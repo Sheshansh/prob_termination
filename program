@@ -1,0 +1,2 @@
+skip;
+while x_2<=x_4 do x_2 := 2*x_1 + x_3 od
