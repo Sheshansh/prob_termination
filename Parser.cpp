@@ -231,10 +231,25 @@ void node::proc_assgn(){
 				}
 			}
 			if(semicolon == -1){
-				cerr<<"Mean value not found in the from distribution assignment between "<<begin<<" "<<end<<endl;
+				cerr<<"Mean value not found in the from distribution assignment between ["<<begin<<","<<end<<")"<<endl;
 			}
 			else{
-				constant = "sample assignment";
+				int temp = samplepos+6;
+				while(temp<semicolon){
+					if(program[temp]=='('){
+						break;
+					}
+					temp++;
+				}
+				if(program[temp]!='('){
+					cerr<<"Wrong assignment from distribution between ["<<begin<<","<<end<<")"<<endl;
+				}
+				temp++;
+				while(isspace(program[temp]) and temp<semicolon){
+					temp++;
+				}
+
+				constant = part(program,temp,semicolon); //Gives the distribution
 				children[1] = new node("constant",semicolon+1,end-1);
 			}
 		}
