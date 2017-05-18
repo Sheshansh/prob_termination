@@ -262,6 +262,7 @@ void node::proc_assgn(){
 }
 
 void node::proc_affexpr(){
+	constant = "and";
 	skip_spaces(begin,end);
 	int AND=-1;
 	for(int i=begin+1;i<end-3;++i){
@@ -271,15 +272,14 @@ void node::proc_affexpr(){
 		}
 	}
 	if(AND==-1){
-		constant = "single literal";
-		node *ch=new node("literal",begin,end);
+		node* ch=new node("literal",begin,end);
 		children.pb(ch);
 	}
 	else{
-		constant = "and";
-		children.resize(2);
-		children[0]=new node("literal",begin,AND);
-		children[1]=new node("affexpr",AND+3,end);
+		node* ch = new node("literal",begin,AND);
+		children.pb(ch);
+		begin = AND + 3;
+		proc_affexpr();
 	}
 }
 
@@ -373,6 +373,7 @@ void node::proc_literal(){
 }
 
 void node::proc_bexpr(){
+	constant = "or";
 	skip_spaces(begin,end);
 	int OR=-1;
 	for(int i=begin+1;i<end-2;++i){
@@ -382,15 +383,14 @@ void node::proc_bexpr(){
 		}
 	}
 	if(OR==-1){
-		constant = "single affexpr";
-		node *ch=new node("affexpr",begin,end);
+		node* ch = new node("affexpr",begin,end);
 		children.pb(ch);
 	}
 	else{
-		constant = "or";
-		children.resize(2);
-		children[0]=new node("affexpr",begin,OR);
-		children[1]=new node("bexpr",OR+2,end);
+		node* ch = new node("affexpr",begin,OR);
+		children.pb(ch);
+		begin = OR+2;
+		proc_bexpr();
 	}
 }
 
@@ -480,7 +480,7 @@ void node::print(){
 	cout<<"Range: ["<<begin<<", "<<end<<")\t";
 	cout<<"Const: |"<<constant<<"|"<<endl;
 	if(begin!=-1 and end!=-1 and begin<=end){
-		cout<<"Text: "<<program.substr(begin, end-begin)<<endl; //<flag> this I changed from end-begin+1
+		cout<<"Text: "<<program.substr(begin, end-begin)<<endl;
 	}
 	if(type=="expr"){
 		cout<<"Expression: ";

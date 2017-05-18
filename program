@@ -1,2 +1,1 @@
-skip;
-while x_2<=x_4 do x_2 := 2*x_1 + x_3 od
+while x_2<=x_4 or x_1>=x_3 and x_5<=x_7 do x_2 := 2*x_1 + x_3 od
