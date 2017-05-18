@@ -17,7 +17,7 @@ using namespace std;
 #define MAXL 100000 //Maximum length of the program
 #define part(x,a,b) (x.substr((a),((b)-(a))))
 #define pb push_back
-#define make_edge(a,b,c) edge((int *)(a),(int *)(b),(c))
+#define make_edge(a,b,c) edge((int*)(a),(int*)(b),(c))
 #define mp make_pair
 
 string program;
@@ -26,8 +26,7 @@ int last_used_label = 0;
 map<int,CFG_location*> label_map;
 node* id1 = new node("expr");
 
-void skip_spaces(int &begin, int &end) //skips the spaces in the beginning and the end
-{
+void skip_spaces(int &begin, int &end){ //skips the spaces in the beginning and the end
   while(begin<program.size() and isspace(program[begin]))
 	begin++;
   while(end>0 and isspace(program[end-1]))
@@ -35,34 +34,40 @@ void skip_spaces(int &begin, int &end) //skips the spaces in the beginning and t
 }
 
 node::node(string t){
-	bracket=NULL;
-	begin=end=-1;
-	type=t;
-	constant="";
+	bracket = NULL;
+	begin = -1;
+	end = -1;
+	type = t;
+	constant = "";
 }
 
 node::node(string t, int b, int e, int s, int l){
-	bracket=NULL;
-	type=t;
-	begin=b;
-	end=e;
+	bracket = NULL;
+	type = t;
+	begin = b;
+	end = e;
 	skip_spaces(begin,end);
-	if(begin>end)
-	cerr<<"Error! begin= "<<b<<" end= "<<e<<endl;
+	if(begin>end){
+		cerr<<"Error! begin= "<<b<<" end= "<<e<<endl;
+	}
 	process(s,l);
+}
+
+node* negate(node* tonegate){
+	
 }
 
 void node::proc_stmt(int s,int l){
 	skip_spaces(begin,end);
 	if(part(program,begin,end)=="skip"){
-		constant="skip";
+		constant = "skip";
 		CFG_edge temporary_edge(label_map[l],1,id1);
 		label_map[s]->edges.pb(temporary_edge);
 		return;
 	}
 	//look for semicolons
-	int open=0; //open if's and while's
-	for(int i=begin;i<end;++i){
+	int open = 0; //open if's and while's
+	for(int i = begin;i<end;++i){
 		if(part(program,i,i+2)=="if" or part(program,i,i+5)=="while" or program[i]=='('){ //Can give seg faults in some extremely unlucky situations
 			open++;
 		}
@@ -74,8 +79,8 @@ void node::proc_stmt(int s,int l){
 			children.resize(2);
 			int mid = ++last_used_label;
 			label_map[mid] = new CFG_location("det",mid);
-			children[1]=new node("stmt",i+1,end,s,mid);
-			children[0]=new node("stmt",begin,i,mid,l);
+			children[1] = new node("stmt",i+1,end,s,mid);
+			children[0] = new node("stmt",begin,i,mid,l);
 			return;
 		}
 	}
@@ -95,15 +100,17 @@ void node::proc_stmt(int s,int l){
 
 	//check if it is a while
 	if(part(program,begin,begin+5)=="while"){
-		int firstdo=-1,lastod=-1;
-		for(int i=begin;i<end;++i){
+		int firstdo = -1,lastod = -1;
+		for(int i = begin;i<end;++i){
 			if(part(program,i,i+2)=="do"){
-				firstdo=i; break;
+				firstdo = i;
+				break;
 			}
 		}
-		for(int i=end-2;i>=begin;--i){
+		for(int i = end-2;i>=begin;--i){
 			if(part(program,i,i+2)=="od"){
-				lastod=i; break;
+				lastod = i;
+				break;
 			}
 		}
 		if(firstdo==-1 or lastod==-1){
@@ -111,52 +118,47 @@ void node::proc_stmt(int s,int l){
 		}
 		constant = "while";
 		children.resize(2);
-		children[0]=new node("bexpr",begin+5,firstdo);
-
+		children[0] = new node("bexpr",begin+5,firstdo);
 		int mid = ++last_used_label;
 		label_map[mid] = new CFG_location("det",mid);
 		node* temporary_node;
-		// temporary_node = new node;
-		//Add something into the temporary node that it is the negation of phi. Ask Petr
+		temporary_node = negate(children[0]);
 		CFG_edge temporary_edge1(label_map[l],1,id1,children[0]);
 		CFG_edge temporary_edge2(label_map[mid],1,id1,temporary_node);
 		label_map[s]->edges.pb(temporary_edge1);
 		label_map[s]->edges.pb(temporary_edge2);
-
-		
-		children[1]=new node("stmt",firstdo+2,lastod,mid,s);
+		children[1] = new node("stmt",firstdo+2,lastod,mid,s);
 		return;
 	}
-
 	//check if it is an if
 	if(part(program,begin,begin+2)=="if"){
-		int firstthen=-1; //first then
-		for(int i=begin;i<end;++i){
+		int firstthen = -1; //first then
+		for(int i = begin;i<end;++i){
 			if(part(program,i,i+4)=="then"){
-				firstthen=i;
+				firstthen = i;
 				break;
 			}
 		}
-		int lastfi=-1;
-		for(int i=end-1;i>=begin;--i){
+		int lastfi = -1;
+		for(int i = end-1;i>=begin;--i){
 			if(part(program,i,i+2)=="fi"){
-				lastfi=i;
+				lastfi = i;
 				break;
 			}
 		}
 		if(lastfi==-1 or firstthen==-1){
 			cerr<<"Invalid if between ["<<begin<<", "<<end<<")"<<endl;
 		}
-		int correselse=-1; //corresponding else
-		int ifcnt=0;
-		for(int i=begin;i<end;++i){
+		int correselse = -1; //corresponding else
+		int ifcnt = 0;
+		for(int i = begin;i<end;++i){
 			if(part(program,i,i+2)=="if"){
 				ifcnt++;
 			}
 			else if(part(program,i,i+4)=="else"){
 				ifcnt--;
 				if(ifcnt==0){
-					correselse=i;
+					correselse = i;
 					break;
 				}
 			}
@@ -167,9 +169,9 @@ void node::proc_stmt(int s,int l){
 		label_map[case2] = new CFG_location("det",case2);
 		CFG_edge temporary_edge1(label_map[case1],1,id1);
 		CFG_edge temporary_edge2(label_map[case2],1,id1);
-		constant="if";
+		constant = "if";
 		children.resize(3);
-		children[0]=new node("ndbexpr",begin+2,firstthen);
+		children[0] = new node("ndbexpr",begin+2,firstthen);
 		if(children[0]->constant=="prob"){
 			label_map[s]->type = "prob";
 			temporary_edge1.probability = stod(children[0]->children[0]->constant);
@@ -183,10 +185,8 @@ void node::proc_stmt(int s,int l){
 			label_map[s]->edges.pb(temporary_edge2);
 		}
 		else{
-			temporary_edge1.guard = children[0]->children[0]; //It is a bexpr
-			// temporary_edge2->guard = How to set it negative of the above guard? Ask Petr
-			//Changing the guards
-			//Same not doubt, ask Petr
+			temporary_edge1.guard = children[0]->children[0]; //It is ndbexpr->bexpr
+			temporary_edge2.guard = negate(children[0]->children[0]);
 			label_map[s]->edges.pb(temporary_edge1);
 			label_map[s]->edges.pb(temporary_edge2);
 		}
@@ -203,8 +203,8 @@ void node::proc_stmt(int s,int l){
 
 void node::proc_assgn(){
 	skip_spaces(begin,end);
-	int pos=-1;
-	for(int i=begin;i<end;++i){
+	int pos = -1;
+	for(int i = begin;i<end;++i){
 		if(part(program,i,i+2)==":="){
 			pos = i;
 			break;
@@ -248,15 +248,13 @@ void node::proc_assgn(){
 				while(isspace(program[temp]) and temp<semicolon){
 					temp++;
 				}
-
 				constant = part(program,temp,semicolon); //Gives the distribution
 				children[1] = new node("constant",semicolon+1,end-1);
 			}
 		}
 		else{
 			constant = "simple assignment";
-			children[1] = new node("expr",pos+2,end);
-			// children[1] = new node("rexpr",pos+2,end);
+			children[1] = new node("expr",pos+2,end); //rexpr is nothing but an expr, a expression
 		}
 	}
 }
@@ -264,15 +262,15 @@ void node::proc_assgn(){
 void node::proc_affexpr(){
 	constant = "and";
 	skip_spaces(begin,end);
-	int AND=-1;
-	for(int i=begin+1;i<end-3;++i){
+	int AND = -1;
+	for(int i = begin+1;i<end-3;++i){
 		if(part(program,i,i+3)=="and" and isspace(program[i-1]) and isspace(program[i+3])){
-			AND=i;
+			AND = i;
 			break;
 		}
 	}
 	if(AND==-1){
-		node* ch=new node("literal",begin,end);
+		node* ch = new node("literal",begin,end);
 		children.pb(ch);
 	}
 	else{
@@ -290,9 +288,9 @@ void node::proc_pvar(){
 
 void node::recursively_form_vector(int begin,int end){ //Note that this shadows the original ones
 	skip_spaces(begin,end);
-	int plusminus=-1;
+	int plusminus = -1;
 	// Implemented as a linear but still recursive function
-	for(int i=begin;i<end;++i){
+	for(int i = begin;i<end;++i){
 		if(program[i]=='+' or program[i]=='-'){
 			plusminus = i;
 			break;
@@ -303,7 +301,7 @@ void node::recursively_form_vector(int begin,int end){ //Note that this shadows 
 		recursively_form_vector(plusminus+1,end);
 		return;
 	}
-	int lastdot=-1;
+	int lastdot = -1;
 	for(int i=begin;i<end;++i){ //Assuming that the program variable names don't contain dot anywhere
 		if(program[i]=='.' or program[i]=='*'){
 			lastdot = i;
@@ -324,10 +322,10 @@ void node::recursively_form_vector(int begin,int end){ //Note that this shadows 
 		if(part(program,block,block+2)!="x_"){
 			cerr<<"Error in the variable in ["<<block<<","<<end<<")"<<endl;
 		}
-		expression[stoi(part(program,block+2,end))]+=stod(part(program,begin,lastdot));
+		expression[stoi(part(program,block+2,end))] += stod(part(program,begin,lastdot));
 	}
 	else{
-		expression[0]+=stod(part(program,begin,end));
+		expression[0] += stod(part(program,begin,end));
 		return;
 	}
 }
@@ -354,8 +352,8 @@ void node::proc_literal(){
 		children[0] = new node("literal",begin+1,end);
 		return;
 	}
-	int sign=-1;
-	for(int i=begin;i<end-1;++i){
+	int sign = -1;
+	for(int i = begin;i<end-1;++i){
 		if(part(program,i,i+2)=="<=" or part(program,i,i+2)==">="){
 			sign = i;
 			break;
@@ -364,8 +362,8 @@ void node::proc_literal(){
 	if(sign!=-1){
 		constant=part(program,sign,sign+2);
 		children.resize(2);
-		children[0]=new node("expr",begin,sign);
-		children[1]=new node("expr",sign+2,end);
+		children[0] = new node("expr",begin,sign);
+		children[1] = new node("expr",sign+2,end);
 	}
 	else{
 		cerr<<"Invalid literal between "<<begin<<" "<<end<<endl;
@@ -375,10 +373,10 @@ void node::proc_literal(){
 void node::proc_bexpr(){
 	constant = "or";
 	skip_spaces(begin,end);
-	int OR=-1;
+	int OR = -1;
 	for(int i=begin+1;i<end-2;++i){
 		if(part(program,i,i+2)=="or" and isspace(program[i-1]) and isspace(program[i+2])){
-			OR=i;
+			OR = i;
 			break;
 		}
 	}
@@ -397,71 +395,69 @@ void node::proc_bexpr(){
 void node::proc_ndbexpr(){
 	skip_spaces(begin,end);
 	if(part(program,begin,end)=="*"){
-		constant="star";
+		constant = "star";
 		return;
 	}
 	if(part(program,begin,begin+4)=="prob"){
-		constant="prob";
-		int open=-1,close=-1;
+		constant = "prob";
+		int open = -1,close = -1;
 		for(int i=begin;i<end;++i){
 			if(program[i]=='('){
-				open=i;
+				open = i;
 			}
 			else if(program[i]==')'){
-				close=i;
+				close = i;
 				break;
 			}
 		}
 		if(open==-1 or close==-1){
 			cerr<<"Invalid probability"<<endl;
 		}
-		node *ch=new node("constant",open+1,close);
+		node* ch = new node("constant",open+1,close);
 		children.pb(ch);
 		return;
 	}
-	constant="single bexpr";
+	constant = "single bexpr";
 	children.resize(1);
 	children[0]=new node("bexpr",begin,end);
 }
 
 void node::process(int s, int l){
-		if(type=="stmt"){
-			proc_stmt(s,l);
-		}
-		else if(type=="assgn"){
-			proc_assgn();
-		}
-		else if(type=="affexpr"){
+	switch(type){
+		case "stmt":
+			proc_stmt();
+			break;
+		case "affexpr":
 			proc_affexpr();
-		}
-		else if(type=="expr"){
+			break;
+		case "expr":
 			proc_expr();
-		}
-		else if(type=="bexpr"){
+			break;
+		case "bexpr":
 			proc_bexpr();
-		}
-		else if(type=="literal"){
+			break;
+		case "literal":
 			proc_literal();
-		}
-		else if(type=="ndbexpr"){
+			break;
+		case "ndbexpr":
 			proc_ndbexpr();
-		}
-		else if(type=="pvar"){
+			break;
+		case "pvar":
 			proc_pvar();
-		}
-		else if(type=="constant"){
+			break;
+		case "constant":
 			proc_constant();
-		}		
-		else{
+			break;
+		default:
 			cerr<<"Undefined type between "<<begin<<" "<<end<<endl;
-		}
 	}
+}
 
-node *root;
+node* root;
 
 int find_variables(){
 	set<string> variables;
-	for(int i=0;i<program.length()-1;i++){
+	for(int i = 0;i<program.length()-1;i++){
 		if(part(program,i,i+2)=="x_"){
 			int variable_parser = i+2;
 			while(isdigit(program[variable_parser])){
@@ -487,7 +483,7 @@ void node::print(){
 		if(expression[0]!=0.0){
 			cout<<expression[0];
 		}
-		for(int i=1;i<=nVariables;i++){
+		for(int i = 1;i<=nVariables;i++){
 			if(expression[i]!=0.0){
 				if(expression[i]>0.0){
 					cout<<"+"<<expression[i]<<"*x_"<<i;
@@ -500,7 +496,7 @@ void node::print(){
 		cout<<endl;
 	}
 	cout<<"Children: ";
-	for(int i=0;i<children.size();++i){
+	for(int i = 0;i<children.size();++i){
 		cout<<children[i]<<"\t";
 	}
 	if(bracket!=NULL){
