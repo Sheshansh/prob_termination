@@ -2,5 +2,5 @@ x_2 := 2*x_1 + x_3;
 if ~x_1<=x_3 then
 	x_1 := x_3 + 1
 else
-	skip
+	x_2 := sample(int[1,2];1.5)
 fi

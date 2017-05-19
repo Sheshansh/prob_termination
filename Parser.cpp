@@ -94,6 +94,7 @@ void node::proc_stmt(int s,int l){
 		constant = "skip";
 		CFG_edge temporary_edge(label_map[l],1,id1);
 		label_map[s]->edges.pb(temporary_edge);
+		// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
 		return;
 	}
 	//look for semicolons
@@ -110,8 +111,8 @@ void node::proc_stmt(int s,int l){
 			children.resize(2);
 			int mid = ++last_used_label;
 			label_map[mid] = new CFG_location("det",mid);
-			children[1] = new node("stmt",i+1,end,s,mid);
-			children[0] = new node("stmt",begin,i,mid,l);
+			children[0] = new node("stmt",begin,i,s,mid);
+			children[1] = new node("stmt",i+1,end,mid,l);
 			return;
 		}
 	}
@@ -158,6 +159,9 @@ void node::proc_stmt(int s,int l){
 		CFG_edge temporary_edge2(label_map[mid],1,id1,temporary_node);
 		label_map[s]->edges.pb(temporary_edge1);
 		label_map[s]->edges.pb(temporary_edge2);
+		// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
+		// cout<<"Adding edge from "<<s<<"to"<<mid<<endl;
+
 		children[1] = new node("stmt",firstdo+2,lastod,mid,s);
 		return;
 	}
@@ -221,6 +225,8 @@ void node::proc_stmt(int s,int l){
 			label_map[s]->edges.pb(temporary_edge1);
 			label_map[s]->edges.pb(temporary_edge2);
 		}
+		// cout<<"Adding edge from "<<s<<"to"<<case1<<endl;
+		// cout<<"Adding edge from "<<s<<"to"<<case2<<endl;
 		children[1]=new node("stmt",firstthen+4,correselse,case1,l);
 		children[2]=new node("stmt",correselse+4,lastfi,case2,l);
 		return;
@@ -280,13 +286,22 @@ void node::proc_assgn(int s,int l){
 					temp++;
 				}
 				constant = part(program,temp,semicolon); //Gives the distribution
-				children[1] = new node("constant",semicolon+1,end-1);
+				children[1] = new node("expr",semicolon+1,end-1); //Though it is just a constant but still storing it in an expression because of consistency
+				label_map[s]->type = "det"; //<flag> Considering that it is just the same as assigning the variable the constant value
+				CFG_edge temporary_edge(label_map[l],stoi(part(program,children[0]->begin+2,children[0]->end)),children[1]);
+				label_map[s]->edges.pb(temporary_edge);
+				// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
+				// cout<<label_map[l]<<endl;
 			}
 		}
 		else{
 			constant = "simple assignment";
 			children[1] = new node("expr",pos+2,end); //rexpr is nothing but an expr, a expression
-			// label_map[s]->
+			label_map[s]->type = "det";
+			CFG_edge temporary_edge(label_map[l],stoi(part(program,children[0]->begin+2,children[0]->end)),children[1]);
+			label_map[s]->edges.pb(temporary_edge);
+			// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
+			// cout<<label_map[l]<<endl;
 		}
 	}
 }
@@ -551,20 +566,53 @@ CFG_edge::CFG_edge(){
 	next = NULL;
 	toChange = 0;
 	change = NULL;
-	probability = 0;
+	probability = 1.0;
 }
 
-CFG_edge::CFG_edge(CFG_location* next,int toChange,node* change,node* guard,double probability){
-	this->next = next;
-	this->toChange = toChange;
-	this->change = change;
-	this->guard = guard;
-	this->probability = probability;
+CFG_edge::CFG_edge(CFG_location* next1,int toChange1,node* change1,node* guard1,double probability1){
+	next = next1;
+	toChange = toChange1;
+	change = change1;
+	guard = guard1;
+	probability = probability1;
+}
+
+void CFG_edge::print(){
+	if(next!=NULL){
+		cout<<"Destination: "<<next->label<<endl;
+	}
+	else{
+		cout<<"Error! Error! Error!"<<endl;
+	}
+	if(toChange!=0){
+		cout<<"Variable to be changed is x_"<<toChange<<endl;
+	}
+	// if(change!=NULL){
+	// 	cout<<"Changed to: "<<endl;
+	// 	// change->print();
+	// }
+	// if(guard!=NULL){
+	// 	cout<<"Guard is: "<<endl;
+	// 	// guard->print();
+	// }
+	cout<<"Probability to occur is"<<probability<<endl<<endl; 
 }
 
 CFG_location::CFG_location(string type,int label){
 	this->label=label;
 	this->type=type;
+}
+
+void CFG_location::print(){
+	// cout<<"Label: "<<label<<endl;
+	cout<<"Type: "<<type<<endl;
+	// cout<<"Edges: "<<endl;
+	int i=1;
+	for(vector<CFG_edge>::iterator it = edges.begin();it!=edges.end();++it){
+		cout<<"Edge #"<<i<<endl;
+		it->print();
+		i++;
+	}
 }
 
 int main(){
@@ -588,6 +636,13 @@ int main(){
 	label_map[start] = new CFG_location("det",start);
 	label_map[end]	 = new CFG_location("det",end);
 	root=new node("stmt",0,program.length(),start,end);
-	root->print();
+	// root->print();
+	cout<<"CFG:"<<endl;
+	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+		cout<<"------------------------"<<endl;
+		cout<<"Node "<<it->first<<endl;
+		it->second->print();
+		// cout<<it->second->label<<endl;
+	}
 	return 0;
 }

@@ -32,18 +32,22 @@ public:
 struct CFG_location;
 
 struct CFG_edge{
+public:
 	CFG_location* next;
 	int toChange;
 	node* change; // An expr node
 	node* guard; // A bexpr node
 	double probability;
 	CFG_edge();
-	CFG_edge(CFG_location* next,int toChange,node* change,node* guard=NULL,double probability=0);
+	CFG_edge(CFG_location* next,int toChange,node* change,node* guard=NULL,double probability=1.0);
+	void print();
 };
 
 struct CFG_location{
+public:
 	int label;
 	string type; //Deterministic == true and non-deterministic == false #convention
 	vector<CFG_edge> edges;
 	CFG_location(string type,int label);
+	void print();
 };
