@@ -117,18 +117,21 @@ void node::proc_stmt(int s,int l){
 		}
 	}
 
-	// //look for brackets
-	// skip_spaces(begin,end);
-	// if(program[begin]=='['){
-	// 	int closed_bracket=-1;
-	// 	for(int j=begin+1;j<end;++j)
-	// 		if(program[j]==']'){
-	// 			closed_bracket=j; break;
-	// 		}
-	// 	bracket=new node("bexpr",begin+1,closed_bracket);
-	// 	begin=closed_bracket+1;
-	// }
-	// skip_spaces(begin,end);
+	//look for brackets
+	// Assuming the invariants are are the beginning itself
+	skip_spaces(begin,end);
+	if(program[begin]=='['){
+		int closed_bracket = -1;
+		for(int j = begin+1;j<end;++j){
+			if(program[j]==']'){
+				closed_bracket = j;
+				break;
+			}
+		}
+		bracket = new node("bexpr",begin+1,closed_bracket);
+		begin = closed_bracket+1;
+	}
+	skip_spaces(begin,end);
 
 	//check if it is a while
 	if(part(program,begin,begin+5)=="while"){
