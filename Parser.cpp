@@ -54,6 +54,37 @@ node::node(string t, int b, int e, int s, int l){
 }
 
 node* negation(node* tonegate){
+	if(tonegate->type=="bexpr" and tonegate->constant=="or"){
+		node* negative;
+		negative = new node("bexpr");
+		negative->constant = "or";
+		negative->children.resize(1);
+		negative->children[0] = new node("affexpr");
+		negative->children[0]->constant = "and";
+		int ORs = tonegate->children.size();
+		for(int i = 0;i<ORs;++i){
+			//Multply this set of AND to the present collection
+			vector<node*> before_multiplication = negative->children;
+			vector<node*> after_multiplication;
+			int before_size = before_multiplication.size();
+			negative->children.clear();
+			int ANDs = tonegate->children[i]->children.size();
+			for(int j = 0;j<ANDs;++j){
+				node* ch = new node("literal");
+				ch->constant = "not";
+				ch->children.pb(tonegate->children[i]->children[j]); //Now ch contains the negated literal
+				//<flag> High optimisation possible here by the !<= ::= >= and ~~ ::= nothing
+				after_multiplication = before_multiplication;
+				for(int k = 0;k<before_size;++k){
+					after_multiplication[k]->children.pb(ch);
+				}
+				negative->children.insert(negative->children.end(),after_multiplication.begin(),after_multiplication.end());
+				//Appending the children after appending one element from the to be multiplied set to each of the children
+			}
+		}
+		return negative;
+	}
+	cerr<<"Wrong argument in negation, passed a"<<tonegate->type<<endl;	
 	return NULL;
 }
 
@@ -198,10 +229,10 @@ void node::proc_stmt(int s,int l){
 	//The statement is a assignment
 	constant = "single assgn";
 	children.resize(1);
-	children[0] = new node("assgn",begin,end);
+	children[0] = new node("assgn",begin,end,s,l);
 }
 
-void node::proc_assgn(){
+void node::proc_assgn(int s,int l){
 	skip_spaces(begin,end);
 	int pos = -1;
 	for(int i = begin;i<end;++i){
@@ -255,6 +286,7 @@ void node::proc_assgn(){
 		else{
 			constant = "simple assignment";
 			children[1] = new node("expr",pos+2,end); //rexpr is nothing but an expr, a expression
+			// label_map[s]->
 		}
 	}
 }
