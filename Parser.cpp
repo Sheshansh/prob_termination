@@ -481,7 +481,7 @@ void node::process(int s, int l){
 		proc_constant();
 	}
 	else if(type=="assgn"){
-		proc_assgn();
+		proc_assgn(s,l);
 	}
 	else{
 		cerr<<"Undefined type between "<<begin<<" "<<end<<endl<<part(program,begin,end)<<endl;

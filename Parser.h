@@ -14,7 +14,7 @@ struct node{
 private:
 //procs
 	void proc_stmt(int s,int l);
-	void proc_assgn();
+	void proc_assgn(int s,int l);
 	void proc_affexpr();
 	void proc_pvar();
 	void recursively_form_vector(int begin,int end);
