@@ -53,8 +53,8 @@ node::node(string t, int b, int e, int s, int l){
 	process(s,l);
 }
 
-node* negate(node* tonegate){
-	
+node* negation(node* tonegate){
+	return NULL;
 }
 
 void node::proc_stmt(int s,int l){
@@ -122,7 +122,7 @@ void node::proc_stmt(int s,int l){
 		int mid = ++last_used_label;
 		label_map[mid] = new CFG_location("det",mid);
 		node* temporary_node;
-		temporary_node = negate(children[0]);
+		temporary_node = negation(children[0]);
 		CFG_edge temporary_edge1(label_map[l],1,id1,children[0]);
 		CFG_edge temporary_edge2(label_map[mid],1,id1,temporary_node);
 		label_map[s]->edges.pb(temporary_edge1);
@@ -186,7 +186,7 @@ void node::proc_stmt(int s,int l){
 		}
 		else{
 			temporary_edge1.guard = children[0]->children[0]; //It is ndbexpr->bexpr
-			temporary_edge2.guard = negate(children[0]->children[0]);
+			temporary_edge2.guard = negation(children[0]->children[0]);
 			label_map[s]->edges.pb(temporary_edge1);
 			label_map[s]->edges.pb(temporary_edge2);
 		}
@@ -307,9 +307,9 @@ void node::recursively_form_vector(int begin,int end){ //Note that this shadows 
 			lastdot = i;
 		}
 	}
-	if(lastdot==-1){
+	if(lastdot==-1 and !isdigit(program[begin])){
 		if(part(program,begin,begin+2)!="x_"){
-			cerr<<"Error in the variable in ["<<begin<<","<<end<<")"<<endl;
+			cerr<<"Error in the variable in ["<<begin<<","<<end<<") i.e.:"<<part(program,begin,end)<<endl;
 		}
 		expression[stoi(part(program,begin+2,end))]+=1.0;
 		// children[0] = new node("pvar",begin,end);
@@ -348,6 +348,7 @@ void node::proc_constant(){
 void node::proc_literal(){
 	skip_spaces(begin,end);
 	if(program[begin]=='~' or program[begin]=='!'){ //Assuming the sign for negation could be '!' or '~'
+		constant = "not";
 		children.resize(1);
 		children[0] = new node("literal",begin+1,end);
 		return;
@@ -423,33 +424,35 @@ void node::proc_ndbexpr(){
 }
 
 void node::process(int s, int l){
-	switch(type){
-		case "stmt":
-			proc_stmt();
-			break;
-		case "affexpr":
-			proc_affexpr();
-			break;
-		case "expr":
-			proc_expr();
-			break;
-		case "bexpr":
-			proc_bexpr();
-			break;
-		case "literal":
-			proc_literal();
-			break;
-		case "ndbexpr":
-			proc_ndbexpr();
-			break;
-		case "pvar":
-			proc_pvar();
-			break;
-		case "constant":
-			proc_constant();
-			break;
-		default:
-			cerr<<"Undefined type between "<<begin<<" "<<end<<endl;
+	if(type=="stmt"){
+		proc_stmt(s,l);
+	}
+	else if(type=="affexpr"){
+		proc_affexpr();
+	}
+	else if(type=="expr"){
+		proc_expr();
+	}
+	else if(type=="bexpr"){
+		proc_bexpr();
+	}
+	else if(type=="literal"){
+		proc_literal();
+	}
+	else if(type=="ndbexpr"){
+		proc_ndbexpr();
+	}
+	else if(type=="pvar"){
+		proc_pvar();
+	}
+	else if(type=="constant"){
+		proc_constant();
+	}
+	else if(type=="assgn"){
+		proc_assgn();
+	}
+	else{
+		cerr<<"Undefined type between "<<begin<<" "<<end<<endl<<part(program,begin,end)<<endl;
 	}
 }
 

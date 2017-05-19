@@ -1,1 +1,6 @@
-while x_2<=x_4 or x_1>=x_3 and x_5<=x_6 and x_1<=x_2 do x_2 := 2*x_1 + x_3 od
+x_2 := 2*x_1 + x_3;
+if ~x_1<=x_3 then
+	x_1 := x_3 + 1
+else
+	skip
+fi
