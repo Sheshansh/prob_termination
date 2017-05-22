@@ -588,16 +588,16 @@ void node::print(){
 	if(bracket!=NULL){
 		bracket->print();
 	}
-	if(temp and type=="bexpr"){
-		temp = false;
-		cout<<"---------------------------Printing Negation------------------------------------------------"<<endl<<endl<<endl;
-		cout<<"---------------------------Printing Negation------------------------------------------------"<<endl<<endl<<endl;
-		cout<<"---------------------------Printing Negation------------------------------------------------"<<endl<<endl<<endl;
-		negation(this)->print();
-		cout<<"---------------------------Printing Negation ends-------------------------------------------"<<endl<<endl;
-		cout<<"---------------------------Printing Negation ends-------------------------------------------"<<endl<<endl;
-		cout<<"---------------------------Printing Negation ends-------------------------------------------"<<endl<<endl;
-	}
+	// if(temp and type=="bexpr"){
+	// 	temp = false;
+	// 	cout<<"---------------------------Printing Negation------------------------------------------------"<<endl<<endl<<endl;
+	// 	cout<<"---------------------------Printing Negation------------------------------------------------"<<endl<<endl<<endl;
+	// 	cout<<"---------------------------Printing Negation------------------------------------------------"<<endl<<endl<<endl;
+	// 	negation(this)->print();
+	// 	cout<<"---------------------------Printing Negation ends-------------------------------------------"<<endl<<endl;
+	// 	cout<<"---------------------------Printing Negation ends-------------------------------------------"<<endl<<endl;
+	// 	cout<<"---------------------------Printing Negation ends-------------------------------------------"<<endl<<endl;
+	// }
 }
 
 CFG_edge::CFG_edge(){
