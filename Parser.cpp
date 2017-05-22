@@ -53,8 +53,26 @@ node::node(string t, int b, int e, int s, int l){
 	process(s,l);
 }
 
+void vcopy(vector<node*> &sink,vector<node*> &tocopy){
+	sink.clear();
+	int size = tocopy.size();
+	sink.resize(size);
+	for(int i=0;i<size;++i){
+		sink[i] = new node(tocopy[i]->type);
+		sink[i]->constant = tocopy[i]->constant;
+		sink[i]->begin = tocopy[i]->begin;
+		sink[i]->end = tocopy[i]->end;
+		sink[i]->bracket = tocopy[i]->bracket;
+		sink[i]->expression = tocopy[i]->expression;
+		sink[i]->children = tocopy[i]->children;
+		//Copying everything bluntly, though some of the statements are not required
+		//<flag> Can be optimised if need be
+	}
+}
+
 node* negation(node* tonegate){
 	if(tonegate->type=="bexpr" and tonegate->constant=="or"){
+		vector<node*> before_multiplication;
 		node* negative;
 		negative = new node("bexpr");
 		negative->constant = "or";
@@ -64,7 +82,9 @@ node* negation(node* tonegate){
 		int ORs = tonegate->children.size();
 		for(int i = 0;i<ORs;++i){
 			//Multply this set of AND to the present collection
-			vector<node*> before_multiplication = negative->children;
+			// before_multiplication.clear();
+			// before_multiplication = negative->children;
+			vcopy(before_multiplication,negative->children);
 			vector<node*> after_multiplication;
 			int before_size = before_multiplication.size();
 			negative->children.clear();
@@ -74,7 +94,9 @@ node* negation(node* tonegate){
 				ch->constant = "not";
 				ch->children.pb(tonegate->children[i]->children[j]); //Now ch contains the negated literal
 				//<flag> High optimisation possible here by the !<= ::= >= and ~~ ::= nothing
-				after_multiplication = before_multiplication;
+				// after_multiplication.clear();
+				vcopy(after_multiplication,before_multiplication);
+				// after_multiplication = before_multiplication;
 				for(int k = 0;k<before_size;++k){
 					after_multiplication[k]->children.pb(ch);
 				}
@@ -325,9 +347,11 @@ void node::proc_affexpr(){
 	}
 	else{
 		node* ch = new node("literal",begin,AND);
+		int begin_backup = begin;
 		children.pb(ch);
 		begin = AND + 3;
 		proc_affexpr();
+		begin = begin_backup;
 	}
 }
 
@@ -438,8 +462,10 @@ void node::proc_bexpr(){
 	else{
 		node* ch = new node("affexpr",begin,OR);
 		children.pb(ch);
+		int begin_backup = begin;
 		begin = OR+2;
 		proc_bexpr();
+		begin = begin_backup;
 	}
 }
 
@@ -522,7 +548,7 @@ int find_variables(){
 	}
 	return variables.size();
 }
-
+bool temp = true;
 void node::print(){
 	cout<<"Add: "<<this<<"\t";
 	cout<<"Type: "<<type<<"\t";
@@ -561,6 +587,16 @@ void node::print(){
 	}
 	if(bracket!=NULL){
 		bracket->print();
+	}
+	if(temp and type=="bexpr"){
+		temp = false;
+		cout<<"---------------------------Printing Negation------------------------------------------------"<<endl<<endl<<endl;
+		cout<<"---------------------------Printing Negation------------------------------------------------"<<endl<<endl<<endl;
+		cout<<"---------------------------Printing Negation------------------------------------------------"<<endl<<endl<<endl;
+		negation(this)->print();
+		cout<<"---------------------------Printing Negation ends-------------------------------------------"<<endl<<endl;
+		cout<<"---------------------------Printing Negation ends-------------------------------------------"<<endl<<endl;
+		cout<<"---------------------------Printing Negation ends-------------------------------------------"<<endl<<endl;
 	}
 }
 
@@ -613,6 +649,7 @@ void CFG_location::print(){
 	int i=1;
 	for(vector<CFG_edge>::iterator it = edges.begin();it!=edges.end();++it){
 		cout<<"Edge #"<<i<<endl;
+		// edges[i].print();
 		it->print();
 		i++;
 	}
@@ -639,7 +676,7 @@ int main(){
 	label_map[start] = new CFG_location("det",start);
 	label_map[end]	 = new CFG_location("det",end);
 	root=new node("stmt",0,program.length(),start,end);
-	// root->print();
+	root->print();
 	cout<<"CFG:"<<endl;
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		cout<<"------------------------"<<endl;

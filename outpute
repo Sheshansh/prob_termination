@@ -1,0 +1,395 @@
+Input Code:
+if x_1<=x_3 and x_2<=x_3 and x_1>=x_3 or x_1>=x_2 and x_1<=x_2 then
+	x_1 := x_3 + 1.0
+else
+	skip
+fi
+Parse Tree:
+Add: 0xb49ea0	Type: stmt	Range: [0, 99)	Const: |if|
+Text: if x_1<=x_3 and x_2<=x_3 and x_1>=x_3 or x_1>=x_2 and x_1<=x_2 then
+	x_1 := x_3 + 1.0
+else
+	skip
+fi
+Children: 0xb4a0e0	0xb4bd80	0xb4c020	
+--------------------
+Add: 0xb4a0e0	Type: ndbexpr	Range: [3, 62)	Const: |single bexpr|
+Text: x_1<=x_3 and x_2<=x_3 and x_1>=x_3 or x_1>=x_2 and x_1<=x_2
+Children: 0xb4a1e0	
+--------------------
+Add: 0xb4a1e0	Type: bexpr	Range: [3, 62)	Const: |or|
+Text: x_1<=x_3 and x_2<=x_3 and x_1>=x_3 or x_1>=x_2 and x_1<=x_2
+Children: 0xb4a270	0xb4a9e0	
+--------------------
+Add: 0xb4a270	Type: affexpr	Range: [3, 37)	Const: |and|
+Text: x_1<=x_3 and x_2<=x_3 and x_1>=x_3
+Children: 0xb4a300	0xb4a550	0xb4a7a0	
+--------------------
+Add: 0xb4a300	Type: literal	Range: [3, 11)	Const: |<=|
+Text: x_1<=x_3
+Children: 0xb4a3b0	0xb4a470	
+--------------------
+Add: 0xb4a3b0	Type: expr	Range: [3, 6)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4a470	Type: expr	Range: [8, 11)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0xb4a550	Type: literal	Range: [16, 24)	Const: |<=|
+Text: x_2<=x_3
+Children: 0xb4a600	0xb4a6c0	
+--------------------
+Add: 0xb4a600	Type: expr	Range: [16, 19)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0xb4a6c0	Type: expr	Range: [21, 24)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0xb4a7a0	Type: literal	Range: [29, 37)	Const: |>=|
+Text: x_1>=x_3
+Children: 0xb4a830	0xb4a8f0	
+--------------------
+Add: 0xb4a830	Type: expr	Range: [29, 32)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4a8f0	Type: expr	Range: [34, 37)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0xb4a9e0	Type: affexpr	Range: [41, 62)	Const: |and|
+Text: x_1>=x_2 and x_1<=x_2
+Children: 0xb4aa70	0xb4acc0	
+--------------------
+Add: 0xb4aa70	Type: literal	Range: [41, 49)	Const: |>=|
+Text: x_1>=x_2
+Children: 0xb4ab20	0xb4abe0	
+--------------------
+Add: 0xb4ab20	Type: expr	Range: [41, 44)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4abe0	Type: expr	Range: [46, 49)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0xb4acc0	Type: literal	Range: [54, 62)	Const: |<=|
+Text: x_1<=x_2
+Children: 0xb4ad70	0xb4ae30	
+--------------------
+Add: 0xb4ad70	Type: expr	Range: [54, 57)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4ae30	Type: expr	Range: [59, 62)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+---------------------------Printing Negation------------------------------------------------
+
+
+---------------------------Printing Negation------------------------------------------------
+
+
+---------------------------Printing Negation------------------------------------------------
+
+
+Add: 0xb4c110	Type: bexpr	Range: [-1, -1)	Const: |or|
+Children: 0xb4c9c0	0xb4ca70	0xb4cb20	0xb4cc80	0xb4cd30	0xb4cde0	
+--------------------
+Add: 0xb4c9c0	Type: affexpr	Range: [-1, -1)	Const: |and|
+Children: 0xb4c2e0	0xb4c8f0	
+--------------------
+Add: 0xb4c2e0	Type: literal	Range: [-1, -1)	Const: |not|
+Children: 0xb4a300	
+--------------------
+Add: 0xb4a300	Type: literal	Range: [3, 11)	Const: |<=|
+Text: x_1<=x_3
+Children: 0xb4a3b0	0xb4a470	
+--------------------
+Add: 0xb4a3b0	Type: expr	Range: [3, 6)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4a470	Type: expr	Range: [8, 11)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0xb4c8f0	Type: literal	Range: [-1, -1)	Const: |not|
+Children: 0xb4aa70	
+--------------------
+Add: 0xb4aa70	Type: literal	Range: [41, 49)	Const: |>=|
+Text: x_1>=x_2
+Children: 0xb4ab20	0xb4abe0	
+--------------------
+Add: 0xb4ab20	Type: expr	Range: [41, 44)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4abe0	Type: expr	Range: [46, 49)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0xb4ca70	Type: affexpr	Range: [-1, -1)	Const: |and|
+Children: 0xb4c460	0xb4c8f0	
+--------------------
+Add: 0xb4c460	Type: literal	Range: [-1, -1)	Const: |not|
+Children: 0xb4a550	
+--------------------
+Add: 0xb4a550	Type: literal	Range: [16, 24)	Const: |<=|
+Text: x_2<=x_3
+Children: 0xb4a600	0xb4a6c0	
+--------------------
+Add: 0xb4a600	Type: expr	Range: [16, 19)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0xb4a6c0	Type: expr	Range: [21, 24)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0xb4c8f0	Type: literal	Range: [-1, -1)	Const: |not|
+Children: 0xb4aa70	
+--------------------
+Add: 0xb4aa70	Type: literal	Range: [41, 49)	Const: |>=|
+Text: x_1>=x_2
+Children: 0xb4ab20	0xb4abe0	
+--------------------
+Add: 0xb4ab20	Type: expr	Range: [41, 44)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4abe0	Type: expr	Range: [46, 49)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0xb4cb20	Type: affexpr	Range: [-1, -1)	Const: |and|
+Children: 0xb4c5e0	0xb4c8f0	
+--------------------
+Add: 0xb4c5e0	Type: literal	Range: [-1, -1)	Const: |not|
+Children: 0xb4a7a0	
+--------------------
+Add: 0xb4a7a0	Type: literal	Range: [29, 37)	Const: |>=|
+Text: x_1>=x_3
+Children: 0xb4a830	0xb4a8f0	
+--------------------
+Add: 0xb4a830	Type: expr	Range: [29, 32)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4a8f0	Type: expr	Range: [34, 37)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0xb4c8f0	Type: literal	Range: [-1, -1)	Const: |not|
+Children: 0xb4aa70	
+--------------------
+Add: 0xb4aa70	Type: literal	Range: [41, 49)	Const: |>=|
+Text: x_1>=x_2
+Children: 0xb4ab20	0xb4abe0	
+--------------------
+Add: 0xb4ab20	Type: expr	Range: [41, 44)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4abe0	Type: expr	Range: [46, 49)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0xb4cc80	Type: affexpr	Range: [-1, -1)	Const: |and|
+Children: 0xb4c2e0	0xb4cbf0	
+--------------------
+Add: 0xb4c2e0	Type: literal	Range: [-1, -1)	Const: |not|
+Children: 0xb4a300	
+--------------------
+Add: 0xb4a300	Type: literal	Range: [3, 11)	Const: |<=|
+Text: x_1<=x_3
+Children: 0xb4a3b0	0xb4a470	
+--------------------
+Add: 0xb4a3b0	Type: expr	Range: [3, 6)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4a470	Type: expr	Range: [8, 11)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0xb4cbf0	Type: literal	Range: [-1, -1)	Const: |not|
+Children: 0xb4acc0	
+--------------------
+Add: 0xb4acc0	Type: literal	Range: [54, 62)	Const: |<=|
+Text: x_1<=x_2
+Children: 0xb4ad70	0xb4ae30	
+--------------------
+Add: 0xb4ad70	Type: expr	Range: [54, 57)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4ae30	Type: expr	Range: [59, 62)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0xb4cd30	Type: affexpr	Range: [-1, -1)	Const: |and|
+Children: 0xb4c460	0xb4cbf0	
+--------------------
+Add: 0xb4c460	Type: literal	Range: [-1, -1)	Const: |not|
+Children: 0xb4a550	
+--------------------
+Add: 0xb4a550	Type: literal	Range: [16, 24)	Const: |<=|
+Text: x_2<=x_3
+Children: 0xb4a600	0xb4a6c0	
+--------------------
+Add: 0xb4a600	Type: expr	Range: [16, 19)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0xb4a6c0	Type: expr	Range: [21, 24)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0xb4cbf0	Type: literal	Range: [-1, -1)	Const: |not|
+Children: 0xb4acc0	
+--------------------
+Add: 0xb4acc0	Type: literal	Range: [54, 62)	Const: |<=|
+Text: x_1<=x_2
+Children: 0xb4ad70	0xb4ae30	
+--------------------
+Add: 0xb4ad70	Type: expr	Range: [54, 57)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4ae30	Type: expr	Range: [59, 62)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0xb4cde0	Type: affexpr	Range: [-1, -1)	Const: |and|
+Children: 0xb4c5e0	0xb4cbf0	
+--------------------
+Add: 0xb4c5e0	Type: literal	Range: [-1, -1)	Const: |not|
+Children: 0xb4a7a0	
+--------------------
+Add: 0xb4a7a0	Type: literal	Range: [29, 37)	Const: |>=|
+Text: x_1>=x_3
+Children: 0xb4a830	0xb4a8f0	
+--------------------
+Add: 0xb4a830	Type: expr	Range: [29, 32)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4a8f0	Type: expr	Range: [34, 37)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0xb4cbf0	Type: literal	Range: [-1, -1)	Const: |not|
+Children: 0xb4acc0	
+--------------------
+Add: 0xb4acc0	Type: literal	Range: [54, 62)	Const: |<=|
+Text: x_1<=x_2
+Children: 0xb4ad70	0xb4ae30	
+--------------------
+Add: 0xb4ad70	Type: expr	Range: [54, 57)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0xb4ae30	Type: expr	Range: [59, 62)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+---------------------------Printing Negation ends-------------------------------------------
+
+---------------------------Printing Negation ends-------------------------------------------
+
+---------------------------Printing Negation ends-------------------------------------------
+
+Add: 0xb4bd80	Type: stmt	Range: [69, 85)	Const: |single assgn|
+Text: x_1 := x_3 + 1.0
+Children: 0xb4be10	
+--------------------
+Add: 0xb4be10	Type: assgn	Range: [69, 85)	Const: |simple assignment|
+Text: x_1 := x_3 + 1.0
+Children: 0xb4bea0	0xb4bf30	
+--------------------
+Add: 0xb4bea0	Type: pvar	Range: [69, 72)	Const: |x_1|
+Text: x_1
+Children: 
+--------------------
+Add: 0xb4bf30	Type: expr	Range: [76, 85)	Const: |expression|
+Text: x_3 + 1.0
+Expression: 1.0000000000+1.0000000000*x_3
+Children: 
+--------------------
+Add: 0xb4c020	Type: stmt	Range: [92, 96)	Const: |skip|
+Text: skip
+Children: 
+--------------------
+CFG:
+------------------------
+Node 1
+Type: det
+Edge #1
+Destination: 3
+Variable to be changed is x_1
+Probability to occur is1.0000000000
+
+Edge #2
+Destination: 4
+Variable to be changed is x_1
+Probability to occur is1.0000000000
+
+------------------------
+Node 2
+Type: det
+------------------------
+Node 3
+Type: det
+Edge #1
+Destination: 2
+Variable to be changed is x_1
+Probability to occur is1.0000000000
+
+------------------------
+Node 4
+Type: det
+Edge #1
+Destination: 2
+Variable to be changed is x_1
+Probability to occur is1.0000000000
+
