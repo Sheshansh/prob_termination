@@ -1,4 +1,4 @@
-if x_1<=x_3 and x_2<=x_3 and x_1>=x_3 or x_1>=x_2 and x_1<=x_2 then
+if !x_1<=x_3 and !x_2<=x_3 and !x_1>=x_3 or !x_1>=x_2 and x_1<=x_2 then
 	x_1 := x_3 + 1.0
 else
 	skip

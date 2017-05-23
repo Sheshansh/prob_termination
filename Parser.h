@@ -10,7 +10,7 @@ struct node{
 	vector<double> expression; //for expressions only
 	//constructor
 	node(string t);
-	node(string t, int b, int e, int s = 0, int l = 0);
+	node(string t, int b, int e, int s = 0, int l = 0, bool negate = false);
 private:
 //procs
 	void proc_stmt(int s,int l);
@@ -20,11 +20,11 @@ private:
 	void recursively_form_vector(int begin,int end);
 	void proc_expr();
 	void proc_constant();
-	void proc_literal();
+	void proc_literal(bool negate);
 	void proc_bexpr();
 	void proc_ndbexpr();
 //main process
-	void process(int s, int l);
+	void process(int s, int l, bool negate);
 public:
 	void print();
 };

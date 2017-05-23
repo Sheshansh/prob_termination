@@ -41,7 +41,7 @@ node::node(string t){
 	constant = "";
 }
 
-node::node(string t, int b, int e, int s, int l){
+node::node(string t, int b, int e, int s, int l, bool negate){
 	bracket = NULL;
 	type = t;
 	begin = b;
@@ -50,7 +50,7 @@ node::node(string t, int b, int e, int s, int l){
 	if(begin>end){
 		cerr<<"Error! begin= "<<b<<" end= "<<e<<endl;
 	}
-	process(s,l);
+	process(s,l,negate);
 }
 
 void vcopy(vector<node*> &sink,vector<node*> &tocopy){
@@ -91,12 +91,18 @@ node* negation(node* tonegate){
 			int ANDs = tonegate->children[i]->children.size();
 			for(int j = 0;j<ANDs;++j){
 				node* ch = new node("literal");
-				ch->constant = "not";
-				ch->children.pb(tonegate->children[i]->children[j]); //Now ch contains the negated literal
-				//<flag> High optimisation possible here by the !<= ::= >= and ~~ ::= nothing
-				// after_multiplication.clear();
+				if(tonegate->children[i]->children[j]->constant == ">="){
+					ch->constant = "<=";
+					ch->children = tonegate->children[i]->children[j]->children;
+				}
+				else if(tonegate->children[i]->children[j]->constant == "<="){
+					ch->constant = ">=";
+					ch->children = tonegate->children[i]->children[j]->children;
+				}
+				else{
+					cerr<<"Something wrong with a literal"<<endl;
+				}
 				vcopy(after_multiplication,before_multiplication);
-				// after_multiplication = before_multiplication;
 				for(int k = 0;k<before_size;++k){
 					after_multiplication[k]->children.pb(ch);
 				}
@@ -419,13 +425,12 @@ void node::proc_constant(){
 	}
 }
 
-void node::proc_literal(){
+void node::proc_literal(bool negate){
 	skip_spaces(begin,end);
 	if(program[begin]=='~' or program[begin]=='!'){ //Assuming the sign for negation could be '!' or '~'
-		constant = "not";
-		children.resize(1);
-		children[0] = new node("literal",begin+1,end);
-		return;
+		begin = begin+1;
+		// cout<<"I am here"<<negate<<!negate<<endl<<endl;
+		proc_literal(!negate);
 	}
 	int sign = -1;
 	for(int i = begin;i<end-1;++i){
@@ -434,14 +439,29 @@ void node::proc_literal(){
 			break;
 		}
 	}
-	if(sign!=-1){
-		constant=part(program,sign,sign+2);
+	if(sign==-1){
+		cerr<<"Invalid literal between "<<begin<<" "<<end<<endl;
+	}
+	else{
+		if(!negate){
+			if(constant==""){
+				// cout<<"How's this"<<endl;
+				constant=part(program,sign,sign+2);
+				//<flag> Only a temporary solution, I don't exactly understand why we need this if condition
+			}
+		}
+		else{
+			// cout<<"Woohoo"<<endl;
+			if(part(program,sign,sign+2)==">="){
+				constant = "<=";
+			}
+			else{
+				constant = ">=";
+			}
+		}
 		children.resize(2);
 		children[0] = new node("expr",begin,sign);
 		children[1] = new node("expr",sign+2,end);
-	}
-	else{
-		cerr<<"Invalid literal between "<<begin<<" "<<end<<endl;
 	}
 }
 
@@ -499,7 +519,7 @@ void node::proc_ndbexpr(){
 	children[0]=new node("bexpr",begin,end);
 }
 
-void node::process(int s, int l){
+void node::process(int s, int l, bool negate){
 	if(type=="stmt"){
 		proc_stmt(s,l);
 	}
@@ -513,7 +533,7 @@ void node::process(int s, int l){
 		proc_bexpr();
 	}
 	else if(type=="literal"){
-		proc_literal();
+		proc_literal(negate);
 	}
 	else if(type=="ndbexpr"){
 		proc_ndbexpr();
@@ -588,16 +608,6 @@ void node::print(){
 	if(bracket!=NULL){
 		bracket->print();
 	}
-	// if(temp and type=="bexpr"){
-	// 	temp = false;
-	// 	cout<<"---------------------------Printing Negation------------------------------------------------"<<endl<<endl<<endl;
-	// 	cout<<"---------------------------Printing Negation------------------------------------------------"<<endl<<endl<<endl;
-	// 	cout<<"---------------------------Printing Negation------------------------------------------------"<<endl<<endl<<endl;
-	// 	negation(this)->print();
-	// 	cout<<"---------------------------Printing Negation ends-------------------------------------------"<<endl<<endl;
-	// 	cout<<"---------------------------Printing Negation ends-------------------------------------------"<<endl<<endl;
-	// 	cout<<"---------------------------Printing Negation ends-------------------------------------------"<<endl<<endl;
-	// }
 }
 
 CFG_edge::CFG_edge(){
@@ -626,14 +636,14 @@ void CFG_edge::print(){
 	if(toChange!=0){
 		cout<<"Variable to be changed is x_"<<toChange<<endl;
 	}
-	// if(change!=NULL){
-	// 	cout<<"Changed to: "<<endl;
-	// 	// change->print();
-	// }
-	// if(guard!=NULL){
-	// 	cout<<"Guard is: "<<endl;
-	// 	// guard->print();
-	// }
+	if(change!=NULL){
+		cout<<"Changed to: "<<endl;
+		change->print();
+	}
+	if(guard!=NULL){
+		cout<<"Guard is: "<<endl;
+		guard->print();
+	}
 	cout<<"Probability to occur is"<<probability<<endl<<endl; 
 }
 

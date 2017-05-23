@@ -1,0 +1,437 @@
+Input Code:
+if !x_1<=x_3 and !x_2<=x_3 and !x_1>=x_3 or !x_1>=x_2 and x_1<=x_2 then
+	x_1 := x_3 + 1.0
+else
+	skip
+fi
+Parse Tree:
+Add: 0x2147ea0	Type: stmt	Range: [0, 103)	Const: |if|
+Text: if !x_1<=x_3 and !x_2<=x_3 and !x_1>=x_3 or !x_1>=x_2 and x_1<=x_2 then
+	x_1 := x_3 + 1.0
+else
+	skip
+fi
+Children: 0x21480e0	0x214a380	0x214a620	
+--------------------
+Add: 0x21480e0	Type: ndbexpr	Range: [3, 66)	Const: |single bexpr|
+Text: !x_1<=x_3 and !x_2<=x_3 and !x_1>=x_3 or !x_1>=x_2 and x_1<=x_2
+Children: 0x21481e0	
+--------------------
+Add: 0x21481e0	Type: bexpr	Range: [3, 66)	Const: |or|
+Text: !x_1<=x_3 and !x_2<=x_3 and !x_1>=x_3 or !x_1>=x_2 and x_1<=x_2
+Children: 0x2148270	0x2148e60	
+--------------------
+Add: 0x2148270	Type: affexpr	Range: [3, 40)	Const: |and|
+Text: !x_1<=x_3 and !x_2<=x_3 and !x_1>=x_3
+Children: 0x2148300	0x21486d0	0x2148aa0	
+--------------------
+Add: 0x2148300	Type: literal	Range: [4, 12)	Const: |>=|
+Text: x_1<=x_3
+Children: 0x2148530	0x21485f0	
+--------------------
+Add: 0x2148530	Type: expr	Range: [4, 7)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x21485f0	Type: expr	Range: [9, 12)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x21486d0	Type: literal	Range: [18, 26)	Const: |>=|
+Text: x_2<=x_3
+Children: 0x2148900	0x21489c0	
+--------------------
+Add: 0x2148900	Type: expr	Range: [18, 21)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0x21489c0	Type: expr	Range: [23, 26)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x2148aa0	Type: literal	Range: [32, 40)	Const: |<=|
+Text: x_1>=x_3
+Children: 0x2148cb0	0x2148d70	
+--------------------
+Add: 0x2148cb0	Type: expr	Range: [32, 35)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x2148d70	Type: expr	Range: [37, 40)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x2148e60	Type: affexpr	Range: [44, 66)	Const: |and|
+Text: !x_1>=x_2 and x_1<=x_2
+Children: 0x2148ef0	0x21492c0	
+--------------------
+Add: 0x2148ef0	Type: literal	Range: [45, 53)	Const: |<=|
+Text: x_1>=x_2
+Children: 0x2149120	0x21491e0	
+--------------------
+Add: 0x2149120	Type: expr	Range: [45, 48)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x21491e0	Type: expr	Range: [50, 53)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0x21492c0	Type: literal	Range: [58, 66)	Const: |<=|
+Text: x_1<=x_2
+Children: 0x2149370	0x2149430	
+--------------------
+Add: 0x2149370	Type: expr	Range: [58, 61)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x2149430	Type: expr	Range: [63, 66)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0x214a380	Type: stmt	Range: [73, 89)	Const: |single assgn|
+Text: x_1 := x_3 + 1.0
+Children: 0x214a410	
+--------------------
+Add: 0x214a410	Type: assgn	Range: [73, 89)	Const: |simple assignment|
+Text: x_1 := x_3 + 1.0
+Children: 0x214a4a0	0x214a530	
+--------------------
+Add: 0x214a4a0	Type: pvar	Range: [73, 76)	Const: |x_1|
+Text: x_1
+Children: 
+--------------------
+Add: 0x214a530	Type: expr	Range: [80, 89)	Const: |expression|
+Text: x_3 + 1.0
+Expression: 1.0000000000+1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x214a620	Type: stmt	Range: [96, 100)	Const: |skip|
+Text: skip
+Children: 
+--------------------
+CFG:
+------------------------
+Node 1
+Type: det
+Edge #1
+Destination: 3
+Variable to be changed is x_1
+Changed to: 
+Add: 0x2145c20	Type: expr	Range: [-1, -1)	Const: |expression|
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Guard is: 
+Add: 0x21481e0	Type: bexpr	Range: [3, 66)	Const: |or|
+Text: !x_1<=x_3 and !x_2<=x_3 and !x_1>=x_3 or !x_1>=x_2 and x_1<=x_2
+Children: 0x2148270	0x2148e60	
+--------------------
+Add: 0x2148270	Type: affexpr	Range: [3, 40)	Const: |and|
+Text: !x_1<=x_3 and !x_2<=x_3 and !x_1>=x_3
+Children: 0x2148300	0x21486d0	0x2148aa0	
+--------------------
+Add: 0x2148300	Type: literal	Range: [4, 12)	Const: |>=|
+Text: x_1<=x_3
+Children: 0x2148530	0x21485f0	
+--------------------
+Add: 0x2148530	Type: expr	Range: [4, 7)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x21485f0	Type: expr	Range: [9, 12)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x21486d0	Type: literal	Range: [18, 26)	Const: |>=|
+Text: x_2<=x_3
+Children: 0x2148900	0x21489c0	
+--------------------
+Add: 0x2148900	Type: expr	Range: [18, 21)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0x21489c0	Type: expr	Range: [23, 26)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x2148aa0	Type: literal	Range: [32, 40)	Const: |<=|
+Text: x_1>=x_3
+Children: 0x2148cb0	0x2148d70	
+--------------------
+Add: 0x2148cb0	Type: expr	Range: [32, 35)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x2148d70	Type: expr	Range: [37, 40)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x2148e60	Type: affexpr	Range: [44, 66)	Const: |and|
+Text: !x_1>=x_2 and x_1<=x_2
+Children: 0x2148ef0	0x21492c0	
+--------------------
+Add: 0x2148ef0	Type: literal	Range: [45, 53)	Const: |<=|
+Text: x_1>=x_2
+Children: 0x2149120	0x21491e0	
+--------------------
+Add: 0x2149120	Type: expr	Range: [45, 48)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x21491e0	Type: expr	Range: [50, 53)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0x21492c0	Type: literal	Range: [58, 66)	Const: |<=|
+Text: x_1<=x_2
+Children: 0x2149370	0x2149430	
+--------------------
+Add: 0x2149370	Type: expr	Range: [58, 61)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x2149430	Type: expr	Range: [63, 66)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Probability to occur is1.0000000000
+
+Edge #2
+Destination: 4
+Variable to be changed is x_1
+Changed to: 
+Add: 0x2145c20	Type: expr	Range: [-1, -1)	Const: |expression|
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Guard is: 
+Add: 0x2149510	Type: bexpr	Range: [-1, -1)	Const: |or|
+Children: 0x2149df0	0x2149ea0	0x2149f50	0x214a0b0	0x214a160	0x214a210	
+--------------------
+Add: 0x2149df0	Type: affexpr	Range: [-1, -1)	Const: |and|
+Children: 0x21496e0	0x2149d20	
+--------------------
+Add: 0x21496e0	Type: literal	Range: [-1, -1)	Const: |<=|
+Children: 0x2148530	0x21485f0	
+--------------------
+Add: 0x2148530	Type: expr	Range: [4, 7)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x21485f0	Type: expr	Range: [9, 12)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x2149d20	Type: literal	Range: [-1, -1)	Const: |>=|
+Children: 0x2149120	0x21491e0	
+--------------------
+Add: 0x2149120	Type: expr	Range: [45, 48)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x21491e0	Type: expr	Range: [50, 53)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0x2149ea0	Type: affexpr	Range: [-1, -1)	Const: |and|
+Children: 0x2149860	0x2149d20	
+--------------------
+Add: 0x2149860	Type: literal	Range: [-1, -1)	Const: |<=|
+Children: 0x2148900	0x21489c0	
+--------------------
+Add: 0x2148900	Type: expr	Range: [18, 21)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0x21489c0	Type: expr	Range: [23, 26)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x2149d20	Type: literal	Range: [-1, -1)	Const: |>=|
+Children: 0x2149120	0x21491e0	
+--------------------
+Add: 0x2149120	Type: expr	Range: [45, 48)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x21491e0	Type: expr	Range: [50, 53)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0x2149f50	Type: affexpr	Range: [-1, -1)	Const: |and|
+Children: 0x21499e0	0x2149d20	
+--------------------
+Add: 0x21499e0	Type: literal	Range: [-1, -1)	Const: |>=|
+Children: 0x2148cb0	0x2148d70	
+--------------------
+Add: 0x2148cb0	Type: expr	Range: [32, 35)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x2148d70	Type: expr	Range: [37, 40)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x2149d20	Type: literal	Range: [-1, -1)	Const: |>=|
+Children: 0x2149120	0x21491e0	
+--------------------
+Add: 0x2149120	Type: expr	Range: [45, 48)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x21491e0	Type: expr	Range: [50, 53)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0x214a0b0	Type: affexpr	Range: [-1, -1)	Const: |and|
+Children: 0x21496e0	0x214a020	
+--------------------
+Add: 0x21496e0	Type: literal	Range: [-1, -1)	Const: |<=|
+Children: 0x2148530	0x21485f0	
+--------------------
+Add: 0x2148530	Type: expr	Range: [4, 7)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x21485f0	Type: expr	Range: [9, 12)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x214a020	Type: literal	Range: [-1, -1)	Const: |>=|
+Children: 0x2149370	0x2149430	
+--------------------
+Add: 0x2149370	Type: expr	Range: [58, 61)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x2149430	Type: expr	Range: [63, 66)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0x214a160	Type: affexpr	Range: [-1, -1)	Const: |and|
+Children: 0x2149860	0x214a020	
+--------------------
+Add: 0x2149860	Type: literal	Range: [-1, -1)	Const: |<=|
+Children: 0x2148900	0x21489c0	
+--------------------
+Add: 0x2148900	Type: expr	Range: [18, 21)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0x21489c0	Type: expr	Range: [23, 26)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x214a020	Type: literal	Range: [-1, -1)	Const: |>=|
+Children: 0x2149370	0x2149430	
+--------------------
+Add: 0x2149370	Type: expr	Range: [58, 61)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x2149430	Type: expr	Range: [63, 66)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Add: 0x214a210	Type: affexpr	Range: [-1, -1)	Const: |and|
+Children: 0x21499e0	0x214a020	
+--------------------
+Add: 0x21499e0	Type: literal	Range: [-1, -1)	Const: |>=|
+Children: 0x2148cb0	0x2148d70	
+--------------------
+Add: 0x2148cb0	Type: expr	Range: [32, 35)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x2148d70	Type: expr	Range: [37, 40)	Const: |expression|
+Text: x_3
+Expression: +1.0000000000*x_3
+Children: 
+--------------------
+Add: 0x214a020	Type: literal	Range: [-1, -1)	Const: |>=|
+Children: 0x2149370	0x2149430	
+--------------------
+Add: 0x2149370	Type: expr	Range: [58, 61)	Const: |expression|
+Text: x_1
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Add: 0x2149430	Type: expr	Range: [63, 66)	Const: |expression|
+Text: x_2
+Expression: +1.0000000000*x_2
+Children: 
+--------------------
+Probability to occur is1.0000000000
+
+------------------------
+Node 2
+Type: det
+------------------------
+Node 3
+Type: det
+Edge #1
+Destination: 2
+Variable to be changed is x_1
+Changed to: 
+Add: 0x214a530	Type: expr	Range: [80, 89)	Const: |expression|
+Text: x_3 + 1.0
+Expression: 1.0000000000+1.0000000000*x_3
+Children: 
+--------------------
+Probability to occur is1.0000000000
+
+------------------------
+Node 4
+Type: det
+Edge #1
+Destination: 2
+Variable to be changed is x_1
+Changed to: 
+Add: 0x2145c20	Type: expr	Range: [-1, -1)	Const: |expression|
+Expression: +1.0000000000*x_1
+Children: 
+--------------------
+Probability to occur is1.0000000000
+
