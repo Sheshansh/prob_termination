@@ -51,3 +51,16 @@ public:
 	CFG_location(string type,int label);
 	void print();
 };
+
+void skip_spaces(int &begin, int &end);
+void vcopy(vector<node*> &sink,vector<node*> &tocopy);
+node* negation(node* tonegate);
+int find_variables();
+void generate_equations(ofstream& equationsfile);
+
+extern string program;
+extern int nVariables;
+extern int last_used_label;
+extern map<int,CFG_location*> label_map;
+extern node* id1;
+extern node* root;
