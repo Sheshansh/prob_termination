@@ -12,6 +12,7 @@
 #include <fstream>
 #include <deque>
 #include <iomanip>
+#include <fstream>
 #include "Parser.h"
 using namespace std;
 #define MAXL 100000 //Maximum length of the program
@@ -665,6 +666,10 @@ void CFG_location::print(){
 	}
 }
 
+void generate_equations(ofstream& equationsfile){
+	
+}
+
 int main(){
 	char input[MAXL];
 	cout<<fixed<<setprecision(10);
@@ -677,22 +682,26 @@ int main(){
 	id1->constant = "expression";
 	id1->expression.resize(nVariables+1);
 	id1->expression[1] = 1.0;
-	cout<<"Input Code:"<<endl;
-	cout<<program<<endl;
-	cout<<"Parse Tree:"<<endl;
+	// cout<<"Input Code:"<<endl;
+	// cout<<program<<endl;
+	// cout<<"Parse Tree:"<<endl;
 	int start,end;
 	start = ++last_used_label;
 	end = ++last_used_label;
 	label_map[start] = new CFG_location("det",start);
 	label_map[end]	 = new CFG_location("det",end);
 	root=new node("stmt",0,program.length(),start,end);
-	root->print();
-	cout<<"CFG:"<<endl;
-	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
-		cout<<"------------------------"<<endl;
-		cout<<"Node "<<it->first<<endl;
-		it->second->print();
-		// cout<<it->second->label<<endl;
-	}
+	// root->print();
+	// cout<<"CFG:"<<endl;
+	// for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+	// 	cout<<"------------------------"<<endl;
+	// 	cout<<"Node "<<it->first<<endl;
+	// 	it->second->print();
+	// 	// cout<<it->second->label<<endl;
+	// }
+	ofstream equationsfile;
+	equationsfile.open ("equations.txt");
+	generate_equations(equationsfile);
+	equationsfile.close();
 	return 0;
 }
