@@ -18,8 +18,6 @@ using namespace std;
 #define MAXL 100000 //Maximum length of the program
 #define part(x,a,b) (x.substr((a),((b)-(a))))
 #define pb push_back
-#define make_edge(a,b,c) edge((int*)(a),(int*)(b),(c))
-#define mp make_pair
 
 string program;
 int nVariables;
@@ -28,10 +26,12 @@ map<int,CFG_location*> label_map;
 node* id1 = new node("expr");
 
 void skip_spaces(int &begin, int &end){ //skips the spaces in the beginning and the end
-  while(begin<program.size() and isspace(program[begin]))
-	begin++;
-  while(end>0 and isspace(program[end-1]))
-	end--;
+	while(begin<program.size() and isspace(program[begin])){
+		begin++;
+	}
+	while(end>0 and isspace(program[end-1])){
+		end--;
+	}
 }
 
 node::node(string t){
@@ -159,6 +159,7 @@ void node::proc_stmt(int s,int l){
 		}
 		bracket = new node("bexpr",begin+1,closed_bracket);
 		begin = closed_bracket+1;
+		label_map[s]->invariant = bracket;
 	}
 	skip_spaces(begin,end);
 
@@ -571,29 +572,51 @@ int find_variables(){
 }
 
 void node::print(){
-	cout<<"Add: "<<this<<"\t";
-	cout<<"Type: "<<type<<"\t";
-	cout<<"Range: ["<<begin<<", "<<end<<")\t";
-	cout<<"Const: |"<<constant<<"|"<<endl;
-	if(begin!=-1 and end!=-1 and begin<=end){
-		cout<<"Text: "<<program.substr(begin, end-begin)<<endl;
-	}
 	if(type=="expr"){
-		cout<<"Expression: ";
 		if(expression[0]!=0.0){
 			cout<<expression[0];
 		}
 		for(int i = 1;i<=nVariables;i++){
 			if(expression[i]!=0.0){
 				if(expression[i]>0.0){
-					cout<<"+"<<expression[i]<<"*x_"<<i;
+					cout<<"+"<<expression[i]<<"x_"<<i;
 				}
 				else{
-					cout<<expression[i]<<"*x_"<<i;
+					cout<<expression[i]<<"x_"<<i;
 				}
 			}
 		}
+		return;
+	}
+	else if(type=="literal"){
+		children[0]->print();
+		cout<<constant;
+		children[1]->print();
+		return;
+	}
+	else if(type=="affexpr"){
+		children[0]->print();
+		for(int i=1;i<children.size();++i){
+			cout<<" and ";
+			children[i]->print();
+		}
+		return;
+	}
+	else if(type=="bexpr"){
+		children[0]->print();
+		for(int i=1;i<children.size();++i){
+			cout<<" or ";
+			children[i]->print();
+		}
 		cout<<endl;
+		return;
+	}
+	cout<<"Add: "<<this<<"\t";
+	cout<<"Type: "<<type<<"\t";
+	cout<<"Range: ["<<begin<<", "<<end<<")\t";
+	cout<<"Const: |"<<constant<<"|"<<endl;
+	if(begin!=-1 and end!=-1 and begin<=end){
+		cout<<"Text: "<<program.substr(begin, end-begin)<<endl;
 	}
 	cout<<"Children: ";
 	for(int i = 0;i<children.size();++i){
@@ -634,12 +657,10 @@ void CFG_edge::print(){
 	else{
 		cout<<"Error! Error! Error!"<<endl;
 	}
-	if(toChange!=0){
-		cout<<"Variable to be changed is x_"<<toChange<<endl;
-	}
-	if(change!=NULL){
-		cout<<"Changed to: "<<endl;
+	if(toChange!=0 and change!=NULL){
+		cout<<"Change: x_"<<toChange<<" changed to ";
 		change->print();
+		cout<<endl;
 	}
 	if(guard!=NULL){
 		cout<<"Guard is: "<<endl;
@@ -656,6 +677,12 @@ CFG_location::CFG_location(string type,int label){
 void CFG_location::print(){
 	// cout<<"Label: "<<label<<endl;
 	cout<<"Type: "<<type<<endl;
+	if(invariant!=NULL){
+		cout<<"Invariant: ";
+		// invariant->print();
+		cout<<endl;
+	}
+
 	// cout<<"Edges: "<<endl;
 	int i=1;
 	for(vector<CFG_edge>::iterator it = edges.begin();it!=edges.end();++it){

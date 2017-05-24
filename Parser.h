@@ -17,12 +17,12 @@ private:
 	void proc_assgn(int s,int l);
 	void proc_affexpr();
 	void proc_pvar();
-	void recursively_form_vector(int begin,int end);
 	void proc_expr();
 	void proc_constant();
 	void proc_literal(bool negate);
 	void proc_bexpr();
 	void proc_ndbexpr();
+	void recursively_form_vector(int begin,int end);
 //main process
 	void process(int s, int l, bool negate);
 public:
@@ -46,10 +46,17 @@ public:
 struct CFG_location{
 public:
 	int label;
-	string type; //Deterministic == true and non-deterministic == false #convention
+	string type; // det ndet and prob
 	vector<CFG_edge> edges;
 	CFG_location(string type,int label);
+	vector<int> ranking_function;
+	node* invariant; // A bexpr node
 	void print();
+};
+
+struct equation{
+	node* affexpr;
+	node* literal;
 };
 
 void skip_spaces(int &begin, int &end);
