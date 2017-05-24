@@ -24,7 +24,18 @@ void generate_equations(ofstream& equationsfile){ //Would use the ofstream file 
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		if(it->second->type=="det"){
 			//Invariant and guard imply the value decrease
-			// if()
+			// Guard would have been NULL here
+			if(it->second->edges.size()==1){
+				if(it->second->invariant==NULL){
+
+				}
+				else{
+					//As te 
+				}
+			}
+			else{
+				// Size is 2
+			}
 		}
 		else if(it->second->type=="ndet"){
 			//Invariant and implies the value decrease for both

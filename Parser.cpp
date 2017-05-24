@@ -147,7 +147,7 @@ void node::proc_stmt(int s,int l){
 	}
 
 	//look for brackets
-	// Assuming the invariants are are the beginning itself
+	// Assuming the invariants are at the beginning itself
 	skip_spaces(begin,end);
 	if(program[begin]=='['){
 		int closed_bracket = -1;
@@ -158,8 +158,8 @@ void node::proc_stmt(int s,int l){
 			}
 		}
 		bracket = new node("bexpr",begin+1,closed_bracket);
-		begin = closed_bracket+1;
 		label_map[s]->invariant = bracket;
+		begin = closed_bracket+1;
 	}
 	skip_spaces(begin,end);
 
@@ -433,6 +433,7 @@ void node::proc_literal(bool negate){
 		begin = begin+1;
 		// cout<<"I am here"<<negate<<!negate<<endl<<endl;
 		proc_literal(!negate);
+		return;
 	}
 	int sign = -1;
 	for(int i = begin;i<end-1;++i){
@@ -446,14 +447,9 @@ void node::proc_literal(bool negate){
 	}
 	else{
 		if(!negate){
-			if(constant==""){
-				// cout<<"How's this"<<endl;
-				constant=part(program,sign,sign+2);
-				//<flag> Only a temporary solution, I don't exactly understand why we need this if condition
-			}
+			constant=part(program,sign,sign+2);
 		}
 		else{
-			// cout<<"Woohoo"<<endl;
 			if(part(program,sign,sign+2)==">="){
 				constant = "<=";
 			}
@@ -603,21 +599,19 @@ void node::print(){
 		return;
 	}
 	else if(type=="bexpr"){
+		cout<<"Add: "<<this<<"\t";
 		children[0]->print();
 		for(int i=1;i<children.size();++i){
 			cout<<" or ";
 			children[i]->print();
 		}
-		cout<<endl;
+		cout<<endl<<"--------------------"<<endl;
 		return;
 	}
 	cout<<"Add: "<<this<<"\t";
 	cout<<"Type: "<<type<<"\t";
 	cout<<"Range: ["<<begin<<", "<<end<<")\t";
 	cout<<"Const: |"<<constant<<"|"<<endl;
-	if(begin!=-1 and end!=-1 and begin<=end){
-		cout<<"Text: "<<program.substr(begin, end-begin)<<endl;
-	}
 	cout<<"Children: ";
 	for(int i = 0;i<children.size();++i){
 		cout<<children[i]<<"\t";
@@ -664,14 +658,15 @@ void CFG_edge::print(){
 	}
 	if(guard!=NULL){
 		cout<<"Guard is: "<<endl;
-		guard->print();
+		// guard-> print();
 	}
 	cout<<"Probability to occur is"<<probability<<endl<<endl; 
 }
 
 CFG_location::CFG_location(string type,int label){
-	this->label=label;
-	this->type=type;
+	this->label = label;
+	this->type = type;
+	invariant = NULL;
 }
 
 void CFG_location::print(){
@@ -679,6 +674,7 @@ void CFG_location::print(){
 	cout<<"Type: "<<type<<endl;
 	if(invariant!=NULL){
 		cout<<"Invariant: ";
+		cout<<invariant;
 		// invariant->print();
 		cout<<endl;
 	}
