@@ -1,0 +1,134 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{00}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{Billingsley}{Billingsley}{1995}]%
+        {Billingsley:book}
+\bibfield{author}{\bibinfo{person}{P. Billingsley}.}
+  \bibinfo{year}{1995}\natexlab{}.
+\newblock \bibinfo{booktitle}{{\em {Probability and Measure}\/}
+  (\bibinfo{edition}{3rd} ed.)}.
+\newblock \bibinfo{publisher}{Wiley}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Chakarov and Sankaranarayanan}{Chakarov and
+  Sankaranarayanan}{2013}]%
+        {SriramCAV}
+\bibfield{author}{\bibinfo{person}{Aleksandar Chakarov} {and}
+  \bibinfo{person}{Sriram Sankaranarayanan}.} \bibinfo{year}{2013}\natexlab{}.
+\newblock \showarticletitle{{Probabilistic Program Analysis with Martingales}}.
+  In \bibinfo{booktitle}{{\em {Computer Aided Verification - 25th International
+  Conference, {CAV} 2013, Saint Petersburg, Russia, July 13-19, 2013.
+  Proceedings}}} {\em (\bibinfo{series}{{Lecture Notes in Computer Science}})},
+  \bibfield{editor}{\bibinfo{person}{Natasha Sharygina} {and}
+  \bibinfo{person}{Helmut Veith}} (Eds.), Vol.~\bibinfo{volume}{8044}.
+  \bibinfo{publisher}{Springer}, \bibinfo{pages}{511--526}.
+\newblock
+\showISBNx{978-3-642-39798-1}
+\showDOI{%
+\url{https://doi.org/10.1007/978-3-642-39799-8_34}}
+
+
+\bibitem[\protect\citeauthoryear{Chatterjee, Fu, and Goharshady}{Chatterjee
+  et~al\mbox{.}}{2016a}]%
+        {CFG16:positivstellensatz-arxiv}
+\bibfield{author}{\bibinfo{person}{Krishnendu Chatterjee},
+  \bibinfo{person}{Hongfei Fu}, {and} \bibinfo{person}{Amir~Kafshdar
+  Goharshady}.} \bibinfo{year}{2016}\natexlab{a}.
+\newblock \showarticletitle{Termination Analysis of Probabilistic Programs
+  through Positivstellensatz's}.
+\newblock \bibinfo{journal}{{\em CoRR\/}}  \bibinfo{volume}{abs/1604.07169}
+  (\bibinfo{year}{2016}).
+\newblock
+\showURL{%
+\url{http://arxiv.org/abs/1604.07169}}
+
+
+\bibitem[\protect\citeauthoryear{Chatterjee, Fu, Novotn{\'{y}}, and
+  Hasheminezhad}{Chatterjee et~al\mbox{.}}{2016b}]%
+        {CFNH16:prob-termination}
+\bibfield{author}{\bibinfo{person}{Krishnendu Chatterjee},
+  \bibinfo{person}{Hongfei Fu}, \bibinfo{person}{Petr Novotn{\'{y}}}, {and}
+  \bibinfo{person}{Rouzbeh Hasheminezhad}.} \bibinfo{year}{2016}\natexlab{b}.
+\newblock \showarticletitle{Algorithmic analysis of qualitative and
+  quantitative termination problems for affine probabilistic programs}. In
+  \bibinfo{booktitle}{{\em Proceedings of the 43rd Annual {ACM}
+  {SIGPLAN-SIGACT} Symposium on Principles of Programming Languages, {POPL}
+  2016, St. Petersburg, FL, USA, January 20 - 22, 2016}},
+  \bibfield{editor}{\bibinfo{person}{Rastislav Bod{\'{\i}}k} {and}
+  \bibinfo{person}{Rupak Majumdar}} (Eds.). \bibinfo{publisher}{{ACM}},
+  \bibinfo{pages}{327--342}.
+\newblock
+\showISBNx{978-1-4503-3549-2}
+\showDOI{%
+\url{https://doi.org/10.1145/2837614.2837639}}
+
+
+\bibitem[\protect\citeauthoryear{Fioriti and Hermanns}{Fioriti and
+  Hermanns}{2015}]%
+        {HolgerPOPL}
+\bibfield{author}{\bibinfo{person}{Luis Mar{\'i}a~Ferrer Fioriti} {and}
+  \bibinfo{person}{Holger Hermanns}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{{Probabilistic Termination: Soundness,
+  Completeness, and Compositionality}}. In \bibinfo{booktitle}{{\em
+  {Proceedings of the 42nd Annual {ACM} {SIGPLAN-SIGACT} Symposium on
+  Principles of Programming Languages, {POPL} 2015, Mumbai, India, January
+  15-17, 2015}}}, \bibfield{editor}{\bibinfo{person}{Sriram~K. Rajamani} {and}
+  \bibinfo{person}{David Walker}} (Eds.). \bibinfo{publisher}{{ACM}},
+  \bibinfo{pages}{489--501}.
+\newblock
+\showISBNx{978-1-4503-3300-9}
+\showDOI{%
+\url{https://doi.org/10.1145/2676726.2677001}}
+
+
+\bibitem[\protect\citeauthoryear{Kozen}{Kozen}{1981}]%
+        {Kozen:prob-semantics}
+\bibfield{author}{\bibinfo{person}{Dexter Kozen}.}
+  \bibinfo{year}{1981}\natexlab{}.
+\newblock \showarticletitle{{Semantics of Probabilistic Programs}}.
+\newblock \bibinfo{journal}{{\it J. Comput. System Sci.}} \bibinfo{volume}{22},
+  \bibinfo{number}{3} (\bibinfo{year}{1981}), \bibinfo{pages}{328--350}.
+\newblock
+\showISSN{0022-0000}
+\showDOI{%
+\url{https://doi.org/10.1016/0022-0000(81)90036-2}}
+
+
+\end{thebibliography}

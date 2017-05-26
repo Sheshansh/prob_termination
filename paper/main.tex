@@ -1,0 +1,495 @@
+\documentclass[acmsmall, anonymous]{acmart}
+
+\usepackage[T1]{fontenc}
+%\usepackage{bm}
+\usepackage{pgfplots}
+\usepackage{enumerate,paralist}
+\usepackage{pbox}
+\usepackage{stmaryrd}
+%\usepackage{}
+
+\usepackage{appendix}
+\usepackage{comment}
+\usepackage{parskip}
+\usepackage{multirow}
+\usepackage{url}
+
+\usepackage[ruled, linesnumbered]{algorithm2e}
+\usepackage{tikz}
+
+\usepackage{calc}
+\usepackage{fp}
+
+
+%\usepackage{lmodern}
+%\usepackage{amsmath}
+%\usepackage{amssymb, amsthm}
+\usepackage{listings}
+\usepackage{mathtools}
+%\usepackage{times}
+%\usepackage{caption}
+%\usepackage{subcaption}
+%\usepackage{subfig}
+\usepackage{multibib}
+\usepackage{flushend}
+
+%\special{papersize=8.5in,11in}
+%\setlength{\pdfpageheight}{\paperheight}
+%\setlength{\pdfpagewidth}{\paperwidth}
+
+%\conferenceinfo{CONF 'yy}{Month d--d, 20yy, City, ST, Country} 
+%\copyrightyear{20yy} 
+%\copyrightdata{978-1-nnnn-nnnn-n/yy/mm} 
+%\doi{nnnnnnn.nnnnnnn}
+
+%\theoremstyle{plain}
+%\newtheorem{lemma}{Lemma}
+%\newtheorem{claim}{Claim}
+%\newtheorem{proposition}{Proposition}
+%\newtheorem{definition}{Definition}
+%\newtheorem{corollary}{Corollary}
+%\newtheorem{theorem}{Theorem}
+%\newtheorem{example}{Example}
+%\newtheorem{remark}{Remark}
+%\newtheorem{observation}{Observation}
+%\newtheorem{assumption}{Assumption}
+
+\newcommand{\expv}{\mathbb{E}}
+\newcommand{\Eval}{\mathsf{ET}}
+\newcommand{\Thr}{\mathsf{Thr}}
+\newcommand{\costvar}{W}
+\newcommand{\stepcost}{c}
+
+\newcommand{\program}{\mathcal{P}}
+
+
+
+\lstdefinelanguage{affprob}
+{
+morekeywords={angel,demon, choice,prob(0.6), if, then, else, fi, while, do, od, 
+true, false, and, or, skip, sample},
+sensitive = false
+}
+
+\usepackage{tikz}
+\usepackage{tikz,pgffor}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes}
+\usetikzlibrary{calc}
+\usetikzlibrary{automata}
+\usetikzlibrary{positioning}
+%\usepackage{fixme,manfnt,mparhack}
+
+\tikzstyle{ang}=[regular polygon, regular polygon sides = 3,draw,inner sep=0pt,minimum size=6mm, yshift = -0.75 mm]
+\tikzstyle{dem}=[shape=diamond,draw,inner sep=0pt,minimum size=6mm]
+\tikzstyle{ran}=[shape=circle,draw,inner sep=0pt,minimum size=5mm]
+\tikzstyle{det}=[shape=rectangle,draw,inner sep=0pt,minimum size=5mm]
+\tikzstyle{tran}=[draw,->,>=stealth, rounded corners]
+
+\usepackage{todonotes}
+
+
+%\newcounter{fixcount}
+%\setcounter{fixcount}{0}
+%\renewcommand{\fixmelogo}{\textcolor{red}{\textdbend}}
+\newcommand{\defineNote}[3][black!65!green]{\expandafter\def\csname #2\endcsname
+##1{\stepcounter{fixcount}\fxwarning{\textcolor{#1}{\textbf{#3}: ##1}}}}
+%\defineNote{PN}{Petr}
+%\defineNote{HF}{Hongfei}
+%\defineNote{KC}{Krish}
+%\defineNote{RH}{Roozbeh}
+
+%\DeclareMathAlphabet{\mathpzc}{OT1}{pzc}{m}{it}
+
+% \ * TODO NOTES * \
+\newcommand{\PN}[1]{\todo[color=orange,author = Petr]{#1}}
+\newcommand{\HF}[1]{\todo[color=green,author = Hongfei]{#1}}
+\newcommand{\KC}[1]{\todo[color=yellow,author = Krish]{#1}}
+\newcommand{\RH}[1]{\todo[color=white!80!blue,author = Roozbeh]{#1}}
+
+%\newcounter{repthmcnt}
+%\newcounter{cntthmmain}
+
+\newcommand{\theoremlike}[2]{\par\medskip\penalty-250%
+%\refstepcounter{theorem}
+{{\bfseries\noindent
+#2 \ref{#1}.}}\it}
+
+\newcommand{\thmhelperpre}[2]{\theoremlike{#1}{#2}}
+\newcommand{\thmhelperpost}{\par\medskip}
+
+\newenvironment{reftheorem}[1]{\thmhelperpre{#1}{Theorem}}{\thmhelperpost}
+\newenvironment{reflemma}[1]{\thmhelperpre{#1}{Lemma}}{\thmhelperpost}
+\newenvironment{refobservation}[1]{\thmhelperpre{#1}{Observation}}{\thmhelperpost}
+\newenvironment{refclaim}[1]{\thmhelperpre{#1}{Claim}}{\thmhelperpost}
+\newenvironment{refdefinition}[1]{\thmhelperpre{#1}{Definition}}{\thmhelperpost}
+\newenvironment{refcorollary}[1]{\thmhelperpre{#1}{Corollary}}{\thmhelperpost}
+\newenvironment{refproposition}[1]{\thmhelperpre{#1}{Proposition}}{\thmhelperpost}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+
+\usepackage{graphicx} 
+\newcommand{\Nats}{\mathbb{N}}
+\newcommand{\Natsinf}{\mathbb{N}\cup\{\infty\}}
+\newcommand{\Ints}{\mathbb{Z}}
+\newcommand{\Intsminus}{\mathbb{Z}_{\leq 0}\cup\{-\infty\}}
+\newcommand{\Intsplusminus}{\mathbb{Z}\cup\{-\infty,\infty\}}
+\newcommand{\Reals}{\mathbb{R}}
+\newcommand{\Realsplus}{\mathbb{R}_{\geq 0}\cup\{\infty\}}
+\newcommand{\Realsminus}{\mathbb{R}_{\leq 0}\cup\{-\infty\}}
+\newcommand{\Realsplusminus}{\mathbb{R}\cup\{-\infty, \infty\}}
+\newcommand{\Realsinf}{\mathbb{R}\cup\{\infty\}}
+\newcommand{\Level}{\mathsf{Lv}}
+\newcommand{\Fwd}{\mbox{\sc Fwd}}
+\newcommand{\Bwd}{\mbox{\sc Bwd}}
+\newcommand{\Fwdstar}{\Fwd^+}
+\newcommand{\Bwdstar}{\Bwd^+}
+\newcommand{\Fwdcomp}{\Fwd '}
+\newcommand{\Bwdcomp}{\Bwd '}
+\newcommand{\LD}{\mathsf{LD}}
+\newcommand{\Localdistcomp}{\mathsf{LD}'}
+\newcommand{\Rootdist}{R}
+\newcommand{\Leafdist}{L}
+\newcommand{\ov}{\overline}
+\newcommand{\Summary}{S}
+\newcommand{\Index}{\mathcal{I}}
+\newcommand{\PNode}[1]{\ov{#1}}
+\newcommand{\Refines}{\sqsubseteq}
+\newcommand{\Strictrefines}{\sqsubset}
+\newcommand{\Distance}{d}
+\newcommand{\Distancecomp}{d'}
+\newcommand{\Weight}{\mathsf{wt}}
+\newcommand{\Length}{\ell}
+\newcommand{\Value}{\overline{\Weight}}
+\newcommand{\Label}{\mathsf{\lambda}}
+\newcommand{\Mergealgo}{\mathsf{Merge}}
+\newcommand{\Splitalgo}{\mathsf{Split}}
+\newcommand{\Nsep}{2/\delta}
+\newcommand{\Seplist}{\mathcal{X}}
+\newcommand{\Complist}{\mathcal{Y}}
+\newcommand{\argmin}{\mathsf{argmin}}
+\newcommand{\Bag}{B}
+\newcommand{\RBag}{\mathcal{B}}
+\newcommand{\RHBag}{\widehat{\mathcal{B}}}
+\newcommand{\Tree}{\mathrm{Tree}}
+\newcommand{\restr}[1]{[#1]}
+\newcommand{\Ushape}{\mathsf{U}}
+\newcommand{\Wshape}{\mathsf{W}}
+\newcommand{\Rankalgo}{\mathsf{Rank}}
+\newcommand{\Balancealgo}{\mathsf{Balance}}
+\newcommand{\Concpreprocessalgo}{\mathsf{ConcurPreprocess}}
+\newcommand{\ConcurAP}{\mathsf{ConcurAP}}
+\newcommand{\Algebraicalgo}{\mathsf{Algebraic}}
+\newcommand{\Updatealgo}{\mathsf{Update}}
+\newcommand{\Concqueryalgo}{\mathsf{ConcurQuery}}
+\newcommand{\DFT}{\mathsf{DFT}}
+\newcommand{\Rank}{\mathsf{r}}
+\newcommand{\Nhood}{\mathsf{Nh}}
+\newcommand{\Nhoodnodes}{\mathsf{NhV}}
+%\newcommand{\Baghood}{\mathsf{Bh}}
+\newcommand{\Comp}{\mathcal{C}}
+\newcommand{\Zero}{\overline{\mathbf{0}}}
+%\newcommand{\One}{\overline{\mathbf{1}}}
+\newcommand{\True}{\mathsf{True}}
+%\newcommand{\False}{\mathsf{False}}
+\newcommand{\DFS}{\mathsf{DFS}}
+\newcommand{\Cost}{\mathsf{c}}
+\newcommand{\Ranktree}{\mathsf{R_G}}
+%\newcommand{\Rankhtree}{\widehat{\mathsf{R_G}}}
+\newcommand{\Rep}{\mathsf{Replace}}
+\newcommand{\Domain}{\mathsf{D}}
+\newcommand{\Cyclealgo}{\mathsf{MinCycle}}
+\newcommand{\Energynodesalgo}{\mathsf{ZeroEnergyNodes}}
+\newcommand{\Energynodesalgotw}{\mathsf{ZeroEnergyNodesTW}}
+\newcommand{\Decisionenergyalgo}{\mathsf{DecisionEnergy}}
+\newcommand{\Killcyclealgo}{\mathsf{KillCycle}}
+\newcommand{\Time}{\mathcal{T}}
+\newcommand{\Space}{\mathcal{S}}
+\newcommand{\Energy}{\mathsf{E}}
+\newcommand{\Timef}{\Weight^{\prime}}
+\newcommand{\HE}{\mathsf{HE}}
+\newcommand{\Intstriplets}{\mathcal{I}}
+\newcommand{\Min}{\bm{\min}}
+\newcommand{\Plus}{\bm{+}}
+%\newcommand{\Path}{\rightsquigarrow}
+%\newcommand{\Nodeset}{\mathpzc{V}}
+\newcommand{\Edgeset}{\mathpzc{E}}
+\newcommand{\Weightmap}{{\mathpzc{wt}}}
+\newcommand{\Graphstruct}{\mathpzc{G}}
+\newcommand{\ProductTree}{\mathsf{ConcurTree}}
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\newcommand{\From}{\Fwdstar}
+\newcommand{\To}{\Bwdstar}
+%\newcommand{\RootV}[1]{\mathcal{#1}}
+\newcommand{\AncestV}[1]{\mathpzc{#1}}
+
+%\newcommand{\Bagfactor}{4\cdot \lambda /\delta}
+\newcommand{\Balfactor}{((1+\delta)/2)^{\lambda-1}}
+\newcommand{\Levelfactor}{\lambda}
+\newcommand{\abc}{(\Bagfactor, \Balfactor, \Levelfactor)}
+
+\newcommand{\Descendants}{[2^{\lambda}]}
+%\newcommand{\val}{\mbox{\rm val}}
+\newcommand{\cost}{\mbox{\rm R}}
+\newcommand{\bb}{\mbox{\rm b}}
+\newcommand{\RR}{\mbox{\rm TB}}
+\newcommand{\Red}{\mbox{\rm Red}}
+%\newcommand{\PromValExtErg}{\mbox{\sc PromValErg}}
+
+\newcommand{\LimitReach}{\mbox{\rm LPre}}
+\newcommand{\Proc}{\mathsf{Proc}}
+\newcommand{\D}{{\mathcal D}}
+\newcommand{\ProbDist}{\mathsf{ProbDist}}
+
+\newcommand{\Exp}{\mathbb{E}}
+
+\newcommand{\Tau}{\ensuremath{\mathcal{T}}}
+\newcommand{\Z}{\ensuremath{{\rm \mathbb Z}}}
+\newcommand{\N}{\ensuremath{{\rm \mathbb N}}}
+\newcommand{\R}{\ensuremath{{\rm \mathbb R}}}
+\newcommand{\F}{\ensuremath{{\rm \mathcal F}}}
+\newcommand{\E}{\ensuremath{{\rm \mathbb E}}}
+\newcommand{\var}{\mathsf{var}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\exsup}{\triangleleft}
+
+\newcommand{\Af}{\mbox{\rm Al}_1}
+\newcommand{\As}{\mbox{\rm Al}_2}
+\newcommand{\At}{\mbox{\rm Al}_3}
+
+\newcommand{\EXP}{\mathsf{LimAvgPre}}
+\newcommand{\ExpRew}{\mathsf{ExpRew}}
+\newcommand{\Update}{\mathsf{Update}}
+\newcommand{\Almost}{\mathsf{Almost}}
+\newcommand{\Limit}{\mathsf{Limit}}
+\newcommand{\Positive}{\mathsf{Positive}}
+\newcommand{\Bounded}{\mathsf{Bounded}}
+\newcommand{\Pred}{\mathsf{Pred}}
+\newcommand{\Preprocessing}{\mbox{\rm Process}}
+\newcommand{\SolveDMPG}{\mbox{\rm SolveDMPG}}
+\newcommand{\AlmostQuantLimAvg}{\mbox{\rm AlmostQuantLimAvg}}
+\newcommand{\Remove}{\mbox{\rm Remove}}
+\newcommand{\dist}{5.5cm*0.5}
+\newcommand{\Prod}[1]{\langle #1 \rangle}
+\newcommand{\eps}{\epsilon}
+\newcommand{\Logratio}{R}
+\newcommand{\Epsbound}{0.39}
+
+\newcommand{\act}{A}
+\newcommand{\mov}{\Gamma}
+\newcommand{\trans}{\delta}
+\newcommand{\stra}{\sigma}
+\newcommand{\bigstra}{\Sigma}
+\newcommand\distr{{\mathcal D}}
+\newcommand\pat{\pi}
+\newcommand\pats{\Pi}
+
+
+\newcommand{\supp}{\mathrm{Supp}}
+\newcommand{\dest}{\mathrm{Dest}}
+\newcommand{\cala}{{\mathcal A}}
+\newcommand{\LimInfAvg}{\mathsf{LimInfAvg}}
+\newcommand{\LimSupAvg}{\mathsf{LimSupAvg}}
+\def\set#1{\{ #1 \}}
+\newcommand{\Safe}{\mathsf{Safe}}
+\newcommand{\Reach}{\mathsf{Reach}}
+
+\newcommand{\wh}{\widehat}
+\newcommand{\Mem}{\mathsf{Mem}}
+
+
+
+
+\newcommand{\Aw}{\mathit{Aw}}
+\newcommand{\Gd}{\mathit{Gd}}
+
+\newcommand{\wt}{\widetilde}
+\newcommand{\ial}{{\sc ImprovedAlgo}}
+
+
+\newcommand{\UH}{\underline{H}}
+\newcommand{\OH}{\overline{H}}
+\newcommand{\Avg}{\mathsf{Avg}}
+
+\newcommand{\Adj}{\mathsf{Adj}}
+
+\newcommand{\Aptime}{\omega}
+\newcommand{\Children}{[2]}
+
+%\sloppy
+
+%\authorinfo{}{}{}
+%\date{}
+
+
+% \*  NOTATION  *\
+
+\newcommand{\pvars}{V}
+\newcommand{\rvars}{R}
+\newcommand{\locs}{\mathit{L}}
+\newcommand{\alocs}{\locs_{A}}
+\newcommand{\dlocs}{\locs_{D}}
+\renewcommand{\trans}{\mathcal{T}}
+\newcommand{\loc}{\ell}
+\newcommand{\initloc}{\loc_0}
+\newcommand{\initval}{\mathbf{x}_0}
+\newcommand{\tran}{\tau}
+\newcommand{\lit}{\xi}
+\newcommand{\satpenalty}{\mathit{Pen}}
+\newcommand{\satstep}{1}
+\newcommand{\mart}{\eta}
+\renewcommand{\E}{\mathbb{E}}
+
+\newcommand{\Rset}{\mathbb{R}}
+\newcommand{\Nset}{\mathbb{N}}
+\newcommand{\Zset}{\mathbb{Z}}
+
+\newcommand{\lin}{\mathit{in}}
+\newcommand{\lout}{\mathit{out}}
+
+\newcommand{\states}{\locs}
+\newcommand{\astates}{\states_A}
+\newcommand{\dstates}{\states_D}
+\newcommand{\pstates}{\states_P}
+\newcommand{\transitions}{\mapsto}
+\newcommand{\probdist}{\mathit{Pr}}
+\newcommand{\guards}{G}
+\newcommand{\labels}{L}
+\newcommand{\prob}{\mathit{Pr}}
+\newcommand{\assgn}[2]{[#1/#2]}
+\newcommand{\id}{\mathit{id}}
+\newcommand{\probm}{\mathbb{P}}
+\newcommand{\inv}{I}
+\newcommand{\pinv}{PI}
+\newcommand{\pinfunc}{\pi}
+\newcommand{\fail}[2]{\mathit{Fail}(#1)}
+\newcommand{\pscheme}{\mathit{PS}}
+
+%\renewcommand{\baselinestretch}{0.96}
+%\addtolength{\parskip}{-0.7mm}
+%\setlength{\textfloatsep}{0.2cm}
+%\addtolength{\textheight}{0.4in}
+%\addtolength{\voffset}{-0.2in}
+%\addtolength{\textwidth}{0.12in}
+%\addtolength{\hoffset}{-0.06in}
+
+\newcommand{\unfold}[2]{\mathit{Unf}(#1,#2)}
+\newcommand{\unf}{\mathit{unf}}
+\newcommand{\term}{Term}
+
+\newcommand{\APP}{{\sc App}}
+\newcommand{\RSAPP}{{\sc Rsapp}}
+\newcommand{\LRAPP}{{\sc LRApp}}
+\newcommand{\support}{\mathit{supp}}
+\newcommand{\val}{\nu}
+\newcommand{\dom}{\mathit{dom}}
+\newcommand{\vars}{\mathcal{V}}
+\newcommand{\sat}[1]{\llbracket #1 \rrbracket}
+\newcommand{\exsat}[1]{\sat{#1}^{\exsup}}
+\newcommand{\up}{u}
+\newcommand{\pCFG}{\mathcal{C}}
+\newcommand{\vals}{\mathit{vals}}
+\newcommand{\sigmat}{\sigma_t}
+\newcommand{\sigmaa}{\sigma_a}
+\newcommand{\cfg}[2]{\vec{C}^{#1}_{#2}}
+\newcommand{\lr}[2]{\loc^{#1}_{#2}}
+\newcommand{\vr}[2]{\vec{x}^{#1}_{#2}}
+\newcommand{\run}{\varrho}
+\newcommand{\locinit}{\loc_{\mathit{init}}}
+\newcommand{\vecinit}{\vec{x}_{\mathit{init}}}
+\newcommand{\natfilt}{\mathcal{R}}
+\newcommand{\lem}{\eta}
+\newcommand{\preexp}[1]{\mathit{pre}_{#1}}
+\newcommand{\Out}{\mathit{Out}}
+\newcommand{\confset}{C}
+\newcommand{\stime}{T}
+\newcommand{\treach}[1]{\stime^{#1}}
+\newcommand{\ttime}{\mathit{Term}}
+
+\newcommand{\setmap}{\mathit{IC}}
+
+
+
+
+\newcites{add}{Additional References}
+\begin{document}
+%\toappear{} 
+
+\title{Multi-Dimensional Probabilistic Ranking \\ (Provisional Title)}
+
+\author{Sheshansh Agrawal}
+\affiliation{
+\institution{IIT Bombay}
+\city{Mumbai}
+\country{India}
+}
+\email{sheshansh@cse.iitb.ac.in}
+
+\author{Krishnendu Chatterjee}
+\affiliation{
+\institution{IST Austria} 
+\city{Klosterneuburg}
+\country{Austria}
+}
+\email{Krishnendu.Chatterjee@ist.ac.at}
+
+\author{Petr Novotn\'{y}}
+\affiliation{
+\institution{IST Austria}
+\city{Klosterneuburg}
+\country{Austria}
+}
+\email{petr.novotny@ist.ac.at}
+
+
+
+%\authorinfo{\DJ{}or\dj{}e \v{Z}ikeli\'c}{University of 
+%	Cambridge, UK}{djordje.zikelic@gmail.com}
+
+\maketitle
+
+%\category{F.3.1}{Logics and Meanings of Programs}{Specifying and Verifying and 
+%Reasoning about Programs}
+
+\terms{Program Verification, Termination}
+
+\keywords{Probabilistic Programs, Termination, Ranking Supermartingale, Lexicographic Ranking}
+
+%\input{introduction}
+\input{prelims}
+%\input{invariants-martingales}
+%\input{martingale-use}
+%\input{repulsing-use}
+%\input{effectivity}
+%\input{alg}
+%%\input{syntax}
+%%\input{semantics}
+%%\input{termination}
+%%\input{term-complexity}
+%%\input{concentration-complexity}
+%%\input{concentration}
+%\input{experiment}
+%\input{conclu}
+
+%{\scriptsize
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{bibliography-master}
+%}
+%\clearpage
+%\appendix
+
+%\begin{center}
+%{\Large Supplementary Material}
+%\end{center}
+
+%\input{app-def}
+
+%\input{app}
+
+%\input{further-proofs}
+
+%\bibliographystyleadd{abbrvnat}
+%\bibliographyadd{diss}
+
+
+\end{document}

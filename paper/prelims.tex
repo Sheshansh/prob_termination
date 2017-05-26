@@ -1,0 +1,999 @@
+
+\vspace{-1em}
+\section{Preliminaries}\label{sec:prelim}
+
+\vspace{-1em}
+\subsection{Basic Notions, Linear Predicates, Valuations}
+\vspace{-0.5em}
+For a set $A$ we denote by $|A|$ the cardinality of $A$. We denote by $\Nset$,
+$\Nset_0$, $\Zset$, and $\Rset$ the sets of all positive integers, non-negative
+integers, integers, and real numbers, respectively. We assume basic knowledge 
+of matrix calculus.
+We use boldface notation for
+vectors, e.g. $\vec{x}$, $\vec{y}$, etc., and we denote an $i$-th component of a
+vector $\vec{x}$ by $\vec{x}[i]$. For the purpose of matrix calculations we 
+assume that (non-transposed) vectors are row vectors. If $\vec{v},\vec{v}'$ are 
+$n$ and $m$ dimensional vectors, respectively, then $(\vec{v},\vec{v}')$ is an 
+$(n+m)$-dimensional vector obtained by ``concatenation'' of $\vec{v}$ and 
+$\vec{v}'$. We identify 1-dimensional vectors with numbers. For an 
+$n$-dimensional vector 
+$\vec{x}$, index $1 \leq i\leq n$, and number $a$ we denote by $\vec{x}(i\leftarrow a)$ 
+a 
+vector $\vec{y}$ such that $\vec{y}[i]=a$ and $\vec{y}[j]=\vec{x}[j]$ for all 
+$1\leq j \leq n$, $j\neq i$.
+For comparison of vectors (e.g. as in $\vec{x}\leq \vec{y}$), we consider componentwise 
+comparison. 
+For comparing functions $f,g$ with the same domains, we write $f\leq g$ 
+if $f(x)\leq g(x)$ for all $x$ in the domain.
+
+
+\smallskip\noindent{\em Variables and valuations.}
+Throughout the paper we fix a countable set of variables $\vars$. 
+We consider some arbitrary but fixed linear order on the set of all variables. 
+Hence, given some set of variables $V$ we can enumerate its members in 
+ascending order (w.r.t. the fixed ordering) and write 
+$V=\{x_1,x_2,x_3,\dots\}$. 
+%A \emph{valuation} is a partial function 
+%$\val\colon 
+%\vars \dashrightarrow \Rset$ assigning a unique number to some of the 
+%variables. A \emph{domain} of a valuation $\val$, denoted by %$\dom(\val)$, is 
+%the set of all variables $x$ such that $\val(x)$ is defined. Given a %set 
+%$\pvars\subseteq \vars$ of variables, we denote by $\vals(\pvars)$ the %set of 
+%all valuations $\val$ with $\dom(\val)=\pvars$.
+
+
+\smallskip\noindent{\em Affine expressions.}
+An \emph{affine expression} over the set of variables $\{x_1,\dots,x_n\}$ is an 
+expression of the form $d+\sum_{i=1}^{n}a_i
+x_i$, where  $d,a_1,\dots,a_n$ are real-valued
+constants. Each affine expression $E$ over $\{x_1,\dots,x_n\}$ 
+determines a function which for each $m$-dimensional vector $\vec{x}$, where $m\geq n$,  
+returns a number resulting from substituting each $x_i$ in $E$ by $\vec{x}[i]$. 
+Slightly abusing our notation, we denote this function also by $E$ and the 
+value of this function on argument $\vec{x}$ by $E(\vec{x})$. A function of the form $E(\vec{x})$ for some affine expression $E$ is called affine.
+%Following the terminology of~\cite{DBLP:conf/sas/KatoenMMM10} we fix the
+%following nomenclature:
+
+\smallskip\noindent{\em Linear constraint, assertion, predicates.}
+We use the following nomenclature:
+\begin{compactitem}
+\item {\em Linear Constraint.} A \emph{linear constraint} is a formula of the
+form $\psi$ or $\neg\psi$, where  $\psi$ is a non-strict inequality
+between affine expressions.
+\item {\em Linear Assertion.} A \emph{linear assertion} is a finite conjunction
+of linear constraints.
+\item {\em Propositionally Linear Predicate.}
+A  \emph{propositionally linear predicate} (PLP) is a finite disjunction of
+linear assertions.
+\end{compactitem}
+
+\noindent{\em Arity and satisfaction of PLP.}
+%The \emph{arity} of a PLP is the number of distinct variables appearing in it. 
+For a PLP $\varphi$ we denote by $\vars(\varphi)$ the set of all variables that 
+appear in $\varphi$. As noted above, we stipulate that $\vars(\varphi)=\{x_1,\dots,x_{n(\varphi)}\}$ for some $n(\varphi)\in \Nset$. A vector $\vec{x}$ of dimension $m\geq n(\varphi)$ \emph{satisfies} $\varphi$, we write 
+$\vec{x}\models\phi$, if 
+ the arithmetic formula obtained by 
+substituting each occurrence of a variable $x_i$ in $\varphi$ by $\vec{x}[i]$ is 
+valid. We denote $\sat{\phi} = \{\vec{x}\in \Rset^m\mid m\geq n(\varphi) \wedge \vec{x} \models\phi\}$ 
+and $\exsat{\phi} = \sat{\phi}
+\cap \Rset^{n(\varphi)}$. 
+
+
+%In this paper, we deem any linear assertion equivalently as a polyhedron
+%defined by the linear assertion (i.e., the set of points satisfying the
+%assertion).
+%It will be always clear from the context whether a linear assertion is deemed
+%as a logical formula or as a polyhedron.
+
+
+\vspace{-1em}
+\subsection{Syntax of Affine Probabilistic Programs (\APP s)}\label{subsec:syntax}
+\vspace{-0.5em}
+
+\noindent{\em The Syntax.}
+We consider the standard syntax for affine probabilistic programs,
+which encompasses basic programming mechanisms such as assignment statement 
+(indicated by `:='), while-loop, if-branch. We also consider basic probabilistic mechanisms 
+such as probabilistic branch (indicated by `prob') and random sampling (e.g. 
+$x:=\textbf{sample(}\mathrm{Uniform}[-2,1]\textbf{)}$ assigns to $x$ a random 
+number 
+uniformly sampled from interval $[-2,1]$). We also allow constructs for 
+(demonic) non-determinism, in particular 
+non-deterministic branching indicated by `\textbf{if }$\star$ \textbf{then...}' construct and non-deterministic assignment.  
+Variables (or identifiers) of a probabilistic program are of \emph{real} type, i.e., 
+values of the variables are real numbers. 
+We allow only affine expressions in test statements and in the right-hand sides of assignments.
+We also assume that assume that each \APP{} $\program$ is preceded by an initialization preamble 
+in 
+which 
+each variable appearing in $\program$ is assigned some concrete number.
+%the program variables are initialized.
+Due to space restrictions, details (such as grammar) are relegated to the Appendix.
+For an example see Figure~\ref{fig:invariant-running}.
+We refer to this class of affine probabilistic programs as \APP s.
+
+
+
+\vspace{-1em}
+\subsection{Semantics of Affine Probabilistic Programs}\label{subsec:semantics}
+\vspace{-0.5em}
+
+We now formally define the semantics of \APP's.
+In order to do this, we first recall some fundamental concepts from probability
+theory.
+
+\smallskip\noindent{\em Basics of Probability Theory.}
+%%We now recall basic definitions of probability theory.
+The crucial notion is the one of a probability space. A probability space is a triple
+$(\Omega,\mathcal{F},\probm)$, where $\Omega$ is a non-empty set (so called
+\emph{sample space}), $\mathcal{F}$ is a \emph{sigma-algebra} over $\Omega$,
+i.e. a collection of subsets of $\Omega$ that contains the empty set
+$\emptyset$, and that is closed under complementation and countable unions, and
+$\probm$ is a \emph{probability measure} on $\mathcal{F}$, i.e., a function
+$\probm\colon \mathcal{F}\rightarrow[0,1]$ such that
+\begin{compactitem}
+\item $\probm(\emptyset)=0$,
+\item for all $A\in \mathcal{F}$ it holds $\probm(\Omega\smallsetminus
+A)=1-\probm(A)$, and
+\item for all pairwise disjoint countable set sequences $A_1,A_2,\dots \in
+\mathcal{F}$ (i.e., $A_i \cap A_j = \emptyset$ for all $i\neq j$)
+we have $\sum_{i=1}^{\infty}\probm(A_i)=\probm(\bigcup_{i=1}^{\infty} A_i)$.
+\end{compactitem}
+
+\noindent{\em Random variables and filtrations.}
+A \emph{random variable} in a probability space $(\Omega,\mathcal{F},\probm)$ is
+an $\mathcal{F}$-measurable function $R\colon \Omega \rightarrow \Rset \cup
+\{\infty\}$, i.e.,
+a function such that for every $a\in \Rset \cup \{ \infty\}$ the set
+$\{\omega\in \Omega\mid R(\omega)\leq a\}$ belongs to $\mathcal{F}$.
+We denote by $\expv[R]$ the \emph{expected value} of a random variable $X$~(see \cite[Chapter 5]{Billingsley:book}
+for a formal definition). 
+%%i.e.
+%%the Lebesgue integral of $X$ with respect to the probability measure $\probm$.
+%%The precise definition of the Lebesgue integral of $R$ is somewhat technical and
+%%we omit it here, see,
+%%e.g., ~\cite[Chapter 4]{Rosenthal:book}, or~\cite[Chapter 5]{Billingsley:book}
+%for a formal definition. 
+A \emph{random vector} in $(\Omega,\mathcal{F},\probm)$ is a vector whose every component is a random 
+variable in this probability space. A \emph{stochastic process} in a 
+probability space $(\Omega,\mathcal{F},\probm)$ is an infinite sequence of 
+random vectors in this space.
+We will also use random variables of the form $R\colon\Omega \rightarrow S$ for some finite 
+set $S$, which is easily translated to the variables above.
+A \emph{filtration} of a sigma-algebra $\mathcal{F}$ is a
+sequence $\{\mathcal{F}_i \}_{i=0}^{\infty}$ of $\sigma$-algebras 
+such that $\mathcal{F}_0 \subseteq \mathcal{F}_1 \subseteq \cdots \subseteq
+\mathcal{F}_n \subseteq \cdots \subseteq \mathcal{F}$.
+
+\emph{Distributions.} We assume the standard definition of a probability 
+distribution specified by a cumulative distribution 
+function~\cite{Billingsley:book}. We denote by $\mathcal{D}$ be a set of 
+probability distributions on 
+real numbers, both discrete and continuous.
+
+\smallskip\noindent{\em Probabilistic Control Flow Graphs.}
+%There are several ways in which one can express the semantics of \APP's with
+%(angelic and demonic) 
+%non-determinism
+The semantics can be defined as the semantics of an uncountable state-space
+Markov decision process (MDP) (uncountable due to real-valued variables).
+We take an operational approach to define the semantics, and associate to each program 
+a certain stochastic process~\cite{SriramCAV,HolgerPOPL,Kozen:prob-semantics}.
+To define this process, we first define so called 
+\emph{probabilistic control flow graphs}~\cite{CFG16:positivstellensatz-arxiv}.
+
+\smallskip
+\begin{definition}
+\label{def:stochgame}
+A \emph{probabilistic control flow graph (pCFG)} is a tuple
+$\pCFG=(\locs,\pvars,\locinit,\vecinit,\transitions,\probdist,\guards)$,
+where
+\begin{compactitem}
+\item $\locs$ is a finite set of \emph{locations} partitioned into three 
+pairwise
+disjoint subsets  $\locs_N$, $\locs_P$, and $\locs_D$ of non-deterministic, 
+probabilistic, and deterministic locations;
+\item $\pvars=\{x_1,\dots,x_{|\pvars|}\}$ is a finite set of \emph{program 
+variables} (note that $\pvars \subseteq \vars$) ;
+\item $\locinit$ is an initial location and $\vecinit$ is an initial 
+\emph{assignment vector};
+% POKRACOVAT ODSUD
+\item $\transitions$ is a transition relation, whose members are tuples of
+the form $(\ell,i,\up,\ell')$, where $\ell$ and $\ell'$ are source and target
+program locations, respectively, $1\leq i \leq |\pvars|$ is a \emph{target variable index}, and $u$ 
+is an 
+\emph{update element}, which can 
+be one of the following mathematical objects: %\begin{itemize}
+%\item 
+(a)~an affine function $u\colon \Rset^{|\pvars|}\rightarrow \Rset$;
+%\item 
+(b)~a distribution $d\in \mathcal{D}$; or
+%%\item 
+(c)~a set $R\subseteq \Rset$.
+%\end{itemize}
+\item $\probdist=\{\prob_{\ell}\}_{\ell \in \locs_P}$ is a collection of
+probability distributions, where each $\prob_{\ell}$ is a discrete probability
+distribution on the set of all transitions outgoing from~$\ell$.
+\item $\guards$ is a function assigning a propositionally linear predicate
+(a \emph{guard}) over $\pvars$ to each transition outgoing from a deterministic 
+location.
+\end{compactitem}
+
+We assume that each location has at least one outgoing transition.
+Also, for every deterministic location $\ell$ we assume the following: if
+$\tau_1,\dots,\tau_k$ are all transitions outgoing from $\ell$, then $G(\tau_1)
+\vee \dots \vee G(\tau_k) \equiv \mathit{true}$ and $G(\tau_i) \wedge G(\tau_j)
+\equiv \mathit{false}$ for each $1\leq i < j \leq k$. Moreover, for each 
+distribution $d$ appearing in the 
+pCFG we assume the following features are known: expected value $\expv[d]$ of 
+$d$ and a 
+single-variable PLP $\varphi_d$ such that the \emph{support} of $d$ (i.e. the 
+smallest 
+closed set of real numbers whose complement has probability zero 
+under $d$)\footnote{In particular, a support of a \emph{discrete} probability 
+	distribution $d$ is simply the at most countable set of all points on a 
+	real 
+	line that have positive probability under $d$.} satisfies 
+$\support(d)\subseteq\exsat{\varphi_d}$. Finally, we assume that for each 
+transition $(\loc,j,u,\loc')$ such that $u$ is a set the location $\loc$ is 
+deterministic. This is just a technical assumption yielding no loss of 
+generality, and it somewhat simplifies notation.
+%And we assume that each coordinate of $\mathcal{D}$ represents an integrable
+%random variable (i.e., the expected value of the absolute value of the random
+%variable exists).
+\end{definition}
+
+%We can naturally transfer the linear ordering of variables in $\vars$ to 
+%variables in $X$. Hence, the set of variables $X$ can be uniquely written as a 
+%vector $\vec{x}=(x_1,\dots,x_{|X|})$.
+%Since $\pvars$ is a linearly ordered set of variables, there is a natural 
+%correspondence between valuations in $\vals(\pvars)$ and 
+%$|\pvars|$-dimensional 
+%vectors. To formalize this correspondence, to any valuation 
+%$\val\in\vals(X)$ we assign a vector 
+%$\vec{x}_{\val}=(\val(x_1),\dots,\val(x_{|X|}))$, while to an 
+%$|X|$-dimensional vector $\vec{x}$ we assign a valuation $\val_{\vec{x}}\in 
+%\vals(\pvars)$ such that $\val_{\vec{x}}(x_i) = \vec{x}[i]$ for all $1\leq i 
+%\leq |X|$. 
+
+%Given a pCFG $\pCFG$ 
+%
+%For notational convenience we assume that the sets $\pvars$ and $\rvars$ are
+%endowed with some fixed linear ordering, which allows us to write $\pvars =
+%\{x_1,x_2,\dots,x_{|\pvars|}\}$ and $\rvars = \{r_1,r_2,\dots,r_{|\rvars|}\}$.
+%Every update function $f$ in a stochastic game can then be viewed as a tuple
+%$(f_1,\dots,f_{|\pvars|})$, where each $f_i$ is of type
+%$\Rset^{|\pvars\cup\rvars|}\rightarrow\Rset$. We denote by
+%$\mathbf{x}=(\vec{x}[i])_{i=1}^{|\pvars|}$ and
+%$\mathbf{r}=(\vec{r}[i])_{i=1}^{|\rvars|}$ the vectors of concrete valuations 
+%of
+%program and random variables, respectively.
+%In particular, we assume that each component of $\vec{r}$ lies within the range
+%of the corresponding random variable. %A valuation $\vec{r}$ is admissible if
+%%each its component lies within the range of the corresponding random variable.
+%We use the following succinct notation for special update functions: by $\id$ 
+%we
+%denote a function which does not change the program variables at all, i.e. for
+%every $1\leq i \leq |\pvars|$ we have $f_i(\vec{x},\vec{r})= \vec{x}[i]$. For a
+%function $g$ over the program and random variables we denote by 
+%$\assgn{x_j}{g}$
+%the update function $f$ such that $f_j(\vec{x},\vec{r})=g(\vec{x},\vec{r})$ and
+%$f_i(\vec{x},\vec{r})=\vec{x}[i]$ for all $i\neq j$.
+
+%We say that an SGS $\mathcal{G}$ is \emph{normalized} if all guards of all
+%transitions in $\mathcal{G}$ are in a disjunctive normal form.
+
+
+%\begin{example}\label{ex:sgs}
+%Figure~\ref{fig:Q4:SGS} shows an example of stochastic game structure.
+%Deterministic locations are represented by boxes, angelic locations by
+%triangles, demonic locations by diamonds,
+%and stochastic locations by circles. Transitions are labelled with update
+%functions, while guards and probabilities
+%of transitions outgoing from deterministic and stochastic locations,
+%respectively, are given in rounded rectangles
+%on these transitions. For the sake of succinctness we do not picture
+%tautological guards and identity update functions. Note that the SGS is
+%normalized.
+%We will describe in Example~\ref{ex:illustrate} how the stochastic game
+%structure shown corresponds to the program described in
+%Example~\ref{ex:prog}.
+%\end{example}
+
+%\paragraph*{Dynamics of Stochastic Games}
+
+\smallskip\noindent{\em Configurations.}
+A \emph{configuration} of a pCFG $\pCFG$ is a tuple $(\ell,\vec{x})$,
+where $\ell$ is a location of $\pCFG$ and $\vec{x}$ is an 
+$|\pvars|$-dimensional vector.
+We say that a transition $\tau$ is \emph{enabled} in a configuration
+$(\ell,\vec{x})$ if $\ell$ is the source location of $\tau$ and in addition,
+${\vec{x}}\models G(\tau)$ provided that $\ell$ is deterministic. A 
+configuration 
+$(\loc,\vec{x})$ is non-deterministic/probabilistic/deterministic if $\loc$ is 
+non-deterministic/probabilistic/deterministic, respectively.
+
+\smallskip\noindent{\em Executions and reachable configurations.}
+A \emph{finite path} (or
+\emph{execution fragment}) in $\pCFG$ is a finite sequence of
+configurations $(\ell_0,\vec{x}_0)\cdots(\ell_k,\vec{x}_k)$ such that 
+%$(\loc_0,\vec{x}_0)=(\locinit,\vecinit)$ and 
+for each
+$0 \leq i < k$ there is a transition  $(\ell_i,j,\up,\ell_{i+1})$ enabled in
+$(\ell_i,\vec{x}_i)$ such that $\vec{x}_{i+1}=\vec{x}_i(j\leftarrow a)$ where $a$ 
+satisfies one of the following:
+\begin{compactitem}
+\item $\up$ is a function $f\colon\Rset^{|X|}\rightarrow\Rset$ and
+$a=f(\vec{x}_{i})$;
+\item $\up$ is an integrable\footnote{A distribution on some numerical domain 
+is integrable if its expected value exists and is finite. In particular, each 
+Dirac distribution is integrable.} distribution $d$ and 
+$a\in \support(d)$; or
+\item $\up$ is a set and $a\in \up$.
+\end{compactitem}
+A \emph{run} (or \emph{execution}) in
+$\pCFG$ is an infinite sequence of configurations whose every finite
+prefix is a finite path.
+A configuration $(\loc,\vec{x})$ is {\em reachable} from the initial 
+configuration
+$(\locinit,\vecinit)$
+if there is a finite path starting in $(\locinit,\vecinit)$ that ends in
+$(\loc,\vec{x})$.
+
+
+\smallskip\noindent{\em Schedulers.}
+Due to the presence of non-determinism and probabilistic choices, a pCFG
+$\pCFG$ may represent a multitude of possible behaviours. The probabilistic
+behaviour of $\pCFG$ can be captured by constructing a suitable
+probability measure over the set of all its runs. Before this can be
+done, non-determinism in $\pCFG$ needs to be resolved. This is done using the 
+standard notion of a \emph{scheduler}.
+
+\smallskip
+\begin{definition}[Schedulers]
+\label{def:schedulers}
+A scheduler in an pCFG $\pCFG$ is a tuple $\sigma=(\sigmat,\sigmaa)$,
+%(the subscripts stand for 'transition' and 'assignment')
+where
+\begin{compactitem}
+\item $\sigmat$ (here '$t$' stands for 'transition') is a function assigning 
+to every finite path that ends in a non-deterministic configuration 
+$(\loc,\vec{x})$ a probability distribution on transitions outgoing from 
+$\loc$; 
+and
+\item $\sigmaa$ (here '$a$' stands for 'assignment') is a function which takes 
+as an argument a finite path ending in a deterministic configuration in which 
+some transition 
+$(\loc,j,u,\loc')$ with $u$ being a set is enabled, and for such a path it 
+returns a probability distribution on $u$.
+\end{compactitem}
+%function
+%which assigns to every finite path in $\mathcal{G}$ that ends in an angelic
+%(resp., demonic) configuration $(\ell,\vec{x})$, respectively,
+%a discrete probability distribution on transitions outgoing from~$\ell$.
+%a transition outgoing from~$\ell$.
+\end{definition}
+
+%A scheduler $\sigma$ is \emph{memoryless} if $\sigmat(w)=\sigmat(w')$ whenever 
+%the finite paths 
+%$w$ and $w'$ end in the same configuration and if $\sigmaa(w)=\sigmaa(w')$ 
+%whenever $w$ and $w'$ end with the same transition. A scheduler $\sigma$ is 
+%\emph{deterministic} if for all $w,w'$ the distributions $\sigmaa(w)$ and 
+%$\sigmat(w')$ are \emph{Dirac}, i.e. they assign probability 1 to a single 
+%transition (resp. to a single number) and probability 0 to all the others.
+
+\smallskip\noindent{\em Stochastic process.}
+A pCFG $\pCFG$ together with a scheduler $\sigma$ can be seen as a stochastic 
+process which produces a random run 
+$(\loc_0,\vec{x}_0)(\loc_1,\vec{x}_1)(\loc_2,\vec{x}_2)\cdots$. The evolution 
+of 
+this process can be informally described as follows: we start in the initial 
+configuration, i.e. $(\loc_{0},\vec{x}_0)=(\locinit,\vecinit)$. 
+Now assume that $i$ 
+steps have elapsed, i.e. a finite path 
+$(\loc_0,\vec{x}_0)(\loc_1,\vec{x}_1)\cdots(\loc_i,\vec{x}_i)$ has already 
+been produced. Then
+\begin{compactitem}
+\item
+A transition $\tau=(\loc,j,u,\loc')$ enabled in 
+$(\lr{}{i},\vr{}{i})$ is chosen as follows:
+
+\begin{compactitem}
+\item
+If $\ell_i$ is non-deterministic then $\tau$ is chosen randomly
+according to the distribution specified
+by scheduler
+$\sigma$, i.e. according to the distribution 
+$\sigmat((\loc_0,\vec{x}_0)(\loc_1,\vec{x}_1)\cdots(\loc_i,\vec{x}_i))$.
+%That is, if $\ell_i$ is angelic (resp., demonic) and $c_0c_1\cdots c_i$ is the
+%sequence of configurations observed so far,
+%then $\tau$ equals %%the distribution
+%$\sigma(c_0c_1\cdots c_i)$ (resp., $\pi(c_0c_1\cdots c_i)$).
+
+
+\item
+If $\ell_i$ is probabilistic, then $\tau$ is chosen randomly according to the
+distribution $\probdist_{\ell_i}$.
+\item
+If $\ell_i$ is deterministic, then by the definition of a pCFG there is exactly
+one enabled transition outgoing from $\ell_i$, and this transition is chosen as
+$\tau$.
+\end{compactitem}
+\item
+Once $\tau$ is chosen as above, we put $\loc_{i+1}=\loc'$. Next, we put 
+$\vec{x}_{i+1}=\vec{x}_{i}(j\leftarrow a)$, where $a$ chosen as follows:
+\begin{compactitem}
+\item If $u$ is a function $u\colon
+\Rset^{|\pvars|}\rightarrow \Rset$, then $a=f(\vec{x}_{i})$.
+\item If $\up$ is a distribution $d$, then $a$ 
+is sampled from $d$.
+\item If $\up$ is a set, then $a$ is sampled from a 
+distribution 
+$\sigmaa((\loc_0,\vec{x}_0)(\loc_1,\vec{x}_1)\cdots(\loc_i,\vec{x}_i))$.
+\end{compactitem}
+\end{compactitem}
+
+The above intuitive explanation can be formalized by showing that
+each pCFG $\pCFG$ together with a scheduler $\sigma$ uniquely determines a 
+certain 
+probabilistic 
+space $(\Omega,\natfilt,\probm^{\sigma})$ in which $\Omega$ is a set of all 
+runs in $\pCFG$, and a stochastic process 
+$\pCFG^{\sigma}=\{\cfg{\sigma}{i}\}_{i=0}^{\infty}$ in this space 
+such 
+that for each $\run\in \Omega$ we have that $\cfg{\sigma}{i}(\run)$ is the 
+$i$-th configuration on run $\run$ (i.e., $\cfg{\sigma}{i}$ is a random vector 
+$(\lr{\sigma}{i},\vr{\sigma}{i})$ with  $\lr{\sigma}{i}$ taking 
+values in $\locs$ and $\vr{\sigma}{i}$ being a random vector of dimension 
+$|\pvars|$ consisting of real-valued random variables). The sigma-algebra 
+$\natfilt$ is the smallest (w.r.t. inclusion) sigma algebra under which all 
+the functions $\cfg{\sigma}{i}$, for all $i\geq 0$ and all schedulers $\sigma$, 
+are $\natfilt$-measurable (a 
+function $f$ returning vectors is $\natfilt$-measurable if for all 
+real-valued vectors 
+$\vec{y}$ of appropriate dimension the set $\{\omega\in \Omega\mid 
+f(\omega)\leq \vec{y}\}$ belongs to $\natfilt$). The 
+probability 
+measure 
+$\probm^{\sigma}$ is such that for each $i$, the distribution of 
+$\cfg{\sigma}{i}$ reflects the aforementioned way in which runs are randomly 
+generated. The formal construction 
+of $\natfilt$ and $\probm^{\sigma}$ is standard~\cite{Billingsley:book} and 
+somewhat 
+technical, hence we omit it. 
+We denote by $\E^\sigma$ the expectation operator in probability space 
+$(\Omega,\natfilt,\probm^{\sigma})$.
+The translation from probabilistic programs to the corresponding pCFG is 
+standard~\cite{CFNH16:prob-termination}, and the details are presented 
+in~\cite{CNZ16:prob-invariants-arxiv}. We point out that the 
+construction produces pCFGs with a property that only transitions outgoing from 
+a deterministic state can update program variables. All other transitions are 
+assumed to be of the form $(\ell,1,\id_1,\ell')$ for some locations 
+$\ell,\ell'$, where $\id_1(\vec{x})=\vec{x}[1]$ for all $\vec{x}$. We use this 
+to simplify notation.
+An illustration of a pCFG is given in Figure~\ref{fig:invariant-running}.
+
+%and instead describe it informally by describing 
+%the evolution of the stochastic process 
+%$\pCFG^{\sigma}=(\cfg{\sigma}{i})_{i=0}^{\infty}$:
+%%The evolution of 
+%%$\pCFG^{\sigma}$
+%%can be intuitively described as follows: 
+%We have that $\lr{\sigma}{0}$ is the initial 
+%location $\loc_0$, and $\vr{\sigma}{0}=\vec{x}_0$, i.e. 
+%$\cfg{\sigma}{0}=(\loc_0,\vec{x}_0)$ with probability 1. Now assume that $i$ 
+%%steps have elapsed, i.e. the vectors 
+%%%$\cfg{\sigma}{0},\cfg{\sigma}{1},\dots,\cfg{\sigma}{i}$ are known. Then
+%%\PN{continue from here}
+%%the behaviour of $\mathcal{G}$ 
+%%under angelic scheduler $\sigma$ and demonic
+%%scheduler $\pi$ can then be intuitively described as follows: 
+%%%The process starts in
+%%the initial configuration $(\ell_0,\vec{x}_0)$. In every step $i$, assuming 
+%%the
+%%current configuration to be $(\ell_i,\vec{x}_i)$ the following happens:
+%%%\PN{Continue from here}
+%
+
+
+%In this way, the players and random choices eventually produce a random run in
+%$\mathcal{G}$. The above intuitive explanation can be formalized by showing 
+%that
+%the schedulers $\sigma$ and $\pi$ induce a unique probability measure
+%$\probm^{\sigma,\pi}$ over a suitable $\sigma$-algebra having runs in
+%$\mathcal{G}$ as a sample space. If $\mathcal{G}$ does not have any
+%angelic/demonic locations, there is only one angelic/demonic scheduler (an 
+%empty
+%function) that we typically omit from the notation, i.e. if there are no 
+%angelic
+%locations we write only $\probm^{\pi}$ etc.
+%%%The formal construction of this probability space is performed
+%%in~\cite{appendix}.
+%%%{\bf KRISH: DO WE WANT THE FORMAL CONSTRUCTION. IT IS FINE TO OMIT.}
+
+
+\vspace{-1em}
+\subsection{Almost-Sure and Probabilistic Termination}
+\vspace{-0.5em}
+We consider computational problems related to the basic liveness properties of 
+\APP{s}, namely \emph{termination} and its generalization, \emph{reachability}. 
+
+\smallskip\noindent{\em Termination, reachability, and termination time.}
+In the following, consider an \APP{} $P$ and its associated pCFG $\pCFG_P$. 
+We say that a run $\run$ of $\pCFG_P$ \emph{reaches} a set of configurations 
+$C$ if it  contains a configuration from $C$. A run \emph{terminates} if it reaches a 
+configuration whose first component (i.e. a location of $\pCFG_P$) is the 
+location
+$\loc_{P}^{\lout}$ corresponding to the value of the program counter after 
+executing $P$. 
+To each set of configurations $C$ we can assign a random variable $\treach{C}$ 
+such that for each run $\run$ the value $\treach{C}(\run)$ represents the first 
+point in time when 
+the current configuration on $\run$ is in $C$. If a run $\run$ does \emph{not} 
+reach a set $C$, then 
+$\treach{C}(\run)=\infty$. We call $\treach{C}$ the 
+\emph{reachability time} of $C$. In particular, if $C$ is the set 
+of all configurations $(\loc,\vec{x})$ such that $\loc=\loc^\lout_P$ (the 
+terminal location of $\pCFG_P$), then $\treach{C}$ is 
+called a \emph{termination time}, as it returns the number of steps after which 
+$\run$ terminates. Since termination time is an important concept on its own, 
+we use a special notation $\ttime$ for it.
+%\begin{example}
+%Consider the program $P$ such that \hspace{-0.25cm}\newsavebox{\figa}
+%\lstset{language=affprob}
+%\lstset{tabsize=1}
+%\begin{lrbox}{\figa}
+%\begin{lstlisting}[mathescape]
+%$P=$x:=2;y:=1
+%\end{lstlisting}
+%\end{lrbox}
+%\usebox{\figa}. The associated pCFG has three locations: initial location 
+%$\loc_{P}^{\lin}$, terminal location $\loc_{P}^{\lout}$, and one 
+%``intermediate'' location, say $\loc$. In the pCFG consider a run 
+%$\run=(\loc_{P}^{\lin},(0,0))(\loc,(2,0))(\loc_{P}^{\lout},(2,1))(\loc_{P}^{\lout},(2,1))\cdots$.
+% Then $\ttime(\run)=2$. If we denote by $C$ the set of configurations 
+% $\{(\loc',(x,y))\mid \loc' \in\{\loc_{P}^{\lin},\loc_{P}^{\lout},\loc\} \text{ 
+% and } x\geq 2\}$, then $\treach{C}(\run)=1$.
+%\end{example}
+Since a probabilistic program may exhibit more than one run, we are interested 
+in probabilities of runs that terminate or reach some set of configurations. 
+This gives rise to the following fundamental computational problems regarding 
+termination:
+
+\begin{compactenum}
+\item \emph{Almost-sure termination:} A probabilistic program $P$ is 
+almost-surely (a.s.) 
+terminating if under each scheduler $\sigma$ it holds that 
+$\probm^{\sigma}(\{\run\mid \run \text{ terminates}\}) = 1$, or equivalently, 
+if for each $\sigma$ it holds $\probm^{\sigma}(\ttime<\infty)=1$. In 
+almost-sure termination question for $P$ we aim to prove that $P$ 
+is 
+almost-surely terminating.
+\item \emph{Probabilistic termination:} In probabilistic termination question 
+for $P$ we aim to compute a \emph{lower bound on the probability of 
+termination}, i.e. a bound $b\in[0,1]$ such that for each scheduler 
+$\sigma$ it holds $\probm^{\sigma}(\{\run\mid \run \text{ terminates}\}) \geq b$ 
+(or equivalently $\probm^{\sigma}(\ttime<\infty)\geq b$).
+\end{compactenum}
+
+We also define corresponding questions for the more general reachability 
+concept. 
+ 
+\begin{compactenum}
+\item \emph{Almost-sure reachability:} For a set $C$ of configurations of a
+probabilistic program $P$, prove (if possible) that under each scheduler 
+$\sigma$ it holds that
+$\probm^{\sigma}(\treach{C}<\infty)=1$.
+\item \emph{Probabilistic reachability:} For a set $C$ of configurations of 
+a probabilistic program $P$, compute a bound $b\in[0,1]$ such that for each scheduler
+$\sigma$ it holds $\probm^{\sigma}(\treach{C}<\infty)\geq b$.
+\end{compactenum}
+
+Since termination is a special case of reachability, each solution to the 
+almost-sure or probabilistic reachability questions provides solution for the 
+corresponding termination questions.
+%\begin{example}\label{ex:illustrate}
+%We now illustrate step by step how the SGS of Example~\ref{ex:sgs} corresponds
+%to
+%the program of Example~\ref{ex:prog}.
+%We first consider the statements $Q_1$ and $Q_2$ (Figure~\ref{fig:Q1Q2}), and
+%show the
+%corresponding SGSs in Figure~\ref{fig:Q1Q2:SGS}.
+%Then consider the statement block $Q_3$ which is a probabilistic choice between
+%$Q_1$ and $Q_2$  (Figure~\ref{fig:Q3}).
+%The corresponding SGS  (Figure~\ref{fig:Q3:SGS}) is obtained from the previous
+%two
+%SGSs as follows: we consider a probabilistic start location where there is a
+%probabilistic
+%branch to the start locations of the SGSs of $Q_1$ and $Q_2$, and the SGS ends
+%in a location with only self-loop.
+%Finally, we consider the whole program as $Q_4$ (Figure~\ref{fig:Q4}),
+%and the corresponding SGS in  (Figure~\ref{fig:Q4:SGS}).
+%The SGS is obtained from SGS for $Q_3$, with the self-loop replaced by a
+%transition
+%back to the probabilistic location (with guard $x\geq 0$), and an edge to the
+%final location
+%(with guard $x<0$).
+%The start location of the whole program is a new location, with transition
+%labeled
+%$x:=0$, to the start of the while loop location.
+%We label the locations in Figure~\ref{fig:Q4:SGS} to refer to them later.
+%\lstset{language=affprob}
+%\lstset{tabsize=3}
+%\newsavebox{\figa}
+%\begin{lrbox}{\figa}
+%\begin{lstlisting}[mathescape]
+%$Q_1$:	if angel then $x:=x+1$ else $x:=x-1$ fi	
+%$Q_2$:	if demon then $x:=x+1$ else $x:=x-1$ fi
+%\end{lstlisting}
+%\end{lrbox}
+%\begin{figure}[h]
+%\centering
+%\usebox{\figa}
+%\caption{Programs $Q_1$ and $Q_2$}
+%\label{fig:Q1Q2}
+%\end{figure}
+%
+%\begin{figure}[h]
+%\centering
+%\begin{tikzpicture}[x=1.8cm]
+%\node[det] (fin1) at (0,-1.5)  {};
+%\node[ang] (angel) at (0,0) {};
+%\node[det] (fin2) at (2.3,-1.5)  {};
+%\node[dem] (demon) at (2.3,0)  {};
+%\node[det] (aif) at (-1,0) {};
+%\node[det] (aelse) at (1,0) {};
+%\node[det] (dif) at (1.3,-1.5) {};
+%\node[det] (delse) at (3.3,-1.5) {};
+%
+%\draw[tran] (angel.155) -- (aif);
+%\draw[tran] (angel.25) -- (aelse);
+%\draw[tran] (demon) -- (dif);
+%\draw[tran] (demon) -- (delse);
+%
+%\path (fin1) edge [tran, loop left] (fin1);
+%\path (fin2) edge [tran, loop below] (fin2);
+%\draw[tran] (dif) -- node[auto,swap] {x:=x+1} (fin2);
+%\draw[tran] (delse) -- node[auto] {x:=x-1} (fin2);
+%\draw[tran] (aif) -- node[auto, swap] {x:=x+1} (fin1);
+%%\draw[tran] (demon) to node[auto] {x:=x-1} (fin2);
+%\draw[tran] (aelse) to node[auto] {x:=x-1} (fin1);
+%\end{tikzpicture}
+%\caption{SGSs for $Q_1$ (left) and $Q_2$ (right)}
+%\label{fig:Q1Q2:SGS}
+%\end{figure}
+%
+%\newsavebox{\figb}
+%\begin{lrbox}{\figb}
+%\begin{lstlisting}[mathescape]
+%$Q_3$:	if prob(0.6) then $Q_1$ else $Q_2$ fi
+%\end{lstlisting}
+%\end{lrbox}
+%\begin{figure}[h]
+%\centering
+%\usebox{\figb}
+%\caption{Program $Q_3$}
+%\label{fig:Q3}
+%\end{figure}
+%\begin{figure}[h]
+%\centering
+%\begin{tikzpicture}[x = 1.8cm]
+%\node[det] (while) at (1.5,-1.5)  {};
+%%%\node[det] (fin) at (0,-3) {};
+%\node[ran] (prob) at (3.7,-1.5) {};
+%\node[ang] (angel) at (3,0) {};
+%\node[dem] at (3,-3) (demon) {};
+%\node[det] (aif) at (2,-0.075) {};
+%\node[det] (aelse) at (3,-0.8) {};
+%\node[det] (dif) at (2,-3) {};
+%\node[det] (delse) at (3,-2.2) {};
+%
+%\draw[tran] (angel) -- (aif);
+%\draw[tran] (angel) -- (aelse);
+%\draw[tran] (demon) -- (dif);
+%\draw[tran] (demon) -- (delse);
+%
+%\path (while) edge [tran, loop left] (while);
+%\draw[tran] (prob) -- node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3,
+%inner sep = 1pt] {$\frac{6}{10}$} (prob|-angel) -- (angel);
+%\draw[tran] (prob) -- node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3,
+%inner sep = 1pt] {$\frac{4}{10}$} (prob|-demon) --(demon);
+%\draw[tran] (dif) --  (demon-|while) -- node[auto, pos=0.2] {x:=x+1} (while);
+%\draw[tran] (aif) --  (angel-|while) -- node[auto, swap, pos=0.2] {x:=x+1}
+%(while);
+%\draw[tran] (delse) -- node[auto] {x:=x-1} (delse-|while.305) --  (while.-55);
+%\draw[tran] (aelse) -- node[auto, swap] {x:=x-1} (aelse-|while.55) -- 
+%(while.55);
+%\end{tikzpicture}
+%\caption{SGS of $Q_3$}
+%\label{fig:Q3:SGS}
+%\end{figure}
+%\newsavebox{\figc}
+%\begin{lrbox}{\figc}
+%\begin{lstlisting}[mathescape]
+%$Q_4$:	$x:=0$; while ($x\ge 0$) do $Q_3$ od
+%\end{lstlisting}
+%\end{lrbox}
+%\begin{figure}[h]
+%\centering
+%\usebox{\figc}
+%\caption{Program $Q_4$}
+%\label{fig:Q4}
+%\end{figure}
+%\begin{figure}[h]
+%\centering
+%\begin{tikzpicture}[x = 1.8cm]
+%%\node[det] (det1) at (0,0) {$\loc_0$};
+%%\node[det] (while) at (1.5,-1.5)  {$\loc_1$};
+%%\node[det] (fin) at (0,-3) {$\loc_5$};
+%%\node[ran] (prob) at (3,-1.5) {$\loc_2$};
+%%\node[ang] (angel) at (3,0) {$\loc_3$};
+%%\node[dem] (demon) at (3,-3)  {$\loc_4$};
+%%
+%%\draw[tran] (det1) to node[auto, swap] {x:=0} (while);
+%%\draw[tran] (while) to node[font=\scriptsize,draw, fill=white,
+%%rectangle,pos=0.3] {$x<0$} (fin);
+%%\draw[tran, loop, looseness = 5, in =-65, out = -115] (fin) to (fin);
+%%\draw[tran] (while) to node[font=\scriptsize,draw, fill=white,
+%%rectangle,pos=0.3] {$x\geq 0$} (prob);
+%%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white,
+%%rectangle,pos=0.3, inner sep = 1pt] {$\frac{6}{10}$} (angel);
+%%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white,
+%%rectangle,pos=0.3, inner sep = 1pt] {$\frac{4}{10}$} (demon);
+%%\draw[tran] (demon) -- node[auto] {x:=x+1} (demon-|while) -- (while);
+%%\draw[tran] (angel) -- node[auto, swap] {x:=x+1} (angel-|while) -- (while);
+%%\draw[tran] (demon) to node[auto] {x:=x-1} (while);
+%%\draw[tran] (angel) to node[auto, swap] {x:=x-1} (while);
+%
+%\node[det] (while) at (1.5,-1.5)  {$\loc_1$};
+%%%\node[det] (fin) at (0,-3) {};
+%\node[ran] (prob) at (3.7,-1.5) {$\loc_2$};
+%\node[ang] (angel) at (3,0) {$\loc_3$};
+%\node[dem] at (3,-3) (demon) {$\loc_4$};
+%\node[det] (aif) at (2,-0.075) {$\loc_5$};
+%\node[det] (aelse) at (3,-0.8) {$\loc_6$};
+%\node[det] (dif) at (2,-3) {$\loc_7$};
+%\node[det] (delse) at (3,-2.2) {$\loc_8$};
+%\node[det] (det1) at (0,0) {$\loc_0$};
+%%\node[det] (while) at (1.5,-1.5)  {};
+%\node[det] (fin) at (0,-3) {$\loc_9$};
+%%\node[ran] (prob) at (3,-1.5) {};
+%%\node[ang] (angel) at (3,0) {};
+%%\node[dem] at (3,-3) (demon) {};
+%%
+%\draw[tran] (det1) to node[auto, swap] {x:=0} (while);
+%\draw[tran] (while) to node[font=\scriptsize,draw, fill=white,
+%rectangle,pos=0.4] {$x<0$} (fin);
+%\draw[tran, loop, looseness = 5, in =-65, out = -115] (fin) to (fin);
+%\draw[tran] (while) to node[font=\scriptsize,draw, fill=white,
+%rectangle,pos=0.3] {$x\geq 0$} (prob);
+%%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white,
+%%rectangle,pos=0.3, inner sep = 1pt] {$\frac{6}{10}$} (angel);
+%%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white,
+%%rectangle,pos=0.3, inner sep = 1pt] {$\frac{4}{10}$} (demon);
+%%\draw[tran] (demon) -- node[auto] {x:=x+1} (demon-|while) -- (while);
+%%\draw[tran] (angel) -- node[auto, swap] {x:=x+1} (angel-|while) -- (while);
+%%\draw[tran] (demon) to node[auto] {x:=x-1} (while);
+%%\draw[tran] (angel) to node[auto, swap] {x:=x-1} (while);
+%
+%
+%\draw[tran] (angel) -- (aif);
+%\draw[tran] (angel) -- (aelse);
+%\draw[tran] (demon) -- (dif);
+%\draw[tran] (demon) -- (delse);
+%
+%\draw[tran] (prob) -- node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3,
+%inner sep = 1pt] {$\frac{6}{10}$} (prob|-angel) -- (angel);
+%\draw[tran] (prob) -- node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3,
+%inner sep = 1pt] {$\frac{4}{10}$} (prob|-demon) --(demon);
+%\draw[tran] (dif) --  (demon-|while) -- node[auto, pos=0.2] {x:=x+1} (while);
+%\draw[tran] (aif) --  (angel-|while) -- node[auto, swap, pos=0.2] {x:=x+1}
+%(while);
+%\draw[tran] (delse) -- node[auto] {x:=x-1} (delse-|while.305) --  (while.-55);
+%\draw[tran] (aelse) -- node[auto, swap] {x:=x-1} (aelse-|while.55) -- 
+%(while.55);
+%\end{tikzpicture}
+%\caption{SGS of $Q_4$}
+%\label{fig:Q4:SGS}
+%\end{figure}
+%\end{example}
+
+%\subsection{Qualitative and Quantitative Termination Questions}
+%We consider the most basic notion of liveness, namely {\em termination},
+%for probabilistic programs, and present the relevant {\em qualitative} and
+%{\em quantitative} questions.
+%
+%
+%
+%\paragraph*{Qualitative question.}
+%We consider the two basic qualitative questions, namely, almost-sure 
+%termination
+%(i.e., termination with probability~$1$) and finite expected termination time.
+%We formally define them below.
+%
+%
+%Given a program $P$, let $\mathcal{G}_P$ be the associated SGS.
+%A run $\rho$ is \emph{terminating} if it reaches a configuration in which the
+%location is $\ell^{\lout}_{P}$.
+%Consider the random variable $T$ which to every run $\rho$ in $\mathcal{G}_P$
+%assigns the first point in time in which a configuration with the location
+%$\ell^{\lout}_{P}$ is encountered,
+%and if the run never reaches such a configuration, then the value assigned is
+%$\infty$.
+%
+%
+%\begin{definition}[Qualitative termination questions]
+%Given a program $P$ and its associated normalized SGS $\mathcal{G}_P$, we
+%consider the following
+%two questions:
+%\begin{compactenum}
+%\item {\em Almost-Sure Termination.} The program is {\em almost-surely (a.s.)}
+%terminating if
+%there exists an angelic scheduler (called {\em a.s terminating}) $\sigma$ such
+%that for all demonic
+%schedulers $\pi$ we have
+%$\probm^{\sigma,\pi}\left( \{\rho\mid\rho \text{ is terminating}\,\}\right) =
+%1;$ or equivalently,
+%$\probm^{\sigma,\pi}(T<\infty)=1$.
+%
+%\item {\em Finite Termination.}
+%The program $P$ is \emph{finitely terminating} (aka positively almost-sure
+%terminating) if there
+%exists an angelic scheduler $\sigma$ (called {\em finitely terminating})
+%such that for all demonic schedulers $\pi$ it holds that
+%$\expv^{\sigma,\pi}[T]<\infty.$
+%%%A scheduler $\sigma$ with this property is said to be \emph{positively
+%%terminating}.
+%\end{compactenum}
+%
+%\end{definition}
+%
+%Note that for all angelic schedulers $\sigma$ and demonic schedulers $\pi$ we
+%have $\expv^{\sigma,\pi}[T]<\infty$ implies $\probm^{\sigma,\pi}(T<\infty)=1$,
+%however, the converse does not hold in general.
+%In other words, finitely terminating implies a.s. terminating, but a.s.
+%termination does not imply finitely termination.
+%
+%\begin{definition}[Quantitative termination questions]
+%\label{def:quanttq}
+%Given a program $P$ and its associated normalized SGS $\mathcal{G}_P$, we
+%consider the following
+%notions:
+%\begin{compactenum}
+%\item {\em Expected Termination Time.} The {\em expected termination} time of
+%$P$ is
+%$\Eval(P) = \inf_{\sigma}\sup_{\pi}\expv^{\sigma,\pi}[T]. $
+%
+%\item {\em Concentration bound.} A bound $B$ is a {\em concentration bound} if
+%there exists two positive constants $c_1$ and $c_2$ such that for all $x\geq 
+%B$,
+%we have
+%$\Thr(P,x) \leq c_1 \cdot \exp(-c_2\cdot x)$, where $\Thr(P,x)=\inf_{\sigma}
+%\sup_{\pi} \probm^{\sigma,\pi}(T > x)$ (i.e., the probability that the
+%termination time exceeds $x \geq B$ decreases exponentially in $x$).
+%\end{compactenum}
+%\end{definition}
+%
+%Note that we assume that an SGS $\mathcal{G}_P$ for a program $P$ is already
+%given in a normalized form, as our algorithms assume that all guards in
+%$\mathcal{G}_P$ are in DNF.
+%%To separate the complexity of normalizing an SGS from the complexity of 
+%%solving
+%%our qualitative and quantitative question we assume
+%In general, converting an SGS into a normalized SGS incurs an exponential
+%blow-up as this is the worst-case blowup when converting a formula into DNF.
+%However, we note that for programs $\mathcal{P}$ that contain only \emph{simple
+%guards}, i.e. guards that are either conjunctions or disjunctions of linear
+%constraints, a normalized game $\mathcal{G}_P$ can be easily constructed in
+%polynomial time using de Morgan laws. In particular, we stress that all our
+%hardness results hold already for programs with simple guards, so they do not
+%rely on the requirement that $\mathcal{G}_P$ must be normalized.
+
+
+
+
+\lstset{language=affprob}
+\lstset{tabsize=3}
+\newsavebox{\invrun}
+\begin{lrbox}{\invrun}
+\begin{lstlisting}[mathescape]
+$x:=10$
+while $x\geq 1$ do
+	if prob(0.75) then $x:=x-1$	else $x:=x+1$ 
+	fi
+od
+\end{lstlisting}
+\end{lrbox}
+\begin{figure}[t]
+\centering
+\usebox{\invrun}
+
+\begin{tikzpicture}[x = 1.8cm]
+%\node[det] (det1) at (0,0) {$\loc_0$};
+%\node[det] (while) at (1.5,-1.5)  {$\loc_1$};
+%\node[det] (fin) at (0,-3) {$\loc_5$};
+%\node[ran] (prob) at (3,-1.5) {$\loc_2$};
+%\node[ang] (angel) at (3,0) {$\loc_3$};
+%\node[dem] (demon) at (3,-3)  {$\loc_4$};
+%
+%\draw[tran] (det1) to node[auto, swap] {x:=0} (while);
+%\draw[tran] (while) to node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3] {$x<0$} (fin);
+%\draw[tran, loop, looseness = 5, in =-65, out = -115] (fin) to (fin);
+%\draw[tran] (while) to node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3] {$x\geq 0$} (prob);
+%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3, inner sep = 1pt] {$\frac{6}{10}$} (angel);
+%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3, inner sep = 1pt] {$\frac{4}{10}$} (demon);
+%\draw[tran] (demon) -- node[auto] {x:=x+1} (demon-|while) -- (while);
+%\draw[tran] (angel) -- node[auto, swap] {x:=x+1} (angel-|while) -- (while);
+%\draw[tran] (demon) to node[auto] {x:=x-1} (while);
+%\draw[tran] (angel) to node[auto, swap] {x:=x-1} (while);
+
+\node[det] (while) at (1.5,0)  {$\loc_0$};
+%%\node[det] (fin) at (0,-3) {};
+\node[ran] (prob) at (3,0) {$\loc_1$};
+%\node[ang] (angel) at (3,0) {$\loc_3$};
+%\node[dem] at (3,-3) (demon) {$\loc_4$};
+%\node[det] (aif) at (2,-0.075) {$\loc_5$};
+%\node[det] (aelse) at (3,-0.8) {$\loc_6$};
+%\node[det] (dif) at (2,-3) {$\loc_7$};
+%\node[det] (delse) at (3,-2.2) {$\loc_8$};
+%\node[det] (det1) at (0,0) {$\loc_0$};
+%\node[det] (while) at (1.5,-1.5)  {};
+\node[det] (fin) at (0,0) {$\loc_2$};
+%\node[ran] (prob) at (3,-1.5) {};
+%\node[ang] (angel) at (3,0) {};
+%\node[dem] at (3,-3) (demon) {};
+%
+%%\draw[tran] (det1) to node[auto, swap] {x:=0} (while);
+\draw[tran] (while) to node[font=\scriptsize,draw, fill=white, 
+rectangle,pos=0.5] {$x<1$} (fin);
+\draw[tran, loop, looseness = 5, in =-65, out = -115] (fin) to (fin);
+\draw[tran] (while) to node[font=\scriptsize,draw, fill=white, 
+rectangle,pos=0.5] {$x\geq 1$} (prob);
+%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3, inner sep = 1pt] {$\frac{6}{10}$} (angel);
+%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3, inner sep = 1pt] {$\frac{4}{10}$} (demon);
+%\draw[tran] (demon) -- node[auto] {x:=x+1} (demon-|while) -- (while);
+%\draw[tran] (angel) -- node[auto, swap] {x:=x+1} (angel-|while) -- (while);
+%\draw[tran] (demon) to node[auto] {x:=x-1} (while);
+%\draw[tran] (angel) to node[auto, swap] {x:=x-1} (while);
+
+
+%\draw[tran] (angel) -- (aif);
+%\draw[tran] (angel) -- (aelse);
+%\draw[tran] (demon) -- (dif);
+%\draw[tran] (demon) -- (delse);
+
+\node (dum1) at (0,0.8) {};
+\node (dum2) at (0,-0.8) {};
+
+\draw[tran] (prob) -- node[font=\scriptsize,draw, fill=white, 
+rectangle,pos=0.5, inner sep = 1pt] {$\frac{3}{4}$} (prob|-dum1) -- node[auto] 
+{x:=x-1}
+(while|-dum1)--(while);
+\draw[tran] (prob) -- node[font=\scriptsize,draw, fill=white, 
+rectangle,pos=0.5, inner sep = 1pt] {$\frac{1}{4}$} (prob|-dum2) 
+-- node[auto,swap] {x:=x+1} (while|-dum2)--(while);
+%\draw[tran] (dif) --  (demon-|while) -- node[auto, pos=0.2] {x:=x+1} (while);
+%\draw[tran] (aif) --  (angel-|while) -- node[auto, swap, pos=0.2] {x:=x+1} 
+%(while);
+%\draw[tran] (delse) -- node[auto] {x:=x-1} (delse-|while.305) --  (while.-55);
+%\draw[tran] (aelse) -- node[auto, swap] {x:=x-1} (aelse-|while.55) --  
+%(while.55);
+\end{tikzpicture}
+\caption{An \APP{} modelling an asymmetric 1-D random walk and the associated 
+pCFG. Probabilistic locations are depicted by circles, with probabilities given 
+on outgoing 
+transitions. Transitions are labelled by their effects. Location $\loc_0$ is 
+initial and $\loc_2$ is terminal.}
+\label{fig:invariant-running}
+\end{figure}
+
