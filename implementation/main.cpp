@@ -46,6 +46,28 @@ struct equation{
 
 stack<equation*> equations;
 
+node* and_node(node* one,node* two){
+	if(one->type!="bexpr" or two->type!="bexpr"){
+		cerr<<"Taking and of wrong type of nodes"<<endl;
+		return NULL;
+	}
+	node* node_and = NULL;
+	node* temp_affexpr = NULL;
+	node_and = new node("bexpr");
+	node_and->constant = "or";
+	int a = one->children.size(), b = two->children.size();
+	for(int i = 0;i<a;i++){
+		for(int j = 0;j<b;j++){
+			temp_affexpr = new node("affexpr");
+			temp_affexpr->constant = "and";
+			temp_affexpr->children = one->children[i]->children;
+			temp_affexpr->children.insert(temp_affexpr->children.end(),two->children[j]->children.begin(),two->children[j]->children.end());
+			node_and->children.pb(temp_affexpr);
+		}
+	}
+	return node_and;
+}
+
 void generate_equations(ofstream& equationsfile){ //Would use the ofstream file to write the equations into it later
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		if(it->second->type=="det"){
@@ -68,8 +90,8 @@ void generate_equations(ofstream& equationsfile){ //Would use the ofstream file 
 			}
 			else{
 				//First make the 2 conditions required
-				cond* condition1 = new cond(it->first,it->second->edges[0].next->label);
-				cond* condition2 = new cond(it->first,it->second->edges[1].next->label);
+				cond* condition0 = new cond(it->first,it->second->edges[0].next->label);
+				cond* condition1 = new cond(it->first,it->second->edges[1].next->label);
 				// Size is 2, so considering the guards is important and guards cannot be NULL
 				if(it->second->invariant==NULL or it->second->edges[0].guard==NULL or it->second->edges[1].guard==NULL){
 					//This should never be the case as this would pose conditions that c==0 and d>0, which are not good
@@ -77,20 +99,30 @@ void generate_equations(ofstream& equationsfile){ //Would use the ofstream file 
 				}
 				else{
 					//First take and of guard and invariant and then make the corresponding equations
+					node* n0 = and_node(it->second->invariant,it->second->edges[0].guard);
+					node* n1 = and_node(it->second->invariant,it->second->edges[1].guard);
+					int nEquations = n0->children.size();
+					for(int i=0;i<nEquations;i++){
+						equations.push(new equation(n0->children[i],condition0));
+					}
+					nEquations = n1->children.size();
+					for(int i=0;i<nEquations;i++){
+						equations.push(new equation(n1->children[i],condition1));
+					}
 				}
 			}
 		}
 		else if(it->second->type=="ndet"){
 			// First make the 2 conditions required
-			cond* condition1 = new cond(it->first,it->second->edges[0].next->label);
-			cond* condition2 = new cond(it->first,it->second->edges[1].next->label);
+			cond* condition0 = new cond(it->first,it->second->edges[0].next->label);
+			cond* condition1 = new cond(it->first,it->second->edges[1].next->label);
 			//Invariant implies the value decrease for both the emerging transitions
 			int nEquations = it->second->invariant->children.size();
 			for(int i=0;i<nEquations;i++){
-				equations.push(new equation(it->second->invariant->children[i],condition1));
+				equations.push(new equation(it->second->invariant->children[i],condition0));
 			}
 			for(int i=0;i<nEquations;i++){
-				equations.push(new equation(it->second->invariant->children[i],condition2));
+				equations.push(new equation(it->second->invariant->children[i],condition1));
 			}
 		}
 		else{
