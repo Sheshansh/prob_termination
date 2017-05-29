@@ -23,7 +23,7 @@ struct cond{
 	int dest1;
 	int dest2;
 	bool probability;
-	cond(int src,int dest1,int dest2 = 0,double probability = -1.0){
+	cond(int src,int dest1,int dest2 = -1,double probability = -1.0){
 		this->src = src;
 		this->dest1 = dest1;
 		this->dest2 = dest2;
@@ -68,7 +68,7 @@ node* and_node(node* one,node* two){
 	return node_and;
 }
 
-void generate_equations(ofstream& equationsfile){ //Would use the ofstream file to write the equations into it later
+void generate_equations(){ //Would use the ofstream file to write the equations into it later
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		if(it->second->type=="det"){
 			//Invariant and guard imply the value decrease
@@ -78,7 +78,8 @@ void generate_equations(ofstream& equationsfile){ //Would use the ofstream file 
 				// Guard would have been NULL here
 				if(it->second->invariant==NULL){
 					//This should never be the case as this would pose conditions that c==0 and d>0, which are not good
-					cerr<<"No invariant specified here"<<endl;
+					// cerr<<"No invariant specified here"<<endl;
+					//This would arise for the end states and skip and other special conditions
 				}
 				else{
 					// Invariant implies the given condition
@@ -137,6 +138,16 @@ void generate_equations(ofstream& equationsfile){ //Would use the ofstream file 
 	}
 }
 
+void print_equations(){
+	while(!equations.empty()){
+		// equationsfile<<"Equation"<<endl;
+		equations.top()->affexpr->print();
+		cout<<"implies";
+		cout<<equations.top()->condition->src<<" "<<equations.top()->condition->dest1<<endl;
+		equations.pop();
+	}
+}
+
 int main(){
 	char input[MAXL];
 	// cout<<fixed<<setprecision(10);
@@ -160,17 +171,18 @@ int main(){
 	cout<<"Input Code:"<<endl;
 	cout<<program<<endl;
 	cout<<"Parse Tree:"<<endl;
-	root->print();
-	cout<<"CFG:"<<endl;
-	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
-		cout<<"------------------------"<<endl;
-		cout<<"Node "<<it->first<<endl;
-		it->second->print();
-		// cout<<it->second->label<<endl;
-	}
-	ofstream equationsfile;
-	equationsfile.open ("equations.txt");
-	generate_equations(equationsfile);
-	equationsfile.close();
+	// root->print();
+	// cout<<"CFG:"<<endl;
+	// for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+	// 	cout<<"------------------------"<<endl;
+	// 	cout<<"Node "<<it->first<<endl;
+	// 	it->second->print();
+	// 	// cout<<it->second->label<<endl;
+	// }
+	// ofstream equationsfile;
+	// equationsfile.open ("equations.txt");
+	generate_equations();
+	print_equations();
+	// equationsfile.close();
 	return 0;
 }
