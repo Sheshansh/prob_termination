@@ -54,11 +54,6 @@ public:
 	void print();
 };
 
-struct equation{
-	node* affexpr;
-	node* literal;
-};
-
 void skip_spaces(int &begin, int &end);
 void vcopy(vector<node*> &sink,vector<node*> &tocopy);
 node* negation(node* tonegate);

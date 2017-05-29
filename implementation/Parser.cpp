@@ -658,7 +658,7 @@ void CFG_edge::print(){
 	}
 	if(guard!=NULL){
 		cout<<"Guard is: "<<endl;
-		// guard-> print();
+		guard-> print();
 	}
 	cout<<"Probability to occur is"<<probability<<endl<<endl; 
 }
@@ -675,15 +675,13 @@ void CFG_location::print(){
 	if(invariant!=NULL){
 		cout<<"Invariant: ";
 		cout<<invariant;
-		// invariant->print();
+		invariant->print();
 		cout<<endl;
 	}
 
-	// cout<<"Edges: "<<endl;
 	int i=1;
 	for(vector<CFG_edge>::iterator it = edges.begin();it!=edges.end();++it){
 		cout<<"Edge #"<<i<<endl;
-		// edges[i].print();
 		it->print();
 		i++;
 	}

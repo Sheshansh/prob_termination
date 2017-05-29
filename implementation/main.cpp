@@ -18,30 +18,89 @@ using namespace std;
 #define part(x,a,b) (x.substr((a),((b)-(a))))
 #define pb push_back
 
-stack<equation> equations;
+struct cond{
+	int src;
+	int dest1;
+	int dest2;
+	bool probability;
+	cond(int src,int dest1,int dest2 = 0,double probability = -1.0){
+		this->src = src;
+		this->dest1 = dest1;
+		this->dest2 = dest2;
+		this->probability = probability;
+	}
+};
+
+struct equation{
+	node* affexpr;
+	cond* condition;
+	equation(){
+		affexpr = NULL;
+		condition = NULL;
+	}
+	equation(node* affexpr,cond* condition){
+		this->affexpr = affexpr;
+		this->condition = condition;
+	}
+};
+
+stack<equation*> equations;
 
 void generate_equations(ofstream& equationsfile){ //Would use the ofstream file to write the equations into it later
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		if(it->second->type=="det"){
 			//Invariant and guard imply the value decrease
-			// Guard would have been NULL here
 			if(it->second->edges.size()==1){
+				//First make a condition
+				cond* condition = new cond(it->first,it->second->edges[0].next->label);
+				// Guard would have been NULL here
 				if(it->second->invariant==NULL){
-
+					//This should never be the case as this would pose conditions that c==0 and d>0, which are not good
+					cerr<<"No invariant specified here"<<endl;
 				}
 				else{
-					//As te 
+					// Invariant implies the given condition
+					int nEquations = it->second->invariant->children.size();
+					for(int i=0;i<nEquations;i++){
+						equations.push(new equation(it->second->invariant->children[i],condition));
+					}
 				}
 			}
 			else{
-				// Size is 2
+				//First make the 2 conditions required
+				cond* condition1 = new cond(it->first,it->second->edges[0].next->label);
+				cond* condition2 = new cond(it->first,it->second->edges[1].next->label);
+				// Size is 2, so considering the guards is important and guards cannot be NULL
+				if(it->second->invariant==NULL or it->second->edges[0].guard==NULL or it->second->edges[1].guard==NULL){
+					//This should never be the case as this would pose conditions that c==0 and d>0, which are not good
+					cerr<<"No invariant or no guard specified here"<<endl;
+				}
+				else{
+					//First take and of guard and invariant and then make the corresponding equations
+				}
 			}
 		}
 		else if(it->second->type=="ndet"){
-			//Invariant and implies the value decrease for both
+			// First make the 2 conditions required
+			cond* condition1 = new cond(it->first,it->second->edges[0].next->label);
+			cond* condition2 = new cond(it->first,it->second->edges[1].next->label);
+			//Invariant implies the value decrease for both the emerging transitions
+			int nEquations = it->second->invariant->children.size();
+			for(int i=0;i<nEquations;i++){
+				equations.push(new equation(it->second->invariant->children[i],condition1));
+			}
+			for(int i=0;i<nEquations;i++){
+				equations.push(new equation(it->second->invariant->children[i],condition2));
+			}
 		}
 		else{
-			//Invariant implies the value decrease of expected value of ranking function
+			//Make one condition for the expected value decrease
+			cond* condition = new cond(it->first,it->second->edges[0].next->label,it->second->edges[1].next->label,it->second->edges[0].probability);
+			//Invariant implies the value decrease of expected value of ranking function, "prob" type node
+			int nEquations = it->second->invariant->children.size();
+			for(int i=0;i<nEquations;i++){
+				equations.push(new equation(it->second->invariant->children[i],condition));
+			}
 		}
 	}
 }
