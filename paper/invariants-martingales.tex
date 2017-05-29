@@ -1,0 +1,665 @@
+%\vspace{-1em}
+\section{Invariants and Ranking Supermartingales}\label{sec:invm}
+%\vspace{-0.5em}
+
+In this section we recall known methods and constructs for solving the 
+qualitative termination and reachability questions for \APP{s}, namely  
+linear invariants and ranking supermartingales. 
+We also demonstrate that these methods are not sufficient to address the 
+quantitative variants of these questions (i.e., probabilistic termination).
+In order to discuss the necessary concepts, we recall the basics of 
+martingales, which is relevant for both this and subsequent sections. 
+%Since the definitions of this section are from the literature we relegate
+%relevant illustrations through example to the Appendix.
+
+%While the core results of this section were already proven in the previous 
+%literature, the version we sometimes present slight generalizations of these 
+%result, which make them applicable to a larger class of programs. We discuss 
+%the nature of these generalizations where appropriate.
+
+%\vspace{-1em}
+\subsection{Pure Invariants}
+%\vspace{-0.5em}
+
+Invariants are a vital element of many program analysis techniques. 
+Intuitively, invariants are maps assigning to each 
+program location $\loc$ of some pCFG a predicate which is guaranteed to hold 
+whenever $\loc$ is 
+entered. To avoid confusion with stochastic invariants, 
+that we introduce later, we call these standard invariants \emph{pure invariants}.
+
+\smallskip
+\begin{definition}[Linear Predicate Map (LPM) and Pure Invariant] We define the 
+following:
+\begin{compactenum}
+\item
+A \emph{linear predicate map (LPM)} for an \APP{} $P$ is a function $I$ 
+assigning to each location $\loc$ of the pCFG $\pCFG_P$ a propositionally 
+linear predicate $I(\loc)$ over the set of program variables of $P$.
+\item
+A \emph{pure linear invariant} (or just a pure invariant) for an \APP{} $P$ is 
+a linear predicate map $\inv$ for $P$ with
+the following property: for each location $\loc$ of $\pCFG_P$ and each finite 
+path $(\loc_0,\vec{x}_0),\cdots,(\loc_n,\vec{x}_n)$ such that 
+$(\loc_0,\vec{x}_0)=(\locinit,\vecinit)$ and $\loc_n = \loc$ it holds
+$\vec{x}_n\models \inv(\loc)$.
+\end{compactenum}
+%%A 
+%%probabilistic LPM for $P$ is a tuple $(\pinv,\pinfunc)$ such that $\pinv$ is 
+%%a 
+%%pure LPM for $P$ and $\pinfunc$ is a function assigning to each location 
+%%$\loc$ 
+%%a probability $\pi(\loc)\in[0,1]$.
+\end{definition}
+
+
+
+%A special class of LPMs are program invariants, i.e. maps assigning to each 
+%program location $\loc$ an PLP which is guaranteed to hold whenever $\loc$ is 
+%entered.
+%Invariants are a standard construct used in automated program analysis. 
+%To avoid confusion with probabilistic invariants, we call the 
+%standard invariants \emph{pure}.
+%
+%\begin{definition}[Pure Linear Invariant]
+%A \emph{pure linear invariant} (or just a pure invariant) for an \APP{} $P$ is 
+%%a function map $\inv$  assigning to each location $\loc$ of the pCFG 
+%%$\pCFG_P$ 
+%%a propositionally 
+%%linear predicate $I(\loc)$ over the set of program variables of $P$ 
+%a linear predicate map $\inv$ for $P$ with
+%the following property: for each location $\loc$ of $\pCFG_P$ and each finite 
+%path $(\loc_0,\vec{x}_0),\cdots,(\loc_n,\vec{x}_n)$ such that 
+%$(\loc_0,\vec{x}_0)=(\locinit,\vecinit)$ and $\loc_n = \loc$ it holds
+%$\val_{\vec{x}_i}\models \inv(\loc)$.
+%\end{definition}
+
+
+
+%\vspace{-1em}
+\subsection{Supermartingales}
+%\vspace{-0.5em}
+
+%Submartingales and their counterparts, supermartingales, are a standard tool 
+%of 
+(Super)martingales, are a standard tool of 
+probability theory apt for analyzing probabilistic objects arising in computer 
+science, from automata-based models~\cite{BKKNK:pMC-zero-reachability} to 
+general probabilistic 
+programs~\cite{SriramCAV,HolgerPOPL,CFNH16:prob-termination,CFG16:positivstellensatz-arxiv,BEFH16:doob-decomposition}.
+ 
+%\PN{Maybe move this sentence to intro.} 
+Let us first recall basic
+definitions and results related to supermartingales, which we need in our 
+analysis.
+
+\smallskip\noindent{\bf Conditional Expectation.} 
+%The notion of conditional expectation 
+%tightly connected to martingales. We present only a brief informal exposition 
+%here, for formal treatment see, e.g.~\cite[Chapter 9]{Williams:book}.
+Let $(\Omega,\mathcal{F},\probm)$ be a probability space, 
+$X\colon\Omega\rightarrow 
+\Rset$ an $\mathcal{F}$-measurable function, and $\mathcal{F}'\subseteq 
+\mathcal{F}$ sub-sigma-algebra of $\mathcal{F}$. The \emph{conditional 
+expectation} of $X$ given $\mathcal{F}'$ is an $\mathcal{F}'$-measurable random 
+variable denoted by $\E[X| \mathcal{F}']$ which satisfies, for each set $A\in 
+\mathcal{F}'$, the following: 
+\begin{equation}
+\label{eq:cond-exp}
+\E[X\cdot 1_A] = \E[\E[X|\mathcal{F}]\cdot 1_A],
+\end{equation}
+where $1_A \colon \Omega\rightarrow \{0,1\}$ is an \emph{indicator function} of 
+$A$, i.e. function returning $1$ for 
+each $\omega\in A$ and $0$ for each $\omega\in \Omega\setminus A$. Note that 
+the left hand-side of~\eqref{eq:cond-exp} intuitively represents the expected 
+value 
+of $X(\omega)$ with domain restricted to $A$.
+
+Recall that in context of probabilistic programs we work with probability 
+spaces of the form $(\Omega,\natfilt,\probm^\sigma)$, where $\Omega$ is a 
+set of runs in some $\pCFG$ and $\mathcal{F}$ is (the smallest) sigma-algebra 
+such that all the functions $\cfg{\sigma}{i}$, where $i\in \Nset_0$ and 
+$\sigma$ is a scheduler, are $\natfilt$-measurable. In such a setting we can 
+also consider sub-sigma-algebras $\natfilt_i$, $i\in \Nset_0$, of 
+$\natfilt$, where $\natfilt_i$ is the smallest sub-sigma-algebra of 
+$\natfilt$ such that all the functions $\cfg{\sigma}{j}$, $0\leq j \leq 
+i$, are $\natfilt_i$-measurable. Intuitively, each set $A$ belonging to such 
+an $\natfilt_i$ consists of runs whose first $i$ steps satisfy some 
+property, and the probability space $(\Omega,\natfilt_i,\probm^\sigma)$ 
+allows us to reason about probabilities of certain events happening in the 
+first 
+$i$ steps of program execution. 
+%(note that since $\natfilt_i \subseteq 
+%\natfilt$, we can view $\probm^\sigma$ also as a function of type 
+%$\natfilt_i\rightarrow [0,1]$). 
+Then, for each $A\in \natfilt_i$, the 
+value $\E[\E[X|\natfilt_i]\cdot 1_A]$ represents the expected value of 
+$X(\run)$ for the randomly generated run $\run$ provided that we restrict to 
+runs whose
+prefix of length $i$ satisfies the property given by $A$. 
+Note that the sequence $\natfilt_0,\natfilt_1,\natfilt_2,\dots$ forms a 
+filtration of $\natfilt$, which we call a \emph{canonical filtration}.
+
+%%\paragraph*{Basics of Supermartingales}
+
+\smallskip
+\begin{definition}[Supermartingale]
+Let $(\Omega,\mathcal{F},\probm)$ be a probability space and 
+$\{\mathcal{F}_i\}_{i=0}^{\infty}$ a filtration of $\mathcal{F}$. A sequence of 
+random variables $\{X_i\}_{i=0}^{\infty}$ is a \emph{supermartingale} w.r.t. 
+filtration $\{\mathcal{F}_i\}_{i=0}^{\infty}$ if it satisfies these conditions:
+\begin{compactenum}
+\item  The process $\{X_i\}_{i=0}^{\infty}$ is \emph{adapted} to 
+$\{\mathcal{F}_i\}_{i=0}^{\infty}$, i.e. for all $i\in \Nset_0$ it holds that 
+$X_i$ is $\mathcal{F}_i$-measurable.
+\item For all $i\in \Nset_0$ it holds $\E[|X_i|]<\infty$.
+\item For all $i\in \Nset_0$ it holds 
+\begin{equation}
+\label{eq:supermart-def}
+\E[X_{i+1}|\mathcal{F}_i] \leq X_i.
+\end{equation}
+
+A supermartingale $\{X_i\}_{i=0}^{\infty}$ has $c$-bounded differences, where 
+$c\geq 0$, if $|X_{i+1}-X_i|<c$ for all $i\in \Nset_0$
+\end{compactenum}
+%A sequence of 
+%random variables $\{X_i\}_{i=0}^{\infty}$ is a \emph{submartingale} w.r.t.  
+%$\{\mathcal{F}_i\}_{i=0}^{\infty}$ if the process $\{-X_i\}_{i=0}^{\infty}$ is 
+%a supermartingale w.r.t. the same filtration.
+\end{definition}
+
+
+Intuitively, a supermartingale is a stochastic process whose average value is 
+guaranteed not to rise as time evolves, even if some information on the past 
+evolution of the process is revealed. 
+%Symmetrically, a submartingale is a 
+%process whose value does not drop on average. 
+We often need to work with supermartingales whose value 
+is guaranteed to decrease on average, until a certain condition is 
+satisfied. The point in time in which such a condition is satisfied is called a 
+\emph{stopping time}.
+
+\smallskip
+\begin{definition}[Stopping time]
+Let $(\Omega,\mathcal{F},\probm)$ be a probability space and 
+$\{\mathcal{F}_i\}_{i=0}^{\infty}$ a filtration. A random variable $\stime 
+\colon 
+\Omega\rightarrow \Nset_0$ is called a \emph{stopping time} w.r.t. 
+$\{\mathcal{F}_i\}_{i=0}^{\infty}$ if %$\stime$ is adapted to this filtration 
+%and if 
+for all $j\in \Nset_0$ the set $\{\omega\in \Omega\mid \stime(\omega)\leq j\}$ 
+belongs to $\mathcal{F}_j$.
+\end{definition}
+
+
+In particular, for each set of configurations $C$ the reachability time 
+$\treach{C}$ of $C$ is a stopping time w.r.t. the canonical filtration, since 
+at each time $j$ we can decide whether $\treach{C}>j$ or not by looking at the 
+prefix of a run of length $j$. 
+%When $\Omega$ is a set of runs of some $\pCFG_P$, we can think of 
+%$\stime$ as representing a 
+%certain condition which can or cannot hold in a given time instance of the 
+%execution of $P$, where $\stime(\run)$ represents the first point in time 
+%during the execution represented by $\run$ in which $P$ holds. The condition 
+%$\{\omega\in \Omega\mid \stime(\omega)\leq j\}\in \mathcal{F}_j$ then states 
+%that whether $P$ holds at step $j$ of a run can be determined by looking at 
+%the 
+%prefix of the run of length $j$. In other words, the stopping condition cannot 
+%``talk'' about future events. The typical stopping time we use in the context 
+%of \APP{s} is the \emph{reachability} time $\treach{C}$ for some set of 
+%configurations $C$, where $\treach{C}(\run)$ is the first point in time when 
+%the current configuration on $\run$ is in $C$. In particular, if $C$ is the 
+%set 
+%of all configurations $(\loc,\vec{x})$ such that $\loc=\loc^\lout_P$ (the 
+%terminal location of $\pCFG_P$), then we denote $\treach{C}$ by $\ttime$ and 
+%call it a \emph{termination time} of $P$.
+%We combine stopping conditions with martingales to get 
+%\emph{$\eps$-decreasing} 
+%supermartingales. %
+Finally, we recall the fundamental notion of a ranking 
+supermartingale.
+
+\smallskip
+\begin{definition}[Ranking supermartingale]
+\label{def:ranking}
+Let $(\Omega,\mathcal{F},\probm)$ be a probability space, 
+$\{\mathcal{F}_i\}_{i=0}^{\infty}$ a filtration of $\mathcal{F}$, $\stime$ a 
+stopping time w.r.t. that filtration, and $\eps\geq 
+0$. 
+A supermartingale $\{X_i\}_{i=0}^{\infty}$ (w.r.t. 
+$\{\mathcal{F}_i\}_{i=0}^{\infty}$) is \emph{$\eps$-decreasing} until 
+$\stime$ 
+if it 
+satisfies 
+the following additional condition: for all $i\in \Nset_0$ it holds
+\begin{equation}
+\label{eq:ranking-sup}
+\E[X_{i+1}|\mathcal{F}_i] \leq X_i - \eps\cdot\vec{1}_{\stime > i}.
+\end{equation}
+
+Further, $\{X_i\}_{i=0}^{\infty}$ is an \emph{$\eps$-ranking} supermartingale 
+($\eps$-RSM) for $\stime$ if it 
+is $\eps$-decreasing until $\stime$ and for 
+each $\omega\in\Omega, j\in\Nset_0$ it holds $\stime(\omega)>j \Rightarrow 
+X_j(\omega)\geq 0$.
+%is a supermartingale w.r.t. $\{\mathcal{F}_i\}_{i=0}^{\infty}$. 
+%A supermartingale $\{X_i\}_{i=0}^{\infty}$ is 
+%is $\eps$-repulsing if for all $i\in \Nset_0$ it holds
+%\begin{equation}
+%\label{eq:repulsing-sub}
+%\E[X_{i+1}|\mathcal{F}_i] \leq X_i - \eps\cdot\vec{1}_{\stime > i}.
+%\end{equation}
+\end{definition}
+Intuitively, if $\stime$ is the reachability time $\treach{C}$ of some set $C$, 
+then the previous definition requires that an $\eps$-ranking supermartingale 
+must decrease by at least $\eps$ on average up to the point when $C$ is 
+reached for a first time. After that, it must not increase (on average).
+The above definition is a bit more general than the standard one in the
+literature as we also consider reachability as opposed to only termination.
+
+
+%Intuitively, until the condition specified by $\stime$ is satisfied, ranking 
+%supermartingale is non-negative and at the same time decreasing by at least 
+%$\eps$ on average, forming a probabilistic analogue of the classical ranking 
+%functions. 
+
+%We finish this part by noting that for some applications it is preferable to 
+%work with supermartingales that have \emph{bounded differences.}
+
+%\begin{definition}
+%A supermartingale $\{X_i\}_{i=0}^{\infty}$ has $c$-bounded differences, where 
+%$c\geq 0$, if $|X_{i+1}-X_i|<c$ for all $i\in \Nset_0$.
+%\end{definition}
+%Note that $\{X_i\}_{i=0}^{\infty}$ being an $\eps$-repulsing supermartingale 
+%for 
+%$\stime$ is 
+%\emph{not} equivalent to $\{-X_i\}_{i=0}^{\infty}$ being an $\eps$-ranking 
+%supermartingale for $\stime$.
+
+%We typically work with $\eps$-ranking supermartingales whose initial value is 
+%positive and $\eps$-repulsing supermartingales whose initial value is 
+%negative. 
+%Then, intuitively an $\eps$-ranking supermartingale is driven towards negative 
+%values by at least $\eps$ in each step (on average) until it indeed becomes 
+%negative, while an $\eps$-repulsing submartingale is driven \emph{away} from 
+%positive values by at least $\eps$ per step, as long as it stays non-positive 
+%(we cannot rule out that it eventually becomes positive, as the decrease by 
+%$\eps$ is guaranteed only on average). 
+%%Note that $\{X_i\}_{i=0}^{\infty}$ being an $\eps$-repulsing submartingale is 
+%%\emph{not} equivalent to $\{-X_i\}_{i=0}^{\infty}$ being an $\eps$-ranking 
+%%supermartingale.
+
+\smallskip\noindent{\bf Martingales in Program Analysis.}
+In the context of \APP{} analysis, we consider a special type of 
+supermartingales given as functions of the current values of program variables. 
+In this paper we focus on the case when these functions are \emph{linear}.
+
+\smallskip
+\begin{definition}[Linear Expression Map]
+A \emph{linear expression map (LEM)} for an \APP{} $P$ is a function $\lem$ 
+assigning to each program location $\loc$ of $\pCFG_P$ an affine expression 
+$\lem(\ell)$ over the program variables of $P$.
+\end{definition}
+
+Each LEM $\lem$ and location $\loc$ determines an affine function $\lem(\loc)$ 
+which takes as an argument an $n$-dimensional vector, where $n$ is the number 
+of distinct variables in $P$. We use $\lem(\loc,\vec{x})$ as a shorthand 
+notation for $\lem(\loc)(\vec{x})$. 
+Martingales for \APP{} analysis are defined via a standard notion of 
+pre-expectation~\cite{SriramCAV}. Intuitively, a pre-expectation of $\lem$ is a 
+function which for each configuration $(\loc,\vec{x})$ returns the maximal
+expected value of $\lem$ after one step is made from this configuration, where 
+the maximum is taken over all possible non-deterministic choices.
+
+\smallskip
+\begin{definition}[Pre-Expectation]
+Let $P$ be an \APP{} such that $\pCFG_P = 
+(\locs,\pvars,\locinit,\vecinit,\transitions,\probdist,\guards)$ and let $\lem$ 
+a 
+linear expression map 
+for~$P$. 
+%Let $\locs$ 
+%be the set of locations of $\pCFG_P$ and $\pvars$ its set of program 
+%variables. 
+The 
+pre-expectation of $\lem$ is a function $\preexp{\lem}\colon \locs\times 
+\Rset^{|\pvars|} \rightarrow \Rset$ defined as follows:
+\begin{compactitem} %\itemsep1pt \parskip0pt \parsep0pt
+\item 
+if $\loc$ is a probabilistic location, then
+$$\preexp{\lem}(\loc,\vec{x}):=\sum_{(\loc,1,\id_1,\loc')\in\transitions} 
+Pr_{\loc}\left((\loc,1,\id_1,\loc')\right)\cdot
+ \lem(\loc',\vec{x});$$
+\item 
+ if $\loc$ is a non-deterministic location, then
+$$\preexp{\lem}(\loc,\vec{x}):=
+\max_{(\loc,1,\id_1,\loc')\in\transitions}\lem(\loc',\vec{x});$$
+
+%\item 
+%$\mathrm{pre}_\eta(\loc,\mathbf{x}):=\min_{(\loc,id,\ell')\in\transitions}\eta\left(\loc',\mathbf{x}\right)$
+% if $\loc$ is an angelic location;
+\item 
+if $\loc$ is a deterministic location, then for each $\vec{x}$ the value 
+$\preexp{\lem}(\loc,\vec{x})$ is determined as follows: there is exactly one 
+transition
+$\tau=(\loc,j,\up,\loc')$ such that $\vec{x}\models G(\tau)$. We distinguish 
+three cases:
+\begin{compactitem}
+\item If $\up\colon \Rset^{|\pvars|}\rightarrow \Rset$ is a function, then 
+$$\preexp{\lem}(\loc,\vec{x}):= \lem(\loc',\vec{x}(j\leftarrow \up(\vec{x}))).$$
+\item If $\up$ is a distribution $d$, then $$ \preexp{\lem}(\loc,\vec{x}):= 
+\lem(\loc',\vec{x}(j\leftarrow \E[d])),$$ where $\E[d]$ is the expected value of the 
+distribution $d$.
+\item 
+If $\up$ is a set, then $$ \preexp{\lem}(\loc,\vec{x}):= \max_{a\in\up}
+\lem(\loc',\vec{x}(j \leftarrow a)).$$
+\end{compactitem}
+%$\mathrm{pre}_\eta(\loc,\mathbf{x}):=\eta(\loc',\expv_{\rvars}\left(f(\vec{x},\mathbf{r})\right))$
+% if $\loc$ is a deterministic location, $(\loc,f,\loc')\in\transitions$ and 
+%$\mathbf{x}\in G(\loc,f,\loc')$, where 
+%$\expv_{\rvars}\left(f(\vec{x},\mathbf{r})\right)$ is the expected value of 
+%$f(\vec{x},\cdot)$. %on $\rvars$ if $\vec{x}$ is treated as a constant vector.
+\end{compactitem}
+%\end{definition}
+\end{definition}
+
+\smallskip
+\begin{definition}(Linear Ranking Supermartingale)
+\label{def:lrsm}
+Let $P$ be an \APP{} such that $\pCFG_P = 
+(\locs,\pvars,\locinit,\vecinit,\transitions,\probdist,\guards)$, let $\inv$ be 
+a linear predicate map and let 
+$\confset\subseteq \locs \times \Rset^{|\pvars|}$ be some set of 
+configurations. 
+%\begin{compactenum}
+%\item
+A linear $\eps$-ranking supermartingale ($\eps$-LRSM) for $\confset$ 
+supported by $\inv$ is a 
+linear expression map $\lem$ for $P$ such that for all configurations 
+$(\loc,\vec{x})$ of $\pCFG_P$ with
+$(\loc,\vec{x})\not\in \confset$ and $\vec{x}\models \inv(\loc)$ the following 
+two conditions hold:
+\begin{compactitem}
+%\item For all $(\loc,\vec{x})\in \locs\times\Rset^{|\pvars|}$ it holds
+%\item For all  it holds 
+\item
+$\lem(\loc,\vec{x})\geq 0$
+\item 
+$\preexp{\lem}(\loc,\vec{x}) \leq \lem(\loc,\vec{x})-\eps$ 
+\end{compactitem}
+%\item
+%\end{compactenum}
+A linear $\eps$-ranking supermartingale supported by $\inv$ has 
+$c$-bounded differences if for each $(\loc,\vec{x})$ such that $\vec{x}\models 
+\inv(\loc)$ and each configuration $(\loc',\vec{x}')$ such that $(\loc,\vec{x}) 
+(\loc',\vec{x}')$ is a path in $\pCFG_P$ it holds 
+$|\lem(\loc,\vec{x})-\lem(\loc',\vec{x}')|\leq c$. 
+\end{definition}
+
+
+The relationship between $\eps$-LRSM in \APP{s}, (pure) invariants, and almost-sure termination 
+is summarized in the following theorem. 
+\smallskip
+\begin{theorem}[{\cite[Theorem 1]{CFNH16:prob-termination}}]
+\label{thm:old-ranking}
+Let $P$ be an \APP{}, $\sigma$ a scheduler, and 
+$(\Omega,\natfilt,\probm^\sigma)$ the corresponding probability space. Further, 
+let $C$ be the set of terminating configurations of $\pCFG_P$ (i.e., the termination
+location is reached), such that there exist an $\eps>0$ and an $\eps$-linear ranking 
+supermartingale $\lem$ supported by a pure invariant $I$. 
+%%for $\treach{C}$. 
+Then 
+\begin{compactenum}
+\item
+$\probm^{\sigma}(\ttime<\infty)=1$, i.e. termination is ensured almost-surely.
+\item
+$\E^{\sigma}[\ttime]<\lem(\locinit,\vecinit)/\eps$.
+%\item
+%If $\{X_i\}_{i=0}^{\infty}$  has $c$-bounded differences for some $c$, then 
+%there exists a concentration bound $B$ for $\treach{C}$ such that $B\leq 
+%({E^{\sigma}[X_0]}/{\eps})+1$.
+\end{compactenum}
+\end{theorem}
+
+
+The previous result shows that if there exists  an $\eps$-LRSM 
+supported by a pure invariant $I$, for $\eps>0$, then under each scheduler 
+termination is ensured almost-surely.
+We now demonstrate that pure invariants, though effective for almost-sure 
+termination, are ineffective to answer probabilistic termination questions.
+
+
+%\begin{figure}[t]
+\lstset{language=affprob}
+\lstset{tabsize=3}
+\newsavebox{\nonterm}
+\begin{lrbox}{\nonterm}
+\begin{lstlisting}[mathescape]
+$x:=30,y:=20$
+while $y\geq 0$ do
+	$x:=x+$sample$(\mathrm{Uniform}[-\frac{1}{4},1])$
+	$y:=y+$sample$(\mathrm{Uniform}[-1,\frac{1}{4}])$
+	while $x \leq 0$ do skip od
+od
+\end{lstlisting}
+\end{lrbox}
+\begin{figure}[t]
+%%\centering
+\usebox{\nonterm}
+\begin{tikzpicture}[x = 1.7cm]
+%\node[det] (det1) at (0,0) {$\loc_0$};
+%\node[det] (while) at (1.5,-1.5)  {$\loc_1$};
+%\node[det] (fin) at (0,-3) {$\loc_5$};
+%\node[ran] (prob) at (3,-1.5) {$\loc_2$};
+%\node[ang] (angel) at (3,0) {$\loc_3$};
+%\node[dem] (demon) at (3,-3)  {$\loc_4$};
+%
+%\draw[tran] (det1) to node[auto, swap] {x:=0} (while);
+%\draw[tran] (while) to node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3] {$x<0$} (fin);
+%\draw[tran, loop, looseness = 5, in =-65, out = -115] (fin) to (fin);
+%\draw[tran] (while) to node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3] {$x\geq 0$} (prob);
+%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3, inner sep = 1pt] {$\frac{6}{10}$} (angel);
+%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3, inner sep = 1pt] {$\frac{4}{10}$} (demon);
+%\draw[tran] (demon) -- node[auto] {x:=x+1} (demon-|while) -- (while);
+%\draw[tran] (angel) -- node[auto, swap] {x:=x+1} (angel-|while) -- (while);
+%\draw[tran] (demon) to node[auto] {x:=x-1} (while);
+%\draw[tran] (angel) to node[auto, swap] {x:=x-1} (while);
+
+\node[det] (while) at (1.5,0)  {$\loc_0$};
+%%\node[det] (fin) at (0,-3) {};
+\node[det] (p1) at (2.5,0) {$\loc_1$};
+\node[det] (p2) at (3.5,0) {$\loc_2$};
+
+\node[det] (lp) at (4.5,0) {$\loc_3$};
+%\node[ang] (angel) at (3,0) {$\loc_3$};
+%\node[dem] at (3,-3) (demon) {$\loc_4$};
+%\node[det] (aif) at (2,-0.075) {$\loc_5$};
+%\node[det] (aelse) at (3,-0.8) {$\loc_6$};
+%\node[det] (dif) at (2,-3) {$\loc_7$};
+%\node[det] (delse) at (3,-2.2) {$\loc_8$};
+%\node[det] (det1) at (0,0) {$\loc_0$};
+%\node[det] (while) at (1.5,-1.5)  {};
+\node[det] (fin) at (0,0) {$\loc_4$};
+%\node[ran] (prob) at (3,-1.5) {};
+%\node[ang] (angel) at (3,0) {};
+%\node[dem] at (3,-3) (demon) {};
+%
+%%\draw[tran] (det1) to node[auto, swap] {x:=0} (while);
+\node (dum1) at (0,0.8) {};
+\node (dum2) at (0,-0.8) {};
+\draw[tran] (while) to node[font=\scriptsize,draw, fill=white, 
+rectangle,pos=0.5] {$y<0$} (fin);
+\draw[tran, loop, looseness = 5, in =-65, out = -115] (fin) to (fin);
+\draw[tran] (while) -- node[font=\scriptsize,draw, fill=white, 
+rectangle,pos=0.5, inner sep = 2pt] {$y\geq0$} node[label={[label 
+distance=0.12cm]-90:{x:=...}}] {} (p1);
+\draw[tran] (p1) to node[label={[label 
+distance=0.12cm]-90:{y:=...}}] {} (p2);
+\draw[tran] (lp) to  (p2);
+\draw[tran] (p2) -- (p2|-dum2) -- node[font=\scriptsize,draw, fill=white, 
+rectangle,pos=0.5, inner sep = 2pt] {$x\leq 0$} (lp|-dum2) -- (lp);
+\draw[tran] (p2) -- (p2|-dum1) -- node[font=\scriptsize,draw, fill=white, 
+rectangle,pos=0.5, inner sep = 2pt] {$x> 0$} (while|-dum1) -- (while);
+%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.3, inner sep = 1pt] {$\frac{4}{10}$} (demon);
+%\draw[tran] (demon) -- node[auto] {x:=x+1} (demon-|while) -- (while);
+%\draw[tran] (angel) -- node[auto, swap] {x:=x+1} (angel-|while) -- (while);
+%\draw[tran] (demon) to node[auto] {x:=x-1} (while);
+%\draw[tran] (angel) to node[auto, swap] {x:=x-1} (while);
+
+
+%\draw[tran] (angel) -- (aif);
+%\draw[tran] (angel) -- (aelse);
+%\draw[tran] (demon) -- (dif);
+%\draw[tran] (demon) -- (delse);
+
+
+
+%\draw[tran] (prob) -- node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.5, inner sep = 1pt] {$\frac{3}{4}$} (prob|-dum1) -- node[auto] 
+%{x:=x-1}
+%(while|-dum1)--(while);
+%\draw[tran] (prob) -- node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.5, inner sep = 1pt] {$\frac{1}{4}$} (prob|-dum2) 
+%-- node[auto,swap] {x:=x+1} (while|-dum2)--(while);
+%\draw[tran] (dif) --  (demon-|while) -- node[auto, pos=0.2] {x:=x+1} (while);
+%\draw[tran] (aif) --  (angel-|while) -- node[auto, swap, pos=0.2] {x:=x+1} 
+%(while);
+%\draw[tran] (delse) -- node[auto] {x:=x-1} (delse-|while.305) --  (while.-55);
+%\draw[tran] (aelse) -- node[auto, swap] {x:=x-1} (aelse-|while.55) --  
+%(while.55);
+\end{tikzpicture}
+\caption{A program with infinitely many reachable configurations which 
+terminates with high probability, but not almost 
+surely, together with a sketch of its pCFG. }\label{fig:nonterm}
+\end{figure}
+
+%We now show why this approach does not work for the probabilistic reachability and termination. 
+
+\smallskip
+\begin{example}\label{ex:nonterm}
+Consider the program in Figure~\ref{fig:nonterm}. 
+In each 
+iteration of the outer loop each of the variables is randomly modified by 
+adding a number drawn from some uniform distribution.
+%incremented or 
+%decremented. The probability of incrementing $x$ is $\frac{3}{8}$, for
+%decrementing $x$ it is $\frac{1}{8}$; the probability of incrementing $y$ it 
+%is 
+%$\frac{1}{8}$ and for decrementing $y$ it is $\frac{3}{8}$. 
+Average increase of $x$ in each iteration is $\frac{3}{8}$, while average decrease 
+of $y$ is $-\frac{3}{8}$.  It is easy to see that a program does not 
+terminate almost-surely: 
+there is for instance a tiny but non-zero probability of $x$ being decremented 
+by at least $\frac{1}{8}$ in 
+each of the first 240 loop iterations, after which we are stuck in the infinite 
+inner 
+loop. On 
+the other hand, the expectations above show that there is a ``trend'' of $y$ 
+decreasing and $x$ increasing, and executions that follow this trend eventually 
+decrement $y$ below $0$ without entering the inner loop. Hence, the 
+probabilistic intuition tells us that the program terminates with a high 
+probability. However, the techniques of this section cannot prove 
+this high-probability termination, since existence of an $\eps$-LRSM (with 
+$\eps>0$) supported by a pure invariant already implies a.s. termination,
+and so no such $\eps$-LRSM can exist for the program. 
+\end{example}
+
+In the next section we generalize the notion of pure invariants to stochastic invariants
+for probabilistic termination to resolve issues like Example~\ref{ex:nonterm}.
+
+%Adirect consequence of Theorems~\ref{thm:pure-supermart} is the following 
+%connection 
+%between pure invariants, 
+%linear ranking supermartingales, and reachability properties. 
+%
+%\begin{corollary}
+%\label{col:linear-ranking-old}
+%Let $\lem$ be a linear $\eps$-ranking supermartingale for some set $C$ of 
+%configurations of an \APP{} $P$ such that $\lem$ is supported by some pure 
+%invariant of $P$. Then under every scheduler $\sigma$ it holds:
+%
+%\begin{compactenum}
+%\item
+%$\probm^{\sigma}(\treach{C}<\infty)=1$, i.e. the set $C$ is reached 
+%almost-surely
+%\item
+%$\E^{\sigma}[\treach{C}]<\lem(\locinit,\vecinit)/\eps$.
+%\item
+%If $\{\lem(\cfg{\sigma}{i})\}_{i=0}^{\infty}$  has $c$-bounded differences for 
+%some $c$, then 
+%there exists a concentration bound $B$ for $\treach{C}$ such that $B\leq 
+%({\lem(\locinit,\vecinit)}/{\eps})+1$.
+%\end{compactenum}
+%\end{corollary}
+
+
+
+
+
+
+
+%\begin{proof}
+%Denote $X_i = \lem(\cfg{\sigma}{i})$. To prove that 
+%\end{proof}
+
+%\begin{example}
+%If we apply Theorem~\ref{thm:pure-supermart} on the $\frac{1}{4}$-LRSM $\lem$ 
+%in Example~\ref{ex:lrsm}, we get exactly the process $\{X'_i\}_{i=0}^{\infty}$ 
+%described in Example~\ref{ex:rsm}.
+%\end{example}
+
+%Having a supermartingale which decreases, on average, by some constant until 
+%$C$ is reached effectively proves that $C$ is reached almost surely, very much like 
+%the standard ranking functions prove that non-probabilistic program terminates. 
+%Moreover, we can use such a supermartingale to prove additional assertions 
+%about the reachability time.
+
+%\begin{theorem}[variant of {\cite[Theorem 1]{CFNH16:prob-termination}}]
+%\label{thm:old-ranking}
+%Let $P$ be an \APP{}, $\sigma$ a scheduler, and 
+%$(\Omega,\natfilt,\probm^\sigma)$ the corresponding probability space. Further, 
+%let $C$ be a set of 
+%configurations of $\pCFG_P$ such 
+%that there exist an $\eps>0$ and an $\eps$-ranking supermartingale  
+%$\{X_i\}_{i=0}^{\infty}$
+%for $\treach{C}$. Then 
+%\begin{compactenum}
+%\item
+%$\probm^{\sigma}(\treach{C}<\infty)=1$, i.e. the set $C$ is reached 
+%almost-surely
+%\item
+%$\E^{\sigma}[\treach{C}]<\E^{\sigma}[X_0]/\eps$.
+%\item
+%If $\{X_i\}_{i=0}^{\infty}$  has $c$-bounded differences for some $c$, then 
+%there exists a concentration bound $B$ for $\treach{C}$ such that $B\leq 
+%({E^{\sigma}[X_0]}/{\eps})+1$.
+%\end{compactenum}
+%\end{theorem}
+
+%\begin{remark}
+%We again somewhat generalize the results of~\cite{CFNH16:prob-termination}, 
+%where the 
+%supermartingale 
+%$\{X_i\}_{i=0}^{\infty}$ was additionally required to satisfy the 
+%following: there exists $K>0$ such that with probability $1$ it holds $X_i > 
+%-K$ for all $i$. We avoid this requirement by use of \emph{stopped ranking 
+%supermartingale property} similar to~\cite[Section 10.9]{Williams:book}.
+%\end{remark}
+
+
+
+
+
+%Note that the requirement~\eqref{eq:ranking-sup} can be equivalently expressed 
+%by stipulating that $\E[X_{i+1}|\mathcal{F}_i] \leq X_i - \eps\cdot 
+%\vec{1}_{\{X_i \geq 0\}}$
+
+
+
+
+
