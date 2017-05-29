@@ -1,5 +1,7 @@
-if !x_1<=x_3 and !x_2<=x_3 and !x_1>=x_3 or !x_1>=x_2 and x_1<=x_2 then
-	x_1 := x_3 + 1.0
+[x_1>=1 or x_1<=20]
+if x_1>=0 and x_1<=4.0 then
+	[x_1>=1 and x_1<=4 or x_1>=1 and x_1<=4]
+	x_1 := x_1 - 2.0
 else
 	skip
 fi

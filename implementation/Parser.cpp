@@ -1,5 +1,6 @@
 //Compile with C++11
 //The variable names should be of the form x_i where i is a number and the indexing starts from 1 i.e. the variables in the program are of the form x_1, x_2 ... x_n.
+//Assuming * is for multiplication rather than .
 #include <iostream>
 #include <algorithm>
 #include <cstdio>
@@ -281,7 +282,7 @@ void node::proc_assgn(int s,int l){
 		}
 	}
 	if(pos==-1){
-		cerr<<"Wrong assignment between ["<<begin<<","<<end<<")"<<endl;
+		cerr<<"Wrong assignment between ["<<begin<<","<<end<<") i.e. "<<part(program,begin,end)<<endl;
 	}
 	else{
 		children.resize(2);
@@ -368,47 +369,59 @@ void node::proc_pvar(){
 	constant = part(program,begin,end);
 }
 
-void node::recursively_form_vector(int begin,int end){ //Note that this shadows the original ones
+void node::analyse_expr(int begin,int end,bool negate){
+	skip_spaces(begin,end);
+	int star = -1;
+	for(int i = begin;i<end;++i){ //Assuming that the program variable names don't contain star anywhere
+		if(program[i]=='*'){
+			star = i;
+		}
+	}
+	if(star==-1){
+		if(part(program,begin,begin+2)=="x_"){
+			if(negate){
+				expression[stoi(part(program,begin+2,end))] += -1.0;
+			}
+			else{
+				expression[stoi(part(program,begin+2,end))] += 1.0;
+			}
+		}
+		else{
+			if(negate){
+				expression[0] -= stod(part(program,begin,end));
+			}
+			else{
+				expression[0] += stod(part(program,begin,end));
+			}
+		}
+	}
+	else{
+		int block=star+1;
+		skip_spaces(begin,star);
+		skip_spaces(block,end);
+		if(part(program,block,block+2)!="x_"){
+			cerr<<"Error in the variable in ["<<block<<","<<end<<")"<<"begin = "<<begin<<endl;
+		}
+		expression[stoi(part(program,block+2,end))] += stod(part(program,begin,star));
+	}
+}
+
+void node::form_vector(int begin,int end,bool negate){ //Note that this shadows the original ones
 	skip_spaces(begin,end);
 	int plusminus = -1;
 	// Implemented as a linear but still recursive function
-	for(int i = begin;i<end;++i){
+	for(int i = begin+1;i<end;++i){
 		if(program[i]=='+' or program[i]=='-'){
 			plusminus = i;
 			break;
 		}
 	}
 	if(plusminus!=-1){
-		recursively_form_vector(begin,plusminus);
-		recursively_form_vector(plusminus+1,end);
-		return;
-	}
-	int lastdot = -1;
-	for(int i=begin;i<end;++i){ //Assuming that the program variable names don't contain dot anywhere
-		if(program[i]=='.' or program[i]=='*'){
-			lastdot = i;
-		}
-	}
-	if(lastdot==-1 and !isdigit(program[begin])){
-		if(part(program,begin,begin+2)!="x_"){
-			cerr<<"Error in the variable in ["<<begin<<","<<end<<") i.e.:"<<part(program,begin,end)<<endl;
-		}
-		expression[stoi(part(program,begin+2,end))]+=1.0;
-		// children[0] = new node("pvar",begin,end);
-		return;
-	}
-	if(program[lastdot]=='*' or !isdigit(program[lastdot+1])){
-		int block=lastdot+1;
-		skip_spaces(begin,lastdot);
-		skip_spaces(block,end);
-		if(part(program,block,block+2)!="x_"){
-			cerr<<"Error in the variable in ["<<block<<","<<end<<")"<<endl;
-		}
-		expression[stoi(part(program,block+2,end))] += stod(part(program,begin,lastdot));
+		analyse_expr(begin,plusminus,negate);
+		form_vector(plusminus+1,end,program[plusminus]=='+');
 	}
 	else{
-		expression[0] += stod(part(program,begin,end));
-		return;
+		analyse_expr(begin,end,negate);
 	}
 }
 
@@ -416,7 +429,7 @@ void node::proc_expr(){
 	skip_spaces(begin,end);
 	constant = "expression";
 	expression.resize(nVariables+1);
-	recursively_form_vector(begin,end);
+	form_vector(begin,end,false);
 }
 
 void node::proc_constant(){
@@ -658,7 +671,7 @@ void CFG_edge::print(){
 	}
 	if(guard!=NULL){
 		cout<<"Guard is: "<<endl;
-		// guard-> print();
+		guard-> print();
 	}
 	cout<<"Probability to occur is"<<probability<<endl<<endl; 
 }
@@ -675,17 +688,14 @@ void CFG_location::print(){
 	if(invariant!=NULL){
 		cout<<"Invariant: ";
 		cout<<invariant;
-		// invariant->print();
+		invariant->print();
 		cout<<endl;
 	}
 
-	// cout<<"Edges: "<<endl;
 	int i=1;
 	for(vector<CFG_edge>::iterator it = edges.begin();it!=edges.end();++it){
 		cout<<"Edge #"<<i<<endl;
-		// edges[i].print();
 		it->print();
 		i++;
 	}
 }
-
