@@ -37,6 +37,18 @@
 \providecommand\natexlab[1]{#1}
 \providecommand\showeprint[2][]{arXiv:#2}
 
+\bibitem[\protect\citeauthoryear{Ash and Dol{\'e}ans-Dade}{Ash and
+  Dol{\'e}ans-Dade}{2000}]%
+        {Ash:book}
+\bibfield{author}{\bibinfo{person}{R.B. Ash} {and} \bibinfo{person}{C.
+  Dol{\'e}ans-Dade}.} \bibinfo{year}{2000}\natexlab{}.
+\newblock \bibinfo{booktitle}{{\em Probability and Measure Theory}}.
+\newblock \bibinfo{publisher}{Harcourt/Academic Press}.
+\newblock
+\showISBNx{9780120652020}
+\showLCCN{99065669}
+
+
 \bibitem[\protect\citeauthoryear{Billingsley}{Billingsley}{1995}]%
         {Billingsley:book}
 \bibfield{author}{\bibinfo{person}{P. Billingsley}.}
