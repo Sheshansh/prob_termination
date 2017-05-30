@@ -17,13 +17,19 @@ using namespace std;
 #define MAXL 100000 //Maximum length of the program
 #define part(x,a,b) (x.substr((a),((b)-(a))))
 #define pb push_back
+#define A(i,j) (top->affexpr->children[i]->children[0]->expression[j+1])
+#define b(i) (-1.0*top->affexpr->children[i]->children[0]->expression[0])
 
 struct cond{
+	int toChange;
+	node* change;
 	int src;
 	int dest1;
 	int dest2;
 	bool probability;
-	cond(int src,int dest1,int dest2 = -1,double probability = -1.0){
+	cond(int toChange,node* change,int src,int dest1,int dest2 = -1,double probability = -1.0){
+		this->toChange = toChange;
+		this->change = change;
 		this->src = src;
 		this->dest1 = dest1;
 		this->dest2 = dest2;
@@ -74,7 +80,7 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 			//Invariant and guard imply the value decrease
 			if(it->second->edges.size()==1){
 				//First make a condition
-				cond* condition = new cond(it->first,it->second->edges[0].next->label);
+				cond* condition = new cond(it->second->edges[0].toChange,it->second->edges[0].change,it->first,it->second->edges[0].next->label);
 				// Guard would have been NULL here
 				if(it->second->invariant==NULL){
 					//This should never be the case as this would pose conditions that c==0 and d>0, which are not good
@@ -91,8 +97,8 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 			}
 			else{
 				//First make the 2 conditions required
-				cond* condition0 = new cond(it->first,it->second->edges[0].next->label);
-				cond* condition1 = new cond(it->first,it->second->edges[1].next->label);
+				cond* condition0 = new cond(-1,NULL,it->first,it->second->edges[0].next->label);
+				cond* condition1 = new cond(-1,NULL,it->first,it->second->edges[1].next->label);
 				// Size is 2, so considering the guards is important and guards cannot be NULL
 				if(it->second->invariant==NULL or it->second->edges[0].guard==NULL or it->second->edges[1].guard==NULL){
 					//This should never be the case as this would pose conditions that c==0 and d>0, which are not good
@@ -115,8 +121,8 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 		}
 		else if(it->second->type=="ndet"){
 			// First make the 2 conditions required
-			cond* condition0 = new cond(it->first,it->second->edges[0].next->label);
-			cond* condition1 = new cond(it->first,it->second->edges[1].next->label);
+			cond* condition0 = new cond(-1,NULL,it->first,it->second->edges[0].next->label);
+			cond* condition1 = new cond(-1,NULL,it->first,it->second->edges[1].next->label);
 			//Invariant implies the value decrease for both the emerging transitions
 			int nEquations = it->second->invariant->children.size();
 			for(int i=0;i<nEquations;i++){
@@ -128,7 +134,7 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 		}
 		else{
 			//Make one condition for the expected value decrease
-			cond* condition = new cond(it->first,it->second->edges[0].next->label,it->second->edges[1].next->label,it->second->edges[0].probability);
+			cond* condition = new cond(-1,NULL,it->first,it->second->edges[0].next->label,it->second->edges[1].next->label,it->second->edges[0].probability);
 			//Invariant implies the value decrease of expected value of ranking function, "prob" type node
 			int nEquations = it->second->invariant->children.size();
 			for(int i=0;i<nEquations;i++){
@@ -138,12 +144,63 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 	}
 }
 
+int last_used_lambda = 0;
+
 void print_equations(){
+	vector<string> c;
+	string d;
+	c.resize(nVariables);
 	while(!equations.empty()){
+		equation* top = equations.top();
 		// equationsfile<<"Equation"<<endl;
-		equations.top()->affexpr->print();
-		cout<<"implies";
-		cout<<equations.top()->condition->src<<" "<<equations.top()->condition->dest1<<endl;
+		// top->affexpr->print();
+		// cout<<" implies ";
+		// cout<<top->condition->src<<" "<<top->condition->dest1<<endl;
+		//A(i,j) means affexpr->children[i-1]->children[0]->expression[j] and b(i) translates to -1.0*affexpr->children[i-1]->children[0]->expression[0]
+		//Creating a macro for this
+		//Create c and d now
+		// cout<<"c is"<<endl;
+		if(top->condition->dest2==-1){
+			if(top->condition->change==NULL){
+				d = "-epsilon+f_"+to_string(top->condition->src)+"_0-f_"+to_string(top->condition->dest1)+"_0"; 
+				for(int i=0;i<nVariables;i++){
+					// c[i] = "";
+					c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"-"+"f_"+to_string(top->condition->src)+"_"+to_string(i+1);
+					// cout<<c[i]<<endl;
+				}
+			}
+			else{
+				for(int i=0;i<nVariables;i++){
+					c[i] = "not set";
+				}
+			}
+		}
+		else{
+			// It was a stochastic node, means change would have been NULL
+			d = "-epsilon+f_"+to_string(top->condition->src)+"_0-"+to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_0-"+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_0"; 
+			for(int i=0;i<nVariables;i++){
+				c[i] = to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_"+to_string(i+1)+"-"+"f_"+to_string(top->condition->src)+"_"+to_string(i+1);
+				// cout<<c[i]<<endl;
+			}
+		}
+		//Printing equations
+		int size = equations.top()->affexpr->children.size();
+		for(int i=0;i<nVariables;++i){
+			//Each iteration, print out a new equation! :)
+			// cout<<A(0,i)<<"l_"<<to_string(last_used_lambda);
+			for(int j=0;j<size;++j){
+				if(A(j,i)>0){
+					cout<<"+"<<A(j,i)<<"l_"<<to_string(last_used_lambda+j);
+				}
+				else if(A(j,i)<0){
+					cout<<A(j,i)<<"l_"<<to_string(last_used_lambda+j);
+				}
+			}
+			cout<<" = "<<c[i]<<endl;
+		}
+		//Printing one equation left
+
+		last_used_lambda += size;
 		equations.pop();
 	}
 }
@@ -157,20 +214,17 @@ int main(){
 	input[i]=0;
 	program=input;
 	nVariables = find_variables(); //To find the number of different variables of the type x_i in the program
-	id1->constant = "expression";
-	id1->expression.resize(nVariables+1);
-	id1->expression[1] = 1.0;
 	int start,end;
 	start = ++last_used_label;
 	end = ++last_used_label;
 	label_map[start] = new CFG_location("det",start);
 	label_map[end]	 = new CFG_location("det",end);
-	CFG_edge last_edge(label_map[end],1,id1);
+	CFG_edge last_edge(label_map[end],-1,NULL);
 	label_map[end]->edges.pb(last_edge);
 	root=new node("stmt",0,program.length(),start,end);
-	cout<<"Input Code:"<<endl;
-	cout<<program<<endl;
-	cout<<"Parse Tree:"<<endl;
+	// cout<<"Input Code:"<<endl;
+	// cout<<program<<endl;
+	// cout<<"Parse Tree:"<<endl;
 	// root->print();
 	// cout<<"CFG:"<<endl;
 	// for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){

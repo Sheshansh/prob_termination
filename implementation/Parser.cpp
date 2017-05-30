@@ -24,7 +24,6 @@ string program;
 int nVariables;
 int last_used_label = 0;
 map<int,CFG_location*> label_map;
-node* id1 = new node("expr");
 
 void skip_spaces(int &begin, int &end){ //skips the spaces in the beginning and the end
 	while(begin<program.size() and isspace(program[begin])){
@@ -122,7 +121,7 @@ void node::proc_stmt(int s,int l){
 	skip_spaces(begin,end);
 	if(part(program,begin,end)=="skip"){
 		constant = "skip";
-		CFG_edge temporary_edge(label_map[l],1,id1);
+		CFG_edge temporary_edge(label_map[l],-1,NULL);
 		label_map[s]->edges.pb(temporary_edge);
 		// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
 		return;
@@ -189,8 +188,8 @@ void node::proc_stmt(int s,int l){
 		label_map[mid] = new CFG_location("det",mid);
 		node* temporary_node;
 		temporary_node = negation(children[0]);
-		CFG_edge temporary_edge1(label_map[l],1,id1,children[0]);
-		CFG_edge temporary_edge2(label_map[mid],1,id1,temporary_node);
+		CFG_edge temporary_edge1(label_map[l],-1,NULL,children[0]);
+		CFG_edge temporary_edge2(label_map[mid],-1,NULL,temporary_node);
 		label_map[s]->edges.pb(temporary_edge1);
 		label_map[s]->edges.pb(temporary_edge2);
 		// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
@@ -236,8 +235,8 @@ void node::proc_stmt(int s,int l){
 		int case2 = ++last_used_label;
 		label_map[case1] = new CFG_location("det",case1);
 		label_map[case2] = new CFG_location("det",case2);
-		CFG_edge temporary_edge1(label_map[case1],1,id1);
-		CFG_edge temporary_edge2(label_map[case2],1,id1);
+		CFG_edge temporary_edge1(label_map[case1],-1,NULL);
+		CFG_edge temporary_edge2(label_map[case2],-1,NULL);
 		constant = "if";
 		children.resize(3);
 		children[0] = new node("ndbexpr",begin+2,firstthen);
@@ -474,6 +473,20 @@ void node::proc_literal(bool negate){
 		children[0] = new node("expr",begin,sign);
 		children[1] = new node("expr",sign+2,end);
 	}
+	if(constant=="<="){
+		for(int i=0;i<=nVariables;i++){
+			children[0]->expression[i] = children[0]->expression[i]-children[1]->expression[i];
+			children[1]->expression[i] = 0;
+		}
+	}
+	else{
+		constant = "<=";
+		for(int i=1;i<=nVariables;i++){
+			children[0]->expression[i] = children[1]->expression[i]-children[0]->expression[i];
+		}
+	}
+	delete children[1];
+	children.resize(1);
 }
 
 void node::proc_bexpr(){
@@ -599,8 +612,7 @@ void node::print(){
 	}
 	else if(type=="literal"){
 		children[0]->print();
-		cout<<constant;
-		children[1]->print();
+		cout<<constant<<"0";
 		return;
 	}
 	else if(type=="affexpr"){
@@ -630,15 +642,13 @@ void node::print(){
 		cout<<children[i]<<"\t";
 	}
 	if(bracket!=NULL){
-		cout<<"Bracket: "<<bracket;
+		cout<<endl<<"Bracket: "<<bracket<<endl;
+		bracket->print();
 	}
-	cout<<endl<<"--------------------"<<endl;
 	for(int i=0;i<children.size();++i){
 		children[i]->print();
 	}
-	if(bracket!=NULL){
-		bracket->print();
-	}
+	cout<<endl<<"--------------------"<<endl;
 }
 
 CFG_edge::CFG_edge(){
@@ -664,7 +674,7 @@ void CFG_edge::print(){
 	else{
 		cout<<"Error! Error! Error!"<<endl;
 	}
-	if(toChange!=0 and change!=NULL){
+	if(change!=NULL){
 		cout<<"Change: x_"<<toChange<<" changed to ";
 		change->print();
 		cout<<endl;
