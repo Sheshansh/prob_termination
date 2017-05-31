@@ -149,7 +149,6 @@ int last_used_lambda = 0;
 void print_equations(){
 	vector<string> c;
 	string negative_d; //negative component of d
-	// string constant; //cons
 	c.resize(nVariables);
 	while(!equations.empty()){
 		equation* top = equations.top();
@@ -160,13 +159,10 @@ void print_equations(){
 			if(top->condition->change==NULL){
 				negative_d = "epsilon-f_"+to_string(top->condition->src)+"_0+f_"+to_string(top->condition->dest1)+"_0"; 
 				for(int i=0;i<nVariables;i++){
-					// c[i] = "";
 					c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"-f_"+to_string(top->condition->src)+"_"+to_string(i+1);
-					// cout<<c[i]<<endl;
 				}
 			}
 			else{
-				// negative_d = "not set";
 				negative_d = "epsilon-f_"+to_string(top->condition->src)+"_0+f_"+to_string(top->condition->dest1)+"_0";
 				if(top->condition->change->expression[0]<0.0){
 					negative_d = negative_d+to_string(top->condition->change->expression[0])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
@@ -175,13 +171,25 @@ void print_equations(){
 					negative_d = negative_d+"+"+to_string(top->condition->change->expression[0])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
 				}
 				for(int i = 0;i<nVariables;i++){
-					if(i!=top->condition->toChange){
-						c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"-"+"f_"+to_string(top->condition->src)+"_"+to_string(i+1);
+					if((i+1)!=top->condition->toChange){
+						c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1);
+						if(top->condition->change->expression[i]>0.0){
+							c[i] = c[i]+"+"+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
+						}
+						else if(top->condition->change->expression[i]<0.0){
+							c[i] = c[i]+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
+						}
 					}
 					else{
-						c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"-"+"f_"+to_string(top->condition->src)+"_"+to_string(i+1);
+						// c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1);
+						if(top->condition->change->expression[i]!=0.0){
+							c[i] = c[i]+"+"+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
+						}
+						else{
+							c[i] = "";
+						}
 					}
-					c[i] = "not set";
+					c[i] = c[i]+"-f_"+to_string(top->condition->src)+"_"+to_string(i+1);
 				}
 			}
 		}
