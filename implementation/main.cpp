@@ -148,39 +148,48 @@ int last_used_lambda = 0;
 
 void print_equations(){
 	vector<string> c;
-	string d;
+	string negative_d; //negative component of d
+	// string constant; //cons
 	c.resize(nVariables);
 	while(!equations.empty()){
 		equation* top = equations.top();
-		// equationsfile<<"Equation"<<endl;
-		// top->affexpr->print();
-		// cout<<" implies ";
-		// cout<<top->condition->src<<" "<<top->condition->dest1<<endl;
 		//A(i,j) means affexpr->children[i-1]->children[0]->expression[j] and b(i) translates to -1.0*affexpr->children[i-1]->children[0]->expression[0]
 		//Creating a macro for this
 		//Create c and d now
-		// cout<<"c is"<<endl;
 		if(top->condition->dest2==-1){
 			if(top->condition->change==NULL){
-				d = "-epsilon+f_"+to_string(top->condition->src)+"_0-f_"+to_string(top->condition->dest1)+"_0"; 
+				negative_d = "epsilon-f_"+to_string(top->condition->src)+"_0+f_"+to_string(top->condition->dest1)+"_0"; 
 				for(int i=0;i<nVariables;i++){
 					// c[i] = "";
-					c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"-"+"f_"+to_string(top->condition->src)+"_"+to_string(i+1);
+					c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"-f_"+to_string(top->condition->src)+"_"+to_string(i+1);
 					// cout<<c[i]<<endl;
 				}
 			}
 			else{
-				for(int i=0;i<nVariables;i++){
+				// negative_d = "not set";
+				negative_d = "epsilon-f_"+to_string(top->condition->src)+"_0+f_"+to_string(top->condition->dest1)+"_0";
+				if(top->condition->change->expression[0]<0.0){
+					negative_d = negative_d+to_string(top->condition->change->expression[0])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
+				}
+				else if(top->condition->change->expression[0]>0.0){
+					negative_d = negative_d+"+"+to_string(top->condition->change->expression[0])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
+				}
+				for(int i = 0;i<nVariables;i++){
+					if(i!=top->condition->toChange){
+						c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"-"+"f_"+to_string(top->condition->src)+"_"+to_string(i+1);
+					}
+					else{
+						c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"-"+"f_"+to_string(top->condition->src)+"_"+to_string(i+1);
+					}
 					c[i] = "not set";
 				}
 			}
 		}
 		else{
 			// It was a stochastic node, means change would have been NULL
-			d = "-epsilon+f_"+to_string(top->condition->src)+"_0-"+to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_0-"+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_0"; 
+			negative_d = "epsilon-f_"+to_string(top->condition->src)+"_0+"+to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_0+"+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_0"; 
 			for(int i=0;i<nVariables;i++){
 				c[i] = to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_"+to_string(i+1)+"-"+"f_"+to_string(top->condition->src)+"_"+to_string(i+1);
-				// cout<<c[i]<<endl;
 			}
 		}
 		//Printing equations
@@ -188,18 +197,28 @@ void print_equations(){
 		for(int i=0;i<nVariables;++i){
 			//Each iteration, print out a new equation! :)
 			// cout<<A(0,i)<<"l_"<<to_string(last_used_lambda);
+			cout<<c[i];
 			for(int j=0;j<size;++j){
 				if(A(j,i)>0){
-					cout<<"+"<<A(j,i)<<"l_"<<to_string(last_used_lambda+j);
+					cout<<-A(j,i)<<"l_"<<to_string(last_used_lambda+j);
 				}
 				else if(A(j,i)<0){
-					cout<<A(j,i)<<"l_"<<to_string(last_used_lambda+j);
+					cout<<"+"<<-A(j,i)<<"l_"<<to_string(last_used_lambda+j);
 				}
 			}
-			cout<<" = "<<c[i]<<endl;
+			cout<<" = 0"<<endl;
 		}
-		//Printing one equation left
-
+		//Printing the last equation
+		cout<<negative_d;
+		for(int i=0;i<size;++i){
+			if(b(i)>0){
+				cout<<"+"<<b(i)<<"l_"<<to_string(last_used_lambda+i);
+			}
+			else if(b(i)<0){
+				cout<<b(i)<<"l_"<<to_string(last_used_lambda+i);
+			}
+		}
+		cout<<" <= 0"<<endl;
 		last_used_lambda += size;
 		equations.pop();
 	}
@@ -207,6 +226,7 @@ void print_equations(){
 
 int main(){
 	char input[MAXL];
+	// Setting precision to the printing of the double variables in program
 	// cout<<fixed<<setprecision(10);
 	int r,i;
 	for(i=0;(r=getchar())!=EOF;i++)
