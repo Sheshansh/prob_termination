@@ -11,8 +11,10 @@ while x_1>=0 do
 			x_1:=x_1+1
 		fi
 	else
+		[x_1>=0]
 		skip;
 		[x_1>=0]
 		x_1:=x_1-1
 	fi
 od
+[x_1<=0]

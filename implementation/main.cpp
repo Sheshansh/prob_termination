@@ -86,6 +86,7 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 					//This should never be the case as this would pose conditions that c==0 and d>0, which are not good
 					// cerr<<"No invariant specified here"<<endl;
 					//This would arise for the end states and skip and other special conditions
+					cout<<it->first<<endl;
 				}
 				else{
 					// Invariant implies the given condition
@@ -174,22 +175,21 @@ void print_equations(){
 					if((i+1)!=top->condition->toChange){
 						c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1);
 						if(top->condition->change->expression[i]>0.0){
-							// c[i] = c[i]+"+"+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
+							c[i] = c[i]+"+"+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
 						}
 						else if(top->condition->change->expression[i]<0.0){
-							// c[i] = c[i]+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
+							c[i] = c[i]+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
 						}
 					}
 					else{
-						// c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1);
 						if(top->condition->change->expression[i]!=0.0){
-							// c[i] = c[i]+"+"+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
+							c[i] = to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
 						}
 						else{
-							// c[i] = "";
+							c[i] = "";
 						}
 					}
-					// c[i] = c[i]+"-f_"+to_string(top->condition->src)+"_"+to_string(i+1);
+					c[i] = c[i]+"-f_"+to_string(top->condition->src)+"_"+to_string(i+1);
 				}
 			}
 		}
@@ -249,7 +249,26 @@ int main(){
 	label_map[end]	 = new CFG_location("det",end);
 	CFG_edge last_edge(label_map[end],-1,NULL);
 	label_map[end]->edges.pb(last_edge);
-	root=new node("stmt",0,program.length(),start,end);
+	int begin = 0;
+	int endprog = program.length();
+	skip_spaces(begin,endprog);
+	if(program[endprog-1]==']'){
+		//This means that there is an end invariant in the program and we can store that into label_map[end]
+		int open = -1;
+		for(int i = endprog-1;i>=0;--i){
+			if(program[i]=='['){
+				open = i;
+				break;
+			}
+		}
+		if(open==-1){
+			cerr<<"Some error with square brackets and end invariant"<<endl;
+		}
+		label_map[end]->invariant = new node("bexpr",open+1,endprog);
+		endprog = open;
+	}
+	skip_spaces(begin,endprog);
+	root=new node("stmt",begin,endprog,start,end);
 	// cout<<"Input Code:"<<endl;
 	// cout<<program<<endl;
 	// cout<<"Parse Tree:"<<endl;
