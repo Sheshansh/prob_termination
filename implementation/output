@@ -1,17 +1,17 @@
-Input Code:
-[x_1>=1 or x_1<=20]
-if x_1>=0 and x_1<=4.0 then
-	[x_1>=1 and x_1<=4 or x_1>=1 and x_1<=4]
-	x_1 := x_1 - 2.0
-else
-	skip
-fi
-Parse Tree:
-+1x_1>=1 and +1x_1<=4implies3 2
-+1x_1>=1 and +1x_1<=4implies3 2
-+1x_1<=20 and +1x_1>=4implies1 4
-+1x_1<=20 and +1x_1<=implies1 4
-+1x_1>=1 and +1x_1>=4implies1 4
-+1x_1>=1 and +1x_1<=implies1 4
-+1x_1<=20 and +1x_1>= and +1x_1<=4implies1 3
-+1x_1>=1 and +1x_1>= and +1x_1<=4implies1 3
+Prob set to be0.875
++1l_0 = 0
+ <= 0
++1l_1 = 0
+ <= 0
++1l_2 = 0
+ <= 0
+1f_6_10.000000f_7_1-f_4_1+1l_3 = 0
+epsilon-f_4_0+1f_6_0+0.000000f_7_0 <= 0
+f_5_1-f_3_1+1l_4 = 0
+epsilon-f_3_0+f_5_0 <= 0
+f_4_1-f_3_1+1l_5 = 0
+epsilon-f_3_0+f_4_0 <= 0
+f_3_1-f_1_1+1l_6+1l_7 = 0
+epsilon-f_1_0+f_3_0 <= 0
+f_2_1-f_1_1+1l_8+1l_9 = 0
+epsilon-f_1_0+f_2_0 <= 0

@@ -26,7 +26,7 @@ struct cond{
 	int src;
 	int dest1;
 	int dest2;
-	bool probability;
+	double probability;
 	cond(int toChange,node* change,int src,int dest1,int dest2 = -1,double probability = -1.0){
 		this->toChange = toChange;
 		this->change = change;
@@ -174,22 +174,22 @@ void print_equations(){
 					if((i+1)!=top->condition->toChange){
 						c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1);
 						if(top->condition->change->expression[i]>0.0){
-							c[i] = c[i]+"+"+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
+							// c[i] = c[i]+"+"+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
 						}
 						else if(top->condition->change->expression[i]<0.0){
-							c[i] = c[i]+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
+							// c[i] = c[i]+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
 						}
 					}
 					else{
 						// c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1);
 						if(top->condition->change->expression[i]!=0.0){
-							c[i] = c[i]+"+"+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
+							// c[i] = c[i]+"+"+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
 						}
 						else{
-							c[i] = "";
+							// c[i] = "";
 						}
 					}
-					c[i] = c[i]+"-f_"+to_string(top->condition->src)+"_"+to_string(i+1);
+					// c[i] = c[i]+"-f_"+to_string(top->condition->src)+"_"+to_string(i+1);
 				}
 			}
 		}
@@ -197,7 +197,7 @@ void print_equations(){
 			// It was a stochastic node, means change would have been NULL
 			negative_d = "epsilon-f_"+to_string(top->condition->src)+"_0+"+to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_0+"+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_0"; 
 			for(int i=0;i<nVariables;i++){
-				c[i] = to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_"+to_string(i+1)+"-"+"f_"+to_string(top->condition->src)+"_"+to_string(i+1);
+				c[i] = to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"+"+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_"+to_string(i+1)+"-"+"f_"+to_string(top->condition->src)+"_"+to_string(i+1);
 			}
 		}
 		//Printing equations
