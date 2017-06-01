@@ -482,7 +482,7 @@ void node::proc_literal(bool negate){
 	}
 	else{
 		constant = "<=";
-		for(int i=1;i<=nVariables;i++){
+		for(int i=0;i<=nVariables;i++){
 			children[0]->expression[i] = children[1]->expression[i]-children[0]->expression[i];
 		}
 	}

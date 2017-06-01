@@ -1,4 +1,5 @@
 // Do I have to add a self loop on the end CFG location, because then the epsilon equation creates issues
+// end node will always be 2
 #include <iostream>
 #include <algorithm>
 #include <cstdio>
@@ -21,20 +22,88 @@ using namespace std;
 #define A(i,j) (top->affexpr->children[i]->children[0]->expression[j+1])
 #define b(i) (-1.0*top->affexpr->children[i]->children[0]->expression[0])
 
+stringstream buffer;
+
 struct cond{
-	int toChange;
-	node* change;
-	int src;
-	int dest1;
-	int dest2;
-	double probability;
+	bool strict;
+	vector<string> c;
+	string negative_d; //negative component of d
 	cond(int toChange,node* change,int src,int dest1,int dest2 = -1,double probability = -1.0){
-		this->toChange = toChange;
-		this->change = change;
-		this->src = src;
-		this->dest1 = dest1;
-		this->dest2 = dest2;
-		this->probability = probability;
+		strict = false;
+		c.resize(nVariables);
+		if(dest2==-1){
+			if(change==NULL){
+				buffer.clear();
+				buffer.str(string());
+				buffer<<"eps-f_"<<src<<"_0+f_"<<dest1<<"_0";
+				negative_d = buffer.str();
+				for(int i=0;i<nVariables;i++){
+					buffer.clear();
+					buffer.str(string());
+					buffer<<"f_"<<dest1<<"_"<<i+1<<"-f_"<<src<<"_"<<i+1;
+					c[i] = buffer.str();
+				}
+			}
+			else{
+				buffer.clear();
+				buffer.str(string());
+				buffer<<"eps-f_"<<src<<"_0+f_"<<dest1<<"_0";
+				if(change->expression[0]<0.0){
+					buffer<<change->expression[0]<<"f_"<<dest1<<"_"<<toChange;
+				}
+				else if(change->expression[0]>0.0){
+					buffer<<"+"<<change->expression[0]<<"f_"<<dest1<<"_"<<toChange;
+				}
+				negative_d = buffer.str();
+				for(int i = 0;i<nVariables;i++){
+					buffer.clear();
+					buffer.str(string());
+					if((i+1)!=toChange){
+						buffer<<"f_"<<dest1<<"_"<<i+1;
+						if(change->expression[i]>0.0){
+							buffer<<"+"<<change->expression[i]<<"f_"<<dest1+"_"<<toChange;
+						}
+						else if(change->expression[i]<0.0){
+							buffer<<change->expression[i]<<"f_"<<dest1+"_"<<toChange;
+						}
+					}
+					else{
+						if(change->expression[i]!=0.0){
+							buffer<<change->expression[i]<<"f_"<<dest1<<"_"<<toChange;
+						}
+					}
+					buffer<<"-f_"<<src<<"_"<<i+1;
+					c[i] = buffer.str();
+				}
+			}
+		}
+		else{
+			// It was a stochastic node, means change would have been NULL
+			buffer.clear();
+			buffer.str(string());
+			buffer<<"eps-f_"<<src<<"_0+"<<probability<<"f_"<<dest1<<"_0+"<<1.0-probability<<"f_"<<dest2<<"_0"; 
+			negative_d = buffer.str();
+			for(int i=0;i<nVariables;i++){
+				buffer.clear();
+				buffer.str(string());
+				buffer<<probability<<"f_"<<dest1<<"_"<<i+1<<"+"<<1.0-probability<<"f_"<<dest2<<"_"<<i+1<<"-f_"<<src<<"_"<<i+1;
+				c[i] = buffer.str();
+			}
+		}
+	}
+	cond(int location_id){
+		strict = (location_id!=2);
+		c.resize(nVariables);
+		for(int i=0;i<nVariables;++i){
+			buffer.clear();
+			buffer.str(string());
+			buffer<<"-f_"<<location_id<<"_"<<i+1;
+			c[i] = buffer.str();
+		}
+		buffer.clear();
+		buffer.str(string());
+		buffer<<"-f_"<<location_id<<"_"<<0;
+		negative_d = buffer.str();
 	}
 };
 
@@ -77,9 +146,20 @@ node* and_node(node* one,node* two){
 
 void generate_equations(){ //Would use the ofstream file to write the equations into it later
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+		// Invariant implies the ranking function to be positive
+		int nEquations = it->second->invariant->children.size();
+		for(int i=0;i<nEquations;i++){
+			cond* condition = new cond(it->first);
+			equations.push(new equation(it->second->invariant->children[i],condition));
+		}
+	}
+	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		if(it->second->type=="det"){
 			//Invariant and guard imply the value decrease
-			if(it->second->edges.size()==1){
+			if(it->second->edges.empty()){
+				//Code for the last node
+			}
+			else if(it->second->edges.size()==1){
 				//First make a condition
 				cond* condition = new cond(it->second->edges[0].toChange,it->second->edges[0].change,it->first,it->second->edges[0].next->label);
 				// Guard would have been NULL here
@@ -149,112 +229,59 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 int last_used_lambda = 0;
 
 void print_equations(){
-	cout<<"maximise eps\n\nst\n\neps >= 0"<<endl;
-	vector<string> c;
-	string negative_d; //negative component of d
-	c.resize(nVariables);
+	cout<<"maximise eps\n\nst\n\neps > 0"<<endl;
+	// c.resize(nVariables);
 	while(!equations.empty()){
 		equation* top = equations.top();
-		//A(i,j) means affexpr->children[i-1]->children[0]->expression[j] and b(i) translates to -1.0*affexpr->children[i-1]->children[0]->expression[0]
-		//Creating a macro for this
-		//Create c and d now
-		if(top->condition->dest2==-1){
-			if(top->condition->change==NULL){
-				negative_d = "eps-f_"+to_string(top->condition->src)+"_0+f_"+to_string(top->condition->dest1)+"_0"; 
-				for(int i=0;i<nVariables;i++){
-					c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"-f_"+to_string(top->condition->src)+"_"+to_string(i+1);
-				}
-			}
-			else{
-				negative_d = "eps-f_"+to_string(top->condition->src)+"_0+f_"+to_string(top->condition->dest1)+"_0";
-				if(top->condition->change->expression[0]<0.0){
-					negative_d = negative_d+to_string(top->condition->change->expression[0])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
-				}
-				else if(top->condition->change->expression[0]>0.0){
-					negative_d = negative_d+"+"+to_string(top->condition->change->expression[0])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
-				}
-				for(int i = 0;i<nVariables;i++){
-					if((i+1)!=top->condition->toChange){
-						c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1);
-						if(top->condition->change->expression[i]>0.0){
-							c[i] = c[i]+"+"+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
-						}
-						else if(top->condition->change->expression[i]<0.0){
-							c[i] = c[i]+to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
-						}
-					}
-					else{
-						if(top->condition->change->expression[i]!=0.0){
-							c[i] = to_string(top->condition->change->expression[i])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
-						}
-						else{
-							c[i] = "";
-						}
-					}
-					c[i] = c[i]+"-f_"+to_string(top->condition->src)+"_"+to_string(i+1);
-				}
-			}
-		}
-		else{
-			// It was a stochastic node, means change would have been NULL
-			negative_d = "eps-f_"+to_string(top->condition->src)+"_0+"+to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_0+"+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_0"; 
-			for(int i=0;i<nVariables;i++){
-				c[i] = to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"+"+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_"+to_string(i+1)+"-"+"f_"+to_string(top->condition->src)+"_"+to_string(i+1);
-			}
-		}
+		// A(i,j) means affexpr->children[i-1]->children[0]->expression[j] and b(i) translates to -1.0*affexpr->children[i-1]->children[0]->expression[0]
+		// Creating a macro for this
 		//Printing equations
 		int size = equations.top()->affexpr->children.size();
 		for(int i=0;i<nVariables;++i){
-			//Each iteration, print out a new equation! :)
-			// cout<<A(0,i)<<"l_"<<to_string(last_used_lambda);
-			cout<<c[i];
+			// Each iteration, print out a new equation! :)
+			cout<<top->condition->c[i];
 			for(int j=0;j<size;++j){
 				if(A(j,i)>0){
-					cout<<-A(j,i)<<"l_"<<to_string(last_used_lambda+j);
+					cout<<-A(j,i)<<"l"<<to_string(last_used_lambda+j);
 				}
 				else if(A(j,i)<0){
-					cout<<"+"<<-A(j,i)<<"l_"<<to_string(last_used_lambda+j);
+					cout<<"+"<<-A(j,i)<<"l"<<to_string(last_used_lambda+j);
 				}
 			}
 			cout<<" = 0"<<endl;
 		}
-		//Printing the last equation
-		cout<<negative_d;
+		// Printing the last equation
+		cout<<top->condition->negative_d;
 		for(int i=0;i<size;++i){
 			if(b(i)>0){
-				cout<<"+"<<b(i)<<"l_"<<to_string(last_used_lambda+i);
+				cout<<"+"<<b(i)<<"l"<<to_string(last_used_lambda+i);
 			}
 			else if(b(i)<0){
-				cout<<b(i)<<"l_"<<to_string(last_used_lambda+i);
+				cout<<b(i)<<"l"<<to_string(last_used_lambda+i);
 			}
 		}
-		cout<<" <= 0"<<endl;
+		if(equations.top()->condition->strict){
+			cout<<" < 0"<<endl;
+		}
+		else{
+			cout<<" <= 0"<<endl;
+		}
 		last_used_lambda += size;
-		// for(int i=0;i<nVariables;++i){
-		// 	//Each iteration, print out a new equation! :)
-		// 	// cout<<A(0,i)<<"l_"<<to_string(last_used_lambda);
-		// 	cout<<c[i];
-		// 	for(int j=0;j<size;++j){
-		// 		if(A(j,i)>0){
-		// 			cout<<-A(j,i)<<"l_"<<to_string(last_used_lambda+j);
-		// 		}
-		// 		else if(A(j,i)<0){
-		// 			cout<<"+"<<-A(j,i)<<"l_"<<to_string(last_used_lambda+j);
-		// 		}
-		// 	}
-		// 	cout<<" = 0"<<endl;
-		// }
-		// last_used_lambda += size;
 		equations.pop();
 	}
 
 	cout<<"\nbounds\n\n";
 	//Loop to print bounds on other variables
-	//for
+	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+		for(int j=0;j<=nVariables;j++){
+			cout<<"-inf<= f_"<<it->first<<"_"<<j<<" <= +inf"<<endl;
+		}
+	}
 	cout<<"end"<<endl;
 }
 
 int main(){
+	int start,end;
 	char input[MAXL];
 	// Setting precision to the printing of the double variables in program
 	// cout<<fixed<<setprecision(10);
@@ -264,13 +291,13 @@ int main(){
 	input[i]=0;
 	program=input;
 	nVariables = find_variables(); //To find the number of different variables of the type x_i in the program
-	int start,end;
 	start = ++last_used_label;
 	end = ++last_used_label;
 	label_map[start] = new CFG_location("det",start);
 	label_map[end]	 = new CFG_location("det",end);
-	CFG_edge last_edge(label_map[end],-1,NULL);
-	label_map[end]->edges.pb(last_edge);
+	// Code for adding self loop
+	// CFG_edge last_edge(label_map[end],-1,NULL);
+	// label_map[end]->edges.pb(last_edge);
 	int begin = 0;
 	int endprog = program.length();
 	skip_spaces(begin,endprog);
@@ -302,8 +329,6 @@ int main(){
 	// 	it->second->print();
 	// 	// cout<<it->second->label<<endl;
 	// }
-	// ofstream equationsfile;
-	// equationsfile.open ("equations.txt");
 	generate_equations();
 	print_equations();
 	// equationsfile.close();
