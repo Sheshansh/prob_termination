@@ -1,0 +1,32 @@
+\section{Lexicographic Supermartingales}
+\label{sec:lexicographic}
+
+In this section we introduce the notion of a \emph{lexicographic ranking 
+supermartingale}, which generalizes the standard notion of ranking 
+supermartingales.
+
+\begin{definition}[Lexicographic Ranking Supermartingale]
+Let $(\Omega,\genfilt,\probm)$ be a probability space, 
+$\{\genfilt_i\}_{i=0}^{\infty}$ a filtration of $\genfilt$, $\stime$ a stopping 
+time w.r.t. that filtration, and 
+$\eps\geq 0$. 
+An $n$-dimensional stochastic process $\{\vec{X}_{i}\}_{i=0}^{\infty}$ is a 
+\emph{lexicographic $\eps$-ranking supermartingale for $\stime$ 
+($\eps$-LexRSM)} if the 
+following 
+conditions hold:
+\begin{compactenum}
+\item For each $1\leq j \leq n$ the 1-dimensional stochastic process 
+$\{\vecseq{X}{i}{j}\}_{i=0}^{\infty}$ is adapted to 
+$\{\genfilt_i\}_{i=0}^{\infty}$.
+\item For each $i\in \Nset_0$ and each $1\leq j \leq n$ it holds 
+$\E[|\vecseq{X}{i}{j}|]<\infty$.
+\item For each $i\in \Nset_0$ there exists $1\leq j \leq n$ such that
+\begin{compactitem}
+	\item $\E[\vecseq{X}{i+1}{j}\mid \genfilt_i]\leq\vecseq{X}{i}{j} - 
+	\eps\cdot \vec{1}_{\stime > i} $; and
+	\item for all $1 \leq j' < j$ it holds $\E[\vecseq{X}{i+1}{j'}\mid 
+	\genfilt_i]\leq\vecseq{X}{i}{j'}$.
+\end{compactitem}
+\end{compactenum}
+\end{definition}

@@ -2,13 +2,16 @@
 \section{Invariants and Ranking Supermartingales}\label{sec:invm}
 %\vspace{-0.5em}
 
-In this section we recall known methods and constructs for solving the 
-qualitative termination and reachability questions for \APP{s}, namely  
-linear invariants and ranking supermartingales. 
-We also demonstrate that these methods are not sufficient to address the 
-quantitative variants of these questions (i.e., probabilistic termination).
-In order to discuss the necessary concepts, we recall the basics of 
-martingales, which is relevant for both this and subsequent sections. 
+In this section we recall basic results on (one-dimensional) ranking 
+supermartingales in probabilistic programs.
+
+%In this section we recall known methods and constructs for solving the 
+%qualitative termination and reachability questions for \APP{s}, namely  
+%linear invariants and ranking supermartingales. 
+%We also demonstrate that these methods are not sufficient to address the 
+%quantitative variants of these questions (i.e., probabilistic termination).
+%In order to discuss the necessary concepts, we recall the basics of 
+%martingales, which is relevant for both this and subsequent sections. 
 %Since the definitions of this section are from the literature we relegate
 %relevant illustrations through example to the Appendix.
 
@@ -18,18 +21,17 @@ martingales, which is relevant for both this and subsequent sections.
 %the nature of these generalizations where appropriate.
 
 %\vspace{-1em}
-\subsection{Pure Invariants}
+\subsection{Invariants}
 %\vspace{-0.5em}
 
 Invariants are a vital element of many program analysis techniques. 
 Intuitively, invariants are maps assigning to each 
 program location $\loc$ of some pCFG a predicate which is guaranteed to hold 
 whenever $\loc$ is 
-entered. To avoid confusion with stochastic invariants, 
-that we introduce later, we call these standard invariants \emph{pure invariants}.
+entered. 
 
 \smallskip
-\begin{definition}[Linear Predicate Map (LPM) and Pure Invariant] We define the 
+\begin{definition}[Linear Predicate Maps (LPMs) and Invariants] We define the 
 following:
 \begin{compactenum}
 \item
@@ -37,7 +39,7 @@ A \emph{linear predicate map (LPM)} for an \APP{} $P$ is a function $I$
 assigning to each location $\loc$ of the pCFG $\pCFG_P$ a propositionally 
 linear predicate $I(\loc)$ over the set of program variables of $P$.
 \item
-A \emph{pure linear invariant} (or just a pure invariant) for an \APP{} $P$ is 
+A \emph{linear invariant} (or just an invariant) for an \APP{} $P$ is 
 a linear predicate map $\inv$ for $P$ with
 the following property: for each location $\loc$ of $\pCFG_P$ and each finite 
 path $(\loc_0,\vec{x}_0),\cdots,(\loc_n,\vec{x}_n)$ such that 
@@ -117,7 +119,7 @@ of $X(\omega)$ with domain restricted to $A$.
 
 Recall that in context of probabilistic programs we work with probability 
 spaces of the form $(\Omega,\natfilt,\probm^\sigma)$, where $\Omega$ is a 
-set of runs in some $\pCFG$ and $\mathcal{F}$ is (the smallest) sigma-algebra 
+set of runs in some $\pCFG$ and $\natfilt$ is (the smallest) sigma-algebra 
 such that all the functions $\cfg{\sigma}{i}$, where $i\in \Nset_0$ and 
 $\sigma$ is a scheduler, are $\natfilt$-measurable. In such a setting we can 
 also consider sub-sigma-algebras $\natfilt_i$, $i\in \Nset_0$, of 
