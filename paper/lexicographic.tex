@@ -1,0 +1,65 @@
+\section{Lexicographic Supermartingales}
+\label{sec:lexicographic}
+
+In this section we introduce the notion of a \emph{lexicographic ranking 
+supermartingale}, which generalizes the standard notion of ranking 
+supermartingales.
+
+\begin{definition}[Lexicographic Ranking Supermartingale]
+Let $(\Omega,\genfilt,\probm)$ be a probability space, 
+$\{\genfilt_i\}_{i=0}^{\infty}$ a filtration of $\genfilt$, $\stime$ a stopping 
+time w.r.t. that filtration, and 
+$\eps\geq 0$. 
+An $n$-dimensional stochastic process $\{\vec{X}_{i}\}_{i=0}^{\infty}$ is a 
+\emph{lexicographic $\eps$-ranking supermartingale for $\stime$ 
+($\eps$-LexRSM)} if the 
+following 
+conditions hold:
+\begin{compactenum}
+\item For each $1\leq j \leq n$ the 1-dimensional stochastic process 
+$\{\vecseq{X}{i}{j}\}_{i=0}^{\infty}$ is adapted to 
+$\{\genfilt_i\}_{i=0}^{\infty}$.
+\item For each $i\in \Nset_0$ and each $1\leq j \leq n$ it holds 
+$\E[|\vecseq{X}{i}{j}|]<\infty$.
+\item For each $i\in \Nset_0$ and each $\omega\in \Omega$ with 
+$\stime(\omega)>i$ there exists $1\leq j 
+\leq n$ such that
+\begin{compactitem}
+	\item $\E[\vecseq{X}{i+1}{j}\mid 
+	\genfilt_i](\omega)\leq\vecseq{X}{i}{j}(\omega) - 
+	\eps$; and
+	\item for all $1 \leq j' < j$ it holds $\E[\vecseq{X}{i+1}{j'}\mid 
+	\genfilt_i](\omega)\leq\vecseq{X}{i}{j'}(\omega)$.
+\end{compactitem}
+\item For each $\omega \in \Omega$ and $i\in \Nset_0$ it holds 
+$\stime(\omega)>i 
+\Rightarrow \vec{X}_i (\omega)\geq \vec{0}$ (componentwise).
+\end{compactenum}
+\end{definition}
+
+\begin{theorem}
+Let $(\Omega,\genfilt,\probm)$ be a probability space, 
+$\{\genfilt_i\}_{i=0}^{\infty}$ a filtration of $\genfilt$, and $\stime$ a 
+stopping 
+time w.r.t. that filtration. If there exists an $\eps$-LexRSM for $\stime$, 
+then $\probm(\stime<\infty)=1$.
+\end{theorem}
+\begin{proof}
+The proofs proceeds by contradiction, i.e. we assume that an $\eps$-LexRSM for 
+$\stime$ exists and $\probm(\stime=\infty)>0$. For succinctness we denote the 
+set $\{\omega\mid \stime(\omega)=\infty\}$ by $\genRunSet_{\infty}$.
+
+For $\omega\in \Omega$ we define the level of $\omega$ at step $i$ to be the 
+number $\levelrank{\omega}{i}$ equal to either $0$, if $\stime(\omega)\leq i$, 
+or otherwise to the smallest $1\leq j \leq n$ such that 
+$\E[\vecseq{X}{i+1}{j}\mid 
+\genfilt_i](\omega)\leq\vecseq{X}{i}{j}(\omega)-\eps$. By the definition of 
+$\eps$-LexRSM the value $\levelrank{\omega}{i}$ is well-defined for all 
+$\omega$. 
+%\[
+%\levelrank{\omega}{i} = \begin{dcases}
+%0 & \text{if $\stime(\omega)\leq i$} \\
+% 
+%\end{dcases}
+%\]
+\end{proof}

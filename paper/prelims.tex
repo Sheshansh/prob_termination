@@ -669,7 +669,7 @@ $(\Omega,\natfilt,\probm^{\sigma})$.
 
 
 \vspace{-1em}
-\subsection{Almost-Sure and Probabilistic Termination}
+\subsection{Almost-Sure and Positive Termination}
 \vspace{-0.5em}
 We consider computational problems related to the basic liveness properties of 
 \APP{s}, namely \emph{termination} and its generalization, \emph{reachability}. 
@@ -677,20 +677,24 @@ We consider computational problems related to the basic liveness properties of
 \smallskip\noindent{\em Termination, reachability, and termination time.}
 In the following, consider an \APP{} $P$ and its associated pCFG $\pCFG_P$. 
 We say that a run $\run$ of $\pCFG_P$ \emph{reaches} a set of configurations 
-$C$ if it  contains a configuration from $C$. A run \emph{terminates} if it reaches a 
+$\confset$ if it  contains a configuration from $\confset$. A run 
+\emph{terminates} if it reaches a 
 configuration whose first component (i.e. a location of $\pCFG_P$) is the 
 location
 $\loc_{P}^{\lout}$ corresponding to the value of the program counter after 
 executing $P$. 
-To each set of configurations $C$ we can assign a random variable $\treach{C}$ 
-such that for each run $\run$ the value $\treach{C}(\run)$ represents the first 
+To each set of configurations $\confset$ we can assign a random variable 
+$\treach{\confset}$ 
+such that for each run $\run$ the value $\treach{\confset}(\run)$ represents 
+the first 
 point in time when 
-the current configuration on $\run$ is in $C$. If a run $\run$ does \emph{not} 
-reach a set $C$, then 
-$\treach{C}(\run)=\infty$. We call $\treach{C}$ the 
-\emph{reachability time} of $C$. In particular, if $C$ is the set 
+the current configuration on $\run$ is in $\confset$. If a run $\run$ does 
+\emph{not} 
+reach a set $\confset$, then 
+$\treach{\confset}(\run)=\infty$. We call $\treach{\confset}$ the 
+\emph{reachability time} of $\confset$. In particular, if $\confset$ is the set 
 of all configurations $(\loc,\vec{x})$ such that $\loc=\loc^\lout_P$ (the 
-terminal location of $\pCFG_P$), then $\treach{C}$ is 
+terminal location of $\pCFG_P$), then $\treach{\confset}$ is 
 called a \emph{termination time}, as it returns the number of steps after which 
 $\run$ terminates. Since termination time is an important concept on its own, 
 we use a special notation $\ttime$ for it.
@@ -725,11 +729,14 @@ if for each $\sigma$ it holds $\probm^{\sigma}(\ttime<\infty)=1$. In
 almost-sure termination question for $P$ we aim to prove that $P$ 
 is 
 almost-surely terminating.
-\item \emph{Probabilistic termination:} In probabilistic termination question 
-for $P$ we aim to compute a \emph{lower bound on the probability of 
-termination}, i.e. a bound $b\in[0,1]$ such that for each scheduler 
-$\sigma$ it holds $\probm^{\sigma}(\{\run\mid \run \text{ terminates}\}) \geq b$ 
-(or equivalently $\probm^{\sigma}(\ttime<\infty)\geq b$).
+\item \emph{Positive termination:} A probabilistic program $P$ is 
+positively
+terminating if under each scheduler $\sigma$ it holds that 
+$\E^{\sigma}(\{\ttime\})<  \infty$. In 
+positive termination question for $P$ we aim to prove that $P$ 
+is 
+positively terminating. Note that each positively terminating program is also 
+a.s. terminating, but the converse does not hold.
 \end{compactenum}
 
 We also define corresponding questions for the more general reachability 
@@ -740,9 +747,10 @@ concept.
 probabilistic program $P$, prove (if possible) that under each scheduler 
 $\sigma$ it holds that
 $\probm^{\sigma}(\treach{C}<\infty)=1$.
-\item \emph{Probabilistic reachability:} For a set $C$ of configurations of 
-a probabilistic program $P$, compute a bound $b\in[0,1]$ such that for each scheduler
-$\sigma$ it holds $\probm^{\sigma}(\treach{C}<\infty)\geq b$.
+\item \emph{Positive reachability:} For a set $C$ of configurations of 
+a probabilistic program $P$, prove (if possible) that under each scheduler 
+$\sigma$ it holds that
+$\E^{\sigma}(\treach{C})<\infty$.
 \end{compactenum}
 
 Since termination is a special case of reachability, each solution to the 
