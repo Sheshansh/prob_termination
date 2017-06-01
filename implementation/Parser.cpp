@@ -92,16 +92,14 @@ node* negation(node* tonegate){
 			int ANDs = tonegate->children[i]->children.size();
 			for(int j = 0;j<ANDs;++j){
 				node* ch = new node("literal");
-				if(tonegate->children[i]->children[j]->constant == ">="){
-					ch->constant = "<=";
-					ch->children = tonegate->children[i]->children[j]->children;
-				}
-				else if(tonegate->children[i]->children[j]->constant == "<="){
-					ch->constant = ">=";
-					ch->children = tonegate->children[i]->children[j]->children;
-				}
-				else{
-					cerr<<"Something wrong with a literal"<<endl;
+				ch->constant = "<=";
+				ch->children.resize(1);
+				ch->children[0] = new node("expr");
+				ch->children[0]->constant = "expression";
+				ch->children[0]->expression.resize(nVariables+1);
+				for(int k=0;k<=nVariables;++k){
+					// cout<<tonegate->children[i]->children[j]->children[0]->expression[k]<<endl;
+					ch->children[0]->expression[k] = -1.0*tonegate->children[i]->children[j]->children[0]->expression[k];
 				}
 				vcopy(after_multiplication,before_multiplication);
 				for(int k = 0;k<before_size;++k){
@@ -189,8 +187,8 @@ void node::proc_stmt(int s,int l){
 		label_map[mid] = new CFG_location("det",mid);
 		node* temporary_node;
 		temporary_node = negation(children[0]);
-		CFG_edge temporary_edge1(label_map[l],-1,NULL,children[0]);
-		CFG_edge temporary_edge2(label_map[mid],-1,NULL,temporary_node);
+		CFG_edge temporary_edge1(label_map[mid],-1,NULL,children[0]);
+		CFG_edge temporary_edge2(label_map[l],-1,NULL,temporary_node);
 		label_map[s]->edges.pb(temporary_edge1);
 		label_map[s]->edges.pb(temporary_edge2);
 		// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
@@ -418,7 +416,7 @@ void node::form_vector(int begin,int end,bool negate){ //Note that this shadows 
 	}
 	if(plusminus!=-1){
 		analyse_expr(begin,plusminus,negate);
-		form_vector(plusminus+1,end,program[plusminus]=='+');
+		form_vector(plusminus+1,end,program[plusminus]=='-');
 	}
 	else{
 		analyse_expr(begin,end,negate);

@@ -13,14 +13,14 @@
 #include <deque>
 #include <iomanip>
 #include <fstream>
-#include <stack>
+#include <queue>
 #include "Parser.h"
 using namespace std;
 #define MAXL 100000 //Maximum length of the program
 #define part(x,a,b) (x.substr((a),((b)-(a))))
 #define pb push_back
-#define A(i,j) (top->affexpr->children[i]->children[0]->expression[j+1])
-#define b(i) (-1.0*top->affexpr->children[i]->children[0]->expression[0])
+#define A(i,j) (front->affexpr->children[i]->children[0]->expression[j+1])
+#define b(i) (-1.0*front->affexpr->children[i]->children[0]->expression[0])
 
 stringstream buffer;
 
@@ -45,6 +45,9 @@ struct cond{
 				}
 			}
 			else{
+				cout<<"tochange is "<<toChange<<"change is"<<endl;
+				change->print();
+				cout<<endl;
 				buffer.clear();
 				buffer.str(string());
 				buffer<<"eps-f_"<<src<<"_0+f_"<<dest1<<"_0";
@@ -120,7 +123,7 @@ struct equation{
 	}
 };
 
-stack<equation*> equations;
+queue<equation*> equations;
 
 node* and_node(node* one,node* two){
 	if(one->type!="bexpr" or two->type!="bexpr"){
@@ -145,14 +148,6 @@ node* and_node(node* one,node* two){
 }
 
 void generate_equations(){ //Would use the ofstream file to write the equations into it later
-	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
-		// Invariant implies the ranking function to be positive
-		int nEquations = it->second->invariant->children.size();
-		for(int i=0;i<nEquations;i++){
-			cond* condition = new cond(it->first);
-			equations.push(new equation(it->second->invariant->children[i],condition));
-		}
-	}
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		if(it->second->type=="det"){
 			//Invariant and guard imply the value decrease
@@ -224,6 +219,14 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 			}
 		}
 	}
+	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+		// Invariant implies the ranking function to be positive
+		int nEquations = it->second->invariant->children.size();
+		for(int i=0;i<nEquations;i++){
+			cond* condition = new cond(it->first);
+			equations.push(new equation(it->second->invariant->children[i],condition));
+		}
+	}
 }
 
 int last_used_lambda = 0;
@@ -232,14 +235,17 @@ void print_equations(){
 	cout<<"maximise eps\n\nst\n\neps > 0"<<endl;
 	// c.resize(nVariables);
 	while(!equations.empty()){
-		equation* top = equations.top();
+		equation* front = equations.front();
 		// A(i,j) means affexpr->children[i-1]->children[0]->expression[j] and b(i) translates to -1.0*affexpr->children[i-1]->children[0]->expression[0]
 		// Creating a macro for this
 		//Printing equations
-		int size = equations.top()->affexpr->children.size();
+		// cout<<endl;
+		// front->affexpr->print();
+		// cout<<endl;
+		int size = equations.front()->affexpr->children.size();
 		for(int i=0;i<nVariables;++i){
 			// Each iteration, print out a new equation! :)
-			cout<<top->condition->c[i];
+			cout<<front->condition->c[i];
 			for(int j=0;j<size;++j){
 				if(A(j,i)>0){
 					cout<<-A(j,i)<<"l"<<to_string(last_used_lambda+j);
@@ -251,7 +257,7 @@ void print_equations(){
 			cout<<" = 0"<<endl;
 		}
 		// Printing the last equation
-		cout<<top->condition->negative_d;
+		cout<<front->condition->negative_d;
 		for(int i=0;i<size;++i){
 			if(b(i)>0){
 				cout<<"+"<<b(i)<<"l"<<to_string(last_used_lambda+i);
@@ -260,7 +266,7 @@ void print_equations(){
 				cout<<b(i)<<"l"<<to_string(last_used_lambda+i);
 			}
 		}
-		if(equations.top()->condition->strict){
+		if(equations.front()->condition->strict){
 			cout<<" < 0"<<endl;
 		}
 		else{
