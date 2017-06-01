@@ -732,7 +732,7 @@ almost-surely terminating.
 \item \emph{Positive termination:} A probabilistic program $P$ is 
 positively
 terminating if under each scheduler $\sigma$ it holds that 
-$\E^{\sigma}(\{\ttime\}) \infty$. In 
+$\E^{\sigma}(\{\ttime\})<  \infty$. In 
 positive termination question for $P$ we aim to prove that $P$ 
 is 
 positively terminating. Note that each positively terminating program is also 
@@ -750,7 +750,7 @@ $\probm^{\sigma}(\treach{C}<\infty)=1$.
 \item \emph{Positive reachability:} For a set $C$ of configurations of 
 a probabilistic program $P$, prove (if possible) that under each scheduler 
 $\sigma$ it holds that
-$E^{\sigma}(\treach{C})<\infty$.
+$\E^{\sigma}(\treach{C})<\infty$.
 \end{compactenum}
 
 Since termination is a special case of reachability, each solution to the 
