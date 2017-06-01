@@ -1,3 +1,4 @@
+// Do I have to add a self loop on the end CFG location, because then the epsilon equation creates issues
 #include <iostream>
 #include <algorithm>
 #include <cstdio>
@@ -148,6 +149,7 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 int last_used_lambda = 0;
 
 void print_equations(){
+	cout<<"maximise eps\n\nst\n\neps >= 0"<<endl;
 	vector<string> c;
 	string negative_d; //negative component of d
 	c.resize(nVariables);
@@ -158,13 +160,13 @@ void print_equations(){
 		//Create c and d now
 		if(top->condition->dest2==-1){
 			if(top->condition->change==NULL){
-				negative_d = "epsilon-f_"+to_string(top->condition->src)+"_0+f_"+to_string(top->condition->dest1)+"_0"; 
+				negative_d = "eps-f_"+to_string(top->condition->src)+"_0+f_"+to_string(top->condition->dest1)+"_0"; 
 				for(int i=0;i<nVariables;i++){
 					c[i] = "f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"-f_"+to_string(top->condition->src)+"_"+to_string(i+1);
 				}
 			}
 			else{
-				negative_d = "epsilon-f_"+to_string(top->condition->src)+"_0+f_"+to_string(top->condition->dest1)+"_0";
+				negative_d = "eps-f_"+to_string(top->condition->src)+"_0+f_"+to_string(top->condition->dest1)+"_0";
 				if(top->condition->change->expression[0]<0.0){
 					negative_d = negative_d+to_string(top->condition->change->expression[0])+"f_"+to_string(top->condition->dest1)+"_"+to_string(top->condition->toChange);
 				}
@@ -195,7 +197,7 @@ void print_equations(){
 		}
 		else{
 			// It was a stochastic node, means change would have been NULL
-			negative_d = "epsilon-f_"+to_string(top->condition->src)+"_0+"+to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_0+"+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_0"; 
+			negative_d = "eps-f_"+to_string(top->condition->src)+"_0+"+to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_0+"+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_0"; 
 			for(int i=0;i<nVariables;i++){
 				c[i] = to_string(top->condition->probability)+"f_"+to_string(top->condition->dest1)+"_"+to_string(i+1)+"+"+to_string(1.0-top->condition->probability)+"f_"+to_string(top->condition->dest2)+"_"+to_string(i+1)+"-"+"f_"+to_string(top->condition->src)+"_"+to_string(i+1);
 			}
@@ -228,8 +230,28 @@ void print_equations(){
 		}
 		cout<<" <= 0"<<endl;
 		last_used_lambda += size;
+		// for(int i=0;i<nVariables;++i){
+		// 	//Each iteration, print out a new equation! :)
+		// 	// cout<<A(0,i)<<"l_"<<to_string(last_used_lambda);
+		// 	cout<<c[i];
+		// 	for(int j=0;j<size;++j){
+		// 		if(A(j,i)>0){
+		// 			cout<<-A(j,i)<<"l_"<<to_string(last_used_lambda+j);
+		// 		}
+		// 		else if(A(j,i)<0){
+		// 			cout<<"+"<<-A(j,i)<<"l_"<<to_string(last_used_lambda+j);
+		// 		}
+		// 	}
+		// 	cout<<" = 0"<<endl;
+		// }
+		// last_used_lambda += size;
 		equations.pop();
 	}
+
+	cout<<"\nbounds\n\n";
+	//Loop to print bounds on other variables
+	//for
+	cout<<"end"<<endl;
 }
 
 int main(){
