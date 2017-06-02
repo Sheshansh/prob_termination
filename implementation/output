@@ -1,14 +1,9 @@
-tochange is 1change is
--1+1x_1
-tochange is 1change is
-1+1x_1
-tochange is 1change is
--1+1x_1
 maximise eps
 
 st
 
 eps > 0
+eps <= 1
 f_3_1-f_1_1+1l0+1l1 = 0
 eps-f_1_0+f_3_0+1l0 <= 0
 f_2_1-f_1_1+1l2-1l3 = 0
