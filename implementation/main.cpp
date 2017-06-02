@@ -157,9 +157,7 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 				// Guard would have been NULL here
 				if(it->second->invariant==NULL){
 					//This should never be the case as this would pose conditions that c==0 and d>0, which are not good
-					// cerr<<"No invariant specified here"<<endl;
-					//This would arise for the end states and skip and other special conditions
-					cout<<it->first<<endl;
+					cerr<<"No invariant specified here"<<endl;
 				}
 				else{
 					// Invariant implies the given condition
@@ -230,15 +228,11 @@ int last_used_lambda = 0;
 
 void print_equations(){
 	cout<<"maximise eps\n\nst\n\neps > 0\neps <= 1"<<endl;
-	// c.resize(nVariables);
 	while(!equations.empty()){
 		equation* front = equations.front();
 		// A(i,j) means affexpr->children[i-1]->children[0]->expression[j] and b(i) translates to -1.0*affexpr->children[i-1]->children[0]->expression[0]
 		// Creating a macro for this
 		//Printing equations
-		// cout<<endl;
-		// front->affexpr->print();
-		// cout<<endl;
 		int size = equations.front()->affexpr->children.size();
 		for(int i=0;i<nVariables;++i){
 			// Each iteration, print out a new equation! :)

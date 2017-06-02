@@ -66,8 +66,6 @@ void vcopy(vector<node*> &sink,vector<node*> &tocopy){
 		sink[i]->bracket = tocopy[i]->bracket;
 		sink[i]->expression = tocopy[i]->expression;
 		sink[i]->children = tocopy[i]->children;
-		//Copying everything bluntly, though some of the statements are not required
-		//<flag> Can be optimised if need be
 	}
 }
 
@@ -83,8 +81,6 @@ node* negation(node* tonegate){
 		int ORs = tonegate->children.size();
 		for(int i = 0;i<ORs;++i){
 			//Multply this set of AND to the present collection
-			// before_multiplication.clear();
-			// before_multiplication = negative->children;
 			vcopy(before_multiplication,negative->children);
 			vector<node*> after_multiplication;
 			int before_size = before_multiplication.size();
@@ -98,7 +94,6 @@ node* negation(node* tonegate){
 				ch->children[0]->constant = "expression";
 				ch->children[0]->expression.resize(nVariables+1);
 				for(int k=0;k<=nVariables;++k){
-					// cout<<tonegate->children[i]->children[j]->children[0]->expression[k]<<endl;
 					ch->children[0]->expression[k] = -1.0*tonegate->children[i]->children[j]->children[0]->expression[k];
 				}
 				vcopy(after_multiplication,before_multiplication);
@@ -134,7 +129,6 @@ void node::proc_stmt(int s,int l){
 		constant = "skip";
 		CFG_edge temporary_edge(label_map[l],-1,NULL);
 		label_map[s]->edges.pb(temporary_edge);
-		// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
 		return;
 	}
 	//look for semicolons
@@ -191,9 +185,6 @@ void node::proc_stmt(int s,int l){
 		CFG_edge temporary_edge2(label_map[l],-1,NULL,temporary_node);
 		label_map[s]->edges.pb(temporary_edge1);
 		label_map[s]->edges.pb(temporary_edge2);
-		// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
-		// cout<<"Adding edge from "<<s<<"to"<<mid<<endl;
-
 		children[1] = new node("stmt",firstdo+2,lastod,mid,s);
 		return;
 	}
@@ -257,8 +248,6 @@ void node::proc_stmt(int s,int l){
 			label_map[s]->edges.pb(temporary_edge1);
 			label_map[s]->edges.pb(temporary_edge2);
 		}
-		// cout<<"Adding edge from "<<s<<"to"<<case1<<endl;
-		// cout<<"Adding edge from "<<s<<"to"<<case2<<endl;
 		children[1]=new node("stmt",firstthen+4,correselse,case1,l);
 		children[2]=new node("stmt",correselse+4,lastfi,case2,l);
 		return;
@@ -322,8 +311,6 @@ void node::proc_assgn(int s,int l){
 				label_map[s]->type = "det"; //<flag> Considering that it is just the same as assigning the variable the constant value
 				CFG_edge temporary_edge(label_map[l],stoi(part(program,children[0]->begin+2,children[0]->end)),children[1]);
 				label_map[s]->edges.pb(temporary_edge);
-				// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
-				// cout<<label_map[l]<<endl;
 			}
 		}
 		else{
@@ -332,8 +319,6 @@ void node::proc_assgn(int s,int l){
 			label_map[s]->type = "det";
 			CFG_edge temporary_edge(label_map[l],stoi(part(program,children[0]->begin+2,children[0]->end)),children[1]);
 			label_map[s]->edges.pb(temporary_edge);
-			// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
-			// cout<<label_map[l]<<endl;
 		}
 	}
 }
@@ -442,7 +427,6 @@ void node::proc_literal(bool negate){
 	skip_spaces(begin,end);
 	if(program[begin]=='~' or program[begin]=='!'){ //Assuming the sign for negation could be '!' or '~'
 		begin = begin+1;
-		// cout<<"I am here"<<negate<<!negate<<endl<<endl;
 		proc_literal(!negate);
 		return;
 	}
@@ -692,7 +676,6 @@ CFG_location::CFG_location(string type,int label){
 }
 
 void CFG_location::print(){
-	// cout<<"Label: "<<label<<endl;
 	cout<<"Type: "<<type<<endl;
 	if(invariant!=NULL){
 		cout<<"Invariant: ";
