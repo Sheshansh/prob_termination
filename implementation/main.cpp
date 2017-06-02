@@ -227,7 +227,7 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 int last_used_lambda = 0;
 
 void print_equations(){
-	cout<<"maximise eps\n\nst\n\neps > 0\neps <= 1"<<endl;
+	cout<<"maximise eps\n\nst\n\neps >= 0\neps <= 1"<<endl;
 	while(!equations.empty()){
 		equation* front = equations.front();
 		// A(i,j) means affexpr->children[i-1]->children[0]->expression[j] and b(i) translates to -1.0*affexpr->children[i-1]->children[0]->expression[0]
