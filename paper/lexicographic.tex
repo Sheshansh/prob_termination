@@ -80,7 +80,39 @@ $\probm(M_{j,i})>0$. Continuing on the same note, for each $B\in \Nset$ we
 denote by $M_{j,i}^{B}$ the set off all $\omega$'s in $M_{j,i}$ s.t. 
 $\vecseq{X}{i}{j}(\omega)\leq B$. Since $M_{j,i}= M_{j,i}^{1} \cup M_{j,i}^{2} 
 \cup M_{j,i}^{3} \cup \cdots  $, there is $B\in \Nset$ s.t. 
-$\probm(M_{j,i}^{B})>0$.
+$\probm(M_{j,i}^{B})>0$. Denote $p=\probm(M_{j,i}^{B})$.
+
+Let $D$ be the set of all $\omega\in \Omega$ such that 
+$\vecseq{X}{i}{j}(\omega)\leq B$. Note that $M_{j,i}^{B} \subseteq D$ and $D\in 
+\genfilt_i$ (and thus also $D\in \genfilt_{i'}$ for all $i'\geq i$). 
+Define a stopping time $\tilde{\stime}$ as follows: for all $\omega \in \Omega$ 
+we put 
+$\tilde{\stime}(\omega)=\inf\{k\in \Nset_0 \mid k\geq i \text{ and }
+\levelrank{\omega}{k} < j \}$.
+
+Define a 
+(one-dimensional) stochastic process $\{\tilde{X}_k\}_{k=0}^{\infty}$ as 
+follows:
+$$
+\tilde{X}_k(\omega) = \begin{dcases}
+0 & \text{if $\omega \not\in D$}\\
+B & \text{if $\omega \in D$ and $k<i$ }\\
+\vecseq{X}{k}{j}(\omega) & \text{ if $k\geq i$ and $\tilde{\stime}(\omega)>i$ 
+}\\
+\vecseq{X}{\tilde{\stime}(\omega)}{j}(\omega) & \text{ if $k\geq i$ and 
+$\tilde{\stime}(\omega)\leq i$ }.
+\end{dcases}
+$$
+
+We prove several properties of the process $\{\tilde{X}_k\}_{k=0}^{\infty}$. 
+First, for all $k\geq 0$, $\tilde{X}_k(\omega)\geq K$, where $K<0$ is the 
+number 
+such that $\vec{X}_j(\omega)\geq K$ for all $j$ and $\omega$ (such a number 
+exists from the definition of LexRSM). Second, denote by 
+%\begin{enumerate}
+%\
+%\end{itemize}
+%\end{enumerate}
 
 
 %\begin{fact}
