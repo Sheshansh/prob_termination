@@ -33,7 +33,9 @@ $\stime(\omega)>i$ there exists $1\leq j
 \end{compactitem}
 \item For each $\omega \in \Omega$ and $i\in \Nset_0$ it holds 
 $\stime(\omega)>i 
-\Rightarrow \vec{X}_i (\omega)\geq \vec{0}$ (componentwise).
+\Rightarrow \vec{X}_i (\omega)\geq \vec{0}$ (componentwise). Moreover, there 
+exists a constant $K<0$ such that $\stime(\omega)=i 
+\Rightarrow \vec{X}_i (\omega)\geq (K,\dots,K)$.
 \end{compactenum}
 \end{definition}
 
@@ -45,7 +47,7 @@ time w.r.t. that filtration. If there exists an $\eps$-LexRSM for $\stime$,
 then $\probm(\stime<\infty)=1$.
 \end{theorem}
 \begin{proof}
-The proofs proceeds by contradiction, i.e. we assume that an $\eps$-LexRSM for 
+The proof proceeds by contradiction, i.e. we assume that an $\eps$-LexRSM for 
 $\stime$ exists and $\probm(\stime=\infty)>0$. For succinctness we denote the 
 set $\{\omega\mid \stime(\omega)=\infty\}$ by $\genRunSet_{\infty}$.
 
@@ -55,7 +57,37 @@ or otherwise to the smallest $1\leq j \leq n$ such that
 $\E[\vecseq{X}{i+1}{j}\mid 
 \genfilt_i](\omega)\leq\vecseq{X}{i}{j}(\omega)-\eps$. By the definition of 
 $\eps$-LexRSM the value $\levelrank{\omega}{i}$ is well-defined for all 
-$\omega$. 
+$\omega$. We denote by $\minlev(\omega)$ the smallest $0 \leq j \leq n$ such 
+that $j$ is a level of $\omega$ at infinitely many steps. Note that $\omega \in 
+\genRunSet_{\infty}$ if and only if $\minlev(\omega)\neq 0$. We denote by $M_i$ 
+the set of all $\omega$'s with $\minlev(\omega)=i$.
+
+Throughout the proof we use several times the following fundamental fact: if 
+$\probm(A)>0$ for some set $A$ and $A=A_1\cup A_2 \cup A_3\cdots$ for some 
+sequence of sets $A_1,A_2,A_3,\dots$, then there exists $i$ such that 
+$\probm(A_i)>0$.
+
+Now since $\genRunSet_{\infty}=M_1,\dots,M_n$, there must be $1\leq j \leq n$ 
+s.t. $\probm(M_j)>0$. For each $\omega\in M_j$ there is the smallest number
+$i_{\omega,j}\in\Nset_0$ such that for all $i\geq i_{\omega,j}$ it holds 
+$\levelrank{\omega}{i}\geq 
+j$. Denote by $S_{j,i}$ the set of all $\omega$'s in $M_j$ s.t. 
+$i_{\omega,j}=i$. 
+Since $M_j = M_{j,1} \cup M_{j,2} \cup M_{j,3} \cup \cdots$, there is $i\in 
+\Nset_0$ 
+s.t. 
+$\probm(M_{j,i})>0$. Continuing on the same note, for each $B\in \Nset$ we 
+denote by $M_{j,i}^{B}$ the set off all $\omega$'s in $M_{j,i}$ s.t. 
+$\vecseq{X}{i}{j}(\omega)\leq B$. Since $M_{j,i}= M_{j,i}^{1} \cup M_{j,i}^{2} 
+\cup M_{j,i}^{3} \cup \cdots  $, there is $B\in \Nset$ s.t. 
+$\probm(M_{j,i}^{B})>0$.
+
+
+%\begin{fact}
+	
+%\end{fact}
+
+
 %\[
 %\levelrank{\omega}{i} = \begin{dcases}
 %0 & \text{if $\stime(\omega)\leq i$} \\
