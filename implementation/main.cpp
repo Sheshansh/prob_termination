@@ -45,9 +45,6 @@ struct cond{
 				}
 			}
 			else{
-				cout<<"tochange is "<<toChange<<"change is"<<endl;
-				change->print();
-				cout<<endl;
 				buffer.clear();
 				buffer.str(string());
 				buffer<<"eps-f_"<<src<<"_0+f_"<<dest1<<"_0";
@@ -232,7 +229,7 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 int last_used_lambda = 0;
 
 void print_equations(){
-	cout<<"maximise eps\n\nst\n\neps > 0"<<endl;
+	cout<<"maximise eps\n\nst\n\neps > 0\neps <= 1"<<endl;
 	// c.resize(nVariables);
 	while(!equations.empty()){
 		equation* front = equations.front();
