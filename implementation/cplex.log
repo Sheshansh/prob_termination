@@ -1,0 +1,210 @@
+
+Log started (V12.7.0.0) Tue Jun  6 13:46:31 2017
+
+
+Problem 'equations.lp' read.
+Read time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+LP Presolve eliminated 6 rows and 10 columns.
+Aggregator did 9 substitutions.
+Reduced LP has 7 rows, 4 columns, and 19 nonzeros.
+Presolve time = 0.00 sec. (0.01 ticks)
+Initializing dual steep norms . . .
+
+Iteration log . . .
+Iteration:     1   Dual objective     =             1.000000
+
+Dual simplex - Optimal:  Objective =  0.0000000000e+00
+Solution time =    0.00 sec.  Iterations = 2 (0)
+Deterministic time = 0.03 ticks  (28.37 ticks/sec)
+
+
+All variables matching '*' are 0.
+
+Log started (V12.7.0.0) Tue Jun  6 13:49:08 2017
+
+
+Problem 'equations.lp' read.
+Read time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+LP Presolve eliminated 5 rows and 9 columns.
+Aggregator did 10 substitutions.
+Reduced LP has 7 rows, 4 columns, and 19 nonzeros.
+Presolve time = 0.00 sec. (0.02 ticks)
+Initializing dual steep norms . . .
+
+Iteration log . . .
+Iteration:     1   Dual objective     =             1.000000
+
+Dual simplex - Optimal:  Objective =  0.0000000000e+00
+Solution time =    0.00 sec.  Iterations = 2 (0)
+Deterministic time = 0.03 ticks  (29.22 ticks/sec)
+
+
+All variables matching '*' are 0.
+
+Log started (V12.7.0.0) Tue Jun  6 13:59:30 2017
+
+
+Problem 'equations.lp' read.
+Read time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+LP Presolve eliminated 5 rows and 9 columns.
+Aggregator did 10 substitutions.
+Reduced LP has 7 rows, 4 columns, and 19 nonzeros.
+Presolve time = 0.00 sec. (0.02 ticks)
+Initializing dual steep norms . . .
+
+Iteration log . . .
+Iteration:     1   Dual objective     =             1.000000
+
+Dual simplex - Optimal:  Objective =  0.0000000000e+00
+Solution time =    0.00 sec.  Iterations = 2 (0)
+Deterministic time = 0.03 ticks  (29.22 ticks/sec)
+
+
+All variables matching '*' are 0.
+
+Log started (V12.7.0.0) Tue Jun  6 13:59:57 2017
+
+
+Problem 'equations.lp' read.
+Read time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+LP Presolve eliminated 5 rows and 9 columns.
+Aggregator did 10 substitutions.
+Reduced LP has 7 rows, 4 columns, and 19 nonzeros.
+Presolve time = 0.00 sec. (0.02 ticks)
+Initializing dual steep norms . . .
+
+Iteration log . . .
+Iteration:     1   Dual objective     =             1.000000
+
+Dual simplex - Optimal:  Objective =  0.0000000000e+00
+Solution time =    0.00 sec.  Iterations = 2 (0)
+Deterministic time = 0.03 ticks  (29.22 ticks/sec)
+
+
+All variables matching '*' are 0.
+
+Log started (V12.7.0.0) Tue Jun  6 14:00:59 2017
+
+
+Problem 'equations.lp' read.
+Read time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+LP Presolve eliminated 8 rows and 8 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.00 ticks)
+
+Dual simplex - Optimal:  Objective =  1.0000000000e+00
+Solution time =    0.00 sec.  Iterations = 0 (0)
+Deterministic time = 0.01 ticks  (5.37 ticks/sec)
+
+
+Variable Name           Solution Value
+eps                           1.000000
+f_1_0                         1.000000
+All other variables matching '*' are 0.
+
+Log started (V12.7.0.0) Tue Jun  6 14:01:08 2017
+
+
+Problem 'equations.lp' read.
+Read time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+LP Presolve eliminated 8 rows and 8 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.00 ticks)
+
+Dual simplex - Optimal:  Objective =  1.0000000000e+00
+Solution time =    0.00 sec.  Iterations = 0 (0)
+Deterministic time = 0.01 ticks  (5.37 ticks/sec)
+
+
+Variable Name           Solution Value
+eps                           1.000000
+f_1_0                         1.000000
+All other variables matching '*' are 0.
+
+Log started (V12.7.0.0) Tue Jun  6 14:01:37 2017
+
+
+Problem 'equations.lp' read.
+Read time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+LP Presolve eliminated 8 rows and 8 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.00 ticks)
+
+Dual simplex - Optimal:  Objective =  1.0000000000e+00
+Solution time =    0.00 sec.  Iterations = 0 (0)
+Deterministic time = 0.01 ticks  (5.37 ticks/sec)
+
+
+Variable Name           Solution Value
+eps                           1.000000
+f_1_0                         1.000000
+All other variables matching '*' are 0.
+
+Log started (V12.7.0.0) Tue Jun  6 14:01:56 2017
+
+
+Problem 'equations.lp' read.
+Read time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+LP Presolve eliminated 16 rows and 16 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.01 ticks)
+
+Dual simplex - Optimal:  Objective =  1.0000000000e+00
+Solution time =    0.00 sec.  Iterations = 0 (0)
+Deterministic time = 0.01 ticks  (11.67 ticks/sec)
+
+
+Variable Name           Solution Value
+eps                           1.000000
+f_1_0                         2.000000
+f_3_0                         1.000000
+All other variables matching '*' are 0.
+
+Log started (V12.7.0.0) Tue Jun  6 14:03:36 2017
+
+
+Problem 'equations.lp' read.
+Read time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+LP Presolve eliminated 16 rows and 16 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.01 ticks)
+
+Dual simplex - Optimal:  Objective =  1.0000000000e+00
+Solution time =    0.00 sec.  Iterations = 0 (0)
+Deterministic time = 0.01 ticks  (11.67 ticks/sec)
+
+
+Variable Name           Solution Value
+eps                           1.000000
+f_1_0                         2.000000
+f_3_0                         1.000000
+All other variables matching '*' are 0.
+
+Log started (V12.7.0.0) Tue Jun  6 14:04:44 2017
+
+
+Problem 'equations.lp' read.
+Read time = 0.00 sec. (0.00 ticks)
+Tried aggregator 1 time.
+LP Presolve eliminated 12 rows and 14 columns.
+All rows and columns eliminated.
+Presolve time = 0.00 sec. (0.01 ticks)
+
+Dual simplex - Optimal:  Objective =  1.0000000000e+00
+Solution time =    0.00 sec.  Iterations = 0 (0)
+Deterministic time = 0.01 ticks  (9.67 ticks/sec)
+
+
+Variable Name           Solution Value
+eps                           1.000000
+f_1_0                         1.000000
+All other variables matching '*' are 0.
