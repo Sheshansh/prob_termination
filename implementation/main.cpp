@@ -331,9 +331,9 @@ int main(){
 	equationsfile.open("files/equations.lp");
 	print_equations(equationsfile);
 	equationsfile.close();
+	// Jugaad for calling cplex from within the code
 	if(system("./files/script.sh")!=0){
 		cout<<"Something wrong with the script analysing equations"<<endl;
 	}
-	
 	return 0;
 }
