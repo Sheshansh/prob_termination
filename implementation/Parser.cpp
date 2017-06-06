@@ -14,6 +14,7 @@
 #include <deque>
 #include <iomanip>
 #include <fstream>
+#include <stdlib.h>
 #include "Parser.h"
 using namespace std;
 #define MAXL 100000 //Maximum length of the program

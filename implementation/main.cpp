@@ -328,8 +328,12 @@ int main(){
 	// }
 	generate_equations();
 	ofstream equationsfile;
-	equationsfile.open("equations.lp");
+	equationsfile.open("files/equations.lp");
 	print_equations(equationsfile);
 	equationsfile.close();
+	if(system("./files/script.sh")!=0){
+		cout<<"Something wrong with the script analysing equations"<<endl;
+	}
+	
 	return 0;
 }
