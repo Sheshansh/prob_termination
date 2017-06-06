@@ -226,8 +226,8 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 
 int last_used_lambda = 0;
 
-void print_equations(){
-	cout<<"maximise eps\n\nst\n\neps >= 0\neps <= 1"<<endl;
+void print_equations(ofstream& equationsfile){
+	equationsfile<<"maximize eps\n\nst\n\neps >= 0\neps <= 1"<<endl;
 	while(!equations.empty()){
 		equation* front = equations.front();
 		// A(i,j) means affexpr->children[i-1]->children[0]->expression[j] and b(i) translates to -1.0*affexpr->children[i-1]->children[0]->expression[0]
@@ -236,45 +236,45 @@ void print_equations(){
 		int size = equations.front()->affexpr->children.size();
 		for(int i=0;i<nVariables;++i){
 			// Each iteration, print out a new equation! :)
-			cout<<front->condition->c[i];
+			equationsfile<<front->condition->c[i];
 			for(int j=0;j<size;++j){
 				if(A(j,i)>0){
-					cout<<-A(j,i)<<"l"<<to_string(last_used_lambda+j);
+					equationsfile<<-A(j,i)<<"l"<<to_string(last_used_lambda+j);
 				}
 				else if(A(j,i)<0){
-					cout<<"+"<<-A(j,i)<<"l"<<to_string(last_used_lambda+j);
+					equationsfile<<"+"<<-A(j,i)<<"l"<<to_string(last_used_lambda+j);
 				}
 			}
-			cout<<" = 0"<<endl;
+			equationsfile<<" = 0"<<endl;
 		}
 		// Printing the last equation
-		cout<<front->condition->negative_d;
+		equationsfile<<front->condition->negative_d;
 		for(int i=0;i<size;++i){
 			if(b(i)>0){
-				cout<<"+"<<b(i)<<"l"<<to_string(last_used_lambda+i);
+				equationsfile<<"+"<<b(i)<<"l"<<to_string(last_used_lambda+i);
 			}
 			else if(b(i)<0){
-				cout<<b(i)<<"l"<<to_string(last_used_lambda+i);
+				equationsfile<<b(i)<<"l"<<to_string(last_used_lambda+i);
 			}
 		}
 		if(equations.front()->condition->strict){
-			cout<<" < 0"<<endl;
+			equationsfile<<" < 0"<<endl;
 		}
 		else{
-			cout<<" <= 0"<<endl;
+			equationsfile<<" <= 0"<<endl;
 		}
 		last_used_lambda += size;
 		equations.pop();
 	}
 
-	cout<<"\nbounds\n\n";
+	equationsfile<<"\nbounds\n\n";
 	//Loop to print bounds on other variables
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		for(int j=0;j<=nVariables;j++){
-			cout<<"-inf<= f_"<<it->first<<"_"<<j<<" <= +inf"<<endl;
+			equationsfile<<"-inf<= f_"<<it->first<<"_"<<j<<" <= +inf"<<endl;
 		}
 	}
-	cout<<"end"<<endl;
+	equationsfile<<"end"<<endl;
 }
 
 int main(){
@@ -327,7 +327,9 @@ int main(){
 	// 	// cout<<it->second->label<<endl;
 	// }
 	generate_equations();
-	print_equations();
-	// equationsfile.close();
+	ofstream equationsfile;
+	equationsfile.open("equations.lp");
+	print_equations(equationsfile);
+	equationsfile.close();
 	return 0;
 }
