@@ -297,6 +297,28 @@ void print_equations(ofstream& equationsfile){
 	equationsfile<<"end"<<endl;
 }
 
+bool process_equations_output(){
+	bool to_return = false;
+	ifstream to_process("files/EquationsOutput");
+	string line;
+	getline(to_process,line);
+	if(line=="CPLEX> Variable Name           Solution Value"){
+		string temp1,temp2;
+		while(to_process>>temp1>>temp2){
+			// cout<<temp1<<" "<<temp2<<endl;
+			if(temp1.length()>3){
+				if(temp1.substr(0,3)=="eps"){
+					// cout<<stoi(temp1.substr(3))<<endl;
+					equations.erase(stoi(temp1.substr(3)));
+					to_return = true;
+					//Removing those equations whose epsilon is 1
+				}
+			}
+		}
+	}
+	return to_return;
+}
+
 int main(){
 	int start,end;
 	char input[MAXL];
@@ -350,7 +372,7 @@ int main(){
 	ofstream equationsfile;
 	equationsfile.open("files/equations.lp");
 	for(int loop_counter=0;loop_counter<100;++loop_counter){	
-		cout<<"Iteration"<<loop_counter+1<<endl;
+		cout<<"Iteration"<<loop_counter+1<<"->"<<endl;
 		print_equations(equationsfile);
 		equationsfile.close();
 		// Jugaad for calling cplex from within the code
@@ -358,6 +380,21 @@ int main(){
 			cout<<"Something wrong with the script analysing equations"<<endl;
 		}
 		//Processing the EquationsOutput file
+		bool state = process_equations_output();
+		if(state==false){
+			cout<<"No solution possible"<<endl;
+			break;
+		}
+		else{
+			//Some equation was deleted, some epsilon was 1
+			// cout<<equations.begin()->first<<endl;
+			if(equations.begin()->first>epsilons_used){
+				cout<<"Solution found"<<endl;
+			}
+			else{
+				cout<<"Going into another iteration"<<endl;
+			}
+		}
 		string command;
 		command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
 		system(command.c_str());
