@@ -61,10 +61,10 @@ struct cond{
 					if((i+1)!=toChange){
 						buffer<<"f_"<<dest1<<"_"<<i+1;
 						if(change->expression[i]>0.0){
-							buffer<<"+"<<change->expression[i]<<"f_"<<dest1+"_"<<toChange;
+							buffer<<"+"<<change->expression[i]<<"f_"<<dest1<<"_"<<toChange;
 						}
 						else if(change->expression[i]<0.0){
-							buffer<<change->expression[i]<<"f_"<<dest1+"_"<<toChange;
+							buffer<<change->expression[i]<<"f_"<<dest1<<"_"<<toChange;
 						}
 					}
 					else{
@@ -239,13 +239,17 @@ int last_used_lambda = 0;
 void print_equations(ofstream& equationsfile){
 	// <flag> to be changed
 	
-	equationsfile<<"maximize eps1";
-	for(int i=2;i<=epsilons_used;++i){
-		equationsfile<<"+eps"<<i;
+	equationsfile<<"maximize ";
+	for(int i=1;i<=epsilons_used;++i){
+		if(equations.find(i)!=equations.end()){
+			equationsfile<<"+eps"<<i;
+		}
 	}
 	equationsfile<<"\n\nst\n\n";
 	for(int i=1;i<=epsilons_used;++i){
-		equationsfile<<"eps"<<i<<" >= 0\neps"<<i<<" <= 1"<<endl;
+		if(equations.find(i)!=equations.end()){
+			equationsfile<<"eps"<<i<<" >= 0\neps"<<i<<" <= 1"<<endl;
+		}
 	}
 	
 
@@ -370,9 +374,9 @@ int main(){
 	// }
 	generate_equations();
 	ofstream equationsfile;
-	equationsfile.open("files/equations.lp");
 	for(int loop_counter=0;loop_counter<100;++loop_counter){	
 		cout<<"Iteration"<<loop_counter+1<<"->"<<endl;
+		equationsfile.open("files/equations.lp");
 		print_equations(equationsfile);
 		equationsfile.close();
 		// Jugaad for calling cplex from within the code
@@ -399,7 +403,6 @@ int main(){
 		command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
 		system(command.c_str());
 		// temporarily for just one iteration
-		break;
 	}
 	return 0;
 }
