@@ -14,7 +14,7 @@
 #include <iomanip>
 #include <fstream>
 #include <queue>
-#include "Parser.h"
+#include "files/Parser.h"
 using namespace std;
 #define MAXL 100000 //Maximum length of the program
 #define part(x,a,b) (x.substr((a),((b)-(a))))
@@ -28,14 +28,14 @@ struct cond{
 	bool strict;
 	vector<string> c;
 	string negative_d; //negative component of d
-	cond(int toChange,node* change,int src,int dest1,int dest2 = -1,double probability = -1.0){
+	cond(int equation_count,int toChange,node* change,int src,int dest1,int dest2 = -1,double probability = -1.0){
 		strict = false;
 		c.resize(nVariables);
 		if(dest2==-1){
 			if(change==NULL){
 				buffer.clear();
 				buffer.str(string());
-				buffer<<"eps-f_"<<src<<"_0+f_"<<dest1<<"_0";
+				buffer<<"eps"<<equation_count<<"-f_"<<src<<"_0+f_"<<dest1<<"_0";
 				negative_d = buffer.str();
 				for(int i=0;i<nVariables;i++){
 					buffer.clear();
@@ -47,7 +47,7 @@ struct cond{
 			else{
 				buffer.clear();
 				buffer.str(string());
-				buffer<<"eps-f_"<<src<<"_0+f_"<<dest1<<"_0";
+				buffer<<"eps"<<equation_count<<"-f_"<<src<<"_0+f_"<<dest1<<"_0";
 				if(change->expression[0]<0.0){
 					buffer<<change->expression[0]<<"f_"<<dest1<<"_"<<toChange;
 				}
@@ -81,7 +81,7 @@ struct cond{
 			// It was a stochastic node, means change would have been NULL
 			buffer.clear();
 			buffer.str(string());
-			buffer<<"eps-f_"<<src<<"_0+"<<probability<<"f_"<<dest1<<"_0+"<<1.0-probability<<"f_"<<dest2<<"_0"; 
+			buffer<<"eps"<<equation_count<<"-f_"<<src<<"_0+"<<probability<<"f_"<<dest1<<"_0+"<<1.0-probability<<"f_"<<dest2<<"_0"; 
 			negative_d = buffer.str();
 			for(int i=0;i<nVariables;i++){
 				buffer.clear();
@@ -120,7 +120,9 @@ struct equation{
 	}
 };
 
-queue<equation*> equations;
+map<int,equation*> equations;
+int equations_counter = 0;
+int epsilons_used = 0;
 
 node* and_node(node* one,node* two){
 	if(one->type!="bexpr" or two->type!="bexpr"){
@@ -153,7 +155,7 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 			}
 			else if(it->second->edges.size()==1){
 				//First make a condition
-				cond* condition = new cond(it->second->edges[0].toChange,it->second->edges[0].change,it->first,it->second->edges[0].next->label);
+				cond* condition = new cond(++equations_counter,it->second->edges[0].toChange,it->second->edges[0].change,it->first,it->second->edges[0].next->label);
 				// Guard would have been NULL here
 				if(it->second->invariant==NULL){
 					//This should never be the case as this would pose conditions that c==0 and d>0, which are not good
@@ -163,14 +165,15 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 					// Invariant implies the given condition
 					int nEquations = it->second->invariant->children.size();
 					for(int i=0;i<nEquations;i++){
-						equations.push(new equation(it->second->invariant->children[i],condition));
+						equations[equations_counter] = new equation(it->second->invariant->children[i],condition);
+						// equations.push(new equation(it->second->invariant->children[i],condition));
 					}
 				}
 			}
 			else{
 				//First make the 2 conditions required
-				cond* condition0 = new cond(-1,NULL,it->first,it->second->edges[0].next->label);
-				cond* condition1 = new cond(-1,NULL,it->first,it->second->edges[1].next->label);
+				cond* condition0 = new cond(++equations_counter,-1,NULL,it->first,it->second->edges[0].next->label);
+				cond* condition1 = new cond(++equations_counter,-1,NULL,it->first,it->second->edges[1].next->label);
 				// Size is 2, so considering the guards is important and guards cannot be NULL
 				if(it->second->invariant==NULL or it->second->edges[0].guard==NULL or it->second->edges[1].guard==NULL){
 					//This should never be the case as this would pose conditions that c==0 and d>0, which are not good
@@ -182,44 +185,51 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 					node* n1 = and_node(it->second->invariant,it->second->edges[1].guard);
 					int nEquations = n0->children.size();
 					for(int i=0;i<nEquations;i++){
-						equations.push(new equation(n0->children[i],condition0));
+						equations[equations_counter-1] = new equation(n0->children[i],condition0);
+						// equations.push(new equation(n0->children[i],condition0));
 					}
 					nEquations = n1->children.size();
 					for(int i=0;i<nEquations;i++){
-						equations.push(new equation(n1->children[i],condition1));
+						equations[equations_counter] = new equation(n1->children[i],condition1);
+						// equations.push(new equation(n1->children[i],condition1));
 					}
 				}
 			}
 		}
 		else if(it->second->type=="ndet"){
 			// First make the 2 conditions required
-			cond* condition0 = new cond(-1,NULL,it->first,it->second->edges[0].next->label);
-			cond* condition1 = new cond(-1,NULL,it->first,it->second->edges[1].next->label);
+			cond* condition0 = new cond(++equations_counter,-1,NULL,it->first,it->second->edges[0].next->label);
+			cond* condition1 = new cond(++equations_counter,-1,NULL,it->first,it->second->edges[1].next->label);
 			//Invariant implies the value decrease for both the emerging transitions
 			int nEquations = it->second->invariant->children.size();
 			for(int i=0;i<nEquations;i++){
-				equations.push(new equation(it->second->invariant->children[i],condition0));
+				equations[equations_counter-1] = new equation(it->second->invariant->children[i],condition0);
+				// equations.push(new equation(it->second->invariant->children[i],condition0));
 			}
 			for(int i=0;i<nEquations;i++){
-				equations.push(new equation(it->second->invariant->children[i],condition1));
+				equations[equations_counter] = new equation(it->second->invariant->children[i],condition1);
+				// equations.push(new equation(it->second->invariant->children[i],condition1));
 			}
 		}
 		else{
 			//Make one condition for the expected value decrease
-			cond* condition = new cond(-1,NULL,it->first,it->second->edges[0].next->label,it->second->edges[1].next->label,it->second->edges[0].probability);
+			cond* condition = new cond(++equations_counter,-1,NULL,it->first,it->second->edges[0].next->label,it->second->edges[1].next->label,it->second->edges[0].probability);
 			//Invariant implies the value decrease of expected value of ranking function, "prob" type node
 			int nEquations = it->second->invariant->children.size();
 			for(int i=0;i<nEquations;i++){
-				equations.push(new equation(it->second->invariant->children[i],condition));
+				equations[equations_counter] = new equation(it->second->invariant->children[i],condition);
+				// equations.push(new equation(it->second->invariant->children[i],condition));
 			}
 		}
 	}
+	epsilons_used = equations_counter;
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		// Invariant implies the ranking function to be positive
 		int nEquations = it->second->invariant->children.size();
 		for(int i=0;i<nEquations;i++){
 			cond* condition = new cond(it->first);
-			equations.push(new equation(it->second->invariant->children[i],condition));
+			equations[++equations_counter] = new equation(it->second->invariant->children[i],condition);
+			// equations.push(new equation(it->second->invariant->children[i],condition));
 		}
 	}
 }
@@ -227,13 +237,24 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 int last_used_lambda = 0;
 
 void print_equations(ofstream& equationsfile){
-	equationsfile<<"maximize eps\n\nst\n\neps >= 0\neps <= 1"<<endl;
-	while(!equations.empty()){
-		equation* front = equations.front();
+	// <flag> to be changed
+	
+	equationsfile<<"maximize eps1";
+	for(int i=2;i<=epsilons_used;++i){
+		equationsfile<<"+eps"<<i;
+	}
+	equationsfile<<"\n\nst\n\n";
+	for(int i=1;i<=epsilons_used;++i){
+		equationsfile<<"eps"<<i<<" >= 0\neps"<<i<<" <= 1"<<endl;
+	}
+	
+
+	for(map<int,equation*>::iterator it = equations.begin();it!=equations.end();++it){
+		equation* front = it->second;
 		// A(i,j) means affexpr->children[i-1]->children[0]->expression[j] and b(i) translates to -1.0*affexpr->children[i-1]->children[0]->expression[0]
 		// Creating a macro for this
 		//Printing equations
-		int size = equations.front()->affexpr->children.size();
+		int size = front->affexpr->children.size();
 		for(int i=0;i<nVariables;++i){
 			// Each iteration, print out a new equation! :)
 			equationsfile<<front->condition->c[i];
@@ -257,14 +278,13 @@ void print_equations(ofstream& equationsfile){
 				equationsfile<<b(i)<<"l"<<to_string(last_used_lambda+i);
 			}
 		}
-		if(equations.front()->condition->strict){
+		if(front->condition->strict){
 			equationsfile<<" < 0"<<endl;
 		}
 		else{
 			equationsfile<<" <= 0"<<endl;
 		}
 		last_used_lambda += size;
-		equations.pop();
 	}
 
 	equationsfile<<"\nbounds\n\n";
@@ -329,11 +349,20 @@ int main(){
 	generate_equations();
 	ofstream equationsfile;
 	equationsfile.open("files/equations.lp");
-	print_equations(equationsfile);
-	equationsfile.close();
-	// Jugaad for calling cplex from within the code
-	if(system("./files/script.sh")!=0){
-		cout<<"Something wrong with the script analysing equations"<<endl;
+	for(int loop_counter=0;loop_counter<100;++loop_counter){	
+		cout<<"Iteration"<<loop_counter+1<<endl;
+		print_equations(equationsfile);
+		equationsfile.close();
+		// Jugaad for calling cplex from within the code
+		if(system("./files/script.sh")!=0){
+			cout<<"Something wrong with the script analysing equations"<<endl;
+		}
+		//Processing the EquationsOutput file
+		string command;
+		command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+		system(command.c_str());
+		// temporarily for just one iteration
+		break;
 	}
 	return 0;
 }

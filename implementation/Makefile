@@ -1,2 +1,2 @@
 all:
-	g++ Parser.cpp main.cpp -std=c++11 -g
+	g++ files/Parser.cpp main.cpp -std=c++11 -g
