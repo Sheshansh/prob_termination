@@ -45,6 +45,9 @@ struct cond{
 				}
 			}
 			else{
+				// cout<<"change is : src"<<src<<" dest:"<<dest1<<" toChange:"<<toChange<<" changed to:";
+				// change->print();
+				// cout<<endl;
 				buffer.clear();
 				buffer.str(string());
 				buffer<<"eps"<<equation_count<<"-f_"<<src<<"_0+f_"<<dest1<<"_0";
@@ -60,20 +63,23 @@ struct cond{
 					buffer.str(string());
 					if((i+1)!=toChange){
 						buffer<<"f_"<<dest1<<"_"<<i+1;
-						if(change->expression[i]>0.0){
-							buffer<<"+"<<change->expression[i]<<"f_"<<dest1<<"_"<<toChange;
+						if(change->expression[i+1]>0.0){
+							buffer<<"+"<<change->expression[i+1]<<"f_"<<dest1<<"_"<<toChange;
 						}
-						else if(change->expression[i]<0.0){
-							buffer<<change->expression[i]<<"f_"<<dest1<<"_"<<toChange;
+						else if(change->expression[i+1]<0.0){
+							buffer<<change->expression[i+1]<<"f_"<<dest1<<"_"<<toChange;
 						}
 					}
 					else{
-						if(change->expression[i]!=0.0){
-							buffer<<change->expression[i]<<"f_"<<dest1<<"_"<<toChange;
+						if(change->expression[i+1]!=0.0){
+							buffer<<change->expression[i+1]<<"f_"<<dest1<<"_"<<toChange;
 						}
+						// change->print();
+						// cout<<""<<endl;
 					}
 					buffer<<"-f_"<<src<<"_"<<i+1;
 					c[i] = buffer.str();
+					// cout<<c[i]<<endl;
 				}
 			}
 		}
@@ -387,13 +393,20 @@ int main(){
 		bool state = process_equations_output();
 		if(state==false){
 			cout<<"No solution possible"<<endl;
+			string command;
+			command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+			system(command.c_str());
 			break;
 		}
 		else{
 			//Some equation was deleted, some epsilon was 1
-			// cout<<equations.begin()->first<<endl;
+			// cout<<equations.begin()->first<<" "<<epsilons_used<<endl;
 			if(equations.begin()->first>epsilons_used){
 				cout<<"Solution found"<<endl;
+				string command;
+				command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+				system(command.c_str());
+				break;
 			}
 			else{
 				cout<<"Going into another iteration"<<endl;
