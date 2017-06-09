@@ -17,12 +17,13 @@ private:
 	void proc_assgn(int s,int l);
 	void proc_affexpr();
 	void proc_pvar();
+	void analyse_expr(int begin,int end,bool negate);
 	void proc_expr();
 	void proc_constant();
 	void proc_literal(bool negate);
 	void proc_bexpr();
 	void proc_ndbexpr();
-	void recursively_form_vector(int begin,int end);
+	void form_vector(int begin,int end,bool negate);
 //main process
 	void process(int s, int l, bool negate);
 public:
@@ -54,16 +55,10 @@ public:
 	void print();
 };
 
-struct equation{
-	node* affexpr;
-	node* literal;
-};
-
 void skip_spaces(int &begin, int &end);
 void vcopy(vector<node*> &sink,vector<node*> &tocopy);
 node* negation(node* tonegate);
 int find_variables();
-void generate_equations(ofstream& equationsfile);
 
 extern string program;
 extern int nVariables;

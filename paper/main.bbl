@@ -37,6 +37,18 @@
 \providecommand\natexlab[1]{#1}
 \providecommand\showeprint[2][]{arXiv:#2}
 
+\bibitem[\protect\citeauthoryear{Ash and Dol{\'e}ans-Dade}{Ash and
+  Dol{\'e}ans-Dade}{2000}]%
+        {Ash:book}
+\bibfield{author}{\bibinfo{person}{R.B. Ash} {and} \bibinfo{person}{C.
+  Dol{\'e}ans-Dade}.} \bibinfo{year}{2000}\natexlab{}.
+\newblock \bibinfo{booktitle}{{\em Probability and Measure Theory}}.
+\newblock \bibinfo{publisher}{Harcourt/Academic Press}.
+\newblock
+\showISBNx{9780120652020}
+\showLCCN{99065669}
+
+
 \bibitem[\protect\citeauthoryear{Billingsley}{Billingsley}{1995}]%
         {Billingsley:book}
 \bibfield{author}{\bibinfo{person}{P. Billingsley}.}
@@ -44,6 +56,17 @@
 \newblock \bibinfo{booktitle}{{\em {Probability and Measure}\/}
   (\bibinfo{edition}{3rd} ed.)}.
 \newblock \bibinfo{publisher}{Wiley}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Br{\'a}zdil, Kiefer, Ku\v{c}era, Novotn{\'y},
+  and Katoen}{Br{\'a}zdil et~al\mbox{.}}{2014}]%
+        {BKKNK:pMC-zero-reachability}
+\bibfield{author}{\bibinfo{person}{T. Br{\'a}zdil}, \bibinfo{person}{S.
+  Kiefer}, \bibinfo{person}{A. Ku\v{c}era}, \bibinfo{person}{P. Novotn{\'y}},
+  {and} \bibinfo{person}{J.-P.{} Katoen}.} \bibinfo{year}{2014}\natexlab{}.
+\newblock \showarticletitle{{Zero-Reachability in Probabilistic Multi-Counter
+  Automata}}. In \bibinfo{booktitle}{{\em {Proceedings of LICS 2014}}}.
 \newblock
 
 
@@ -129,6 +152,30 @@
 \showISSN{0022-0000}
 \showDOI{%
 \url{https://doi.org/10.1016/0022-0000(81)90036-2}}
+
+
+\bibitem[\protect\citeauthoryear{Neuh{\"a}u{\ss}er, Stoelinga, and
+  Katoen}{Neuh{\"a}u{\ss}er et~al\mbox{.}}{2009}]%
+        {NSK:CTMDP-delayed}
+\bibfield{author}{\bibinfo{person}{M. Neuh{\"a}u{\ss}er}, \bibinfo{person}{M.
+  Stoelinga}, {and} \bibinfo{person}{J.-P.{} Katoen}.}
+  \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{{Delayed Nondeterminism in Continuous-Time {Markov}
+  Decision Processes}}. In \bibinfo{booktitle}{{\em {Proceedings of {FoSSaCS
+  2009}}}}, Vol.~\bibinfo{volume}{5504}. \bibinfo{pages}{364--379}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Neuh{\"a}u{\ss}er and
+  Katoen}{Neuh{\"a}u{\ss}er and Katoen}{2007}]%
+        {NK:CTMDP-bisimulation}
+\bibfield{author}{\bibinfo{person}{Martin~R Neuh{\"a}u{\ss}er} {and}
+  \bibinfo{person}{Joost-Pieter Katoen}.} \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{Bisimulation and logical preservation for
+  continuous-time Markov decision processes}. In \bibinfo{booktitle}{{\em
+  International Conference on Concurrency Theory}}. Springer,
+  \bibinfo{pages}{412--427}.
+\newblock
 
 
 \end{thebibliography}

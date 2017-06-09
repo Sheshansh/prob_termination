@@ -126,7 +126,8 @@ theory.
 %%We now recall basic definitions of probability theory.
 The crucial notion is the one of a probability space. A probability space is a triple
 $(\Omega,\mathcal{F},\probm)$, where $\Omega$ is a non-empty set (so called
-\emph{sample space}), $\mathcal{F}$ is a \emph{sigma-algebra} over $\Omega$,
+\emph{sample space}), $\mathcal{F}$ is a \emph{sigma-algebra} of measurable 
+sets over $\Omega$,
 i.e. a collection of subsets of $\Omega$ that contains the empty set
 $\emptyset$, and that is closed under complementation and countable unions, and
 $\probm$ is a \emph{probability measure} on $\mathcal{F}$, i.e., a function
@@ -186,21 +187,38 @@ To define this process, we first define so called
 \begin{definition}
 \label{def:stochgame}
 A \emph{probabilistic control flow graph (pCFG)} is a tuple
-$\pCFG=(\locs,\pvars,\locinit,\vecinit,\transitions,\probdist,\guards)$,
+$\pCFG=(\locs,\pvars,\locinit,\vecinit,\transitions,\updates,\probdist,\guards)$,
 where
 \begin{compactitem}
-\item $\locs$ is a finite set of \emph{locations} partitioned into three 
+\item $\locs$ is a finite set of \emph{locations} partitioned into four 
 pairwise
-disjoint subsets  $\locs_N$, $\locs_P$, and $\locs_D$ of non-deterministic, 
-probabilistic, and deterministic locations;
+disjoint subsets  $\locsNB$, $\locsPB$, $\locs_D$, and $\locs_A$ of 
+non-deterministic branching, 
+probabilistic branching, deterministic, and assignment locations;
 \item $\pvars=\{x_1,\dots,x_{|\pvars|}\}$ is a finite set of \emph{program 
 variables} (note that $\pvars \subseteq \vars$) ;
 \item $\locinit$ is an initial location and $\vecinit$ is an initial 
 \emph{assignment vector};
 % POKRACOVAT ODSUD
-\item $\transitions$ is a transition relation, whose members are tuples of
-the form $(\ell,i,\up,\ell')$, where $\ell$ and $\ell'$ are source and target
-program locations, respectively, $1\leq i \leq |\pvars|$ is a \emph{target variable index}, and $u$ 
+\item $\transitions\subseteq\locs\times\locs$ is a transition relation'
+%whose members are tuples of
+%the form $(\ell,i,\up,\ell')$, where $\ell$ and $\ell'$ are source and target
+%program locations, respectively, $1\leq i \leq |\pvars|$ is a \emph{target 
+%variable index}, and $u$ 
+%is an 
+%\emph{update element}, which can 
+%be one of the following mathematical objects: %\begin{itemize}
+%%\item 
+%(a)~an affine function $u\colon \Rset^{|\pvars|}\rightarrow \Rset$;
+%%\item 
+%(b)~a distribution $d\in \mathcal{D}$; or
+%%%\item 
+%(c)~a set $R\subseteq \Rset$.
+%\end{itemize}
+\item $\updates$ is a function assigning to each transition outgoing from an 
+assignment location a tuple $(i,\up)$, where $1\leq i \leq |\pvars|$ is a 
+\emph{target 
+	variable index} and $\up$ 
 is an 
 \emph{update element}, which can 
 be one of the following mathematical objects: %\begin{itemize}
@@ -208,12 +226,12 @@ be one of the following mathematical objects: %\begin{itemize}
 (a)~an affine function $u\colon \Rset^{|\pvars|}\rightarrow \Rset$;
 %\item 
 (b)~a distribution $d\in \mathcal{D}$; or
-%%\item 
+%\item 
 (c)~a set $R\subseteq \Rset$.
 %\end{itemize}
-\item $\probdist=\{\prob_{\ell}\}_{\ell \in \locs_P}$ is a collection of
+\item $\probdist=\{\prob_{\ell}\}_{\ell \in \locsPB}$ is a collection of
 probability distributions, where each $\prob_{\ell}$ is a discrete probability
-distribution on the set of all transitions outgoing from~$\ell$.
+distribution on the set of all transitions outgoing from~$\ell$;
 \item $\guards$ is a function assigning a propositionally linear predicate
 (a \emph{guard}) over $\pvars$ to each transition outgoing from a deterministic 
 location.
@@ -234,10 +252,12 @@ under $d$)\footnote{In particular, a support of a \emph{discrete} probability
 	distribution $d$ is simply the at most countable set of all points on a 
 	real 
 	line that have positive probability under $d$.} satisfies 
-$\support(d)\subseteq\exsat{\varphi_d}$. Finally, we assume that for each 
-transition $(\loc,j,u,\loc')$ such that $u$ is a set the location $\loc$ is 
-deterministic. This is just a technical assumption yielding no loss of 
-generality, and it somewhat simplifies notation.
+$\support(d)\subseteq\exsat{\varphi_d}$. Finally, we assume that each 
+assignment location has at most (and thus exactly) one outgoing transition.
+%Finally, we assume that for each 
+%transition $(\loc,j,u,\loc')$ such that $u$ is a set the location $\loc$ is 
+%deterministic. This is just a technical assumption yielding no loss of 
+%generality, and it somewhat simplifies notation.
 %And we assume that each coordinate of $\mathcal{D}$ represents an integrable
 %random variable (i.e., the expected value of the absolute value of the random
 %variable exists).
@@ -302,35 +322,61 @@ generality, and it somewhat simplifies notation.
 
 %\paragraph*{Dynamics of Stochastic Games}
 
+The translation from probabilistic programs to the corresponding pCFG is 
+standard~\cite{CFNH16:prob-termination}, and the details are presented 
+in~\AppendixMaterial.
+
 \smallskip\noindent{\em Configurations.}
 A \emph{configuration} of a pCFG $\pCFG$ is a tuple $(\ell,\vec{x})$,
 where $\ell$ is a location of $\pCFG$ and $\vec{x}$ is an 
 $|\pvars|$-dimensional vector.
 We say that a transition $\tau$ is \emph{enabled} in a configuration
 $(\ell,\vec{x})$ if $\ell$ is the source location of $\tau$ and in addition,
-${\vec{x}}\models G(\tau)$ provided that $\ell$ is deterministic. A 
-configuration 
-$(\loc,\vec{x})$ is non-deterministic/probabilistic/deterministic if $\loc$ is 
-non-deterministic/probabilistic/deterministic, respectively.
+${\vec{x}}\models G(\tau)$ provided that $\ell$ is deterministic. 
+%A 
+%configuration 
+%$(\loc,\vec{x})$ is non-deterministic/probabilistic/deterministic/assignment 
+%one if 
+%$\loc$ is 
+%non-deterministic/probabilistic/deterministic/assignment one, respectively.
 
 \smallskip\noindent{\em Executions and reachable configurations.}
+We say that a configuration $(\loc',\vec{x}')$ is a \emph{successor} of a 
+configuration $(\loc,\vec{x})$ if 
+%A \emph{finite path} (or
+%\emph{execution fragment}) of length $k$ in $\pCFG$ is a finite sequence of
+%configurations $(\ell_0,\vec{x}_0)\cdots(\ell_k,\vec{x}_k)$ such that 
+%%$(\loc_0,\vec{x}_0)=(\locinit,\vecinit)$ and 
+%for each
+%$0 \leq i < k$ 
+there is a transition  $\tau=(\loc,\loc')$ enabled in
+$(\loc,\vec{x})$ 
+%such that $\vec{x}_{i+1}=\vec{x}_i(j\leftarrow a)$ where $a$ 
+%satisfies one of the following:
+and $\vec{x}'$ satisfies the following:
+\begin{compactitem}
+\item if $\loc$ is not an assignment location, then $\vec{x}'=\vec{x}$;
+\item if $\loc$ is an assignment location with $\updates(\tau)=(j,\up)$, then 
+$\vec{x}_{i+1}=\vec{x}_i(j\leftarrow a)$ where $a$ satisfies one of the 
+following 
+depending on the type of $\up$:
+\begin{compactitem}
+\item if $\up$ is an affine function, then $a=\up(\vec{x})$;
+\item if $\up$ is an integrable\footnote{A distribution on some numerical 
+domain 
+is integrable if its expected value exists and is finite. In particular, each 
+Dirac distribution is integrable.} distribution $d$, then 
+$a\in \support(d)$;
+\item if $\up$ is a set, then $a$ is some element of $\up$.
+\end{compactitem}
+\end{compactitem}
 A \emph{finite path} (or
-\emph{execution fragment}) in $\pCFG$ is a finite sequence of
+\emph{execution fragment}) of length $k$ in $\pCFG$ is a finite sequence of
 configurations $(\ell_0,\vec{x}_0)\cdots(\ell_k,\vec{x}_k)$ such that 
 %$(\loc_0,\vec{x}_0)=(\locinit,\vecinit)$ and 
 for each
-$0 \leq i < k$ there is a transition  $(\ell_i,j,\up,\ell_{i+1})$ enabled in
-$(\ell_i,\vec{x}_i)$ such that $\vec{x}_{i+1}=\vec{x}_i(j\leftarrow a)$ where $a$ 
-satisfies one of the following:
-\begin{compactitem}
-\item $\up$ is a function $f\colon\Rset^{|X|}\rightarrow\Rset$ and
-$a=f(\vec{x}_{i})$;
-\item $\up$ is an integrable\footnote{A distribution on some numerical domain 
-is integrable if its expected value exists and is finite. In particular, each 
-Dirac distribution is integrable.} distribution $d$ and 
-$a\in \support(d)$; or
-\item $\up$ is a set and $a\in \up$.
-\end{compactitem}
+$0 \leq i < k$ the configuration $(\loc_{i+1},\vec{x}_{i+1})$ is a successor of 
+$(\loc_i,\vec{x}_i)$.
 A \emph{run} (or \emph{execution}) in
 $\pCFG$ is an infinite sequence of configurations whose every finite
 prefix is a finite path.
@@ -338,41 +384,107 @@ A configuration $(\loc,\vec{x})$ is {\em reachable} from the initial
 configuration
 $(\locinit,\vecinit)$
 if there is a finite path starting in $(\locinit,\vecinit)$ that ends in
-$(\loc,\vec{x})$.
+$(\loc,\vec{x})$. We denote by $\Conf_\pCFG,\Fpath_\pCFG$ and $\Run_\pCFG$ the 
+sets of all configurations, finite paths and runs in $\pCFG$, respectively, 
+dropping the index $\pCFG$ when known from the context.
 
 
-\smallskip\noindent{\em Schedulers.}
+\smallskip\noindent{\em Non-determinism and Schedulers.}
 Due to the presence of non-determinism and probabilistic choices, a pCFG
 $\pCFG$ may represent a multitude of possible behaviours. The probabilistic
 behaviour of $\pCFG$ can be captured by constructing a suitable
 probability measure over the set of all its runs. Before this can be
-done, non-determinism in $\pCFG$ needs to be resolved. This is done using the 
-standard notion of a \emph{scheduler}.
+done, non-determinism in $\pCFG$ needs to be resolved. This is achieved using 
+the 
+standard notion of a \emph{scheduler}. 
+
+There are two sources of non-determinism in our programs: one in branching and 
+one in assignments. We call a location $\loc$ non-deterministic if $\loc$ is a 
+non-deterministic branching location or if $\loc$ is an assignment location 
+with a 
+non-deterministic assignment (i.e., the only transition $\tau$ outgoing from 
+$\loc$ has $\updates(\tau)=(j,\up)$ where $\up$ is a set). A configuration 
+$(\loc,\vec{x})$ is non-deterministic if $\loc$ is non-deterministic.
 
 \smallskip
 \begin{definition}[Schedulers]
 \label{def:schedulers}
-A scheduler in an pCFG $\pCFG$ is a tuple $\sigma=(\sigmat,\sigmaa)$,
+A scheduler in a pCFG $\pCFG$ is a function $\sigma$
 %(the subscripts stand for 'transition' and 'assignment')
-where
-\begin{compactitem}
-\item $\sigmat$ (here '$t$' stands for 'transition') is a function assigning 
+%\begin{compactitem}
+ assigning 
 to every finite path that ends in a non-deterministic configuration 
-$(\loc,\vec{x})$ a probability distribution on transitions outgoing from 
-$\loc$; 
-and
-\item $\sigmaa$ (here '$a$' stands for 'assignment') is a function which takes 
-as an argument a finite path ending in a deterministic configuration in which 
-some transition 
-$(\loc,j,u,\loc')$ with $u$ being a set is enabled, and for such a path it 
-returns a probability distribution on $u$.
-\end{compactitem}
+$(\loc,\vec{x})$ a probability distribution on successor configurations of 
+$(\loc,\vec{x})$.
+
+%\end{compactitem}
 %function
 %which assigns to every finite path in $\mathcal{G}$ that ends in an angelic
 %(resp., demonic) configuration $(\ell,\vec{x})$, respectively,
 %a discrete probability distribution on transitions outgoing from~$\ell$.
 %a transition outgoing from~$\ell$.
 \end{definition}
+
+\smallskip\noindent{\em Measurable schedulers.}
+Note that schedulers can be viewed as partial functions from the set $\Fpath$ 
+to the set of probability distributions over the set $\Conf$.
+Since we deal with programs operating over real-valued variables, both $\Fpath$ 
+and $\Conf$ can be uncountable sets. Hence, we impose an 
+additional \emph{measurability} condition on schedulers, so as to ensure that 
+the semantics of probabilistic non-deterministic programs is defined in a 
+mathematically 
+sound way. First we need to clarify what are measurable sets of configurations 
+and histories. We define a sigma-algebra $\mathcal{F}_{\Conf}$ of measurable 
+sets of configurations to be the sigma-algebra 
+over $\Conf$ 
+generated\footnote{In general, it is known that for each set $\Omega$ and each 
+collection of its subsets $F\subseteq 2^{\Omega}$ there exists at least one 
+sigma-algebra $\mathcal{F}$ s.t. $F\subseteq \mathcal{F}$ and the intersection 
+of all such sigma-algebras is again a sigma algebra --  so called sigma-algebra 
+generated by $F$~\cite{Billingsley:book}.} by 
+all sets of the form $\{\loc\}\times B$, where $\loc$ is a location of $\pCFG$ 
+and  
+$B$ is a Borel-measurable subset 
+of $\Rset^{|\pvars|}$. Next, the set of finite paths $\Fpath$ can be viewed as 
+a subset of $\Conf\cup \Conf\times\Conf \cup \Conf\times\Conf\times\Conf \cup 
+\dots$. Hence, we define the sigma-algebra $\mathcal{H}$ of measurable sets of 
+finite paths 
+to be the sigma algebra generated by all sets of the form $\confset_1\times 
+\confset_2 \times 
+\cdots \times \confset_k \subseteq \Fpath$ such that $k\in \Nset$ and 
+$\confset_i \in 
+\mathcal{F}_{\Conf}$ for 
+all $1\leq i \leq k$. Now we can define the measurability of schedulers. Recall 
+that for each finite path $\genpath$ ending in a non-deterministic 
+configuration 
+we have that $\sigma(\genpath)$ is a probability distribution on $\Conf$. For 
+each measurable set of configurations $\confset$ we denote by 
+$\sigma(\genpath)(\confset)$ the probability that the random draw from 
+distribution $\sigma(\genpath)$ selects an element of $\confset$. We say that a 
+scheduler $\sigma$ is measurable if for each $\confset \in \mathcal{F}_{\Conf}$ 
+and each $p\in[0,1]$ the set $\{\pi \in \Fpath \mid 
+\sigma(\genpath)(\confset)\leq p\}$ belongs to $\mathcal{H}$, i.e., it is a 
+measurable set of paths.
+
+While the definition of a measurable scheduler might seem somewhat technical, 
+it is natural from measure-theoretic point of view and analogous definitions 
+inevitably emerge in works dealing with systems that exhibit both probabilistic 
+and non-deterministic behaviour over a continuous state 
+space~\cite{NSK:CTMDP-delayed,NK:CTMDP-bisimulation}. In particular, if all the 
+variables in a program range over a discrete set (such as the integers), 
+then each scheduler in the associated pCFG is measurable.
+%Formally, let 
+%$\Borel(\Rset^{|\pvars|})$ be the standard sigma-algebra of Borel-measurable 
+%subsets of $\Rset^{|\pvars|}$. Now let $\genPathSet$ be any set of finite 
+%paths 
+%in 
+%$\pCFG$ and denote by $\proj_j (A)$ the set of all variable valuations that 
+%appear on some path in $A$ in step $j$, i.e. $\proj_j(A) = 
+%\{\vec{y}\in\Rset^{|\pvars|} \mid \exists  
+%(\ell_0,\vec{x}_0)\cdots(\ell_k,\vec{x}_k) \in A \text{ s.t. } k \geq j \} $
+%A \emph{measurable cylinder} of length 
+%$k$ is a 
+%set of paths $\cylinder_n$ in $\pCFG$ satisfying the following condition: 
 
 %A scheduler $\sigma$ is \emph{memoryless} if $\sigmat(w)=\sigmat(w')$ whenever 
 %the finite paths 
@@ -383,7 +495,7 @@ returns a probability distribution on $u$.
 %transition (resp. to a single number) and probability 0 to all the others.
 
 \smallskip\noindent{\em Stochastic process.}
-A pCFG $\pCFG$ together with a scheduler $\sigma$ can be seen as a stochastic 
+A pCFG $\pCFG$ together with a scheduler $\sigma$ define a stochastic 
 process which produces a random run 
 $(\loc_0,\vec{x}_0)(\loc_1,\vec{x}_1)(\loc_2,\vec{x}_2)\cdots$. The evolution 
 of 
@@ -391,47 +503,89 @@ this process can be informally described as follows: we start in the initial
 configuration, i.e. $(\loc_{0},\vec{x}_0)=(\locinit,\vecinit)$. 
 Now assume that $i$ 
 steps have elapsed, i.e. a finite path 
-$(\loc_0,\vec{x}_0)(\loc_1,\vec{x}_1)\cdots(\loc_i,\vec{x}_i)$ has already 
-been produced. Then
+$\genpath_i=(\loc_0,\vec{x}_0)(\loc_1,\vec{x}_1)\cdots(\loc_i,\vec{x}_i)$ has 
+already 
+been produced. Then a successor configuration $(\loc_{i+1},\vec{x}_{i+1})$ is 
+chosen as follows:
 \begin{compactitem}
 \item
-A transition $\tau=(\loc,j,u,\loc')$ enabled in 
-$(\lr{}{i},\vr{}{i})$ is chosen as follows:
-
-\begin{compactitem}
+If $\loc_i$ is a non-deterministic location, then 
+$(\loc_{i+1},\vec{x}_{i+1})$ is sampled according to scheduler $\sigma$, i.e. 
+from 
+the distribution $\sigma(\genpath_i)$.
 \item
-If $\ell_i$ is non-deterministic then $\tau$ is chosen randomly
-according to the distribution specified
-by scheduler
-$\sigma$, i.e. according to the distribution 
-$\sigmat((\loc_0,\vec{x}_0)(\loc_1,\vec{x}_1)\cdots(\loc_i,\vec{x}_i))$.
-%That is, if $\ell_i$ is angelic (resp., demonic) and $c_0c_1\cdots c_i$ is the
-%sequence of configurations observed so far,
-%then $\tau$ equals %%the distribution
-%$\sigma(c_0c_1\cdots c_i)$ (resp., $\pi(c_0c_1\cdots c_i)$).
-
-
-\item
-If $\ell_i$ is probabilistic, then $\tau$ is chosen randomly according to the
-distribution $\probdist_{\ell_i}$.
-\item
-If $\ell_i$ is deterministic, then by the definition of a pCFG there is exactly
-one enabled transition outgoing from $\ell_i$, and this transition is chosen as
-$\tau$.
-\end{compactitem}
-\item
-Once $\tau$ is chosen as above, we put $\loc_{i+1}=\loc'$. Next, we put 
-$\vec{x}_{i+1}=\vec{x}_{i}(j\leftarrow a)$, where $a$ chosen as follows:
+If $\loc_i$ is an assignment location (but not a non-deterministic one) with, 
+there 
+is exactly one transition $\tau=(\loc_i,\loc')$ outgoing from it and we put 
+$\loc_{i+1}=\loc'$. Denoting $\updates(\tau)=(j,\up)$, the vector 
+$\vec{x}_{i+1}$ is 
+then defined as 
+$\vec{x}_{i+1}=\vec{x}_{i}(j\leftarrow a)$ where $a$ is chosen depending on 
+$\up$:
 \begin{compactitem}
 \item If $u$ is a function $u\colon
 \Rset^{|\pvars|}\rightarrow \Rset$, then $a=f(\vec{x}_{i})$.
 \item If $\up$ is a distribution $d$, then $a$ 
 is sampled from $d$.
-\item If $\up$ is a set, then $a$ is sampled from a 
-distribution 
-$\sigmaa((\loc_0,\vec{x}_0)(\loc_1,\vec{x}_1)\cdots(\loc_i,\vec{x}_i))$.
 \end{compactitem}
+\item In all other cases we have $\vec{x}_{i+1}=\vec{x}_i$, and $\loc_{i+1}$ is 
+determined as follows:
+\begin{itemize}
+	\item If $\loc_i$ is a probabilistic branching location, then a transition 
+	$(\loc_i,\loc')$ is sampled from $\probdist_{\loc_i}$ and we put
+	$\loc_{i+1}=\loc'$;
+	\item If $\loc_i$ is deterministic, then there is exactly one transition 
+	$(\loc_i,\loc')$ enabled in $(\loc_i,\vec{x}_i)$, in which case we put 
+	$\loc_{i+1}=\loc'$.
+\end{itemize}
 \end{compactitem}
+
+
+%\begin{compactitem}
+%\item
+%a transition $\tau=(\loc_i,\loc')$ enabled in 
+%$(\lr{}{i},\vr{}{i})$ is chosen as follows:
+%
+%\begin{compactitem}
+%\item
+%If $\ell_i$ is non-deterministic, then $\tau$ is chosen randomly
+%according to the distribution specified
+%by scheduler
+%$\sigma$, i.e. according to distribution
+%$\sigma((\loc_0,\vec{x}_0)(\loc_1,\vec{x}_1)\cdots(\loc_i,\vec{x}_i))$ 
+%(formally, this is a distribution over successor configurations of 
+%$(\loc_i,\vec{x}_i)$, but each such successor $(\loc',\vec{x}')$ uniquely 
+%determines a transition $(\loc_i,\loc')$ ).
+%%That is, if $\ell_i$ is angelic (resp., demonic) and $c_0c_1\cdots c_i$ is the
+%%sequence of configurations observed so far,
+%%then $\tau$ equals %%the distribution
+%%$\sigma(c_0c_1\cdots c_i)$ (resp., $\pi(c_0c_1\cdots c_i)$).
+%
+%
+%\item
+%If $\ell_i$ is probabilistic, then $\tau$ is chosen randomly according to the
+%distribution $\probdist_{\ell_i}$.
+%\item
+%If $\ell_i$ is deterministic or assignment location, then by the definition of 
+%a pCFG there is exactly
+%one enabled transition outgoing from $\ell_i$, and this transition is chosen as
+%$\tau$.
+%\end{compactitem}
+%\item
+%Once $\tau$ is chosen as above, we put $\loc_{i+1}=\loc'$. Next, if $\loc_i$ 
+%is 
+%not an assignment location, we put $\vec{x}_{i+1}=\vec{x}_{i}$. Otherwise 
+%$\vec{x}_{i+1}=\vec{x}_{i}(j\leftarrow a)$, where $a$ chosen as follows:
+%\begin{compactitem}
+%\item If $u$ is a function $u\colon
+%\Rset^{|\pvars|}\rightarrow \Rset$, then $a=f(\vec{x}_{i})$.
+%\item If $\up$ is a distribution $d$, then $a$ 
+%is sampled from $d$.
+%\item If $\up$ is a set, then $a$ is sampled from a 
+%distribution 
+%$\sigmaa((\loc_0,\vec{x}_0)(\loc_1,\vec{x}_1)\cdots(\loc_i,\vec{x}_i))$.
+%\end{compactitem}
+%\end{compactitem}
 
 The above intuitive explanation can be formalized by showing that
 each pCFG $\pCFG$ together with a scheduler $\sigma$ uniquely determines a 
@@ -441,36 +595,39 @@ space $(\Omega,\natfilt,\probm^{\sigma})$ in which $\Omega$ is a set of all
 runs in $\pCFG$, and a stochastic process 
 $\pCFG^{\sigma}=\{\cfg{\sigma}{i}\}_{i=0}^{\infty}$ in this space 
 such 
-that for each $\run\in \Omega$ we have that $\cfg{\sigma}{i}(\run)$ is the 
-$i$-th configuration on run $\run$ (i.e., $\cfg{\sigma}{i}$ is a random vector 
+that for each run $\run\in \Omega$ we have that $\cfg{\sigma}{i}(\run)$ is the 
+$i$-th configuration on $\run$ (i.e., $\cfg{\sigma}{i}$ is a random vector 
 $(\lr{\sigma}{i},\vr{\sigma}{i})$ with  $\lr{\sigma}{i}$ taking 
 values in $\locs$ and $\vr{\sigma}{i}$ being a random vector of dimension 
 $|\pvars|$ consisting of real-valued random variables). The sigma-algebra 
 $\natfilt$ is the smallest (w.r.t. inclusion) sigma algebra under which all 
-the functions $\cfg{\sigma}{i}$, for all $i\geq 0$ and all schedulers $\sigma$, 
-are $\natfilt$-measurable (a 
-function $f$ returning vectors is $\natfilt$-measurable if for all 
-real-valued vectors 
-$\vec{y}$ of appropriate dimension the set $\{\omega\in \Omega\mid 
-f(\omega)\leq \vec{y}\}$ belongs to $\natfilt$). The 
+the functions $\cfg{\sigma}{i}$, for all $i\geq 0$, 
+are $\natfilt$-measurable (i.e., for each $\cfg{\sigma}{i}$ and each measurable 
+set of configurations $\confset\in\mathcal{F}_{\Conf}$ it holds 
+$\{\omega\mid\cfg{\sigma}{i}(\omega)\in \confset\}\in \natfilt$). Equivalently, 
+$\natfilt$ can be defined as a sigma algebra generated by all set of runs of 
+the form $F\times \Conf^{\infty}$, where $F\in \mathcal{H}$ is a measurable set 
+of finite paths. The 
 probability 
 measure 
 $\probm^{\sigma}$ is such that for each $i$, the distribution of 
 $\cfg{\sigma}{i}$ reflects the aforementioned way in which runs are randomly 
 generated. The formal construction 
-of $\natfilt$ and $\probm^{\sigma}$ is standard~\cite{Billingsley:book} and 
+of $\natfilt$ and $\probm^{\sigma}$ proceeds via the standard \emph{cylinder 
+construction}~\cite[Theorem 2.7.2]{Ash:book} and is
 somewhat 
 technical, hence we omit it. 
 We denote by $\E^\sigma$ the expectation operator in probability space 
 $(\Omega,\natfilt,\probm^{\sigma})$.
-The translation from probabilistic programs to the corresponding pCFG is 
-standard~\cite{CFNH16:prob-termination}. We point out that the 
-construction produces pCFGs with a property that only transitions outgoing from 
-a deterministic state can update program variables. All other transitions are 
-assumed to be of the form $(\ell,1,\id_1,\ell')$ for some locations 
-$\ell,\ell'$, where $\id_1(\vec{x})=\vec{x}[1]$ for all $\vec{x}$. We use this 
-to simplify notation.
-An illustration of a pCFG is given in Figure~\ref{fig:invariant-running}.
+ 
+%We point out that the 
+%construction produces pCFGs with a property that only transitions outgoing 
+%from 
+%a deterministic state can update program variables. All other transitions are 
+%assumed to be of the form $(\ell,1,\id_1,\ell')$ for some locations 
+%$\ell,\ell'$, where $\id_1(\vec{x})=\vec{x}[1]$ for all $\vec{x}$. We use this 
+%to simplify notation.
+%An illustration of a pCFG is given in Figure~\ref{fig:invariant-running}.
 
 %and instead describe it informally by describing 
 %the evolution of the stochastic process 
@@ -512,7 +669,7 @@ An illustration of a pCFG is given in Figure~\ref{fig:invariant-running}.
 
 
 \vspace{-1em}
-\subsection{Almost-Sure and Probabilistic Termination}
+\subsection{Almost-Sure and Positive Termination}
 \vspace{-0.5em}
 We consider computational problems related to the basic liveness properties of 
 \APP{s}, namely \emph{termination} and its generalization, \emph{reachability}. 
@@ -520,20 +677,24 @@ We consider computational problems related to the basic liveness properties of
 \smallskip\noindent{\em Termination, reachability, and termination time.}
 In the following, consider an \APP{} $P$ and its associated pCFG $\pCFG_P$. 
 We say that a run $\run$ of $\pCFG_P$ \emph{reaches} a set of configurations 
-$C$ if it  contains a configuration from $C$. A run \emph{terminates} if it reaches a 
+$\confset$ if it  contains a configuration from $\confset$. A run 
+\emph{terminates} if it reaches a 
 configuration whose first component (i.e. a location of $\pCFG_P$) is the 
 location
 $\loc_{P}^{\lout}$ corresponding to the value of the program counter after 
 executing $P$. 
-To each set of configurations $C$ we can assign a random variable $\treach{C}$ 
-such that for each run $\run$ the value $\treach{C}(\run)$ represents the first 
+To each set of configurations $\confset$ we can assign a random variable 
+$\treach{\confset}$ 
+such that for each run $\run$ the value $\treach{\confset}(\run)$ represents 
+the first 
 point in time when 
-the current configuration on $\run$ is in $C$. If a run $\run$ does \emph{not} 
-reach a set $C$, then 
-$\treach{C}(\run)=\infty$. We call $\treach{C}$ the 
-\emph{reachability time} of $C$. In particular, if $C$ is the set 
+the current configuration on $\run$ is in $\confset$. If a run $\run$ does 
+\emph{not} 
+reach a set $\confset$, then 
+$\treach{\confset}(\run)=\infty$. We call $\treach{\confset}$ the 
+\emph{reachability time} of $\confset$. In particular, if $\confset$ is the set 
 of all configurations $(\loc,\vec{x})$ such that $\loc=\loc^\lout_P$ (the 
-terminal location of $\pCFG_P$), then $\treach{C}$ is 
+terminal location of $\pCFG_P$), then $\treach{\confset}$ is 
 called a \emph{termination time}, as it returns the number of steps after which 
 $\run$ terminates. Since termination time is an important concept on its own, 
 we use a special notation $\ttime$ for it.
@@ -568,11 +729,14 @@ if for each $\sigma$ it holds $\probm^{\sigma}(\ttime<\infty)=1$. In
 almost-sure termination question for $P$ we aim to prove that $P$ 
 is 
 almost-surely terminating.
-\item \emph{Probabilistic termination:} In probabilistic termination question 
-for $P$ we aim to compute a \emph{lower bound on the probability of 
-termination}, i.e. a bound $b\in[0,1]$ such that for each scheduler 
-$\sigma$ it holds $\probm^{\sigma}(\{\run\mid \run \text{ terminates}\}) \geq b$ 
-(or equivalently $\probm^{\sigma}(\ttime<\infty)\geq b$).
+\item \emph{Positive termination:} A probabilistic program $P$ is 
+positively
+terminating if under each scheduler $\sigma$ it holds that 
+$\E^{\sigma}(\{\ttime\})<  \infty$. In 
+positive termination question for $P$ we aim to prove that $P$ 
+is 
+positively terminating. Note that each positively terminating program is also 
+a.s. terminating, but the converse does not hold.
 \end{compactenum}
 
 We also define corresponding questions for the more general reachability 
@@ -583,9 +747,10 @@ concept.
 probabilistic program $P$, prove (if possible) that under each scheduler 
 $\sigma$ it holds that
 $\probm^{\sigma}(\treach{C}<\infty)=1$.
-\item \emph{Probabilistic reachability:} For a set $C$ of configurations of 
-a probabilistic program $P$, compute a bound $b\in[0,1]$ such that for each scheduler
-$\sigma$ it holds $\probm^{\sigma}(\treach{C}<\infty)\geq b$.
+\item \emph{Positive reachability:} For a set $C$ of configurations of 
+a probabilistic program $P$, prove (if possible) that under each scheduler 
+$\sigma$ it holds that
+$\E^{\sigma}(\treach{C})<\infty$.
 \end{compactenum}
 
 Since termination is a special case of reachability, each solution to the 

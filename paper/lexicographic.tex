@@ -1,0 +1,149 @@
+\section{Lexicographic Supermartingales}
+\label{sec:lexicographic}
+
+In this section we introduce the notion of a \emph{lexicographic ranking 
+supermartingale}, which generalizes the standard notion of ranking 
+supermartingales.
+
+\begin{definition}[Lexicographic Ranking Supermartingale]
+Let $(\Omega,\genfilt,\probm)$ be a probability space, 
+$\{\genfilt_i\}_{i=0}^{\infty}$ a filtration of $\genfilt$, $\stime$ a stopping 
+time w.r.t. that filtration, and 
+$\eps\geq 0$. 
+An $n$-dimensional stochastic process $\{\vec{X}_{i}\}_{i=0}^{\infty}$ is a 
+\emph{lexicographic $\eps$-ranking supermartingale for $\stime$ 
+($\eps$-LexRSM)} if the 
+following 
+conditions hold:
+\begin{compactenum}
+\item For each $1\leq j \leq n$ the 1-dimensional stochastic process 
+$\{\vecseq{X}{i}{j}\}_{i=0}^{\infty}$ is adapted to 
+$\{\genfilt_i\}_{i=0}^{\infty}$.
+\item For each $i\in \Nset_0$ and each $1\leq j \leq n$ it holds 
+$\E[|\vecseq{X}{i}{j}|]<\infty$.
+\item For each $i\in \Nset_0$ and each $\omega\in \Omega$ with 
+$\stime(\omega)>i$ there exists $1\leq j 
+\leq n$ such that
+\begin{compactitem}
+	\item $\E[\vecseq{X}{i+1}{j}\mid 
+	\genfilt_i](\omega)\leq\vecseq{X}{i}{j}(\omega) - 
+	\eps$; and
+	\item for all $1 \leq j' < j$ it holds $\E[\vecseq{X}{i+1}{j'}\mid 
+	\genfilt_i](\omega)\leq\vecseq{X}{i}{j'}(\omega)$.
+\end{compactitem}
+\item For each $\omega \in \Omega$ and $i\in \Nset_0$ it holds 
+$\stime(\omega)>i 
+\Rightarrow \vec{X}_i (\omega)\geq \vec{0}$ (componentwise). Moreover, there 
+exists a constant $K<0$ such that $\stime(\omega)=i 
+\Rightarrow \vec{X}_i (\omega)\geq (K,\dots,K)$.
+\end{compactenum}
+\end{definition}
+
+\begin{theorem}
+Let $(\Omega,\genfilt,\probm)$ be a probability space, 
+$\{\genfilt_i\}_{i=0}^{\infty}$ a filtration of $\genfilt$, and $\stime$ a 
+stopping 
+time w.r.t. that filtration. If there exists an $\eps$-LexRSM for $\stime$, 
+then $\probm(\stime<\infty)=1$.
+\end{theorem}
+\begin{proof}
+The proof proceeds by contradiction, i.e. we assume that an $\eps$-LexRSM for 
+$\stime$ exists and $\probm(\stime=\infty)>0$. For succinctness we denote the 
+set $\{\omega\mid \stime(\omega)=\infty\}$ by $\genRunSet_{\infty}$.
+
+For $\omega\in \Omega$ we define the level of $\omega$ at step $i$ to be the 
+number $\levelrank{\omega}{i}$ equal to either $0$, if $\stime(\omega)\leq i$, 
+or otherwise to the smallest $1\leq j \leq n$ such that 
+$\E[\vecseq{X}{i+1}{j}\mid 
+\genfilt_i](\omega)\leq\vecseq{X}{i}{j}(\omega)-\eps$. By the definition of 
+$\eps$-LexRSM the value $\levelrank{\omega}{i}$ is well-defined for all 
+$\omega$. We denote by $\minlev(\omega)$ the smallest $0 \leq j \leq n$ such 
+that $j$ is a level of $\omega$ at infinitely many steps. Note that $\omega \in 
+\genRunSet_{\infty}$ if and only if $\minlev(\omega)\neq 0$. We denote by $M_i$ 
+the set of all $\omega$'s with $\minlev(\omega)=i$.
+
+Throughout the proof we use several times the following fundamental fact: if 
+$\probm(A)>0$ for some set $A$ and $A=A_1\cup A_2 \cup A_3\cdots$ for some 
+sequence of sets $A_1,A_2,A_3,\dots$, then there exists $i$ such that 
+$\probm(A_i)>0$.
+
+Now since $\genRunSet_{\infty}=M_1,\dots,M_n$, there must be $1\leq j \leq n$ 
+s.t. $\probm(M_j)>0$. For each $\omega\in M_j$ there is the smallest number
+$i_{\omega,j}\in\Nset_0$ such that for all $i\geq i_{\omega,j}$ it holds 
+$\levelrank{\omega}{i}\geq 
+j$. Denote by $S_{j,i}$ the set of all $\omega$'s in $M_j$ s.t. 
+$i_{\omega,j}=i$. 
+Since $M_j = M_{j,1} \cup M_{j,2} \cup M_{j,3} \cup \cdots$, there is $i\in 
+\Nset_0$ 
+s.t. 
+$\probm(M_{j,i})>0$. Continuing on the same note, for each $B\in \Nset$ we 
+denote by $M_{j,i}^{B}$ the set off all $\omega$'s in $M_{j,i}$ s.t. 
+$\vecseq{X}{i}{j}(\omega)\leq B$. Since $M_{j,i}= M_{j,i}^{1} \cup M_{j,i}^{2} 
+\cup M_{j,i}^{3} \cup \cdots  $, there is $B\in \Nset$ s.t. 
+$\probm(M_{j,i}^{B})>0$. Denote $p=\probm(M_{j,i}^{B})$.
+
+Let $D$ be the set of all $\omega\in \Omega$ such that 
+$\vecseq{X}{i}{j}(\omega)\leq B$. Note that $M_{j,i}^{B} \subseteq D$ and $D\in 
+\genfilt_i$ (and thus also $D\in \genfilt_{i'}$ for all $i'\geq i$). 
+Define a stopping time $\tilde{\stime}$ as follows: for all $\omega \in \Omega$ 
+we put 
+$\tilde{\stime}(\omega)=\inf\{k\in \Nset_0 \mid k\geq i \text{ and }
+\levelrank{\omega}{k} < j \}$.
+
+Define a 
+(one-dimensional) stochastic process $\{\tilde{X}_k\}_{k=0}^{\infty}$ as 
+follows:
+$$
+\tilde{X}_k(\omega) = \begin{dcases}
+0 & \text{if $\omega \not\in D$}\\
+B & \text{if $\omega \in D$ and $k<i$ }\\
+\vecseq{X}{k}{j}(\omega) & \text{if $\omega \in D$, $k\geq i$ and 
+$\tilde{\stime}(\omega)>i$ 
+}\\
+\vecseq{X}{\tilde{\stime}(\omega)}{j}(\omega) & \text{if $\omega\in D$, $k\geq 
+i$ and 
+$\tilde{\stime}(\omega)\leq i$ }.
+\end{dcases}
+$$
+
+We prove several properties of the process $\{\tilde{X}_k\}_{k=0}^{\infty}$. 
+First, for all $k\geq 0$, $\tilde{X}_k(\omega)\geq K$, where $K<0$ is the 
+number 
+such that $\vec{X}_j(\omega)\geq (K,\dots,K)$ for all $j$ and $\omega$ (such a 
+number 
+exists from the definition of LexRSM). Second, for any $k\in \Nset_0$ denote by 
+$\noofdec_k$ the random variable such that $\noofdec_k(\omega) = |\{i'\in 
+\Nset\mid i \leq i' \leq k \text{ and } \levelrank{\omega}{i'}=j\} |$.
+We claim 
+that for each $k\geq i$ 
+it holds 
+\begin{equation}
+\label{eq:lexrsm-soundness-main}
+\E[\tilde{X}_k]\leq B\cdot \probm(D) - \eps\cdot\sum_{\ell=0}^{k-i-1} \probm(D 
+\cap \tilde{\stime}\geq k \cap \noofdec_k 
+\geq 
+\ell).
+\end{equation}
+
+The proof of~\eqref{eq:lexrsm-soundness-main} goes by induction on $k$. For 
+$k=i$ the sum on the right-hand side is over an empty set of indexes, so the 
+inequality immediately follows from the definition of $\tilde{X}_k$. Now assume 
+that~\eqref{eq:lexrsm-soundness-main} holds for some $k\geq i$. 
+%\begin{enumerate}
+%\
+%\end{itemize}
+%\end{enumerate}
+
+
+%\begin{fact}
+	
+%\end{fact}
+
+
+%\[
+%\levelrank{\omega}{i} = \begin{dcases}
+%0 & \text{if $\stime(\omega)\leq i$} \\
+% 
+%\end{dcases}
+%\]
+\end{proof}

@@ -1,5 +1,6 @@
 //Compile with C++11
 //The variable names should be of the form x_i where i is a number and the indexing starts from 1 i.e. the variables in the program are of the form x_1, x_2 ... x_n.
+//Assuming * is for multiplication rather than .
 #include <iostream>
 #include <algorithm>
 #include <cstdio>
@@ -13,6 +14,7 @@
 #include <deque>
 #include <iomanip>
 #include <fstream>
+#include <stdlib.h>
 #include "Parser.h"
 using namespace std;
 #define MAXL 100000 //Maximum length of the program
@@ -23,7 +25,6 @@ string program;
 int nVariables;
 int last_used_label = 0;
 map<int,CFG_location*> label_map;
-node* id1 = new node("expr");
 
 void skip_spaces(int &begin, int &end){ //skips the spaces in the beginning and the end
 	while(begin<program.size() and isspace(program[begin])){
@@ -66,8 +67,6 @@ void vcopy(vector<node*> &sink,vector<node*> &tocopy){
 		sink[i]->bracket = tocopy[i]->bracket;
 		sink[i]->expression = tocopy[i]->expression;
 		sink[i]->children = tocopy[i]->children;
-		//Copying everything bluntly, though some of the statements are not required
-		//<flag> Can be optimised if need be
 	}
 }
 
@@ -83,8 +82,6 @@ node* negation(node* tonegate){
 		int ORs = tonegate->children.size();
 		for(int i = 0;i<ORs;++i){
 			//Multply this set of AND to the present collection
-			// before_multiplication.clear();
-			// before_multiplication = negative->children;
 			vcopy(before_multiplication,negative->children);
 			vector<node*> after_multiplication;
 			int before_size = before_multiplication.size();
@@ -92,16 +89,13 @@ node* negation(node* tonegate){
 			int ANDs = tonegate->children[i]->children.size();
 			for(int j = 0;j<ANDs;++j){
 				node* ch = new node("literal");
-				if(tonegate->children[i]->children[j]->constant == ">="){
-					ch->constant = "<=";
-					ch->children = tonegate->children[i]->children[j]->children;
-				}
-				else if(tonegate->children[i]->children[j]->constant == "<="){
-					ch->constant = ">=";
-					ch->children = tonegate->children[i]->children[j]->children;
-				}
-				else{
-					cerr<<"Something wrong with a literal"<<endl;
+				ch->constant = "<=";
+				ch->children.resize(1);
+				ch->children[0] = new node("expr");
+				ch->children[0]->constant = "expression";
+				ch->children[0]->expression.resize(nVariables+1);
+				for(int k=0;k<=nVariables;++k){
+					ch->children[0]->expression[k] = -1.0*tonegate->children[i]->children[j]->children[0]->expression[k];
 				}
 				vcopy(after_multiplication,before_multiplication);
 				for(int k = 0;k<before_size;++k){
@@ -119,11 +113,23 @@ node* negation(node* tonegate){
 
 void node::proc_stmt(int s,int l){
 	skip_spaces(begin,end);
+	if(program[begin]=='['){
+		int closed_bracket = -1;
+		for(int j = begin+1;j<end;++j){
+			if(program[j]==']'){
+				closed_bracket = j;
+				break;
+			}
+		}
+		bracket = new node("bexpr",begin+1,closed_bracket);
+		label_map[s]->invariant = bracket;
+		begin = closed_bracket+1;
+	}
+	skip_spaces(begin,end);
 	if(part(program,begin,end)=="skip"){
 		constant = "skip";
-		CFG_edge temporary_edge(label_map[l],1,id1);
+		CFG_edge temporary_edge(label_map[l],-1,NULL);
 		label_map[s]->edges.pb(temporary_edge);
-		// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
 		return;
 	}
 	//look for semicolons
@@ -149,19 +155,7 @@ void node::proc_stmt(int s,int l){
 	//look for brackets
 	// Assuming the invariants are at the beginning itself
 	skip_spaces(begin,end);
-	if(program[begin]=='['){
-		int closed_bracket = -1;
-		for(int j = begin+1;j<end;++j){
-			if(program[j]==']'){
-				closed_bracket = j;
-				break;
-			}
-		}
-		bracket = new node("bexpr",begin+1,closed_bracket);
-		label_map[s]->invariant = bracket;
-		begin = closed_bracket+1;
-	}
-	skip_spaces(begin,end);
+	
 
 	//check if it is a while
 	if(part(program,begin,begin+5)=="while"){
@@ -188,13 +182,10 @@ void node::proc_stmt(int s,int l){
 		label_map[mid] = new CFG_location("det",mid);
 		node* temporary_node;
 		temporary_node = negation(children[0]);
-		CFG_edge temporary_edge1(label_map[l],1,id1,children[0]);
-		CFG_edge temporary_edge2(label_map[mid],1,id1,temporary_node);
+		CFG_edge temporary_edge1(label_map[mid],-1,NULL,children[0]);
+		CFG_edge temporary_edge2(label_map[l],-1,NULL,temporary_node);
 		label_map[s]->edges.pb(temporary_edge1);
 		label_map[s]->edges.pb(temporary_edge2);
-		// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
-		// cout<<"Adding edge from "<<s<<"to"<<mid<<endl;
-
 		children[1] = new node("stmt",firstdo+2,lastod,mid,s);
 		return;
 	}
@@ -235,8 +226,8 @@ void node::proc_stmt(int s,int l){
 		int case2 = ++last_used_label;
 		label_map[case1] = new CFG_location("det",case1);
 		label_map[case2] = new CFG_location("det",case2);
-		CFG_edge temporary_edge1(label_map[case1],1,id1);
-		CFG_edge temporary_edge2(label_map[case2],1,id1);
+		CFG_edge temporary_edge1(label_map[case1],-1,NULL);
+		CFG_edge temporary_edge2(label_map[case2],-1,NULL);
 		constant = "if";
 		children.resize(3);
 		children[0] = new node("ndbexpr",begin+2,firstthen);
@@ -258,8 +249,6 @@ void node::proc_stmt(int s,int l){
 			label_map[s]->edges.pb(temporary_edge1);
 			label_map[s]->edges.pb(temporary_edge2);
 		}
-		// cout<<"Adding edge from "<<s<<"to"<<case1<<endl;
-		// cout<<"Adding edge from "<<s<<"to"<<case2<<endl;
 		children[1]=new node("stmt",firstthen+4,correselse,case1,l);
 		children[2]=new node("stmt",correselse+4,lastfi,case2,l);
 		return;
@@ -281,7 +270,7 @@ void node::proc_assgn(int s,int l){
 		}
 	}
 	if(pos==-1){
-		cerr<<"Wrong assignment between ["<<begin<<","<<end<<")"<<endl;
+		cerr<<"Wrong assignment between ["<<begin<<","<<end<<") i.e. "<<part(program,begin,end)<<endl;
 	}
 	else{
 		children.resize(2);
@@ -323,8 +312,6 @@ void node::proc_assgn(int s,int l){
 				label_map[s]->type = "det"; //<flag> Considering that it is just the same as assigning the variable the constant value
 				CFG_edge temporary_edge(label_map[l],stoi(part(program,children[0]->begin+2,children[0]->end)),children[1]);
 				label_map[s]->edges.pb(temporary_edge);
-				// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
-				// cout<<label_map[l]<<endl;
 			}
 		}
 		else{
@@ -333,8 +320,6 @@ void node::proc_assgn(int s,int l){
 			label_map[s]->type = "det";
 			CFG_edge temporary_edge(label_map[l],stoi(part(program,children[0]->begin+2,children[0]->end)),children[1]);
 			label_map[s]->edges.pb(temporary_edge);
-			// cout<<"Adding edge from "<<s<<"to"<<l<<endl;
-			// cout<<label_map[l]<<endl;
 		}
 	}
 }
@@ -368,47 +353,59 @@ void node::proc_pvar(){
 	constant = part(program,begin,end);
 }
 
-void node::recursively_form_vector(int begin,int end){ //Note that this shadows the original ones
+void node::analyse_expr(int begin,int end,bool negate){
+	skip_spaces(begin,end);
+	int star = -1;
+	for(int i = begin;i<end;++i){ //Assuming that the program variable names don't contain star anywhere
+		if(program[i]=='*'){
+			star = i;
+		}
+	}
+	if(star==-1){
+		if(part(program,begin,begin+2)=="x_"){
+			if(negate){
+				expression[stoi(part(program,begin+2,end))] += -1.0;
+			}
+			else{
+				expression[stoi(part(program,begin+2,end))] += 1.0;
+			}
+		}
+		else{
+			if(negate){
+				expression[0] -= stod(part(program,begin,end));
+			}
+			else{
+				expression[0] += stod(part(program,begin,end));
+			}
+		}
+	}
+	else{
+		int block=star+1;
+		skip_spaces(begin,star);
+		skip_spaces(block,end);
+		if(part(program,block,block+2)!="x_"){
+			cerr<<"Error in the variable in ["<<block<<","<<end<<")"<<"begin = "<<begin<<endl;
+		}
+		expression[stoi(part(program,block+2,end))] += stod(part(program,begin,star));
+	}
+}
+
+void node::form_vector(int begin,int end,bool negate){ //Note that this shadows the original ones
 	skip_spaces(begin,end);
 	int plusminus = -1;
 	// Implemented as a linear but still recursive function
-	for(int i = begin;i<end;++i){
+	for(int i = begin+1;i<end;++i){
 		if(program[i]=='+' or program[i]=='-'){
 			plusminus = i;
 			break;
 		}
 	}
 	if(plusminus!=-1){
-		recursively_form_vector(begin,plusminus);
-		recursively_form_vector(plusminus+1,end);
-		return;
-	}
-	int lastdot = -1;
-	for(int i=begin;i<end;++i){ //Assuming that the program variable names don't contain dot anywhere
-		if(program[i]=='.' or program[i]=='*'){
-			lastdot = i;
-		}
-	}
-	if(lastdot==-1 and !isdigit(program[begin])){
-		if(part(program,begin,begin+2)!="x_"){
-			cerr<<"Error in the variable in ["<<begin<<","<<end<<") i.e.:"<<part(program,begin,end)<<endl;
-		}
-		expression[stoi(part(program,begin+2,end))]+=1.0;
-		// children[0] = new node("pvar",begin,end);
-		return;
-	}
-	if(program[lastdot]=='*' or !isdigit(program[lastdot+1])){
-		int block=lastdot+1;
-		skip_spaces(begin,lastdot);
-		skip_spaces(block,end);
-		if(part(program,block,block+2)!="x_"){
-			cerr<<"Error in the variable in ["<<block<<","<<end<<")"<<endl;
-		}
-		expression[stoi(part(program,block+2,end))] += stod(part(program,begin,lastdot));
+		analyse_expr(begin,plusminus,negate);
+		form_vector(plusminus+1,end,program[plusminus]=='-');
 	}
 	else{
-		expression[0] += stod(part(program,begin,end));
-		return;
+		analyse_expr(begin,end,negate);
 	}
 }
 
@@ -416,7 +413,7 @@ void node::proc_expr(){
 	skip_spaces(begin,end);
 	constant = "expression";
 	expression.resize(nVariables+1);
-	recursively_form_vector(begin,end);
+	form_vector(begin,end,false);
 }
 
 void node::proc_constant(){
@@ -431,7 +428,6 @@ void node::proc_literal(bool negate){
 	skip_spaces(begin,end);
 	if(program[begin]=='~' or program[begin]=='!'){ //Assuming the sign for negation could be '!' or '~'
 		begin = begin+1;
-		// cout<<"I am here"<<negate<<!negate<<endl<<endl;
 		proc_literal(!negate);
 		return;
 	}
@@ -461,6 +457,20 @@ void node::proc_literal(bool negate){
 		children[0] = new node("expr",begin,sign);
 		children[1] = new node("expr",sign+2,end);
 	}
+	if(constant=="<="){
+		for(int i=0;i<=nVariables;i++){
+			children[0]->expression[i] = children[0]->expression[i]-children[1]->expression[i];
+			children[1]->expression[i] = 0;
+		}
+	}
+	else{
+		constant = "<=";
+		for(int i=0;i<=nVariables;i++){
+			children[0]->expression[i] = children[1]->expression[i]-children[0]->expression[i];
+		}
+	}
+	delete children[1];
+	children.resize(1);
 }
 
 void node::proc_bexpr(){
@@ -586,8 +596,7 @@ void node::print(){
 	}
 	else if(type=="literal"){
 		children[0]->print();
-		cout<<constant;
-		children[1]->print();
+		cout<<constant<<"0";
 		return;
 	}
 	else if(type=="affexpr"){
@@ -617,15 +626,13 @@ void node::print(){
 		cout<<children[i]<<"\t";
 	}
 	if(bracket!=NULL){
-		cout<<"Bracket: "<<bracket;
+		cout<<endl<<"Bracket: "<<bracket<<endl;
+		bracket->print();
 	}
-	cout<<endl<<"--------------------"<<endl;
 	for(int i=0;i<children.size();++i){
 		children[i]->print();
 	}
-	if(bracket!=NULL){
-		bracket->print();
-	}
+	cout<<endl<<"--------------------"<<endl;
 }
 
 CFG_edge::CFG_edge(){
@@ -651,14 +658,14 @@ void CFG_edge::print(){
 	else{
 		cout<<"Error! Error! Error!"<<endl;
 	}
-	if(toChange!=0 and change!=NULL){
+	if(change!=NULL){
 		cout<<"Change: x_"<<toChange<<" changed to ";
 		change->print();
 		cout<<endl;
 	}
 	if(guard!=NULL){
 		cout<<"Guard is: "<<endl;
-		// guard-> print();
+		guard-> print();
 	}
 	cout<<"Probability to occur is"<<probability<<endl<<endl; 
 }
@@ -670,22 +677,18 @@ CFG_location::CFG_location(string type,int label){
 }
 
 void CFG_location::print(){
-	// cout<<"Label: "<<label<<endl;
 	cout<<"Type: "<<type<<endl;
 	if(invariant!=NULL){
 		cout<<"Invariant: ";
 		cout<<invariant;
-		// invariant->print();
+		invariant->print();
 		cout<<endl;
 	}
 
-	// cout<<"Edges: "<<endl;
 	int i=1;
 	for(vector<CFG_edge>::iterator it = edges.begin();it!=edges.end();++it){
 		cout<<"Edge #"<<i<<endl;
-		// edges[i].print();
 		it->print();
 		i++;
 	}
 }
-

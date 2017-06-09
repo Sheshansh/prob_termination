@@ -42,7 +42,8 @@
 %\copyrightdata{978-1-nnnn-nnnn-n/yy/mm} 
 %\doi{nnnnnnn.nnnnnnn}
 
-%\theoremstyle{plain}
+%\theoremstyle{example}
+%\newtheorem{fact}{Fact}
 %\newtheorem{lemma}{Lemma}
 %\newtheorem{claim}{Claim}
 %\newtheorem{proposition}{Proposition}
@@ -401,12 +402,33 @@ sensitive = false
 \newcommand{\lem}{\eta}
 \newcommand{\preexp}[1]{\mathit{pre}_{#1}}
 \newcommand{\Out}{\mathit{Out}}
-\newcommand{\confset}{C}
+\newcommand{\confset}{Z}
 \newcommand{\stime}{T}
 \newcommand{\treach}[1]{\stime^{#1}}
 \newcommand{\ttime}{\mathit{Term}}
 
 \newcommand{\setmap}{\mathit{IC}}
+
+\newcommand{\Borel}{\mathcal{B}}
+\newcommand{\cylinder}{\mathit{Cyl}}
+\newcommand{\genPathSet}{A}
+\newcommand{\proj}{\pi}
+\newcommand{\updates}{U}
+\newcommand{\Fpath}{\mathit{Fpath}}
+\newcommand{\Conf}{\mathit{Conf}}
+\newcommand{\Run}{\mathit{Run}}
+\newcommand{\genpath}{\pi}
+\newcommand{\locsNB}{\locs_{\mathit{NB}}}
+\newcommand{\locsPB}{\locs_{\mathit{PB}}}
+\newcommand{\AppendixMaterial}{the supplementary material}
+\newcommand{\genfilt}{\mathcal{F}}
+
+\newcommand{\vecseq}[3]{\vec{#1}_{#2}[#3]}
+\newcommand{\genRunSet}{\genPathSet}
+\newcommand{\levelrank}[2]{\mathit{lev}_{#2}(#1)}
+\newcommand{\minlev}{\mathit{min}\text{-}\mathit{lev}}
+\newcommand{\noofdec}{\sharp}
+
 
 
 
@@ -457,7 +479,8 @@ sensitive = false
 
 %\input{introduction}
 \input{prelims}
-%\input{invariants-martingales}
+\input{invariants-martingales}
+\input{lexicographic}
 %\input{martingale-use}
 %\input{repulsing-use}
 %\input{effectivity}
@@ -473,7 +496,7 @@ sensitive = false
 
 %{\scriptsize
 \bibliographystyle{ACM-Reference-Format}
-\bibliography{bibliography-master}
+\bibliography{bibliography-master,new-popl18}
 %}
 %\clearpage
 %\appendix

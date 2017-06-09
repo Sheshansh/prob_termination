@@ -1,0 +1,17 @@
+[x_1 >= 0 and x_2 >= 1]
+while x_1 >= 1 do
+    [x_1>=1 and x_2>=1]
+    if prob(0.5) then
+        [x_1>=1 and x_2>=1]
+        x_2:= 2*x_2
+    else
+        [x_1>=1 and x_2>=1]
+        x_1:=x_1-1
+    fi
+od;
+[x_1>=0 and x_1<=1 and x_2>=0]
+while x_2 >= 1 do
+    [x_1>=0 and x_1<=1 and x_2 >= 1]
+    x_2:=x_2-1
+od
+[x_1>=0 and x_1<=1 and x_2>=0 and x_2<=1]
