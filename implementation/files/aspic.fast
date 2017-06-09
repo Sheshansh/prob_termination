@@ -1,0 +1,76 @@
+model main{
+
+	var x_1, x_2;
+
+	states state_1, state_2, state_3, state_4, state_5, state_6, state_7;
+
+	transition t_1_0 := {
+		from	:= state_1;
+		to	:= state_4;
+		guard	:= 1-1x_1<=0;
+		action	:= ;
+	};
+
+	transition t_1_1 := {
+		from	:= state_1;
+		to	:= state_3;
+		guard	:= -1+1x_1<=0;
+		action	:= ;
+	};
+
+	transition t_3_0 := {
+		from	:= state_3;
+		to	:= state_7;
+		guard	:= 1-1x_2<=0;
+		action	:= ;
+	};
+
+	transition t_3_1 := {
+		from	:= state_3;
+		to	:= state_2;
+		guard	:= -1+1x_2<=0;
+		action	:= ;
+	};
+
+	transition t_4_0 := {
+		from	:= state_4;
+		to	:= state_5;
+		guard	:= true;
+		action	:= ;
+	};
+
+	transition t_4_1 := {
+		from	:= state_4;
+		to	:= state_6;
+		guard	:= true;
+		action	:= ;
+	};
+
+	transition t_5_0 := {
+		from	:= state_5;
+		to	:= state_1;
+		guard	:= true;
+		action	:= x_2' = 2x_2;
+	};
+
+	transition t_6_0 := {
+		from	:= state_6;
+		to	:= state_1;
+		guard	:= true;
+		action	:= x_1' = -1+1x_1;
+	};
+
+	transition t_7_0 := {
+		from	:= state_7;
+		to	:= state_3;
+		guard	:= true;
+		action	:= x_2' = -1+1x_2;
+	};
+
+}
+
+strategy main_s{
+
+	Region init := {state = state_1 && x_1 >= 0 && x_2 >= 1};
+
+}

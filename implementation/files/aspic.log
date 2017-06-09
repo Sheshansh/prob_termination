@@ -1,0 +1,226 @@
+Analyzing : aspic.fst with acceleration. 
+2017, Jun 09,16:16:30 with aspic Version 3.4
+
+ The graph loops structure  = [[0; 3; 5; 4]; [2; 6]; 1]
+
+ strategy=[[(state_1,[t_6_0,t_5_0],true); (state_4,[t_1_0],false);
+            (state_6,[t_4_1],false); (state_5,[t_4_0],false)];
+           [(state_3,[t_7_0,t_1_1__tsplit1,t_1_1__tsplit0],true);
+            (state_7,[t_3_0],false)];
+           (state_2,[t_3_1],false)]
+  Processing strategy [[(state_1,[t_6_0,t_5_0],true);
+                        (state_4,[t_1_0],false); (state_6,[t_4_1],false);
+                        (state_5,[t_4_0],false)];
+                       [(state_3,[t_7_0,t_1_1__tsplit1,t_1_1__tsplit0],true);
+                        (state_7,[t_3_0],false)];
+                       (state_2,[t_3_1],false)]
+  Processing strategy [(state_1,[t_6_0,t_5_0],true); (state_4,[t_1_0],false);
+                       (state_6,[t_4_1],false); (state_5,[t_4_0],false)]
+
+  ** processing vertex state_4 :
+    the old polyhedron is  empty(2) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_1_0 (coming from loc state_1)
+    we apply the transfo to the poly {$>=0,1>0,x_1>=0,x_2>=1} in the prec hedge
+    contrib of hedge t_1_0 (coming from loc state_1) = {$>=0,1>0,x_2>=1,
+                                                        x_1>=1}
+    the contributions from the preceeding nodes is  {$>=0,1>0,x_2>=1,x_1>=1} 
+    nreach={$>=0,1>0,x_2>=1,x_1>=1}
+
+  ** processing vertex state_6 :
+    the old polyhedron is  empty(2) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_4_1 (coming from loc state_4)
+    we apply the transfo to the poly {$>=0,1>0,x_2>=1,x_1>=1} in the prec hedge
+    contrib of hedge t_4_1 (coming from loc state_4) = {$>=0,1>0,x_2>=1,
+                                                        x_1>=1}
+    the contributions from the preceeding nodes is  {$>=0,1>0,x_2>=1,x_1>=1} 
+    nreach={$>=0,1>0,x_2>=1,x_1>=1}
+
+  ** processing vertex state_5 :
+    the old polyhedron is  empty(2) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_4_0 (coming from loc state_4)
+    we apply the transfo to the poly {$>=0,1>0,x_2>=1,x_1>=1} in the prec hedge
+    contrib of hedge t_4_0 (coming from loc state_4) = {$>=0,1>0,x_2>=1,
+                                                        x_1>=1}
+    the contributions from the preceeding nodes is  {$>=0,1>0,x_2>=1,x_1>=1} 
+    nreach={$>=0,1>0,x_2>=1,x_1>=1}
+
+  ** processing vertex state_1 with widening:
+    the old polyhedron is  {$>=0,1>0,x_2>=1,x_1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_6_0 (coming from loc state_6)
+    we apply the transfo to the poly {$>=0,1>0,x_2>=1,x_1>=1} in the prec hedge
+    contrib of hedge t_6_0 (coming from loc state_6) = constraints not available(2)
+    dealing with hedge t_5_0 (coming from loc state_5)
+    we apply the transfo to the poly {$>=0,1>0,x_2>=1,x_1>=1} in the prec hedge
+    contrib of hedge t_5_0 (coming from loc state_5) = constraints not available(2)
+    the contributions from the preceeding nodes is  {1>0,$>=0,x_1>=0,x_2>=1} 
+    reach= {1>0,$>=0,x_2>=1,x_1>=0} 
+    no change, the abstr value is still {$>=0,1>0,x_2>=1,x_1>=0} 
+
+  ** processing vertex state_4 :
+    the old polyhedron is  {$>=0,1>0,x_2>=1,x_1>=1} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_1_0 (coming from loc state_1)
+    we apply the transfo to the poly {$>=0,1>0,x_2>=1,x_1>=0} in the prec hedge
+    contrib of hedge t_1_0 (coming from loc state_1) = {$>=0,1>0,x_2>=1,
+                                                        x_1>=1}
+    the contributions from the preceeding nodes is  {$>=0,1>0,x_2>=1,x_1>=1} 
+    reach= {$>=0,1>0,x_2>=1,x_1>=1} 
+    no change, the abstr value is still {$>=0,1>0,x_2>=1,x_1>=1} 
+
+  ** processing vertex state_6 :
+    the old polyhedron is  {$>=0,1>0,x_2>=1,x_1>=1} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_4_1 (coming from loc state_4)
+    we apply the transfo to the poly {$>=0,1>0,x_2>=1,x_1>=1} in the prec hedge
+    contrib of hedge t_4_1 (coming from loc state_4) = {$>=0,1>0,x_2>=1,
+                                                        x_1>=1}
+    the contributions from the preceeding nodes is  {$>=0,1>0,x_2>=1,x_1>=1} 
+    reach= {$>=0,1>0,x_2>=1,x_1>=1} 
+    no change, the abstr value is still {$>=0,1>0,x_2>=1,x_1>=1} 
+
+  ** processing vertex state_5 :
+    the old polyhedron is  {$>=0,1>0,x_2>=1,x_1>=1} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_4_0 (coming from loc state_4)
+    we apply the transfo to the poly {$>=0,1>0,x_2>=1,x_1>=1} in the prec hedge
+    contrib of hedge t_4_0 (coming from loc state_4) = {$>=0,1>0,x_2>=1,
+                                                        x_1>=1}
+    the contributions from the preceeding nodes is  {$>=0,1>0,x_2>=1,x_1>=1} 
+    reach= {$>=0,1>0,x_2>=1,x_1>=1} 
+    no change, the abstr value is still {$>=0,1>0,x_2>=1,x_1>=1} 
+
+  End Processing strategy [(state_1,[t_6_0,t_5_0],true);
+                           (state_4,[t_1_0],false); (state_6,[t_4_1],false);
+                           (state_5,[t_4_0],false)]
+  Sum up of the looping step (2 iteration(s))
+    acc(state_1)={$>=0,1>0,x_2>=1,x_1>=0}
+    acc(state_4)={$>=0,1>0,x_2>=1,x_1>=1}
+    acc(state_6)={$>=0,1>0,x_2>=1,x_1>=1}
+    acc(state_5)={$>=0,1>0,x_2>=1,x_1>=1}
+  Processing strategy [(state_3,[t_7_0,t_1_1__tsplit1,t_1_1__tsplit0],true);
+                       (state_7,[t_3_0],false)]
+
+  ** processing vertex state_3 with widening:
+    the old polyhedron is  empty(2) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_1_1__tsplit1 (coming from loc state_1)
+    we apply the transfo to the poly {$>=0,1>0,x_2>=1,x_1>=0} in the prec hedge
+    dealing with hedge t_1_1__tsplit0 (coming from loc state_1)
+    we apply the transfo to the poly {$>=0,1>0,x_2>=1,x_1>=0} in the prec hedge
+    contrib of hedge t_1_1__tsplit0 (coming from loc state_1) = {$>=0,1>0,
+                                                                 x_2>=1,
+                                                                 x_1>=0,
+                                                                 x_1<=1}
+    the contributions from the preceeding nodes is  {$>=0,1>0,x_2>=1,x_1>=0,
+                                                     x_1<=1} 
+    nreach={$>=0,1>0,x_2>=1,x_1>=0,x_1<=1}
+
+  ** processing vertex state_7 :
+    the old polyhedron is  empty(2) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_3_0 (coming from loc state_3)
+    we apply the transfo to the poly {$>=0,1>0,x_2>=1,x_1>=0,x_1<=1} in the prec hedge
+    contrib of hedge t_3_0 (coming from loc state_3) = {x_1<=1,$>=0,1>0,
+                                                        x_2>=1,x_1>=0}
+    the contributions from the preceeding nodes is  {x_1<=1,$>=0,1>0,x_2>=1,
+                                                     x_1>=0} 
+    nreach={x_1<=1,$>=0,1>0,x_2>=1,x_1>=0}
+
+  ** processing vertex state_3 with widening:
+    the old polyhedron is  {x_1<=1,$>=0,1>0,x_2>=1,x_1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_7_0 (coming from loc state_7)
+    we apply the transfo to the poly {x_1<=1,$>=0,1>0,x_2>=1,x_1>=0} in the prec hedge
+    contrib of hedge t_7_0 (coming from loc state_7) = constraints not available(2)
+    the contributions from the preceeding nodes is  constraints not available(2) 
+    nreach={x_1<=1,1>0,x_2>=0,$>=0,x_1>=0}
+     widen part :
+    widening {x_1<=1,$>=0,1>0,x_2>=1,x_1>=0} by {x_1<=1,1>0,x_2>=0,$>=0,
+                                                 x_1>=0} ? 
+   nb of hedges = 3
+        acceleration (or smt) and new control path  : do not widen
+
+  ** processing vertex state_7 :
+    the old polyhedron is  {x_1<=1,$>=0,1>0,x_2>=1,x_1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_3_0 (coming from loc state_3)
+    we apply the transfo to the poly {x_1<=1,1>0,x_2>=0,$>=0,x_1>=0} in the prec hedge
+    contrib of hedge t_3_0 (coming from loc state_3) = {x_1<=1,$>=0,1>0,
+                                                        x_2>=1,x_1>=0}
+    the contributions from the preceeding nodes is  {x_1<=1,$>=0,1>0,x_2>=1,
+                                                     x_1>=0} 
+    reach= {x_1<=1,$>=0,1>0,x_2>=1,x_1>=0} 
+    no change, the abstr value is still {x_1<=1,$>=0,1>0,x_2>=1,x_1>=0} 
+
+  ** processing vertex state_3 with widening:
+    the old polyhedron is  {x_1<=1,$>=0,1>0,x_2>=0,x_1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_7_0 (coming from loc state_7)
+    we apply the transfo to the poly {x_1<=1,$>=0,1>0,x_2>=1,x_1>=0} in the prec hedge
+    contrib of hedge t_7_0 (coming from loc state_7) = constraints not available(2)
+    the contributions from the preceeding nodes is  constraints not available(2) 
+    reach= {x_1<=1,$>=0,1>0,x_2>=0,x_1>=0} 
+    no change, the abstr value is still {x_1<=1,$>=0,1>0,x_2>=0,x_1>=0} 
+
+  ** processing vertex state_7 :
+    the old polyhedron is  {x_1<=1,$>=0,1>0,x_2>=1,x_1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_3_0 (coming from loc state_3)
+    we apply the transfo to the poly {x_1<=1,$>=0,1>0,x_2>=0,x_1>=0} in the prec hedge
+    contrib of hedge t_3_0 (coming from loc state_3) = {x_1<=1,$>=0,1>0,
+                                                        x_2>=1,x_1>=0}
+    the contributions from the preceeding nodes is  {x_1<=1,$>=0,1>0,x_2>=1,
+                                                     x_1>=0} 
+    reach= {x_1<=1,$>=0,1>0,x_2>=1,x_1>=0} 
+    no change, the abstr value is still {x_1<=1,$>=0,1>0,x_2>=1,x_1>=0} 
+
+  End Processing strategy [(state_3,[t_7_0,t_1_1__tsplit1,t_1_1__tsplit0],true);
+                           (state_7,[t_3_0],false)]
+  Sum up of the looping step (3 iteration(s))
+    acc(state_3)={x_1<=1,$>=0,1>0,x_2>=0,x_1>=0}
+    acc(state_7)={x_1<=1,$>=0,1>0,x_2>=1,x_1>=0}
+
+  ** processing vertex state_2 :
+    the old polyhedron is  empty(2) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_3_1 (coming from loc state_3)
+    we apply the transfo to the poly {x_1<=1,$>=0,1>0,x_2>=0,x_1>=0} in the prec hedge
+    contrib of hedge t_3_1 (coming from loc state_3) = {x_1<=1,$>=0,1>0,
+                                                        x_2>=0,x_1>=0,x_2<=1}
+    the contributions from the preceeding nodes is  {x_1<=1,$>=0,1>0,x_2>=0,
+                                                     x_1>=0,x_2<=1} 
+    nreach={x_1<=1,$>=0,1>0,x_2>=0,x_1>=0,x_2<=1}
+
+  End Processing strategy [[(state_1,[t_6_0,t_5_0],true);
+                            (state_4,[t_1_0],false); (state_6,[t_4_1],false);
+                            (state_5,[t_4_0],false)];
+                           [(state_3,[t_7_0,t_1_1__tsplit1,t_1_1__tsplit0],true);
+                            (state_7,[t_3_0],false)];
+                           (state_2,[t_3_1],false)]
+  Sum up of the looping step (1 iteration(s))
+    acc(state_1)={$>=0,1>0,x_2>=1,x_1>=0}
+    acc(state_4)={$>=0,1>0,x_2>=1,x_1>=1}
+    acc(state_6)={$>=0,1>0,x_2>=1,x_1>=1}
+    acc(state_5)={$>=0,1>0,x_2>=1,x_1>=1}
+    acc(state_3)={x_1<=1,$>=0,1>0,x_2>=0,x_1>=0}
+    acc(state_7)={x_1<=1,$>=0,1>0,x_2>=1,x_1>=0}
+    acc(state_2)={x_1<=1,$>=0,1>0,x_2>=0,x_1>=0,x_2<=1}
+
+   *  Invariants =  
+state_1 -----> {x_1>=0, x_2>=1} 
+
+state_2 -----> {x_2<=1, x_1>=0, x_2>=0, x_1<=1} 
+
+state_3 -----> {x_1>=0, x_2>=0, x_1<=1} 
+
+state_4 -----> {x_1>=1, x_2>=1} 
+
+state_5 -----> {x_1>=1, x_2>=1} 
+
+state_6 -----> {x_1>=1, x_2>=1} 
+
+state_7 -----> {x_1>=0, x_2>=1, x_1<=1} 

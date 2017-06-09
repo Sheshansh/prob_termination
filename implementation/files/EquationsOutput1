@@ -1,0 +1,11 @@
+CPLEX> Variable Name           Solution Value
+eps3                          1.000000
+eps8                          1.000000
+f_7_2                         2.000000
+f_3_2                         2.000000
+f_7_0                        -1.000000
+l56                           2.000000
+l63                           1.000000
+l64                           1.000000
+l65                           2.000000
+All other variables matching '*' are 0.

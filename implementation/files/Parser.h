@@ -27,7 +27,7 @@ private:
 //main process
 	void process(int s, int l, bool negate);
 public:
-	void print();
+	void print(ostream& outputfile = cout,string and_string = "and", string or_string = "or", string multiply_string = "");
 };
 
 struct CFG_location;
