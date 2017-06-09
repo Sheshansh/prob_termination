@@ -1,5 +1,10 @@
 // Do I have to add a self loop on the end CFG location, because then the epsilon equation creates issues
 // end node will always be 2
+/*
+Comments:
+	Ask Petr	When invariant is NULL the program gives wrong result, because it ignores the implication in that case
+https://tapas.labri.fr/wp/wp-content/uploads/2017/02/FAST-manual.pdf
+*/
 #include <iostream>
 #include <algorithm>
 #include <cstdio>
@@ -231,7 +236,10 @@ void generate_equations(){ //Would use the ostream file to write the equations i
 	epsilons_used = equations_counter;
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		// Invariant implies the ranking function to be positive
-		int nEquations = it->second->invariant->children.size();
+		int nEquations = 0;
+		if(it->second->invariant!=NULL){
+			nEquations = it->second->invariant->children.size();
+		}
 		for(int i=0;i<nEquations;i++){
 			cond* condition = new cond(it->first);
 			equations[++equations_counter] = new equation(it->second->invariant->children[i],condition);
@@ -410,61 +418,68 @@ int main(){
 	}
 	skip_spaces(begin,endprog);
 	root=new node("stmt",begin,endprog,start,end);
+	// cout<<last_used_label<<endl;
 	ofstream fastfile;
 	fastfile.open("files/aspic.fast");
 	ostream* outfast = &fastfile;
 	print_fast(*outfast);
 	fastfile.close();
-	// cout<<"Input Code:"<<endl;
-	// cout<<program<<endl;
-	// cout<<"Parse Tree:"<<endl;
-	// root->print();
-	// cout<<"CFG:"<<endl;
-	// for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
-	// 	cout<<"------------------------"<<endl;
-	// 	cout<<"Node "<<it->first<<endl;
-	// 	it->second->print();
-	// 	// cout<<it->second->label<<endl;
-	// }
-	generate_equations();
-	ofstream equationsfile;
-	for(int loop_counter=0;loop_counter<100;++loop_counter){	
-		cout<<"Iteration"<<loop_counter+1<<"->"<<endl;
-		equationsfile.open("files/equations.lp");
-		ostream* equation_output_file = &equationsfile;
-		print_equations(*equation_output_file);
-		equationsfile.close();
-		// Jugaad for calling cplex from within the code
-		if(system("./files/script.sh")!=0){
-			cout<<"Something wrong with the script analysing equations"<<endl;
-		}
-		//Processing the EquationsOutput file
-		bool state = process_equations_output();
-		if(state==false){
-			cout<<"No solution possible"<<endl;
-			string command;
-			command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
-			system(command.c_str());
-			break;
-		}
-		else{
-			//Some equation was deleted, some epsilon was 1
-			// cout<<equations.begin()->first<<" "<<epsilons_used<<endl;
-			if(equations.begin()->first>epsilons_used){
-				cout<<"Solution found"<<endl;
-				string command;
-				command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
-				system(command.c_str());
-				break;
-			}
-			else{
-				cout<<"Going into another iteration"<<endl;
-			}
-		}
-		string command;
-		command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
-		system(command.c_str());
-		// temporarily for just one iteration
+	if(system("./files/invariant_script.sh")!=0){
+		cout<<"Something wrong with the script to find invariants";
 	}
+	/*
+	// Code to print the tree structure etc.
+	cout<<"Input Code:"<<endl;
+	cout<<program<<endl;
+	cout<<"Parse Tree:"<<endl;
+	root->print();
+	cout<<"CFG:"<<endl;
+	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+		cout<<"------------------------"<<endl;
+		cout<<"Node "<<it->first<<endl;
+		it->second->print();
+		// cout<<it->second->label<<endl;
+	}
+	*/
+	// generate_equations();
+	// ofstream equationsfile;
+	// for(int loop_counter=0;loop_counter<100;++loop_counter){	
+	// 	cout<<"Iteration"<<loop_counter+1<<"->"<<endl;
+	// 	equationsfile.open("files/equations.lp");
+	// 	ostream* equation_output_file = &equationsfile;
+	// 	print_equations(*equation_output_file);
+	// 	equationsfile.close();
+	// 	// Jugaad for calling cplex from within the code
+	// 	if(system("./files/script.sh")!=0){
+	// 		cout<<"Something wrong with the script analysing equations"<<endl;
+	// 	}
+	// 	//Processing the EquationsOutput file
+	// 	bool state = process_equations_output();
+	// 	if(state==false){
+	// 		cout<<"No solution possible"<<endl;
+	// 		string command;
+	// 		command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+	// 		system(command.c_str());
+	// 		break;
+	// 	}
+	// 	else{
+	// 		//Some equation was deleted, some epsilon was 1
+	// 		// cout<<equations.begin()->first<<" "<<epsilons_used<<endl;
+	// 		if(equations.begin()->first>epsilons_used){
+	// 			cout<<"Solution found"<<endl;
+	// 			string command;
+	// 			command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+	// 			system(command.c_str());
+	// 			break;
+	// 		}
+	// 		else{
+	// 			cout<<"Going into another iteration"<<endl;
+	// 		}
+	// 	}
+	// 	string command;
+	// 	command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+	// 	system(command.c_str());
+	// 	// temporarily for just one iteration
+	// }
 	return 0;
 }

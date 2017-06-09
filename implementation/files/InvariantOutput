@@ -1,0 +1,55 @@
+
+*** 
+Aspic by Laure Gonnord, version 3.4  
+Binary compiled on vendredi  1 janvier 2016 
+Input file = files/aspic.fast 
+***
+ Configuration of Aspic * (version 3.4) 
+   * name of file : files/aspic.fast 
+   * inputfile of type (real) Fast format 
+   * DEBUG : Only prints analysis steps in a separate .log file 
+   * PRINTING STUFF : Invars(stdout) 
+   * ANALYSIS 
+    * with acceleration 
+   * delay of widening = 1 
+   * steps of descending sequence = 0 
+   * newpath heuristic = disabled 
+   * Name of model = main, Name of file = files/aspic.fast 
+   * 2 variable(s) and 9 locs(s) and 11 transitions(s) in the .fst
+   * Searching objective in fast strategy 
+       -> we suppose that we want to compute post*(init) with init a convex set
+       or post*(init) and bad if the state bad exists and bad is convex
+       -> Initial region "init" found
+       -> Finding initial polyhedron. OK. 
+       -> No bad region
+   * The initial state has label state_2 and the associated polyhedron is {
+$>=0,1>0} 
+   * There is/are 0 bad node(s)
+   * Printing option = Invars(stdout) 
+   * Parsing OK, now analysing 
+   * LRA with acceleration with delay =  1 
+
+*** Results : 
+   *  Invariants =  
+state_2 -----> {true} 
+
+state_3 -----> {false} 
+
+state_4 -----> {false} 
+
+state_1 -----> {false} 
+
+state_5 -----> {false} 
+
+state_6 -----> {false} 
+
+state_7 -----> {false} 
+
+state_8 -----> {false} 
+
+state_9 -----> {false} 
+   * Remember that we have no bad region 
+   * No accel has been applied
+   * Stats =  { time=0.000000; iterations=1; descendings=0; } 
+
+ Finished ! 
