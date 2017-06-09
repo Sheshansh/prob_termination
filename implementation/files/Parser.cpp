@@ -577,62 +577,69 @@ int find_variables(){
 	return variables.size();
 }
 
-void node::print(){
+void node::print(ostream& outputfile, string and_string, string or_string, string multiply_string){
 	if(type=="expr"){
+		bool something_printed = false;
 		if(expression[0]!=0.0){
-			cout<<expression[0];
+			outputfile<<expression[0];
+			something_printed = true;
 		}
 		for(int i = 1;i<=nVariables;i++){
 			if(expression[i]!=0.0){
 				if(expression[i]>0.0){
-					cout<<"+"<<expression[i]<<"x_"<<i;
+					if(something_printed==true){
+						outputfile<<"+"<<expression[i]<<multiply_string<<"x_"<<i;
+					}
+					else{
+						outputfile<<expression[i]<<multiply_string<<"x_"<<i;
+					}
+					something_printed = true;
 				}
 				else{
-					cout<<expression[i]<<"x_"<<i;
+					outputfile<<expression[i]<<multiply_string<<"x_"<<i;
+					something_printed = true;
 				}
 			}
 		}
 		return;
 	}
 	else if(type=="literal"){
-		children[0]->print();
-		cout<<constant<<"0";
+		children[0]->print(outputfile,and_string,or_string);
+		outputfile<<constant<<"0";
 		return;
 	}
 	else if(type=="affexpr"){
-		children[0]->print();
+		children[0]->print(outputfile,and_string,or_string);
 		for(int i=1;i<children.size();++i){
-			cout<<" and ";
-			children[i]->print();
+			outputfile<<" "<<and_string<<" ";
+			children[i]->print(outputfile,and_string,or_string);
 		}
 		return;
 	}
 	else if(type=="bexpr"){
-		cout<<"Add: "<<this<<"\t";
-		children[0]->print();
+		children[0]->print(outputfile,and_string,or_string);
 		for(int i=1;i<children.size();++i){
-			cout<<" or ";
-			children[i]->print();
+			outputfile<<" "<<or_string<<" ";
+			children[i]->print(outputfile,and_string,or_string);
 		}
-		cout<<endl<<"--------------------"<<endl;
 		return;
 	}
-	cout<<"Add: "<<this<<"\t";
-	cout<<"Type: "<<type<<"\t";
-	cout<<"Range: ["<<begin<<", "<<end<<")\t";
-	cout<<"Const: |"<<constant<<"|"<<endl;
-	cout<<"Children: ";
+	outputfile<<"Add: "<<this<<"\t";
+	outputfile<<"Type: "<<type<<"\t";
+	outputfile<<"Range: ["<<begin<<", "<<end<<")\t";
+	outputfile<<"Const: |"<<constant<<"|"<<endl;
+	outputfile<<"Children: ";
 	for(int i = 0;i<children.size();++i){
-		cout<<children[i]<<"\t";
+		outputfile<<children[i]<<"\t";
 	}
 	if(bracket!=NULL){
-		cout<<endl<<"Bracket: "<<bracket<<endl;
-		bracket->print();
+		outputfile<<endl<<"Bracket: "<<bracket<<endl;
+		bracket->print(outputfile,and_string,or_string);
 	}
 	for(int i=0;i<children.size();++i){
-		children[i]->print();
+		children[i]->print(outputfile,and_string,or_string);
 	}
-	cout<<endl<<"--------------------"<<endl;
+	outputfile<<endl<<"--------------------"<<endl;
 }
 
 CFG_edge::CFG_edge(){

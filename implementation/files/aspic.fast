@@ -1,62 +1,76 @@
-model ack {
+model main{
 
-  var m, n;
+	var x_1, x_2;
 
-  states start, cont1, a, b, stop3, stop2, stop1;
+	states state_1, state_2, state_3, state_4, state_5, state_6, state_7;
 
-  transition t0bis := {
-    from   := start;
-    to     := cont1;
-    guard  := m > 0.11102;
-    action := ;
-  };
+	transition t_1_0 := {
+		from	:= state_1;
+		to	:= state_4;
+		guard	:= 1-1x_1<=0;
+		action	:= ;
+	};
 
-  transition t0 := {
-    from   := start;
-    to     := stop1;
-    guard  := m <= 0;
-    action := ;
-  };
+	transition t_1_1 := {
+		from	:= state_1;
+		to	:= state_3;
+		guard	:= -1+1x_1<=0;
+		action	:= ;
+	};
 
-  transition t2 := {
-    from   := cont1;
-    to     := a;
-    guard  := n > 0;
-    action := n' = n - 1;
-  };
+	transition t_3_0 := {
+		from	:= state_3;
+		to	:= state_7;
+		guard	:= 1-1x_2<=0;
+		action	:= ;
+	};
 
-  transition t1 := {
-    from   := cont1;
-    to     := stop2;
-    guard  := n <= 0;
-    action := m' = m - 1, n' = 1;
-  };
+	transition t_3_1 := {
+		from	:= state_3;
+		to	:= state_2;
+		guard	:= -1+1x_2<=0;
+		action	:= ;
+	};
 
-  transition t3 := {
-    from   := a;
-    to     := b;
-    guard  := true;
-    action := m' = m - 1, n' = ?;
-  };
+	transition t_4_0 := {
+		from	:= state_4;
+		to	:= state_5;
+		guard	:= true;
+		action	:= ;
+	};
 
-  transition t4bis := {
-    from   := b;
-    to     := stop3;
-    guard  := n < 0;
-    action := ;
-  };
+	transition t_4_1 := {
+		from	:= state_4;
+		to	:= state_6;
+		guard	:= true;
+		action	:= ;
+	};
 
-  transition t4 := {
-    from   := b;
-    to     := start;
-    guard  := n >= 0;
-    action := ;
-  };
+	transition t_5_0 := {
+		from	:= state_5;
+		to	:= state_1;
+		guard	:= true;
+		action	:= x_2' = 2x_2;
+	};
+
+	transition t_6_0 := {
+		from	:= state_6;
+		to	:= state_1;
+		guard	:= true;
+		action	:= x_1' = -1+1x_1;
+	};
+
+	transition t_7_0 := {
+		from	:= state_7;
+		to	:= state_3;
+		guard	:= true;
+		action	:= x_2' = -1+1x_2;
+	};
 
 }
 
-strategy ack_s {
+strategy main_s{
 
-  Region init := {state = start && n >= 0 && m >= 0};
+	Region init := {state = state_1 && x_1 >= 0 && x_2 >= 1};
 
 }

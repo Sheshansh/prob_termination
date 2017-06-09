@@ -152,7 +152,7 @@ node* and_node(node* one,node* two){
 	return node_and;
 }
 
-void generate_equations(){ //Would use the ofstream file to write the equations into it later
+void generate_equations(){ //Would use the ostream file to write the equations into it later
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		if(it->second->type=="det"){
 			//Invariant and guard imply the value decrease
@@ -242,7 +242,7 @@ void generate_equations(){ //Would use the ofstream file to write the equations 
 
 int last_used_lambda = 0;
 
-void print_equations(ofstream& equationsfile){
+void print_equations(ostream& equationsfile){
 	// <flag> to be changed
 	
 	equationsfile<<"maximize ";
@@ -329,6 +329,49 @@ bool process_equations_output(){
 	return to_return;
 }
 
+void print_fast(ostream& fastfile){
+	fastfile<<"model main{\n\n";
+	fastfile<<"\tvar x_1";
+	for(int i=2;i<=nVariables;++i){
+		fastfile<<", x_"<<i;
+	}
+	fastfile<<";\n\n";
+
+	fastfile<<"\tstates state_1";
+	for(int i=2;i<=last_used_label;++i){
+		fastfile<<", state_"<<i;
+	}
+	fastfile<<";\n\n";
+
+	for(int i=1;i<=last_used_label;++i){
+		CFG_location* state = label_map[i];
+		for(int j=0;j<state->edges.size();++j){
+			fastfile<<"\ttransition t_"<<i<<"_"<<j<<" := {\n";
+			fastfile<<"\t\tfrom\t:= state_"<<i<<";\n";
+			fastfile<<"\t\tto\t:= state_"<<state->edges[j].next->label<<";\n";
+			fastfile<<"\t\tguard\t:= ";
+			if(state->edges[j].guard==NULL){
+				fastfile<<"true";
+			}
+			else{
+				state->edges[j].guard->print(fastfile,"&&","||");
+			}
+			fastfile<<";\n";
+			fastfile<<"\t\taction\t:= ";
+			if(state->edges[j].change!=NULL){
+				fastfile<<"x_"<<state->edges[j].toChange<<"' = ";
+				state->edges[j].change->print(fastfile);
+			}
+			//Print action here
+			fastfile<<";\n\t};\n\n";
+		}
+	}
+
+	fastfile<<"}\n\nstrategy main_s{\n\n";
+	fastfile<<"\tRegion init := {state = state_1 && x_1 >= 0 && x_2 >= 1};\n\n";
+	fastfile<<"}";
+}
+
 int main(){
 	int start,end;
 	char input[MAXL];
@@ -367,6 +410,11 @@ int main(){
 	}
 	skip_spaces(begin,endprog);
 	root=new node("stmt",begin,endprog,start,end);
+	ofstream fastfile;
+	fastfile.open("files/aspic.fast");
+	ostream* outfast = &fastfile;
+	print_fast(*outfast);
+	fastfile.close();
 	// cout<<"Input Code:"<<endl;
 	// cout<<program<<endl;
 	// cout<<"Parse Tree:"<<endl;
@@ -383,7 +431,8 @@ int main(){
 	for(int loop_counter=0;loop_counter<100;++loop_counter){	
 		cout<<"Iteration"<<loop_counter+1<<"->"<<endl;
 		equationsfile.open("files/equations.lp");
-		print_equations(equationsfile);
+		ostream* equation_output_file = &equationsfile;
+		print_equations(*equation_output_file);
 		equationsfile.close();
 		// Jugaad for calling cplex from within the code
 		if(system("./files/script.sh")!=0){
