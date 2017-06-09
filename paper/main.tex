@@ -425,9 +425,11 @@ sensitive = false
 
 \newcommand{\vecseq}[3]{\vec{#1}_{#2}[#3]}
 \newcommand{\genRunSet}{\genPathSet}
-\newcommand{\levelrank}[2]{\mathit{lev}_{#2}(#1)}
+\newcommand{\levelrank}[2]{\def\EmptyTest{#1}\ifdefempty{\EmptyTest}{\mathit{lev}_{#2}}{\mathit{lev}_{#2}(#1)}}
 \newcommand{\minlev}{\mathit{min}\text{-}\mathit{lev}}
 \newcommand{\noofdec}{\sharp}
+\newcommand{\fixn}[1]{{#1}^*}
+\newcommand{\indicator}[1]{{1}_{#1}}
 
 
 
