@@ -97,9 +97,11 @@ $$
 \tilde{X}_k(\omega) = \begin{dcases}
 0 & \text{if $\omega \not\in D$}\\
 B & \text{if $\omega \in D$ and $k<i$ }\\
-\vecseq{X}{k}{j}(\omega) & \text{ if $k\geq i$ and $\tilde{\stime}(\omega)>i$ 
+\vecseq{X}{k}{j}(\omega) & \text{if $\omega \in D$, $k\geq i$ and 
+$\tilde{\stime}(\omega)>i$ 
 }\\
-\vecseq{X}{\tilde{\stime}(\omega)}{j}(\omega) & \text{ if $k\geq i$ and 
+\vecseq{X}{\tilde{\stime}(\omega)}{j}(\omega) & \text{if $\omega\in D$, $k\geq 
+i$ and 
 $\tilde{\stime}(\omega)\leq i$ }.
 \end{dcases}
 $$
@@ -107,8 +109,26 @@ $$
 We prove several properties of the process $\{\tilde{X}_k\}_{k=0}^{\infty}$. 
 First, for all $k\geq 0$, $\tilde{X}_k(\omega)\geq K$, where $K<0$ is the 
 number 
-such that $\vec{X}_j(\omega)\geq K$ for all $j$ and $\omega$ (such a number 
-exists from the definition of LexRSM). Second, denote by 
+such that $\vec{X}_j(\omega)\geq (K,\dots,K)$ for all $j$ and $\omega$ (such a 
+number 
+exists from the definition of LexRSM). Second, for any $k\in \Nset_0$ denote by 
+$\noofdec_k$ the random variable such that $\noofdec_k(\omega) = |\{i'\in 
+\Nset\mid i \leq i' \leq k \text{ and } \levelrank{\omega}{i'}=j\} |$.
+We claim 
+that for each $k\geq i$ 
+it holds 
+\begin{equation}
+\label{eq:lexrsm-soundness-main}
+\E[\tilde{X}_k]\leq B\cdot \probm(D) - \eps\cdot\sum_{\ell=0}^{k-i-1} \probm(D 
+\cap \tilde{\stime}\geq k \cap \noofdec_k 
+\geq 
+\ell).
+\end{equation}
+
+The proof of~\eqref{eq:lexrsm-soundness-main} goes by induction on $k$. For 
+$k=i$ the sum on the right-hand side is over an empty set of indexes, so the 
+inequality immediately follows from the definition of $\tilde{X}_k$. Now assume 
+that~\eqref{eq:lexrsm-soundness-main} holds for some $k\geq i$. 
 %\begin{enumerate}
 %\
 %\end{itemize}
