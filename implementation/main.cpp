@@ -2,8 +2,7 @@
 // end node will always be 2
 /*
 Comments:
-	Ask Petr	When invariant is NULL the program gives wrong result, because it ignores the implication in that case
-https://tapas.labri.fr/wp/wp-content/uploads/2017/02/FAST-manual.pdf
+	https://tapas.labri.fr/wp/wp-content/uploads/2017/02/FAST-manual.pdf
 */
 #include <iostream>
 #include <algorithm>
@@ -376,7 +375,7 @@ void print_fast(ostream& fastfile){
 	}
 
 	fastfile<<"}\n\nstrategy main_s{\n\n";
-	fastfile<<"\tRegion init := {state = state_1 && x_1 >= 0 && x_2 >= 1};\n\n";
+	fastfile<<"\tRegion init := {state = state_1};\n\n";
 	fastfile<<"}";
 }
 
@@ -427,6 +426,21 @@ int main(){
 	if(system("./files/invariant_script.sh")!=0){
 		cout<<"Something wrong with the script to find invariants";
 	}
+	
+	// Code for analysing files/InvariantOutput comes here
+	ifstream invariant_file("files/InvariantOutput");
+	for(int i=1;i<=last_used_label;){
+		string line;
+		getline(invariant_file,line);
+		size_t open = line.find('{');
+		if(open!=string::npos){
+			size_t close = line.find('}');
+			cout<<open<<" "<<close<<" "<<part(line,open+1,close)<<endl;
+			// <flag> Left here
+			i++;
+		}
+	}
+
 	/*
 	// Code to print the tree structure etc.
 	cout<<"Input Code:"<<endl;
