@@ -35,6 +35,17 @@ void skip_spaces(int &begin, int &end){ //skips the spaces in the beginning and 
 	}
 }
 
+void skip_spaces(string& line){
+	int begin = 0,end = line.length();
+	while(begin<line.size() and isspace(line[begin])){
+		begin++;
+	}
+	while(end>0 and isspace(line[end-1])){
+		end--;
+	}
+	line = part(line,begin,end);
+}
+
 node::node(string t){
 	bracket = NULL;
 	begin = -1;
@@ -53,6 +64,36 @@ node::node(string t, int b, int e, int s, int l, bool negate){
 		cerr<<"Error! begin= "<<b<<" end= "<<e<<endl;
 	}
 	process(s,l,negate);
+}
+
+node::node(string t, string l){
+	type = t;
+	if(t=="bexpr"){
+		children.resize(1);
+		children[0] = new node("affexpr");
+		stringstream line_stream;
+		line_stream.str(l);
+		string comma_sep;
+		while(getline(line_stream,comma_sep,',')){
+			skip_spaces(comma_sep);
+			node* formed_literal = new node("literal",comma_sep);
+			children[0]->children.pb(formed_literal);
+		}
+	}
+	else if(t=="literal"){
+		constant = "and";
+		proc_literal(false,false,l);
+		// <flag> Do something with the return value, ask Petr for the specific case
+	}
+	else if(t=="expr"){
+		constant = "expression";
+		proc_expr(l);
+	}
+	else{
+		cerr<<"Wrong usage"<<endl;
+		return;
+	}
+	
 }
 
 void vcopy(vector<node*> &sink,vector<node*> &tocopy){
@@ -111,7 +152,31 @@ node* negation(node* tonegate){
 	return NULL;
 }
 
+node* and_node(node* one,node* two){
+	if(one->type!="bexpr" or two->type!="bexpr"){
+		cerr<<"Taking and of wrong type of nodes"<<endl;
+		return NULL;
+	}
+	node* node_and = NULL;
+	node* temp_affexpr = NULL;
+	node_and = new node("bexpr");
+	node_and->constant = "or";
+	int a = one->children.size(), b = two->children.size();
+	for(int i = 0;i<a;i++){
+		for(int j = 0;j<b;j++){
+			temp_affexpr = new node("affexpr");
+			temp_affexpr->constant = "and";
+			temp_affexpr->children = one->children[i]->children;
+			temp_affexpr->children.insert(temp_affexpr->children.end(),two->children[j]->children.begin(),two->children[j]->children.end());
+			node_and->children.pb(temp_affexpr);
+		}
+	}
+	return node_and;
+}
+
 void node::proc_stmt(int s,int l){
+	
+	// Code to add invariants manually at each node
 	skip_spaces(begin,end);
 	if(program[begin]=='['){
 		int closed_bracket = -1;
@@ -125,6 +190,7 @@ void node::proc_stmt(int s,int l){
 		label_map[s]->invariant = bracket;
 		begin = closed_bracket+1;
 	}
+	
 	skip_spaces(begin,end);
 	if(part(program,begin,end)=="skip"){
 		constant = "skip";
@@ -390,6 +456,41 @@ void node::analyse_expr(int begin,int end,bool negate){
 	}
 }
 
+void node::analyse_expr(string l,bool negate){
+	int x_pos = -1;
+	for(int i = 0;i<l.length();++i){
+		if(l[i]=='x'){
+			x_pos = i;
+		}
+	}
+	if(x_pos!=-1){
+		if(x_pos==0){
+			if(negate){
+				expression[stoi(part(l,x_pos+2,l.length()))] += -1.0;
+			}
+			else{
+				expression[stoi(part(l,x_pos+2,l.length()))] += 1.0;
+			}
+		}
+		else{
+			if(negate){
+				expression[0] -= stod(part(l,0,x_pos));
+			}
+			else{
+				expression[0] += stod(part(l,0,x_pos));
+			}
+		}
+	}
+	else{
+		if(negate){
+			expression[0] -= stod(l);
+		}
+		else{
+			expression[0] += stod(l);
+		}
+	}
+}
+
 void node::form_vector(int begin,int end,bool negate){ //Note that this shadows the original ones
 	skip_spaces(begin,end);
 	int plusminus = -1;
@@ -409,11 +510,36 @@ void node::form_vector(int begin,int end,bool negate){ //Note that this shadows 
 	}
 }
 
+void node::form_vector(string l,bool negate){
+	skip_spaces(l);
+	int plusminus = -1;
+	// Implemented as a linear but still recursive function
+	for(int i = 1;i<l.length();++i){
+		if(l[i]=='+' or l[i]=='-'){
+			plusminus = i;
+			break;
+		}
+	}
+	if(plusminus!=-1){
+		analyse_expr(part(l,0,plusminus),negate);
+		form_vector(part(l,plusminus+1,l.length()),l[plusminus]=='-');
+	}
+	else{
+		analyse_expr(l,negate);
+	}
+}
+
 void node::proc_expr(){
 	skip_spaces(begin,end);
 	constant = "expression";
 	expression.resize(nVariables+1);
 	form_vector(begin,end,false);
+}
+
+void node::proc_expr(string l){
+	skip_spaces(l);
+	expression.resize(nVariables+1);
+	form_vector(l,false);
 }
 
 void node::proc_constant(){
@@ -424,39 +550,78 @@ void node::proc_constant(){
 	}
 }
 
-void node::proc_literal(bool negate){
-	skip_spaces(begin,end);
-	if(program[begin]=='~' or program[begin]=='!'){ //Assuming the sign for negation could be '!' or '~'
-		begin = begin+1;
-		proc_literal(!negate);
-		return;
-	}
-	int sign = -1;
-	for(int i = begin;i<end-1;++i){
-		if(part(program,i,i+2)=="<=" or part(program,i,i+2)==">="){
-			sign = i;
-			break;
+bool node::proc_literal(bool negate,bool strategic, string line){
+	bool to_return = false;
+	if(strategic){
+		skip_spaces(begin,end);
+		if(program[begin]=='~' or program[begin]=='!'){ //Assuming the sign for negation could be '!' or '~'
+			begin = begin+1;
+			proc_literal(!negate);
+			return to_return;
 		}
-	}
-	if(sign==-1){
-		cerr<<"Invalid literal between "<<begin<<" "<<end<<endl;
-	}
-	else{
-		if(!negate){
-			constant=part(program,sign,sign+2);
+		int sign = -1;
+		for(int i = begin;i<end-1;++i){
+			if(part(program,i,i+2)=="<=" or part(program,i,i+2)==">="){
+				sign = i;
+				break;
+			}
+		}
+		if(sign==-1){
+			cerr<<"Invalid literal between "<<begin<<" "<<end<<endl;
 		}
 		else{
-			if(part(program,sign,sign+2)==">="){
-				constant = "<=";
+			if(!negate){
+				constant=part(program,sign,sign+2);
 			}
 			else{
-				constant = ">=";
+				if(part(program,sign,sign+2)==">="){
+					constant = "<=";
+				}
+				else{
+					constant = ">=";
+				}
+			}
+			children.resize(2);
+			children[0] = new node("expr",begin,sign);
+			children[1] = new node("expr",sign+2,end);
+		}
+	}
+	else{
+		int sign = -1;
+		for(int i=0;i<line.length()-1;++i){
+			if(line[i]=='<' or line[i]=='>' or line[i]=='='){
+				sign = i;
+				break;
 			}
 		}
 		children.resize(2);
-		children[0] = new node("expr",begin,sign);
-		children[1] = new node("expr",sign+2,end);
+		children[0] = new node("expr",part(line,begin,sign));
+		if(sign==-1){
+			cerr<<"Invalid literal";
+		}
+		else if(part(line,sign,sign+2)==">="){
+			constant = ">=";
+			children[1] = new node("expr",part(line,sign+2,end));
+		}
+		else if(part(line,sign,sign+2)=="<="){
+			constant = "<=";
+			children[1] = new node("expr",part(line,sign+2,end));
+		}
+		else if(line[sign]=='>'){
+			constant = ">=";
+			children[1] = new node("expr",part(line,sign+1,end));
+		}
+		else if(line[sign]=='<'){
+			constant = "<=";
+			children[1] = new node("expr",part(line,sign+1,end));
+		}
+		else{
+			constant = "<=";
+			children[1] = new node("expr",part(line,sign+1,end));
+			to_return = true;
+		}
 	}
+
 	if(constant=="<="){
 		for(int i=0;i<=nVariables;i++){
 			children[0]->expression[i] = children[0]->expression[i]-children[1]->expression[i];
@@ -471,6 +636,7 @@ void node::proc_literal(bool negate){
 	}
 	delete children[1];
 	children.resize(1);
+	return to_return;
 }
 
 void node::proc_bexpr(){
@@ -624,6 +790,7 @@ void node::print(ostream& outputfile, string and_string, string or_string, strin
 		}
 		return;
 	}
+	cout<<"alpha "<<type<<endl<<endl;
 	outputfile<<"Add: "<<this<<"\t";
 	outputfile<<"Type: "<<type<<"\t";
 	outputfile<<"Range: ["<<begin<<", "<<end<<")\t";
@@ -687,7 +854,7 @@ void CFG_location::print(){
 	cout<<"Type: "<<type<<endl;
 	if(invariant!=NULL){
 		cout<<"Invariant: ";
-		cout<<invariant;
+		cout<<invariant<<" : ";
 		invariant->print();
 		cout<<endl;
 	}
