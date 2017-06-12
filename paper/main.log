@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.28)  9 JUN 2017 16:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  12 JUN 2017 16:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **main.tex
 (./main.tex
 LaTeX2e <2016/03/31> patch level 3
-Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+Babel <3.9r> and hyphenation patterns for 53 language(s) loaded.
 (./acmart.cls
 Document Class: acmart 2017/05/14 v1.39 Typesetting articles for Association of
  Computing Machinery
@@ -1760,32 +1760,32 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
  [1.1{/home/pnovotny/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 ]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 10.0pt on input line 90.
+(Font)              scaled to size 10.0pt on input line 109.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 98.
+(Font)              scaled to size 10.0pt on input line 127.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 98.
+(Font)              scaled to size 7.3pt on input line 127.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 98.
+(Font)              scaled to size 5.5pt on input line 127.
  [2.2]
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 190.
+(Font)              scaled to size 10.0pt on input line 234.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 7.3pt on input line 190.
+(Font)              scaled to size 7.3pt on input line 234.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 5.5pt on input line 190.
+(Font)              scaled to size 5.5pt on input line 234.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 8.0pt on input line 254.
+(Font)              scaled to size 8.0pt on input line 298.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 6.2pt on input line 254.
+(Font)              scaled to size 6.2pt on input line 298.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 8.0pt on input line 254.
+(Font)              scaled to size 8.0pt on input line 298.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 6.2pt on input line 254.
+(Font)              scaled to size 6.2pt on input line 298.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.2pt on input line 254.
+(Font)              scaled to size 6.2pt on input line 298.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 8.0pt on input line 254.
+(Font)              scaled to size 8.0pt on input line 298.
 
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
@@ -1803,16 +1803,16 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 [5.5]
 \invrun=\box84
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 1120.
+(Font)              scaled to size 7.0pt on input line 1164.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 1160.
+(Font)              scaled to size 9.0pt on input line 1204.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 9.0pt on input line 1160.
+(Font)              scaled to size 9.0pt on input line 1204.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 9.0pt on input line 1160.
+(Font)              scaled to size 9.0pt on input line 1204.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 1160.
-) (./invariants-martingales.tex [6.6]
+(Font)              scaled to size 9.0pt on input line 1204.
+ [6.6]) (./invariants-martingales.tex
 
 Package natbib Warning: Citation `BEFH16:doob-decomposition' on page 7 undefine
 d on input line 91.
@@ -1824,25 +1824,25 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [7.7] [8.8]
+
+Package Fancyhdr Warning: \headheight is too small (13.0pt): 
+ Make it at least 22.47003pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[9.9]
 \nonterm=\box85
-
-
-Package Fancyhdr Warning: \headheight is too small (13.0pt): 
- Make it at least 22.47003pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[9.9]) (./lexicographic.tex [10.10]
+ [10.10]) (./lexicographic.tex
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[11.11]
+[11.11] [12.12]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [12.12]
+
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
@@ -1860,7 +1860,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 520.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 520.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 520.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: F68561205193B10DAB46518CBE933D82;2189.
+(rerunfilecheck)             Checksum: 22DDC07ED59F1B7F16A819C80B611553;2107.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -1873,13 +1873,13 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 520.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 44436 strings out of 493013
- 957165 string characters out of 6131492
- 1183155 words of memory out of 5000000
- 46310 multiletter control sequences out of 15000+600000
- 288375 words of font info for 571 fonts, out of 8000000 for 9000
- 1302 hyphenation exceptions out of 8191
- 62i,17n,96p,965b,6957s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44433 strings out of 493644
+ 957075 string characters out of 6150875
+ 1180541 words of memory out of 5000000
+ 46267 multiletter control sequences out of 15000+600000
+ 288021 words of font info for 569 fonts, out of 8000000 for 9000
+ 944 hyphenation exceptions out of 8191
+ 62i,18n,96p,965b,6957s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/liberti
 ne/lbtn_xogrpz.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/newt
 x/libertinealt.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/libe
@@ -1913,7 +1913,7 @@ e/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/txfonts/txsyc.pfb></home/
 pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/txsys.pfb></home/pnov
 otny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlr.pfb></home/pnovotny/
 texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlri.pfb>
-Output written on main.pdf (14 pages, 772683 bytes).
+Output written on main.pdf (14 pages, 774340 bytes).
 PDF statistics:
  401 PDF objects out of 1000 (max. 8388607)
  323 compressed objects within 4 object streams

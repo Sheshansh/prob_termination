@@ -42,15 +42,28 @@ $V=\{x_1,x_2,x_3,\dots\}$.
 %all valuations $\val$ with $\dom(\val)=\pvars$.
 
 
-\smallskip\noindent{\em Affine expressions.}
+\smallskip\noindent{\em Expressions.}
+An \emph{expression} over the set of variables $\{x_1,\dots,x_n\}$ 
+is an expression in the standard programming-language sense, i.e. a formula 
+built in finite number of steps from constants, variables $x_1,\dots,x_n$, and 
+numerical operators from some fixed finite set. Each expression $E$ over 
+$\{x_1,\dots,x_n\}$ 
+determines a function which for each $m$-dimensional vector $\vec{x}$, where 
+$m\geq n$,  
+returns a number resulting from substituting each $x_i$ in $E$ by $\vec{x}[i]$. 
+Slightly abusing our notation, we denote this function also by $E$ and the 
+value of this function on argument $\vec{x}$ by $E(\vec{x})$. 
+%An expression $E$ 
+%is \emph{measurable} if the function $E(\vec{x})$ is Borel 
+%measurable~\cite{xxx}.  In particular, expressions built using the standard 
+%arithmetic operators  are all measurable.
+
+\smallskip\noindent{\em Affine Expressions.}
 An \emph{affine expression} over the set of variables $\{x_1,\dots,x_n\}$ is an 
 expression of the form $d+\sum_{i=1}^{n}a_i
 x_i$, where  $d,a_1,\dots,a_n$ are real-valued
-constants. Each affine expression $E$ over $\{x_1,\dots,x_n\}$ 
-determines a function which for each $m$-dimensional vector $\vec{x}$, where $m\geq n$,  
-returns a number resulting from substituting each $x_i$ in $E$ by $\vec{x}[i]$. 
-Slightly abusing our notation, we denote this function also by $E$ and the 
-value of this function on argument $\vec{x}$ by $E(\vec{x})$. A function of the form $E(\vec{x})$ for some affine expression $E$ is called affine.
+constants.  A function of the form $E(\vec{x})$ for some affine expression $E$ 
+is called affine.
 %Following the terminology of~\cite{DBLP:conf/sas/KatoenMMM10} we fix the
 %following nomenclature:
 
@@ -87,11 +100,27 @@ and $\exsat{\phi} = \sat{\phi}
 
 
 \vspace{-1em}
-\subsection{Syntax of Affine Probabilistic Programs (\APP s)}\label{subsec:syntax}
+\subsection{Syntax of Probabilistic Programs}\label{subsec:syntax}
 \vspace{-0.5em}
 
+In this subsection we define the form of probabilistic programs that we 
+consider in our analysis. We consider two classes of probabilistic programs: 
+general probabilistic programs with arbitrary (measurable) expressions and 
+their subclass, affine probabilistic programs (\APP s) where are expressions 
+are restricted to be affine (see below for a precise definition). The reason 
+for this dual view is that our work also has two main points of focus: a 
+theoretical one, where we introduce new proof rules that can be used to prove 
+properties of general probabilistic programs; and an algorithmic one, where we 
+aim to prove properties of probabilistic programs automatically, using the 
+aforementioned proof rules. As already testified in the non-probabilistic 
+world, programs that contain only affine expressions allow for more efficient 
+automation of the analysis and at the same time, due to the presence of 
+non-determinism they can be used to form sound abstractions of programs with 
+non-linear arithmetic. Hence, we consider general programs when providing our 
+theoretical results and \APP s when presenting the automation of our techniques.
+
 \noindent{\em The Syntax.}
-We consider the standard syntax for affine probabilistic programs,
+We consider the standard syntax for probabilistic programs,
 which encompasses basic programming mechanisms such as assignment statement 
 (indicated by `:='), while-loop, if-branch. We also consider basic probabilistic mechanisms 
 such as probabilistic branch (indicated by `prob') and random sampling (e.g. 
@@ -102,15 +131,30 @@ uniformly sampled from interval $[-2,1]$). We also allow constructs for
 non-deterministic branching indicated by `\textbf{if }$\star$ \textbf{then...}' construct and non-deterministic assignment.  
 Variables (or identifiers) of a probabilistic program are of \emph{real} type, i.e., 
 values of the variables are real numbers. 
-We allow only affine expressions in test statements and in the right-hand sides of assignments.
-We also assume that assume that each \APP{} $\program$ is preceded by an initialization preamble 
+We also assume that assume that each \APP{} $\program$ is preceded by an 
+initialization preamble 
 in 
 which 
 each variable appearing in $\program$ is assigned some concrete number.
+the program variables are initialized. We do not a priori (\textbf{PETR: 
+elaborate one xpressions})
+
+\smallskip\noindent{\em Affine Probabilistic Programs (\APP s).}
+A probabilistic program is \emph{affine} if all the expressions that occur in 
+the program (i.e. in loop guards, conditionals and on right-hand sides of 
+assignments) are affine. We refer to the class of affine probabilistic programs 
+as \APP s.
+%We also assume that assume that each \APP{} $\program$ is preceded by an 
+%initialization preamble 
+%in 
+%which 
+%each variable appearing in $\program$ is assigned some concrete number.
 %the program variables are initialized.
-Due to space restrictions, details (such as grammar) are relegated to the Appendix.
+
+Due to space restrictions, details of syntax (such as grammar) are relegated to 
+the Appendix.
 For an example see Figure~\ref{fig:invariant-running}.
-We refer to this class of affine probabilistic programs as \APP s.
+
 
 
 
