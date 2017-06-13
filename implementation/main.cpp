@@ -2,6 +2,7 @@
 // end node will always be 2
 /*
 Comments:
+	Considering start invariant and neglecting all other invariants, also the start invariant should be a polyhedra(Which I think would not pose a problem)
 	https://tapas.labri.fr/wp/wp-content/uploads/2017/02/FAST-manual.pdf
 */
 #include <iostream>
@@ -49,9 +50,6 @@ struct cond{
 				}
 			}
 			else{
-				// cout<<"change is : src"<<src<<" dest:"<<dest1<<" toChange:"<<toChange<<" changed to:";
-				// change->print();
-				// cout<<endl;
 				buffer.clear();
 				buffer.str(string());
 				buffer<<"eps"<<equation_count<<"-f_"<<src<<"_0+f_"<<dest1<<"_0";
@@ -78,12 +76,9 @@ struct cond{
 						if(change->expression[i+1]!=0.0){
 							buffer<<change->expression[i+1]<<"f_"<<dest1<<"_"<<toChange;
 						}
-						// change->print();
-						// cout<<""<<endl;
 					}
 					buffer<<"-f_"<<src<<"_"<<i+1;
 					c[i] = buffer.str();
-					// cout<<c[i]<<endl;
 				}
 			}
 		}
@@ -134,30 +129,10 @@ map<int,equation*> equations;
 int equations_counter = 0;
 int epsilons_used = 0;
 
-node* and_node(node* one,node* two){
-	if(one->type!="bexpr" or two->type!="bexpr"){
-		cerr<<"Taking and of wrong type of nodes"<<endl;
-		return NULL;
-	}
-	node* node_and = NULL;
-	node* temp_affexpr = NULL;
-	node_and = new node("bexpr");
-	node_and->constant = "or";
-	int a = one->children.size(), b = two->children.size();
-	for(int i = 0;i<a;i++){
-		for(int j = 0;j<b;j++){
-			temp_affexpr = new node("affexpr");
-			temp_affexpr->constant = "and";
-			temp_affexpr->children = one->children[i]->children;
-			temp_affexpr->children.insert(temp_affexpr->children.end(),two->children[j]->children.begin(),two->children[j]->children.end());
-			node_and->children.pb(temp_affexpr);
-		}
-	}
-	return node_and;
-}
-
 void generate_equations(){ //Would use the ostream file to write the equations into it later
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+		it->second->invariant->print();
+		cout<<endl;
 		if(it->second->type=="det"){
 			//Invariant and guard imply the value decrease
 			if(it->second->edges.empty()){
@@ -168,8 +143,7 @@ void generate_equations(){ //Would use the ostream file to write the equations i
 				cond* condition = new cond(++equations_counter,it->second->edges[0].toChange,it->second->edges[0].change,it->first,it->second->edges[0].next->label);
 				// Guard would have been NULL here
 				if(it->second->invariant==NULL){
-					//This should never be the case as this would pose conditions that c==0 and d>0, which are not good
-					cerr<<"No invariant specified here"<<endl;
+					//It is the case when the invariant is false
 				}
 				else{
 					// Invariant implies the given condition
@@ -250,8 +224,6 @@ void generate_equations(){ //Would use the ostream file to write the equations i
 int last_used_lambda = 0;
 
 void print_equations(ostream& equationsfile){
-	// <flag> to be changed
-	
 	equationsfile<<"maximize ";
 	for(int i=1;i<=epsilons_used;++i){
 		if(equations.find(i)!=equations.end()){
@@ -322,10 +294,8 @@ bool process_equations_output(){
 	if(line=="CPLEX> Variable Name           Solution Value"){
 		string temp1,temp2;
 		while(to_process>>temp1>>temp2){
-			// cout<<temp1<<" "<<temp2<<endl;
 			if(temp1.length()>3){
 				if(temp1.substr(0,3)=="eps"){
-					// cout<<stoi(temp1.substr(3))<<endl;
 					equations.erase(stoi(temp1.substr(3)));
 					to_return = true;
 					//Removing those equations whose epsilon is 1
@@ -334,6 +304,18 @@ bool process_equations_output(){
 		}
 	}
 	return to_return;
+}
+
+string start_invariant(){
+	if(label_map[1]->invariant == NULL){
+		return "true";
+	}
+	else{
+		buffer.clear();
+		buffer.str(string());
+		label_map[1]->invariant->print(buffer,"&&","||");
+		return buffer.str();
+	}
 }
 
 void print_fast(ostream& fastfile){
@@ -375,7 +357,7 @@ void print_fast(ostream& fastfile){
 	}
 
 	fastfile<<"}\n\nstrategy main_s{\n\n";
-	fastfile<<"\tRegion init := {state = state_1};\n\n";
+	fastfile<<"\tRegion init := {state = state_1 && "<<start_invariant()<<"};\n\n";
 	fastfile<<"}";
 }
 
@@ -400,24 +382,7 @@ int main(){
 	int begin = 0;
 	int endprog = program.length();
 	skip_spaces(begin,endprog);
-	if(program[endprog-1]==']'){
-		//This means that there is an end invariant in the program and we can store that into label_map[end]
-		int open = -1;
-		for(int i = endprog-1;i>=0;--i){
-			if(program[i]=='['){
-				open = i;
-				break;
-			}
-		}
-		if(open==-1){
-			cerr<<"Some error with square brackets and end invariant"<<endl;
-		}
-		label_map[end]->invariant = new node("bexpr",open+1,endprog);
-		endprog = open;
-	}
-	skip_spaces(begin,endprog);
 	root=new node("stmt",begin,endprog,start,end);
-	// cout<<last_used_label<<endl;
 	ofstream fastfile;
 	fastfile.open("files/aspic.fast");
 	ostream* outfast = &fastfile;
@@ -435,65 +400,89 @@ int main(){
 		size_t open = line.find('{');
 		if(open!=string::npos){
 			size_t close = line.find('}');
-			cout<<open<<" "<<close<<" "<<part(line,open+1,close)<<endl;
-			// <flag> Left here
+			string invariant_string = part(line,open+1,close);
+			if(invariant_string=="true"){
+				if(label_map[i]->invariant==NULL){
+					// label_map[i]->invariant = new node("true"); //Effectively but add 0<=0 instead
+					label_map[i]->invariant = new node("bexpr");
+					node* concerned_node = label_map[i]->invariant;
+					concerned_node->children.resize(1);
+					concerned_node->children[0] = new node("affexpr");
+					concerned_node->children[0]->children.resize(1);
+					concerned_node->children[0]->children[0] = new node("literal");
+					concerned_node->children[0]->children[0]->constant = "<=";
+					concerned_node->children[0]->children[0]->children.resize(1);
+					concerned_node->children[0]->children[0]->children[0] = new node("expr");
+					concerned_node->children[0]->children[0]->children[0]->expression.resize(nVariables+1);
+				}
+			}
+			else if(invariant_string!="false"){
+				bool temp;
+				node* generated_invariant = new node("bexpr",invariant_string,temp);
+				if(label_map[i]->invariant==NULL){
+					label_map[i]->invariant = generated_invariant;
+				}
+				else if(i!=1){
+					label_map[i]->invariant = and_node(label_map[i]->invariant,generated_invariant);
+				}
+			}
 			i++;
 		}
 	}
 
-	/*
-	// Code to print the tree structure etc.
-	cout<<"Input Code:"<<endl;
-	cout<<program<<endl;
-	cout<<"Parse Tree:"<<endl;
-	root->print();
-	cout<<"CFG:"<<endl;
-	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
-		cout<<"------------------------"<<endl;
-		cout<<"Node "<<it->first<<endl;
-		it->second->print();
-		// cout<<it->second->label<<endl;
-	}
-	*/
-	// generate_equations();
-	// ofstream equationsfile;
-	// for(int loop_counter=0;loop_counter<100;++loop_counter){	
-	// 	cout<<"Iteration"<<loop_counter+1<<"->"<<endl;
-	// 	equationsfile.open("files/equations.lp");
-	// 	ostream* equation_output_file = &equationsfile;
-	// 	print_equations(*equation_output_file);
-	// 	equationsfile.close();
-	// 	// Jugaad for calling cplex from within the code
-	// 	if(system("./files/script.sh")!=0){
-	// 		cout<<"Something wrong with the script analysing equations"<<endl;
-	// 	}
-	// 	//Processing the EquationsOutput file
-	// 	bool state = process_equations_output();
-	// 	if(state==false){
-	// 		cout<<"No solution possible"<<endl;
-	// 		string command;
-	// 		command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
-	// 		system(command.c_str());
-	// 		break;
-	// 	}
-	// 	else{
-	// 		//Some equation was deleted, some epsilon was 1
-	// 		// cout<<equations.begin()->first<<" "<<epsilons_used<<endl;
-	// 		if(equations.begin()->first>epsilons_used){
-	// 			cout<<"Solution found"<<endl;
-	// 			string command;
-	// 			command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
-	// 			system(command.c_str());
-	// 			break;
-	// 		}
-	// 		else{
-	// 			cout<<"Going into another iteration"<<endl;
-	// 		}
-	// 	}
-	// 	string command;
-	// 	command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
-	// 	system(command.c_str());
-	// 	// temporarily for just one iteration
+	
+	// // Code to print the tree structure etc.
+	// cout<<"Input Code:"<<endl;
+	// cout<<program<<endl;
+	// cout<<"Parse Tree:"<<endl;
+	// root->print();
+	// cout<<"CFG:"<<endl;
+	// for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+	// 	cout<<"------------------------"<<endl;
+	// 	cout<<"Node "<<it->first<<endl;
+	// 	it->second->print();
+	// 	// cout<<it->second->label<<endl;
 	// }
+	
+	generate_equations();
+	ofstream equationsfile;
+	for(int loop_counter=0;loop_counter<100;++loop_counter){	
+		cout<<"Iteration"<<loop_counter+1<<"->"<<endl;
+		equationsfile.open("files/equations.lp");
+		ostream* equation_output_file = &equationsfile;
+		print_equations(*equation_output_file);
+		equationsfile.close();
+		// Jugaad for calling cplex from within the code
+		if(system("./files/script.sh")!=0){
+			cout<<"Something wrong with the script analysing equations"<<endl;
+		}
+		//Processing the EquationsOutput file
+		bool state = process_equations_output();
+		if(state==false){
+			cout<<"No solution possible"<<endl;
+			string command;
+			command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+			system(command.c_str());
+			break;
+		}
+		else{
+			//Some equation was deleted, some epsilon was 1
+			// cout<<equations.begin()->first<<" "<<epsilons_used<<endl;
+			if(equations.begin()->first>epsilons_used){
+				cout<<"Solution found"<<endl;
+				string command;
+				command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+				system(command.c_str());
+				break;
+			}
+			else{
+				cout<<"Going into another iteration"<<endl;
+			}
+		}
+		string command;
+		command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+		system(command.c_str());
+		// temporarily for just one iteration
+	}
 	return 0;
 }

@@ -11,6 +11,7 @@ struct node{
 	//constructor
 	node(string t);
 	node(string t, int b, int e, int s = 0, int l = 0, bool negate = false);
+	node(string t, string line, bool& to_return);
 private:
 //procs
 	void proc_stmt(int s,int l);
@@ -18,12 +19,15 @@ private:
 	void proc_affexpr();
 	void proc_pvar();
 	void analyse_expr(int begin,int end,bool negate);
+	void analyse_expr(string l,bool negate);
 	void proc_expr();
+	void proc_expr(string l);
 	void proc_constant();
-	void proc_literal(bool negate);
+	bool proc_literal(bool negate, bool strategic = true, string line = "");
 	void proc_bexpr();
 	void proc_ndbexpr();
 	void form_vector(int begin,int end,bool negate);
+	void form_vector(string l,bool negate);
 //main process
 	void process(int s, int l, bool negate);
 public:
@@ -58,11 +62,11 @@ public:
 void skip_spaces(int &begin, int &end);
 void vcopy(vector<node*> &sink,vector<node*> &tocopy);
 node* negation(node* tonegate);
+node* and_node(node* one,node* two);
 int find_variables();
 
 extern string program;
 extern int nVariables;
 extern int last_used_label;
 extern map<int,CFG_location*> label_map;
-extern node* id1;
 extern node* root;

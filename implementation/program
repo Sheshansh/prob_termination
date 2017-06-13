@@ -1,5 +1,3 @@
-x_1:=1;
-x_2:=1;
 while x_1 >= 1 do
     if prob(0.5) then
         x_2:= 2*x_2
