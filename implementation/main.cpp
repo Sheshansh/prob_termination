@@ -2,7 +2,6 @@
 // end node will always be 2
 /*
 Comments:
-	Ask Petr what to do about the specific case <flag>
 	Considering start invariant and neglecting all other invariants, also the start invariant should be a polyhedra(Which I think would not pose a problem)
 	https://tapas.labri.fr/wp/wp-content/uploads/2017/02/FAST-manual.pdf
 */
@@ -132,6 +131,8 @@ int epsilons_used = 0;
 
 void generate_equations(){ //Would use the ostream file to write the equations into it later
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+		it->second->invariant->print();
+		cout<<endl;
 		if(it->second->type=="det"){
 			//Invariant and guard imply the value decrease
 			if(it->second->edges.empty()){
@@ -142,9 +143,7 @@ void generate_equations(){ //Would use the ostream file to write the equations i
 				cond* condition = new cond(++equations_counter,it->second->edges[0].toChange,it->second->edges[0].change,it->first,it->second->edges[0].next->label);
 				// Guard would have been NULL here
 				if(it->second->invariant==NULL){
-					// <flag> Do something because true and false handling has changed
-					//This should never be the case as this would pose conditions that c==0 and d>0, which are not good
-					cerr<<"No invariant specified here"<<endl;
+					//It is the case when the invariant is false
 				}
 				else{
 					// Invariant implies the given condition
@@ -225,8 +224,6 @@ void generate_equations(){ //Would use the ostream file to write the equations i
 int last_used_lambda = 0;
 
 void print_equations(ostream& equationsfile){
-	// <flag> to be changed
-	
 	equationsfile<<"maximize ";
 	for(int i=1;i<=epsilons_used;++i){
 		if(equations.find(i)!=equations.end()){
@@ -406,18 +403,26 @@ int main(){
 			string invariant_string = part(line,open+1,close);
 			if(invariant_string=="true"){
 				if(label_map[i]->invariant==NULL){
-					label_map[i]->invariant = new node("true");
+					// label_map[i]->invariant = new node("true"); //Effectively but add 0<=0 instead
+					label_map[i]->invariant = new node("bexpr");
+					node* concerned_node = label_map[i]->invariant;
+					concerned_node->children.resize(1);
+					concerned_node->children[0] = new node("affexpr");
+					concerned_node->children[0]->children.resize(1);
+					concerned_node->children[0]->children[0] = new node("literal");
+					concerned_node->children[0]->children[0]->constant = "<=";
+					concerned_node->children[0]->children[0]->children.resize(1);
+					concerned_node->children[0]->children[0]->children[0] = new node("expr");
+					concerned_node->children[0]->children[0]->children[0]->expression.resize(nVariables+1);
 				}
 			}
-			else if(invariant_string=="false"){
-				label_map[i]->invariant = new node("false");
-			}
-			else{
-				node* generated_invariant = new node("bexpr",invariant_string);
+			else if(invariant_string!="false"){
+				bool temp;
+				node* generated_invariant = new node("bexpr",invariant_string,temp);
 				if(label_map[i]->invariant==NULL){
 					label_map[i]->invariant = generated_invariant;
 				}
-				else{
+				else if(i!=1){
 					label_map[i]->invariant = and_node(label_map[i]->invariant,generated_invariant);
 				}
 			}

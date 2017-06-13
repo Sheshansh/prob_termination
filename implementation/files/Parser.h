@@ -11,7 +11,7 @@ struct node{
 	//constructor
 	node(string t);
 	node(string t, int b, int e, int s = 0, int l = 0, bool negate = false);
-	node(string t, string line);
+	node(string t, string line, bool& to_return);
 private:
 //procs
 	void proc_stmt(int s,int l);
@@ -69,5 +69,4 @@ extern string program;
 extern int nVariables;
 extern int last_used_label;
 extern map<int,CFG_location*> label_map;
-extern node* id1;
 extern node* root;

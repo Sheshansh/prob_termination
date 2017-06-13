@@ -66,7 +66,7 @@ node::node(string t, int b, int e, int s, int l, bool negate){
 	process(s,l,negate);
 }
 
-node::node(string t, string l){
+node::node(string t, string l, bool& to_return){
 	type = t;
 	if(t=="bexpr"){
 		children.resize(1);
@@ -76,14 +76,32 @@ node::node(string t, string l){
 		string comma_sep;
 		while(getline(line_stream,comma_sep,',')){
 			skip_spaces(comma_sep);
-			node* formed_literal = new node("literal",comma_sep);
+			bool return_value = false;
+			node* formed_literal = new node("literal",comma_sep, return_value);
 			children[0]->children.pb(formed_literal);
+			if(return_value){
+				node* other_literal = new node("literal");
+				other_literal->constant = "<=";
+				other_literal->children.resize(1);
+				other_literal->children[0] = new node("expr");
+				other_literal->children[0]->expression.resize(nVariables+1);
+				for(int i=0;i<=nVariables;++i){
+					other_literal->children[0]->expression[i] = -1.0*formed_literal->children[0]->expression[i];
+				}
+				children[0]->children.pb(other_literal);
+				// formed_literal->print();
+				// cout<<endl;
+				// other_literal->print();
+				// cout<<endl;
+
+			}
 		}
 	}
 	else if(t=="literal"){
 		constant = "and";
-		proc_literal(false,false,l);
-		// <flag> Do something with the return value, ask Petr for the specific case
+		if(proc_literal(false,false,l)){
+			to_return = true;
+		}
 	}
 	else if(t=="expr"){
 		constant = "expression";
@@ -595,29 +613,30 @@ bool node::proc_literal(bool negate,bool strategic, string line){
 			}
 		}
 		children.resize(2);
-		children[0] = new node("expr",part(line,begin,sign));
+		bool temp;
+		children[0] = new node("expr",part(line,begin,sign),temp);
 		if(sign==-1){
 			cerr<<"Invalid literal";
 		}
 		else if(part(line,sign,sign+2)==">="){
 			constant = ">=";
-			children[1] = new node("expr",part(line,sign+2,end));
+			children[1] = new node("expr",part(line,sign+2,end),temp);
 		}
 		else if(part(line,sign,sign+2)=="<="){
 			constant = "<=";
-			children[1] = new node("expr",part(line,sign+2,end));
+			children[1] = new node("expr",part(line,sign+2,end),temp);
 		}
 		else if(line[sign]=='>'){
 			constant = ">=";
-			children[1] = new node("expr",part(line,sign+1,end));
+			children[1] = new node("expr",part(line,sign+1,end),temp);
 		}
 		else if(line[sign]=='<'){
 			constant = "<=";
-			children[1] = new node("expr",part(line,sign+1,end));
+			children[1] = new node("expr",part(line,sign+1,end),temp);
 		}
 		else{
 			constant = "<=";
-			children[1] = new node("expr",part(line,sign+1,end));
+			children[1] = new node("expr",part(line,sign+1,end),temp);
 			to_return = true;
 		}
 	}
@@ -767,6 +786,9 @@ void node::print(ostream& outputfile, string and_string, string or_string, strin
 				}
 			}
 		}
+		if(!something_printed){
+			outputfile<<"0";
+		}
 		return;
 	}
 	else if(type=="literal"){
@@ -790,7 +812,6 @@ void node::print(ostream& outputfile, string and_string, string or_string, strin
 		}
 		return;
 	}
-	cout<<"alpha "<<type<<endl<<endl;
 	outputfile<<"Add: "<<this<<"\t";
 	outputfile<<"Type: "<<type<<"\t";
 	outputfile<<"Range: ["<<begin<<", "<<end<<")\t";
