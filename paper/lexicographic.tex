@@ -3,7 +3,54 @@
 
 In this section we introduce the notion of a \emph{lexicographic ranking 
 supermartingale}, which generalizes the standard notion of ranking 
-supermartingales.
+supermartingales. However, to define any form of a supermartingale, we need the crucial notion of conditional expectation.
+
+\smallskip\noindent{\bf Conditional Expectation.} 
+%The notion of conditional expectation 
+%tightly connected to martingales. We present only a brief informal exposition 
+%here, for formal treatment see, e.g.~\cite[Chapter 9]{Williams:book}.
+Let $(\Omega,\mathcal{F},\probm)$ be a probability space, 
+$X\colon\Omega\rightarrow 
+\Rset$ an $\mathcal{F}$-measurable function, and $\mathcal{F}'\subseteq 
+\mathcal{F}$ sub-sigma-algebra of $\mathcal{F}$. The \emph{conditional 
+	expectation} of $X$ given $\mathcal{F}'$ is an $\mathcal{F}'$-measurable random 
+variable denoted by $\E[X| \mathcal{F}']$ which satisfies, for each set $A\in 
+\mathcal{F}'$, the following: 
+\begin{equation}
+\label{eq:cond-exp}
+\E[X\cdot 1_A] = \E[\E[X|\mathcal{F}]\cdot 1_A],
+\end{equation}
+where $1_A \colon \Omega\rightarrow \{0,1\}$ is an \emph{indicator function} of 
+$A$, i.e. function returning $1$ for 
+each $\omega\in A$ and $0$ for each $\omega\in \Omega\setminus A$. Note that 
+the left hand-side of~\eqref{eq:cond-exp} intuitively represents the expected 
+value 
+of $X(\omega)$ with domain restricted to $A$.
+
+In context of probabilistic programs we work with probability 
+spaces of the form $(\Omega,\natfilt,\probm^\sigma)$, where $\Omega$ is a 
+set of runs in some $\pCFG$ and $\natfilt$ is (the smallest) sigma-algebra 
+such that all the functions $\cfg{\sigma}{i}$, where $i\in \Nset_0$ and 
+$\sigma$ is a scheduler, are $\natfilt$-measurable. In such a setting we can 
+also consider sub-sigma-algebras $\natfilt_i$, $i\in \Nset_0$, of 
+$\natfilt$, where $\natfilt_i$ is the smallest sub-sigma-algebra of 
+$\natfilt$ such that all the functions $\cfg{\sigma}{j}$, $0\leq j \leq 
+i$, are $\natfilt_i$-measurable. Intuitively, each set $A$ belonging to such 
+an $\natfilt_i$ consists of runs whose first $i$ steps satisfy some 
+property, and the probability space $(\Omega,\natfilt_i,\probm^\sigma)$ 
+allows us to reason about probabilities of certain events happening in the 
+first 
+$i$ steps of program execution. 
+%(note that since $\natfilt_i \subseteq 
+%\natfilt$, we can view $\probm^\sigma$ also as a function of type 
+%$\natfilt_i\rightarrow [0,1]$). 
+Then, for each $A\in \natfilt_i$, the 
+value $\E[\E[X|\natfilt_i]\cdot 1_A]$ represents the expected value of 
+$X(\run)$ for the randomly generated run $\run$ provided that we restrict to 
+runs whose
+prefix of length $i$ satisfies the property given by $A$. 
+The sequence $\natfilt_0,\natfilt_1,\natfilt_2,\dots$ forms a 
+filtration of $\natfilt$, which we call a \emph{canonical filtration}.
 
 \begin{definition}[Lexicographic Ranking Supermartingale]
 Let $(\Omega,\genfilt,\probm)$ be a probability space, 
@@ -21,6 +68,8 @@ $\{\vecseq{X}{i}{j}\}_{i=0}^{\infty}$ is adapted to
 $\{\genfilt_i\}_{i=0}^{\infty}$.
 %\item For each $i\in \Nset_0$ and each $1\leq j \leq n$ it holds 
 %$\E[|\vecseq{X}{i}{j}|]<\infty$.
+\item For each $\omega \in \Omega$ and $i\in \Nset_0$ it holds 
+$\vec{X}_i (\omega)\geq \vec{0}$ (componentwise).
 \item For each $i\in \Nset_0$ and each $\omega\in \Omega$ with 
 $\stime(\omega)>i$ there exists $1\leq j 
 \leq n$ such that
@@ -31,10 +80,10 @@ $\stime(\omega)>i$ there exists $1\leq j
 	\item for all $1 \leq j' < j$ it holds $\E[\vecseq{X}{i+1}{j'}\mid 
 	\genfilt_i](\omega)\leq\vecseq{X}{i}{j'}(\omega)$.
 \end{compactitem}
-\item For each $\omega \in \Omega$ and $i\in \Nset_0$ it holds 
-$\vec{X}_i (\omega)\geq \vec{0}$ (componentwise).
 \end{compactenum}
 \end{definition}
+
+The 1-dimensional lexicographic $\eps$-ranking supermartingale is, to a large extent, equivalent to the notion of a ranking supermartingale as studied in~\cite{xxx}. There is one significant difference: in~\cite{xxx} there is an additional \emph{integrability} condition imposed on the one-dimensional process $\{X_i\}_{i=0}^{\infty}$, which requires that for each $i\geq 0$ it holds $\E[|X_i|]<\infty$ (or equivalently $\E[X_i]<\infty$, as the process is required to be non-negative). We do not impose this condition, and indeed, it is possible to define a 3-dimensional LexRSM $\{\vec{X}_{i}\}_{i=0}^{\infty}$ such that $\E[X[3]_i]=\infty$ for some $i$ \textbf{[PETR: EXAMPLE]}. However, closer inspection of proofs in~\cite{xxx} that link 1-dimensional ranking supermartingales to a.s. termination reveals that the integrability condition is never explicitly used there. Indeed, the only point in which integrability is needed is to ensure that the conditional expectations exist and are well-defined. However, the existence of conditional expectations is also guaranteed for random variables that are non-negative, even if their expected value if infinite, see Theorem~\ref{xxx}. This is exactly the case in both the original 1-dimensional ranking supermartingales and our generalization to LexRSMs. Below we show, that also in the LexRSM case we do not need integrability to prove a.s. termination, and hence we drop the condition altogether. This is particularly relevant when applying LexRSMs to programs with non-linear arithmetic, where proving integrability of LexRSM is more difficult than in the affine case, see Example~\ref{xxx}. 
 
 \begin{theorem}
 Let $(\Omega,\genfilt,\probm)$ be a probability space, 

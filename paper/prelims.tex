@@ -3,7 +3,7 @@
 \section{Preliminaries}\label{sec:prelim}
 
 \vspace{-1em}
-\subsection{Basic Notions, Linear Predicates, Valuations}
+\subsection{Basic Notions}
 \vspace{-0.5em}
 For a set $A$ we denote by $|A|$ the cardinality of $A$. We denote by $\Nset$,
 $\Nset_0$, $\Zset$, and $\Rset$ the sets of all positive integers, non-negative
@@ -42,54 +42,57 @@ $V=\{x_1,x_2,x_3,\dots\}$.
 %all valuations $\val$ with $\dom(\val)=\pvars$.
 
 
-\smallskip\noindent{\em Expressions.}
-An \emph{expression} over the set of variables $\{x_1,\dots,x_n\}$ 
-is an expression in the standard programming-language sense, i.e. a formula 
-built in finite number of steps from constants, variables $x_1,\dots,x_n$, and 
-numerical operators from some fixed finite set. Each expression $E$ over 
-$\{x_1,\dots,x_n\}$ 
-determines a function which for each $m$-dimensional vector $\vec{x}$, where 
-$m\geq n$,  
-returns a number resulting from substituting each $x_i$ in $E$ by $\vec{x}[i]$. 
-Slightly abusing our notation, we denote this function also by $E$ and the 
-value of this function on argument $\vec{x}$ by $E(\vec{x})$. 
-%An expression $E$ 
-%is \emph{measurable} if the function $E(\vec{x})$ is Borel 
-%measurable~\cite{xxx}.  In particular, expressions built using the standard 
-%arithmetic operators  are all measurable.
-
-\smallskip\noindent{\em Affine Expressions.}
-An \emph{affine expression} over the set of variables $\{x_1,\dots,x_n\}$ is an 
-expression of the form $d+\sum_{i=1}^{n}a_i
-x_i$, where  $d,a_1,\dots,a_n$ are real-valued
-constants.  A function of the form $E(\vec{x})$ for some affine expression $E$ 
-is called affine.
-%Following the terminology of~\cite{DBLP:conf/sas/KatoenMMM10} we fix the
-%following nomenclature:
-
-\smallskip\noindent{\em Linear constraint, assertion, predicates.}
-We use the following nomenclature:
-\begin{compactitem}
-\item {\em Linear Constraint.} A \emph{linear constraint} is a formula of the
-form $\psi$ or $\neg\psi$, where  $\psi$ is a non-strict inequality
-between affine expressions.
-\item {\em Linear Assertion.} A \emph{linear assertion} is a finite conjunction
-of linear constraints.
-\item {\em Propositionally Linear Predicate.}
-A  \emph{propositionally linear predicate} (PLP) is a finite disjunction of
-linear assertions.
-\end{compactitem}
-
-\noindent{\em Arity and satisfaction of PLP.}
-%The \emph{arity} of a PLP is the number of distinct variables appearing in it. 
-For a PLP $\varphi$ we denote by $\vars(\varphi)$ the set of all variables that 
-appear in $\varphi$. As noted above, we stipulate that $\vars(\varphi)=\{x_1,\dots,x_{n(\varphi)}\}$ for some $n(\varphi)\in \Nset$. A vector $\vec{x}$ of dimension $m\geq n(\varphi)$ \emph{satisfies} $\varphi$, we write 
-$\vec{x}\models\phi$, if 
- the arithmetic formula obtained by 
-substituting each occurrence of a variable $x_i$ in $\varphi$ by $\vec{x}[i]$ is 
-valid. We denote $\sat{\phi} = \{\vec{x}\in \Rset^m\mid m\geq n(\varphi) \wedge \vec{x} \models\phi\}$ 
-and $\exsat{\phi} = \sat{\phi}
-\cap \Rset^{n(\varphi)}$. 
+%\smallskip\noindent{\em Expressions.}
+%An \emph{expression} over the set of variables $\{x_1,\dots,x_n\}$ 
+%is an expression in the standard programming-language sense, i.e. a formula 
+%built in finite number of steps from constants, variables $x_1,\dots,x_n$, and 
+%numerical operators from some fixed finite set. Each expression $E$ over 
+%$\{x_1,\dots,x_n\}$ 
+%determines a function which for each $m$-dimensional vector $\vec{x}$, where 
+%$m\geq n$,  
+%returns a number resulting from substituting each $x_i$ in $E$ by $\vec{x}[i]$. 
+%Slightly abusing our notation, we denote this function also by $E$ and the 
+%value of this function on argument $\vec{x}$ by $E(\vec{x})$. 
+%%An expression $E$ 
+%%is \emph{measurable} if the function $E(\vec{x})$ is Borel 
+%%measurable~\cite{xxx}.  In particular, expressions built using the standard 
+%%arithmetic operators  are all measurable.
+%
+%\smallskip\noindent{\em Affine Expressions.}
+%An \emph{affine expression} over the set of variables $\{x_1,\dots,x_n\}$ is an 
+%expression of the form $d+\sum_{i=1}^{n}a_i
+%x_i$, where  $d,a_1,\dots,a_n$ are real-valued
+%constants.  A function of the form $E(\vec{x})$ for some affine expression $E$ 
+%is called affine.
+%%Following the terminology of~\cite{DBLP:conf/sas/KatoenMMM10} we fix the
+%%following nomenclature
+%
+%\smallskip\noindent{\em Predicates}
+%A \emph{predicate} is a logical formula obtained by a finite number of applications of conjunction, disjunction and negation operations on \emph{atomic predicates} of the form $E(\vec{x})\leq E'(\vec{y})$, where $E$, $E'$ are expressions.
+%
+%\smallskip\noindent{\em Linear constraints, assertions, predicates.}
+%In the case of predicates involving only linear expression we use the following nomenclature:
+%\begin{compactitem}
+%\item {\em Linear Constraint.} A \emph{linear constraint} is a formula of the
+%form $\psi$ or $\neg\psi$, where  $\psi$ is a non-strict inequality
+%between affine expressions.
+%\item {\em Linear Assertion.} A \emph{linear assertion} is a finite conjunction
+%of linear constraints.
+%\item {\em Propositionally Linear Predicate.}
+%A  \emph{propositionally linear predicate} (PLP) is a finite disjunction of
+%linear assertions.
+%\end{compactitem}
+%
+%\noindent{\em Arity and satisfaction of PLP.}
+%%The \emph{arity} of a PLP is the number of distinct variables appearing in it. 
+%For a PLP $\varphi$ we denote by $\vars(\varphi)$ the set of all variables that 
+%appear in $\varphi$. As noted above, we stipulate that $\vars(\varphi)=\{x_1,\dots,x_{n(\varphi)}\}$ for some $n(\varphi)\in \Nset$. A vector $\vec{x}$ of dimension $m\geq n(\varphi)$ \emph{satisfies} $\varphi$, we write 
+%$\vec{x}\models\phi$, if 
+% the arithmetic formula obtained by 
+%substituting each occurrence of a variable $x_i$ in $\varphi$ by $\vec{x}[i]$ is 
+%valid. We denote $\sat{\phi} = \{\vec{x}\in \Rset^m\mid m\geq n(\varphi) \wedge \vec{x} \models\phi\}$ 
+%and $\exsat{\phi} = \sat{\phi}
+%\cap \Rset^{n(\varphi)}$. 
 
 
 %In this paper, we deem any linear assertion equivalently as a polyhedron
@@ -119,10 +122,74 @@ non-determinism they can be used to form sound abstractions of programs with
 non-linear arithmetic. Hence, we consider general programs when providing our 
 theoretical results and \APP s when presenting the automation of our techniques.
 
-\noindent{\em The Syntax.}
+\smallskip\noindent{\em Expressions.}
+An \emph{expression} over the set of variables $\{x_1,\dots,x_n\}$ 
+is an expression in the standard programming-language sense, i.e. a formula 
+built in finite number of steps from constants, variables $x_1,\dots,x_n$, and 
+numerical operators from some fixed finite set. Each expression $E$ over 
+$\{x_1,\dots,x_n\}$ 
+determines a function which for each $m$-dimensional vector $\vec{x}$, where 
+$m\geq n$,  
+returns a number resulting from substituting each $x_i$ in $E$ by $\vec{x}[i]$. 
+Slightly abusing our notation, we denote this function also by $E$ and the 
+value of this function on argument $\vec{x}$ by $E(\vec{x})$. We do not a priori fix a concrete set of operators that can be used to form expressions. However, in order to ensure that semantics of probabilistic programs with real-valued variables is defined correctly, we impose the following two conditions on the set of expressions used in each program:
+\begin{enumerate}
+\item
+For each expression $E$ over variables $\{x_1,\dots,x_n\}$ and each $n$-dimensional vector $\vec{x}$ the value $E(\vec{x})$ is well defined.\footnote{Our results can be easily extended to programs where encountering an expression of undefined value, such as division by zero, triggers an exception which terminates the program, but we abstract away from such details for the sake of clarity.}
+\item
+The function defined by each expression $E$ is Borel-measurable (for definition of Borel-measura\-bility, see, e.g.~\cite{Billingsley:book}).
+\end{enumerate}
+
+From measure theory it is known that these conditions hold in particular for programs where expressions are build using the standard arithmetic operators of addition, subtraction, multiplication, and division (provided that expressions evaluating to zero are not allowed as divisors).
+
+%An expression $E$ 
+%is \emph{measurable} if the function $E(\vec{x})$ is Borel 
+%measurable~\cite{xxx}.  In particular, expressions built using the standard 
+%arithmetic operators  are all measurable.
+
+\smallskip\noindent{\em Affine Expressions.}
+An \emph{affine expression} over the set of variables $\{x_1,\dots,x_n\}$ is an 
+expression of the form $d+\sum_{i=1}^{n}a_i
+x_i$, where  $d,a_1,\dots,a_n$ are real-valued
+constants.  A function of the form $E(\vec{x})$ for some affine expression $E$ 
+is called affine. As noted above
+%Following the terminology of~\cite{DBLP:conf/sas/KatoenMMM10} we fix the
+%following nomenclature
+
+\smallskip\noindent{\em Predicates}
+A \emph{predicate} is a logical formula obtained by a finite number of applications of conjunction, disjunction and negation operations on \emph{atomic predicates} of the form $E(\vec{x})\leq E'(\vec{y})$, where $E$, $E'$ are expressions.
+
+\smallskip\noindent{\em Linear constraints, assertions, predicates.}
+In the case of predicates involving only linear expression we use the following nomenclature:
+\begin{compactitem}
+	\item {\em Linear Constraint.} A \emph{linear constraint} is a formula of the
+	form $\psi$ or $\neg\psi$, where  $\psi$ is a non-strict inequality
+	between affine expressions.
+	\item {\em Linear Assertion.} A \emph{linear assertion} is a finite conjunction
+	of linear constraints.
+	\item {\em Propositionally Linear Predicate.}
+	A  \emph{propositionally linear predicate} (PLP) is a finite disjunction of
+	linear assertions.
+\end{compactitem}
+
+\textbf{[PETR: SAY SOMETHING ABOUT PREDICATE SATISFACTION.]}
+\textbf{[PETR: EXPLAIN BOREL-MEASURABILITY IN MORE DETAIL?]}
+
+%\noindent{\em Arity and satisfaction of PLP.}
+%%The \emph{arity} of a PLP is the number of distinct variables appearing in it. 
+%For a PLP $\varphi$ we denote by $\vars(\varphi)$ the set of all variables that 
+%appear in $\varphi$. As noted above, we stipulate that $\vars(\varphi)=\{x_1,\dots,x_{n(\varphi)}\}$ for some $n(\varphi)\in \Nset$. A vector $\vec{x}$ of dimension $m\geq n(\varphi)$ \emph{satisfies} $\varphi$, we write 
+%$\vec{x}\models\phi$, if 
+%the arithmetic formula obtained by 
+%substituting each occurrence of a variable $x_i$ in $\varphi$ by $\vec{x}[i]$ is 
+%valid. We denote $\sat{\phi} = \{\vec{x}\in \Rset^m\mid m\geq n(\varphi) \wedge \vec{x} \models\phi\}$ 
+%and $\exsat{\phi} = \sat{\phi}
+%\cap \Rset^{n(\varphi)}$. 
+
+\noindent{\em The Syntax of Probabilistic Programs {(\PP s)}.}
 We consider the standard syntax for probabilistic programs,
 which encompasses basic programming mechanisms such as assignment statement 
-(indicated by `:='), while-loop, if-branch. We also consider basic probabilistic mechanisms 
+(indicated by `:='), while-loop, if-branch. Expressions appear on right-hand sides of assignments, and predicates act as loop guards and conditions in if-then-else statements. We also consider basic probabilistic mechanisms 
 such as probabilistic branch (indicated by `prob') and random sampling (e.g. 
 $x:=\textbf{sample(}\mathrm{Uniform}[-2,1]\textbf{)}$ assigns to $x$ a random 
 number 
@@ -131,13 +198,12 @@ uniformly sampled from interval $[-2,1]$). We also allow constructs for
 non-deterministic branching indicated by `\textbf{if }$\star$ \textbf{then...}' construct and non-deterministic assignment.  
 Variables (or identifiers) of a probabilistic program are of \emph{real} type, i.e., 
 values of the variables are real numbers. 
-We also assume that assume that each \APP{} $\program$ is preceded by an 
+We also assume that assume that each \PP{} $\program$ is preceded by an 
 initialization preamble 
 in 
 which 
 each variable appearing in $\program$ is assigned some concrete number.
-the program variables are initialized. We do not a priori (\textbf{PETR: 
-elaborate one xpressions})
+the program variables are initialized. 
 
 \smallskip\noindent{\em Affine Probabilistic Programs (\APP s).}
 A probabilistic program is \emph{affine} if all the expressions that occur in 
@@ -159,10 +225,10 @@ For an example see Figure~\ref{fig:invariant-running}.
 
 
 \vspace{-1em}
-\subsection{Semantics of Affine Probabilistic Programs}\label{subsec:semantics}
+\subsection{Semantics of Probabilistic Programs}\label{subsec:semantics}
 \vspace{-0.5em}
 
-We now formally define the semantics of \APP's.
+We now formally define the semantics of \PP's.
 In order to do this, we first recall some fundamental concepts from probability
 theory.
 
@@ -244,7 +310,7 @@ variables} (note that $\pvars \subseteq \vars$) ;
 \item $\locinit$ is an initial location and $\vecinit$ is an initial 
 \emph{assignment vector};
 % POKRACOVAT ODSUD
-\item $\transitions\subseteq\locs\times\locs$ is a transition relation'
+\item $\transitions\subseteq\locs\times\locs$ is a transition relation;
 %whose members are tuples of
 %the form $(\ell,i,\up,\ell')$, where $\ell$ and $\ell'$ are source and target
 %program locations, respectively, $1\leq i \leq |\pvars|$ is a \emph{target 
@@ -267,7 +333,7 @@ is an
 \emph{update element}, which can 
 be one of the following mathematical objects: %\begin{itemize}
 %\item 
-(a)~an affine function $u\colon \Rset^{|\pvars|}\rightarrow \Rset$;
+(a)~a Borel-measurable function $u\colon \Rset^{|\pvars|}\rightarrow \Rset$;
 %\item 
 (b)~a distribution $d\in \mathcal{D}$; or
 %\item 
@@ -405,7 +471,7 @@ $\vec{x}_{i+1}=\vec{x}_i(j\leftarrow a)$ where $a$ satisfies one of the
 following 
 depending on the type of $\up$:
 \begin{compactitem}
-\item if $\up$ is an affine function, then $a=\up(\vec{x})$;
+\item if $\up$ is a Borel-measurable function, then $a=\up(\vec{x})$;
 \item if $\up$ is an integrable\footnote{A distribution on some numerical 
 domain 
 is integrable if its expected value exists and is finite. In particular, each 
@@ -719,7 +785,7 @@ We consider computational problems related to the basic liveness properties of
 \APP{s}, namely \emph{termination} and its generalization, \emph{reachability}. 
 
 \smallskip\noindent{\em Termination, reachability, and termination time.}
-In the following, consider an \APP{} $P$ and its associated pCFG $\pCFG_P$. 
+In the following, consider a \PP{} $P$ and its associated pCFG $\pCFG_P$. 
 We say that a run $\run$ of $\pCFG_P$ \emph{reaches} a set of configurations 
 $\confset$ if it  contains a configuration from $\confset$. A run 
 \emph{terminates} if it reaches a 
