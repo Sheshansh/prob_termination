@@ -1,0 +1,11 @@
+if x_1>=0 then
+	while x_3>=x_2 and x_1>=0 do
+		if * then
+			x_3:=x_3-1-x_1
+		else
+			x_2:=x_2+1+x_1
+		fi
+	od
+else
+	skip
+fi

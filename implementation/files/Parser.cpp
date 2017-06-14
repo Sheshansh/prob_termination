@@ -614,29 +614,29 @@ bool node::proc_literal(bool negate,bool strategic, string line){
 		}
 		children.resize(2);
 		bool temp;
-		children[0] = new node("expr",part(line,begin,sign),temp);
+		children[0] = new node("expr",part(line,0,sign),temp);
 		if(sign==-1){
 			cerr<<"Invalid literal";
 		}
 		else if(part(line,sign,sign+2)==">="){
 			constant = ">=";
-			children[1] = new node("expr",part(line,sign+2,end),temp);
+			children[1] = new node("expr",part(line,sign+2,line.length()),temp);
 		}
 		else if(part(line,sign,sign+2)=="<="){
 			constant = "<=";
-			children[1] = new node("expr",part(line,sign+2,end),temp);
+			children[1] = new node("expr",part(line,sign+2,line.length()),temp);
 		}
 		else if(line[sign]=='>'){
 			constant = ">=";
-			children[1] = new node("expr",part(line,sign+1,end),temp);
+			children[1] = new node("expr",part(line,sign+1,line.length()),temp);
 		}
 		else if(line[sign]=='<'){
 			constant = "<=";
-			children[1] = new node("expr",part(line,sign+1,end),temp);
+			children[1] = new node("expr",part(line,sign+1,line.length()),temp);
 		}
 		else{
 			constant = "<=";
-			children[1] = new node("expr",part(line,sign+1,end),temp);
+			children[1] = new node("expr",part(line,sign+1,line.length()),temp);
 			to_return = true;
 		}
 	}

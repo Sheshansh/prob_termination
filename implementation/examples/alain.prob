@@ -1,0 +1,28 @@
+x_1 := 0;
+if x_2 <= 2*x_4 then
+	skip
+else
+	if x_2 <= x_5+x_4 then
+		skip
+	else
+		if x_5>=0 and x_3>=0 and x_4>=0 and x_6>=0 and x_2>=0 then
+			[x_6>=0]
+			while x_6-1 >= 0 do
+				x_6 := x_6-1;
+				x_2 := 0;
+				x_1 := x_1+1;
+				[x_7>=0]
+				while x_7 >= 0 do
+					x_7 := x_7-1;
+					x_5 := x_4;
+					x_2 := x_2+1
+				od
+				x_5 := x_5+x_4;
+				x_7 := x_5
+			od;
+			x_6 := x_6-1
+		else
+			skip
+		fi
+	fi
+fi
