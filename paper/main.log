@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.28)  14 JUN 2017 14:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.28)  17 JUN 2017 15:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1780,13 +1780,6 @@ Overfull \hbox (8.74901pt too wide) in paragraph at lines 175--177
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 5.5pt on input line 194.
 [2.2]
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 300.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 7.3pt on input line 300.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 5.5pt on input line 300.
-
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
@@ -1795,11 +1788,17 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 
 [3.3]
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 8.0pt on input line 364.
+(Font)              scaled to size 10.0pt on input line 302.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 6.2pt on input line 364.
+(Font)              scaled to size 7.3pt on input line 302.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
+(Font)              scaled to size 5.5pt on input line 302.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
+(Font)              scaled to size 8.0pt on input line 366.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
+(Font)              scaled to size 6.2pt on input line 366.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 8.0pt on input line 364.
+(Font)              scaled to size 8.0pt on input line 366.
  [4.4]
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
@@ -1810,15 +1809,15 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 [5.5] [6.6]
 \invrun=\box84
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 1230.
+(Font)              scaled to size 7.0pt on input line 1232.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 1270.
+(Font)              scaled to size 9.0pt on input line 1272.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 9.0pt on input line 1270.
+(Font)              scaled to size 9.0pt on input line 1272.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 9.0pt on input line 1270.
+(Font)              scaled to size 9.0pt on input line 1272.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 1270.
+(Font)              scaled to size 9.0pt on input line 1272.
 ) (./lexicographic.tex
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
@@ -1826,37 +1825,36 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[7.7]
+[7.7] [8.8]
 
-Package natbib Warning: Citation `xxx' on page 8 undefined on input line 86.
-
-
-Package natbib Warning: Citation `xxx' on page 8 undefined on input line 86.
+Package natbib Warning: Citation `xxx' on page 9 undefined on input line 109.
 
 
-Package natbib Warning: Citation `xxx' on page 8 undefined on input line 86.
+Package natbib Warning: Citation `xxx' on page 9 undefined on input line 109.
 
 
-LaTeX Warning: Reference `xxx' on page 8 undefined on input line 86.
+Package natbib Warning: Citation `xxx' on page 9 undefined on input line 109.
 
 
-LaTeX Warning: Reference `xxx' on page 8 undefined on input line 86.
+LaTeX Warning: Reference `xxx' on page 9 undefined on input line 109.
 
-[8.8]
 
-Package Fancyhdr Warning: \headheight is too small (13.0pt): 
- Make it at least 22.47003pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
+LaTeX Warning: Reference `xxx' on page 9 undefined on input line 109.
 
-[9.9] [10.10]) (./main.bbl
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[11.11])
+[9.9] [10.10]
+
+Package Fancyhdr Warning: \headheight is too small (13.0pt): 
+ Make it at least 22.47003pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[11.11]) (./main.bbl)
 
 Package natbib Warning: There were undefined citations.
 
@@ -1883,11 +1881,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 521.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 44338 strings out of 493013
- 955475 string characters out of 6131492
- 1179637 words of memory out of 5000000
- 46264 multiletter control sequences out of 15000+600000
- 286136 words of font info for 557 fonts, out of 8000000 for 9000
+ 44356 strings out of 493013
+ 955858 string characters out of 6131492
+ 1179611 words of memory out of 5000000
+ 46265 multiletter control sequences out of 15000+600000
+ 287691 words of font info for 567 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  62i,17n,96p,1716b,6958s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/newtx/l
@@ -1923,10 +1921,10 @@ e/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/txfonts/txsyc.pfb></home/
 pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/txsys.pfb></home/pnov
 otny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlr.pfb></home/pnovotny/
 texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlri.pfb>
-Output written on main.pdf (12 pages, 749539 bytes).
+Output written on main.pdf (12 pages, 755865 bytes).
 PDF statistics:
- 346 PDF objects out of 1000 (max. 8388607)
- 271 compressed objects within 3 object streams
- 67 named destinations out of 1000 (max. 500000)
+ 355 PDF objects out of 1000 (max. 8388607)
+ 280 compressed objects within 3 object streams
+ 69 named destinations out of 1000 (max. 500000)
  83025 words of extra memory for PDF output out of 89155 (max. 10000000)
 

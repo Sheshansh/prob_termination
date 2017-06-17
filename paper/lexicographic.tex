@@ -12,7 +12,7 @@ supermartingales. However, to define any form of a supermartingale, we need the 
 Let $(\Omega,\mathcal{F},\probm)$ be a probability space, 
 $X\colon\Omega\rightarrow 
 \Rset$ an $\mathcal{F}$-measurable function, and $\mathcal{F}'\subseteq 
-\mathcal{F}$ sub-sigma-algebra of $\mathcal{F}$. The \emph{conditional 
+\mathcal{F}$ sub-sigma-algebra of $\mathcal{F}$. A \emph{conditional 
 	expectation} of $X$ given $\mathcal{F}'$ is an $\mathcal{F}'$-measurable random 
 variable denoted by $\E[X| \mathcal{F}']$ which satisfies, for each set $A\in 
 \mathcal{F}'$, the following: 
@@ -26,6 +26,26 @@ each $\omega\in A$ and $0$ for each $\omega\in \Omega\setminus A$. Note that
 the left hand-side of~\eqref{eq:cond-exp} intuitively represents the expected 
 value 
 of $X(\omega)$ with domain restricted to $A$.
+
+Note that any $\mathcal{F}'$-measurable random variable satisfying~\eqref{eq:cond-exp} can be called a conditional expectation. The definition does not guarantee that the conditional expectation is uniquely defined or that it exists at all. However, from probability theory we have the following:
+
+\begin{proposition}
+\label{prop:conditional-exp-existence}
+Let $(\Omega,\mathcal{F},\probm)$ be a probability space, 
+$X\colon\Omega\rightarrow 
+\Rset$ an $\mathcal{F}$-measurable function, and $\mathcal{F}'\subseteq 
+\mathcal{F}$ sub-sigma-algebra of $\mathcal{F}$. Assume that one of the following conditions hold:
+\begin{itemize}
+\item $\E[|X|]<\infty$; or
+\item $X$ is non-negative and for all $\omega\in\Omega$ it holds $X(\omega)\neq \infty$.
+\end{itemize}
+Then there exists a conditional expectation of $X$ given $\mathcal{F}'$ and it is almost-surely unique, i.e. for each two $\mathcal{F}'$-measurable functions $f$, $g$ that satisfy~\eqref{eq:cond-exp} it holds $\probm(\{\omega\mid f(\omega)\neq g(\omega)\})=0$.
+\end{proposition}
+\begin{proof}
+The proof for the case when $\E[|X|]$ is standard and appears in many textbooks on probability theory (e.g.~\cite{Billingsley:book,Ash:book,Rosenthal:book}). The proof for the second case is essentially the same: the condition that $X$ is non-negative and not admitting infinite value suffices for satisfying the assumptions of Radon-Nikodym Theorem, the main theoretical tool used in the proof. For the sake of completeness we present the proof in \AppendixMaterial.
+\end{proof}
+
+Since the constraint~\eqref{eq:cond-exp} defining conditional expectation is phrased in terms of expected values, the almost-sure uniqueness cannot be strengthened to uniqueness, as re-defining a random variable on a set of probability zero does not change its expectation. In the following, when we say that a conditional expectation of a random variable $X$ satisfies some inequality (e.g. $\E[X\mid\mathcal{F}]\geq 0$) on set $L\subseteq \Omega$, we mean that for each $\mathcal{F}$-measurable function $\E[X\mid\mathcal{F}]$ satisfying~\eqref{eq:cond-exp} the inequality is satisfied for almost all $\omega \in L$.
 
 In context of probabilistic programs we work with probability 
 spaces of the form $(\Omega,\natfilt,\probm^\sigma)$, where $\Omega$ is a 
@@ -52,6 +72,11 @@ prefix of length $i$ satisfies the property given by $A$.
 The sequence $\natfilt_0,\natfilt_1,\natfilt_2,\dots$ forms a 
 filtration of $\natfilt$, which we call a \emph{canonical filtration}.
 
+\begin{definition}
+Let $(\Omega,\genfilt,\probm)$ be a probability space and $O\subseteq \Omega$ some set.
+ We say that sets $L_1,\dots,L_n$ form an almost-sure partition of $O$ if $L_1,\dots,L_n$ are pairwise disjoint and $\probm(\{\omega\in O\mid \omega \not \in L_1\cup\dots \cup L_n\})=0$
+\end{definition}
+
 \begin{definition}[Lexicographic Ranking Supermartingale]
 Let $(\Omega,\genfilt,\probm)$ be a probability space, 
 $\{\genfilt_i\}_{i=0}^{\infty}$ a filtration of $\genfilt$, $\stime$ a stopping 
@@ -68,17 +93,15 @@ $\{\vecseq{X}{i}{j}\}_{i=0}^{\infty}$ is adapted to
 $\{\genfilt_i\}_{i=0}^{\infty}$.
 %\item For each $i\in \Nset_0$ and each $1\leq j \leq n$ it holds 
 %$\E[|\vecseq{X}{i}{j}|]<\infty$.
-\item For each $\omega \in \Omega$ and $i\in \Nset_0$ it holds 
-$\vec{X}_i (\omega)\geq \vec{0}$ (componentwise).
-\item For each $i\in \Nset_0$ and each $\omega\in \Omega$ with 
-$\stime(\omega)>i$ there exists $1\leq j 
-\leq n$ such that
+\item For each $\omega \in \Omega$, $i\in \Nset_0$ and $1\leq j \leq n$ it holds 
+$\vec{X}_i (\omega)[j]\geq {0}$ and $\vec{X}_i(\omega)[j]\neq \infty$.
+\item For each $i\in \Nset_0$ there exists an almost-sure partition of the set $\{\stime>i\}$ into $n$ subsets $L^i_1,\dots,L^i_n$, all of them $\genfilt_i$-measurable, such that for each $1\leq j \leq n$:
 \begin{compactitem}
 	\item $\E[\vecseq{X}{i+1}{j}\mid 
-	\genfilt_i](\omega)\leq\vecseq{X}{i}{j}(\omega) - 
-	\eps$; and
-	\item for all $1 \leq j' < j$ it holds $\E[\vecseq{X}{i+1}{j'}\mid 
-	\genfilt_i](\omega)\leq\vecseq{X}{i}{j'}(\omega)$.
+	\genfilt_i]\leq\vecseq{X}{i}{j} - 
+	\eps$ on $L_j$; and
+	\item for all $1 \leq j' < j$ we have $\E[\vecseq{X}{i+1}{j'}\mid 
+	\genfilt_i]=\vecseq{X}{i}{j'}$ on $L_{j}$.
 \end{compactitem}
 \end{compactenum}
 \end{definition}
@@ -98,14 +121,12 @@ $\stime$ exists and $\probm(\stime=\infty)>0$. For succinctness we denote the
 set $\{\omega\mid \stime(\omega)=\infty\}$ by $\genRunSet_{\infty}$.
 
 For $\omega\in \Omega$ we define the level of $\omega$ at step $i$ to be the 
-number $\levelrank{\omega}{i}$ equal to either $0$, if $\stime(\omega)\leq i$, 
-or otherwise to the smallest $1\leq j \leq n$ such that 
-$\E[\vecseq{X}{i+1}{j}\mid 
-\genfilt_i](\omega)\leq\vecseq{X}{i}{j}(\omega)-\eps$. By the definition of 
+number $\levelrank{\omega}{i}$ equal to either $0$, if $\stime(\omega)\leq i$ or $\omega$ does not belong to $L^i_1 \cup \dots\cup L^i_n$, 
+or otherwise to the $1\leq j \leq n$ such that $\omega\in L^i_j$. By the definition of 
 $\eps$-LexRSM the value $\levelrank{\omega}{i}$ is well-defined for all 
 $\omega$ and moreover, the random variable $\levelrank{}{i}$ is $\genfilt_i$-measurable. We denote by $\minlev(\omega)$ the smallest $0 \leq j \leq n$ such 
 that $j$ is a level of $\omega$ at infinitely many steps. Note that $\omega \in 
-\genRunSet_{\infty}$ if and only if $\minlev(\omega)\neq 0$. We denote by $M_i$ 
+\genRunSet_{\infty}$ implies $\minlev(\omega)\neq 0$, and $\probm(\genRunSet_{\infty})=\probm(\{\minlev \neq 0 \})$, as for each $i$ almost all $\omega$'s for which $\stime(\omega)>i$ belong to $L^i_1 \cup \dots\cup L^i_n$. We denote by $M_i$ 
 the set of all $\omega$'s with $\minlev(\omega)=i$.
 
 Throughout the proof we use several times the following fundamental fact: if 
@@ -259,3 +280,4 @@ the last inequality following by substituting for $m$. But for each $k$ the rand
 %\end{dcases}
 %\]
 \end{proof}
+

@@ -9,16 +9,11 @@ Warning--string name "springer" is undefined
 --line 6299 of file bibliography-master.bib
 Warning--string name "lncs" is undefined
 --line 6300 of file bibliography-master.bib
-Warning--string name "acm" is undefined
---line 6868 of file bibliography-master.bib
 Database file #2: new-popl18.bib
-Warning--I didn't find a database entry for "BEFH16:doob-decomposition"
+Warning--I didn't find a database entry for "xxx"
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Warning--empty address in Ash:book
 Warning--empty address in Billingsley:book
-Warning--empty publisher in BKKNK:pMC-zero-reachability
-Warning--empty address in BKKNK:pMC-zero-reachability
-Warning--page numbers missing in both pages and numpages fields in BKKNK:pMC-zero-reachability
 Warning--empty address in SriramCAV
 Warning--page numbers missing in both pages and numpages fields in CFG16:positivstellensatz-arxiv
 Warning--empty address in CFNH16:prob-termination
@@ -27,45 +22,46 @@ Warning--empty publisher in NSK:CTMDP-delayed
 Warning--empty address in NSK:CTMDP-delayed
 Warning--empty publisher in NK:CTMDP-bisimulation
 Warning--empty address in NK:CTMDP-bisimulation
+Warning--empty address in Rosenthal:book
 You've used 10 entries,
             5706 wiz_defined-function locations,
-            1404 strings with 18066 characters,
-and the built_in function-call counts, 11070 in all, are:
-= -- 1243
-> -- 412
+            1402 strings with 17906 characters,
+and the built_in function-call counts, 10656 in all, are:
+= -- 1215
+> -- 369
 < -- 0
-+ -- 123
-- -- 177
-* -- 796
-:= -- 1189
-add.period$ -- 51
++ -- 107
+- -- 165
+* -- 747
+:= -- 1150
+add.period$ -- 53
 call.type$ -- 10
-change.case$ -- 66
+change.case$ -- 63
 chr.to.int$ -- 9
-cite$ -- 23
-duplicate$ -- 906
-empty$ -- 657
-format.name$ -- 177
-if$ -- 2538
+cite$ -- 21
+duplicate$ -- 876
+empty$ -- 637
+format.name$ -- 161
+if$ -- 2437
 int.to.chr$ -- 2
 int.to.str$ -- 0
-missing$ -- 42
-newline$ -- 130
+missing$ -- 39
+newline$ -- 131
 num.names$ -- 85
-pop$ -- 412
+pop$ -- 384
 preamble$ -- 1
-purify$ -- 114
+purify$ -- 110
 quote$ -- 0
-skip$ -- 343
+skip$ -- 334
 stack$ -- 0
-substring$ -- 858
+substring$ -- 855
 swap$ -- 81
 text.length$ -- 63
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 236
-warning$ -- 13
-while$ -- 86
+type$ -- 221
+warning$ -- 11
+while$ -- 90
 width$ -- 0
-write$ -- 227
-(There were 17 warnings)
+write$ -- 229
+(There were 14 warnings)
