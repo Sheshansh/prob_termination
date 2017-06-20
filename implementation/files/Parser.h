@@ -63,10 +63,12 @@ void skip_spaces(int &begin, int &end);
 void vcopy(vector<node*> &sink,vector<node*> &tocopy);
 node* negation(node* tonegate);
 node* and_node(node* one,node* two);
-int find_variables();
+int find_variables(int& begin, int& end);
 
 extern string program;
 extern int nVariables;
 extern int last_used_label;
 extern map<int,CFG_location*> label_map;
 extern node* root;
+extern map<string,int> variableId;
+extern map<int,string> variable;

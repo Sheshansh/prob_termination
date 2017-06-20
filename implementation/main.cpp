@@ -131,6 +131,9 @@ int epsilons_used = 0;
 
 void generate_equations(){ //Would use the ostream file to write the equations into it later
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+		if(it->second->invariant==NULL){
+			continue;
+		}
 		it->second->invariant->print();
 		cout<<endl;
 		if(it->second->type=="det"){
@@ -320,9 +323,9 @@ string start_invariant(){
 
 void print_fast(ostream& fastfile){
 	fastfile<<"model main{\n\n";
-	fastfile<<"\tvar x_1";
+	fastfile<<"\tvar "<<variable[1];
 	for(int i=2;i<=nVariables;++i){
-		fastfile<<", x_"<<i;
+		fastfile<<", "<<variable[i];
 	}
 	fastfile<<";\n\n";
 
@@ -348,10 +351,9 @@ void print_fast(ostream& fastfile){
 			fastfile<<";\n";
 			fastfile<<"\t\taction\t:= ";
 			if(state->edges[j].change!=NULL){
-				fastfile<<"x_"<<state->edges[j].toChange<<"' = ";
+				fastfile<<variable[state->edges[j].toChange]<<"' = ";
 				state->edges[j].change->print(fastfile);
 			}
-			//Print action here
 			fastfile<<";\n\t};\n\n";
 		}
 	}
@@ -371,7 +373,10 @@ int main(){
 		input[i]=r;
 	input[i]=0;
 	program=input;
-	nVariables = find_variables(); //To find the number of different variables of the type x_i in the program
+	int begin = 0;
+	int endprog = program.length();
+	skip_spaces(begin,endprog);
+	nVariables = find_variables(begin,endprog); //To find the number of different variables of the type x_i in the program
 	start = ++last_used_label;
 	end = ++last_used_label;
 	label_map[start] = new CFG_location("det",start);
@@ -379,9 +384,6 @@ int main(){
 	// Code for adding self loop
 	// CFG_edge last_edge(label_map[end],-1,NULL);
 	// label_map[end]->edges.pb(last_edge);
-	int begin = 0;
-	int endprog = program.length();
-	skip_spaces(begin,endprog);
 	root=new node("stmt",begin,endprog,start,end);
 	ofstream fastfile;
 	fastfile.open("files/aspic.fast");

@@ -25,6 +25,8 @@ string program;
 int nVariables;
 int last_used_label = 0;
 map<int,CFG_location*> label_map;
+map<string,int> variableId;
+map<int,string> variable;
 
 void skip_spaces(int &begin, int &end){ //skips the spaces in the beginning and the end
 	while(begin<program.size() and isspace(program[begin])){
@@ -394,7 +396,7 @@ void node::proc_assgn(int s,int l){
 				constant = part(program,temp,semicolon); //Gives the distribution
 				children[1] = new node("expr",semicolon+1,end-1); //Though it is just a constant but still storing it in an expression because of consistency
 				label_map[s]->type = "det"; //<flag> Considering that it is just the same as assigning the variable the constant value
-				CFG_edge temporary_edge(label_map[l],stoi(part(program,children[0]->begin+2,children[0]->end)),children[1]);
+				CFG_edge temporary_edge(label_map[l],variableId[part(program,children[0]->begin,children[0]->end)],children[1]);
 				label_map[s]->edges.pb(temporary_edge);
 			}
 		}
@@ -402,7 +404,7 @@ void node::proc_assgn(int s,int l){
 			constant = "simple assignment";
 			children[1] = new node("expr",pos+2,end); //rexpr is nothing but an expr, a expression
 			label_map[s]->type = "det";
-			CFG_edge temporary_edge(label_map[l],stoi(part(program,children[0]->begin+2,children[0]->end)),children[1]);
+			CFG_edge temporary_edge(label_map[l],variableId[part(program,children[0]->begin,children[0]->end)],children[1]);
 			label_map[s]->edges.pb(temporary_edge);
 		}
 	}
@@ -446,15 +448,7 @@ void node::analyse_expr(int begin,int end,bool negate){
 		}
 	}
 	if(star==-1){
-		if(part(program,begin,begin+2)=="x_"){
-			if(negate){
-				expression[stoi(part(program,begin+2,end))] += -1.0;
-			}
-			else{
-				expression[stoi(part(program,begin+2,end))] += 1.0;
-			}
-		}
-		else{
+		if(isdigit(program[begin])){
 			if(negate){
 				expression[0] -= stod(part(program,begin,end));
 			}
@@ -462,32 +456,42 @@ void node::analyse_expr(int begin,int end,bool negate){
 				expression[0] += stod(part(program,begin,end));
 			}
 		}
+		else{
+			if(negate){
+				expression[variableId[part(program,begin,end)]] -= 1.0;
+			}
+			else{
+				expression[variableId[part(program,begin,end)]] += 1.0;
+			}
+		}
 	}
 	else{
 		int block=star+1;
 		skip_spaces(begin,star);
 		skip_spaces(block,end);
-		if(part(program,block,block+2)!="x_"){
+		map<string, int>::iterator it = variableId.find(part(program,block,end));
+		if(it==variableId.end()){
 			cerr<<"Error in the variable in ["<<block<<","<<end<<")"<<"begin = "<<begin<<endl;
 		}
-		expression[stoi(part(program,block+2,end))] += stod(part(program,begin,star));
+		expression[it->second] += stod(part(program,begin,star));
 	}
 }
 
 void node::analyse_expr(string l,bool negate){
 	int x_pos = -1;
 	for(int i = 0;i<l.length();++i){
-		if(l[i]=='x'){
+		if(!isdigit(l[i]) and l[i]!='.'){
 			x_pos = i;
+			break;
 		}
 	}
 	if(x_pos!=-1){
 		if(x_pos==0){
 			if(negate){
-				expression[stoi(part(l,x_pos+2,l.length()))] += -1.0;
+				expression[variableId[part(l,x_pos,l.length())]] -= 1.0;
 			}
 			else{
-				expression[stoi(part(l,x_pos+2,l.length()))] += 1.0;
+				expression[variableId[part(l,x_pos,l.length())]] += 1.0;
 			}
 		}
 		else{
@@ -747,19 +751,33 @@ void node::process(int s, int l, bool negate){
 
 node* root;
 
-int find_variables(){
-	set<string> variables;
-	for(int i = 0;i<program.length()-1;i++){
-		if(part(program,i,i+2)=="x_"){
-			int variable_parser = i+2;
-			while(isdigit(program[variable_parser])){
-				variable_parser++;
-			}
-			string variable = part(program,i,variable_parser);
-			variables.insert(variable);
+int find_variables(int& begin, int &end){
+	int toReturn = 0;
+	if(part(program,begin,begin+3)!="var"){
+		cerr<<"No variables specified"<<endl;
+		exit(0);
+	}
+	int semicolon = -1;
+	for(int i=begin;i<end;i++){
+		if(program[i]==';'){
+			semicolon = i;
+			break;
 		}
 	}
-	return variables.size();
+	if(semicolon==-1){
+		cerr<<"No semicolon in program";
+		exit(0);
+	}
+	istringstream ss(part(program,begin+3,semicolon));
+	string token;
+	while(getline(ss,token,',')){
+		skip_spaces(token);
+		toReturn++;
+		variable[toReturn] = token;
+		variableId[token] = toReturn;
+	}
+	begin = semicolon+1;
+	return toReturn;
 }
 
 void node::print(ostream& outputfile, string and_string, string or_string, string multiply_string){
@@ -773,15 +791,15 @@ void node::print(ostream& outputfile, string and_string, string or_string, strin
 			if(expression[i]!=0.0){
 				if(expression[i]>0.0){
 					if(something_printed==true){
-						outputfile<<"+"<<expression[i]<<multiply_string<<"x_"<<i;
+						outputfile<<"+"<<expression[i]<<multiply_string<<variable[i];
 					}
 					else{
-						outputfile<<expression[i]<<multiply_string<<"x_"<<i;
+						outputfile<<expression[i]<<multiply_string<<variable[i];
 					}
 					something_printed = true;
 				}
 				else{
-					outputfile<<expression[i]<<multiply_string<<"x_"<<i;
+					outputfile<<expression[i]<<multiply_string<<variable[i];
 					something_printed = true;
 				}
 			}
