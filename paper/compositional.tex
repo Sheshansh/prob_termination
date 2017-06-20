@@ -30,3 +30,16 @@ section we show that using our insights in lexicographic supermartingales we
 can obtain a subtly different notion of a probabilistic V-rule which is sound 
 without any additional assumptions, and which can be used to prove termination 
 of programs that the previous method cannot handle. 
+
+Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do } 
+\programbody \textbf{ od}$. We denote by $\loops(\program)$ the set of all 
+loops in $\program$ there are on the top level of $\programbody$, i.e. they are 
+nested loops of $\program$ nested directly "below" the outer loop. We define a 
+depth-1 slice of $\program$ to be a \PP{} $\slice(\program)$ obtained from 
+$\program$ by removing all loops in $\loops(\program)$. A formal definition of 
+both functions is given in \AppendixMaterial, we illustrate them in the 
+following example.
+
+\textbf{[PETR: INSERT EXAMPLE]}
+
+
