@@ -9,7 +9,7 @@ int aaron12() {
 
 		} else {
 			x=x-z;
-			y=y+(z*z);
+			y=y+(z*z); // Breakage point
 			z=z-1;
 
 		}

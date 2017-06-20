@@ -1,0 +1,1940 @@
+Analyzing : alain.fst with acceleration. 
+2017, Jun 20,14:40:11 with aspic Version 3.4
+
+ The graph loops structure  = [1; 2; 37; 19; 36; 4; 20; 34; 6; 16; 22; 14;
+                               21;
+                               [17; 23; 24; 7; 32; 8; 31;
+                                [18; 27; 9; 30; 10; 29; 11; 28]; 12; 26; 13;
+                                25];
+                               15; 33; 5; 35; 3; 0]
+
+ strategy=[(start,[],false); (lbl_2,[f_53],false); (lbl_2_52,[t_51],false);
+           (lbl_3,[lbl_2_t],false); (fp_44,[fp_46],false);
+           (lbl_6,[f_50],false); (lbl_7,[t_49],false); (fp_36,[fp_38],false);
+           (lbl_9,[f_42],false); (lbl_10,[t_41],false);
+           (fp,[fp_10__tsplit4,fp_10__tsplit3,fp_10__tsplit2,fp_10__tsplit1,fp_10__tsplit0],false);
+           (lbl_20,[f_34],false); (tp,[tp_9],false);
+           [(lbl_11,[lbl_19_t,f_32],true); (lbl_11_11,[lbl_11_t],false);
+            (wh,[tp_12],false); (lbl_12,[f_31],false);
+            (lbl_12_30,[t_29],false); (lbl_13,[lbl_12_t],false);
+            (lbl_13_28,[t_27],false); (lbl_14,[lbl_13_t,lbl_17_t],true);
+            (wh_18,[tp_19],false); (lbl_15,[f],false);
+            (lbl_15_26,[t_25],false); (lbl_16,[lbl_15_t],false);
+            (lbl_16_24,[t_23],false); (lbl_17,[lbl_16_t],false);
+            (lbl_17_22,[t_21],false); (lbl_18,[fp_20],false);
+            (lbl_18_17,[t_16],false); (lbl_19,[lbl_18_t],false);
+            (lbl_19_15,[t_14],false)];
+           (lbl_21,[fp_13,t_33],false); (tp_35,[tp_37],false);
+           (lbl_8,[f_40],false); (tp_43,[tp_45],false); (lbl_5,[f_48],false);
+           (stop,[t,t_39,t_47],false)]
+  Processing strategy [(start,[],false); (lbl_2,[f_53],false);
+                       (lbl_2_52,[t_51],false); (lbl_3,[lbl_2_t],false);
+                       (fp_44,[fp_46],false); (lbl_6,[f_50],false);
+                       (lbl_7,[t_49],false); (fp_36,[fp_38],false);
+                       (lbl_9,[f_42],false); (lbl_10,[t_41],false);
+                       (fp,[fp_10__tsplit4,fp_10__tsplit3,fp_10__tsplit2,fp_10__tsplit1,fp_10__tsplit0],false);
+                       (lbl_20,[f_34],false); (tp,[tp_9],false);
+                       [(lbl_11,[lbl_19_t,f_32],true);
+                        (lbl_11_11,[lbl_11_t],false); (wh,[tp_12],false);
+                        (lbl_12,[f_31],false); (lbl_12_30,[t_29],false);
+                        (lbl_13,[lbl_12_t],false); (lbl_13_28,[t_27],false);
+                        (lbl_14,[lbl_13_t,lbl_17_t],true);
+                        (wh_18,[tp_19],false); (lbl_15,[f],false);
+                        (lbl_15_26,[t_25],false); (lbl_16,[lbl_15_t],false);
+                        (lbl_16_24,[t_23],false); (lbl_17,[lbl_16_t],false);
+                        (lbl_17_22,[t_21],false); (lbl_18,[fp_20],false);
+                        (lbl_18_17,[t_16],false); (lbl_19,[lbl_18_t],false);
+                        (lbl_19_15,[t_14],false)];
+                       (lbl_21,[fp_13,t_33],false); (tp_35,[tp_37],false);
+                       (lbl_8,[f_40],false); (tp_43,[tp_45],false);
+                       (lbl_5,[f_48],false); (stop,[t,t_39,t_47],false)]
+
+  ** processing vertex lbl_2 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge f_53 (coming from loc start)
+    we apply the transfo to the poly {$>=0,1>0} in the prec hedge
+    contrib of hedge f_53 (coming from loc start) = {$>=0,1>0}
+    the contributions from the preceeding nodes is  {$>=0,1>0} 
+    nreach={$>=0,1>0}
+
+  ** processing vertex lbl_2_52 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_51 (coming from loc lbl_2)
+    we apply the transfo to the poly {$>=0,1>0} in the prec hedge
+    contrib of hedge t_51 (coming from loc lbl_2) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={c1=0,$>=0,1>0}
+
+  ** processing vertex lbl_3 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_2_t (coming from loc lbl_2_52)
+    we apply the transfo to the poly {c1=0,$>=0,1>0} in the prec hedge
+    contrib of hedge lbl_2_t (coming from loc lbl_2_52) = {c1=0,$>=0,1>0}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0} 
+    nreach={c1=0,$>=0,1>0}
+
+  ** processing vertex fp_44 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge fp_46 (coming from loc lbl_3)
+    we apply the transfo to the poly {c1=0,$>=0,1>0} in the prec hedge
+    contrib of hedge fp_46 (coming from loc lbl_3) = {c1=0,$>=0,1>0,n2>2y}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,n2>2y} 
+    nreach={c1=0,$>=0,1>0,n2>2y}
+
+  ** processing vertex lbl_6 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge f_50 (coming from loc fp_44)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y} in the prec hedge
+    contrib of hedge f_50 (coming from loc fp_44) = {c1=0,$>=0,1>0,n2>2y}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,n2>2y} 
+    nreach={c1=0,$>=0,1>0,n2>2y}
+
+  ** processing vertex lbl_7 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_49 (coming from loc lbl_6)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y} in the prec hedge
+    contrib of hedge t_49 (coming from loc lbl_6) = {c1=0,$>=0,1>0,n2>2y}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,n2>2y} 
+    nreach={c1=0,$>=0,1>0,n2>2y}
+
+  ** processing vertex fp_36 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge fp_38 (coming from loc lbl_7)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y} in the prec hedge
+    contrib of hedge fp_38 (coming from loc lbl_7) = {c1=0,$>=0,1>0,n2>2y,
+                                                      n2>y+z}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,n2>2y,
+                                                     n2>y+z} 
+    nreach={c1=0,$>=0,1>0,n2>2y,n2>y+z}
+
+  ** processing vertex lbl_9 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge f_42 (coming from loc fp_36)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2>y+z} in the prec hedge
+    contrib of hedge f_42 (coming from loc fp_36) = {c1=0,$>=0,1>0,n2>2y,
+                                                     n2>y+z}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,n2>2y,
+                                                     n2>y+z} 
+    nreach={c1=0,$>=0,1>0,n2>2y,n2>y+z}
+
+  ** processing vertex lbl_10 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_41 (coming from loc lbl_9)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2>y+z} in the prec hedge
+    contrib of hedge t_41 (coming from loc lbl_9) = {c1=0,$>=0,1>0,n2>2y,
+                                                     n2>y+z}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,n2>2y,
+                                                     n2>y+z} 
+    nreach={c1=0,$>=0,1>0,n2>2y,n2>y+z}
+
+  ** processing vertex fp :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge fp_10__tsplit4 (coming from loc lbl_10)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2>y+z} in the prec hedge
+    contrib of hedge fp_10__tsplit4 (coming from loc lbl_10) = {c1=0,$>=0,
+                                                                1>0,n2>2y,
+                                                                n2>y+z,n2<0}
+    dealing with hedge fp_10__tsplit3 (coming from loc lbl_10)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2>y+z} in the prec hedge
+    contrib of hedge fp_10__tsplit3 (coming from loc lbl_10) = {c1=0,$>=0,
+                                                                1>0,n2>2y,
+                                                                n2>y+z,n1<0}
+    dealing with hedge fp_10__tsplit2 (coming from loc lbl_10)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2>y+z} in the prec hedge
+    contrib of hedge fp_10__tsplit2 (coming from loc lbl_10) = {c1=0,$>=0,
+                                                                1>0,n2>2y,
+                                                                n2>y+z,y<0}
+    dealing with hedge fp_10__tsplit1 (coming from loc lbl_10)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2>y+z} in the prec hedge
+    contrib of hedge fp_10__tsplit1 (coming from loc lbl_10) = {c1=0,$>=0,
+                                                                1>0,n2>2y,
+                                                                n2>y+z,x<0}
+    dealing with hedge fp_10__tsplit0 (coming from loc lbl_10)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2>y+z} in the prec hedge
+    contrib of hedge fp_10__tsplit0 (coming from loc lbl_10) = {c1=0,$>=0,
+                                                                1>0,n2>2y,
+                                                                n2>y+z,z<0}
+    the contributions from the preceeding nodes is  {c1=0,1>0,n2>y+z,n2>2y,
+                                                     $>=0} 
+    nreach={c1=0,1>0,n2>y+z,n2>2y,$>=0}
+
+  ** processing vertex lbl_20 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge f_34 (coming from loc fp)
+    we apply the transfo to the poly {c1=0,1>0,n2>y+z,n2>2y,$>=0} in the prec hedge
+    contrib of hedge f_34 (coming from loc fp) = {c1=0,1>0,n2>y+z,n2>2y,$>=0}
+    the contributions from the preceeding nodes is  {c1=0,1>0,n2>y+z,n2>2y,
+                                                     $>=0} 
+    nreach={c1=0,1>0,n2>y+z,n2>2y,$>=0}
+
+  ** processing vertex tp :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_9 (coming from loc lbl_10)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2>y+z} in the prec hedge
+    contrib of hedge tp_9 (coming from loc lbl_10) = {c1=0,$>=0,1>0,n2>2y,
+                                                      n2>y+z,z>=0,y>=0,x>=0,
+                                                      n1>=0}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,n2>2y,
+                                                     n2>y+z,z>=0,y>=0,x>=0,
+                                                     n1>=0} 
+    nreach={c1=0,$>=0,1>0,n2>2y,n2>y+z,z>=0,y>=0,x>=0,n1>=0}
+  Processing strategy [(lbl_11,[lbl_19_t,f_32],true);
+                       (lbl_11_11,[lbl_11_t],false); (wh,[tp_12],false);
+                       (lbl_12,[f_31],false); (lbl_12_30,[t_29],false);
+                       (lbl_13,[lbl_12_t],false); (lbl_13_28,[t_27],false);
+                       (lbl_14,[lbl_13_t,lbl_17_t],true);
+                       (wh_18,[tp_19],false); (lbl_15,[f],false);
+                       (lbl_15_26,[t_25],false); (lbl_16,[lbl_15_t],false);
+                       (lbl_16_24,[t_23],false); (lbl_17,[lbl_16_t],false);
+                       (lbl_17_22,[t_21],false); (lbl_18,[fp_20],false);
+                       (lbl_18_17,[t_16],false); (lbl_19,[lbl_18_t],false);
+                       (lbl_19_15,[t_14],false)]
+
+  ** processing vertex lbl_11 with widening:
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge f_32 (coming from loc tp)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2>y+z,z>=0,y>=0,
+                                      x>=0,n1>=0} in the prec hedge
+    contrib of hedge f_32 (coming from loc tp) = {c1=0,$>=0,1>0,n2>2y,n2>y+z,
+                                                  z>=0,y>=0,x>=0,n1>=0}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,n2>2y,
+                                                     n2>y+z,z>=0,y>=0,x>=0,
+                                                     n1>=0} 
+    nreach={c1=0,$>=0,1>0,n2>2y,n2>y+z,z>=0,y>=0,x>=0,n1>=0}
+
+  ** processing vertex lbl_11_11 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_11_t (coming from loc lbl_11)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2>y+z,z>=0,y>=0,
+                                      x>=0,n1>=0} in the prec hedge
+    contrib of hedge lbl_11_t (coming from loc lbl_11) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={c1=0,n1+1>=0,1>0,x>=0,$>=0,z>=0,y>=0,n2>y+z,n2>2y}
+
+  ** processing vertex wh :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_12 (coming from loc lbl_11_11)
+    we apply the transfo to the poly {c1=0,n1+1>=0,1>0,x>=0,$>=0,z>=0,y>=0,
+                                      n2>y+z,n2>2y} in the prec hedge
+    contrib of hedge tp_12 (coming from loc lbl_11_11) = {c1=0,$>=0,1>0,z>=0,
+                                                          y>=0,x>=0,n2>2y,
+                                                          n2>y+z,n1>=0}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,z>=0,y>=0,
+                                                     x>=0,n2>2y,n2>y+z,n1>=0} 
+    nreach={c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1>=0}
+
+  ** processing vertex lbl_12 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge f_31 (coming from loc wh)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,
+                                      n2>y+z,n1>=0} in the prec hedge
+    contrib of hedge f_31 (coming from loc wh) = {c1=0,$>=0,1>0,z>=0,y>=0,
+                                                  x>=0,n2>2y,n2>y+z,n1>=0}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,z>=0,y>=0,
+                                                     x>=0,n2>2y,n2>y+z,n1>=0} 
+    nreach={c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1>=0}
+
+  ** processing vertex lbl_12_30 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_29 (coming from loc lbl_12)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,
+                                      n2>y+z,n1>=0} in the prec hedge
+    contrib of hedge t_29 (coming from loc lbl_12) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,y>=0,n2>y+z,n2>2y}
+
+  ** processing vertex lbl_13 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_12_t (coming from loc lbl_12_30)
+    we apply the transfo to the poly {c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,
+                                      y>=0,n2>y+z,n2>2y} in the prec hedge
+    contrib of hedge lbl_12_t (coming from loc lbl_12_30) = {c1=0,c2=0,n1>=0,
+                                                             $>=0,1>0,x>=0,
+                                                             z>=0,y>=0,
+                                                             n2>y+z,n2>2y}
+    the contributions from the preceeding nodes is  {c1=0,c2=0,n1>=0,$>=0,
+                                                     1>0,x>=0,z>=0,y>=0,
+                                                     n2>y+z,n2>2y} 
+    nreach={c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,y>=0,n2>y+z,n2>2y}
+
+  ** processing vertex lbl_13_28 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_27 (coming from loc lbl_13)
+    we apply the transfo to the poly {c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,
+                                      y>=0,n2>y+z,n2>2y} in the prec hedge
+    contrib of hedge t_27 (coming from loc lbl_13) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,y>=0,n2>y+z,n2>2y}
+
+  ** processing vertex lbl_14 with widening:
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_13_t (coming from loc lbl_13_28)
+    we apply the transfo to the poly {c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,
+                                      y>=0,n2>y+z,n2>2y} in the prec hedge
+    contrib of hedge lbl_13_t (coming from loc lbl_13_28) = {c2=0,c1=1,$>=0,
+                                                             1>0,n1>=0,x>=0,
+                                                             z>=0,y>=0,
+                                                             n2>y+z,n2>2y}
+    the contributions from the preceeding nodes is  {c2=0,c1=1,$>=0,1>0,
+                                                     n1>=0,x>=0,z>=0,y>=0,
+                                                     n2>y+z,n2>2y} 
+    nreach={c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,y>=0,n2>y+z,n2>2y}
+
+  ** processing vertex wh_18 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_19 (coming from loc lbl_14)
+    we apply the transfo to the poly {c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,
+                                      y>=0,n2>y+z,n2>2y} in the prec hedge
+    contrib of hedge tp_19 (coming from loc lbl_14) = {c2=0,c1=1,$>=0,1>0,
+                                                       z>=0,y>=0,x>=0,n2>2y,
+                                                       n2>y+z,n1>=0}
+    the contributions from the preceeding nodes is  {c2=0,c1=1,$>=0,1>0,z>=0,
+                                                     y>=0,x>=0,n2>2y,n2>y+z,
+                                                     n1>=0} 
+    nreach={c2=0,c1=1,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1>=0}
+
+  ** processing vertex lbl_15 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge f (coming from loc wh_18)
+    we apply the transfo to the poly {c2=0,c1=1,$>=0,1>0,z>=0,y>=0,x>=0,
+                                      n2>2y,n2>y+z,n1>=0} in the prec hedge
+    contrib of hedge f (coming from loc wh_18) = {c2=0,c1=1,$>=0,1>0,z>=0,
+                                                  y>=0,x>=0,n2>2y,n2>y+z,
+                                                  n1>=0}
+    the contributions from the preceeding nodes is  {c2=0,c1=1,$>=0,1>0,z>=0,
+                                                     y>=0,x>=0,n2>2y,n2>y+z,
+                                                     n1>=0} 
+    nreach={c2=0,c1=1,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1>=0}
+
+  ** processing vertex lbl_15_26 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_25 (coming from loc lbl_15)
+    we apply the transfo to the poly {c2=0,c1=1,$>=0,1>0,z>=0,y>=0,x>=0,
+                                      n2>2y,n2>y+z,n1>=0} in the prec hedge
+    contrib of hedge t_25 (coming from loc lbl_15) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,y>=0,n2+1>y+z,n2+1>2y}
+
+  ** processing vertex lbl_16 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_15_t (coming from loc lbl_15_26)
+    we apply the transfo to the poly {c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,
+                                      y>=0,n2+1>y+z,n2+1>2y} in the prec hedge
+    contrib of hedge lbl_15_t (coming from loc lbl_15_26) = {c2=0,c1=1,$>=0,
+                                                             1>0,n1>=0,x>=0,
+                                                             z>=0,y>=0,
+                                                             n2+1>y+z,n2+1>2y}
+    the contributions from the preceeding nodes is  {c2=0,c1=1,$>=0,1>0,
+                                                     n1>=0,x>=0,z>=0,y>=0,
+                                                     n2+1>y+z,n2+1>2y} 
+    nreach={c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,y>=0,n2+1>y+z,n2+1>2y}
+
+  ** processing vertex lbl_16_24 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_23 (coming from loc lbl_16)
+    we apply the transfo to the poly {c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,
+                                      y>=0,n2+1>y+z,n2+1>2y} in the prec hedge
+    contrib of hedge t_23 (coming from loc lbl_16) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={y=z,c2=0,c1=1,n1>=0,1>0,$>=0,x>=0,n2+1>2z,z>=0}
+
+  ** processing vertex lbl_17 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_16_t (coming from loc lbl_16_24)
+    we apply the transfo to the poly {y=z,c2=0,c1=1,n1>=0,1>0,$>=0,x>=0,
+                                      n2+1>2z,z>=0} in the prec hedge
+    contrib of hedge lbl_16_t (coming from loc lbl_16_24) = {y=z,c2=0,c1=1,
+                                                             n1>=0,1>0,$>=0,
+                                                             x>=0,n2+1>2z,
+                                                             z>=0}
+    the contributions from the preceeding nodes is  {y=z,c2=0,c1=1,n1>=0,1>0,
+                                                     $>=0,x>=0,n2+1>2z,z>=0} 
+    nreach={y=z,c2=0,c1=1,n1>=0,1>0,$>=0,x>=0,n2+1>2z,z>=0}
+
+  ** processing vertex lbl_17_22 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_21 (coming from loc lbl_17)
+    we apply the transfo to the poly {y=z,c2=0,c1=1,n1>=0,1>0,$>=0,x>=0,
+                                      n2+1>2z,z>=0} in the prec hedge
+    contrib of hedge t_21 (coming from loc lbl_17) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={y=z,c2=1,c1=1,$>=0,1>0,n1>=0,y>=0,n2+1>2y,x>=0}
+
+  ** processing vertex lbl_18 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge fp_20 (coming from loc lbl_14)
+    we apply the transfo to the poly {c2=0,c1=1,$>=0,1>0,z>=0,y>=0,x>=0,
+                                      n2>2y,n2>y+z,n1>=0} in the prec hedge
+    the contributions from the preceeding nodes is  empty(7) 
+    reach= empty(7) 
+    no change, the abstr value is still empty(7) 
+
+  ** processing vertex lbl_18_17 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_16 (coming from loc lbl_18)
+    the contributions from the preceeding nodes is  empty(7) 
+    reach= empty(7) 
+    no change, the abstr value is still empty(7) 
+
+  ** processing vertex lbl_19 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_18_t (coming from loc lbl_18_17)
+    the contributions from the preceeding nodes is  empty(7) 
+    reach= empty(7) 
+    no change, the abstr value is still empty(7) 
+
+  ** processing vertex lbl_19_15 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_14 (coming from loc lbl_19)
+    the contributions from the preceeding nodes is  empty(7) 
+    reach= empty(7) 
+    no change, the abstr value is still empty(7) 
+
+  ** processing vertex lbl_11 with widening:
+    the old polyhedron is  {c1=0,$>=0,1>0,n2>2y,n2>y+z,z>=0,y>=0,x>=0,n1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_19_t (coming from loc lbl_19_15)
+    the contributions from the preceeding nodes is  empty(7) 
+    reach= {c1=0,$>=0,1>0,n2>2y,n2>y+z,z>=0,y>=0,x>=0,n1>=0} 
+    no change, the abstr value is still {c1=0,$>=0,1>0,n2>2y,n2>y+z,z>=0,
+                                         y>=0,x>=0,n1>=0} 
+
+  ** processing vertex lbl_11_11 :
+    the old polyhedron is  {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1+1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_11_t (coming from loc lbl_11)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2>y+z,z>=0,y>=0,
+                                      x>=0,n1>=0} in the prec hedge
+    contrib of hedge lbl_11_t (coming from loc lbl_11) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    reach= {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1+1>=0} 
+    no change, the abstr value is still {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,
+                                         n2>y+z,n1+1>=0} 
+
+  ** processing vertex wh :
+    the old polyhedron is  {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_12 (coming from loc lbl_11_11)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,
+                                      n2>y+z,n1+1>=0} in the prec hedge
+    contrib of hedge tp_12 (coming from loc lbl_11_11) = {c1=0,$>=0,1>0,z>=0,
+                                                          y>=0,x>=0,n2>2y,
+                                                          n2>y+z,n1>=0}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,z>=0,y>=0,
+                                                     x>=0,n2>2y,n2>y+z,n1>=0} 
+    reach= {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1>=0} 
+    no change, the abstr value is still {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,
+                                         n2>y+z,n1>=0} 
+
+  ** processing vertex lbl_12 :
+    the old polyhedron is  {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge f_31 (coming from loc wh)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,
+                                      n2>y+z,n1>=0} in the prec hedge
+    contrib of hedge f_31 (coming from loc wh) = {c1=0,$>=0,1>0,z>=0,y>=0,
+                                                  x>=0,n2>2y,n2>y+z,n1>=0}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,z>=0,y>=0,
+                                                     x>=0,n2>2y,n2>y+z,n1>=0} 
+    reach= {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1>=0} 
+    no change, the abstr value is still {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,
+                                         n2>y+z,n1>=0} 
+
+  ** processing vertex lbl_12_30 :
+    the old polyhedron is  {c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,y>=0,n2>y+z,
+                            n2>2y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_29 (coming from loc lbl_12)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,
+                                      n2>y+z,n1>=0} in the prec hedge
+    contrib of hedge t_29 (coming from loc lbl_12) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    reach= {c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,y>=0,n2>y+z,n2>2y} 
+    no change, the abstr value is still {c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,
+                                         y>=0,n2>y+z,n2>2y} 
+
+  ** processing vertex lbl_13 :
+    the old polyhedron is  {c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,y>=0,n2>y+z,
+                            n2>2y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_12_t (coming from loc lbl_12_30)
+    we apply the transfo to the poly {c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,
+                                      y>=0,n2>y+z,n2>2y} in the prec hedge
+    contrib of hedge lbl_12_t (coming from loc lbl_12_30) = {c1=0,c2=0,n1>=0,
+                                                             $>=0,1>0,x>=0,
+                                                             z>=0,y>=0,
+                                                             n2>y+z,n2>2y}
+    the contributions from the preceeding nodes is  {c1=0,c2=0,n1>=0,$>=0,
+                                                     1>0,x>=0,z>=0,y>=0,
+                                                     n2>y+z,n2>2y} 
+    reach= {c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,y>=0,n2>y+z,n2>2y} 
+    no change, the abstr value is still {c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,
+                                         y>=0,n2>y+z,n2>2y} 
+
+  ** processing vertex lbl_13_28 :
+    the old polyhedron is  {c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,y>=0,n2>y+z,
+                            n2>2y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_27 (coming from loc lbl_13)
+    we apply the transfo to the poly {c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,
+                                      y>=0,n2>y+z,n2>2y} in the prec hedge
+    contrib of hedge t_27 (coming from loc lbl_13) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    reach= {c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,y>=0,n2>y+z,n2>2y} 
+    no change, the abstr value is still {c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,
+                                         y>=0,n2>y+z,n2>2y} 
+
+  ** processing vertex lbl_14 with widening:
+    the old polyhedron is  {c2=0,c1=1,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,
+                            n1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_13_t (coming from loc lbl_13_28)
+    we apply the transfo to the poly {c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,
+                                      y>=0,n2>y+z,n2>2y} in the prec hedge
+    contrib of hedge lbl_13_t (coming from loc lbl_13_28) = {c2=0,c1=1,$>=0,
+                                                             1>0,n1>=0,x>=0,
+                                                             z>=0,y>=0,
+                                                             n2>y+z,n2>2y}
+    dealing with hedge lbl_17_t (coming from loc lbl_17_22)
+    we apply the transfo to the poly {y=z,c2=1,c1=1,$>=0,1>0,n1>=0,y>=0,
+                                      n2+1>2y,x>=0} in the prec hedge
+    contrib of hedge lbl_17_t (coming from loc lbl_17_22) = {y=z,c2=1,c1=1,
+                                                             $>=0,1>0,n1>=0,
+                                                             y>=0,n2+1>2y,
+                                                             x>=0}
+    the contributions from the preceeding nodes is  {c1=1,c2+n2>2y,n1>=0,
+                                                     x>=0,z>=0,y>=0,
+                                                     c2+n2>y+z,c2>=0,$>=0,
+                                                     c2<=1,1>0} 
+    nreach={c1=1,n1>=0,z>=0,y>=0,x>=0,c2+n2>2y,c2+n2>y+z,c2>=0,$>=0,c2<=1,1>0}
+     widen part :
+    widening {c2=0,c1=1,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1>=0} by {
+c1=1,n1>=0,z>=0,y>=0,x>=0,c2+n2>2y,c2+n2>y+z,c2>=0,$>=0,c2<=1,1>0} ? 
+   nb of hedges = 2
+        acceleration (or smt) and new control path  : do not widen
+
+  ** processing vertex wh_18 :
+    the old polyhedron is  {c2=0,c1=1,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,
+                            n1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_19 (coming from loc lbl_14)
+    we apply the transfo to the poly {c1=1,n1>=0,z>=0,y>=0,x>=0,c2+n2>2y,
+                                      c2+n2>y+z,c2>=0,$>=0,c2<=1,1>0} in the prec hedge
+    contrib of hedge tp_19 (coming from loc lbl_14) = {c1=1,c2<=1,$>=0,1>0,
+                                                       z>=0,y>=0,x>=0,n1>=0,
+                                                       c2>=0,c2+n2>2y,
+                                                       c2+n2>y+z,n2>0}
+    the contributions from the preceeding nodes is  {c1=1,c2<=1,$>=0,1>0,
+                                                     z>=0,y>=0,x>=0,n1>=0,
+                                                     c2>=0,c2+n2>2y,
+                                                     c2+n2>y+z,n2>0} 
+    nreach={c1=1,c2<=1,$>=0,1>0,z>=0,y>=0,x>=0,n1>=0,c2>=0,c2+n2>2y,
+            c2+n2>y+z,n2>0}
+      do not widen
+
+  ** processing vertex lbl_15 :
+    the old polyhedron is  {c2=0,c1=1,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,
+                            n1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge f (coming from loc wh_18)
+    we apply the transfo to the poly {c1=1,c2<=1,$>=0,1>0,z>=0,y>=0,x>=0,
+                                      n1>=0,c2>=0,c2+n2>2y,c2+n2>y+z,n2>0} in the prec hedge
+    contrib of hedge f (coming from loc wh_18) = {c1=1,c2<=1,$>=0,1>0,z>=0,
+                                                  y>=0,x>=0,n1>=0,c2>=0,
+                                                  c2+n2>2y,c2+n2>y+z,n2>0}
+    the contributions from the preceeding nodes is  {c1=1,c2<=1,$>=0,1>0,
+                                                     z>=0,y>=0,x>=0,n1>=0,
+                                                     c2>=0,c2+n2>2y,
+                                                     c2+n2>y+z,n2>0} 
+    nreach={c1=1,c2<=1,$>=0,1>0,z>=0,y>=0,x>=0,n1>=0,c2>=0,c2+n2>2y,
+            c2+n2>y+z,n2>0}
+      do not widen
+
+  ** processing vertex lbl_15_26 :
+    the old polyhedron is  {c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,y>=0,n2+1>y+z,
+                            n2+1>2y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_25 (coming from loc lbl_15)
+    we apply the transfo to the poly {c1=1,c2<=1,$>=0,1>0,z>=0,y>=0,x>=0,
+                                      n1>=0,c2>=0,c2+n2>2y,c2+n2>y+z,n2>0} in the prec hedge
+    contrib of hedge t_25 (coming from loc lbl_15) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={c1=1,n1>=0,x>=0,c2<=1,c2+n2+1>2y,n2+1>0,1>0,c2+n2+1>y+z,c2>=0,
+            $>=0,y>=0,z>=0}
+      do not widen
+
+  ** processing vertex lbl_16 :
+    the old polyhedron is  {c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,y>=0,n2+1>y+z,
+                            n2+1>2y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_15_t (coming from loc lbl_15_26)
+    we apply the transfo to the poly {c1=1,n1>=0,x>=0,c2<=1,c2+n2+1>2y,
+                                      n2+1>0,1>0,c2+n2+1>y+z,c2>=0,$>=0,y>=0,
+                                      z>=0} in the prec hedge
+    contrib of hedge lbl_15_t (coming from loc lbl_15_26) = {c1=1,n1>=0,x>=0,
+                                                             c2<=1,
+                                                             c2+n2+1>2y,
+                                                             n2+1>0,1>0,
+                                                             c2+n2+1>y+z,
+                                                             c2>=0,$>=0,y>=0,
+                                                             z>=0}
+    the contributions from the preceeding nodes is  {c1=1,n1>=0,x>=0,c2<=1,
+                                                     c2+n2+1>2y,n2+1>0,1>0,
+                                                     c2+n2+1>y+z,c2>=0,$>=0,
+                                                     y>=0,z>=0} 
+    nreach={c1=1,n1>=0,x>=0,c2<=1,c2+n2+1>2y,n2+1>0,1>0,c2+n2+1>y+z,c2>=0,
+            $>=0,y>=0,z>=0}
+      do not widen
+
+  ** processing vertex lbl_16_24 :
+    the old polyhedron is  {y=z,c2=0,c1=1,n1>=0,1>0,$>=0,x>=0,n2+1>2z,z>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_23 (coming from loc lbl_16)
+    we apply the transfo to the poly {c1=1,n1>=0,x>=0,c2<=1,c2+n2+1>2y,
+                                      n2+1>0,1>0,c2+n2+1>y+z,c2>=0,$>=0,y>=0,
+                                      z>=0} in the prec hedge
+    contrib of hedge t_23 (coming from loc lbl_16) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={y=z,c1=1,x>=0,c2+n2+1>2z,c2>=0,$>=0,n1>=0,1>0,c2<=1,n2+1>0,z>=0}
+      do not widen
+
+  ** processing vertex lbl_17 :
+    the old polyhedron is  {y=z,c2=0,c1=1,n1>=0,1>0,$>=0,x>=0,n2+1>2z,z>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_16_t (coming from loc lbl_16_24)
+    we apply the transfo to the poly {y=z,c1=1,x>=0,c2+n2+1>2z,c2>=0,$>=0,
+                                      n1>=0,1>0,c2<=1,n2+1>0,z>=0} in the prec hedge
+    contrib of hedge lbl_16_t (coming from loc lbl_16_24) = {y=z,c1=1,x>=0,
+                                                             c2+n2+1>2z,
+                                                             c2>=0,$>=0,
+                                                             n1>=0,1>0,c2<=1,
+                                                             n2+1>0,z>=0}
+    the contributions from the preceeding nodes is  {y=z,c1=1,x>=0,
+                                                     c2+n2+1>2z,c2>=0,$>=0,
+                                                     n1>=0,1>0,c2<=1,n2+1>0,
+                                                     z>=0} 
+    nreach={y=z,c1=1,x>=0,c2+n2+1>2z,c2>=0,$>=0,n2+1>0,z>=0,n1>=0,c2<=1,1>0}
+      do not widen
+
+  ** processing vertex lbl_17_22 :
+    the old polyhedron is  {y=z,c2=1,c1=1,$>=0,1>0,n1>=0,y>=0,n2+1>2y,x>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_21 (coming from loc lbl_17)
+    we apply the transfo to the poly {y=z,c1=1,x>=0,c2+n2+1>2z,c2>=0,$>=0,
+                                      n2+1>0,z>=0,n1>=0,c2<=1,1>0} in the prec hedge
+    contrib of hedge t_21 (coming from loc lbl_17) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={y=z,c1=1,x>=0,n1>=0,c2<=2,1>0,n2+1>0,c2+n2>2y,$>=0,c2>=1,y>=0}
+      do not widen
+
+  ** processing vertex lbl_18 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge fp_20 (coming from loc lbl_14)
+    we apply the transfo to the poly {c1=1,c2<=1,$>=0,1>0,z>=0,y>=0,x>=0,
+                                      n1>=0,c2>=0,c2+n2>2y,c2+n2>y+z} in the prec hedge
+    contrib of hedge fp_20 (coming from loc lbl_14) = {c1=1,c2<=1,$>=0,n2<=0,
+                                                       z>=0,y>=0,x>=0,n1>=0,
+                                                       c2+n2>y+z,c2+n2>2y}
+    the contributions from the preceeding nodes is  {c1=1,c2<=1,$>=0,n2<=0,
+                                                     z>=0,y>=0,x>=0,n1>=0,
+                                                     c2+n2>y+z,c2+n2>2y} 
+    nreach={c1=1,c2<=1,$>=0,n2<=0,z>=0,y>=0,x>=0,n1>=0,c2+n2>y+z,c2+n2>2y}
+
+  ** processing vertex lbl_18_17 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_16 (coming from loc lbl_18)
+    we apply the transfo to the poly {c1=1,c2<=1,$>=0,n2<=0,z>=0,y>=0,x>=0,
+                                      n1>=0,c2+n2>y+z,c2+n2>2y} in the prec hedge
+    contrib of hedge t_16 (coming from loc lbl_18) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={c1=1,$>=0,x>=0,n2<=0,c2<=1,n1>=0,y<=z,y>=0,c2+n2>z,c2+n2>2y}
+
+  ** processing vertex lbl_19 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_18_t (coming from loc lbl_18_17)
+    we apply the transfo to the poly {c1=1,$>=0,x>=0,n2<=0,c2<=1,n1>=0,y<=z,
+                                      y>=0,c2+n2>z,c2+n2>2y} in the prec hedge
+    contrib of hedge lbl_18_t (coming from loc lbl_18_17) = {c1=1,$>=0,x>=0,
+                                                             n2<=0,c2<=1,
+                                                             n1>=0,y<=z,y>=0,
+                                                             c2+n2>z,c2+n2>2y}
+    the contributions from the preceeding nodes is  {c1=1,$>=0,x>=0,n2<=0,
+                                                     c2<=1,n1>=0,y<=z,y>=0,
+                                                     c2+n2>z,c2+n2>2y} 
+    nreach={c1=1,$>=0,x>=0,n2<=0,c2<=1,n1>=0,y<=z,y>=0,c2+n2>z,c2+n2>2y}
+
+  ** processing vertex lbl_19_15 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_14 (coming from loc lbl_19)
+    we apply the transfo to the poly {c1=1,$>=0,x>=0,n2<=0,c2<=1,n1>=0,y<=z,
+                                      y>=0,c2+n2>z,c2+n2>2y} in the prec hedge
+    contrib of hedge t_14 (coming from loc lbl_19) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={c1=1,n2=z,$>=0,c2<=1,n1>=0,x>=0,y>=0,c2>z,c2>2y,y<=z}
+
+  ** processing vertex lbl_11 with widening:
+    the old polyhedron is  {c1=0,$>=0,1>0,n2>2y,n2>y+z,z>=0,y>=0,x>=0,n1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_19_t (coming from loc lbl_19_15)
+    we apply the transfo to the poly {c1=1,n2=z,$>=0,c2<=1,n1>=0,x>=0,y>=0,
+                                      c2>z,c2>2y,y<=z} in the prec hedge
+    contrib of hedge lbl_19_t (coming from loc lbl_19_15) = {c1=1,n2=z,$>=0,
+                                                             c2<=1,n1>=0,
+                                                             x>=0,y>=0,c2>z,
+                                                             c2>2y,y<=z}
+    the contributions from the preceeding nodes is  {c1=1,n2=z,$>=0,c2<=1,
+                                                     n1>=0,x>=0,y>=0,c2>z,
+                                                     c2>2y,y<=z} 
+    nreach={z>=0,n1>=0,x>=0,y>=0,c1>=0,$>=0,c1<=1,c1+2n2>2y+2z,n2+z>=2y,
+            n2>=z,c1+2n2>4y,c1+n2>2y,c1+n2>y+z,1>0}
+     widen part :
+    widening {c1=0,$>=0,1>0,n2>2y,n2>y+z,z>=0,y>=0,x>=0,n1>=0} by {z>=0,
+                                                                   n1>=0,
+                                                                   x>=0,y>=0,
+                                                                   c1>=0,
+                                                                   $>=0,
+                                                                   c1<=1,
+                                                                   c1+2n2>2y+2z,
+                                                                   n2+z>=2y,
+                                                                   n2>=z,
+                                                                   c1+2n2>4y,
+                                                                   c1+n2>2y,
+                                                                   c1+n2>y+z,
+                                                                   1>0} ? 
+   nb of hedges = 2
+        acceleration (or smt) and new control path  : do not widen
+
+  ** processing vertex lbl_11_11 :
+    the old polyhedron is  {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1+1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_11_t (coming from loc lbl_11)
+    we apply the transfo to the poly {z>=0,n1>=0,x>=0,y>=0,c1>=0,$>=0,c1<=1,
+                                      c1+2n2>2y+2z,n2+z>=2y,n2>=z,c1+2n2>4y,
+                                      c1+n2>2y,c1+n2>y+z,1>0} in the prec hedge
+    contrib of hedge lbl_11_t (coming from loc lbl_11) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={n1+1>=0,x>=0,$>=0,c1<=1,y>=0,c1>=0,1>0,c1+n2>2y,c1+n2>y+z,z>=0,
+            n2+z>=2y,c1+2n2>2y+2z,n2>=z,c1+2n2>4y}
+      do not widen
+
+  ** processing vertex wh :
+    the old polyhedron is  {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_12 (coming from loc lbl_11_11)
+    we apply the transfo to the poly {n1+1>=0,x>=0,$>=0,c1<=1,y>=0,c1>=0,1>0,
+                                      c1+n2>2y,c1+n2>y+z,z>=0,n2+z>=2y,
+                                      c1+2n2>2y+2z,n2>=z,c1+2n2>4y} in the prec hedge
+    contrib of hedge tp_12 (coming from loc lbl_11_11) = {c1<=1,$>=0,1>0,
+                                                          z>=0,y>=0,x>=0,
+                                                          n2+z>=2y,n2>=z,
+                                                          n1>=0,c1>=0,
+                                                          c1+n2>2y,c1+n2>y+z,
+                                                          c1+2n2>4y,
+                                                          c1+2n2>2y+2z}
+    the contributions from the preceeding nodes is  {c1<=1,$>=0,1>0,z>=0,
+                                                     y>=0,x>=0,n2+z>=2y,
+                                                     n2>=z,n1>=0,c1>=0,
+                                                     c1+n2>2y,c1+n2>y+z,
+                                                     c1+2n2>4y,c1+2n2>2y+2z} 
+    nreach={c1<=1,$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,n2>=z,n1>=0,c1>=0,
+            c1+n2>2y,c1+n2>y+z,c1+2n2>4y,c1+2n2>2y+2z}
+      do not widen
+
+  ** processing vertex lbl_12 :
+    the old polyhedron is  {c1=0,$>=0,1>0,z>=0,y>=0,x>=0,n2>2y,n2>y+z,n1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge f_31 (coming from loc wh)
+    we apply the transfo to the poly {c1<=1,$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,
+                                      n2>=z,n1>=0,c1>=0,c1+n2>2y,c1+n2>y+z,
+                                      c1+2n2>4y,c1+2n2>2y+2z} in the prec hedge
+    contrib of hedge f_31 (coming from loc wh) = {c1<=1,$>=0,1>0,z>=0,y>=0,
+                                                  x>=0,n2+z>=2y,n2>=z,n1>=0,
+                                                  c1>=0,c1+n2>2y,c1+n2>y+z,
+                                                  c1+2n2>4y,c1+2n2>2y+2z}
+    the contributions from the preceeding nodes is  {c1<=1,$>=0,1>0,z>=0,
+                                                     y>=0,x>=0,n2+z>=2y,
+                                                     n2>=z,n1>=0,c1>=0,
+                                                     c1+n2>2y,c1+n2>y+z,
+                                                     c1+2n2>4y,c1+2n2>2y+2z} 
+    nreach={c1<=1,$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,n2>=z,n1>=0,c1>=0,
+            c1+n2>2y,c1+n2>y+z,c1+2n2>4y,c1+2n2>2y+2z}
+      do not widen
+
+  ** processing vertex lbl_12_30 :
+    the old polyhedron is  {c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,y>=0,n2>y+z,
+                            n2>2y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_29 (coming from loc lbl_12)
+    we apply the transfo to the poly {c1<=1,$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,
+                                      n2>=z,n1>=0,c1>=0,c1+n2>2y,c1+n2>y+z,
+                                      c1+2n2>4y,c1+2n2>2y+2z} in the prec hedge
+    contrib of hedge t_29 (coming from loc lbl_12) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={c2=0,c1>=0,n1>=0,y>=0,z>=0,$>=0,c1+n2>2y,c1+2n2>2y+2z,c1+2n2>4y,
+            c1+n2>y+z,n2>=z,n2+z>=2y,x>=0,c1<=1,1>0}
+      do not widen
+
+  ** processing vertex lbl_13 :
+    the old polyhedron is  {c1=0,c2=0,n1>=0,$>=0,1>0,x>=0,z>=0,y>=0,n2>y+z,
+                            n2>2y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_12_t (coming from loc lbl_12_30)
+    we apply the transfo to the poly {c2=0,c1>=0,n1>=0,y>=0,z>=0,$>=0,
+                                      c1+n2>2y,c1+2n2>2y+2z,c1+2n2>4y,
+                                      c1+n2>y+z,n2>=z,n2+z>=2y,x>=0,c1<=1,1>0} in the prec hedge
+    contrib of hedge lbl_12_t (coming from loc lbl_12_30) = {c2=0,c1>=0,
+                                                             n1>=0,y>=0,z>=0,
+                                                             $>=0,c1+n2>2y,
+                                                             c1+2n2>2y+2z,
+                                                             c1+2n2>4y,
+                                                             c1+n2>y+z,n2>=z,
+                                                             n2+z>=2y,x>=0,
+                                                             c1<=1,1>0}
+    the contributions from the preceeding nodes is  {c2=0,c1>=0,n1>=0,y>=0,
+                                                     z>=0,$>=0,c1+n2>2y,
+                                                     c1+2n2>2y+2z,c1+2n2>4y,
+                                                     c1+n2>y+z,n2>=z,
+                                                     n2+z>=2y,x>=0,c1<=1,1>0} 
+    nreach={c2=0,c1>=0,n1>=0,1>0,y>=0,z>=0,$>=0,c1<=1,c1+n2>2y,n2>=z,
+            c1+2n2>4y,c1+n2>y+z,n2+z>=2y,c1+2n2>2y+2z,x>=0}
+      do not widen
+
+  ** processing vertex lbl_13_28 :
+    the old polyhedron is  {c2=0,c1=1,$>=0,1>0,n1>=0,x>=0,z>=0,y>=0,n2>y+z,
+                            n2>2y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_27 (coming from loc lbl_13)
+    we apply the transfo to the poly {c2=0,c1>=0,n1>=0,1>0,y>=0,z>=0,$>=0,
+                                      c1<=1,c1+n2>2y,n2>=z,c1+2n2>4y,
+                                      c1+n2>y+z,n2+z>=2y,c1+2n2>2y+2z,x>=0} in the prec hedge
+    contrib of hedge t_27 (coming from loc lbl_13) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={c2=0,n1>=0,x>=0,$>=0,c1<=2,z>=0,1>0,y>=0,c1+n2>2y+1,c1+n2>y+z+1,
+            c1>=1,c1+2n2>2y+2z+1,c1+2n2>4y+1,n2+z>=2y,n2>=z}
+      do not widen
+
+  ** processing vertex lbl_14 with widening:
+    the old polyhedron is  {c1=1,c2<=1,$>=0,1>0,z>=0,y>=0,x>=0,n1>=0,c2>=0,
+                            c2+n2>2y,c2+n2>y+z} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_13_t (coming from loc lbl_13_28)
+    we apply the transfo to the poly {c2=0,n1>=0,x>=0,$>=0,c1<=2,z>=0,1>0,
+                                      y>=0,c1+n2>2y+1,c1+n2>y+z+1,c1>=1,
+                                      c1+2n2>2y+2z+1,c1+2n2>4y+1,n2+z>=2y,
+                                      n2>=z} in the prec hedge
+    contrib of hedge lbl_13_t (coming from loc lbl_13_28) = {c2=0,n1>=0,x>=0,
+                                                             $>=0,c1<=2,z>=0,
+                                                             1>0,y>=0,
+                                                             c1+n2>2y+1,
+                                                             c1+n2>y+z+1,
+                                                             c1>=1,
+                                                             c1+2n2>2y+2z+1,
+                                                             c1+2n2>4y+1,
+                                                             n2+z>=2y,n2>=z}
+    dealing with hedge lbl_17_t (coming from loc lbl_17_22)
+    we apply the transfo to the poly {y=z,c1=1,x>=0,n1>=0,c2<=2,1>0,n2+1>0,
+                                      c2+n2>2y,$>=0,c2>=1,y>=0} in the prec hedge
+    contrib of hedge lbl_17_t (coming from loc lbl_17_22) = {y=z,c1=1,x>=0,
+                                                             n1>=0,c2<=2,1>0,
+                                                             n2+1>0,c2+n2>2y,
+                                                             $>=0,c2>=1,y>=0}
+    the contributions from the preceeding nodes is  {n1>=0,x>=0,c1>=1,
+                                                     c1+c2+n2>2y+1,2c1+c2<=4,
+                                                     c1+c2+n2>y+z+1,1>0,
+                                                     n2+2z+1>2y,n2+y+1>z,
+                                                     c2+n2>=z,c2>=0,y>=0,
+                                                     z>=0,c2+n2+z>=2y,
+                                                     c1+2c2+2n2>2y+2z+1,
+                                                     c1+z<=n2+y+2,
+                                                     c1+2z<=c2+2n2+2,
+                                                     c1+4y<=c2+2n2+2z+2,
+                                                     c1+2c2+2n2>4y+1,
+                                                     c1+2y<=n2+2z+2,$>=0} 
+    nreach={n1>=0,x>=0,c1>=1,c1+c2+n2>2y+1,2c1+c2<=4,c1+c2+n2>y+z+1,1>0,
+            n2+2z+1>2y,n2+y+1>z,c2+n2>=z,c2>=0,y>=0,z>=0,c2+n2+z>=2y,
+            c1+2c2+2n2>2y+2z+1,c1+z<=n2+y+2,c1+2z<=c2+2n2+2,
+            c1+4y<=c2+2n2+2z+2,c1+2c2+2n2>4y+1,c1+2y<=n2+2z+2,$>=0}
+     widen part :
+    widening {c1=1,c2<=1,$>=0,1>0,z>=0,y>=0,x>=0,n1>=0,c2>=0,c2+n2>2y,
+              c2+n2>y+z} by {n1>=0,x>=0,c1>=1,c1+c2+n2>2y+1,2c1+c2<=4,
+                             c1+c2+n2>y+z+1,1>0,n2+2z+1>2y,n2+y+1>z,c2+n2>=z,
+                             c2>=0,y>=0,z>=0,c2+n2+z>=2y,c1+2c2+2n2>2y+2z+1,
+                             c1+z<=n2+y+2,c1+2z<=c2+2n2+2,c1+4y<=c2+2n2+2z+2,
+                             c1+2c2+2n2>4y+1,c1+2y<=n2+2z+2,$>=0} ? 
+   nb of hedges = 2
+    --upto : matrix with 58 constraints --
+    widening = {y>=0,z>=0,$>=0,1>0,c1+c2+n2>y+z+1,c1+c2+n2>2y+1,c1>=1,c2>=0,
+                n1>=0,x>=0}
+
+  ** processing vertex wh_18 :
+    the old polyhedron is  {c1=1,c2<=1,$>=0,1>0,z>=0,y>=0,x>=0,n1>=0,c2>=0,
+                            c2+n2>2y,c2+n2>y+z,n2>0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_19 (coming from loc lbl_14)
+    we apply the transfo to the poly {y>=0,z>=0,$>=0,1>0,c1+c2+n2>y+z+1,
+                                      c1+c2+n2>2y+1,c1>=1,c2>=0,n1>=0,x>=0} in the prec hedge
+    contrib of hedge tp_19 (coming from loc lbl_14) = {y>=0,z>=0,$>=0,1>0,
+                                                       c1+c2+n2>y+z+1,
+                                                       c1+c2+n2>2y+1,c1>=1,
+                                                       c2>=0,n1>=0,x>=0,n2>0}
+    the contributions from the preceeding nodes is  {y>=0,z>=0,$>=0,1>0,
+                                                     c1+c2+n2>y+z+1,
+                                                     c1+c2+n2>2y+1,c1>=1,
+                                                     c2>=0,n1>=0,x>=0,n2>0} 
+    nreach={n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,c1+c2+n2>y+z+1,c1+c2+n2>2y+1,
+            c1>=1,z>=0,y>=0}
+      do not widen
+
+  ** processing vertex lbl_15 :
+    the old polyhedron is  {c1=1,c2<=1,$>=0,1>0,z>=0,y>=0,x>=0,n1>=0,c2>=0,
+                            c2+n2>2y,c2+n2>y+z,n2>0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge f (coming from loc wh_18)
+    we apply the transfo to the poly {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,
+                                      c1+c2+n2>y+z+1,c1+c2+n2>2y+1,c1>=1,
+                                      z>=0,y>=0} in the prec hedge
+    contrib of hedge f (coming from loc wh_18) = {n2>0,$>=0,1>0,x>=0,n1>=0,
+                                                  c2>=0,c1+c2+n2>y+z+1,
+                                                  c1+c2+n2>2y+1,c1>=1,z>=0,
+                                                  y>=0}
+    the contributions from the preceeding nodes is  {n2>0,$>=0,1>0,x>=0,
+                                                     n1>=0,c2>=0,
+                                                     c1+c2+n2>y+z+1,
+                                                     c1+c2+n2>2y+1,c1>=1,
+                                                     z>=0,y>=0} 
+    nreach={n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,c1+c2+n2>y+z+1,c1+c2+n2>2y+1,
+            c1>=1,z>=0,y>=0}
+      do not widen
+
+  ** processing vertex lbl_15_26 :
+    the old polyhedron is  {c1=1,n1>=0,x>=0,c2<=1,c2+n2+1>2y,n2+1>0,1>0,
+                            c2+n2+1>y+z,c2>=0,$>=0,y>=0,z>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_25 (coming from loc lbl_15)
+    we apply the transfo to the poly {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,
+                                      c1+c2+n2>y+z+1,c1+c2+n2>2y+1,c1>=1,
+                                      z>=0,y>=0} in the prec hedge
+    contrib of hedge t_25 (coming from loc lbl_15) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,c1+c2+n2>y+z,c1+c2+n2>2y,c1>=1,
+            z>=0,y>=0}
+      do not widen
+
+  ** processing vertex lbl_16 :
+    the old polyhedron is  {c1=1,n1>=0,x>=0,c2<=1,c2+n2+1>2y,n2+1>0,1>0,
+                            c2+n2+1>y+z,c2>=0,$>=0,y>=0,z>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_15_t (coming from loc lbl_15_26)
+    we apply the transfo to the poly {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,
+                                      c1+c2+n2>y+z,c1+c2+n2>2y,c1>=1,z>=0,
+                                      y>=0} in the prec hedge
+    contrib of hedge lbl_15_t (coming from loc lbl_15_26) = {n1>=0,x>=0,
+                                                             n2+1>0,1>0,$>=0,
+                                                             c2>=0,
+                                                             c1+c2+n2>y+z,
+                                                             c1+c2+n2>2y,
+                                                             c1>=1,z>=0,y>=0}
+    the contributions from the preceeding nodes is  {n1>=0,x>=0,n2+1>0,1>0,
+                                                     $>=0,c2>=0,c1+c2+n2>y+z,
+                                                     c1+c2+n2>2y,c1>=1,z>=0,
+                                                     y>=0} 
+    nreach={n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,c1+c2+n2>y+z,c1+c2+n2>2y,c1>=1,
+            z>=0,y>=0}
+      do not widen
+
+  ** processing vertex lbl_16_24 :
+    the old polyhedron is  {y=z,c1=1,x>=0,c2+n2+1>2z,c2>=0,$>=0,n1>=0,1>0,
+                            c2<=1,n2+1>0,z>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_23 (coming from loc lbl_16)
+    we apply the transfo to the poly {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,
+                                      c1+c2+n2>y+z,c1+c2+n2>2y,c1>=1,z>=0,
+                                      y>=0} in the prec hedge
+    contrib of hedge t_23 (coming from loc lbl_16) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={y=z,x>=0,n2+1>0,1>0,$>=0,c1>=1,z>=0,n1>=0,c1+c2+n2>2z,c2>=0}
+      do not widen
+
+  ** processing vertex lbl_17 :
+    the old polyhedron is  {y=z,c1=1,x>=0,c2+n2+1>2z,c2>=0,$>=0,n2+1>0,z>=0,
+                            n1>=0,c2<=1,1>0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_16_t (coming from loc lbl_16_24)
+    we apply the transfo to the poly {y=z,x>=0,n2+1>0,1>0,$>=0,c1>=1,z>=0,
+                                      n1>=0,c1+c2+n2>2z,c2>=0} in the prec hedge
+    contrib of hedge lbl_16_t (coming from loc lbl_16_24) = {y=z,x>=0,n2+1>0,
+                                                             1>0,$>=0,c1>=1,
+                                                             z>=0,n1>=0,
+                                                             c1+c2+n2>2z,
+                                                             c2>=0}
+    the contributions from the preceeding nodes is  {y=z,x>=0,n2+1>0,1>0,
+                                                     $>=0,c1>=1,z>=0,n1>=0,
+                                                     c1+c2+n2>2z,c2>=0} 
+    nreach={y=z,x>=0,$>=0,n2+1>0,n1>=0,1>0,c2>=0,z>=0,c1>=1,c1+c2+n2>2z}
+      do not widen
+
+  ** processing vertex lbl_17_22 :
+    the old polyhedron is  {y=z,c1=1,x>=0,n1>=0,c2<=2,1>0,n2+1>0,c2+n2>2y,
+                            $>=0,c2>=1,y>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_21 (coming from loc lbl_17)
+    we apply the transfo to the poly {y=z,x>=0,$>=0,n2+1>0,n1>=0,1>0,c2>=0,
+                                      z>=0,c1>=1,c1+c2+n2>2z} in the prec hedge
+    contrib of hedge t_21 (coming from loc lbl_17) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={y=z,x>=0,n1>=0,1>0,n2+1>0,$>=0,c2>=1,c1>=1,y>=0,c1+c2+n2>2y+1}
+      do not widen
+
+  ** processing vertex lbl_18 :
+    the old polyhedron is  {c1=1,c2<=1,$>=0,n2<=0,z>=0,y>=0,x>=0,n1>=0,
+                            c2+n2>y+z,c2+n2>2y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge fp_20 (coming from loc lbl_14)
+    we apply the transfo to the poly {y>=0,z>=0,$>=0,1>0,c1+c2+n2>y+z+1,
+                                      c1+c2+n2>2y+1,c1>=1,c2>=0,n1>=0,x>=0} in the prec hedge
+    contrib of hedge fp_20 (coming from loc lbl_14) = {y>=0,z>=0,$>=0,1>0,
+                                                       c1+c2+n2>y+z+1,
+                                                       c1+c2+n2>2y+1,c1>=1,
+                                                       c2>=0,n1>=0,x>=0,n2<=0}
+    the contributions from the preceeding nodes is  {y>=0,z>=0,$>=0,1>0,
+                                                     c1+c2+n2>y+z+1,
+                                                     c1+c2+n2>2y+1,c1>=1,
+                                                     c2>=0,n1>=0,x>=0,n2<=0} 
+    nreach={$>=0,c1>=1,n1>=0,x>=0,n2<=0,y>=0,z>=0,c1+c2+n2>2y+1,1>0,c2>=0,
+            c1+c2+n2>y+z+1}
+      do not widen
+
+  ** processing vertex lbl_18_17 :
+    the old polyhedron is  {c1=1,$>=0,x>=0,n2<=0,c2<=1,n1>=0,y<=z,y>=0,
+                            c2+n2>z,c2+n2>2y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_16 (coming from loc lbl_18)
+    we apply the transfo to the poly {$>=0,c1>=1,n1>=0,x>=0,n2<=0,y>=0,z>=0,
+                                      c1+c2+n2>2y+1,1>0,c2>=0,c1+c2+n2>y+z+1} in the prec hedge
+    contrib of hedge t_16 (coming from loc lbl_18) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={x>=0,n1>=0,$>=0,c1>=1,n2<=0,y>=0,y<=z,c1+c2+n2>2y+1,c1+c2+n2>z+1,
+            1>0,c2>=0}
+      do not widen
+
+  ** processing vertex lbl_19 :
+    the old polyhedron is  {c1=1,$>=0,x>=0,n2<=0,c2<=1,n1>=0,y<=z,y>=0,
+                            c2+n2>z,c2+n2>2y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_18_t (coming from loc lbl_18_17)
+    we apply the transfo to the poly {x>=0,n1>=0,$>=0,c1>=1,n2<=0,y>=0,y<=z,
+                                      c1+c2+n2>2y+1,c1+c2+n2>z+1,1>0,c2>=0} in the prec hedge
+    contrib of hedge lbl_18_t (coming from loc lbl_18_17) = {x>=0,n1>=0,$>=0,
+                                                             c1>=1,n2<=0,
+                                                             y>=0,y<=z,
+                                                             c1+c2+n2>2y+1,
+                                                             c1+c2+n2>z+1,
+                                                             1>0,c2>=0}
+    the contributions from the preceeding nodes is  {x>=0,n1>=0,$>=0,c1>=1,
+                                                     n2<=0,y>=0,y<=z,
+                                                     c1+c2+n2>2y+1,
+                                                     c1+c2+n2>z+1,1>0,c2>=0} 
+    nreach={x>=0,n1>=0,$>=0,c1>=1,n2<=0,y>=0,y<=z,c1+c2+n2>2y+1,c1+c2+n2>z+1,
+            1>0,c2>=0}
+      do not widen
+
+  ** processing vertex lbl_19_15 :
+    the old polyhedron is  {c1=1,n2=z,$>=0,c2<=1,n1>=0,x>=0,y>=0,c2>z,c2>2y,
+                            y<=z} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_14 (coming from loc lbl_19)
+    we apply the transfo to the poly {x>=0,n1>=0,$>=0,c1>=1,n2<=0,y>=0,y<=z,
+                                      c1+c2+n2>2y+1,c1+c2+n2>z+1,1>0,c2>=0} in the prec hedge
+    contrib of hedge t_14 (coming from loc lbl_19) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={n2=z,n1>=0,x>=0,c1>=1,$>=0,n2>=y,y>=0,c1+c2>2y+1,1>0,c2>=0,
+            c1+c2>n2+1}
+      do not widen
+
+  ** processing vertex lbl_11 with widening:
+    the old polyhedron is  {z>=0,n1>=0,x>=0,y>=0,c1>=0,$>=0,c1<=1,
+                            c1+2n2>2y+2z,n2+z>=2y,n2>=z,c1+2n2>4y,c1+n2>2y,
+                            c1+n2>y+z,1>0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_19_t (coming from loc lbl_19_15)
+    we apply the transfo to the poly {n2=z,n1>=0,x>=0,c1>=1,$>=0,n2>=y,y>=0,
+                                      c1+c2>2y+1,1>0,c2>=0,c1+c2>n2+1} in the prec hedge
+    contrib of hedge lbl_19_t (coming from loc lbl_19_15) = {n2=z,n1>=0,x>=0,
+                                                             c1>=1,$>=0,
+                                                             n2>=y,y>=0,
+                                                             c1+c2>2y+1,1>0,
+                                                             c2>=0,c1+c2>n2+1}
+    the contributions from the preceeding nodes is  {n2=z,n1>=0,x>=0,c1>=1,
+                                                     $>=0,n2>=y,y>=0,
+                                                     c1+c2>2y+1,1>0,c2>=0,
+                                                     c1+c2>n2+1} 
+    nreach={n1>=0,x>=0,1>0,n2>=z,y>=0,z>=0,n2+z>=2y,$>=0,c1>=0,c1+n2>z,
+            c1+n2+z>2y}
+     widen part :
+    widening {z>=0,n1>=0,x>=0,y>=0,c1>=0,$>=0,c1<=1,c1+2n2>2y+2z,n2+z>=2y,
+              n2>=z,c1+2n2>4y,c1+n2>2y,c1+n2>y+z,1>0} by {n1>=0,x>=0,1>0,
+                                                          n2>=z,y>=0,z>=0,
+                                                          n2+z>=2y,$>=0,
+                                                          c1>=0,c1+n2>z,
+                                                          c1+n2+z>2y} ? 
+   nb of hedges = 2
+    --upto : matrix with 58 constraints --
+    widening = {y>=0,z>=0,$>=0,c1>=0,n1>=0,1>0,n2>=z,n2+z>=2y,x>=0}
+
+  ** processing vertex lbl_11_11 :
+    the old polyhedron is  {c1<=1,$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,n2>=z,
+                            n1+1>=0,c1>=0,c1+n2>2y,c1+n2>y+z,c1+2n2>4y,
+                            c1+2n2>2y+2z} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_11_t (coming from loc lbl_11)
+    we apply the transfo to the poly {y>=0,z>=0,$>=0,c1>=0,n1>=0,1>0,n2>=z,
+                                      n2+z>=2y,x>=0} in the prec hedge
+    contrib of hedge lbl_11_t (coming from loc lbl_11) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={1>0,x>=0,n2+z>=2y,n2>=z,n1+1>=0,z>=0,$>=0,y>=0,c1>=0}
+      do not widen
+
+  ** processing vertex wh :
+    the old polyhedron is  {c1<=1,$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,n2>=z,
+                            n1>=0,c1>=0,c1+n2>2y,c1+n2>y+z,c1+2n2>4y,
+                            c1+2n2>2y+2z} 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_12 (coming from loc lbl_11_11)
+    we apply the transfo to the poly {1>0,x>=0,n2+z>=2y,n2>=z,n1+1>=0,z>=0,
+                                      $>=0,y>=0,c1>=0} in the prec hedge
+    contrib of hedge tp_12 (coming from loc lbl_11_11) = {$>=0,1>0,z>=0,y>=0,
+                                                          x>=0,n2+z>=2y,
+                                                          n2>=z,n1>=0,c1>=0}
+    the contributions from the preceeding nodes is  {$>=0,1>0,z>=0,y>=0,x>=0,
+                                                     n2+z>=2y,n2>=z,n1>=0,
+                                                     c1>=0} 
+    nreach={1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,$>=0,y>=0,c1>=0}
+      do not widen
+
+  ** processing vertex lbl_12 :
+    the old polyhedron is  {c1<=1,$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,n2>=z,
+                            n1>=0,c1>=0,c1+n2>2y,c1+n2>y+z,c1+2n2>4y,
+                            c1+2n2>2y+2z} 
+    the incoming hedges are not meta ones 
+    dealing with hedge f_31 (coming from loc wh)
+    we apply the transfo to the poly {1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,
+                                      $>=0,y>=0,c1>=0} in the prec hedge
+    contrib of hedge f_31 (coming from loc wh) = {1>0,x>=0,n2+z>=2y,n2>=z,
+                                                  n1>=0,z>=0,$>=0,y>=0,c1>=0}
+    the contributions from the preceeding nodes is  {1>0,x>=0,n2+z>=2y,n2>=z,
+                                                     n1>=0,z>=0,$>=0,y>=0,
+                                                     c1>=0} 
+    nreach={1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,$>=0,y>=0,c1>=0}
+      do not widen
+
+  ** processing vertex lbl_12_30 :
+    the old polyhedron is  {c2=0,c1>=0,n1>=0,y>=0,z>=0,$>=0,c1+n2>2y,
+                            c1+2n2>2y+2z,c1+2n2>4y,c1+n2>y+z,n2>=z,n2+z>=2y,
+                            x>=0,c1<=1,1>0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_29 (coming from loc lbl_12)
+    we apply the transfo to the poly {1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,
+                                      $>=0,y>=0,c1>=0} in the prec hedge
+    contrib of hedge t_29 (coming from loc lbl_12) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={c2=0,c1>=0,1>0,n1>=0,y>=0,$>=0,x>=0,z>=0,n2>=z,n2+z>=2y}
+      do not widen
+
+  ** processing vertex lbl_13 :
+    the old polyhedron is  {c2=0,c1>=0,n1>=0,1>0,y>=0,z>=0,$>=0,c1<=1,
+                            c1+n2>2y,n2>=z,c1+2n2>4y,c1+n2>y+z,n2+z>=2y,
+                            c1+2n2>2y+2z,x>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_12_t (coming from loc lbl_12_30)
+    we apply the transfo to the poly {c2=0,c1>=0,1>0,n1>=0,y>=0,$>=0,x>=0,
+                                      z>=0,n2>=z,n2+z>=2y} in the prec hedge
+    contrib of hedge lbl_12_t (coming from loc lbl_12_30) = {c2=0,c1>=0,1>0,
+                                                             n1>=0,y>=0,$>=0,
+                                                             x>=0,z>=0,n2>=z,
+                                                             n2+z>=2y}
+    the contributions from the preceeding nodes is  {c2=0,c1>=0,1>0,n1>=0,
+                                                     y>=0,$>=0,x>=0,z>=0,
+                                                     n2>=z,n2+z>=2y} 
+    nreach={c2=0,n1>=0,1>0,x>=0,n2>=z,n2+z>=2y,y>=0,$>=0,z>=0,c1>=0}
+      do not widen
+
+  ** processing vertex lbl_13_28 :
+    the old polyhedron is  {c2=0,n1>=0,x>=0,$>=0,c1<=2,z>=0,1>0,y>=0,
+                            c1+n2>2y+1,c1+n2>y+z+1,c1>=1,c1+2n2>2y+2z+1,
+                            c1+2n2>4y+1,n2+z>=2y,n2>=z} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_27 (coming from loc lbl_13)
+    we apply the transfo to the poly {c2=0,n1>=0,1>0,x>=0,n2>=z,n2+z>=2y,
+                                      y>=0,$>=0,z>=0,c1>=0} in the prec hedge
+    contrib of hedge t_27 (coming from loc lbl_13) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={c2=0,n1>=0,x>=0,1>0,n2>=z,n2+z>=2y,y>=0,z>=0,c1>=1,$>=0}
+      do not widen
+
+  ** processing vertex lbl_14 with widening:
+    the old polyhedron is  {y>=0,z>=0,$>=0,1>0,c1+c2+n2>y+z+1,c1+c2+n2>2y+1,
+                            c1>=1,c2>=0,n1>=0,x>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_13_t (coming from loc lbl_13_28)
+    we apply the transfo to the poly {c2=0,n1>=0,x>=0,1>0,n2>=z,n2+z>=2y,
+                                      y>=0,z>=0,c1>=1,$>=0} in the prec hedge
+    contrib of hedge lbl_13_t (coming from loc lbl_13_28) = {c2=0,n1>=0,x>=0,
+                                                             1>0,n2>=z,
+                                                             n2+z>=2y,y>=0,
+                                                             z>=0,c1>=1,$>=0}
+    dealing with hedge lbl_17_t (coming from loc lbl_17_22)
+    we apply the transfo to the poly {y=z,x>=0,n1>=0,1>0,n2+1>0,$>=0,c2>=1,
+                                      c1>=1,y>=0,c1+c2+n2>2y+1} in the prec hedge
+    contrib of hedge lbl_17_t (coming from loc lbl_17_22) = {y=z,x>=0,n1>=0,
+                                                             1>0,n2+1>0,$>=0,
+                                                             c2>=1,c1>=1,
+                                                             y>=0,
+                                                             c1+c2+n2>2y+1}
+    the contributions from the preceeding nodes is  {x>=0,n1>=0,c1>=1,y>=0,
+                                                     z>=0,1>0,n2+y+1>z,
+                                                     n2+2z+1>2y,$>=0,
+                                                     c1+c2+2n2>2z,c2>=0,
+                                                     c2+n2+2z>=2y,c2+n2+y>=z,
+                                                     c1+2c2+2n2>=2z+1,
+                                                     c1+2c2+2n2+2z>=4y+1,
+                                                     c1+c2+2n2+2z>4y} 
+    nreach={x>=0,n1>=0,1>0,$>=0,z>=0,c2>=0,y>=0,c1>=1,c1+c2+n2+z>=2y+1,
+            c1+c2+n2>=z+1}
+     widen part :
+    widening {y>=0,z>=0,$>=0,1>0,c1+c2+n2>y+z+1,c1+c2+n2>2y+1,c1>=1,c2>=0,
+              n1>=0,x>=0} by {x>=0,n1>=0,1>0,$>=0,z>=0,c2>=0,y>=0,c1>=1,
+                              c1+c2+n2+z>=2y+1,c1+c2+n2>=z+1} ? 
+   nb of hedges = 2
+    --upto : matrix with 58 constraints --
+    widening = {y>=0,z>=0,$>=0,1>0,c1>=1,c2>=0,n1>=0,x>=0}
+
+  ** processing vertex wh_18 :
+    the old polyhedron is  {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,c1+c2+n2>y+z+1,
+                            c1+c2+n2>2y+1,c1>=1,z>=0,y>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_19 (coming from loc lbl_14)
+    we apply the transfo to the poly {y>=0,z>=0,$>=0,1>0,c1>=1,c2>=0,n1>=0,
+                                      x>=0} in the prec hedge
+    contrib of hedge tp_19 (coming from loc lbl_14) = {y>=0,z>=0,$>=0,1>0,
+                                                       c1>=1,c2>=0,n1>=0,
+                                                       x>=0,n2>0}
+    the contributions from the preceeding nodes is  {y>=0,z>=0,$>=0,1>0,
+                                                     c1>=1,c2>=0,n1>=0,x>=0,
+                                                     n2>0} 
+    nreach={n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,c1>=1,y>=0}
+      do not widen
+
+  ** processing vertex lbl_15 :
+    the old polyhedron is  {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,c1+c2+n2>y+z+1,
+                            c1+c2+n2>2y+1,c1>=1,z>=0,y>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge f (coming from loc wh_18)
+    we apply the transfo to the poly {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,
+                                      c1>=1,y>=0} in the prec hedge
+    contrib of hedge f (coming from loc wh_18) = {n2>0,$>=0,1>0,x>=0,n1>=0,
+                                                  c2>=0,z>=0,c1>=1,y>=0}
+    the contributions from the preceeding nodes is  {n2>0,$>=0,1>0,x>=0,
+                                                     n1>=0,c2>=0,z>=0,c1>=1,
+                                                     y>=0} 
+    nreach={n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,c1>=1,y>=0}
+      do not widen
+
+  ** processing vertex lbl_15_26 :
+    the old polyhedron is  {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,c1+c2+n2>y+z,
+                            c1+c2+n2>2y,c1>=1,z>=0,y>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_25 (coming from loc lbl_15)
+    we apply the transfo to the poly {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,
+                                      c1>=1,y>=0} in the prec hedge
+    contrib of hedge t_25 (coming from loc lbl_15) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,c1>=1,y>=0}
+      do not widen
+
+  ** processing vertex lbl_16 :
+    the old polyhedron is  {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,c1+c2+n2>y+z,
+                            c1+c2+n2>2y,c1>=1,z>=0,y>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_15_t (coming from loc lbl_15_26)
+    we apply the transfo to the poly {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,
+                                      c1>=1,y>=0} in the prec hedge
+    contrib of hedge lbl_15_t (coming from loc lbl_15_26) = {n1>=0,x>=0,
+                                                             n2+1>0,1>0,$>=0,
+                                                             c2>=0,z>=0,
+                                                             c1>=1,y>=0}
+    the contributions from the preceeding nodes is  {n1>=0,x>=0,n2+1>0,1>0,
+                                                     $>=0,c2>=0,z>=0,c1>=1,
+                                                     y>=0} 
+    nreach={n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,c1>=1,y>=0}
+      do not widen
+
+  ** processing vertex lbl_16_24 :
+    the old polyhedron is  {y=z,x>=0,n2+1>0,1>0,$>=0,c1>=1,z>=0,n1>=0,
+                            c1+c2+n2>2z,c2>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_23 (coming from loc lbl_16)
+    we apply the transfo to the poly {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,
+                                      c1>=1,y>=0} in the prec hedge
+    contrib of hedge t_23 (coming from loc lbl_16) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={y=z,$>=0,z>=0,x>=0,c1>=1,1>0,c2>=0,n1>=0,n2+1>0}
+      do not widen
+
+  ** processing vertex lbl_17 :
+    the old polyhedron is  {y=z,x>=0,$>=0,n2+1>0,n1>=0,1>0,c2>=0,z>=0,c1>=1,
+                            c1+c2+n2>2z} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_16_t (coming from loc lbl_16_24)
+    we apply the transfo to the poly {y=z,$>=0,z>=0,x>=0,c1>=1,1>0,c2>=0,
+                                      n1>=0,n2+1>0} in the prec hedge
+    contrib of hedge lbl_16_t (coming from loc lbl_16_24) = {y=z,$>=0,z>=0,
+                                                             x>=0,c1>=1,1>0,
+                                                             c2>=0,n1>=0,
+                                                             n2+1>0}
+    the contributions from the preceeding nodes is  {y=z,$>=0,z>=0,x>=0,
+                                                     c1>=1,1>0,c2>=0,n1>=0,
+                                                     n2+1>0} 
+    nreach={y=z,x>=0,$>=0,n2+1>0,n1>=0,1>0,c2>=0,c1>=1,z>=0}
+      do not widen
+
+  ** processing vertex lbl_17_22 :
+    the old polyhedron is  {y=z,x>=0,n1>=0,1>0,n2+1>0,$>=0,c2>=1,c1>=1,y>=0,
+                            c1+c2+n2>2y+1} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_21 (coming from loc lbl_17)
+    we apply the transfo to the poly {y=z,x>=0,$>=0,n2+1>0,n1>=0,1>0,c2>=0,
+                                      c1>=1,z>=0} in the prec hedge
+    contrib of hedge t_21 (coming from loc lbl_17) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={y=z,x>=0,n1>=0,1>0,n2+1>0,$>=0,c2>=1,c1>=1,y>=0}
+      do not widen
+
+  ** processing vertex lbl_18 :
+    the old polyhedron is  {$>=0,c1>=1,n1>=0,x>=0,n2<=0,y>=0,z>=0,
+                            c1+c2+n2>2y+1,1>0,c2>=0,c1+c2+n2>y+z+1} 
+    the incoming hedges are not meta ones 
+    dealing with hedge fp_20 (coming from loc lbl_14)
+    we apply the transfo to the poly {y>=0,z>=0,$>=0,1>0,c1>=1,c2>=0,n1>=0,
+                                      x>=0} in the prec hedge
+    contrib of hedge fp_20 (coming from loc lbl_14) = {y>=0,z>=0,$>=0,1>0,
+                                                       c1>=1,c2>=0,n1>=0,
+                                                       x>=0,n2<=0}
+    the contributions from the preceeding nodes is  {y>=0,z>=0,$>=0,1>0,
+                                                     c1>=1,c2>=0,n1>=0,x>=0,
+                                                     n2<=0} 
+    nreach={c1>=1,n1>=0,x>=0,c2>=0,1>0,n2<=0,z>=0,y>=0,$>=0}
+      do not widen
+
+  ** processing vertex lbl_18_17 :
+    the old polyhedron is  {x>=0,n1>=0,$>=0,c1>=1,n2<=0,y>=0,y<=z,
+                            c1+c2+n2>2y+1,c1+c2+n2>z+1,1>0,c2>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_16 (coming from loc lbl_18)
+    we apply the transfo to the poly {c1>=1,n1>=0,x>=0,c2>=0,1>0,n2<=0,z>=0,
+                                      y>=0,$>=0} in the prec hedge
+    contrib of hedge t_16 (coming from loc lbl_18) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,y>=0,$>=0}
+      do not widen
+
+  ** processing vertex lbl_19 :
+    the old polyhedron is  {x>=0,n1>=0,$>=0,c1>=1,n2<=0,y>=0,y<=z,
+                            c1+c2+n2>2y+1,c1+c2+n2>z+1,1>0,c2>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_18_t (coming from loc lbl_18_17)
+    we apply the transfo to the poly {x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,
+                                      y>=0,$>=0} in the prec hedge
+    contrib of hedge lbl_18_t (coming from loc lbl_18_17) = {x>=0,n1>=0,
+                                                             c1>=1,c2>=0,1>0,
+                                                             n2<=0,y<=z,y>=0,
+                                                             $>=0}
+    the contributions from the preceeding nodes is  {x>=0,n1>=0,c1>=1,c2>=0,
+                                                     1>0,n2<=0,y<=z,y>=0,$>=0} 
+    nreach={x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,y>=0,$>=0}
+      do not widen
+
+  ** processing vertex lbl_19_15 :
+    the old polyhedron is  {n2=z,n1>=0,x>=0,c1>=1,$>=0,n2>=y,y>=0,c1+c2>2y+1,
+                            1>0,c2>=0,c1+c2>n2+1} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_14 (coming from loc lbl_19)
+    we apply the transfo to the poly {x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,
+                                      y>=0,$>=0} in the prec hedge
+    contrib of hedge t_14 (coming from loc lbl_19) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    nreach={n2=z,$>=0,x>=0,1>0,c1>=1,n1>=0,c2>=0,y>=0,n2>=y}
+      do not widen
+
+  ** processing vertex lbl_11 with widening:
+    the old polyhedron is  {y>=0,z>=0,$>=0,c1>=0,n1>=0,1>0,n2>=z,n2+z>=2y,
+                            x>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_19_t (coming from loc lbl_19_15)
+    we apply the transfo to the poly {n2=z,$>=0,x>=0,1>0,c1>=1,n1>=0,c2>=0,
+                                      y>=0,n2>=y} in the prec hedge
+    contrib of hedge lbl_19_t (coming from loc lbl_19_15) = {n2=z,$>=0,x>=0,
+                                                             1>0,c1>=1,n1>=0,
+                                                             c2>=0,y>=0,n2>=y}
+    the contributions from the preceeding nodes is  {n2=z,$>=0,x>=0,1>0,
+                                                     c1>=1,n1>=0,c2>=0,y>=0,
+                                                     n2>=y} 
+    reach= {y>=0,z>=0,n1>=0,n2>=z,n2+z>=2y,x>=0,$>=0,c1>=0,1>0} 
+    no change, the abstr value is still {y>=0,z>=0,$>=0,c1>=0,n1>=0,1>0,
+                                         n2>=z,n2+z>=2y,x>=0} 
+
+  ** processing vertex lbl_11_11 :
+    the old polyhedron is  {$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,n2>=z,n1+1>=0,
+                            c1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_11_t (coming from loc lbl_11)
+    we apply the transfo to the poly {y>=0,z>=0,$>=0,c1>=0,n1>=0,1>0,n2>=z,
+                                      n2+z>=2y,x>=0} in the prec hedge
+    contrib of hedge lbl_11_t (coming from loc lbl_11) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    reach= {$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,n2>=z,n1+1>=0,c1>=0} 
+    no change, the abstr value is still {$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,
+                                         n2>=z,n1+1>=0,c1>=0} 
+
+  ** processing vertex wh :
+    the old polyhedron is  {1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,$>=0,y>=0,
+                            c1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_12 (coming from loc lbl_11_11)
+    we apply the transfo to the poly {$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,n2>=z,
+                                      n1+1>=0,c1>=0} in the prec hedge
+    contrib of hedge tp_12 (coming from loc lbl_11_11) = {$>=0,1>0,z>=0,y>=0,
+                                                          x>=0,n2+z>=2y,
+                                                          n2>=z,n1>=0,c1>=0}
+    the contributions from the preceeding nodes is  {$>=0,1>0,z>=0,y>=0,x>=0,
+                                                     n2+z>=2y,n2>=z,n1>=0,
+                                                     c1>=0} 
+    reach= {1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,$>=0,y>=0,c1>=0} 
+    no change, the abstr value is still {1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,
+                                         $>=0,y>=0,c1>=0} 
+
+  ** processing vertex lbl_12 :
+    the old polyhedron is  {1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,$>=0,y>=0,
+                            c1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge f_31 (coming from loc wh)
+    we apply the transfo to the poly {1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,
+                                      $>=0,y>=0,c1>=0} in the prec hedge
+    contrib of hedge f_31 (coming from loc wh) = {1>0,x>=0,n2+z>=2y,n2>=z,
+                                                  n1>=0,z>=0,$>=0,y>=0,c1>=0}
+    the contributions from the preceeding nodes is  {1>0,x>=0,n2+z>=2y,n2>=z,
+                                                     n1>=0,z>=0,$>=0,y>=0,
+                                                     c1>=0} 
+    reach= {1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,$>=0,y>=0,c1>=0} 
+    no change, the abstr value is still {1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,
+                                         $>=0,y>=0,c1>=0} 
+
+  ** processing vertex lbl_12_30 :
+    the old polyhedron is  {c2=0,c1>=0,1>0,n1>=0,y>=0,$>=0,x>=0,z>=0,n2>=z,
+                            n2+z>=2y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_29 (coming from loc lbl_12)
+    we apply the transfo to the poly {1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,
+                                      $>=0,y>=0,c1>=0} in the prec hedge
+    contrib of hedge t_29 (coming from loc lbl_12) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    reach= {c2=0,c1>=0,1>0,n1>=0,y>=0,z>=0,n2>=z,n2+z>=2y,x>=0,$>=0} 
+    no change, the abstr value is still {c2=0,c1>=0,1>0,n1>=0,y>=0,$>=0,x>=0,
+                                         z>=0,n2>=z,n2+z>=2y} 
+
+  ** processing vertex lbl_13 :
+    the old polyhedron is  {c2=0,n1>=0,1>0,x>=0,n2>=z,n2+z>=2y,y>=0,$>=0,
+                            z>=0,c1>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_12_t (coming from loc lbl_12_30)
+    we apply the transfo to the poly {c2=0,c1>=0,1>0,n1>=0,y>=0,$>=0,x>=0,
+                                      z>=0,n2>=z,n2+z>=2y} in the prec hedge
+    contrib of hedge lbl_12_t (coming from loc lbl_12_30) = {c2=0,c1>=0,1>0,
+                                                             n1>=0,y>=0,$>=0,
+                                                             x>=0,z>=0,n2>=z,
+                                                             n2+z>=2y}
+    the contributions from the preceeding nodes is  {c2=0,c1>=0,1>0,n1>=0,
+                                                     y>=0,$>=0,x>=0,z>=0,
+                                                     n2>=z,n2+z>=2y} 
+    reach= {c2=0,n1>=0,1>0,x>=0,n2>=z,n2+z>=2y,y>=0,$>=0,z>=0,c1>=0} 
+    no change, the abstr value is still {c2=0,n1>=0,1>0,x>=0,n2>=z,n2+z>=2y,
+                                         y>=0,$>=0,z>=0,c1>=0} 
+
+  ** processing vertex lbl_13_28 :
+    the old polyhedron is  {c2=0,n1>=0,x>=0,1>0,n2>=z,n2+z>=2y,y>=0,z>=0,
+                            c1>=1,$>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_27 (coming from loc lbl_13)
+    we apply the transfo to the poly {c2=0,n1>=0,1>0,x>=0,n2>=z,n2+z>=2y,
+                                      y>=0,$>=0,z>=0,c1>=0} in the prec hedge
+    contrib of hedge t_27 (coming from loc lbl_13) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    reach= {c2=0,n1>=0,x>=0,1>0,n2>=z,n2+z>=2y,y>=0,z>=0,c1>=1,$>=0} 
+    no change, the abstr value is still {c2=0,n1>=0,x>=0,1>0,n2>=z,n2+z>=2y,
+                                         y>=0,z>=0,c1>=1,$>=0} 
+
+  ** processing vertex lbl_14 with widening:
+    the old polyhedron is  {y>=0,z>=0,$>=0,1>0,c1>=1,c2>=0,n1>=0,x>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_13_t (coming from loc lbl_13_28)
+    we apply the transfo to the poly {c2=0,n1>=0,x>=0,1>0,n2>=z,n2+z>=2y,
+                                      y>=0,z>=0,c1>=1,$>=0} in the prec hedge
+    contrib of hedge lbl_13_t (coming from loc lbl_13_28) = {c2=0,n1>=0,x>=0,
+                                                             1>0,n2>=z,
+                                                             n2+z>=2y,y>=0,
+                                                             z>=0,c1>=1,$>=0}
+    dealing with hedge lbl_17_t (coming from loc lbl_17_22)
+    we apply the transfo to the poly {y=z,x>=0,n1>=0,1>0,n2+1>0,$>=0,c2>=1,
+                                      c1>=1,y>=0} in the prec hedge
+    contrib of hedge lbl_17_t (coming from loc lbl_17_22) = {y=z,x>=0,n1>=0,
+                                                             1>0,n2+1>0,$>=0,
+                                                             c2>=1,c1>=1,y>=0}
+    the contributions from the preceeding nodes is  {n1>=0,x>=0,c1>=1,y>=0,
+                                                     z>=0,1>0,n2+2z+1>2y,
+                                                     n2+y+1>z,c2>=0,$>=0,
+                                                     c2+n2+y>=z,c2+n2+2z>=2y} 
+    reach= {c1>=1,n1>=0,x>=0,$>=0,1>0,c2>=0,y>=0,z>=0} 
+    no change, the abstr value is still {y>=0,z>=0,$>=0,1>0,c1>=1,c2>=0,
+                                         n1>=0,x>=0} 
+
+  ** processing vertex wh_18 :
+    the old polyhedron is  {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,c1>=1,y>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_19 (coming from loc lbl_14)
+    we apply the transfo to the poly {y>=0,z>=0,$>=0,1>0,c1>=1,c2>=0,n1>=0,
+                                      x>=0} in the prec hedge
+    contrib of hedge tp_19 (coming from loc lbl_14) = {y>=0,z>=0,$>=0,1>0,
+                                                       c1>=1,c2>=0,n1>=0,
+                                                       x>=0,n2>0}
+    the contributions from the preceeding nodes is  {y>=0,z>=0,$>=0,1>0,
+                                                     c1>=1,c2>=0,n1>=0,x>=0,
+                                                     n2>0} 
+    reach= {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,c1>=1,y>=0} 
+    no change, the abstr value is still {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,
+                                         c1>=1,y>=0} 
+
+  ** processing vertex lbl_15 :
+    the old polyhedron is  {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,c1>=1,y>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge f (coming from loc wh_18)
+    we apply the transfo to the poly {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,
+                                      c1>=1,y>=0} in the prec hedge
+    contrib of hedge f (coming from loc wh_18) = {n2>0,$>=0,1>0,x>=0,n1>=0,
+                                                  c2>=0,z>=0,c1>=1,y>=0}
+    the contributions from the preceeding nodes is  {n2>0,$>=0,1>0,x>=0,
+                                                     n1>=0,c2>=0,z>=0,c1>=1,
+                                                     y>=0} 
+    reach= {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,c1>=1,y>=0} 
+    no change, the abstr value is still {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,
+                                         c1>=1,y>=0} 
+
+  ** processing vertex lbl_15_26 :
+    the old polyhedron is  {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,c1>=1,y>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_25 (coming from loc lbl_15)
+    we apply the transfo to the poly {n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,
+                                      c1>=1,y>=0} in the prec hedge
+    contrib of hedge t_25 (coming from loc lbl_15) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    reach= {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,c1>=1,y>=0} 
+    no change, the abstr value is still {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,
+                                         z>=0,c1>=1,y>=0} 
+
+  ** processing vertex lbl_16 :
+    the old polyhedron is  {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,c1>=1,y>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_15_t (coming from loc lbl_15_26)
+    we apply the transfo to the poly {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,
+                                      c1>=1,y>=0} in the prec hedge
+    contrib of hedge lbl_15_t (coming from loc lbl_15_26) = {n1>=0,x>=0,
+                                                             n2+1>0,1>0,$>=0,
+                                                             c2>=0,z>=0,
+                                                             c1>=1,y>=0}
+    the contributions from the preceeding nodes is  {n1>=0,x>=0,n2+1>0,1>0,
+                                                     $>=0,c2>=0,z>=0,c1>=1,
+                                                     y>=0} 
+    reach= {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,c1>=1,y>=0} 
+    no change, the abstr value is still {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,
+                                         z>=0,c1>=1,y>=0} 
+
+  ** processing vertex lbl_16_24 :
+    the old polyhedron is  {y=z,$>=0,z>=0,x>=0,c1>=1,1>0,c2>=0,n1>=0,n2+1>0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_23 (coming from loc lbl_16)
+    we apply the transfo to the poly {n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,
+                                      c1>=1,y>=0} in the prec hedge
+    contrib of hedge t_23 (coming from loc lbl_16) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    reach= {y=z,$>=0,z>=0,c1>=1,1>0,c2>=0,n1>=0,n2+1>0,x>=0} 
+    no change, the abstr value is still {y=z,$>=0,z>=0,x>=0,c1>=1,1>0,c2>=0,
+                                         n1>=0,n2+1>0} 
+
+  ** processing vertex lbl_17 :
+    the old polyhedron is  {y=z,x>=0,$>=0,n2+1>0,n1>=0,1>0,c2>=0,c1>=1,z>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_16_t (coming from loc lbl_16_24)
+    we apply the transfo to the poly {y=z,$>=0,z>=0,x>=0,c1>=1,1>0,c2>=0,
+                                      n1>=0,n2+1>0} in the prec hedge
+    contrib of hedge lbl_16_t (coming from loc lbl_16_24) = {y=z,$>=0,z>=0,
+                                                             x>=0,c1>=1,1>0,
+                                                             c2>=0,n1>=0,
+                                                             n2+1>0}
+    the contributions from the preceeding nodes is  {y=z,$>=0,z>=0,x>=0,
+                                                     c1>=1,1>0,c2>=0,n1>=0,
+                                                     n2+1>0} 
+    reach= {y=z,x>=0,$>=0,n2+1>0,n1>=0,1>0,c2>=0,c1>=1,z>=0} 
+    no change, the abstr value is still {y=z,x>=0,$>=0,n2+1>0,n1>=0,1>0,
+                                         c2>=0,c1>=1,z>=0} 
+
+  ** processing vertex lbl_17_22 :
+    the old polyhedron is  {y=z,x>=0,n1>=0,1>0,n2+1>0,$>=0,c2>=1,c1>=1,y>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_21 (coming from loc lbl_17)
+    we apply the transfo to the poly {y=z,x>=0,$>=0,n2+1>0,n1>=0,1>0,c2>=0,
+                                      c1>=1,z>=0} in the prec hedge
+    contrib of hedge t_21 (coming from loc lbl_17) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    reach= {y=z,x>=0,n1>=0,1>0,n2+1>0,$>=0,c2>=1,c1>=1,y>=0} 
+    no change, the abstr value is still {y=z,x>=0,n1>=0,1>0,n2+1>0,$>=0,
+                                         c2>=1,c1>=1,y>=0} 
+
+  ** processing vertex lbl_18 :
+    the old polyhedron is  {c1>=1,n1>=0,x>=0,c2>=0,1>0,n2<=0,z>=0,y>=0,$>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge fp_20 (coming from loc lbl_14)
+    we apply the transfo to the poly {y>=0,z>=0,$>=0,1>0,c1>=1,c2>=0,n1>=0,
+                                      x>=0} in the prec hedge
+    contrib of hedge fp_20 (coming from loc lbl_14) = {y>=0,z>=0,$>=0,1>0,
+                                                       c1>=1,c2>=0,n1>=0,
+                                                       x>=0,n2<=0}
+    the contributions from the preceeding nodes is  {y>=0,z>=0,$>=0,1>0,
+                                                     c1>=1,c2>=0,n1>=0,x>=0,
+                                                     n2<=0} 
+    reach= {c1>=1,n1>=0,x>=0,c2>=0,1>0,n2<=0,z>=0,y>=0,$>=0} 
+    no change, the abstr value is still {c1>=1,n1>=0,x>=0,c2>=0,1>0,n2<=0,
+                                         z>=0,y>=0,$>=0} 
+
+  ** processing vertex lbl_18_17 :
+    the old polyhedron is  {x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,y>=0,$>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_16 (coming from loc lbl_18)
+    we apply the transfo to the poly {c1>=1,n1>=0,x>=0,c2>=0,1>0,n2<=0,z>=0,
+                                      y>=0,$>=0} in the prec hedge
+    contrib of hedge t_16 (coming from loc lbl_18) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    reach= {x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,y>=0,$>=0} 
+    no change, the abstr value is still {x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,
+                                         y<=z,y>=0,$>=0} 
+
+  ** processing vertex lbl_19 :
+    the old polyhedron is  {x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,y>=0,$>=0} 
+    the incoming hedges are not meta ones 
+    dealing with hedge lbl_18_t (coming from loc lbl_18_17)
+    we apply the transfo to the poly {x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,
+                                      y>=0,$>=0} in the prec hedge
+    contrib of hedge lbl_18_t (coming from loc lbl_18_17) = {x>=0,n1>=0,
+                                                             c1>=1,c2>=0,1>0,
+                                                             n2<=0,y<=z,y>=0,
+                                                             $>=0}
+    the contributions from the preceeding nodes is  {x>=0,n1>=0,c1>=1,c2>=0,
+                                                     1>0,n2<=0,y<=z,y>=0,$>=0} 
+    reach= {x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,y>=0,$>=0} 
+    no change, the abstr value is still {x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,
+                                         y<=z,y>=0,$>=0} 
+
+  ** processing vertex lbl_19_15 :
+    the old polyhedron is  {n2=z,$>=0,x>=0,1>0,c1>=1,n1>=0,c2>=0,y>=0,n2>=y} 
+    the incoming hedges are not meta ones 
+    dealing with hedge t_14 (coming from loc lbl_19)
+    we apply the transfo to the poly {x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,
+                                      y>=0,$>=0} in the prec hedge
+    contrib of hedge t_14 (coming from loc lbl_19) = constraints not available(7)
+    the contributions from the preceeding nodes is  constraints not available(7) 
+    reach= {n2=z,$>=0,x>=0,1>0,c1>=1,c2>=0,n1>=0,y>=0,n2>=y} 
+    no change, the abstr value is still {n2=z,$>=0,x>=0,1>0,c1>=1,n1>=0,
+                                         c2>=0,y>=0,n2>=y} 
+
+  End Processing strategy [(lbl_11,[lbl_19_t,f_32],true);
+                           (lbl_11_11,[lbl_11_t],false); (wh,[tp_12],false);
+                           (lbl_12,[f_31],false); (lbl_12_30,[t_29],false);
+                           (lbl_13,[lbl_12_t],false);
+                           (lbl_13_28,[t_27],false);
+                           (lbl_14,[lbl_13_t,lbl_17_t],true);
+                           (wh_18,[tp_19],false); (lbl_15,[f],false);
+                           (lbl_15_26,[t_25],false);
+                           (lbl_16,[lbl_15_t],false);
+                           (lbl_16_24,[t_23],false);
+                           (lbl_17,[lbl_16_t],false);
+                           (lbl_17_22,[t_21],false); (lbl_18,[fp_20],false);
+                           (lbl_18_17,[t_16],false);
+                           (lbl_19,[lbl_18_t],false);
+                           (lbl_19_15,[t_14],false)]
+  Sum up of the looping step (5 iteration(s))
+    acc(lbl_11)={y>=0,z>=0,$>=0,c1>=0,n1>=0,1>0,n2>=z,n2+z>=2y,x>=0}
+    acc(lbl_11_11)={$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,n2>=z,n1+1>=0,c1>=0}
+    acc(wh)={1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,$>=0,y>=0,c1>=0}
+    acc(lbl_12)={1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,$>=0,y>=0,c1>=0}
+    acc(lbl_12_30)={c2=0,c1>=0,1>0,n1>=0,y>=0,$>=0,x>=0,z>=0,n2>=z,n2+z>=2y}
+    acc(lbl_13)={c2=0,n1>=0,1>0,x>=0,n2>=z,n2+z>=2y,y>=0,$>=0,z>=0,c1>=0}
+    acc(lbl_13_28)={c2=0,n1>=0,x>=0,1>0,n2>=z,n2+z>=2y,y>=0,z>=0,c1>=1,$>=0}
+    acc(lbl_14)={y>=0,z>=0,$>=0,1>0,c1>=1,c2>=0,n1>=0,x>=0}
+    acc(wh_18)={n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,c1>=1,y>=0}
+    acc(lbl_15)={n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,c1>=1,y>=0}
+    acc(lbl_15_26)={n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,c1>=1,y>=0}
+    acc(lbl_16)={n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,c1>=1,y>=0}
+    acc(lbl_16_24)={y=z,$>=0,z>=0,x>=0,c1>=1,1>0,c2>=0,n1>=0,n2+1>0}
+    acc(lbl_17)={y=z,x>=0,$>=0,n2+1>0,n1>=0,1>0,c2>=0,c1>=1,z>=0}
+    acc(lbl_17_22)={y=z,x>=0,n1>=0,1>0,n2+1>0,$>=0,c2>=1,c1>=1,y>=0}
+    acc(lbl_18)={c1>=1,n1>=0,x>=0,c2>=0,1>0,n2<=0,z>=0,y>=0,$>=0}
+    acc(lbl_18_17)={x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,y>=0,$>=0}
+    acc(lbl_19)={x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,y>=0,$>=0}
+    acc(lbl_19_15)={n2=z,$>=0,x>=0,1>0,c1>=1,n1>=0,c2>=0,y>=0,n2>=y}
+
+  ** processing vertex lbl_21 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge fp_13 (coming from loc lbl_11_11)
+    we apply the transfo to the poly {$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,n2>=z,
+                                      n1+1>=0,c1>=0} in the prec hedge
+    contrib of hedge fp_13 (coming from loc lbl_11_11) = {$>=0,n1<0,z>=0,
+                                                          y>=0,x>=0,n2+z>=2y,
+                                                          n2>=z,n1+1>=0,c1>=0}
+    dealing with hedge t_33 (coming from loc lbl_20)
+    we apply the transfo to the poly {c1=0,1>0,n2>y+z,n2>2y,$>=0} in the prec hedge
+    contrib of hedge t_33 (coming from loc lbl_20) = {c1=0,1>0,n2>y+z,n2>2y,
+                                                      $>=0}
+    the contributions from the preceeding nodes is  {c1>=0,1>0,$>=0} 
+    nreach={c1>=0,1>0,$>=0}
+
+  ** processing vertex tp_35 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_37 (coming from loc lbl_7)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y} in the prec hedge
+    contrib of hedge tp_37 (coming from loc lbl_7) = {c1=0,$>=0,1>0,n2>2y,
+                                                      n2<=y+z}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,n2>2y,
+                                                     n2<=y+z} 
+    nreach={c1=0,$>=0,1>0,n2>2y,n2<=y+z}
+
+  ** processing vertex lbl_8 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge f_40 (coming from loc tp_35)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2<=y+z} in the prec hedge
+    contrib of hedge f_40 (coming from loc tp_35) = {c1=0,$>=0,1>0,n2>2y,
+                                                     n2<=y+z}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,n2>2y,
+                                                     n2<=y+z} 
+    nreach={c1=0,$>=0,1>0,n2>2y,n2<=y+z}
+
+  ** processing vertex tp_43 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge tp_45 (coming from loc lbl_3)
+    we apply the transfo to the poly {c1=0,$>=0,1>0} in the prec hedge
+    contrib of hedge tp_45 (coming from loc lbl_3) = {c1=0,$>=0,1>0,n2<=2y}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,n2<=2y} 
+    nreach={c1=0,$>=0,1>0,n2<=2y}
+
+  ** processing vertex lbl_5 :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge f_48 (coming from loc tp_43)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2<=2y} in the prec hedge
+    contrib of hedge f_48 (coming from loc tp_43) = {c1=0,$>=0,1>0,n2<=2y}
+    the contributions from the preceeding nodes is  {c1=0,$>=0,1>0,n2<=2y} 
+    nreach={c1=0,$>=0,1>0,n2<=2y}
+
+  ** processing vertex stop :
+    the old polyhedron is  empty(7) 
+    the incoming hedges are not meta ones 
+    dealing with hedge t (coming from loc lbl_21)
+    we apply the transfo to the poly {c1>=0,1>0,$>=0} in the prec hedge
+    contrib of hedge t (coming from loc lbl_21) = {c1>=0,1>0,$>=0}
+    dealing with hedge t_39 (coming from loc lbl_8)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2>2y,n2<=y+z} in the prec hedge
+    contrib of hedge t_39 (coming from loc lbl_8) = {c1=0,$>=0,1>0,n2>2y,
+                                                     n2<=y+z}
+    dealing with hedge t_47 (coming from loc lbl_5)
+    we apply the transfo to the poly {c1=0,$>=0,1>0,n2<=2y} in the prec hedge
+    contrib of hedge t_47 (coming from loc lbl_5) = {c1=0,$>=0,1>0,n2<=2y}
+    the contributions from the preceeding nodes is  {c1>=0,1>0,$>=0} 
+    nreach={c1>=0,1>0,$>=0}
+
+  End Processing strategy [(start,[],false); (lbl_2,[f_53],false);
+                           (lbl_2_52,[t_51],false); (lbl_3,[lbl_2_t],false);
+                           (fp_44,[fp_46],false); (lbl_6,[f_50],false);
+                           (lbl_7,[t_49],false); (fp_36,[fp_38],false);
+                           (lbl_9,[f_42],false); (lbl_10,[t_41],false);
+                           (fp,[fp_10__tsplit4,fp_10__tsplit3,fp_10__tsplit2,fp_10__tsplit1,fp_10__tsplit0],false);
+                           (lbl_20,[f_34],false); (tp,[tp_9],false);
+                           [(lbl_11,[lbl_19_t,f_32],true);
+                            (lbl_11_11,[lbl_11_t],false); (wh,[tp_12],false);
+                            (lbl_12,[f_31],false); (lbl_12_30,[t_29],false);
+                            (lbl_13,[lbl_12_t],false);
+                            (lbl_13_28,[t_27],false);
+                            (lbl_14,[lbl_13_t,lbl_17_t],true);
+                            (wh_18,[tp_19],false); (lbl_15,[f],false);
+                            (lbl_15_26,[t_25],false);
+                            (lbl_16,[lbl_15_t],false);
+                            (lbl_16_24,[t_23],false);
+                            (lbl_17,[lbl_16_t],false);
+                            (lbl_17_22,[t_21],false); (lbl_18,[fp_20],false);
+                            (lbl_18_17,[t_16],false);
+                            (lbl_19,[lbl_18_t],false);
+                            (lbl_19_15,[t_14],false)];
+                           (lbl_21,[fp_13,t_33],false);
+                           (tp_35,[tp_37],false); (lbl_8,[f_40],false);
+                           (tp_43,[tp_45],false); (lbl_5,[f_48],false);
+                           (stop,[t,t_39,t_47],false)]
+  Sum up of the looping step (1 iteration(s))
+    acc(start)={$>=0,1>0}
+    acc(lbl_2)={$>=0,1>0}
+    acc(lbl_2_52)={c1=0,$>=0,1>0}
+    acc(lbl_3)={c1=0,$>=0,1>0}
+    acc(fp_44)={c1=0,$>=0,1>0,n2>2y}
+    acc(lbl_6)={c1=0,$>=0,1>0,n2>2y}
+    acc(lbl_7)={c1=0,$>=0,1>0,n2>2y}
+    acc(fp_36)={c1=0,$>=0,1>0,n2>2y,n2>y+z}
+    acc(lbl_9)={c1=0,$>=0,1>0,n2>2y,n2>y+z}
+    acc(lbl_10)={c1=0,$>=0,1>0,n2>2y,n2>y+z}
+    acc(fp)={c1=0,1>0,n2>y+z,n2>2y,$>=0}
+    acc(lbl_20)={c1=0,1>0,n2>y+z,n2>2y,$>=0}
+    acc(tp)={c1=0,$>=0,1>0,n2>2y,n2>y+z,z>=0,y>=0,x>=0,n1>=0}
+    acc(lbl_11)={y>=0,z>=0,$>=0,c1>=0,n1>=0,1>0,n2>=z,n2+z>=2y,x>=0}
+    acc(lbl_11_11)={$>=0,1>0,z>=0,y>=0,x>=0,n2+z>=2y,n2>=z,n1+1>=0,c1>=0}
+    acc(wh)={1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,$>=0,y>=0,c1>=0}
+    acc(lbl_12)={1>0,x>=0,n2+z>=2y,n2>=z,n1>=0,z>=0,$>=0,y>=0,c1>=0}
+    acc(lbl_12_30)={c2=0,c1>=0,1>0,n1>=0,y>=0,$>=0,x>=0,z>=0,n2>=z,n2+z>=2y}
+    acc(lbl_13)={c2=0,n1>=0,1>0,x>=0,n2>=z,n2+z>=2y,y>=0,$>=0,z>=0,c1>=0}
+    acc(lbl_13_28)={c2=0,n1>=0,x>=0,1>0,n2>=z,n2+z>=2y,y>=0,z>=0,c1>=1,$>=0}
+    acc(lbl_14)={y>=0,z>=0,$>=0,1>0,c1>=1,c2>=0,n1>=0,x>=0}
+    acc(wh_18)={n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,c1>=1,y>=0}
+    acc(lbl_15)={n2>0,$>=0,1>0,x>=0,n1>=0,c2>=0,z>=0,c1>=1,y>=0}
+    acc(lbl_15_26)={n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,c1>=1,y>=0}
+    acc(lbl_16)={n1>=0,x>=0,n2+1>0,1>0,$>=0,c2>=0,z>=0,c1>=1,y>=0}
+    acc(lbl_16_24)={y=z,$>=0,z>=0,x>=0,c1>=1,1>0,c2>=0,n1>=0,n2+1>0}
+    acc(lbl_17)={y=z,x>=0,$>=0,n2+1>0,n1>=0,1>0,c2>=0,c1>=1,z>=0}
+    acc(lbl_17_22)={y=z,x>=0,n1>=0,1>0,n2+1>0,$>=0,c2>=1,c1>=1,y>=0}
+    acc(lbl_18)={c1>=1,n1>=0,x>=0,c2>=0,1>0,n2<=0,z>=0,y>=0,$>=0}
+    acc(lbl_18_17)={x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,y>=0,$>=0}
+    acc(lbl_19)={x>=0,n1>=0,c1>=1,c2>=0,1>0,n2<=0,y<=z,y>=0,$>=0}
+    acc(lbl_19_15)={n2=z,$>=0,x>=0,1>0,c1>=1,n1>=0,c2>=0,y>=0,n2>=y}
+    acc(lbl_21)={c1>=0,1>0,$>=0}
+    acc(tp_35)={c1=0,$>=0,1>0,n2>2y,n2<=y+z}
+    acc(lbl_8)={c1=0,$>=0,1>0,n2>2y,n2<=y+z}
+    acc(tp_43)={c1=0,$>=0,1>0,n2<=2y}
+    acc(lbl_5)={c1=0,$>=0,1>0,n2<=2y}
+    acc(stop)={c1>=0,1>0,$>=0}
+
+   *  Invariants =  
+stop -----> {c1>=0} 
+
+start -----> {true} 
+
+lbl_2 -----> {true} 
+
+lbl_5 -----> {n2<=2y, c1=0} 
+
+lbl_6 -----> {n2>2y, c1=0} 
+
+lbl_8 -----> {n2<=y+z, n2>2y, c1=0} 
+
+lbl_9 -----> {n2>y+z, n2>2y, c1=0} 
+
+lbl_12 -----> {c1>=0, y>=0, z>=0, n1>=0, n2>=z, n2+z>=2y, x>=0} 
+
+lbl_13 -----> {c1>=0, z>=0, y>=0, n2+z>=2y, n2>=z, x>=0, n1>=0, c2=0} 
+
+lbl_15 -----> {y>=0, c1>=1, z>=0, c2>=0, n1>=0, x>=0, n2>0} 
+
+lbl_16 -----> {y>=0, c1>=1, z>=0, c2>=0, n2+1>0, x>=0, n1>=0} 
+
+lbl_17 -----> {z>=0, c1>=1, c2>=0, n1>=0, n2+1>0, x>=0, y=z} 
+
+lbl_18 -----> {y>=0, z>=0, n2<=0, c2>=0, x>=0, n1>=0, c1>=1} 
+
+lbl_19 -----> {y>=0, y<=z, n2<=0, c2>=0, c1>=1, n1>=0, x>=0} 
+
+lbl_20 -----> {n2>2y, n2>y+z, c1=0} 
+
+lbl_21 -----> {c1>=0} 
+
+lbl_10 -----> {n2>y+z, n2>2y, c1=0} 
+
+lbl_11 -----> {x>=0, n2+z>=2y, n2>=z, n1>=0, c1>=0, z>=0, y>=0} 
+
+lbl_14 -----> {x>=0, n1>=0, c2>=0, c1>=1, z>=0, y>=0} 
+
+lbl_3 -----> {c1=0} 
+
+lbl_7 -----> {n2>2y, c1=0} 
+
+tp -----> {n1>=0, x>=0, y>=0, z>=0, n2>y+z, n2>2y, c1=0} 
+
+fp -----> {n2>2y, n2>y+z, c1=0} 
+
+lbl_11_11 -----> {c1>=0, n1+1>=0, n2>=z, n2+z>=2y, x>=0, y>=0, z>=0} 
+
+wh -----> {c1>=0, y>=0, z>=0, n1>=0, n2>=z, n2+z>=2y, x>=0} 
+
+lbl_19_15 -----> {n2>=y, y>=0, c2>=0, n1>=0, c1>=1, x>=0, n2=z} 
+
+lbl_18_17 -----> {y>=0, y<=z, n2<=0, c2>=0, c1>=1, n1>=0, x>=0} 
+
+wh_18 -----> {y>=0, c1>=1, z>=0, c2>=0, n1>=0, x>=0, n2>0} 
+
+lbl_17_22 -----> {y>=0, c1>=1, c2>=1, n2+1>0, n1>=0, x>=0, y=z} 
+
+lbl_16_24 -----> {n2+1>0, n1>=0, c2>=0, c1>=1, x>=0, z>=0, y=z} 
+
+lbl_15_26 -----> {y>=0, c1>=1, z>=0, c2>=0, n2+1>0, x>=0, n1>=0} 
+
+lbl_13_28 -----> {c1>=1, z>=0, y>=0, n2+z>=2y, n2>=z, x>=0, n1>=0, c2=0} 
+
+lbl_12_30 -----> {n2+z>=2y, n2>=z, z>=0, x>=0, y>=0, n1>=0, c1>=0, c2=0} 
+
+tp_35 -----> {n2<=y+z, n2>2y, c1=0} 
+
+fp_36 -----> {n2>y+z, n2>2y, c1=0} 
+
+tp_43 -----> {n2<=2y, c1=0} 
+
+fp_44 -----> {n2>2y, c1=0} 
+
+lbl_2_52 -----> {c1=0} 

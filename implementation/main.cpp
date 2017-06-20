@@ -437,14 +437,14 @@ int main(){
 	// cout<<"Input Code:"<<endl;
 	// cout<<program<<endl;
 	// cout<<"Parse Tree:"<<endl;
-	root->print(cout,"&&","||","*",false);
-	// cout<<"CFG:"<<endl;
-	// for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
-	// 	cout<<"------------------------"<<endl;
-	// 	cout<<"Node "<<it->first<<endl;
-	// 	it->second->print();
-	// 	// cout<<it->second->label<<endl;
-	// }
+	// root->print(cout,"&&","||","*",false);
+	cout<<"CFG:"<<endl;
+	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+		cout<<"------------------------"<<endl;
+		cout<<"Node "<<it->first<<endl;
+		it->second->print();
+		// cout<<it->second->label<<endl;
+	}
 	
 	generate_equations();
 	ofstream equationsfile;

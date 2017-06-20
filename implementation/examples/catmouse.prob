@@ -1,7 +1,9 @@
-x_3 := 0;
-[x_2>=x_1+1]
-while x_3<=x_1 do
-	if x_3<=x_2 then x_3 := x_3+1
-	else x_3 := x_3-1
+var x,n,m;
+[m>n and x<n and x<=0 and x>=0]
+while x<=n do
+	if x<=m then
+		x := x+1
+	else
+		x := x-1
 	fi
 od
