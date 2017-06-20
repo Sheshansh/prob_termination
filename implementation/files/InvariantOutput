@@ -1,0 +1,41 @@
+   *  Invariants =  
+state_1 -----> {true} 
+
+state_2 -----> {c1>=0} 
+
+state_3 -----> {c1=0} 
+
+state_4 -----> {2y>=n2, c1=0} 
+
+state_5 -----> {2y<n2, c1=0} 
+
+state_6 -----> {y+z>=n2, 2y<n2, c1=0} 
+
+state_7 -----> {y+z<n2, 2y<n2, c1=0} 
+
+state_8 -----> {c1>=0, n1>=0, z>=0, y>=0, x>=0, z<=n2} 
+
+state_9 -----> {2y<n2, y+z<n2, c1=0} 
+
+state_10 -----> {c1>=0, n1>=0, z>=0, y>=0, x>=0, z<=n2, n1<1} 
+
+state_11 -----> {y>=0, c1>=0, z>=0, n1>=1, x>=0, z<=n2} 
+
+state_12 -----> {y>=0, c1>=0, z>=0, z<=n2, n1>=0, x>=0} 
+
+state_13 -----> {n1>=0, z>=0, z<=n2, c1>=0, y>=0, x>=0, c2=0} 
+
+state_14 -----> {c1>=1, n1>=0, z>=0, y>=0, x>=0, c2>=0} 
+
+state_15 -----> {y>=0, z>=0, c1>=1, n2<0, c2>=0, n1>=0, x>=0} 
+
+state_16 -----> {y>=0, z>=0, c1>=1, c2>=0, n2>=0, n1>=0, x>=0} 
+
+state_17 -----> {y>=0, c1>=1, z>=0, c2>=0, n2+1>=0, n1>=0, x>=0} 
+
+state_18 -----> {n1>=0, n2+1>=0, c1>=1, c2>=0, y>=0, x>=0, y=z} 
+   * Remember that we have no bad region 
+   * No accel has been applied
+   * Stats =  { time=0.024000; iterations=6; descendings=0; } 
+
+ Finished ! 

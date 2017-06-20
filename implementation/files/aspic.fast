@@ -1,0 +1,167 @@
+model main{
+
+	var x, y, z, n1, n2, c1, c2;
+
+	states state_1, state_2, state_3, state_4, state_5, state_6, state_7, state_8, state_9, state_10, state_11, state_12, state_13, state_14, state_15, state_16, state_17, state_18;
+
+	transition t_1_0 := {
+		from	:= state_1;
+		to	:= state_3;
+		guard	:= true;
+		action	:= c1' = 0;
+	};
+
+	transition t_3_0 := {
+		from	:= state_3;
+		to	:= state_4;
+		guard	:= -2y+1n2<=0;
+		action	:= ;
+	};
+
+	transition t_3_1 := {
+		from	:= state_3;
+		to	:= state_5;
+		guard	:= 2y-1n2<0;
+		action	:= ;
+	};
+
+	transition t_4_0 := {
+		from	:= state_4;
+		to	:= state_2;
+		guard	:= true;
+		action	:= ;
+	};
+
+	transition t_5_0 := {
+		from	:= state_5;
+		to	:= state_6;
+		guard	:= -1y-1z+1n2<=0;
+		action	:= ;
+	};
+
+	transition t_5_1 := {
+		from	:= state_5;
+		to	:= state_7;
+		guard	:= 1y+1z-1n2<0;
+		action	:= ;
+	};
+
+	transition t_6_0 := {
+		from	:= state_6;
+		to	:= state_2;
+		guard	:= true;
+		action	:= ;
+	};
+
+	transition t_7_0 := {
+		from	:= state_7;
+		to	:= state_8;
+		guard	:= -1z<=0 && -1x<=0 && -1y<=0 && -1n1<=0 && -1n2<=0;
+		action	:= ;
+	};
+
+	transition t_7_1 := {
+		from	:= state_7;
+		to	:= state_9;
+		guard	:= 1z<0 || 1x<0 || 1y<0 || 1n1<0 || 1n2<0;
+		action	:= ;
+	};
+
+	transition t_8_0 := {
+		from	:= state_8;
+		to	:= state_11;
+		guard	:= 1-1n1<=0;
+		action	:= ;
+	};
+
+	transition t_8_1 := {
+		from	:= state_8;
+		to	:= state_10;
+		guard	:= -1+1n1<0;
+		action	:= ;
+	};
+
+	transition t_9_0 := {
+		from	:= state_9;
+		to	:= state_2;
+		guard	:= true;
+		action	:= ;
+	};
+
+	transition t_10_0 := {
+		from	:= state_10;
+		to	:= state_2;
+		guard	:= true;
+		action	:= n1' = -1+1n1;
+	};
+
+	transition t_11_0 := {
+		from	:= state_11;
+		to	:= state_12;
+		guard	:= true;
+		action	:= n1' = -1+1n1;
+	};
+
+	transition t_12_0 := {
+		from	:= state_12;
+		to	:= state_13;
+		guard	:= true;
+		action	:= c2' = 0;
+	};
+
+	transition t_13_0 := {
+		from	:= state_13;
+		to	:= state_14;
+		guard	:= true;
+		action	:= c1' = 1+1c1;
+	};
+
+	transition t_14_0 := {
+		from	:= state_14;
+		to	:= state_16;
+		guard	:= -1n2<=0;
+		action	:= ;
+	};
+
+	transition t_14_1 := {
+		from	:= state_14;
+		to	:= state_15;
+		guard	:= 1n2<0;
+		action	:= ;
+	};
+
+	transition t_15_0 := {
+		from	:= state_15;
+		to	:= state_8;
+		guard	:= true;
+		action	:= n2' = 1z;
+	};
+
+	transition t_16_0 := {
+		from	:= state_16;
+		to	:= state_17;
+		guard	:= true;
+		action	:= n2' = -1+1n2;
+	};
+
+	transition t_17_0 := {
+		from	:= state_17;
+		to	:= state_18;
+		guard	:= true;
+		action	:= z' = 1y;
+	};
+
+	transition t_18_0 := {
+		from	:= state_18;
+		to	:= state_14;
+		guard	:= true;
+		action	:= c2' = 1+1c2;
+	};
+
+}
+
+strategy main_s{
+
+	Region init := {state = state_1 && true};
+
+}

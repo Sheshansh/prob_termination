@@ -1,0 +1,204 @@
+CFG:
+------------------------
+Node 1
+Type: det
+Invariant: 0x183d150 : 0<=0
+Edge #1
+Destination: 3
+Change: x_6 changed to 0
+Probability to occur is1
+
+------------------------
+Node 2
+Type: det
+Invariant: 0x183d400 : -1c1<=0
+------------------------
+Node 3
+Type: det
+Invariant: 0x183d7b0 : 1c1<=0 and -1c1<=0
+Edge #1
+Destination: 4
+Guard is: 
+-2y+1n2<=0Probability to occur is1
+
+Edge #2
+Destination: 5
+Guard is: 
+2y-1n2<=0Probability to occur is1
+
+------------------------
+Node 4
+Type: det
+Invariant: 0x183dba0 : -2+1n2<=0 and 1c1<=0 and -1c1<=0
+Edge #1
+Destination: 2
+Probability to occur is1
+
+------------------------
+Node 5
+Type: det
+Invariant: 0x183e1e0 : 2-1n2<=0 and 1c1<=0 and -1c1<=0
+Edge #1
+Destination: 6
+Guard is: 
+-1y-1z+1n2<=0Probability to occur is1
+
+Edge #2
+Destination: 7
+Guard is: 
+1y+1z-1n2<=0Probability to occur is1
+
+------------------------
+Node 6
+Type: det
+Invariant: 0x183e800 : -1y-1z+1n2<=0 and 2-1n2<=0 and 1c1<=0 and -1c1<=0
+Edge #1
+Destination: 2
+Probability to occur is1
+
+------------------------
+Node 7
+Type: det
+Invariant: 0x183efe0 : 1y+1z-1n2<=0 and 2-1n2<=0 and 1c1<=0 and -1c1<=0
+Edge #1
+Destination: 8
+Guard is: 
+-1z<=0 and -1x<=0 and -1y<=0 and -1n1<=0 and -1n2<=0Probability to occur is1
+
+Edge #2
+Destination: 9
+Guard is: 
+1z<=0 or 1x<=0 or 1y<=0 or 1n1<=0 or 1n2<=0Probability to occur is1
+
+------------------------
+Node 8
+Type: det
+Invariant: 0x183f7d0 : -1c1<=0 and -1n1<=0 and -1z<=0 and -1y<=0 and -1x<=0 and 1z-1n2<=0
+Edge #1
+Destination: 11
+Guard is: 
+1-1n1<=0Probability to occur is1
+
+Edge #2
+Destination: 10
+Guard is: 
+-1+1n1<=0Probability to occur is1
+
+------------------------
+Node 9
+Type: det
+Invariant: 0x18403c0 : 2-1n2<=0 and 1y+1z-1n2<=0 and 1c1<=0 and -1c1<=0
+Edge #1
+Destination: 2
+Probability to occur is1
+
+------------------------
+Node 10
+Type: det
+Invariant: 0x1840b70 : -1c1<=0 and -1n1<=0 and -1z<=0 and -1y<=0 and -1x<=0 and 1z-1n2<=0 and -1+1n1<=0
+Edge #1
+Destination: 2
+Change: x_4 changed to -1+1n1
+Probability to occur is1
+
+------------------------
+Node 11
+Type: det
+Invariant: 0x1841870 : -1y<=0 and -1c1<=0 and -1z<=0 and 1-1n1<=0 and -1x<=0 and 1z-1n2<=0
+Edge #1
+Destination: 12
+Change: x_4 changed to -1+1n1
+Probability to occur is1
+
+------------------------
+Node 12
+Type: det
+Invariant: 0x18422e0 : -1y<=0 and -1c1<=0 and -1z<=0 and 1z-1n2<=0 and -1n1<=0 and -1x<=0
+Edge #1
+Destination: 13
+Change: x_7 changed to 0
+Probability to occur is1
+
+------------------------
+Node 13
+Type: det
+Invariant: 0x1842e30 : -1n1<=0 and -1z<=0 and 1z-1n2<=0 and -1c1<=0 and -1y<=0 and -1x<=0 and 1c2<=0 and -1c2<=0
+Edge #1
+Destination: 14
+Change: x_6 changed to 1+1c1
+Probability to occur is1
+
+------------------------
+Node 14
+Type: det
+Invariant: 0x1843bf0 : 1-1c1<=0 and -1n1<=0 and -1z<=0 and -1y<=0 and -1x<=0 and -1c2<=0
+Edge #1
+Destination: 16
+Guard is: 
+-1n2<=0Probability to occur is1
+
+Edge #2
+Destination: 15
+Guard is: 
+1n2<=0Probability to occur is1
+
+------------------------
+Node 15
+Type: det
+Invariant: 0x1844770 : -1y<=0 and -1z<=0 and 1-1c1<=0 and 1n2<=0 and -1c2<=0 and -1n1<=0 and -1x<=0
+Edge #1
+Destination: 8
+Change: x_5 changed to 1z
+Probability to occur is1
+
+------------------------
+Node 16
+Type: det
+Invariant: 0x18453f0 : -1y<=0 and -1z<=0 and 1-1c1<=0 and -1c2<=0 and -1n2<=0 and -1n1<=0 and -1x<=0
+Edge #1
+Destination: 17
+Change: x_5 changed to -1+1n2
+Probability to occur is1
+
+------------------------
+Node 17
+Type: det
+Invariant: 0x1846070 : -1y<=0 and 1-1c1<=0 and -1z<=0 and -1c2<=0 and -1-1n2<=0 and -1n1<=0 and -1x<=0
+Edge #1
+Destination: 18
+Change: x_3 changed to 1y
+Probability to occur is1
+
+------------------------
+Node 18
+Type: det
+Invariant: 0x1846cf0 : -1n1<=0 and -1-1n2<=0 and 1-1c1<=0 and -1c2<=0 and -1y<=0 and -1x<=0 and 1y-1z<=0 and -1y+1z<=0
+Edge #1
+Destination: 14
+Change: x_7 changed to 1+1c2
+Probability to occur is1
+
+0<=0
+-1c1<=0
+1c1<=0 and -1c1<=0
+-2+1n2<=0 and 1c1<=0 and -1c1<=0
+2-1n2<=0 and 1c1<=0 and -1c1<=0
+-1y-1z+1n2<=0 and 2-1n2<=0 and 1c1<=0 and -1c1<=0
+1y+1z-1n2<=0 and 2-1n2<=0 and 1c1<=0 and -1c1<=0
+-1c1<=0 and -1n1<=0 and -1z<=0 and -1y<=0 and -1x<=0 and 1z-1n2<=0
+2-1n2<=0 and 1y+1z-1n2<=0 and 1c1<=0 and -1c1<=0
+-1c1<=0 and -1n1<=0 and -1z<=0 and -1y<=0 and -1x<=0 and 1z-1n2<=0 and -1+1n1<=0
+-1y<=0 and -1c1<=0 and -1z<=0 and 1-1n1<=0 and -1x<=0 and 1z-1n2<=0
+-1y<=0 and -1c1<=0 and -1z<=0 and 1z-1n2<=0 and -1n1<=0 and -1x<=0
+-1n1<=0 and -1z<=0 and 1z-1n2<=0 and -1c1<=0 and -1y<=0 and -1x<=0 and 1c2<=0 and -1c2<=0
+1-1c1<=0 and -1n1<=0 and -1z<=0 and -1y<=0 and -1x<=0 and -1c2<=0
+-1y<=0 and -1z<=0 and 1-1c1<=0 and 1n2<=0 and -1c2<=0 and -1n1<=0 and -1x<=0
+-1y<=0 and -1z<=0 and 1-1c1<=0 and -1c2<=0 and -1n2<=0 and -1n1<=0 and -1x<=0
+-1y<=0 and 1-1c1<=0 and -1z<=0 and -1c2<=0 and -1-1n2<=0 and -1n1<=0 and -1x<=0
+-1n1<=0 and -1-1n2<=0 and 1-1c1<=0 and -1c2<=0 and -1y<=0 and -1x<=0 and 1y-1z<=0 and -1y+1z<=0
+Iteration1->
+Going into another iteration
+Iteration2->
+Going into another iteration
+Iteration3->
+No solution possible

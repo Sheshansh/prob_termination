@@ -1,26 +1,26 @@
-x_1 := 0;
-if x_2 <= 2*x_4 then
+var x,y,z,n1,n2,c1,c2;
+c1 := 0;
+if n2 <= 2*y then
 	skip
 else
-	if x_2 <= x_5+x_4 then
+	if n2 <= z+y then
 		skip
 	else
-		if x_5>=0 and x_3>=0 and x_4>=0 and x_6>=0 and x_2>=0 then
-			[x_6>=0]
-			while x_6-1 >= 0 do
-				x_6 := x_6-1;
-				x_2 := 0;
-				x_1 := x_1+1;
-				[x_7>=0]
-				while x_7 >= 0 do
-					x_7 := x_7-1;
-					x_5 := x_4;
-					x_2 := x_2+1
+		if z>=0 and x>=0 and y>=0 and n1>=0 and n2>=0 then
+			while n1-1 >= 0 do
+				n1 := n1-1;
+				c2 := 0;
+				
+				c1 := c1+1;
+				while n2 >= 0 do
+					n2 := n2-1;
+					z := y;
+					c2 := c2+1
 				od
-				x_5 := x_5+x_4;
-				x_7 := x_5
+				z := z+y;
+				n2 := z
 			od;
-			x_6 := x_6-1
+			n1 := n1-1
 		else
 			skip
 		fi
