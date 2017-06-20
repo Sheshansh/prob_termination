@@ -54,12 +54,14 @@ node::node(string t){
 	end = -1;
 	type = t;
 	constant = "";
+	strict = false;
 }
 
 node::node(string t, int b, int e, int s, int l, bool negate){
 	bracket = NULL;
 	type = t;
 	begin = b;
+	strict = false;
 	end = e;
 	skip_spaces(begin,end);
 	if(begin>end){
@@ -69,6 +71,7 @@ node::node(string t, int b, int e, int s, int l, bool negate){
 }
 
 node::node(string t, string l, bool& to_return){
+	strict = false;
 	type = t;
 	if(t=="bexpr"){
 		children.resize(1);
@@ -155,6 +158,7 @@ node* negation(node* tonegate){
 				ch->children[0] = new node("expr");
 				ch->children[0]->constant = "expression";
 				ch->children[0]->expression.resize(nVariables+1);
+				ch->strict = !(tonegate->children[i]->children[j]->strict);
 				for(int k=0;k<=nVariables;++k){
 					ch->children[0]->expression[k] = -1.0*tonegate->children[i]->children[j]->children[0]->expression[k];
 				}
@@ -583,7 +587,7 @@ bool node::proc_literal(bool negate,bool strategic, string line){
 		}
 		int sign = -1;
 		for(int i = begin;i<end-1;++i){
-			if(part(program,i,i+2)=="<=" or part(program,i,i+2)==">="){
+			if(program[i]=='<' or program[i]=='>'){
 				sign = i;
 				break;
 			}
@@ -592,20 +596,44 @@ bool node::proc_literal(bool negate,bool strategic, string line){
 			cerr<<"Invalid literal between "<<begin<<" "<<end<<endl;
 		}
 		else{
-			if(!negate){
-				constant=part(program,sign,sign+2);
-			}
-			else{
-				if(part(program,sign,sign+2)==">="){
-					constant = "<=";
+			if(program[sign+1]=='='){
+				if(!negate){
+					constant=part(program,sign,sign+2);
 				}
 				else{
-					constant = ">=";
+					if(part(program,sign,sign+2)==">="){
+						constant = "<=";
+					}
+					else{
+						constant = ">=";
+					}
 				}
+				children.resize(2);
+				children[0] = new node("expr",begin,sign);
+				children[1] = new node("expr",sign+2,end);
 			}
-			children.resize(2);
-			children[0] = new node("expr",begin,sign);
-			children[1] = new node("expr",sign+2,end);
+			else{
+				strict = true;
+				if(!negate){
+					if(program[sign]=='>'){
+						constant = ">=";
+					}
+					else{
+						constant = "<=";
+					}
+				}
+				else{
+					if(program[sign]=='>'){
+						constant = "<=";
+					}
+					else{
+						constant = ">=";
+					}
+				}
+				children.resize(2);
+				children[0] = new node("expr",begin,sign);
+				children[1] = new node("expr",sign+1,end);
+			}
 		}
 	}
 	else{
@@ -780,7 +808,7 @@ int find_variables(int& begin, int &end){
 	return toReturn;
 }
 
-void node::print(ostream& outputfile, string and_string, string or_string, string multiply_string){
+void node::print(ostream& outputfile, string and_string, string or_string, string multiply_string, bool bruteforce){
 	if(type=="expr"){
 		bool something_printed = false;
 		if(expression[0]!=0.0){
@@ -810,42 +838,55 @@ void node::print(ostream& outputfile, string and_string, string or_string, strin
 		return;
 	}
 	else if(type=="literal"){
-		children[0]->print(outputfile,and_string,or_string);
-		outputfile<<constant<<"0";
+		children[0]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+		if(strict and bruteforce){
+			if(constant=="<="){
+				outputfile<<"<0";
+			}
+			else{
+				outputfile<<">0";				
+			}
+		}
+		else{
+			outputfile<<constant<<"0";
+		}
 		return;
 	}
 	else if(type=="affexpr"){
-		children[0]->print(outputfile,and_string,or_string);
+		children[0]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
 		for(int i=1;i<children.size();++i){
 			outputfile<<" "<<and_string<<" ";
-			children[i]->print(outputfile,and_string,or_string);
+			children[i]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
 		}
 		return;
 	}
 	else if(type=="bexpr"){
-		children[0]->print(outputfile,and_string,or_string);
+		children[0]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
 		for(int i=1;i<children.size();++i){
 			outputfile<<" "<<or_string<<" ";
-			children[i]->print(outputfile,and_string,or_string);
+			children[i]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
 		}
 		return;
 	}
-	outputfile<<"Add: "<<this<<"\t";
-	outputfile<<"Type: "<<type<<"\t";
-	outputfile<<"Range: ["<<begin<<", "<<end<<")\t";
-	outputfile<<"Const: |"<<constant<<"|"<<endl;
-	outputfile<<"Children: ";
-	for(int i = 0;i<children.size();++i){
-		outputfile<<children[i]<<"\t";
-	}
+	// <flag>
+	// outputfile<<"Add: "<<this<<"\t";
+	// outputfile<<"Type: "<<type<<"\t";
+	// outputfile<<"Range: ["<<begin<<", "<<end<<")\t";
+	// outputfile<<"Const: |"<<constant<<"|"<<endl;
+	// outputfile<<"Children: ";
+	// for(int i = 0;i<children.size();++i){
+	// 	outputfile<<children[i]<<"\t";
+	// }
 	if(bracket!=NULL){
-		outputfile<<endl<<"Bracket: "<<bracket<<endl;
-		bracket->print(outputfile,and_string,or_string);
+		// outputfile<<endl<<"Bracket: "<<bracket<<endl;
+		bracket->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+		outputfile<<endl;
 	}
 	for(int i=0;i<children.size();++i){
-		children[i]->print(outputfile,and_string,or_string);
+		children[i]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
 	}
-	outputfile<<endl<<"--------------------"<<endl;
+	outputfile<<endl;
+	// outputfile<<endl<<"--------------------"<<endl;
 }
 
 CFG_edge::CFG_edge(){

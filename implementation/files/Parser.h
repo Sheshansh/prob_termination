@@ -4,6 +4,7 @@ using namespace std;
 struct node{
 	string type; //The type of entity that this node corresponds to
 	string constant; //The constant factor (subtype) of this node
+	bool strict;
 	int begin,end; //begin and end point in program
 	vector<node *> children; //children in the parse tree
 	node *bracket; //bexpr written in bracket next to this node (for stmt only)
@@ -31,7 +32,7 @@ private:
 //main process
 	void process(int s, int l, bool negate);
 public:
-	void print(ostream& outputfile = cout,string and_string = "and", string or_string = "or", string multiply_string = "");
+	void print(ostream& outputfile = cout,string and_string = "and", string or_string = "or", string multiply_string = "", bool bruteforce = false);
 };
 
 struct CFG_location;

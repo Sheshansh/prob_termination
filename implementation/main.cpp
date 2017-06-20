@@ -346,13 +346,13 @@ void print_fast(ostream& fastfile){
 				fastfile<<"true";
 			}
 			else{
-				state->edges[j].guard->print(fastfile,"&&","||");
+				state->edges[j].guard->print(fastfile,"&&","||","",true);
 			}
 			fastfile<<";\n";
 			fastfile<<"\t\taction\t:= ";
 			if(state->edges[j].change!=NULL){
 				fastfile<<variable[state->edges[j].toChange]<<"' = ";
-				state->edges[j].change->print(fastfile);
+				state->edges[j].change->print(fastfile,"&&","||","",true);
 			}
 			fastfile<<";\n\t};\n\n";
 		}
@@ -437,7 +437,7 @@ int main(){
 	// cout<<"Input Code:"<<endl;
 	// cout<<program<<endl;
 	// cout<<"Parse Tree:"<<endl;
-	// root->print();
+	root->print(cout,"&&","||","*",false);
 	// cout<<"CFG:"<<endl;
 	// for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 	// 	cout<<"------------------------"<<endl;
