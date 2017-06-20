@@ -1,0 +1,32 @@
+\section{Compositionality of Ranking Supermartingales Revisited}
+\label{sec:compositional}
+
+Compositionality in the context of termination proving means providing the 
+proof of termination step-by-step, handling one loop at a time, rather than 
+attempting to construct the proof (in our case, a LexRSM) at once, by solving a 
+single large system of constraints. In non-probabilistic setting, the 
+relationship between lexicographic ranking functions and compositional 
+termination proving is well established, as well as the importance of 
+compositional proofs for efficient implementation~\cite{xxx}. In the context of 
+probabilistic programs, the work~\cite{HolgerPOPL} attempted to provide a 
+compositional notion of almost-sure termination proof based on the 
+\emph{probabilistic variant rule (V-rule),} which we explain in a more detail 
+below. 
+However, as already noted in~\cite{HolgerPOPL}, the probabilistic V-rule is not 
+sound in general. In order to rectify this issue, in~\cite{HolgerPOPL} they 
+impose an additional constraint of \emph{uniform integrability} on ranking 
+supermartingales that prove termination of individual loops, 
+under which the probabilistic V-rule is shown to be sound. Apart from uniform 
+integrability being somewhat restrictive in itself, in~\cite{HolgerPOPL} it is 
+argued that proving uniform integrability is beyond the capability of 
+state-of-the-art automated theorem provers. As a substitute for 
+these,~\cite{HolgerPOPL} introduces a type system that can be used to 
+automatically prove 
+uniform integrability of ranking supermartingales for a restricted class of 
+programs. In particular, the method cannot handle programs in which termination 
+is controlled by variable that can be modified by a non-constant value, e.g. 
+variable $x$ which appears in an assignment of the form $x:=x-y$. In this 
+section we show that using our insights in lexicographic supermartingales we 
+can obtain a subtly different notion of a probabilistic V-rule which is sound 
+without any additional assumptions, and which can be used to prove termination 
+of programs that the previous method cannot handle. 
