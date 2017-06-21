@@ -139,8 +139,25 @@ the process is real-valued, componentwise non-negative, and adapted to the
 canonical filtration of $\natfilt$. It remains to prove that condition (3) in 
 Definition~\ref{def:lexrsm} is satisfied. To this end, for each $i\geq 0$ we 
 define an almost-sure partition of the set $\{\run\in \OmegaRun\mid 
-\ttime(\run) >i\}$ into sets $L^{i}_1,\dots,L^{i}_n$ by putting 
-\end{proof}
+\ttime(\run) >i\}$ into sets $L^{i}_1,\dots,L^{i}_n$ by putting $L^i_j$ to be 
+the set of all runs $\run$ such that $\ttime(\run)>i$ and for $\run$ the index 
+$j$ is the smallest one such that $\preexp{\lem_j}(\cfg{\sigma}{i}(\run)) \leq 
+\lem_j(\cfg{\sigma}{i}(\run))-\eps$ (which entails 
+$\preexp{\lem_{j'}}(\cfg{\sigma}{i}(\run)) =
+\lem_{j'}(\cfg{\sigma}{i}(\run))-\eps$ for all $1\leq j'< j$). Due to 
+definition of an $\eps$-LexRSM map such a $j$ exists for all 
+$\run\in\{\ttime>i\}$ and hence we indeed have a partition. It remains to prove 
+that irrespective of the initial choice of $\sigma$ it holds, for each $1\leq j 
+\leq n$, that $\E^\sigma[\vecseq{X}{i+1}{j}\mid 
+\natfilt_i]\leq\preexp{\lem_{j}}(\cfg{\sigma}{}) $. This can be achieved by a 
+standard~\cite{xxx}, through somewhat technical computation, which we defer to 
+\AppendixMaterial.
+
+Since  $\{\vec{X}_{i}\}_{i=0}^{\infty}$ 
+is an $\eps$-LexRSM for $\ttime$, from Theorem~\ref{thm:lexrsm-programs} it 
+follows that $\probm^{\sigma}\ttime <\infty) =1$, irrespective of scheduler 
+$\sigma$.
+\end{proof} 
 
 
 
