@@ -37,7 +37,7 @@ $X\colon\Omega\rightarrow
 \mathcal{F}$ sub-sigma-algebra of $\mathcal{F}$. Assume that one of the following conditions hold:
 \begin{itemize}
 \item $\E[|X|]<\infty$; or
-\item $X$ is non-negative and for all $\omega\in\Omega$ it holds $X(\omega)\neq \infty$.
+\item $X$ is real-valued and non-negative.
 \end{itemize}
 Then there exists a conditional expectation of $X$ given $\mathcal{F}'$ and it is almost-surely unique, i.e. for each two $\mathcal{F}'$-measurable functions $f$, $g$ that satisfy~\eqref{eq:cond-exp} it holds $\probm(\{\omega\mid f(\omega)\neq g(\omega)\})=0$.
 \end{proposition}
@@ -78,11 +78,13 @@ Let $(\Omega,\genfilt,\probm)$ be a probability space and $O\subseteq \Omega$ so
 \end{definition}
 
 \begin{definition}[Lexicographic Ranking Supermartingale]
+\label{def:lexrsm}
 Let $(\Omega,\genfilt,\probm)$ be a probability space, 
 $\{\genfilt_i\}_{i=0}^{\infty}$ a filtration of $\genfilt$, $\stime$ a stopping 
 time w.r.t. that filtration, and 
 $\eps\geq 0$. 
-An $n$-dimensional stochastic process $\{\vec{X}_{i}\}_{i=0}^{\infty}$ is a 
+An $n$-dimensional real-valued stochastic process 
+$\{\vec{X}_{i}\}_{i=0}^{\infty}$ is a 
 \emph{lexicographic $\eps$-ranking supermartingale for $\stime$ 
 ($\eps$-LexRSM)} if the 
 following 
@@ -94,7 +96,7 @@ $\{\genfilt_i\}_{i=0}^{\infty}$.
 %\item For each $i\in \Nset_0$ and each $1\leq j \leq n$ it holds 
 %$\E[|\vecseq{X}{i}{j}|]<\infty$.
 \item For each $\omega \in \Omega$, $i\in \Nset_0$ and $1\leq j \leq n$ it holds 
-$\vec{X}_i (\omega)[j]\geq {0}$ and $\vec{X}_i(\omega)[j]\neq \infty$.
+$\vec{X}_i (\omega)[j]\geq {0}$. % and $\vec{X}_i(\omega)[j]\neq \infty$.
 \item For each $i\in \Nset_0$ there exists an almost-sure partition of the set $\{\stime>i\}$ into $n$ subsets $L^i_1,\dots,L^i_n$, all of them $\genfilt_i$-measurable, such that for each $1\leq j \leq n$:
 \begin{compactitem}
 	\item $\E[\vecseq{X}{i+1}{j}\mid 
