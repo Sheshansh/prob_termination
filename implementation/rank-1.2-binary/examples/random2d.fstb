@@ -1,0 +1,182 @@
+
+//Fast File Modified for ranking stuff - 2009, Dec 10,11:16:55
+
+model random2d{
+
+//parameters N__o, i__o, r__o, x__o, y__o;
+
+  var N, i, r, x, y, N__o, i__o, r__o, x__o, y__o;
+
+  states stop, start, lbl_21, lbl_12_1, lbl_14_1, lbl_17_1, lbl_19_1, lbl_8_1, ____start;
+
+  transition t_63 :={
+   from    := start ;
+   to      := stop ;
+   guard   := N<=0;
+   action  := y' = 0,x' = 0,i' = 0;
+  };
+
+
+  transition t_64 :={
+   from    := start ;
+   to      := lbl_8_1 ;
+   guard   := N>=1;
+   action  := y' = 0,x' = 0,r' = ?,i' = 1;
+  };
+
+
+  transition t_61 :={
+   from    := lbl_21 ;
+   to      := stop ;
+   guard   := N<=i;
+   action  := ;
+  };
+
+
+  transition t_62 :={
+   from    := lbl_21 ;
+   to      := lbl_8_1 ;
+   guard   := N>=i+1;
+   action  := r' = ?,i' =  1  + i;
+  };
+
+
+  transition t_51 :={
+   from    := lbl_12_1 ;
+   to      := stop ;
+   guard   := N<=i;
+   action  := ;
+  };
+
+
+  transition t_52 :={
+   from    := lbl_12_1 ;
+   to      := lbl_8_1 ;
+   guard   := N>=i+1;
+   action  := r' = ?,i' =  1  + i;
+  };
+
+
+  transition t_53 :={
+   from    := lbl_14_1 ;
+   to      := stop ;
+   guard   := N<=i;
+   action  := ;
+  };
+
+
+  transition t_54 :={
+   from    := lbl_14_1 ;
+   to      := lbl_8_1 ;
+   guard   := N>=i+1;
+   action  := r' = ?,i' =  1  + i;
+  };
+
+
+  transition t_55 :={
+   from    := lbl_17_1 ;
+   to      := stop ;
+   guard   := N<=i;
+   action  := ;
+  };
+
+
+  transition t_56 :={
+   from    := lbl_17_1 ;
+   to      := lbl_8_1 ;
+   guard   := N>=i+1;
+   action  := r' = ?,i' =  1  + i;
+  };
+
+
+  transition t_57 :={
+   from    := lbl_19_1 ;
+   to      := stop ;
+   guard   := N<=i;
+   action  := ;
+  };
+
+
+  transition t_58 :={
+   from    := lbl_19_1 ;
+   to      := lbl_8_1 ;
+   guard   := N>=i+1;
+   action  := r' = ?,i' =  1  + i;
+  };
+
+
+  transition t_45__tsplit0 :={
+   from    := lbl_8_1 ;
+   to      := lbl_21 ;
+   guard   := r+1<=0;
+   action  := ;
+  };
+
+
+  transition t_45__tsplit1 :={
+   from    := lbl_8_1 ;
+   to      := lbl_21 ;
+   guard   := r>=4;
+   action  := ;
+  };
+
+
+  transition t_46 :={
+   from    := lbl_8_1 ;
+   to      := lbl_12_1 ;
+   guard   := r=0;
+   action  := x' =  1  + x;
+  };
+
+
+  transition t_47 :={
+   from    := lbl_8_1 ;
+   to      := lbl_14_1 ;
+   guard   := r=1;
+   action  := x' = x - 1;
+  };
+
+
+  transition t_48 :={
+   from    := lbl_8_1 ;
+   to      := lbl_17_1 ;
+   guard   := r=2;
+   action  := y' =  1  + y;
+  };
+
+
+  transition t_49 :={
+   from    := lbl_8_1 ;
+   to      := lbl_19_1 ;
+   guard   := r=3;
+   action  := y' = y - 1;
+  };
+
+
+  transition ____inittransition :={
+   from    := ____start ;
+   to      := start ;
+   guard   := true;
+   action  := N' = N__o,i' = i__o,r' = r__o,x' = x__o,y' = y__o;
+  };
+
+
+}
+
+strategy xx {
+
+Region init:={ state = ____start && true};
+
+}
+
+
+// Result of Analysis  
+//invariant stop := i+x+y>=0 && i+x>=y && i>=x+y && i+y>=x && N<=i && N=N__o ;
+//invariant start := y=y__o && x=x__o && r=r__o && i=i__o && N=N__o ;
+//invariant lbl_21 := N>=i && i+x+y>=1 && i+x>=y+1 && i+y>=x+1 && i>=x+y+1 && N=N__o ;
+//invariant lbl_12_1 := N>=i && i+x+y>=2 && i+x>=y+2 && i+y>=x && i>=x+y && r=0 && N=N__o ;
+//invariant lbl_14_1 := N>=i && i+x+y>=0 && i+x>=y && i+y>=x+2 && i>=x+y+2 && r=1 && N=N__o ;
+//invariant lbl_17_1 := N>=i && i+x+y>=2 && i+x>=y && i+y>=x+2 && i>=x+y && r=2 && N=N__o ;
+//invariant lbl_19_1 := N>=i && i+x+y>=0 && i+x>=y+2 && i+y>=x && i>=x+y+2 && r=3 && N=N__o ;
+//invariant lbl_8_1 := i+x>=y+1 && i+y>=x+1 && i>=x+y+1 && i+x+y>=1 && N>=i && N=N__o ;
+//invariant ____start := true ;

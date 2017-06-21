@@ -1,0 +1,122 @@
+
+//Fast File Modified for ranking stuff - 2009, Dec 10,11:17:23
+
+model wise{
+
+//parameters x__o, y__o;
+
+  var x, y, x__o, y__o;
+
+  states stop, start, lbl_8_1, lbl_9_1, ____start;
+
+  transition t_13__tsplit0 :={
+   from    := start ;
+   to      := stop ;
+   guard   := x+1<=0;
+   action  := ;
+  };
+
+
+  transition t_13__tsplit1 :={
+   from    := start ;
+   to      := stop ;
+   guard   := y+1<=0;
+   action  := ;
+  };
+
+
+  transition t_23 :={
+   from    := start ;
+   to      := stop ;
+   guard   := x>=0 && x+2>=y && y>=0 && x<=y+2;
+   action  := ;
+  };
+
+
+  transition t_24 :={
+   from    := start ;
+   to      := lbl_8_1 ;
+   guard   := x>=0 && x+3<=y;
+   action  := x' =  1  + x;
+  };
+
+
+  transition t_25 :={
+   from    := start ;
+   to      := lbl_9_1 ;
+   guard   := x>=y+3 && y>=0;
+   action  := y' =  1  + y;
+  };
+
+
+  transition t_17 :={
+   from    := lbl_8_1 ;
+   to      := stop ;
+   guard   := x+2>=y && x<=y+2;
+   action  := ;
+  };
+
+
+  transition t_18 :={
+   from    := lbl_8_1 ;
+   to      := lbl_8_1 ;
+   guard   := x+3<=y;
+   action  := x' =  1  + x;
+  };
+
+
+  transition t_19 :={
+   from    := lbl_8_1 ;
+   to      := lbl_9_1 ;
+   guard   := x>=y+3;
+   action  := y' =  1  + y;
+  };
+
+
+  transition t_20 :={
+   from    := lbl_9_1 ;
+   to      := stop ;
+   guard   := x+2>=y && x<=y+2;
+   action  := ;
+  };
+
+
+  transition t_21 :={
+   from    := lbl_9_1 ;
+   to      := lbl_8_1 ;
+   guard   := x+3<=y;
+   action  := x' =  1  + x;
+  };
+
+
+  transition t_22 :={
+   from    := lbl_9_1 ;
+   to      := lbl_9_1 ;
+   guard   := x>=y+3;
+   action  := y' =  1  + y;
+  };
+
+
+  transition ____inittransition :={
+   from    := ____start ;
+   to      := start ;
+   guard   := true;
+   action  := x' = x__o,y' = y__o;
+  };
+
+
+}
+
+strategy xx {
+
+Region init:={ state = ____start && true};
+
+}
+
+
+// Result of Analysis  
+//invariant stop := x>=x__o && y>=y__o ;
+//invariant start := y=y__o && x=x__o ;
+//invariant ____start := true ;
+//invariant lbl_8_1 :=  x>=x__o+1 && x__o>=0 && x+2<=y && y=y__o ;
+//invariant lbl_9_1 :=  x>=y+2 && y>=y__o+1 && y__o>=0 && x=x__o ;

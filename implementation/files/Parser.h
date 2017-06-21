@@ -61,6 +61,7 @@ public:
 };
 
 void skip_spaces(int &begin, int &end);
+void skip_spaces(string&);
 void vcopy(vector<node*> &sink,vector<node*> &tocopy);
 node* negation(node* tonegate);
 node* and_node(node* one,node* two);
@@ -73,3 +74,4 @@ extern map<int,CFG_location*> label_map;
 extern node* root;
 extern map<string,int> variableId;
 extern map<int,string> variable;
+extern map<string,int> stateId;

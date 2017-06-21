@@ -1,0 +1,93 @@
+
+//Fast File Modified for ranking stuff - 2009, Dec 10,12:44:10
+
+model ack{
+
+//parameters m__o, n__o;
+
+  var m, n, m__o, n__o;
+
+  states start, a, b, cont1, stop3, stop1, stop2, ____start;
+
+  transition t0 :={
+   from    := start ;
+   to      := stop1 ;
+   guard   := m<=0;
+   action  := ;
+  };
+
+
+  transition t0bis :={
+   from    := start ;
+   to      := cont1 ;
+   guard   := m>0;
+   action  := ;
+  };
+
+
+  transition t1 :={
+   from    := cont1 ;
+   to      := stop2 ;
+   guard   := n<=0;
+   action  := n' = 1,m' = m - 1;
+  };
+
+
+  transition t2 :={
+   from    := cont1 ;
+   to      := a ;
+   guard   := n>0;
+   action  := n' = n - 1;
+  };
+
+
+  transition t3 :={
+   from    := a ;
+   to      := b ;
+   guard   := true;
+   action  := n' = ?,m' = m - 1;
+  };
+
+
+  transition t4 :={
+   from    := b ;
+   to      := start ;
+   guard   := n>=0;
+   action  := ;
+  };
+
+
+  transition t4bis :={
+   from    := b ;
+   to      := stop3 ;
+   guard   := n<0;
+   action  := ;
+  };
+
+
+  transition ____inittransition :={
+   from    := ____start ;
+   to      := start ;
+   guard   := true;
+   action  := m' = m__o,n' = n__o;
+  };
+
+
+}
+
+strategy xx {
+
+Region init:={ state = ____start && m__o>=0&&n__o>=0};
+
+}
+
+
+// Result of Analysis  
+//invariant start := m__o>=0 && n__o>=0 && n>=0 && m+1>0 && m<=m__o ;
+//invariant a := m<=m__o && n__o>=0 && n+1>0 && m>0 ;
+//invariant b := m+1>0 && n__o>=0 && m+1<=m__o ;
+//invariant cont1 := m>0 && n>=0 && n__o>=0 && m<=m__o ;
+//invariant stop3 := n<0 && m+1>0 && n__o>=0 && m+1<=m__o ;
+//invariant stop1 := n__o>=0 && n>=0 && m__o>=0 && m+1>0 && m<=0 ;
+//invariant stop2 := n__o>=0 && m+1<=m__o && m+1>0 && n=1 ;
+//invariant ____start := m__o>=0 && n__o>=0 ;

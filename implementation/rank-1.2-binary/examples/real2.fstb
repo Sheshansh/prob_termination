@@ -1,0 +1,147 @@
+
+//Fast File Modified for ranking stuff - 2009, Dec 10,11:16:57
+
+model real2{
+
+//parameters again__o, i__o, len__o, tmp__o, tmp_1__o;
+
+  var again, i, len, tmp, tmp_1, again__o, i__o, len__o, tmp__o, tmp_1__o;
+
+  states stop, start, incr, lbl_7_1, lbl_4_4, ____start;
+
+  transition t_35 :={
+   from    := start ;
+   to      := incr ;
+   guard   := len<=1;
+   action  := i' = 0,again' = 0;
+  };
+
+
+  transition t_36 :={
+   from    := start ;
+   to      := lbl_7_1 ;
+   guard   := len>=2;
+   action  := tmp' = ?,i' = 0,again' = 0;
+  };
+
+
+  transition t_37 :={
+   from    := start ;
+   to      := lbl_4_4 ;
+   guard   := len>=2;
+   action  := tmp_1' = 0,i' = 1,again' = 0;
+  };
+
+
+  transition t_25 :={
+   from    := incr ;
+   to      := stop ;
+   guard   := again=0;
+   action  := ;
+  };
+
+
+  transition t_32__tsplit0 :={
+   from    := incr ;
+   to      := incr ;
+   guard   := len<=1 && again+1<=0;
+   action  := i' = 0,again' = 0;
+  };
+
+
+  transition t_32__tsplit1 :={
+   from    := incr ;
+   to      := incr ;
+   guard   := again>=1 && len<=1;
+   action  := i' = 0,again' = 0;
+  };
+
+
+  transition t_33__tsplit0 :={
+   from    := incr ;
+   to      := lbl_7_1 ;
+   guard   := len>=2 && again+1<=0;
+   action  := tmp' = ?,i' = 0,again' = 0;
+  };
+
+
+  transition t_33__tsplit1 :={
+   from    := incr ;
+   to      := lbl_7_1 ;
+   guard   := again>=1 && len>=2;
+   action  := tmp' = ?,i' = 0,again' = 0;
+  };
+
+
+  transition t_34__tsplit0 :={
+   from    := incr ;
+   to      := lbl_4_4 ;
+   guard   := len>=2 && again+1<=0;
+   action  := tmp_1' = 0,i' = 1,again' = 0;
+  };
+
+
+  transition t_34__tsplit1 :={
+   from    := incr ;
+   to      := lbl_4_4 ;
+   guard   := again>=1 && len>=2;
+   action  := tmp_1' = 0,i' = 1,again' = 0;
+  };
+
+
+  transition t_23 :={
+   from    := lbl_7_1 ;
+   to      := lbl_4_4 ;
+   guard   := true;
+   action  := tmp_1' = i,i' =  1  + i,again' = 1;
+  };
+
+
+  transition t_29 :={
+   from    := lbl_4_4 ;
+   to      := incr ;
+   guard   := i+1>=len;
+   action  := ;
+  };
+
+
+  transition t_30 :={
+   from    := lbl_4_4 ;
+   to      := lbl_7_1 ;
+   guard   := i+2<=len;
+   action  := tmp' = ?;
+  };
+
+
+  transition t_31 :={
+   from    := lbl_4_4 ;
+   to      := lbl_4_4 ;
+   guard   := i+2<=len;
+   action  := tmp_1' = i,i' =  1  + i;
+  };
+
+
+  transition ____inittransition :={
+   from    := ____start ;
+   to      := start ;
+   guard   := true;
+   action  := again' = again__o,i' = i__o,len' = len__o,tmp' = tmp__o,tmp_1' = tmp_1__o;
+  };
+
+
+}
+
+strategy xx {
+
+Region init:={ state = ____start && true};
+
+}
+
+
+// Result of Analysis  
+//invariant stop := i+1>=len && i>=0 && again=0 && len=len__o ;
+//invariant start := tmp_1=tmp_1__o && tmp=tmp__o && len=len__o && i=i__o && again=again__o ;
+//invariant lbl_7_1 := again<=1 && again>=0 && again<=i && i+2<=len__o && len=len__o ;
+//invariant ____start := true ;
+//invariant incr :=  i+1>=len && again>=0 && again<=i && len=len__o ;
+//invariant lbl_4_4 :=  again>=0 && i>=1 && i+1<=len && again<=1 && len=len__o && i=tmp_1+1 ;

@@ -1,5 +1,7 @@
-var tx,x,y;
-[tx>=0 and x>y]
+var tx,x,y,tx_0,x_o,y_o;
+tx := tx_o;
+x := x_o;
+y := y_o;
 if tx>=0 then
 	while x>=y and tx>=0 do
 		if * then

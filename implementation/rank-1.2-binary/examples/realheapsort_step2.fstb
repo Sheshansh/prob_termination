@@ -1,0 +1,203 @@
+
+//Fast File Modified for ranking stuff - 2010, Apr 08,12:33:52
+
+model realheapsort_step2{
+
+//parameters N__o, j__o, k__o, m__o, tmp__o;
+
+  var N, j, k, m, tmp, N__o, j__o, k__o, m__o, tmp__o;
+
+  states stop, start, lbl_20_1, lbl_21_1, lbl_4_3, ____start;
+
+  transition t_51 :={
+   from    := start ;
+   to      := stop ;
+   guard   := N<=2;
+   action  := ;
+  };
+
+
+  transition t_76 :={
+   from    := start ;
+   to      := lbl_21_1 ;
+   guard   := N>=3;
+   action  := m' = 1,k' = 0,j' = N;
+  };
+
+
+  transition t_77 :={
+   from    := start ;
+   to      := lbl_20_1 ;
+   guard   := N>=3;
+   action  := m' = 1,k' = 0,j' = 1;
+  };
+
+
+  transition t_78 :={
+   from    := start ;
+   to      := lbl_21_1 ;
+   guard   := N>=4;
+   action  := m' = 2,k' = 0,j' = N;
+  };
+
+
+  transition t_79 :={
+   from    := start ;
+   to      := lbl_20_1 ;
+   guard   := N>=4;
+   action  := m' = 2,k' = 0,j' = 2;
+  };
+
+
+  transition t_60 :={
+   from    := lbl_20_1 ;
+   to      := lbl_4_3 ;
+   guard   := N<=2j+k+2;
+   action  := tmp' = k,k' =  1  + k;
+  };
+
+
+  transition t_61 :={
+   from    := lbl_20_1 ;
+   to      := lbl_21_1 ;
+   guard   := N>=2j+k+3;
+   action  := m' =  1  + 2*j,j' = N;
+  };
+
+
+  transition t_62 :={
+   from    := lbl_20_1 ;
+   to      := lbl_20_1 ;
+   guard   := N>=2j+k+3;
+   action  := m' =  1  + 2*j,j' =  1  + 2*j;
+  };
+
+
+  transition t_63 :={
+   from    := lbl_20_1 ;
+   to      := lbl_21_1 ;
+   guard   := N>=2j+k+4;
+   action  := m' =  2  + 2*j,j' = N;
+  };
+
+
+  transition t_64 :={
+   from    := lbl_20_1 ;
+   to      := lbl_20_1 ;
+   guard   := N>=2j+k+4;
+   action  := m' =  2  + 2*j,j' =  2  + 2*j;
+  };
+
+
+  transition t_65 :={
+   from    := lbl_21_1 ;
+   to      := lbl_4_3 ;
+   guard   := N<=2j+k+2;
+   action  := tmp' = k,k' =  1  + k;
+  };
+
+
+  transition t_66 :={
+   from    := lbl_21_1 ;
+   to      := lbl_21_1 ;
+   guard   := N>=2j+k+3;
+   action  := m' =  1  + 2*j,j' = N;
+  };
+
+
+  transition t_67 :={
+   from    := lbl_21_1 ;
+   to      := lbl_20_1 ;
+   guard   := N>=2j+k+3;
+   action  := m' =  1  + 2*j,j' =  1  + 2*j;
+  };
+
+
+  transition t_68 :={
+   from    := lbl_21_1 ;
+   to      := lbl_21_1 ;
+   guard   := N>=2j+k+4;
+   action  := m' =  2  + 2*j,j' = N;
+  };
+
+
+  transition t_69 :={
+   from    := lbl_21_1 ;
+   to      := lbl_20_1 ;
+   guard   := N>=2j+k+4;
+   action  := m' =  2  + 2*j,j' =  2  + 2*j;
+  };
+
+
+  transition t_56 :={
+   from    := lbl_4_3 ;
+   to      := stop ;
+   guard   := N<=k+1;
+   action  := ;
+  };
+
+
+  transition t_70 :={
+   from    := lbl_4_3 ;
+   to      := lbl_4_3 ;
+   guard   := N=k+2;
+   action  := tmp' = k,m' = 0,k' =  1  + k,j' = 0;
+  };
+
+
+  transition t_71 :={
+   from    := lbl_4_3 ;
+   to      := lbl_21_1 ;
+   guard   := N>=k+3;
+   action  := m' = 1,j' = N;
+  };
+
+
+  transition t_72 :={
+   from    := lbl_4_3 ;
+   to      := lbl_20_1 ;
+   guard   := N>=k+3;
+   action  := m' = 1,j' = 1;
+  };
+
+
+  transition t_73 :={
+   from    := lbl_4_3 ;
+   to      := lbl_21_1 ;
+   guard   := N>=k+4;
+   action  := m' = 2,j' = N;
+  };
+
+
+  transition t_74 :={
+   from    := lbl_4_3 ;
+   to      := lbl_20_1 ;
+   guard   := N>=k+4;
+   action  := m' = 2,j' = 2;
+  };
+
+
+  transition ____inittransition :={
+   from    := ____start ;
+   to      := start ;
+   guard   := true;
+   action  := N' = N__o,j' = j__o,k' = k__o,m' = m__o,tmp' = tmp__o;
+  };
+
+
+}
+
+strategy xx {
+
+Region init:={ state = ____start && true};
+
+}
+
+
+// Result of Analysis  
+//invariant stop := N=N__o ;
+//invariant start := tmp=tmp__o && m=m__o && k=k__o && j=j__o && N=N__o ;
+//invariant lbl_20_1 := j>=1 && k>=0 && N>=j+k+2 && j=m && N=N__o ;
+//invariant lbl_21_1 := m>=1 && k>=0 && N>=k+m+2 && N=j && N=N__o ;
+//invariant lbl_4_3 := N>=k+m+1 && N>=j && k>=1 && k+m>=2 && j>=m && N<=j+k+m+1 && N+3m>=j+3 && k=tmp+1 && N=N__o ;
+//invariant ____start := true ;

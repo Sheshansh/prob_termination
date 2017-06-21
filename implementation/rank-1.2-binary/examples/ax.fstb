@@ -1,0 +1,98 @@
+
+//Fast File Modified for ranking stuff - 2010, Apr 08,12:09:00
+
+model ax{
+
+//parameters i__o, j__o, n__o;
+
+  var i, j, n, i__o, j__o, n__o;
+
+  states stop, start, lbl_7_1, cut, ____start;
+
+  transition t_24 :={
+   from    := start ;
+   to      := lbl_7_1 ;
+   guard   := n>=2;
+   action  := j' = 1,i' = 0;
+  };
+
+
+  transition t_26 :={
+   from    := start ;
+   to      := stop ;
+   guard   := n<=1;
+   action  := j' = 0,i' = 1;
+  };
+
+
+  transition t_18 :={
+   from    := lbl_7_1 ;
+   to      := lbl_7_1 ;
+   guard   := j+2<=n;
+   action  := j' =  1  + j;
+  };
+
+
+  transition t_19 :={
+   from    := lbl_7_1 ;
+   to      := cut ;
+   guard   := j+1>=n && i+3<=n;
+   action  := i' =  1  + i;
+  };
+
+
+  transition t_20 :={
+   from    := lbl_7_1 ;
+   to      := stop ;
+   guard   := i+2>=n && j+1>=n;
+   action  := i' =  1  + i;
+  };
+
+
+  transition t_21 :={
+   from    := cut ;
+   to      := lbl_7_1 ;
+   guard   := n>=2;
+   action  := j' = 1;
+  };
+
+
+  transition t_22 :={
+   from    := cut ;
+   to      := cut ;
+   guard   := n<=1 && i+3<=n;
+   action  := j' = 0,i' =  1  + i;
+  };
+
+
+  transition t_23 :={
+   from    := cut ;
+   to      := stop ;
+   guard   := i+2>=n && n<=1;
+   action  := j' = 0,i' =  1  + i;
+  };
+
+
+  transition ____inittransition :={
+   from    := ____start ;
+   to      := start ;
+   guard   := true;
+   action  := i' = i__o,j' = j__o,n' = n__o;
+  };
+
+
+}
+
+strategy xx {
+
+Region init:={ state = ____start && true};
+
+}
+
+
+// Result of Analysis  
+//invariant stop := i>=j && i<=j+1 && j+1>=n && i>=1 && n=n__o ;
+//invariant start := n=n__o && j=j__o && i=i__o ;
+//invariant lbl_7_1 := j+1<=n && i+2<=n && j>=1 && i>=0 && n=n__o ;
+//invariant cut := i+1<=j && i>=1 && j+1=n && j+1=n__o ;
+//invariant ____start := true ;

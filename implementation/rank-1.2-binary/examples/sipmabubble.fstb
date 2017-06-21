@@ -1,0 +1,131 @@
+
+//Fast File Modified for ranking stuff - 2009, Dec 10,11:17:14
+
+model sipmabubble{
+
+//parameters i__o, j__o, n__o, tmp__o;
+
+  var i, j, n, tmp, i__o, j__o, n__o, tmp__o;
+
+  states stop, start, lbl_14_2, lbl_13_1, lbl_9_1, ____start;
+
+  transition t_30 :={
+   from    := start ;
+   to      := stop ;
+   guard   := n+1<=0;
+   action  := i' = n;
+  };
+
+
+  transition t_38 :={
+   from    := start ;
+   to      := lbl_14_2 ;
+   guard   := n=0;
+   action  := j' = 0,i' = n - 1;
+  };
+
+
+  transition t_39 :={
+   from    := start ;
+   to      := lbl_9_1 ;
+   guard   := n>=1;
+   action  := tmp' = ?,j' = 0,i' = n;
+  };
+
+
+  transition t_40 :={
+   from    := start ;
+   to      := lbl_13_1 ;
+   guard   := n>=1;
+   action  := j' = 1,i' = n;
+  };
+
+
+  transition t_28 :={
+   from    := lbl_14_2 ;
+   to      := stop ;
+   guard   := i+1<=0;
+   action  := ;
+  };
+
+
+  transition t_35 :={
+   from    := lbl_14_2 ;
+   to      := lbl_14_2 ;
+   guard   := i=0;
+   action  := j' = 0,i' = i - 1;
+  };
+
+
+  transition t_36 :={
+   from    := lbl_14_2 ;
+   to      := lbl_9_1 ;
+   guard   := i>=1;
+   action  := tmp' = ?,j' = 0;
+  };
+
+
+  transition t_37 :={
+   from    := lbl_14_2 ;
+   to      := lbl_13_1 ;
+   guard   := i>=1;
+   action  := j' = 1;
+  };
+
+
+  transition t_32 :={
+   from    := lbl_13_1 ;
+   to      := lbl_14_2 ;
+   guard   := i<=j;
+   action  := i' = i - 1;
+  };
+
+
+  transition t_33 :={
+   from    := lbl_13_1 ;
+   to      := lbl_9_1 ;
+   guard   := i>=j+1;
+   action  := tmp' = ?;
+  };
+
+
+  transition t_34 :={
+   from    := lbl_13_1 ;
+   to      := lbl_13_1 ;
+   guard   := i>=j+1;
+   action  := j' =  1  + j;
+  };
+
+
+  transition t_25 :={
+   from    := lbl_9_1 ;
+   to      := lbl_13_1 ;
+   guard   := true;
+   action  := j' =  1  + j;
+  };
+
+
+  transition ____inittransition :={
+   from    := ____start ;
+   to      := start ;
+   guard   := true;
+   action  := i' = i__o,j' = j__o,n' = n__o,tmp' = tmp__o;
+  };
+
+
+}
+
+strategy xx {
+
+Region init:={ state = ____start && true};
+
+}
+
+
+// Result of Analysis  
+//invariant stop := i<=n && i+1<=0 && n=n__o ;
+//invariant start := tmp=tmp__o && n=n__o && j=j__o && i=i__o ;
+//invariant lbl_9_1 := j>=0 && i>=j+1 && i<=n && n=n__o ;
+//invariant ____start := true ;
+//invariant lbl_14_2 :=  i+1>=0 && i+1<=n && i+1=j && n=n__o ;
+//invariant lbl_13_1 :=  i>=j && j>=1 && i<=n && n=n__o ;

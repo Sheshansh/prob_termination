@@ -1,0 +1,81 @@
+
+//Fast File Modified for ranking stuff - 2009, Dec 10,11:16:53
+
+model random1d{
+
+//parameters a__o, max__o, x__o;
+
+  var a, max, x, a__o, max__o, x__o;
+
+  states stop, start, lbl_10_1, ____start;
+
+  transition t_22 :={
+   from    := start ;
+   to      := stop ;
+   guard   := max<=0;
+   action  := ;
+  };
+
+
+  transition t_30 :={
+   from    := start ;
+   to      := lbl_10_1 ;
+   guard   := max>=1;
+   action  := x' = 2,a' = 1;
+  };
+
+
+  transition t_31 :={
+   from    := start ;
+   to      := lbl_10_1 ;
+   guard   := max>=1;
+   action  := x' = 2,a' =  - 1;
+  };
+
+
+  transition t_26 :={
+   from    := lbl_10_1 ;
+   to      := stop ;
+   guard   := max+1<=x;
+   action  := ;
+  };
+
+
+  transition t_27 :={
+   from    := lbl_10_1 ;
+   to      := lbl_10_1 ;
+   guard   := max>=x;
+   action  := x' =  1  + x,a' =  1  + a;
+  };
+
+
+  transition t_28 :={
+   from    := lbl_10_1 ;
+   to      := lbl_10_1 ;
+   guard   := max>=x;
+   action  := x' =  1  + x,a' = a - 1;
+  };
+
+
+  transition ____inittransition :={
+   from    := ____start ;
+   to      := start ;
+   guard   := true;
+   action  := a' = a__o,max' = max__o,x' = x__o;
+  };
+
+
+}
+
+strategy xx {
+
+Region init:={ state = ____start && true};
+
+}
+
+
+// Result of Analysis  
+//invariant stop := max=max__o ;
+//invariant start := x=x__o && max=max__o && a=a__o ;
+//invariant ____start := true ;
+//invariant lbl_10_1 :=  a+x>=1 && max+1>=x && x>=2 && a+1<=x && max=max__o ;

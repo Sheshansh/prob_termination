@@ -1,0 +1,155 @@
+
+//Fast File Modified for ranking stuff - 2009, Dec 10,11:16:49
+
+model perfect2{
+
+//parameters x__o, y1__o, y2__o, y3__o;
+
+  var x, y1, y2, y3, x__o, y1__o, y2__o, y3__o;
+
+  states stop, start, lbl_20, incr, lbl_15_1, ____start;
+
+  transition t_40 :={
+   from    := start ;
+   to      := stop ;
+   guard   := x<=0;
+   action  := ;
+  };
+
+
+  transition t_48 :={
+   from    := start ;
+   to      := lbl_20 ;
+   guard   := x=1;
+   action  := y3' = x,y2' = x,y1' = x - 1;
+  };
+
+
+  transition t_56 :={
+   from    := start ;
+   to      := lbl_15_1 ;
+   guard   := x>=2;
+   action  := y3' = x,y2' = 1,y1' = x - 1;
+  };
+
+
+  transition t :={
+   from    := lbl_20 ;
+   to      := stop ;
+   guard   := true;
+   action  := ;
+  };
+
+
+  transition t_46 :={
+   from    := incr ;
+   to      := lbl_20 ;
+   guard   := y1=1;
+   action  := y1' = y1 - 1;
+  };
+
+
+  transition t_53__tsplit0 :={
+   from    := incr ;
+   to      := lbl_15_1 ;
+   guard   := y1<=y2+1 && y1<=0;
+   action  := y2' =  1  + y2 - y1,y1' = y1 - 1;
+  };
+
+
+  transition t_53__tsplit1 :={
+   from    := incr ;
+   to      := lbl_15_1 ;
+   guard   := y1>=2 && y1<=y2+1;
+   action  := y2' =  1  + y2 - y1,y1' = y1 - 1;
+  };
+
+
+  transition t_54__tsplit0 :={
+   from    := incr ;
+   to      := incr ;
+   guard   := y1>=y2+2 && y1<=0;
+   action  := y2' = x,y1' = y1 - 1;
+  };
+
+
+  transition t_54__tsplit1 :={
+   from    := incr ;
+   to      := incr ;
+   guard   := y1>=y2+2 && y2>=1;
+   action  := y2' = x,y1' = y1 - 1;
+  };
+
+
+  transition t_54__tsplit2 :={
+   from    := incr ;
+   to      := incr ;
+   guard   := y1>=2 && y2+1<=0;
+   action  := y2' = x,y1' = y1 - 1;
+  };
+
+
+  transition t_55 :={
+   from    := incr ;
+   to      := incr ;
+   guard   := y1>=2 && y2=0;
+   action  := y3' =  1  + y3 - y1,y2' = x,y1' = y1 - 1;
+  };
+
+
+  transition t_50 :={
+   from    := lbl_15_1 ;
+   to      := lbl_15_1 ;
+   guard   := y1<=y2;
+   action  := y2' = y2 - y1;
+  };
+
+
+  transition t_51__tsplit0 :={
+   from    := lbl_15_1 ;
+   to      := incr ;
+   guard   := y1>=y2+1 && y2+1<=0;
+   action  := y2' = x;
+  };
+
+
+  transition t_51__tsplit1 :={
+   from    := lbl_15_1 ;
+   to      := incr ;
+   guard   := y1>=y2+1 && y2>=1;
+   action  := y2' = x;
+  };
+
+
+  transition t_52 :={
+   from    := lbl_15_1 ;
+   to      := incr ;
+   guard   := y1>=1 && y2=0;
+   action  := y3' = y3 - y1,y2' = x;
+  };
+
+
+  transition ____inittransition :={
+   from    := ____start ;
+   to      := start ;
+   guard   := true;
+   action  := x' = x__o,y1' = y1__o,y2' = y2__o,y3' = y3__o;
+  };
+
+
+}
+
+strategy xx {
+
+Region init:={ state = ____start && true};
+
+}
+
+
+// Result of Analysis  
+//invariant stop := x=x__o ;
+//invariant start := y3=y3__o && y2=y2__o && y1=y1__o && x=x__o ;
+//invariant lbl_20 := x>=y3 && x>=1 && x=x__o && y1=0 && x=y2 ;
+//invariant incr := y1>=1 && x>=y1+1 && x>=y3 && x+y1>=y3+2 && x=y2 && x=x__o ;
+//invariant lbl_15_1 := x>=y1+1 && x>=y3 && x>=y1+y2 && y1>=1 && y2>=0 && x=x__o ;
+//invariant ____start := true ;

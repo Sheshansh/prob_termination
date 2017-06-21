@@ -1,0 +1,106 @@
+
+//Fast File Modified for ranking stuff - 2010, Apr 08,12:03:49
+
+model cousot9{
+
+//parameters N__o, i__o, j__o;
+
+  var N, i, j, N__o, i__o, j__o;
+
+  states stop, start, lbl_5_2, lbl_7_2, ____start;
+
+  transition t_25 :={
+   from    := start ;
+   to      := stop ;
+   guard   := N<=0;
+   action  := i' = N;
+  };
+
+
+  transition t_26 :={
+   from    := start ;
+   to      := lbl_5_2 ;
+   guard   := N>=1 && j>=1;
+   action  := j' = j - 1,i' = N;
+  };
+
+
+  transition t_27 :={
+   from    := start ;
+   to      := lbl_7_2 ;
+   guard   := N>=1 && j<=0;
+   action  := j' = N,i' = N - 1;
+  };
+
+
+  transition t_19 :={
+   from    := lbl_5_2 ;
+   to      := stop ;
+   guard   := i<=0;
+   action  := ;
+  };
+
+
+  transition t_20 :={
+   from    := lbl_5_2 ;
+   to      := lbl_5_2 ;
+   guard   := i>=1 && j>=1;
+   action  := j' = j - 1;
+  };
+
+
+  transition t_21 :={
+   from    := lbl_5_2 ;
+   to      := lbl_7_2 ;
+   guard   := i>=1 && j<=0;
+   action  := j' = N,i' = i - 1;
+  };
+
+
+  transition t_22 :={
+   from    := lbl_7_2 ;
+   to      := stop ;
+   guard   := i<=0;
+   action  := ;
+  };
+
+
+  transition t_23 :={
+   from    := lbl_7_2 ;
+   to      := lbl_5_2 ;
+   guard   := i>=1 && j>=1;
+   action  := j' = j - 1;
+  };
+
+
+  transition t_24 :={
+   from    := lbl_7_2 ;
+   to      := lbl_7_2 ;
+   guard   := i>=1 && j<=0;
+   action  := j' = N,i' = i - 1;
+  };
+
+
+  transition ____inittransition :={
+   from    := ____start ;
+   to      := start ;
+   guard   := true;
+   action  := N' = N__o,i' = i__o,j' = j__o;
+  };
+
+
+}
+
+strategy xx {
+
+Region init:={ state = ____start && true};
+
+}
+
+
+// Result of Analysis  
+//invariant stop := N>=i && i<=0 && N=N__o ;
+//invariant start := j=j__o && i=i__o && N=N__o ;
+//invariant lbl_5_2 := j>=0 && i>=1 && N>=i && N=N__o ;
+//invariant lbl_7_2 := i>=0 && N>=i+1 && N=j && N=N__o ;
+//invariant ____start := true ;

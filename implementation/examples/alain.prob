@@ -1,4 +1,11 @@
-var x,y,z,n1,n2,c1,c2;
+var x,y,z,n1,n2,c1,c2,x_o,y_o,z_o,n1_o,n2_o,c1_o,c2_o;
+x := x_o;
+y := y_o;
+z := z_o;
+n1 := n1_o;
+n2 := n2_o;
+c1 := c1_o;
+c2 := c2_o;
 c1 := 0;
 if n2 <= 2*y then
 	skip
@@ -7,20 +14,20 @@ else
 		skip
 	else
 		if z>=0 and x>=0 and y>=0 and n1>=0 and n2>=0 then
-			while n1-1 >= 0 do
-				n1 := n1-1;
+			n1 := n1-1;
+			
+			while n1 >= 0 do
 				c2 := 0;
-				
 				c1 := c1+1;
 				while n2 >= 0 do
 					n2 := n2-1;
 					z := y;
 					c2 := c2+1
-				od
+				od;
 				z := z+y;
-				n2 := z
-			od;
-			n1 := n1-1
+				n2 := z;
+				n1 := n1-1
+			od
 		else
 			skip
 		fi

@@ -1,0 +1,106 @@
+
+//Fast File Modified for ranking stuff - 2010, Apr 08,11:52:35
+
+model wcet2{
+
+//parameters i__o, j__o, tmp__o, tmp_1__o;
+
+  var i, j, tmp, tmp_1, i__o, j__o, tmp__o, tmp_1__o;
+
+  states stop, start, lbl_9_2, lbl_8_2, ____start;
+
+  transition t_15 :={
+   from    := start ;
+   to      := stop ;
+   guard   := i>=5;
+   action  := ;
+  };
+
+
+  transition t_21 :={
+   from    := start ;
+   to      := lbl_9_2 ;
+   guard   := i<=2;
+   action  := tmp' = i,j' = 0,i' =  1  + i;
+  };
+
+
+  transition t_22 :={
+   from    := start ;
+   to      := lbl_8_2 ;
+   guard   := i>=3 && i<=4;
+   action  := tmp_1' = 0,j' = 1;
+  };
+
+
+  transition t_13 :={
+   from    := lbl_9_2 ;
+   to      := stop ;
+   guard   := i>=5;
+   action  := ;
+  };
+
+
+  transition t_19 :={
+   from    := lbl_9_2 ;
+   to      := lbl_9_2 ;
+   guard   := i<=2;
+   action  := tmp' = i,j' = 0,i' =  1  + i;
+  };
+
+
+  transition t_20 :={
+   from    := lbl_9_2 ;
+   to      := lbl_8_2 ;
+   guard   := i>=3 && i<=4;
+   action  := tmp_1' = 0,j' = 1;
+  };
+
+
+  transition t_17__tsplit0 :={
+   from    := lbl_8_2 ;
+   to      := lbl_9_2 ;
+   guard   := i<=2;
+   action  := tmp' = i,i' =  1  + i;
+  };
+
+
+  transition t_17__tsplit1 :={
+   from    := lbl_8_2 ;
+   to      := lbl_9_2 ;
+   guard   := j>=10;
+   action  := tmp' = i,i' =  1  + i;
+  };
+
+
+  transition t_18 :={
+   from    := lbl_8_2 ;
+   to      := lbl_8_2 ;
+   guard   := i>=3 && j<=9;
+   action  := tmp_1' = j,j' =  1  + j;
+  };
+
+
+  transition ____inittransition :={
+   from    := ____start ;
+   to      := start ;
+   guard   := true;
+   action  := i' = i__o,j' = j__o,tmp' = tmp__o,tmp_1' = tmp_1__o;
+  };
+
+
+}
+
+strategy xx {
+
+Region init:={ state = ____start && true};
+
+}
+
+
+// Result of Analysis  
+//invariant stop := i>=i__o && i>=5 ;
+//invariant start := tmp_1=tmp_1__o && tmp=tmp__o && j=j__o && i=i__o ;
+//invariant lbl_9_2 := i>=i__o+1 && 5i<=j+15 && j>=0 && i=tmp+1 ;
+//invariant lbl_8_2 := j<=10 && j>=1 && i>=i__o && i>=3 && i<=4 && j=tmp_1+1 ;
+//invariant ____start := true ;
