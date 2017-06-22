@@ -198,12 +198,9 @@ uniformly sampled from interval $[-2,1]$). We also allow constructs for
 non-deterministic branching indicated by `\textbf{if }$\star$ \textbf{then...}' construct and non-deterministic assignment.  
 Variables (or identifiers) of a probabilistic program are of \emph{real} type, i.e., 
 values of the variables are real numbers. 
-We also assume that assume that each \PP{} $\program$ is preceded by an 
-initialization preamble 
-in 
-which 
-each variable appearing in $\program$ is assigned some concrete number.
-the program variables are initialized. 
+We also assume that assume that each \PP{} $\program$ is preceded by a preamble 
+specifying possible initial values of program variables: the preamble consists 
+of a single predicate characterizing possible initial valuations.
 
 \smallskip\noindent{\em Affine Probabilistic Programs (\APP s).}
 A probabilistic program is \emph{affine} if all the expressions that occur in 
@@ -301,7 +298,7 @@ To define this process, we first define so called
 \begin{definition}
 \label{def:stochgame}
 A \emph{probabilistic control flow graph (pCFG)} is a tuple
-$\pCFG=(\locs,\pvars,\locinit,\vecinit,\transitions,\updates,\probdist,\guards)$,
+$\pCFG=(\locs,\pvars,\locinit,\vecinitset,\transitions,\updates,\probdist,\guards)$,
 where
 \begin{compactitem}
 \item $\locs$ is a finite set of \emph{locations} partitioned into four 
@@ -311,8 +308,8 @@ non-deterministic branching,
 probabilistic branching, deterministic, and assignment locations;
 \item $\pvars=\{x_1,\dots,x_{|\pvars|}\}$ is a finite set of \emph{program 
 variables} (note that $\pvars \subseteq \vars$) ;
-\item $\locinit$ is an initial location and $\vecinit$ is an initial 
-\emph{assignment vector};
+\item $\locinit$ is an initial location and $\vecinitset$ is a set of initial 
+\emph{assignment vectors};
 % POKRACOVAT ODSUD
 \item $\transitions\subseteq\locs\times\locs$ is a transition relation;
 %whose members are tuples of
@@ -487,6 +484,7 @@ $a\in \support(d)$;
 A \emph{finite path} (or
 \emph{execution fragment}) of length $k$ in $\pCFG$ is a finite sequence of
 configurations $(\ell_0,\vec{x}_0)\cdots(\ell_k,\vec{x}_k)$ such that 
+$\loc_0=\locinit$, $\vec{x}_0\in\vecinitset$, and 
 %$(\loc_0,\vec{x}_0)=(\locinit,\vecinit)$ and 
 for each
 $0 \leq i < k$ the configuration $(\loc_{i+1},\vec{x}_{i+1})$ is a successor of 
@@ -496,7 +494,7 @@ $\pCFG$ is an infinite sequence of configurations whose every finite
 prefix is a finite path.
 A configuration $(\loc,\vec{x})$ is {\em reachable} from the initial 
 configuration
-$(\locinit,\vecinit)$
+$(\locinit,\vecinit)$ (where, $\vecinit\in \vecinitset$)
 if there is a finite path starting in $(\locinit,\vecinit)$ that ends in
 $(\loc,\vec{x})$. We denote by $\Conf_\pCFG,\Fpath_\pCFG$ and $\Run_\pCFG$ the 
 sets of all configurations, finite paths and runs in $\pCFG$, respectively, 
@@ -609,7 +607,8 @@ then each scheduler in the associated pCFG is measurable.
 %transition (resp. to a single number) and probability 0 to all the others.
 
 \smallskip\noindent{\em Stochastic process.}
-A pCFG $\pCFG$ together with a scheduler $\sigma$ define a stochastic 
+A pCFG $\pCFG$ together with a scheduler $\sigma$ and initial valuation 
+$\vecinit\in\vecinitset$ define a stochastic 
 process which produces a random run 
 $(\loc_0,\vec{x}_0)(\loc_1,\vec{x}_1)(\loc_2,\vec{x}_2)\cdots$. The evolution 
 of 
@@ -702,10 +701,12 @@ determined as follows:
 %\end{compactitem}
 
 The above intuitive explanation can be formalized by showing that
-each pCFG $\pCFG$ together with a scheduler $\sigma$ uniquely determines a 
+each pCFG $\pCFG$ together with a scheduler $\sigma$ and initial valuation 
+$\vecinit\in \vecinitset$ uniquely determine a 
 certain 
 probabilistic 
-space $(\OmegaRun,\natfilt,\probm^{\sigma})$ in which $\OmegaRun$ is a set of 
+space $(\OmegaRun,\natfilt,\probm^{\sigma}_{\vecinit})$ in which $\OmegaRun$ 
+is a set of 
 all 
 runs in $\pCFG$, and a stochastic process 
 $\pCFG^{\sigma}=\{\cfg{\sigma}{i}\}_{i=0}^{\infty}$ in this space 
@@ -726,15 +727,17 @@ the form $F\times \Conf^{\infty}$, where $F\in \mathcal{H}$ is a measurable set
 of finite paths. The 
 probability 
 measure 
-$\probm^{\sigma}$ is such that for each $i$, the distribution of 
+$\probm^{\sigma}_{\vecinit}$ is such that for each $i$, the distribution of 
 $\cfg{\sigma}{i}$ reflects the aforementioned way in which runs are randomly 
 generated. The formal construction 
-of $\natfilt$ and $\probm^{\sigma}$ proceeds via the standard \emph{cylinder 
+of $\natfilt$ and $\probm^{\sigma}_{\vecinit}$ proceeds via the standard 
+\emph{cylinder 
 construction}~\cite[Theorem 2.7.2]{Ash:book} and is
 somewhat 
 technical, hence we omit it. 
-We denote by $\E^\sigma$ the expectation operator in probability space 
-$(\OmegaRun,\natfilt,\probm^{\sigma})$.
+We denote by $\E^\sigma_{\vecinit}$ the expectation operator in probability 
+space 
+$(\OmegaRun,\natfilt,\probm^{\sigma}_{\vecinit})$.
  
 %We point out that the 
 %construction produces pCFGs with a property that only transitions outgoing 
@@ -790,30 +793,30 @@ $(\OmegaRun,\natfilt,\probm^{\sigma})$.
 We consider computational problems related to the basic liveness properties of 
 \APP{s}, namely \emph{termination} and its generalization, \emph{reachability}. 
 
-\smallskip\noindent{\em Termination, reachability, and termination time.}
+\smallskip\noindent{\em Termination and termination time.}
 In the following, consider a \PP{} $P$ and its associated pCFG $\pCFG_P$. 
-We say that a run $\run$ of $\pCFG_P$ \emph{reaches} a set of configurations 
-$\confset$ if it  contains a configuration from $\confset$. A run 
+We say that a run 
 \emph{terminates} if it reaches a 
 configuration whose first component (i.e. a location of $\pCFG_P$) is the 
 location
 $\loc_{P}^{\lout}$ corresponding to the value of the program counter after 
 executing $P$. 
-To each set of configurations $\confset$ we can assign a random variable 
-$\treach{\confset}$ 
-such that for each run $\run$ the value $\treach{\confset}(\run)$ represents 
+We define a random variable $\ttime$
+such that for each run $\run$ the value $\ttime(\run)$ represents 
 the first 
 point in time when 
-the current configuration on $\run$ is in $\confset$. If a run $\run$ does 
+the current location is $\loc_P^{\lout}$. If a run $\run$ does 
 \emph{not} 
-reach a set $\confset$, then 
-$\treach{\confset}(\run)=\infty$. We call $\treach{\confset}$ the 
-\emph{reachability time} of $\confset$. In particular, if $\confset$ is the set 
-of all configurations $(\loc,\vec{x})$ such that $\loc=\loc^\lout_P$ (the 
-terminal location of $\pCFG_P$), then $\treach{\confset}$ is 
-called a \emph{termination time}, as it returns the number of steps after which 
-$\run$ terminates. Since termination time is an important concept on its own, 
-we use a special notation $\ttime$ for it.
+terminate, then 
+$\ttime(\run)=\infty$. We call $\ttime$ the 
+\emph{termination time} of $\program$. 
+%In particular, if $\confset$ is the set 
+%of all configurations $(\loc,\vec{x})$ such that $\loc=\loc^\lout_P$ (the 
+%terminal location of $\pCFG_P$), then $\treach{\confset}$ is 
+%called a \emph{termination time}, as it returns the number of steps after 
+%which 
+%$\run$ terminates. Since termination time is an important concept on its own, 
+%we use a special notation $\ttime$ for it.
 %\begin{example}
 %Consider the program $P$ such that \hspace{-0.25cm}\newsavebox{\figa}
 %\lstset{language=affprob}
@@ -839,39 +842,42 @@ termination:
 \begin{compactenum}
 \item \emph{Almost-sure termination:} A probabilistic program $P$ is 
 almost-surely (a.s.) 
-terminating if under each scheduler $\sigma$ it holds that 
-$\probm^{\sigma}(\{\run\mid \run \text{ terminates}\}) = 1$, or equivalently, 
+terminating if under each scheduler $\sigma$ and for each initial valuation 
+$\vecinit\in\vecinitset$ it holds that 
+$\probm^{\sigma}_{\vecinit}(\{\run\mid \run \text{ terminates}\}) = 1$, or 
+equivalently, 
 if for each $\sigma$ it holds $\probm^{\sigma}(\ttime<\infty)=1$. In 
 almost-sure termination question for $P$ we aim to prove that $P$ 
 is 
 almost-surely terminating.
 \item \emph{Positive termination:} A probabilistic program $P$ is 
 positively
-terminating if under each scheduler $\sigma$ it holds that 
-$\E^{\sigma}(\{\ttime\})<  \infty$. In 
+terminating if under each scheduler $\sigma$ and for each initial valuation 
+$\vecinit\in\vecinitset$ it holds that 
+$\E^{\sigma}_{\vecinit}(\{\ttime\})<  \infty$. In 
 positive termination question for $P$ we aim to prove that $P$ 
 is 
 positively terminating. Note that each positively terminating program is also 
 a.s. terminating, but the converse does not hold.
 \end{compactenum}
 
-We also define corresponding questions for the more general reachability 
-concept. 
- 
-\begin{compactenum}
-\item \emph{Almost-sure reachability:} For a set $C$ of configurations of a
-probabilistic program $P$, prove (if possible) that under each scheduler 
-$\sigma$ it holds that
-$\probm^{\sigma}(\treach{C}<\infty)=1$.
-\item \emph{Positive reachability:} For a set $C$ of configurations of 
-a probabilistic program $P$, prove (if possible) that under each scheduler 
-$\sigma$ it holds that
-$\E^{\sigma}(\treach{C})<\infty$.
-\end{compactenum}
-
-Since termination is a special case of reachability, each solution to the 
-almost-sure or probabilistic reachability questions provides solution for the 
-corresponding termination questions.
+%We also define corresponding questions for the more general reachability 
+%concept. 
+% 
+%\begin{compactenum}
+%\item \emph{Almost-sure reachability:} For a set $C$ of configurations of a
+%probabilistic program $P$, prove (if possible) that under each scheduler 
+%$\sigma$ it holds that
+%$\probm^{\sigma}(\treach{C}<\infty)=1$.
+%\item \emph{Positive reachability:} For a set $C$ of configurations of 
+%a probabilistic program $P$, prove (if possible) that under each scheduler 
+%$\sigma$ it holds that
+%$\E^{\sigma}(\treach{C})<\infty$.
+%\end{compactenum}
+%
+%Since termination is a special case of reachability, each solution to the 
+%almost-sure or probabilistic reachability questions provides solution for the 
+%corresponding termination questions.
 %\begin{example}\label{ex:illustrate}
 %We now illustrate step by step how the SGS of Example~\ref{ex:sgs} corresponds
 %to

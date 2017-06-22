@@ -1,6 +1,10 @@
 \section{Applying Lexicographic Supermartingales to Probabilistic Programs}
 
-We now discuss how to leverage the mathematical results of the previous section to provide a sound proof rule for almost-sure termination of probabilistic programs. Hence, for the rest of this section we fix a \PP{} $\program$ and the associated pCFG $\pCFG_\program=(\locs,\pvars,\locinit,\vecinit,\transitions,\updates,\probdist,\guards)$.
+We now discuss how to leverage the mathematical results of the previous section 
+to provide a sound proof rule for almost-sure termination of probabilistic 
+programs. Hence, for the rest of this section we fix a \PP{} $\program$ and the 
+associated pCFG 
+$\pCFG_\program=(\locs,\pvars,\locinit,\vecinitset,\transitions,\updates,\probdist,\guards)$.
 
 We aim to define a function assigning a non-negative vector to each configuration (so called measurable map) such that in each point of computation, the expected value of the function after performing one more computational step is smaller (in lexicographic ordering) than the current one. This property can be formalized using the standard  notion of \emph{pre-expectation}~\cite{xxx}.
 
@@ -126,10 +130,11 @@ invariant map $\inv$.
 Then $\program$ terminates almost surely.
 \end{theorem}
 \begin{proof}
-Let $\sigma$ be any measurable scheduler in $\program$.
+Let $\sigma$ be any measurable scheduler and $\vecinit\in\vecinitset$ any 
+initial variable valuation in $\program$.
 We define an $n$-dimensional stochastic process 
 $\{\vec{X}_{i}\}_{i=0}^{\infty} $ on the probability space 
-$(\OmegaRun,\natfilt,\probm^{\sigma})$ such 
+$(\OmegaRun,\natfilt,\probm^{\sigma}_{\vecinit})$ such 
 that for each 
 $i\geq 0$ and $1\leq j 
 \leq n$ and each run $\run$ we put $\vecseq{X}{i}{j}(\run) = 
@@ -147,16 +152,17 @@ $\preexp{\lem_{j'}}(\cfg{\sigma}{i}(\run)) =
 \lem_{j'}(\cfg{\sigma}{i}(\run))-\eps$ for all $1\leq j'< j$). Due to 
 definition of an $\eps$-LexRSM map such a $j$ exists for all 
 $\run\in\{\ttime>i\}$ and hence we indeed have a partition. It remains to prove 
-that irrespective of the initial choice of $\sigma$ it holds, for each $1\leq j 
-\leq n$, that $\E^\sigma[\vecseq{X}{i+1}{j}\mid 
+that irrespective of the initial choice of $\sigma$ and $\vecinit$ it holds, 
+for each $1\leq j 
+\leq n$, that $\E^\sigma_{\vecinit}[\vecseq{X}{i+1}{j}\mid 
 \natfilt_i]\leq\preexp{\lem_{j}}(\cfg{\sigma}{}) $. This can be achieved by a 
 standard~\cite{xxx}, through somewhat technical computation, which we defer to 
 \AppendixMaterial.
 
 Since  $\{\vec{X}_{i}\}_{i=0}^{\infty}$ 
 is an $\eps$-LexRSM for $\ttime$, from Theorem~\ref{thm:lexrsm-programs} it 
-follows that $\probm^{\sigma}\ttime <\infty) =1$, irrespective of scheduler 
-$\sigma$.
+follows that $\probm^{\sigma}_{\vecinit}\ttime <\infty) =1$, irrespective of 
+$\sigma$ and $\vecinit$.
 \end{proof} 
 
 
