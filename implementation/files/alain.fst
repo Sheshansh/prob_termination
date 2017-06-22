@@ -2,12 +2,10 @@
 model alain {
 var c1,c2,n1,n2,x,y,z;
 //@parameters x,y;
-states start,stop,lbl_2,lbl_2_52,tp_43,lbl_5
-,fp_44,lbl_6,lbl_7,tp_35,lbl_8, fp_36,lbl_9,lbl_10
-,lbl_12,lbl_13,lbl_15,lbl_16
-,lbl_17,lbl_18,lbl_19,lbl_20,lbl_21,lbl_11,lbl_14,lbl_3,tp,fp,lbl_11_11
+states stop,start,lbl_2,lbl_5,lbl_6,lbl_8,lbl_9,lbl_12,lbl_13,lbl_15,lbl_16,
+lbl_17,lbl_18,lbl_19,lbl_20,lbl_21,lbl_10,lbl_11,lbl_14,lbl_3,lbl_7,tp,fp,lbl_11_11
 ,wh,lbl_19_15,lbl_18_17,wh_18,lbl_17_22,lbl_16_24,lbl_15_26,lbl_13_28,lbl_12_30
-;
+,tp_35,fp_36,tp_43,fp_44,lbl_2_52;
 transition f_53 :={
   from  := start;
   to    := lbl_2;
@@ -266,42 +264,3 @@ transition lbl_2_t :={
 strategy dumb {
     Region init := { state = start && true };
 }
-// Result of Analysis  
-//invariant start := true ;
-//invariant stop := c1>=0 ;
-//invariant lbl_2 := true ;
-//invariant lbl_2_52 := c1=0 ;
-//invariant tp_43 := n2<=2y && c1=0 ;
-//invariant lbl_5 := n2<=2y && c1=0 ;
-//invariant fp_44 := n2>2y && c1=0 ;
-//invariant lbl_6 := n2>2y && c1=0 ;
-//invariant lbl_7 := n2>2y && c1=0 ;
-//invariant tp_35 := n2<=y+z && n2>2y && c1=0 ;
-//invariant lbl_8 := n2<=y+z && n2>2y && c1=0 ;
-//invariant fp_36 := n2>y+z && n2>2y && c1=0 ;
-//invariant lbl_9 := n2>y+z && n2>2y && c1=0 ;
-//invariant lbl_10 := n2>y+z && n2>2y && c1=0 ;
-//invariant lbl_12 := c1>=0 && y>=0 && z>=0 && n1>=0 && n2>=z && n2+z>=2y && x>=0 ;
-//invariant lbl_13 := c1>=0 && z>=0 && y>=0 && n2+z>=2y && n2>=z && x>=0 && n1>=0 && c2=0 ;
-//invariant lbl_15 := y>=0 && c1>=1 && z>=0 && c2>=0 && n1>=0 && x>=0 && n2>0 ;
-//invariant lbl_16 := y>=0 && c1>=1 && z>=0 && c2>=0 && n2+1>0 && x>=0 && n1>=0 ;
-//invariant lbl_17 := z>=0 && c1>=1 && c2>=0 && n1>=0 && n2+1>0 && x>=0 && y=z ;
-//invariant lbl_18 := y>=0 && z>=0 && n2<=0 && c2>=0 && x>=0 && n1>=0 && c1>=1 ;
-//invariant lbl_19 := y>=0 && y<=z && n2<=0 && c2>=0 && c1>=1 && n1>=0 && x>=0 ;
-//invariant lbl_20 := n2>2y && n2>y+z && c1=0 ;
-//invariant lbl_21 := c1>=0 ;
-//invariant lbl_11 := x>=0 && n2+z>=2y && n2>=z && n1>=0 && c1>=0 && z>=0 && y>=0 ;
-//invariant lbl_14 := x>=0 && n1>=0 && c2>=0 && c1>=1 && z>=0 && y>=0 ;
-//invariant lbl_3 := c1=0 ;
-//invariant tp := n1>=0 && x>=0 && y>=0 && z>=0 && n2>y+z && n2>2y && c1=0 ;
-//invariant fp := n2>2y && n2>y+z && c1=0 ;
-//invariant lbl_11_11 := c1>=0 && n1+1>=0 && n2>=z && n2+z>=2y && x>=0 && y>=0 && z>=0 ;
-//invariant wh := c1>=0 && y>=0 && z>=0 && n1>=0 && n2>=z && n2+z>=2y && x>=0 ;
-//invariant lbl_19_15 := n2>=y && y>=0 && c2>=0 && n1>=0 && c1>=1 && x>=0 && n2=z ;
-//invariant lbl_18_17 := y>=0 && y<=z && n2<=0 && c2>=0 && c1>=1 && n1>=0 && x>=0 ;
-//invariant wh_18 := y>=0 && c1>=1 && z>=0 && c2>=0 && n1>=0 && x>=0 && n2>0 ;
-//invariant lbl_17_22 := y>=0 && c1>=1 && c2>=1 && n2+1>0 && n1>=0 && x>=0 && y=z ;
-//invariant lbl_16_24 := n2+1>0 && n1>=0 && c2>=0 && c1>=1 && x>=0 && z>=0 && y=z ;
-//invariant lbl_15_26 := y>=0 && c1>=1 && z>=0 && c2>=0 && n2+1>0 && x>=0 && n1>=0 ;
-//invariant lbl_13_28 := c1>=1 && z>=0 && y>=0 && n2+z>=2y && n2>=z && x>=0 && n1>=0 && c2=0 ;
-//invariant lbl_12_30 := n2+z>=2y && n2>=z && z>=0 && x>=0 && y>=0 && n1>=0 && c1>=0 && c2=0 ;

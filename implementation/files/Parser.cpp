@@ -27,7 +27,6 @@ int last_used_label = 0;
 map<int,CFG_location*> label_map;
 map<string,int> variableId;
 map<int,string> variable;
-map<string,int> stateId;
 
 void skip_spaces(int &begin, int &end){ //skips the spaces in the beginning and the end
 	while(begin<program.size() and isspace(program[begin])){
@@ -914,7 +913,7 @@ void CFG_edge::print(){
 		cout<<"Error! Error! Error!"<<endl;
 	}
 	if(change!=NULL){
-		cout<<"Change: "<<variable[toChange]<<" changed to ";
+		cout<<"Change: x_"<<toChange<<" changed to ";
 		change->print();
 		cout<<endl;
 	}
