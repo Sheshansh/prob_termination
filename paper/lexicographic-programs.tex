@@ -1,0 +1,163 @@
+\section{Applying Lexicographic Supermartingales to Probabilistic Programs}
+
+We now discuss how to leverage the mathematical results of the previous section to provide a sound proof rule for almost-sure termination of probabilistic programs. Hence, for the rest of this section we fix a \PP{} $\program$ and the associated pCFG $\pCFG_\program=(\locs,\pvars,\locinit,\vecinit,\transitions,\updates,\probdist,\guards)$.
+
+We aim to define a function assigning a non-negative vector to each configuration (so called measurable map) such that in each point of computation, the expected value of the function after performing one more computational step is smaller (in lexicographic ordering) than the current one. This property can be formalized using the standard  notion of \emph{pre-expectation}~\cite{xxx}.
+
+\begin{definition}[Measurable Maps and Linear Expression Maps]
+A 1-dimensional \emph{measurable map} for a \PP{} $\program$ is a  
+real-valued function $\lem$ 
+assigning to each program location $\loc$ of $\pCFG_P$ a Borel-measurable function $\lem(\loc)$  of program variables, i.e. each $\lem(\loc)$  is a function of type $\Rset^{|\pvars|}\rightarrow \Rset$. As a special case, if all the functions $\lem(\loc)$ are affine, then we call $\lem$ a 1-dimensional \emph{linear expression map (LEM)}. 
+Am $n$-dimensional measurable/linear expression map is a vector $\vec{\lem}=(\lem_1,\dots,\lem_n)$ of 1-dimensional measurable/linear expression maps. 
+\end{definition}
+
+Each 1-dimensional measurable map $\lem$ and location $\loc$ determines a function $\lem(\loc)$ 
+which takes as an argument an $|\pvars|$-dimensional vector. We use $\lem(\loc,\vec{x})$ as a shorthand 
+notation for $\lem(\loc)(\vec{x})$.
+
+\begin{definition}[Pre-Expectation]
+	Let $\lem$ 
+	be 1-dimensional measurable map for a \PP{} $\program$.
+	%Let $\locs$ 
+	%be the set of locations of $\pCFG_P$ and $\pvars$ its set of program 
+	%variables. 
+	The 
+	pre-expectation of $\lem$ is a function $\preexp{\lem}\colon \locs\times 
+	\Rset^{|\pvars|} \rightarrow \Rset\cup\{\infty\}$ defined as follows:
+	\begin{compactitem} %\itemsep1pt \parskip0pt \parsep0pt
+		\item 
+		if $\loc$ is a probabilistic branching location, then
+		$$\preexp{\lem}(\loc,\vec{x}):=\sum_{(\loc,\loc')\in\transitions} 
+		Pr_{\loc}\left(\loc,\loc'\right)\cdot
+		\lem(\loc',\vec{x});$$
+		\item 
+		if $\loc$ is a non-deterministic branching location, then
+		$$\preexp{\lem}(\loc,\vec{x}):=
+		\max_{(\loc,\loc')\in\transitions}\lem(\loc',\vec{x});$$
+		
+		%\item 
+		%$\mathrm{pre}_\eta(\loc,\mathbf{x}):=\min_{(\loc,id,\ell')\in\transitions}\eta\left(\loc',\mathbf{x}\right)$
+		% if $\loc$ is an angelic location;
+		\item 
+		if $\loc$ is a deterministic location, then for each $\vec{x}$ the value 
+		$\preexp{\lem}(\loc,\vec{x})$ is determined as follows: there is exactly one 
+		transition
+		$\tau=(\loc,\loc')$ such that $\vec{x}\models G(\tau)$. We put $$\preexp{\lem}(\loc,\vec{x}):= \lem(\loc',\vec{x})$$.
+		\item 
+		If $\loc$ is an assignment location, then there is exactly one transition $\tau=(\loc,\loc')$ outgoing from $\loc$.
+		We distinguish 
+		three cases, depending on $\updates(\tau)=(j,\up)$ (recall that $\up$ is an update element):
+		\begin{compactitem}
+			\item If $\up\colon \Rset^{|\pvars|}\rightarrow \Rset$ is a Borel-measurable function, then 
+			$$\preexp{\lem}(\loc,\vec{x}):= \lem(\loc',\vec{x}(j\leftarrow \up(\vec{x}))).$$
+			\item If $\up$ is a distribution $d$, then $$ \preexp{\lem}(\loc,\vec{x}):= 
+			\lem(\loc',\vec{x}(j\leftarrow \E[d])),$$ where $\E[d]$ is the expected value of the 
+			distribution $d$.
+			\item 
+			If $\up$ is a set, then $$ \preexp{\lem}(\loc,\vec{x}):= \sup_{a\in\up}
+			\lem(\loc',\vec{x}(j \leftarrow a)).$$
+		\end{compactitem}
+		%$\mathrm{pre}_\eta(\loc,\mathbf{x}):=\eta(\loc',\expv_{\rvars}\left(f(\vec{x},\mathbf{r})\right))$
+		% if $\loc$ is a deterministic location, $(\loc,f,\loc')\in\transitions$ and 
+		%$\mathbf{x}\in G(\loc,f,\loc')$, where 
+		%$\expv_{\rvars}\left(f(\vec{x},\mathbf{r})\right)$ is the expected value of 
+		%$f(\vec{x},\cdot)$. %on $\rvars$ if $\vec{x}$ is treated as a constant vector.
+	\end{compactitem}
+	%\end{definition}
+\end{definition}
+
+Intuitively, a pre-expectation of $\lem$ is a 
+function which for each configuration $(\loc,\vec{x})$ returns the maximal
+expected value of $\lem$ after one step is made from this configuration, where 
+the maximum is taken over all possible non-deterministic choices.
+%Note that the only way in which pre-expectation can attain an infinite value 
+%is 
+%due to non-deterministic assignment. However, if the program in question has 
+%\emph{bounded non-determinism}, in the sense that all non-deterministic 
+%assignments can only choose the assignment value from a bounded set\footnote{A 
+%set $u \subseteq \mathcal{R}$ is bounded if it is contained in some interval 
+%of 
+%a finite length}, then the pre-expectation of any real-valued measurable map 
+%is 
+%a real-valued function.
+
+As in termination analysis of non-probabilistic programs, our LexRSMs are typically supported by \emph{invariants}, i.e. overapproximations of the set of reachable configuration. 
+
+\begin{definition}[Invariant Map and Linear Invariant Map]
+An \emph{invariant map} for a \PP{} $\program$ is a function $\inv$ assigning to each location of $\pCFG_{\program}$ a Borel-measurable set $\inv({\loc})\subseteq \Rset^{|\pvars|}$ of variable valuations, so called invariant of $\loc$, such that for each configuration $(\loc,\vec{x})$ reachable from the initial configuration it holds $\vec{x}\in \inv(\loc)$. Additionally, if each set $\inv(\loc)$ is of the form $\{\vec{x}\mid\vec{x}\models \Psi^\ell \}$ for some propositionally linear predicate $\Psi^\ell$, then we call $\inv$ a \emph{linear invariant map} (LIM).
+\end{definition}
+
+Slightly abusing the notation, we view each LIM equivalently as a function assigning linear predicates (whose satisfaction sets overapproximate the set of reachable valuations) to program locations.
+
+We now have all the ingredients needed to define the notion of LexRSM maps for probabilistic programs.
+
+\begin{definition}[Lexicographic Ranking Supermartingale Map]
+Let $\eps>0$. An $n$-dimensional \emph{lexicographic $\eps$-ranking supermartingale map} ($\eps$-LexRSM map) for a program $\program$ supported by an invariant map $\inv$ is an $n$-dimensional measurable map $\vec{\lem}=(\lem_1,\dots,\lem_n)$ for $\program$ such that for each configuration $(\loc,\vec{x})$ where $\loc\neq \locterm$ and $\vec{x}\in \inv(\loc)$ the following conditions are satisfied:
+ \begin{compactitem}
+ 	%\item For all $(\loc,\vec{x})\in \locs\times\Rset^{|\pvars|}$ it holds
+ 	%\item For all  it holds 
+ 	\item
+ 	for all $1\leq j \leq n$, $\lem_j(\loc,\vec{x})\geq 0$; and
+ 	\item 
+ 	there exists $1\leq j \leq$ n such that
+ 	\begin{compactitem}
+ 	\item
+ 	$\preexp{\lem_j}(\loc,\vec{x}) \leq \lem_j(\loc,\vec{x})-\eps$, and
+ 	\item
+ 	for all $1\leq j'<j$ it holds 
+ 	$\preexp{\lem_{j'}}(\loc,\vec{x}) \leq \lem_{j'}(\loc,\vec{x})$.
+ 	\end{compactitem}
+ \end{compactitem}
+If additionally $\lem$ is a linear expression map, then we call it a linear $\eps$-LexRSM map ($\eps$-LinLexRSM).
+\end{definition}
+
+\textbf{[PETR: DEFINE LOCATION TERMINATION]}
+
+The main result is the soundness of $\eps$-LexRSM maps for proving a.s. 
+termination.
+
+\begin{theorem}
+\label{thm:lexrsm-programs}
+Let $\program$ be a probabilistic program. Assume that there exists an $\eps>0$ 
+and an $n$-dimensional $\eps$-LexRSM map $\vec{\lem}=(\lem_1,\dots,\lem_n)$ for 
+$\program$ supported 
+by some 
+invariant map $\inv$. 
+Then $\program$ terminates almost surely.
+\end{theorem}
+\begin{proof}
+Let $\sigma$ be any measurable scheduler in $\program$.
+We define an $n$-dimensional stochastic process 
+$\{\vec{X}_{i}\}_{i=0}^{\infty} $ on the probability space 
+$(\OmegaRun,\natfilt,\probm^{\sigma})$ such 
+that for each 
+$i\geq 0$ and $1\leq j 
+\leq n$ and each run $\run$ we put $\vecseq{X}{i}{j}(\run) = 
+\lem_j(\cfg{\sigma}{i}(\run))$. We claim that $\{\vec{X}_{i}\}_{i=0}^{\infty}$ 
+is an $\eps$-LexRSM for the termination time $\ttime$ of $\program$. Clearly 
+the process is real-valued, componentwise non-negative, and adapted to the 
+canonical filtration of $\natfilt$. It remains to prove that condition (3) in 
+Definition~\ref{def:lexrsm} is satisfied. To this end, for each $i\geq 0$ we 
+define an almost-sure partition of the set $\{\run\in \OmegaRun\mid 
+\ttime(\run) >i\}$ into sets $L^{i}_1,\dots,L^{i}_n$ by putting $L^i_j$ to be 
+the set of all runs $\run$ such that $\ttime(\run)>i$ and for $\run$ the index 
+$j$ is the smallest one such that $\preexp{\lem_j}(\cfg{\sigma}{i}(\run)) \leq 
+\lem_j(\cfg{\sigma}{i}(\run))-\eps$ (which entails 
+$\preexp{\lem_{j'}}(\cfg{\sigma}{i}(\run)) =
+\lem_{j'}(\cfg{\sigma}{i}(\run))-\eps$ for all $1\leq j'< j$). Due to 
+definition of an $\eps$-LexRSM map such a $j$ exists for all 
+$\run\in\{\ttime>i\}$ and hence we indeed have a partition. It remains to prove 
+that irrespective of the initial choice of $\sigma$ it holds, for each $1\leq j 
+\leq n$, that $\E^\sigma[\vecseq{X}{i+1}{j}\mid 
+\natfilt_i]\leq\preexp{\lem_{j}}(\cfg{\sigma}{}) $. This can be achieved by a 
+standard~\cite{xxx}, through somewhat technical computation, which we defer to 
+\AppendixMaterial.
+
+Since  $\{\vec{X}_{i}\}_{i=0}^{\infty}$ 
+is an $\eps$-LexRSM for $\ttime$, from Theorem~\ref{thm:lexrsm-programs} it 
+follows that $\probm^{\sigma}\ttime <\infty) =1$, irrespective of scheduler 
+$\sigma$.
+\end{proof} 
+
+
+
