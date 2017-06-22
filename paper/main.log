@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  22 JUN 2017 14:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  22 JUN 2017 14:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1883,12 +1883,6 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 
 Package natbib Warning: Citation `xxx' on page 14 undefined on input line 10.
 
-
-Overfull \hbox (3.67972pt too wide) in paragraph at lines 51--52
-[]\T1/LinuxLibertineT-TLF/b/n/10 [PETR: IN-TRO-DUCE SETS OF INI-TIAL PRO-GRAM V
-AL-U-A-TIONS RATHER THAN A CON-
- []
-
 ) (./main.bbl [14.14])
 
 Package natbib Warning: There were undefined citations.
@@ -1922,11 +1916,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 530.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 44403 strings out of 493644
- 956732 string characters out of 6150875
+ 44400 strings out of 493644
+ 956657 string characters out of 6150875
  1179259 words of memory out of 5000000
  46234 multiletter control sequences out of 15000+600000
- 289883 words of font info for 581 fonts, out of 8000000 for 9000
+ 289610 words of font info for 579 fonts, out of 8000000 for 9000
  944 hyphenation exceptions out of 8191
  62i,17n,96p,1716b,6965s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/newtx/l
@@ -1962,7 +1956,7 @@ e/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/txfonts/txsyc.pfb></home/
 pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/txsys.pfb></home/pnov
 otny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlr.pfb></home/pnovotny/
 texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlri.pfb>
-Output written on main.pdf (15 pages, 772901 bytes).
+Output written on main.pdf (15 pages, 773183 bytes).
 PDF statistics:
  389 PDF objects out of 1000 (max. 8388607)
  310 compressed objects within 4 object streams

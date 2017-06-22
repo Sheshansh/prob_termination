@@ -40,15 +40,20 @@ $\program$ by removing all loops in $\loops(\program)$ and replacing them with
 skip statements. We also define the set 
 $\alloops(\program)$ of all loops in $\program$, i.e. 
 $\alloops(\program):=\loops(\program)\cup \{\loops(\program')\mid \program'\in 
-\loops(\program)\}$. A 
-formal definition of 
+\loops(\program)\}$. The above definitions do not specify the initialization 
+preamble for the sub-programs $\program'\in\alloops(\program)$: we can deem 
+this pre-amble empty, i.e. consider these sub-programs with any initial 
+valuation, or, provided that some invariant map $\inv$ for $\program$ is 
+given, we can set the set of possible initial valuations of a sub-program 
+$\program'$ to be the set $\inv(\loc^{\lin}_{\program'})$, where 
+$\inv(\loc^{\lin}_{\program'})$ is the location of $\program$ corresponding to 
+the head of the loop $\program'$.
+A formal definition of 
 both functions is given in \AppendixMaterial, we illustrate them in the 
 following example.
 
 \textbf{[PETR: INSERT EXAMPLE]}
 
-\textbf{[PETR: INTRODUCE SETS OF INITIAL PROGRAM VALUATIONS RATHER THAN A 
-CONCRETE VALUATION]}
 
 Each measurable map for $\lem$ can be, in a natural way, restricted to a 
 measurable map $\lem_{\program'}$ for $\program'\in \loops(\program)$, 
@@ -59,5 +64,5 @@ $\pCFG_{\slice(\program)}$ is produced from $\pCFG_{\program}$ essentially by
 removing certain locations (provided that we identify the locations forming 
 heads of nested loops with locations preceding skip statements), and 
 $\lem_{\slice}$ is defined to be equal to $\lem$ in all the locations that 
-remained. 
+remained. Similarly, 
 
