@@ -132,6 +132,7 @@ int epsilons_used = 0;
 void generate_equations(){ //Would use the ostream file to write the equations into it later
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		if(it->second->invariant==NULL){
+			cout<<endl;
 			continue;
 		}
 		it->second->invariant->print();
@@ -227,6 +228,7 @@ void generate_equations(){ //Would use the ostream file to write the equations i
 int last_used_lambda = 0;
 
 void print_equations(ostream& equationsfile){
+	last_used_lambda = 0;
 	equationsfile<<"maximize ";
 	for(int i=1;i<=epsilons_used;++i){
 		if(equations.find(i)!=equations.end()){
@@ -285,6 +287,9 @@ void print_equations(ostream& equationsfile){
 		for(int j=0;j<=nVariables;j++){
 			equationsfile<<"-inf<= f_"<<it->first<<"_"<<j<<" <= +inf"<<endl;
 		}
+	}
+	for(int i=0;i<=last_used_lambda;++i){
+		equationsfile<<"-inf<= l"<<i<<" <= +inf"<<endl;
 	}
 	equationsfile<<"end"<<endl;
 }
@@ -444,13 +449,13 @@ int main(){
 	// cout<<program<<endl;
 	// cout<<"Parse Tree:"<<endl;
 	// root->print(cout,"&&","||","*",false);
-	// cout<<"CFG:"<<endl;
-	// for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
-	// 	cout<<"------------------------"<<endl;
-	// 	cout<<"Node "<<it->first<<endl;
-	// 	it->second->print();
-	// 	// cout<<it->second->label<<endl;
-	// }
+	cout<<"CFG:"<<endl;
+	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+		cout<<"------------------------"<<endl;
+		cout<<"Node "<<it->first<<endl;
+		it->second->print();
+		// cout<<it->second->label<<endl;
+	}
 	
 	generate_equations();
 	ofstream equationsfile;
