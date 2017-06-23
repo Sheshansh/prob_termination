@@ -321,6 +321,8 @@ string start_invariant(){
 	}
 }
 
+
+
 void print_fast(ostream& fastfile){
 	fastfile<<"model main{\n\n";
 	fastfile<<"\tvar "<<variable[1];
@@ -346,7 +348,14 @@ void print_fast(ostream& fastfile){
 				fastfile<<"true";
 			}
 			else{
-				state->edges[j].guard->print(fastfile,"&&","||","",true);
+				node* temp;
+				if(label_map[i]->invariant!=NULL){
+					temp = and_node(state->edges[j].guard,label_map[i]->invariant);
+				}
+				else{
+					temp = state->edges[j].guard;
+				}
+				temp->print(fastfile,"&&","||","",true);
 			}
 			fastfile<<";\n";
 			fastfile<<"\t\taction\t:= ";
@@ -394,7 +403,7 @@ int main(){
 		cout<<"Something wrong with the script to find invariants";
 	}
 	
-	// Code for analysing files/InvariantOutput comes here
+	// // Code for analysing files/InvariantOutput comes here
 	ifstream invariant_file("files/InvariantOutput");
 	for(int i=1;i<=last_used_label;){
 		string line;
@@ -405,7 +414,6 @@ int main(){
 			string invariant_string = part(line,open+1,close);
 			if(invariant_string=="true"){
 				if(label_map[i]->invariant==NULL){
-					// label_map[i]->invariant = new node("true"); //Effectively but add 0<=0 instead
 					label_map[i]->invariant = new node("bexpr");
 					node* concerned_node = label_map[i]->invariant;
 					concerned_node->children.resize(1);
@@ -430,21 +438,19 @@ int main(){
 			}
 			i++;
 		}
-	}
-
-	
+	}	
 	// // Code to print the tree structure etc.
 	// cout<<"Input Code:"<<endl;
 	// cout<<program<<endl;
 	// cout<<"Parse Tree:"<<endl;
 	// root->print(cout,"&&","||","*",false);
-	cout<<"CFG:"<<endl;
-	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
-		cout<<"------------------------"<<endl;
-		cout<<"Node "<<it->first<<endl;
-		it->second->print();
-		// cout<<it->second->label<<endl;
-	}
+	// cout<<"CFG:"<<endl;
+	// for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+	// 	cout<<"------------------------"<<endl;
+	// 	cout<<"Node "<<it->first<<endl;
+	// 	it->second->print();
+	// 	// cout<<it->second->label<<endl;
+	// }
 	
 	generate_equations();
 	ofstream equationsfile;

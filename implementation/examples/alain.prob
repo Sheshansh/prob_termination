@@ -11,7 +11,7 @@ else
 				n1 := n1-1;
 				c2 := 0;
 				c1 := c1+1;
-				while n2 >= 0 do
+				while n2 > 0 do
 					n2 := n2-1;
 					z := y;
 					c2 := c2+1

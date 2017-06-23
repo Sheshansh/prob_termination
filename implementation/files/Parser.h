@@ -17,15 +17,15 @@ private:
 //procs
 	void proc_stmt(int s,int l);
 	void proc_assgn(int s,int l);
-	void proc_affexpr();
+	void proc_affexpr(); //
 	void proc_pvar();
 	void analyse_expr(int begin,int end,bool negate);
 	void analyse_expr(string l,bool negate);
-	void proc_expr();
-	void proc_expr(string l);
+	void proc_expr(); //
+	void proc_expr(string l); //
 	void proc_constant();
 	bool proc_literal(bool negate, bool strategic = true, string line = "");
-	void proc_bexpr();
+	void proc_bexpr(); //
 	void proc_ndbexpr();
 	void form_vector(int begin,int end,bool negate);
 	void form_vector(string l,bool negate);

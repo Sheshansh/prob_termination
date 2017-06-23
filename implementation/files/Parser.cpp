@@ -868,25 +868,63 @@ void node::print(ostream& outputfile, string and_string, string or_string, strin
 		}
 		return;
 	}
-	// <flag>
-	// outputfile<<"Add: "<<this<<"\t";
-	// outputfile<<"Type: "<<type<<"\t";
-	// outputfile<<"Range: ["<<begin<<", "<<end<<")\t";
-	// outputfile<<"Const: |"<<constant<<"|"<<endl;
-	// outputfile<<"Children: ";
-	// for(int i = 0;i<children.size();++i){
-	// 	outputfile<<children[i]<<"\t";
-	// }
-	if(bracket!=NULL){
-		// outputfile<<endl<<"Bracket: "<<bracket<<endl;
-		bracket->print(outputfile,and_string,or_string,multiply_string,bruteforce);
-		outputfile<<endl;
+	else if(type=="ndbexpr"){
+		if(constant=="single bexpr"){
+			children[0]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+		}
+		else{
+			// <flag>
+		}
 	}
-	for(int i=0;i<children.size();++i){
-		children[i]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+	else if(type=="stmt"){
+		if(constant=="skip"){
+			// Do nothing
+		}
+		else if(constant=="several statements"){
+			children[0]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+			outputfile<<endl;
+			children[1]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+		}
+		else if(constant=="while"){
+			outputfile<<"while(";
+			children[0]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+			outputfile<<"){\n\n";
+			children[1]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+			outputfile<<"\n}";
+		}
+		else if(constant=="if"){
+			outputfile<<"if(";
+			children[0]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+			outputfile<<"){\n\n";
+			children[1]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+			outputfile<<"\n}\nelse{\n\n";
+			children[2]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+			outputfile<<"\n}";
+		}
+		else if(constant=="single assgn"){
+			children[0]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+			cout<<";\n";
+		}
+		else{
+			cerr<<"Wrong constant in statement node\n";
+		}
 	}
-	outputfile<<endl;
-	// outputfile<<endl<<"--------------------"<<endl;
+	else if(type=="assgn"){
+		children[0]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+		outputfile<<" = ";
+		if(constant=="assignment from distribution"){
+			// <flag>
+		}
+		else if(constant=="simple assignment"){
+			children[1]->print(outputfile,and_string,or_string,multiply_string,bruteforce);
+		}
+		else{
+			cerr<<"Some wrong constant type in assignment\n";
+		}
+	}
+	else if(type=="pvar" || type=="constant"){
+		outputfile<<constant;
+	}
 }
 
 CFG_edge::CFG_edge(){

@@ -1,5 +1,5 @@
 var tx,x,y;
-[tx>=0 and x>y]
+[x>y]
 if tx>=0 then
 	while x>=y and tx>=0 do
 		if * then

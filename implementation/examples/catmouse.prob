@@ -1,9 +1,10 @@
 var x,n,m;
-[m>n and x<n and x<=0 and x>=0]
-while x<=n do
-	if x<=m then
-		x := x+1
-	else
-		x := x-1
-	fi
-od
+if m>n and x<=n+1 then
+	while x<=n do
+		if x<=m then
+			x := x+1
+		else
+			x := x-1
+		fi
+	od
+else skip fi
