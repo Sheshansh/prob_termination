@@ -1,4 +1,5 @@
 var i,j,N;
+[N<10000]
 i := N;
 while i>0 do
 

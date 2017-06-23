@@ -1,0 +1,8 @@
+var i,j,k,tmp;
+[i<=j]
+while i<=100 and j<=k do
+	tmp := i;
+	i := j;
+	j := tmp+1;
+	k := k-1
+od

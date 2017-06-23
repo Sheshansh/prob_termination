@@ -1,0 +1,16 @@
+var x,y;
+if x<=0 then
+	skip
+else
+	if y<=0  then
+		skip
+	else
+		while x > y or x<y do 
+			if x<y then
+				y := y-x
+			else 
+				x := x-y
+			fi
+		od
+	fi
+fi
