@@ -288,6 +288,9 @@ void print_equations(ostream& equationsfile){
 			equationsfile<<"-inf<= f_"<<it->first<<"_"<<j<<" <= +inf"<<endl;
 		}
 	}
+	for(int i=0;i<=last_used_lambda;++i){
+		equationsfile<<"-inf<= l"<<i<<" <= +inf"<<endl;
+	}
 	equationsfile<<"end"<<endl;
 }
 
