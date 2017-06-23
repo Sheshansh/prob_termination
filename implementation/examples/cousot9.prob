@@ -1,0 +1,12 @@
+var i,j,N;
+i := N;
+while i>0 do
+
+	if j>0 then
+		j := j-1
+	else
+		j := N;
+		i := i-1
+	fi
+
+od

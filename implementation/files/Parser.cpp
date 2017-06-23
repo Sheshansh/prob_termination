@@ -951,7 +951,7 @@ void CFG_edge::print(){
 		cout<<"Error! Error! Error!"<<endl;
 	}
 	if(change!=NULL){
-		cout<<"Change: x_"<<toChange<<" changed to ";
+		cout<<"Change: "<<variable[toChange]<<" = ";
 		change->print();
 		cout<<endl;
 	}

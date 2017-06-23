@@ -1,0 +1,12 @@
+var n,b,x,y;
+while x>=0 and 0<=y and y<=n do
+  if b==0 then
+    y++;                      /* transition t1 */
+    if (random()) b=1;        /* transition t3 */
+  fi
+  else if (b==1) {
+  y--;                      /* transition t2 */
+  if (random()) {x--; b=0;} /* transition t4 */
+  }
+  else break;
+od
