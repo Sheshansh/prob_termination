@@ -32,37 +32,69 @@ without any additional assumptions, and which can be used to prove termination
 of programs that the previous method cannot handle. 
 
 Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do } 
-\programbody \textbf{ od}$. We denote by $\loops(\program)$ the set of all 
-loops in $\program$ there are on the top level of $\programbody$, i.e. they are 
-nested loops of $\program$ nested directly "below" the outer loop. We define an 
-un-nested slice of $\program$ to be a \PP{} $\slice(\program)$ obtained from 
-$\program$ by removing all loops in $\loops(\program)$ and replacing them with 
-skip statements. We also define the set 
-$\alloops(\program)$ of all loops in $\program$, i.e. 
-$\alloops(\program):=\loops(\program)\cup \{\loops(\program')\mid \program'\in 
-\loops(\program)\}$. The above definitions do not specify the initialization 
-preamble for the sub-programs $\program'\in\alloops(\program)$: we can deem 
-this pre-amble empty, i.e. consider these sub-programs with any initial 
-valuation, or, provided that some invariant map $\inv$ for $\program$ is 
-given, we can set the set of possible initial valuations of a sub-program 
-$\program'$ to be the set $\inv(\loc^{\lin}_{\program'})$, where 
-$\inv(\loc^{\lin}_{\program'})$ is the location of $\program$ corresponding to 
-the head of the loop $\program'$.
-A formal definition of 
+\programbody \textbf{ od}$, and let $\pCFG_{\program}$ be the associated pCFG, whose set of locations we denote by $\locs$. We denote by $\loops(\program)$ the set of all locations of $\pCFG_{\program}$ that belong to a sub-pCFG of $\pCFG_{\program}$ corresponding to some nested loop of $\program$. We also define $\slice(\program)$ to be the set $\locs\setminus\loops(\program)$ of locations that do not belong to any nested sub-loop.  A formal definition of 
 both functions is given in \AppendixMaterial, we illustrate them in the 
 following example.
+%We denote by $\loops(\program)$ the set of all 
+%loops in $\program$ there are on the top level of $\programbody$, i.e. they are 
+%nested loops of $\program$ nested directly "below" the outer loop. We define an 
+%un-nested slice of $\program$ to be a \PP{} $\slice(\program)$ obtained from 
+%$\program$ by removing all loops in $\loops(\program)$ and replacing them with 
+%skip statements. We also define the set 
+%$\alloops(\program)$ of all loops in $\program$, i.e. 
+%$\alloops(\program):=\loops(\program)\cup \{\loops(\program')\mid \program'\in 
+%\loops(\program)\}$. The above definitions do not specify the initialization 
+%preamble for the sub-programs $\program'\in\alloops(\program)$: we can deem 
+%this pre-amble empty, i.e. consider these sub-programs with any initial 
+%valuation, or, provided that some invariant map $\inv$ for $\program$ is 
+%given, we can set the set of possible initial valuations of a sub-program 
+%$\program'$ to be the set $\inv(\loc^{\lin}_{\program'})$, where 
+%$\inv(\loc^{\lin}_{\program'})$ is the location of $\program$ corresponding to 
+%the head of the loop $\program'$.
+%A formal definition of 
+%both functions is given in \AppendixMaterial, we illustrate them in the 
+%following example.
 
 \textbf{[PETR: INSERT EXAMPLE]}
 
+We say that a 1-dimensional measurable map $\lem$ for $\pCFG_{\program}$ is $\eps$-ranking in location $\loc$, if for each $\vec{x}\in\Rset^{|\pvars|}$ such that $(\loc,\vec{x}) $ is reachable from some initial configuration it holds $\preexp{\lem}(\loc,\vec{x})\leq \lem(\loc,\vec{x})-\eps.$ The map $\lem$ is \emph{unaffected} in location $\loc$ if it is $0$-ranking in $\loc$, and non-negative in $\loc$ if $\lem(\loc,\vec{x})\geq 0$ for all $\vec{x}$ such that $(\loc,\vec{x})$ is reachable from an initial configuration. A measurable map $\lem$ is propositionally linear, if each function $\lem(\loc)$ is of the form $\indicator{G_1}\cdot E_1 + \cdots \indicator{G_k}\cdot E_k$, where each $\indicator{G_i}$ is an indicator function of some polyhedron and each $E_i$ is a linear expression.
 
-Each measurable map for $\lem$ can be, in a natural way, restricted to a 
-measurable map $\lem_{\program'}$ for $\program'\in \loops(\program)$, 
-since each pCFG $\pCFG_{\program'}$ is a sub-pCFG of $\pCFG_{\program}$. 
-Similarly, a measurable map $\lem$ for $\program$ can be restricted to a 
-measurable map $\lem_{\slice}$ for $\slice(\program)$, since 
-$\pCFG_{\slice(\program)}$ is produced from $\pCFG_{\program}$ essentially by 
-removing certain locations (provided that we identify the locations forming 
-heads of nested loops with locations preceding skip statements), and 
-$\lem_{\slice}$ is defined to be equal to $\lem$ in all the locations that 
-remained. Similarly, 
+We recall the notion of compositional ranking supermartingale as introduced in~\cite{HolgerPOPL}. We call it a PV supermartingale, as it is based on so called probabilistic variant rule. Due to differences in syntax and semantics, the definition is syntactically slightly different from~\cite{HolgerPOPL}, but the essence is the same. 
+
+\begin{definition}[PV-supermartingale]
+A 1-dimensional propositionally linear map $\lem$ is a PV supermartingale (PVSM) for a program $\program$ if there exists $\eps>0$ such that $\lem$ is $\eps$-ranking an non-negative in each location $\loc\in\slice{(\program)}$ and unaffected in each $\loc\in\loops(\program)$.
+\end{definition}
+
+In~\cite{HolgerPOPL} they show that even if all nested loops were already proved to terminate a.s. and there is a PVSM for the program, then the program itself might not terminate a.s. Then they investigate conditions under which existence of a PVSM together with a proof of a.s. termination of each nested sub-loop of $\program$ entails termination of the whole program $\program$. The condition were formulated in terms of a certain type system for \PP{}s, so we say that a PVSM satisfying the condition \emph{typechecks} correctly. In~\cite{HolgerPOPL} the following was proved:
+
+\begin{theorem}[\cite{HolgerPOPL}]
+\label{thm:holger-comp}
+Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do } 
+\programbody \textbf{ od}$. Assume that each nested loop of $\program$ terminates almost surely from each reachable configuration, and that there exists a PVSM for $\program$ that typechecks correctly. Then $\program$ terminates almost surely.
+\end{theorem}
+
+We do not repeat the precise definition of the typesystem here, we just explain its motivation and give examples where it fails, i.e. examples where $\program$ terminates a.s. (and hence the same holds also for its nested loops) and a PV martingale exists, but no PVSM typechecks.  
+
+The purpose of the typesystem is, in principle, to ensure that the stochastic process which, in each time step, returns the current value of the PVSM, is uniformly integrable inside the nested loops. Uniform integrability is a deep concept from probability and measure theory: a sequence $X_0,X_1,X_2,\dots$ of random variables is uniformly integrable if for each $\delta>0$ there exists an $K\in \Nset$ such that for all $n\geq 0$ it holds $\E[|X_n|\cdot\indicator{X_n \geq K}]\leq \delta$. As noted in~\cite{HolgerPOPL}, proofs of uniform integrability are hard to (semi)-automatize, and hence they devise the typechecking as a sound (but not complete) method of proving uniform integrability. Take for example \textbf{[PETR: ADD EXAMPLE]}. However, as we show below, for none of these programs there exists a PVSM that typechecks. 
+
+Indeed, taking a closer look at typesystem in~\cite{HolgerPOPL}, there are several reasons for typechecking of PVSM to fail. The major ones are:
+\begin{compactenum}
+\item
+A PVSM $\lem$ for \PP{} $\program$ will not typecheck if $\program$ has a nested loop in which the value of $\lem$ can change unboundedly in a single step (see Example~\ref{xxx}). 
+\item
+A PVSM $\lem$ for  \PP{} $\program$ will not typecheck if $\program$ has a nested loop which itself has a nested loop in which some variable appearing in some expression in $\lem$ is modified, see Example~\ref{xxx}.\footnote{Both these statements regarding typechecking failure are somewhat simplified, even in these two cases the PVSM might sometimes typecheck correctly, in case where the nested loops are followed by assignments which completely overwrite the effect of these loops, e.g. if \textbf{[PETR: POINTER TO AN EXAMPLE]}. However, the statements intuitively summarize the major reasons for typechecking failure. }
+\end{compactenum}
+
+To overcome the rather strict 
+
+%Each measurable map for $\lem$ can be, in a natural way, restricted to a 
+%measurable map $\lem_{\program'}$ for $\program'\in \loops(\program)$, 
+%since each pCFG $\pCFG_{\program'}$ is a sub-pCFG of $\pCFG_{\program}$. 
+%Similarly, a measurable map $\lem$ for $\program$ can be restricted to a 
+%measurable map $\lem_{\slice}$ for $\slice(\program)$, since 
+%$\pCFG_{\slice(\program)}$ is produced from $\pCFG_{\program}$ essentially by 
+%removing certain locations (provided that we identify the locations forming 
+%heads of nested loops with locations preceding skip statements), and 
+%$\lem_{\slice}$ is defined to be equal to $\lem$ in all the locations that 
+%remained. Similarly, 
 
