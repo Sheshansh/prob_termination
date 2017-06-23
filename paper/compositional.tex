@@ -34,12 +34,35 @@ of programs that the previous method cannot handle.
 Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do } 
 \programbody \textbf{ od}$. We denote by $\loops(\program)$ the set of all 
 loops in $\program$ there are on the top level of $\programbody$, i.e. they are 
-nested loops of $\program$ nested directly "below" the outer loop. We define a 
-depth-1 slice of $\program$ to be a \PP{} $\slice(\program)$ obtained from 
-$\program$ by removing all loops in $\loops(\program)$. A formal definition of 
+nested loops of $\program$ nested directly "below" the outer loop. We define an 
+un-nested slice of $\program$ to be a \PP{} $\slice(\program)$ obtained from 
+$\program$ by removing all loops in $\loops(\program)$ and replacing them with 
+skip statements. We also define the set 
+$\alloops(\program)$ of all loops in $\program$, i.e. 
+$\alloops(\program):=\loops(\program)\cup \{\loops(\program')\mid \program'\in 
+\loops(\program)\}$. The above definitions do not specify the initialization 
+preamble for the sub-programs $\program'\in\alloops(\program)$: we can deem 
+this pre-amble empty, i.e. consider these sub-programs with any initial 
+valuation, or, provided that some invariant map $\inv$ for $\program$ is 
+given, we can set the set of possible initial valuations of a sub-program 
+$\program'$ to be the set $\inv(\loc^{\lin}_{\program'})$, where 
+$\inv(\loc^{\lin}_{\program'})$ is the location of $\program$ corresponding to 
+the head of the loop $\program'$.
+A formal definition of 
 both functions is given in \AppendixMaterial, we illustrate them in the 
 following example.
 
 \textbf{[PETR: INSERT EXAMPLE]}
 
+
+Each measurable map for $\lem$ can be, in a natural way, restricted to a 
+measurable map $\lem_{\program'}$ for $\program'\in \loops(\program)$, 
+since each pCFG $\pCFG_{\program'}$ is a sub-pCFG of $\pCFG_{\program}$. 
+Similarly, a measurable map $\lem$ for $\program$ can be restricted to a 
+measurable map $\lem_{\slice}$ for $\slice(\program)$, since 
+$\pCFG_{\slice(\program)}$ is produced from $\pCFG_{\program}$ essentially by 
+removing certain locations (provided that we identify the locations forming 
+heads of nested loops with locations preceding skip statements), and 
+$\lem_{\slice}$ is defined to be equal to $\lem$ in all the locations that 
+remained. Similarly, 
 
