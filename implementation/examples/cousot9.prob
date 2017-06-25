@@ -1,5 +1,5 @@
 var i,j,N;
-[N<10000]
+[j>-5 and N>-10]
 i := N;
 while i>0 do
 

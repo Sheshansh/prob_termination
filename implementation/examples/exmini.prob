@@ -1,5 +1,5 @@
 var i,j,k,tmp;
-[i<=j]
+skip;
 while i<=100 and j<=k do
 	tmp := i;
 	i := j;

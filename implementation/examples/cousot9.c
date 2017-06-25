@@ -1,7 +1,6 @@
 int cousot9(){
 
   int i,j,N;
-
   i=N;
   while(i>0) {
 
