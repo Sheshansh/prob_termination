@@ -3,16 +3,22 @@
 
 Compositionality in the context of termination proving means providing the 
 proof of termination step-by-step, handling one loop at a time, rather than 
-attempting to construct the proof (in our case, a LexRSM) at once, by solving a 
-single large system of constraints. In non-probabilistic setting, the 
+attempting to construct the proof (in our case, a LexRSM) at once. In non-probabilistic setting, the 
 relationship between lexicographic ranking functions and compositional 
 termination proving is well established, as well as the importance of 
 compositional proofs for efficient implementation~\cite{xxx}. In the context of 
 probabilistic programs, the work~\cite{HolgerPOPL} attempted to provide a 
 compositional notion of almost-sure termination proof based on the 
 \emph{probabilistic variant rule (V-rule),} which we explain in a more detail 
-below. 
-However, as already noted in~\cite{HolgerPOPL}, the probabilistic V-rule is not 
+below. The reason for this attempt was to provide a method of proving a.s. termination for programs where 1-dimensional ranking supermartingales are not sufficient. Since our LexRSMs were conceived with a similar motivation, we devote this section to a thorough comparison of our approach with the one of~\cite{HolgerPOPL}. 
+
+There are two main features of LexRSMs compared with the previous approach, which we call a PVSM (probabilistci V-rule supermartingale) approach. First, the PVSM approach is only applicable to programs in which termination of each loop can be witnessed by a suitable 1-dimensional ranking supermartingale. But there are already single-loop programs for which no 1-dimensional ranking supermartingale exists but a LexRSM does, see the following example.
+
+\textbf{[PETR: ADD EXAMPLE]}
+
+The need for multi-dimensional ranking arises within loops that might go through several ``computation phases'' before terminating, and loops containing non-deterministic choices.
+
+Second, as already noted in~\cite{HolgerPOPL}, the probabilistic V-rule is not 
 sound in general. In order to rectify this issue, in~\cite{HolgerPOPL} they 
 impose an additional constraint of \emph{uniform integrability} on ranking 
 supermartingales that prove termination of individual loops, 
@@ -24,11 +30,11 @@ these,~\cite{HolgerPOPL} introduces a type system that can be used to
 automatically prove 
 uniform integrability of ranking supermartingales for a restricted class of 
 programs. In particular, the method cannot handle programs in which termination 
-is controlled by variable that can be modified by a non-constant value, e.g. 
+is controlled by a variable that can be modified by a non-constant value in some sub-program, e.g. 
 variable $x$ which appears in an assignment of the form $x:=x-y$. In this 
-section we show that using our insights in lexicographic supermartingales we 
+section we show that using our insights into LexRSMs we 
 can obtain a subtly different notion of a probabilistic V-rule which is sound 
-without any additional assumptions, and which can be used to prove termination 
+without any additional assumptions, and which can be used to compositionally prove termination 
 of programs that the previous method cannot handle. 
 
 Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do } 
@@ -57,12 +63,12 @@ following example.
 
 \textbf{[PETR: INSERT EXAMPLE]}
 
-We say that a 1-dimensional measurable map $\lem$ for $\pCFG_{\program}$ is $\eps$-ranking in location $\loc$, if for each $\vec{x}\in\Rset^{|\pvars|}$ such that $(\loc,\vec{x}) $ is reachable from some initial configuration it holds $\preexp{\lem}(\loc,\vec{x})\leq \lem(\loc,\vec{x})-\eps.$ The map $\lem$ is \emph{unaffected} in location $\loc$ if it is $0$-ranking in $\loc$, and non-negative in $\loc$ if $\lem(\loc,\vec{x})\geq 0$ for all $\vec{x}$ such that $(\loc,\vec{x})$ is reachable from an initial configuration. A measurable map $\lem$ is propositionally linear, if each function $\lem(\loc)$ is of the form $\indicator{G_1}\cdot E_1 + \cdots \indicator{G_k}\cdot E_k$, where each $\indicator{G_i}$ is an indicator function of some polyhedron and each $E_i$ is a linear expression.
+Given an invariant map $\inv$, we say that a 1-dimensional measurable map $\lem$ for $\pCFG_{\program}$ is $\eps$-$\inv$-ranking in location $\loc$, if for each $\vec{x}\in\inv(\loc)$  it holds $\preexp{\lem}(\loc,\vec{x})\leq \lem(\loc,\vec{x})-\eps.$ The map $\lem$ is $\inv$-\emph{unaffected} in location $\loc$ if it is $0$-ranking in $\loc$, and $\inv$-non-negative in $\loc$ if $\lem(\loc,\vec{x})\geq 0$ for all $\vec{x} \in \inv(\loc)$. A measurable map $\lem$ is propositionally linear, if each function $\lem(\loc)$ is of the form $\indicator{G_1}\cdot E_1 + \cdots \indicator{G_k}\cdot E_k$, where each $\indicator{G_i}$ is an indicator function of some polyhedron and each $E_i$ is a linear expression.
 
 We recall the notion of compositional ranking supermartingale as introduced in~\cite{HolgerPOPL}. We call it a PV supermartingale, as it is based on so called probabilistic variant rule. Due to differences in syntax and semantics, the definition is syntactically slightly different from~\cite{HolgerPOPL}, but the essence is the same. 
 
 \begin{definition}[PV-supermartingale {\cite[Definition 7.1.]{HolgerPOPL}}]
-A 1-dimensional propositionally linear map $\lem$ is a PV supermartingale (PVSM) for a program $\program$ if there exists $\eps>0$ such that $\lem$ is $\eps$-ranking an non-negative in each location $\loc\in\slice{(\program)}$ and unaffected in each $\loc\in\loops(\program)$.
+A 1-dimensional propositionally linear map $\lem$ is a PV supermartingale (PVSM) for a program $\program$ supported by an invariant map $\inv$ if there exists $\eps>0$ such that $\lem$ is $\eps$-$\inv$-ranking an $\inv$-non-negative in each location $\loc\in\slice{(\program)}$ and $\inv$-unaffected in each $\loc\in\loops(\program)$.
 \end{definition}
 
 As a matter of fact, the condition that $\lem$ should be non-negative in locations of $\slice{(\program)}$ is not explicitly mentioned in \cite{HolgerPOPL}. However, it is implicitly used in some of the proofs and one can easily construct an example where, if the non-negativity in $\slice{(\program)}$ is not required, the Theorem~\ref{thm:holger-comp} below, which also comes from~\cite{HolgerPOPL}, does not hold. Hence, we state the condition explicitly.
@@ -87,17 +93,18 @@ A PVSM $\lem$ for \PP{} $\program$ will not typecheck if $\program$ has a nested
 A PVSM $\lem$ for  \PP{} $\program$ will not typecheck if $\program$ has a nested loop which itself has a nested loop in which some variable appearing in some expression in $\lem$ is modified, see Example~\ref{xxx}.\footnote{Both these statements regarding typechecking failure are somewhat simplified, even in these two cases the PVSM might sometimes typecheck correctly, in case where the nested loops are followed by assignments which completely overwrite the effect of these loops, e.g. if \textbf{[PETR: POINTER TO AN EXAMPLE]}. However, the statements intuitively summarize the major reasons for typechecking failure. }
 \end{compactenum}
 
+Thus, the typechecking algorithm may rule out programs where the termination-controlling variable represents e.g. a length of an array, which can be doubled/halved in some sub-program do to (de)allocation, merging, or splitting.
 To overcome the rather strict typechecking, we use the results on LexRSMs to define a new notion of compositional ranking supermartingales, which we call \emph{nob-negative compositional (NC)} supermartingales. For the sake of generality, we allow NC martingales to be general measurable maps, not necessarily propositionally linear.
 
 \begin{definition}
 \label{def:nonneg-comp}
-A 1-dimensional measurable map $\lem$ is an NC supermartingale (NCSM) for a program $\program$ if there exists $\eps>0$ such that $\lem$ is:
+A 1-dimensional measurable map $\lem$ is an NC supermartingale (NCSM) for a program $\program$ supported by an invariant map $\inv$ if there exists $\eps>0$ such that $\lem$ is:
 \begin{compactenum}
-\item  non-negative in each location of $\pCFG_{\program}$;
+\item  $\inv$-non-negative in each location of $\pCFG_{\program}$;
 \item 
- $\eps$-ranking in each location $\loc\in\slice{(\program)}$; and
+ $\eps$-$\inv$-ranking in each location $\loc\in\slice{(\program)}$; and
 \item 
-  unaffected in each $\loc\in\loops(\program)$.
+  $\inv$-unaffected in each $\loc\in\loops(\program)$.
 \end{compactenum}
 A (propositionally) linear NCSM (LinNCSM) is a NCSM which is also a (propositionally) linear expression map.
 \end{definition}
@@ -105,15 +112,78 @@ A (propositionally) linear NCSM (LinNCSM) is a NCSM which is also a (proposition
 We can prove that NCSMs are a sound method for proving a.s. termination in a compositional way, without any additional assumptions.
 
 \begin{theorem}
+\label{thm:nonneg-comp}
 Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do } 
-\programbody \textbf{ od}$. Assume that each nested loop of $\program$ terminates almost surely from each reachable configuration, and that there exists a NCSM for $\program$. Then $\program$ terminates almost surely.
+\programbody \textbf{ od}$. Assume that each nested loop of $\program$ terminates almost surely from each reachable configuration, and that there exists a NCSM for $\program$ supported by some invariant map. Then $\program$ terminates almost surely.
 \end{theorem}
 \begin{proof}
 \textbf{[PETR: TBD]}
 \end{proof}
 
-Hence, NCSMs effectively trade the uniform integrability condition for non-negativity over the whole program. We believe that the latter condition is substantially easier to impose and check automatically, especially in the case of affine probabilistic programs and (propositionally) linear NCSMs: there synthesizing NCSM entails synthesizing sufficient program invariants (for which there is a good automated tool support~\cite{xxx}) and encoding the non-negativity condition into a collection of linear constraints (as for general LexRSMs in Section~\ref{xxx}). 
+Hence, NCSMs effectively trade the uniform integrability condition for non-negativity over the whole program. We believe that the latter condition is substantially easier to impose and check automatically, especially in the case of affine probabilistic programs and (propositionally) linear NCSMs: for \APP{}s, synthesizing NCSM entails synthesizing sufficient program invariants (for which there is a good automated tool support~\cite{xxx}) that overapproximate set of reachable configurations and encoding the rankingn, unaffection, and non-negativity conditions into a collection of linear constraints (as for general LinLexRSMs in Section~\ref{xxx}). Examples~\ref{xxx} show instances where attempts to prove of a.s. termination via PVSMs fail while proofs via LinNCSMs work. 
 
+%While we defined NCSMs as one-dimensional measurable maps to make them analogous to 
+
+Using LinNCSMs we can devise the following simple algorithm for compositional proving of almost-sure termination of \APP{}s:
+
+\begin{algorithm}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\DontPrintSemicolon
+
+\Input{An \APP{} $\program$ together with an invariant map $\inv$.}
+$d\leftarrow \text{ depth of loop nesting in $\program$}$\;
+\For{$i \leftarrow d$ \KwTo $0$}{
+\ForEach{sub-loop $\program'$ of $\program$ nested $i$ levels below the main loop}{
+\label{algoline:one}
+$\linsystem \leftarrow$ system of lin. constraints encoding the existence of LinNCSM for $\program'$ supported by $\inv$\;
+\label{algoline:two}\If{$\linsystem$ not solvable}{check existence of a PVSM for $\program'$~\cite{HolgerPOPL}
+\;
+\lIf{PVSM does not exist}{\Return{``cannot prove a.s. termination of $\program$''}}
+}
+}
+}
+\Return{``$\program$ terminates a.s.'' }
+\caption{Compositional Termination Proving}
+\label{algo:compositional}
+\end{algorithm}
+
+The soundness of the algorithm follows from Theorems~\ref{thm:nonneg-comp} and \ref{thm:holger-comp}. Note that we use the PVSM-based algorithm of~\cite{HolgerPOPL} as a back-up sub-procedure for the case when LinNCSM-based proof fails. Hence, Algorithm~\ref{algo:compositional} can compositionally prove a.s. termination of strictly larger class of programs than the PVSM-based algorithm alone.
+
+To summarize, the novelty of NCSMs is the following:
+\begin{compactenum}
+\item
+NCSMs allow compositional, fully automated proofs of a.s. termination without the need for reasoning about uniform integrability.
+\item LinNCSMs are capable of proving a.s. termination of programs for which no uniformly integrable PVSMs exist (and hence the method of~\cite{HolgerPOPL} cannot be used at all on such programs).
+\item LinNCSMs are capable of proving a.s. termination of programs for which the method of~\cite{HolgerPOPL} cannot be applied in an automated way, do to failure of the typechecking procedure.
+\end{compactenum}
+
+\subsection{Multidimensional Compositional Ranking}
+
+As noted previously, a fundamental advantage of LexRSMs over PVSMs is that LexRSMs can handle loops that go through several computational phases and as a result of this do not admit one-dimensional ranking supermartingales. Above, we defined NCSMs as one-dimensional objects, to make them analogous to PVSMs for better comparison. However, we can also define a multi-dimensional version of NCSMs. We say that, given an invariant map $\inv$, an $n$-dimensional measurable map is $\inv$-ranking in a location $\loc$ if for each $\vec{x}\in \inv(\loc)$ there exists $1\leq j \leq n$ such that $\preexp{\lem_j}(\loc,\vec{x}) \leq \lem_j(\loc,\vec{x})-\eps$ and for each $j'<j$ the map $\lem_{j'}$ is $\inv$-unaffected in $\loc$.
+
+\begin{definition}
+An $n$-dimensional measurable map $\vec{\lem}=(\lem_1,\dots,\lem_n)$ is an NC supermartingale (NCSM) for a program $\program$ supported by an invariant map $\inv$ if there exists $\eps>0$ such that:
+\begin{compactenum}
+	\item  for each $1\leq i \leq n$, $\lem_i$ is non-negative in each location of $\pCFG_{\program}$;
+	\item 
+	$\vec{\lem}$ is $\eps$-ranking in each location $\loc\in\slice{(\program)}$; and
+	\item 
+	for each $1\leq i \leq n$, $\lem_i$ is
+	unaffected in each $\loc\in\loops(\program)$.
+\end{compactenum}
+An $n$-dimensional (propositionally) linear NCSM (LinNCSM) is an $n$-dimensional NCSM which is also a (propositionally) linear expression map.
+\end{definition}
+
+The following theorem can be proved in the same way as Theorem~\ref{thm:nonneg-comp}.
+
+\begin{theorem}
+Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do } 
+\programbody \textbf{ od}$. Assume that each nested loop of $\program$ terminates almost surely from each reachable configuration, and that there exists a NCSM for $\program$ supported by some invariant map. Then $\program$ terminates almost surely.
+\end{theorem}
+
+For \APP{}s, we can generalize Algorithm~\ref{algo:compositional} by changing line~\ref{algoline:one} to ``check existence of a multi-dimensional LinNCSM for $\program'$'' and line~\ref{algoline:two} to ``\textbf{if} a multi-dimensional LinNCSM does not exist.'' The check of existence of a multi-dimensional LinNCSM for $\program'$ can be done by algorithm presented in Section~\ref{xxx}, modified so as to only pursue ranking for transitions outgoing from locations belonging to $\slice(\program')$. (I.e., only these transitions have $\eps_{\tau}$ included in the objective function, and algorithm terminates once all such transitions are ranked.) This further expands the usage of the algorithm.
+
+There are several advantages of using LexRSMs in a compositonal way. First, using Algorithm~\ref{algo:compositional} (modified for multi-dimensional LinNCSMs) we opt for solving a larger number of smaller linear systems rather than a smaller number of larger ones, which may be sometimes advantageous for performance reasons. Second, using compositional reasoning, we can leverage LexRSMs in a situation where some of the sub-loops were already proved to be a.s. terminating by some other argument, such as using an interactive proof assistant that leverages human intuition. This makes the LexRSM method applicable to programs whose parts are difficult to treat via automated static analysis.
 
 
 %% I SHOULD MAYBE EXPLAIN THAT THE NEED TO PERFORM A STATIC ANALYSIS OF THE WHOLE PROGRAM IS 
