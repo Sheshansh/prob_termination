@@ -61,9 +61,11 @@ We say that a 1-dimensional measurable map $\lem$ for $\pCFG_{\program}$ is $\ep
 
 We recall the notion of compositional ranking supermartingale as introduced in~\cite{HolgerPOPL}. We call it a PV supermartingale, as it is based on so called probabilistic variant rule. Due to differences in syntax and semantics, the definition is syntactically slightly different from~\cite{HolgerPOPL}, but the essence is the same. 
 
-\begin{definition}[PV-supermartingale]
+\begin{definition}[PV-supermartingale {\cite[Definition 7.1.]{HolgerPOPL}}]
 A 1-dimensional propositionally linear map $\lem$ is a PV supermartingale (PVSM) for a program $\program$ if there exists $\eps>0$ such that $\lem$ is $\eps$-ranking an non-negative in each location $\loc\in\slice{(\program)}$ and unaffected in each $\loc\in\loops(\program)$.
 \end{definition}
+
+As a matter of fact, the condition that $\lem$ should be non-negative in locations of $\slice{(\program)}$ is not explicitly mentioned in \cite{HolgerPOPL}. However, it is implicitly used in some of the proofs and one can easily construct an example where, if the non-negativity in $\slice{(\program)}$ is not required, the Theorem~\ref{thm:holger-comp} below, which also comes from~\cite{HolgerPOPL}, does not hold. Hence, we state the condition explicitly.
 
 In~\cite{HolgerPOPL} they show that even if all nested loops were already proved to terminate a.s. and there is a PVSM for the program, then the program itself might not terminate a.s. Then they investigate conditions under which existence of a PVSM together with a proof of a.s. termination of each nested sub-loop of $\program$ entails termination of the whole program $\program$. The condition were formulated in terms of a certain type system for \PP{}s, so we say that a PVSM satisfying the condition \emph{typechecks} correctly. In~\cite{HolgerPOPL} the following was proved:
 
@@ -85,7 +87,37 @@ A PVSM $\lem$ for \PP{} $\program$ will not typecheck if $\program$ has a nested
 A PVSM $\lem$ for  \PP{} $\program$ will not typecheck if $\program$ has a nested loop which itself has a nested loop in which some variable appearing in some expression in $\lem$ is modified, see Example~\ref{xxx}.\footnote{Both these statements regarding typechecking failure are somewhat simplified, even in these two cases the PVSM might sometimes typecheck correctly, in case where the nested loops are followed by assignments which completely overwrite the effect of these loops, e.g. if \textbf{[PETR: POINTER TO AN EXAMPLE]}. However, the statements intuitively summarize the major reasons for typechecking failure. }
 \end{compactenum}
 
-To overcome the rather strict 
+To overcome the rather strict typechecking, we use the results on LexRSMs to define a new notion of compositional ranking supermartingales, which we call \emph{nob-negative compositional (NC)} supermartingales. For the sake of generality, we allow NC martingales to be general measurable maps, not necessarily propositionally linear.
+
+\begin{definition}
+\label{def:nonneg-comp}
+A 1-dimensional measurable map $\lem$ is an NC supermartingale (NCSM) for a program $\program$ if there exists $\eps>0$ such that $\lem$ is:
+\begin{compactenum}
+\item  non-negative in each location of $\pCFG_{\program}$;
+\item 
+ $\eps$-ranking in each location $\loc\in\slice{(\program)}$; and
+\item 
+  unaffected in each $\loc\in\loops(\program)$.
+\end{compactenum}
+A (propositionally) linear NCSM (LinNCSM) is a NCSM which is also a (propositionally) linear expression map.
+\end{definition}
+
+We can prove that NCSMs are a sound method for proving a.s. termination in a compositional way, without any additional assumptions.
+
+\begin{theorem}
+Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do } 
+\programbody \textbf{ od}$. Assume that each nested loop of $\program$ terminates almost surely from each reachable configuration, and that there exists a NCSM for $\program$. Then $\program$ terminates almost surely.
+\end{theorem}
+\begin{proof}
+\textbf{[PETR: TBD]}
+\end{proof}
+
+Hence, NCSMs effectively trade the uniform integrability condition for non-negativity over the whole program. We believe that the latter condition is substantially easier to impose and check automatically, especially in the case of affine probabilistic programs and (propositionally) linear NCSMs: there synthesizing NCSM entails synthesizing sufficient program invariants (for which there is a good automated tool support~\cite{xxx}) and encoding the non-negativity condition into a collection of linear constraints (as for general LexRSMs in Section~\ref{xxx}). 
+
+
+
+%% I SHOULD MAYBE EXPLAIN THAT THE NEED TO PERFORM A STATIC ANALYSIS OF THE WHOLE PROGRAM IS 
+%% NOT LIMITING, AS SOMETHING SIMILAR NEEDS TO BE DONE FOR PVSM. BUT MAYBE LEAVE THIS FOR REBUTTAL. :)
 
 %Each measurable map for $\lem$ can be, in a natural way, restricted to a 
 %measurable map $\lem_{\program'}$ for $\program'\in \loops(\program)$, 

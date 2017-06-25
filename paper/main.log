@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.28)  23 JUN 2017 18:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.28)  25 JUN 2017 15:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1885,28 +1885,34 @@ Package natbib Warning: Citation `xxx' on page 14 undefined on input line 10.
 
 [14.14]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/it' will be
-(Font)              scaled to size 10.0pt on input line 72.
+(Font)              scaled to size 10.0pt on input line 74.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 7.3pt on input line 72.
+(Font)              scaled to size 7.3pt on input line 74.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 5.5pt on input line 72.
-
-
-LaTeX Warning: Reference `xxx' on page 15 undefined on input line 83.
+(Font)              scaled to size 5.5pt on input line 74.
 
 
 LaTeX Warning: Reference `xxx' on page 15 undefined on input line 85.
 
+
+LaTeX Warning: Reference `xxx' on page 15 undefined on input line 87.
+
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 8.0pt on input line 85.
-) (./main.bbl
+(Font)              scaled to size 8.0pt on input line 87.
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[15.15])
+[15.15]
+
+Package natbib Warning: Citation `xxx' on page 16 undefined on input line 115.
+
+
+LaTeX Warning: Reference `xxx' on page 16 undefined on input line 115.
+
+) (./main.bbl)
 
 Package natbib Warning: There were undefined citations.
 
@@ -1933,11 +1939,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 530.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 44456 strings out of 493013
- 958044 string characters out of 6131492
- 1180904 words of memory out of 5000000
- 46290 multiletter control sequences out of 15000+600000
- 322908 words of font info for 606 fonts, out of 8000000 for 9000
+ 44465 strings out of 493013
+ 958179 string characters out of 6131492
+ 1180932 words of memory out of 5000000
+ 46291 multiletter control sequences out of 15000+600000
+ 323179 words of font info for 608 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  62i,17n,96p,1716b,6965s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/liberti
@@ -1975,10 +1981,10 @@ syb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/txfonts/txsy
 c.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/txsys.pf
 b></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlr.pfb></h
 ome/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlri.pfb>
-Output written on main.pdf (16 pages, 812638 bytes).
+Output written on main.pdf (16 pages, 815223 bytes).
 PDF statistics:
- 413 PDF objects out of 1000 (max. 8388607)
- 331 compressed objects within 4 object streams
- 83 named destinations out of 1000 (max. 500000)
+ 423 PDF objects out of 1000 (max. 8388607)
+ 341 compressed objects within 4 object streams
+ 88 named destinations out of 1000 (max. 500000)
  86113 words of extra memory for PDF output out of 89155 (max. 10000000)
 
