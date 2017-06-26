@@ -1,0 +1,14 @@
+var N,x,y,i,r;
+x:=0;
+y:=0;
+i:=0;
+while i<N do
+  i:=i+1;
+  r=random(); 
+  if (r>=0 && r<=3) {
+  	if (r==0) x=x+1; else
+  	if (r==1) x=x-1; else
+  	if (r==2) y=y+1; else
+  	if (r==3) y=y-1;
+  }
+od

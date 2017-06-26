@@ -1,5 +1,4 @@
 var n,i;
-[n>1]
 i:=n-1;
 while i>1 do
 	i := i-1

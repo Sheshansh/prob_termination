@@ -15,4 +15,3 @@ int counterex1a()
   }
   return 0;
 }
-

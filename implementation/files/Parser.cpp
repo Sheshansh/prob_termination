@@ -269,14 +269,18 @@ void node::proc_stmt(int s,int l){
 		children.resize(2);
 		children[0] = new node("bexpr",begin+5,firstdo);
 		int mid = ++last_used_label;
+		int s_dup = ++last_used_label;
 		label_map[mid] = new CFG_location("det",mid);
+		label_map[s_dup] = new CFG_location("det",s_dup);
 		node* temporary_node;
 		temporary_node = negation(children[0]);
 		CFG_edge temporary_edge1(label_map[mid],-1,NULL,children[0]);
 		CFG_edge temporary_edge2(label_map[l],-1,NULL,temporary_node);
 		label_map[s]->edges.pb(temporary_edge1);
+		label_map[s_dup]->edges.pb(temporary_edge1);
 		label_map[s]->edges.pb(temporary_edge2);
-		children[1] = new node("stmt",firstdo+2,lastod,mid,s);
+		label_map[s_dup]->edges.pb(temporary_edge2);
+		children[1] = new node("stmt",firstdo+2,lastod,mid,s_dup);
 		return;
 	}
 	//check if it is an if
