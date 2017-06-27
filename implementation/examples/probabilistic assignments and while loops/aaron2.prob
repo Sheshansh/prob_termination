@@ -1,0 +1,22 @@
+var tx,x,y;
+if tx>=0 then
+	while x>=y and tx>=0 do
+	if prob(0.3) then
+		if * then
+			if prob(0.5) then
+				x:=x-1-tx+1
+			else
+				x:=x-1-tx-1
+			fi
+		else
+			if prob(0.5) then
+				y:=y+1+tx+1
+			else
+				y:=y+1+tx-1
+			fi
+		fi
+	else skip fi
+	od
+else
+	skip
+fi
