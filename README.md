@@ -8,3 +8,4 @@ Conditions for using the tool:
 1. Declare all the variables in the beginning of the program as
  var <variable-1>, <variable-2>, ...;
 2. Start invariant is taken as the start condition for the program and propogated though the invariant genration tool aspic, all other invariants are taken conjuncts with the invariants generated. To declare invariant put it in [square brackets] at the relevant point in the program.
+3. Variable names cannot contain if or while in them
