@@ -8,4 +8,3 @@ int speedSingleSingle()
     }
   return 0;
 }
-

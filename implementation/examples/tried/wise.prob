@@ -1,0 +1,12 @@
+var x, y;
+if x<0 or y<0 then
+	skip
+else
+	while x-y>2 or y-x>2 do
+		if x < y then
+			x := x+1
+		else
+			y:= y+1
+		fi
+	od
+fi
