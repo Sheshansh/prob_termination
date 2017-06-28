@@ -323,7 +323,7 @@ string start_invariant(){
 	}
 }
 
-
+int last_dummy_state_used = 0;
 
 void print_fast(ostream& fastfile){
 	fastfile<<"model main{\n\n";
@@ -337,35 +337,66 @@ void print_fast(ostream& fastfile){
 	for(int i=2;i<=last_used_label;++i){
 		fastfile<<", state_"<<i;
 	}
+	for(int i=1;i<=dummy_states_needed;++i){
+		fastfile<<",dummy_"<<i;
+	}
 	fastfile<<";\n\n";
 
 	for(int i=1;i<=last_used_label;++i){
 		CFG_location* state = label_map[i];
 		for(int j=0;j<state->edges.size();++j){
-			fastfile<<"\ttransition t_"<<i<<"_"<<j<<" := {\n";
-			fastfile<<"\t\tfrom\t:= state_"<<i<<";\n";
-			fastfile<<"\t\tto\t:= state_"<<state->edges[j].next->label<<";\n";
-			fastfile<<"\t\tguard\t:= ";
-			if(state->edges[j].guard==NULL){
-				fastfile<<"true";
-			}
-			else{
-				node* temp;
-				if(label_map[i]->invariant!=NULL){
-					temp = and_node(state->edges[j].guard,label_map[i]->invariant);
+			if(state->edges[j].change!=NULL){
+				if(state->edges[j].change->delta!=0){
+					//Add the four transitions and the job would be done
 				}
 				else{
-					temp = state->edges[j].guard;
+					fastfile<<"\ttransition t_"<<i<<"_"<<j<<" := {\n";
+					fastfile<<"\t\tfrom\t:= state_"<<i<<";\n";
+					fastfile<<"\t\tto\t:= state_"<<state->edges[j].next->label<<";\n";
+					fastfile<<"\t\tguard\t:= ";
+					if(state->edges[j].guard==NULL){
+						fastfile<<"true";
+					}
+					else{
+						node* temp;
+						if(label_map[i]->invariant!=NULL){
+							temp = and_node(state->edges[j].guard,label_map[i]->invariant);
+						}
+						else{
+							temp = state->edges[j].guard;
+						}
+						temp->print(fastfile,"&&","||","",true);
+					}
+					fastfile<<";\n";
+					fastfile<<"\t\taction\t:= ";
+					if(state->edges[j].change!=NULL){
+						fastfile<<variable[state->edges[j].toChange]<<"' = ";
+						state->edges[j].change->print(fastfile,"&&","||","",true);
+					}
+					fastfile<<";\n\t};\n\n";
 				}
-				temp->print(fastfile,"&&","||","",true);
 			}
-			fastfile<<";\n";
-			fastfile<<"\t\taction\t:= ";
-			if(state->edges[j].change!=NULL){
-				fastfile<<variable[state->edges[j].toChange]<<"' = ";
-				state->edges[j].change->print(fastfile,"&&","||","",true);
+			else{
+				fastfile<<"\ttransition t_"<<i<<"_"<<j<<" := {\n";
+				fastfile<<"\t\tfrom\t:= state_"<<i<<";\n";
+				fastfile<<"\t\tto\t:= state_"<<state->edges[j].next->label<<";\n";
+				fastfile<<"\t\tguard\t:= ";
+				if(state->edges[j].guard==NULL){
+					fastfile<<"true";
+				}
+				else{
+					node* temp;
+					if(label_map[i]->invariant!=NULL){
+						temp = and_node(state->edges[j].guard,label_map[i]->invariant);
+					}
+					else{
+						temp = state->edges[j].guard;
+					}
+					temp->print(fastfile,"&&","||","",true);
+				}
+				fastfile<<";\n";
+				fastfile<<"\t\taction\t:= ;\n\t};\n\n";
 			}
-			fastfile<<";\n\t};\n\n";
 		}
 	}
 

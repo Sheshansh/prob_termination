@@ -9,6 +9,7 @@ struct node{
 	vector<node *> children; //children in the parse tree
 	node *bracket; //bexpr written in bracket next to this node (for stmt only)
 	vector<double> expression; //for expressions only
+	double delta;
 	//constructor
 	node(string t);
 	node(string t, int b, int e, int s = 0, int l = 0, bool negate = false);
@@ -73,3 +74,4 @@ extern map<int,CFG_location*> label_map;
 extern node* root;
 extern map<string,int> variableId;
 extern map<int,string> variable;
+extern int dummy_states_needed; //For adding the if * condition in fast file

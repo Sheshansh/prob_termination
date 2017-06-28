@@ -27,6 +27,7 @@ int last_used_label = 0;
 map<int,CFG_location*> label_map;
 map<string,int> variableId;
 map<int,string> variable;
+int dummy_states_needed = 0;
 
 void skip_spaces(int &begin, int &end){ //skips the spaces in the beginning and the end
 	while(begin<program.size() and isspace(program[begin])){
@@ -55,6 +56,7 @@ node::node(string t){
 	type = t;
 	constant = "";
 	strict = false;
+	delta = 0.0;
 }
 
 node::node(string t, int b, int e, int s, int l, bool negate){
@@ -63,6 +65,7 @@ node::node(string t, int b, int e, int s, int l, bool negate){
 	begin = b;
 	strict = false;
 	end = e;
+	delta = 0.0;
 	skip_spaces(begin,end);
 	if(begin>end){
 		cerr<<"Error! begin= "<<b<<" end= "<<e<<endl;
@@ -73,6 +76,7 @@ node::node(string t, int b, int e, int s, int l, bool negate){
 node::node(string t, string l, bool& to_return){
 	strict = false;
 	type = t;
+	delta = 0.0;
 	if(t=="bexpr"){
 		children.resize(1);
 		children[0] = new node("affexpr");
@@ -374,47 +378,47 @@ void node::proc_assgn(int s,int l){
 		while(isspace(program[samplepos])){
 			samplepos++;
 		}
-		if(part(program,samplepos,samplepos+6)=="sample"){
-			int semicolon = -1;
-			constant = "assignment from distribution";
-			for(int i = samplepos+6;i<end;i++){
-				if(program[i]==';'){
-					semicolon = i;
-					break;
-				}
-			}
-			if(semicolon == -1){
-				cerr<<"Mean value not found in the from distribution assignment between ["<<begin<<","<<end<<")"<<endl;
-			}
-			else{
-				int temp = samplepos+6;
-				while(temp<semicolon){
-					if(program[temp]=='('){
-						break;
-					}
-					temp++;
-				}
-				if(program[temp]!='('){
-					cerr<<"Wrong assignment from distribution between ["<<begin<<","<<end<<")"<<endl;
-				}
-				temp++;
-				while(isspace(program[temp]) and temp<semicolon){
-					temp++;
-				}
-				constant = part(program,temp,semicolon); //Gives the distribution
-				children[1] = new node("expr",semicolon+1,end-1); //Though it is just a constant but still storing it in an expression because of consistency
-				label_map[s]->type = "det"; //<flag> Considering that it is just the same as assigning the variable the constant value
-				CFG_edge temporary_edge(label_map[l],variableId[part(program,children[0]->begin,children[0]->end)],children[1]);
-				label_map[s]->edges.pb(temporary_edge);
-			}
-		}
-		else{
+		// if(part(program,samplepos,samplepos+6)=="sample"){
+		// 	int semicolon = -1;
+		// 	constant = "assignment from distribution";
+		// 	for(int i = samplepos+6;i<end;i++){
+		// 		if(program[i]==';'){
+		// 			semicolon = i;
+		// 			break;
+		// 		}
+		// 	}
+		// 	if(semicolon == -1){
+		// 		cerr<<"Mean value not found in the from distribution assignment between ["<<begin<<","<<end<<")"<<endl;
+		// 	}
+		// 	else{
+		// 		int temp = samplepos+6;
+		// 		while(temp<semicolon){
+		// 			if(program[temp]=='('){
+		// 				break;
+		// 			}
+		// 			temp++;
+		// 		}
+		// 		if(program[temp]!='('){
+		// 			cerr<<"Wrong assignment from distribution between ["<<begin<<","<<end<<")"<<endl;
+		// 		}
+		// 		temp++;
+		// 		while(isspace(program[temp]) and temp<semicolon){
+		// 			temp++;
+		// 		}
+		// 		constant = part(program,temp,semicolon); //Gives the distribution
+		// 		children[1] = new node("expr",semicolon+1,end-1); //Though it is just a constant but still storing it in an expression because of consistency
+		// 		label_map[s]->type = "det"; //<flag> Considering that it is just the same as assigning the variable the constant value
+		// 		CFG_edge temporary_edge(label_map[l],variableId[part(program,children[0]->begin,children[0]->end)],children[1]);
+		// 		label_map[s]->edges.pb(temporary_edge);
+		// 	}
+		// }
+		// else{
 			constant = "simple assignment";
 			children[1] = new node("expr",pos+2,end); //rexpr is nothing but an expr, a expression
 			label_map[s]->type = "det";
 			CFG_edge temporary_edge(label_map[l],variableId[part(program,children[0]->begin,children[0]->end)],children[1]);
 			label_map[s]->edges.pb(temporary_edge);
-		}
+		// }
 	}
 }
 
@@ -449,6 +453,45 @@ void node::proc_pvar(){
 
 void node::analyse_expr(int begin,int end,bool negate){
 	skip_spaces(begin,end);
+	if(program[begin]=='['){
+		if(program[end-1]==']'){
+			int comma = -1;
+			for(int i=begin;i<end;i++){
+				if(program[i]==','){
+					comma = i;
+					break;
+				}
+			}
+			if(comma==-1){
+				cerr<<"No comma in [a,b] literal between "<<begin<<","<<end<<endl;
+			}
+			else{
+				string lower = part(program,begin+1,comma);
+				string upper = part(program,comma+1,end-1);
+				skip_spaces(lower);
+				skip_spaces(upper);
+				double lower_bound = stod(lower);
+				double upper_bound = stod(upper);
+				if(lower_bound<upper_bound){
+					if(negate){
+						expression[0] -= (upper_bound+lower_bound)/2.0;
+						
+					}
+					else{
+						expression[0] += (upper_bound+lower_bound)/2.0;
+					}
+					delta += (upper_bound-lower_bound)/2.0;
+				}
+				else{
+					cerr<<"LOwer bound is greater than upper bound between "<<begin<<","<<end<<endl;
+				}
+			}
+		}
+		else{
+			cerr<<"Wrong format for [a,b] literal between "<<begin<<","<<end<<endl;
+		}
+		return;
+	}
 	int star = -1;
 	for(int i = begin;i<end;++i){ //Assuming that the program variable names don't contain star anywhere
 		if(program[i]=='*'){
@@ -525,15 +568,27 @@ void node::form_vector(int begin,int end,bool negate){ //Note that this shadows 
 	skip_spaces(begin,end);
 	int plusminus = -1;
 	// Implemented as a linear but still recursive function
-	for(int i = begin+1;i<end;++i){
-		if(program[i]=='+' or program[i]=='-'){
+	int open_brackets = 0;
+	for(int i = begin;i<end;++i){
+		if(program[i]=='['){
+			open_brackets++;
+		}
+		else if(program[i]==']'){
+			open_brackets--;
+		}
+		if((program[i]=='+' or program[i]=='-') and open_brackets==0){
 			plusminus = i;
 			break;
 		}
 	}
 	if(plusminus!=-1){
-		analyse_expr(begin,plusminus,negate);
-		form_vector(plusminus+1,end,program[plusminus]=='-');
+		if(plusminus==begin){
+			form_vector(plusminus+1,end,program[plusminus]=='-' xor negate);
+		}
+		else{
+			analyse_expr(begin,plusminus,negate);
+			form_vector(plusminus+1,end,program[plusminus]=='-');
+		}
 	}
 	else{
 		analyse_expr(begin,end,negate);
@@ -544,8 +599,15 @@ void node::form_vector(string l,bool negate){
 	skip_spaces(l);
 	int plusminus = -1;
 	// Implemented as a linear but still recursive function
-	for(int i = 1;i<l.length();++i){
-		if(l[i]=='+' or l[i]=='-'){
+	int open_brackets = 0;
+	for(int i = 0;i<l.length();++i){
+		if(l[i]=='['){
+			open_brackets++;
+		}
+		else if(l[i]==']'){
+			open_brackets--;
+		}
+		if((l[i]=='+' or l[i]=='-') and open_brackets==0){
 			plusminus = i;
 			break;
 		}
@@ -564,6 +626,9 @@ void node::proc_expr(){
 	constant = "expression";
 	expression.resize(nVariables+1);
 	form_vector(begin,end,false);
+	if (delta!=0){
+		dummy_states_needed += 2;
+	}
 }
 
 void node::proc_expr(string l){
