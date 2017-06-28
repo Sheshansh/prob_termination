@@ -348,6 +348,58 @@ void print_fast(ostream& fastfile){
 			if(state->edges[j].change!=NULL){
 				if(state->edges[j].change->delta!=0){
 					//Add the four transitions and the job would be done
+					//diverge 1
+					++last_dummy_state_used;
+					fastfile<<"\ttransition t_"<<i<<"_"<<j<<"_diverge1"<<" := {\n";
+					fastfile<<"\t\tfrom\t:= state_"<<i<<";\n";
+					fastfile<<"\t\tto\t:= dummy_"<<last_dummy_state_used<<";\n";
+					if(state->edges[j].guard!=NULL){
+						cerr<<"guard in an assignment"<<endl;
+					}
+					fastfile<<"\t\tguard\t:= true;\n";
+					fastfile<<"\t\taction\t:= ;\n\t};\n\n";
+					//converge 1
+					fastfile<<"\ttransition t_"<<i<<"_"<<j<<"_converge1"<<" := {\n";
+					fastfile<<"\t\tfrom\t:= dummy_"<<last_dummy_state_used<<";\n";
+					fastfile<<"\t\tto\t:= state_"<<state->edges[j].next->label<<";\n";
+					if(state->edges[j].guard!=NULL){
+						cerr<<"guard in an assignment"<<endl;
+					}
+					fastfile<<"\t\tguard\t:= true;\n";
+					fastfile<<"\t\taction\t:= ";
+					if(state->edges[j].change!=NULL){
+						fastfile<<variable[state->edges[j].toChange]<<"' = ";
+						state->edges[j].change->print(fastfile,"&&","||","",true);
+						fastfile<<"+"<<state->edges[j].change->delta;
+					}
+					fastfile<<";\n\t};\n\n";
+					
+
+					//diverge 2
+					++last_dummy_state_used;
+					fastfile<<"\ttransition t_"<<i<<"_"<<j<<"_diverge2"<<" := {\n";
+					fastfile<<"\t\tfrom\t:= state_"<<i<<";\n";
+					fastfile<<"\t\tto\t:= dummy_"<<last_dummy_state_used<<";\n";
+					if(state->edges[j].guard!=NULL){
+						cerr<<"guard in an assignment"<<endl;
+					}
+					fastfile<<"\t\tguard\t:= true;\n";
+					fastfile<<"\t\taction\t:= ;\n\t};\n\n";
+					//converge 2
+					fastfile<<"\ttransition t_"<<i<<"_"<<j<<"_converge2"<<" := {\n";
+					fastfile<<"\t\tfrom\t:= dummy_"<<last_dummy_state_used<<";\n";
+					fastfile<<"\t\tto\t:= state_"<<state->edges[j].next->label<<";\n";
+					if(state->edges[j].guard!=NULL){
+						cerr<<"guard in an assignment"<<endl;
+					}
+					fastfile<<"\t\tguard\t:= true;\n";
+					fastfile<<"\t\taction\t:= ";
+					if(state->edges[j].change!=NULL){
+						fastfile<<variable[state->edges[j].toChange]<<"' = ";
+						state->edges[j].change->print(fastfile,"&&","||","",true);
+						fastfile<<"-"<<state->edges[j].change->delta;
+					}
+					fastfile<<";\n\t};\n\n";
 				}
 				else{
 					fastfile<<"\ttransition t_"<<i<<"_"<<j<<" := {\n";
