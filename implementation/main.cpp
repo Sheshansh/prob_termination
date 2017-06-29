@@ -132,11 +132,11 @@ int epsilons_used = 0;
 void generate_equations(){ //Would use the ostream file to write the equations into it later
 	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
 		if(it->second->invariant==NULL){
-			cout<<endl;
+			// cout<<endl;
 			continue;
 		}
-		it->second->invariant->print();
-		cout<<endl;
+		// it->second->invariant->print();
+		// cout<<endl;
 		if(it->second->type=="det"){
 			//Invariant and guard imply the value decrease
 			if(it->second->edges.empty()){
@@ -539,8 +539,9 @@ int main(){
 	
 	generate_equations();
 	ofstream equationsfile;
-	for(int loop_counter=0;loop_counter<100;++loop_counter){	
-		cout<<"Iteration"<<loop_counter+1<<"->"<<endl;
+	bool solved = false;
+	int loop_counter=0;
+	for(;loop_counter<100;++loop_counter){	
 		equationsfile.open("files/equations.lp");
 		ostream* equation_output_file = &equationsfile;
 		print_equations(*equation_output_file);
@@ -552,7 +553,6 @@ int main(){
 		//Processing the EquationsOutput file
 		bool state = process_equations_output();
 		if(state==false){
-			cout<<"No solution possible"<<endl;
 			string command;
 			command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
 			system(command.c_str());
@@ -560,22 +560,27 @@ int main(){
 		}
 		else{
 			//Some equation was deleted, some epsilon was 1
-			// cout<<equations.begin()->first<<" "<<epsilons_used<<endl;
 			if(equations.begin()->first>epsilons_used){
-				cout<<"Solution found"<<endl;
+				solved = true;
 				string command;
 				command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
 				system(command.c_str());
 				break;
 			}
 			else{
-				cout<<"Going into another iteration"<<endl;
 			}
 		}
 		string command;
 		command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
 		system(command.c_str());
 		// temporarily for just one iteration
+	}
+	cout<<"The number of states in pCFG generated is "<<last_used_label<<endl;
+	if(solved){
+		cout<<"Found a solution of dimension "<<loop_counter+1<<"."<<endl;
+	}
+	else{
+		cout<<"No solution found, stopped after "<<loop_counter+1<<" iterations"<<endl;
 	}
 	return 0;
 }

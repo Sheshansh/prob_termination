@@ -78,32 +78,33 @@ node::node(string t, string l, bool& to_return){
 	type = t;
 	delta = 0.0;
 	if(t=="bexpr"){
-		children.resize(1);
-		children[0] = new node("affexpr");
 		stringstream line_stream;
 		line_stream.str(l);
-		string comma_sep;
-		while(getline(line_stream,comma_sep,',')){
-			skip_spaces(comma_sep);
-			bool return_value = false;
-			node* formed_literal = new node("literal",comma_sep, return_value);
-			children[0]->children.pb(formed_literal);
-			if(return_value){
-				node* other_literal = new node("literal");
-				other_literal->constant = "<=";
-				other_literal->children.resize(1);
-				other_literal->children[0] = new node("expr");
-				other_literal->children[0]->expression.resize(nVariables+1);
-				for(int i=0;i<=nVariables;++i){
-					other_literal->children[0]->expression[i] = -1.0*formed_literal->children[0]->expression[i];
-				}
-				children[0]->children.pb(other_literal);
-				// formed_literal->print();
-				// cout<<endl;
-				// other_literal->print();
-				// cout<<endl;
+		string semicolon_sep;
+		while(getline(line_stream,semicolon_sep,';')){	
+			node* affexpr_temp = new node("affexpr");
+			stringstream line_stream1;
+			line_stream1.str(semicolon_sep);
+			string comma_sep;
+			while(getline(line_stream1,comma_sep,',')){
+				skip_spaces(comma_sep);
+				bool return_value = false;
+				node* formed_literal = new node("literal",comma_sep, return_value);
+				affexpr_temp->children.pb(formed_literal);
+				if(return_value){
+					node* other_literal = new node("literal");
+					other_literal->constant = "<=";
+					other_literal->children.resize(1);
+					other_literal->children[0] = new node("expr");
+					other_literal->children[0]->expression.resize(nVariables+1);
+					for(int i=0;i<=nVariables;++i){
+						other_literal->children[0]->expression[i] = -1.0*formed_literal->children[0]->expression[i];
+					}
+					affexpr_temp->children.pb(other_literal);
 
+				}
 			}
+			children.pb(affexpr_temp);
 		}
 	}
 	else if(t=="literal"){
@@ -472,7 +473,7 @@ void node::analyse_expr(int begin,int end,bool negate){
 				skip_spaces(upper);
 				double lower_bound = stod(lower);
 				double upper_bound = stod(upper);
-				if(lower_bound<upper_bound){
+				if(lower_bound<=upper_bound){
 					if(negate){
 						expression[0] -= (upper_bound+lower_bound)/2.0;
 						

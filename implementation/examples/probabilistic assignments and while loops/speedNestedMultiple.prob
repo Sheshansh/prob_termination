@@ -1,11 +1,9 @@
 var x,n,y,m;
-x:=0;
 while x<n do
 if prob(0.5) then
-  y:=0;
-  x:=x+1;
   while y<m do
-if prob(0.5) then y:=y+1 else skip fi
-od
+if prob(0.5) then y:= [-2,2]+y+1 else skip fi
+od;
+  x:= [-2,2]+x+1
 else skip fi
 od

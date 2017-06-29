@@ -1,22 +1,22 @@
 var i, j, k, n, m, N;
 if 0<=n and 0<=m and 0<=N then
-	i := 0;
+	i := [0,0]+ 0;
 	while i<n do
 if prob(0.5) then
-		j := 0;
+		j := [0,0]+ 0;
 		while j<m do
 if prob(0.5) then
-			j := j+ 1;
-			k := i;
+			j := [0,0]+ j+ 1;
+			k := [0,0]+ i;
 			while k<N do
 if prob(0.5) then
-				k := k+1
+				k := [0,0]+ k+1
 			else skip fi
 od;
-			i := k
+			i := [0,0]+ k
 		else skip fi
 od;
-		i := i+1
+		i := [0,0]+ i+1
 	else skip fi
 od
 else
