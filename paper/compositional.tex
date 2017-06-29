@@ -83,15 +83,145 @@ Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do }
 
 We do not repeat the precise definition of the typesystem here, we just explain its motivation and give examples where it fails, i.e. examples where $\program$ terminates a.s. (and hence the same holds also for its nested loops) and a PV martingale exists, but no PVSM typechecks.  
 
-The purpose of the typesystem is, in principle, to ensure that the stochastic process which, in each time step, returns the current value of the PVSM, is uniformly integrable inside the nested loops. Uniform integrability is a deep concept from probability and measure theory: a sequence $X_0,X_1,X_2,\dots$ of random variables is uniformly integrable if for each $\delta>0$ there exists an $K\in \Nset$ such that for all $n\geq 0$ it holds $\E[|X_n|\cdot\indicator{X_n \geq K}]\leq \delta$. As noted in~\cite{HolgerPOPL}, proofs of uniform integrability are hard to (semi)-automatize, and hence they devise the typechecking as a sound (but not complete) method of proving uniform integrability. Take for example \textbf{[PETR: ADD EXAMPLE]}. However, as we show below, for none of these programs there exists a PVSM that typechecks. 
+The purpose of the typesystem is, in principle, to ensure that the stochastic 
+process which, in each time step, returns the current value of the PVSM, is 
+uniformly integrable inside the nested loops. Uniform integrability is a deep 
+concept from probability and measure theory: a sequence $X_0,X_1,X_2,\dots$ of 
+random variables is uniformly integrable if for each $\delta>0$ there exists an 
+$K\in \Nset$ such that for all $n\geq 0$ it holds $\E[|X_n|\cdot\indicator{X_n 
+\geq K}]\leq \delta$. As noted in~\cite{HolgerPOPL}, proofs of uniform 
+integrability are hard to (semi)-automatize, and hence they devise the 
+typechecking as a sound (but not complete) method of proving uniform 
+integrability. This is illustrated in the following example.
+
+\begin{example}
+Consider the two \APP{}s in Figure~\ref{fig:uniint}, that differ only in one 
+coefficient in the 
+assignment on line 5. For the inner loop there exists (in both cases) a 
+1-dimensional linear ranking supermartingale whose value in each location is 
+equal to $c+d_{\loc}$, where $d_{\loc}$ is a location-specific constant. Since 
+the expected change of $c$ in each loop step is $-0.5$, this is indeed a LRSM. 
+Also, in both cases, a LEM of the form $x+d_{\loc}$, again for some suitable 
+location-specific constants $d_{\loc}$, is a PVSM for the outer loop, as $x$ 
+decreases and is non-negative within the outer loop and its expected change is 
+non-negative within the inner loop (more precisely, the inner-loop expected 
+change of $x$ zero in the left program and $-\frac{x}{4} - \frac{3}{4}$ in the 
+right 
+program). 
+However, the variable $x$ is uniformly integrable within the inner loop of the 
+right program while for the left program this does not hold. To see this, 
+imagine the inner loop as a stand-alone program and let $X_n$ be the value of 
+variable $x$ after $n$ steps of this stand-alone program (i.e., when the loop 
+terminates $x$ no longer changes). Solving a simple linear recurrence shows 
+that in the right program $\E[X_n] \rightarrow 0$ as $n\rightarrow \infty$, 
+which in particular shows uniform integrability of $X_0,X_1,X_2,\dots$. On the 
+other hand, in the left program for each $K>0$ we have $\probm(X_K \geq 
+2^K\cdot{x_0})\geq \frac{1}{2^K}$, where $x_0$ is the value of $x$ upon 
+entering the loop. Hence $\E[|X_K|cdot\indicator{X_K 
+\geq K}]\geq 1$ for each $K$ sufficiently large, which is incompatible with 
+uniform integrability. The example shows that proving uniform integrability 
+requires intricate reasoning about quantitative behaviour of the program. 
+Moreover, as shown below, none of the two programs have a PVSM that typechecks.
+
+% compute the distribution of 
+%$x$ in this stand-alone program after $n$ steps. In both cases, $x$ has value 
+%$0$ with probability 
+%$1-\frac{1}{2^n}$, as this is the probability of setting $x$ to zero in the 
+%first $n$ steps, after which the loop terminates. With the remaining 
+%probability $\frac{1}{2^n}$ the value of $x$ is $2^n \cdot x_0 - 2^{n+1}+2$ in 
+%the left program and $(\frac{3}{2})^n \cdot x_{0} -3\cdot((\frac{3}{2})^n +1)$ 
+%in the right program, where $x_0$ is the value of $x$ upon entering the inner 
+%loop (both equations are obtained by solving a simple linear recurrence). 
+%Hence, for the right program, the expectation of $x$ after $n$ steps of the 
+%inner loop (viewed as a stand-alone program) tends to zero as $n\rightarrow 
+%\infty$, which in particular shows uniform integrability. However, in left 
+%inner loop, $\E[|X_n|\cdot\indicator{X_n 
+%	\geq }]\geq 1$ 
+\end{example}
+%However, as we show below, for none of these programs there exists a PVSM that 
+%typechecks.
+
+\lstset{language=affprob}
+\lstset{tabsize=2}
+\newsavebox{\uniinto}
+\begin{lrbox}{\uniinto}
+\begin{lstlisting}[mathescape]
+while $x\geq 0$ do
+	$c:=1$;
+	while $x\geq 1$ and $c\geq 1$ do
+		if prob(0.5) then $x:=0$
+			else $x:=2(x-1)$ fi;
+		if prob(0.5) then $c:=0$ 
+			else skip fi
+	od;
+	$x:=x-1$
+od
+\end{lstlisting}
+\end{lrbox}
+\newsavebox{\uniintt}
+\begin{lrbox}{\uniintt}
+	\begin{lstlisting}[mathescape]
+while $x\geq 0$ do
+	$c:=1$;
+	while $x\geq 1$ and $c\geq 1$ do
+		if prob(0.5) then $x:=0$
+			else $x:=\frac{3}{2}(x-1)$ fi;
+		if prob(0.5) then $c:=0$ 
+			else skip fi
+	od;
+	$x:=x-1$
+od
+	\end{lstlisting}
+\end{lrbox}
+\begin{figure}[t]
+	%%\centering
+	\usebox{\uniinto}
+	\hspace{1cm}
+	\usebox{\uniintt}
+\label{fig:uniint}
+\caption{Examples of programs with (right) and without (left) uniformly 
+integrable PVSMs.}
+\end{figure}
+
+\lstset{language=affprob}
+\lstset{tabsize=2}
+\newsavebox{\unintthree}
+\begin{lrbox}{\unintthree}
+	\begin{lstlisting}[mathescape]
+	while $x\geq 0$ do
+	while $y\geq 0$ do
+	z:=x;
+	while $z\geq 0$ do
+	z:=z-1;
+	x:=x-1
+	od;
+	y:=y-1
+	od;
+	$x:=x-1$
+	od
+	\end{lstlisting}
+\end{lrbox}
+\begin{figure}[t]
+	%%\centering
+	\usebox{\unintthree}
+	%	\hspace{1cm}
+	%	\usebox{\uniintt}
+	\label{fig:uniint2}
+	\caption{Program where the outer loop does not have a PVSM that 
+		typechecks.}.
+\end{figure}
 
 Indeed, taking a closer look at typesystem in~\cite{HolgerPOPL}, there are several reasons for typechecking of PVSM to fail. The major ones are:
 \begin{compactenum}
 \item
-A PVSM $\lem$ for \PP{} $\program$ will not typecheck if $\program$ has a nested loop in which the value of $\lem$ can change unboundedly in a single step (see Example~\ref{xxx}). 
+A PVSM $\lem$ for \PP{} $\program$ will not typecheck if $\program$ has a 
+nested loop in which the value of $\lem$ can change unboundedly in a single 
+step (see Figure~\ref{fig:uniint}). 
 \item
 A PVSM $\lem$ for  \PP{} $\program$ will not typecheck if $\program$ has a nested loop which itself has a nested loop in which some variable appearing in some expression in $\lem$ is modified, see Example~\ref{xxx}.\footnote{Both these statements regarding typechecking failure are somewhat simplified, even in these two cases the PVSM might sometimes typecheck correctly, in case where the nested loops are followed by assignments which completely overwrite the effect of these loops, e.g. if \textbf{[PETR: POINTER TO AN EXAMPLE]}. However, the statements intuitively summarize the major reasons for typechecking failure. }
 \end{compactenum}
+
+
 
 Thus, the typechecking algorithm may rule out programs where the termination-controlling variable represents e.g. a length of an array, which can be doubled/halved in some sub-program do to (de)allocation, merging, or splitting.
 To overcome the rather strict typechecking, we use the results on LexRSMs to define a new notion of compositional ranking supermartingales, which we call \emph{nob-negative compositional (NC)} supermartingales. For the sake of generality, we allow NC martingales to be general measurable maps, not necessarily propositionally linear.
@@ -108,6 +238,8 @@ A 1-dimensional measurable map $\lem$ is an NC supermartingale (NCSM) for a prog
 \end{compactenum}
 A (propositionally) linear NCSM (LinNCSM) is a NCSM which is also a (propositionally) linear expression map.
 \end{definition}
+
+
 
 We can prove that NCSMs are a sound method for proving a.s. termination in a compositional way, without any additional assumptions.
 
