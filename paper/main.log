@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  29 JUN 2017 16:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  29 JUN 2017 18:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -703,6 +703,11 @@ Package: fontenc 2016/06/19 v1.99m Standard LaTeX package
 File: t1enc.def 2016/06/19 v1.99m Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
 ))
+(/home/pnovotny/texlive/2016/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2016/05/22 v1.1-161 Sub-captions (AR)
+\c@subfigure=\count127
+\c@subtable=\count128
+)
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/pgfplots/pgfplots.sty
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplots.revision.
 tex)
@@ -754,10 +759,10 @@ ed.code.tex
 \pgf@yc=\dimen152
 \w@pgf@writea=\write5
 \r@pgf@reada=\read1
-\c@pgf@counta=\count127
-\c@pgf@countb=\count128
-\c@pgf@countc=\count129
-\c@pgf@countd=\count130
+\c@pgf@counta=\count129
+\c@pgf@countb=\count130
+\c@pgf@countc=\count131
+\c@pgf@countd=\count132
 \t@pgf@toka=\toks36
 \t@pgf@tokb=\toks37
 \t@pgf@tokc=\toks38
@@ -778,8 +783,8 @@ File: pgfsys-common-pdf.def 2013/10/10  (rcs-revision 1.13)
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftp
 ath.code.tex
 File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
-\pgfsyssoftpath@smallbuffer@items=\count131
-\pgfsyssoftpath@bigbuffer@items=\count132
+\pgfsyssoftpath@smallbuffer@items=\count133
+\pgfsyssoftpath@bigbuffer@items=\count134
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/systemlayer/pgfsysproto
 col.code.tex
@@ -797,7 +802,7 @@ ex)
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/math/pgfmathparser.code
 .tex
 \pgfmath@dimen=\dimen153
-\pgfmath@count=\count133
+\pgfmath@count=\count135
 \pgfmath@box=\box35
 \pgfmath@toks=\toks39
 \pgfmath@stack@operand=\toks40
@@ -823,7 +828,7 @@ isc.code.tex)
 ntegerarithmetics.code.tex)))
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.
 tex
-\c@pgfmathroundto@lastzeros=\count134
+\c@pgfmathroundto@lastzeros=\count136
 ))
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoint
 s.code.tex
@@ -861,7 +866,7 @@ File: pgfcorescopes.code.tex 2015/05/08  (rcs-revision 1.46)
 \pgfpic=\box36
 \pgf@hbox=\box37
 \pgf@layerbox@main=\box38
-\pgf@picture@serial@count=\count135
+\pgf@picture@serial@count=\count137
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraph
 icstate.code.tex
@@ -896,7 +901,7 @@ File: pgfcorearrows.code.tex 2015/05/14  (rcs-revision 1.43)
 .code.tex
 File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
 \pgf@max=\dimen177
-\pgf@sys@shading@range@num=\count136
+\pgf@sys@shading@range@num=\count138
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage
 .code.tex
@@ -961,7 +966,7 @@ Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/libraries/pgflibraryplo
 thandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
-\pgf@plot@mark@count=\count137
+\pgf@plot@mark@count=\count139
 \pgfplotmarksize=\dimen182
 )
 \tikz@lastx=\dimen183
@@ -974,19 +979,19 @@ File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
 \tikz@figbox@bg=\box42
 \tikz@tempbox=\box43
 \tikz@tempbox@bg=\box44
-\tikztreelevel=\count138
-\tikznumberofchildren=\count139
-\tikznumberofcurrentchild=\count140
-\tikz@fig@count=\count141
+\tikztreelevel=\count140
+\tikznumberofchildren=\count141
+\tikznumberofcurrentchild=\count142
+\tikz@fig@count=\count143
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix
 .code.tex
 File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
-\pgfmatrixcurrentrow=\count142
-\pgfmatrixcurrentcolumn=\count143
-\pgf@matrix@numberofcolumns=\count144
+\pgfmatrixcurrentrow=\count144
+\pgfmatrixcurrentcolumn=\count145
+\pgf@matrix@numberofcolumns=\count146
 )
-\tikz@expandcount=\count145
+\tikz@expandcount=\count147
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libr
 aries/tikzlibrarytopaths.code.tex
@@ -999,8 +1004,8 @@ tex
 \t@pgfplots@tokb=\toks45
 \t@pgfplots@tokc=\toks46
 \pgfplots@tmpa=\dimen189
-\c@pgfplots@coordindex=\count146
-\c@pgfplots@scanlineindex=\count147
+\c@pgfplots@coordindex=\count148
+\c@pgfplots@scanlineindex=\count149
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgen
 eric.code.tex))
@@ -1016,7 +1021,7 @@ Package pgfplots: loading complementary arithmetics for your pgf version...
 plotsoldpgfsupp_pgflibraryfpu.code.tex)
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgf
 plotsoldpgfsupp_pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count148
+\c@pgfmathroundto@lastzeros=\count150
 ))
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.
 code.tex
@@ -1026,13 +1031,13 @@ lotsliststructure.code.tex)
 lotsliststructureext.code.tex)
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgfplots/liststructure/pgfp
 lotsarray.code.tex
-\c@pgfplotsarray@tmp=\count149
+\c@pgfplotsarray@tmp=\count151
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgfplots/liststructure/pgfp
 lotsmatrix.code.tex)
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgfplots/numtable/pgfplotst
 ableshared.code.tex
-\c@pgfplotstable@counta=\count150
+\c@pgfplotstable@counta=\count152
 \t@pgfplotstable@a=\toks47
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgfplots/liststructure/pgfp
@@ -1045,7 +1050,7 @@ y.data.code.tex))
 verb.code.tex)
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgf
 plots.surfshading.code.tex
-\c@pgfplotslibrarysurf@no=\count151
+\c@pgfplotslibrarysurf@no=\count153
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfp
 lots.surfshading.pgfsys-pdftex.def)))
@@ -1082,7 +1087,7 @@ tions.code.tex
 \pgfdecoratedinputsegmentcompleteddistance=\dimen192
 \pgfdecoratedinputsegmentremainingdistance=\dimen193
 \pgf@decorate@distancetomove=\dimen194
-\pgf@decorate@repeatstate=\count152
+\pgf@decorate@repeatstate=\count154
 \pgfdecorationsegmentamplitude=\dimen195
 \pgfdecorationsegmentlength=\dimen196
 )
@@ -1096,7 +1101,7 @@ gflibrarydecorations.pathmorphing.code.tex))
 aries/tikzlibrarydecorations.pathreplacing.code.tex
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/libraries/decorations/p
 gflibrarydecorations.pathreplacing.code.tex))
-\pgfplots@numplots=\count153
+\pgfplots@numplots=\count155
 \pgfplots@xmin@reg=\dimen197
 \pgfplots@xmax@reg=\dimen256
 \pgfplots@ymin@reg=\dimen257
@@ -1129,15 +1134,15 @@ Package: pbox 2011/12/07 v1.2 Dynamic parboxes
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count154
-\calc@Bcount=\count155
+\calc@Acount=\count156
+\calc@Bcount=\count157
 \calc@Adimen=\dimen261
 \calc@Bdimen=\dimen262
 \calc@Askip=\skip73
 \calc@Bskip=\skip74
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count156
+\calc@Ccount=\count158
 \calc@Cskip=\skip75
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/base/ifthen.sty
@@ -1153,9 +1158,9 @@ LaTeX Font Info:    Overwriting symbol font `stmry' in version `bold'
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/appendix/appendix.sty
 Package: appendix 2009/09/02 v1.2b extra appendix facilities
-\c@@pps=\count157
-\c@@ppsavesec=\count158
-\c@@ppsaveapp=\count159
+\c@@pps=\count159
+\c@@ppsavesec=\count160
+\c@@ppsaveapp=\count161
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2001/04/09 non-zero parskip adjustments
@@ -1169,7 +1174,7 @@ LaTeX Warning: Command \@starttoc  has changed.
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count160
+\c@AlgoLine=\count162
 \algocf@hangindent=\skip77
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/tools/xspace.sty
@@ -1216,9 +1221,9 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \algoheightrule=\skip92
 \algotitleheightruledefault=\skip93
 \algotitleheightrule=\skip94
-\c@algocfline=\count161
-\c@algocfproc=\count162
-\c@algocf=\count163
+\c@algocfline=\count163
+\c@algocfproc=\count164
+\c@algocf=\count165
 \algocf@algoframe=\box52
 \algocf@algobox=\box53
 ) (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/fp/fp.sty
@@ -1227,19 +1232,19 @@ Package: fp 1995/04/02
 `Fixed Point Package', Version 0.8, April 2, 1995 (C) Michael Mehlich
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/fp/defpattern.sty
 Package: defpattern 1994/10/12
-\actioncount=\count164
+\actioncount=\count166
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/fp/fp-basic.sty
 Package: fp-basic 1996/05/13
-\FP@xs=\count165
-\FP@xia=\count166
-\FP@xib=\count167
-\FP@xfa=\count168
-\FP@xfb=\count169
-\FP@rega=\count170
-\FP@regb=\count171
-\FP@regs=\count172
-\FP@times=\count173
+\FP@xs=\count167
+\FP@xia=\count168
+\FP@xib=\count169
+\FP@xfa=\count170
+\FP@xfb=\count171
+\FP@rega=\count172
+\FP@regb=\count173
+\FP@regs=\count174
+\FP@times=\count175
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/fp/fp-addons.sty
 Package: fp-addons 1995/03/15
@@ -1258,7 +1263,7 @@ Package: fp-pas 1994/08/29
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/fp/fp-random.sty
 Package: fp-random 1995/02/23
-\FPseed=\count174
+\FPseed=\count176
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/fp/fp-eqn.sty
 Package: fp-eqn 1995/04/03
@@ -1272,29 +1277,29 @@ Package: fp-eval 1995/04/03
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen270
 \WF@size=\dimen271
-\c@WF@wrappedlines=\count175
+\c@WF@wrappedlines=\count177
 \WF@box=\box54
 \WF@everypar=\toks50
 Package: wrapfig 2003/01/31  v 3.6
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count176
+\lst@mode=\count178
 \lst@gtempboxa=\box55
 \lst@token=\toks51
-\lst@length=\count177
+\lst@length=\count179
 \lst@currlwidth=\dimen272
-\lst@column=\count178
-\lst@pos=\count179
+\lst@column=\count180
+\lst@pos=\count181
 \lst@lostspace=\dimen273
 \lst@width=\dimen274
-\lst@newlines=\count180
-\lst@lineno=\count181
+\lst@newlines=\count182
+\lst@lineno=\count183
 \lst@maxwidth=\dimen275
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count182
-\lst@skipnumbers=\count183
+\c@lstnumber=\count184
+\lst@skipnumbers=\count185
 \lst@framebox=\box56
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/listings/listings.cfg
@@ -1312,7 +1317,7 @@ LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
-\g_MT_multlinerow_int=\count184
+\g_MT_multlinerow_int=\count186
 \l_MT_multwidth_dim=\dimen276
 \origjot=\skip95
 \l_MT_shortvdotswithinadjustabove_dim=\dimen277
@@ -1324,14 +1329,14 @@ LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/multibib/multibib.sty
 Package: multibib 2008/12/10 v1.4 Multiple bibliographies for one document.
-\mb@biblabelwidth=\count185
+\mb@biblabelwidth=\count187
 )
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/sttools/flushend.sty
 Package: flushend 2016/06/21 v3.2 Balancing columns in twocolumn mode
 \flushend@@lastskip@a=\skip96
 \flushend@@lastskip@b=\skip97
 \flushend@@lastskip@c=\skip98
-\flushend@@penalty@a=\count186
+\flushend@@penalty@a=\count188
 \flushend@@lastkern@a=\dimen283
 \var@@temp@spread=\dimen284
 \var@@temp@a=\dimen285
@@ -1347,7 +1352,7 @@ Package: flushend 2016/06/21 v3.2 Balancing columns in twocolumn mode
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count187
+\etb@tempcnta=\count189
 ))
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libr
 aries/tikzlibraryarrows.code.tex
@@ -1445,7 +1450,7 @@ File: tikzlibrarypositioning.code.tex 2008/10/06 v3.0.1a (rcs-revision 1.7)
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/todonotes/todonotes.sty
 Package: todonotes 2015/07/09 .dtx Todonotes source and documentation.
 Package: todonotes 2012/07/25
-\c@@todonotes@numberoftodonotes=\count188
+\c@@todonotes@numberoftodonotes=\count190
 )
 \@auxoutadd=\write6
 
@@ -1455,62 +1460,62 @@ Package: todonotes 2012/07/25
  (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 450.
+LaTeX Font Info:    Checking defaults for OML/nxlmi/m/it on input line 452.
 LaTeX Font Info:    Try loading font information for OML+nxlmi on input line 45
-0.
+2.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/newtx/omlnxlmi.fd
 File: omlnxlmi.fd 2013/11/19 Fontinst v1.933 font definitions for OML/nxlmi.
 )
-LaTeX Font Info:    ... okay on input line 450.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 450.
-LaTeX Font Info:    ... okay on input line 450.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 450.
-LaTeX Font Info:    ... okay on input line 450.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 450.
-LaTeX Font Info:    ... okay on input line 450.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 450.
-LaTeX Font Info:    ... okay on input line 450.
-LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 450.
-LaTeX Font Info:    Try loading font information for U+ntxexa on input line 450
+LaTeX Font Info:    ... okay on input line 452.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 452.
+LaTeX Font Info:    ... okay on input line 452.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 452.
+LaTeX Font Info:    ... okay on input line 452.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 452.
+LaTeX Font Info:    ... okay on input line 452.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 452.
+LaTeX Font Info:    ... okay on input line 452.
+LaTeX Font Info:    Checking defaults for U/ntxexa/m/n on input line 452.
+LaTeX Font Info:    Try loading font information for U+ntxexa on input line 452
 .
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/newtx/untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    ... okay on input line 450.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 450.
-LaTeX Font Info:    ... okay on input line 450.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 450.
-LaTeX Font Info:    ... okay on input line 450.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 450.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 450.
+LaTeX Font Info:    ... okay on input line 452.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 452.
+LaTeX Font Info:    ... okay on input line 452.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 452.
+LaTeX Font Info:    ... okay on input line 452.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 452.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 452.
 
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 450.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 450.
+LaTeX Font Info:    ... okay on input line 452.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 452.
 LaTeX Font Info:    Try loading font information for LMS+ntxsy on input line 45
-0.
+2.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/newtx/lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 450.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 450.
+LaTeX Font Info:    ... okay on input line 452.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 452.
 LaTeX Font Info:    Try loading font information for LMX+ntxexx on input line 4
-50.
+52.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/newtx/lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 450.
+LaTeX Font Info:    ... okay on input line 452.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 450.
+(Font)              scaled to size 8.0pt on input line 452.
 LaTeX Font Info:    Try loading font information for OT1+LinuxLibertineT-TLF on
- input line 450.
+ input line 452.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/libertine/OT1LinuxLibertineT-
 TLF.fd
@@ -1518,50 +1523,50 @@ File: OT1LinuxLibertineT-TLF.fd 2012/11/26 (autoinst) Font definitions for OT1/
 LinuxLibertineT-TLF.
 )
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 450.
+(Font)              scaled to size 8.0pt on input line 452.
 <<ot1.cmap>>
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.2pt on input line 450.
+(Font)              scaled to size 6.2pt on input line 452.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 450.
+(Font)              scaled to size 5.5pt on input line 452.
 <<oml.cmap>>
-LaTeX Font Info:    Try loading font information for U+msa on input line 450.
+LaTeX Font Info:    Try loading font information for U+msa on input line 452.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 450.
+LaTeX Font Info:    Try loading font information for U+msb on input line 452.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+ntxmia on input line 450
+LaTeX Font Info:    Try loading font information for U+ntxmia on input line 452
 .
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/newtx/untxmia.fd
 File: untxmia.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxmia.
 )
-LaTeX Font Info:    Try loading font information for U+ntxsym on input line 450
+LaTeX Font Info:    Try loading font information for U+ntxsym on input line 452
 .
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/newtx/untxsym.fd
 File: untxsym.fd 2015/03/20 Fontinst v1.933 font definitions for U/ntxsym.
 )
-LaTeX Font Info:    Try loading font information for U+ntxsyc on input line 450
+LaTeX Font Info:    Try loading font information for U+ntxsyc on input line 452
 .
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
-LaTeX Font Info:    Try loading font information for U+stmry on input line 450.
+LaTeX Font Info:    Try loading font information for U+stmry on input line 452.
 
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
 
 LaTeX Font Warning: Font shape `U/stmry/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 450.
+(Font)              size <5> substituted on input line 452.
 
-LaTeX Info: Redefining \microtypecontext on input line 450.
+LaTeX Info: Redefining \microtypecontext on input line 452.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
@@ -1577,7 +1582,7 @@ Package microtype Info: Loading generic settings for font family
 (microtype)             See the microtype manual for details.
 ABD: EveryShipout initializing macros
 \AtBeginShipoutBox=\box83
-Package hyperref Info: Link coloring OFF on input line 450.
+Package hyperref Info: Link coloring OFF on input line 452.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1585,11 +1590,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count189
+\c@section@level=\count191
 )
-LaTeX Info: Redefining \ref on input line 450.
-LaTeX Info: Redefining \pageref on input line 450.
-LaTeX Info: Redefining \nameref on input line 450.
+LaTeX Info: Redefining \ref on input line 452.
+LaTeX Info: Redefining \pageref on input line 452.
+LaTeX Info: Redefining \nameref on input line 452.
  (./main.out) (./main.out)
 \@outlinefile=\write7
 \openout7 = `main.out'.
@@ -1597,16 +1602,16 @@ LaTeX Info: Redefining \nameref on input line 450.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count190
+\scratchcounter=\count192
 \scratchdimen=\dimen288
 \scratchbox=\box84
-\nofMPsegments=\count191
-\nofMParguments=\count192
+\nofMPsegments=\count193
+\nofMParguments=\count194
 \everyMPshowfont=\toks54
-\MPscratchCnt=\count193
+\MPscratchCnt=\count195
 \MPscratchDim=\dimen289
-\MPnumerator=\count194
-\makeMPintoPDFobject=\count195
+\MPnumerator=\count196
+\makeMPintoPDFobject=\count197
 \everyMPtoPDFconversion=\toks55
 ) (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1659,8 +1664,8 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@mv@tabular=\count196
-\c@mv@boldtabular=\count197
+\c@mv@tabular=\count266
+\c@mv@boldtabular=\count267
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
@@ -1675,15 +1680,15 @@ Package caption Info: End \AtBeginDocument code.
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.14} into 
 your preamble.
- on input line 450.
+ on input line 452.
 
-\c@lstlisting=\count266
+\c@lstlisting=\count268
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 484.
+(Font)              scaled to size 14.4pt on input line 486.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 484.
+(Font)              scaled to size 14.4pt on input line 486.
 LaTeX Font Info:    Try loading font information for T1+LinuxBiolinumT-TLF on i
-nput line 484.
+nput line 486.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/libertine/T1LinuxBiolinumT-TL
 F.fd
@@ -1693,21 +1698,21 @@ uxBiolinumT-TLF.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/bx/n' in size <14.4> not 
 available
 (Font)              Font shape `T1/LinuxBiolinumT-TLF/b/n' tried instead on inp
-ut line 484.
+ut line 486.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 484.
+(Font)              scaled to size 14.4pt on input line 486.
 Package microtype Info: Loading generic settings for font family
 (microtype)             `LinuxBiolinumT-TLF' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 484.
+(Font)              scaled to size 14.4pt on input line 486.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 484.
+(Font)              scaled to size 10.95pt on input line 486.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 484.
+(Font)              scaled to size 10.95pt on input line 486.
 LaTeX Font Info:    Try loading font information for TS1+LinuxLibertineT-TLF on
- input line 484.
+ input line 486.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/libertine/TS1LinuxLibertineT-
 TLF.fd
@@ -1715,25 +1720,25 @@ File: TS1LinuxLibertineT-TLF.fd 2012/11/26 (autoinst) Font definitions for TS1/
 LinuxLibertineT-TLF.
 )
 LaTeX Font Info:    Font shape `TS1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 484.
+(Font)              scaled to size 8.0pt on input line 486.
 Package microtype Info: Loading generic settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 484.
+(Font)              scaled to size 9.0pt on input line 486.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 9.0pt on input line 484.
+(Font)              scaled to size 9.0pt on input line 486.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 484.
+(Font)              scaled to size 9.0pt on input line 486.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 484.
+(Font)              scaled to size 9.0pt on input line 486.
 Package microtype Info: Loading generic settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 484.
+(Font)              scaled to size 7.3pt on input line 486.
  (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 ) (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -1741,11 +1746,11 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 484.
+(hyperref)                removing `\\' on input line 486.
 
 
 Class acmart Warning: The command \terms{} is obsolete. I am going to ignore it
- on input line 489.
+ on input line 491.
 
 (./prelims.tex
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
@@ -1756,38 +1761,42 @@ ailable
 ut line 3.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/b/n' will be
 (Font)              scaled to size 10.0pt on input line 3.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 8.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 10.0pt on input line 13.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 7.3pt on input line 13.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 5.5pt on input line 13.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 30.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 10.0pt on input line 112.
- [1.1{/home/pnovotny/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
-]
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 138.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 8.0pt on input line 138.
-LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 6.2pt on input line 138.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.2pt on input line 138.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 175.
+(Font)              scaled to size 10.0pt on input line 6.
 
-Overfull \hbox (8.74901pt too wide) in paragraph at lines 175--177
+
+Package natbib Warning: Citation `POPL17PAPER' on page 1 undefined on input lin
+e 6.
+
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 11.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 10.0pt on input line 16.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 7.3pt on input line 16.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 5.5pt on input line 16.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
+(Font)              scaled to size 10.0pt on input line 33.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
+(Font)              scaled to size 10.0pt on input line 115.
+[1.1{/home/pnovotny/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 7.3pt on input line 141.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 8.0pt on input line 141.
+LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
+(Font)              scaled to size 6.2pt on input line 141.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 6.2pt on input line 141.
+
+Overfull \hbox (8.74901pt too wide) in paragraph at lines 178--180
 []\T1/LinuxLibertineT-TLF/b/n/10 [PETR: SAY SOME-THING ABOUT PRED-I-CATE SAT-IS
 -FAC-TION.] [PETR: EX-PLAIN BOREL-
  []
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 194.
+(Font)              scaled to size 5.5pt on input line 197.
 [2.2]
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
@@ -1797,17 +1806,17 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 
 [3.3]
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 301.
+(Font)              scaled to size 10.0pt on input line 304.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 7.3pt on input line 301.
+(Font)              scaled to size 7.3pt on input line 304.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 5.5pt on input line 301.
+(Font)              scaled to size 5.5pt on input line 304.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 8.0pt on input line 365.
+(Font)              scaled to size 8.0pt on input line 368.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 6.2pt on input line 365.
+(Font)              scaled to size 6.2pt on input line 368.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 8.0pt on input line 365.
+(Font)              scaled to size 8.0pt on input line 368.
  [4.4]
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
@@ -1816,7 +1825,7 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [5.5]
-Overfull \hbox (3.0958pt too wide) in paragraph at lines 843--853
+Overfull \hbox (3.0958pt too wide) in paragraph at lines 846--856
 \T1/LinuxLibertineT-TLF/m/n/10 (-20) each sched-uler $\OML/nxlmi/m/it/10 ^^[$ \
 T1/LinuxLibertineT-TLF/m/n/10 (-20) and for each ini-tial val-u-a-tion $\OT1/Li
 nuxLibertineT-TLF/sb/n/10 x[] \LMS/ntxsy/m/n/10 2 \U/ntxmia/m/it/10 ^^D[]$ \T1/
@@ -1828,15 +1837,15 @@ xsy/m/n/10 gº \U/ntxmia/m/it/10 =
 [6.6]
 \invrun=\box85
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 1242.
+(Font)              scaled to size 7.0pt on input line 1245.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 1282.
+(Font)              scaled to size 9.0pt on input line 1285.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 9.0pt on input line 1282.
+(Font)              scaled to size 9.0pt on input line 1285.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 9.0pt on input line 1282.
+(Font)              scaled to size 9.0pt on input line 1285.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 1282.
+(Font)              scaled to size 9.0pt on input line 1285.
 ) (./lexicographic.tex
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
@@ -1894,18 +1903,11 @@ Package natbib Warning: Citation `xxx' on page 14 undefined on input line 9.
 
 [14.14]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/it' will be
-(Font)              scaled to size 10.0pt on input line 80.
+(Font)              scaled to size 10.0pt on input line 85.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 7.3pt on input line 80.
+(Font)              scaled to size 7.3pt on input line 85.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 5.5pt on input line 80.
-
-
-Package caption Warning: \label without proper reference on input line 181.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `fig:uniint' on page 15 undefined on input line 98.
+(Font)              scaled to size 5.5pt on input line 85.
 
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
@@ -1917,30 +1919,19 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 \uniinto=\box86
 \uniintt=\box87
 \unintthree=\box88
- [16.16]
+\unintfour=\box89
 
-Package caption Warning: \label without proper reference on input line 181.
-See the caption package documentation for explanation.
+Underfull \hbox (badness 10000) in paragraph at lines 224--255
+[][]
+ []
 
+[16.16]
 
-LaTeX Warning: Reference `fig:uniint' on page 17 undefined on input line 219.
-
-
-LaTeX Warning: Reference `xxx' on page 17 undefined on input line 221.
-
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 8.0pt on input line 221.
-
-Package natbib Warning: Citation `xxx' on page 17 undefined on input line 255.
+Package natbib Warning: Citation `xxx' on page 17 undefined on input line 326.
 
 
-LaTeX Warning: Reference `xxx' on page 17 undefined on input line 255.
+LaTeX Warning: Reference `xxx' on page 17 undefined on input line 329.
 
-
-LaTeX Warning: Reference `xxx' on page 17 undefined on input line 255.
-
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 7.0pt on input line 266.
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
@@ -1948,25 +1939,29 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [17.17]
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
+(Font)              scaled to size 7.0pt on input line 353.
+ [18.18]
 
-LaTeX Warning: Reference `xxx' on page 18 undefined on input line 316.
+LaTeX Warning: Reference `xxx' on page 19 undefined on input line 408.
 
-[18.18]) (./extensions.tex) (./main.bbl)
-
-Package natbib Warning: There were undefined citations.
-
+) (./extensions.tex) (./main.bbl
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[19.19]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 535.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 535.
+[19.19])
+
+Package natbib Warning: There were undefined citations.
+
+[20.20]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 537.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 537.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 535.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 535.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 537.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 537.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 0BB097F61806616D62BB1DC2643515A7;2706.
 
@@ -1977,20 +1972,20 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 535.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 537.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 44617 strings out of 493644
- 960246 string characters out of 6150875
- 1197460 words of memory out of 5000000
- 46320 multiletter control sequences out of 15000+600000
- 329059 words of font info for 614 fonts, out of 8000000 for 9000
+ 44729 strings out of 493644
+ 961963 string characters out of 6150875
+ 1210129 words of memory out of 5000000
+ 46419 multiletter control sequences out of 15000+600000
+ 325047 words of font info for 614 fonts, out of 8000000 for 9000
  944 hyphenation exceptions out of 8191
- 62i,18n,96p,1716b,7022s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,18n,96p,1716b,7182s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/liberti
 ne/lbtn_ki75ao.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/newt
 x/libertinealt.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/libe
@@ -2026,10 +2021,10 @@ syb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/txfonts/txsy
 c.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/txsys.pf
 b></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlr.pfb></h
 ome/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlri.pfb>
-Output written on main.pdf (19 pages, 844132 bytes).
+Output written on main.pdf (20 pages, 849057 bytes).
 PDF statistics:
- 532 PDF objects out of 1000 (max. 8388607)
- 446 compressed objects within 5 object streams
- 150 named destinations out of 1000 (max. 500000)
- 86649 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 557 PDF objects out of 1000 (max. 8388607)
+ 470 compressed objects within 5 object streams
+ 161 named destinations out of 1000 (max. 500000)
+ 86137 words of extra memory for PDF output out of 89155 (max. 10000000)
 

@@ -61,7 +61,12 @@ following example.
 %both functions is given in \AppendixMaterial, we illustrate them in the 
 %following example.
 
-\textbf{[PETR: INSERT EXAMPLE]}
+%\textbf{[PETR: INSERT EXAMPLE]}
+\begin{example}
+Consider the program $\program$ in Figure~\ref{fig:uniint4} and its associated 
+pCFG. Then $\loops(\program)=\{\loc_2,\loc_3\}$ and 
+$\slice(\program)=\{\loc_0,\loc_1,\loc_4,\loc^{\lout}\}$.
+\end{example}
 
 Given an invariant map $\inv$, we say that a 1-dimensional measurable map $\lem$ for $\pCFG_{\program}$ is $\eps$-$\inv$-ranking in location $\loc$, if for each $\vec{x}\in\inv(\loc)$  it holds $\preexp{\lem}(\loc,\vec{x})\leq \lem(\loc,\vec{x})-\eps.$ The map $\lem$ is $\inv$-\emph{unaffected} in location $\loc$ if it is $0$-ranking in $\loc$, and $\inv$-non-negative in $\loc$ if $\lem(\loc,\vec{x})\geq 0$ for all $\vec{x} \in \inv(\loc)$. A measurable map $\lem$ is propositionally linear, if each function $\lem(\loc)$ is of the form $\indicator{G_1}\cdot E_1 + \cdots \indicator{G_k}\cdot E_k$, where each $\indicator{G_i}$ is an indicator function of some polyhedron and each $E_i$ is a linear expression.
 
@@ -101,8 +106,8 @@ assignment on line 5. For the inner loop there exists (in both cases) a
 1-dimensional linear ranking supermartingale whose value in each location is 
 equal to $c+d_{\loc}$, where $d_{\loc}$ is a location-specific constant. Since 
 the expected change of $c$ in each loop step is $-0.5$, this is indeed a LRSM. 
-Also, in both cases, a LEM of the form $x+d_{\loc}$, again for some suitable 
-location-specific constants $d_{\loc}$, is a PVSM for the outer loop, as $x$ 
+Also, in both cases, a LEM of the form $x+d_{\loc}'$, again for some suitable 
+location-specific constants $d_{\loc}'$, is a PVSM for the outer loop, as $x$ 
 decreases and is non-negative within the outer loop and its expected change is 
 non-negative within the inner loop (more precisely, the inner-loop expected 
 change of $x$ zero in the left program and $-\frac{x}{4} - \frac{3}{4}$ in the 
@@ -178,9 +183,9 @@ od
 	\usebox{\uniinto}
 	\hspace{1cm}
 	\usebox{\uniintt}
-\label{fig:uniint}
 \caption{Examples of programs with (right) and without (left) uniformly 
 integrable PVSMs.}
+\label{fig:uniint}
 \end{figure}
 
 \lstset{language=affprob}
@@ -188,27 +193,79 @@ integrable PVSMs.}
 \newsavebox{\unintthree}
 \begin{lrbox}{\unintthree}
 	\begin{lstlisting}[mathescape]
-	while $x\geq 0$ do
+while $x\geq 0$ do
 	while $y\geq 0$ do
-	z:=x;
-	while $z\geq 0$ do
-	z:=z-1;
-	x:=x-1
+		$z:=x$;
+		while $z\geq 0$ do
+			$z:=z-1$;
+			$x:=x-1$
+		od;
+		$y:=y-1$
 	od;
-	y:=y-1
+	$x:=x+$sample$(\mathit{Uniform[-3,1]})$
+od
+	\end{lstlisting}
+\end{lrbox}
+\newsavebox{\unintfour}
+\begin{lrbox}{\unintfour}
+	\begin{lstlisting}[mathescape]
+while $x\geq 0 $ do
+	$y:=x$;
+	while $y\geq 1$ do
+		$y:=y+$sample$(\mathit{Uniform[-3,1]})$
 	od;
 	$x:=x-1$
-	od
+od
 	\end{lstlisting}
 \end{lrbox}
 \begin{figure}[t]
 	%%\centering
+	\begin{subfigure}{0.45\textwidth}
+		\usebox{\unintfour}
+		\vspace{0.2cm}
+		\begin{tikzpicture}[x=1.8cm,y=1.4cm]
+		\node[det] (init) at (0,0) {$\loc_0$};
+		\node[det] (fin) at (0,-1) {$\loc^{\lout}$};
+		\node[det] (as1) at (1,0) {$\loc_1$};
+		\node[det] (inner) at (2,0) {$\loc_2$};
+		\node[det] (as2) at (2,-1) {$\loc_3$};
+		\node[det] (as3) at (3,0) {$\loc_4$};
+%		
+		\draw[tran] (init) to node[font=\scriptsize,draw, fill=white, 
+		rectangle,pos=0.5] {$x<0$} (fin);
+		\draw[tran] (init) to node[font=\scriptsize,draw, fill=white, 
+		rectangle,pos=0.5] {$x\geq 0$} (as1);
+		\draw[tran] (as1) -- node[auto,font=\scriptsize] {$y:=x$} (inner);
+		\draw[tran] (inner) to node[font=\scriptsize,draw, fill=white, 
+		rectangle,pos=0.5] {$y<1$} (as3);
+		\draw[tran] (inner) to node[font=\scriptsize,draw, fill=white, 
+		rectangle,pos=0.5] {$y\geq 1$} (as2);
+		\draw[tran,rounded corners] (as2) -- (1.25,-1) -- 
+		node[font=\scriptsize, 
+		label={[xshift=-0.4cm,yshift=-0.2cm,font=\scriptsize] 
+		{$y:=\dots$}}] 
+		{} 
+		(inner);
+		\draw[tran, rounded corners] (as3) -- (3,0.5) -- node[font=\scriptsize, 
+		label={[font=\scriptsize, yshift=-0.1cm] {$x:=x-1$}}] {} (0,0.5) -- 
+		(init);
+		\end{tikzpicture}
+		%	\hspace{1cm}
+		%	\usebox{\uniintt}
+		\caption{Example for slicing illustration: program and its pCFG.}
+		\label{fig:uniint4}
+	\end{subfigure}
+	\hspace{0.5cm}
+	\begin{subfigure}{0.45\textwidth}
 	\usebox{\unintthree}
 	%	\hspace{1cm}
 	%	\usebox{\uniintt}
-	\label{fig:uniint2}
 	\caption{Program where the outer loop does not have a PVSM that 
-		typechecks.}.
+		typechecks.}
+	\label{fig:uniint2}
+	\end{subfigure}
+\caption{Program illustrations.}
+\label{fig:comp-ex}
 \end{figure}
 
 Indeed, taking a closer look at typesystem in~\cite{HolgerPOPL}, there are several reasons for typechecking of PVSM to fail. The major ones are:
@@ -218,7 +275,16 @@ A PVSM $\lem$ for \PP{} $\program$ will not typecheck if $\program$ has a
 nested loop in which the value of $\lem$ can change unboundedly in a single 
 step (see Figure~\ref{fig:uniint}). 
 \item
-A PVSM $\lem$ for  \PP{} $\program$ will not typecheck if $\program$ has a nested loop which itself has a nested loop in which some variable appearing in some expression in $\lem$ is modified, see Example~\ref{xxx}.\footnote{Both these statements regarding typechecking failure are somewhat simplified, even in these two cases the PVSM might sometimes typecheck correctly, in case where the nested loops are followed by assignments which completely overwrite the effect of these loops, e.g. if \textbf{[PETR: POINTER TO AN EXAMPLE]}. However, the statements intuitively summarize the major reasons for typechecking failure. }
+A PVSM $\lem$ for  \PP{} $\program$ will not typecheck if $\program$ has a 
+nested loop which itself has a nested loop in which some variable appearing in 
+some expression in $\lem$ is modified, see 
+Figure~\ref{fig:uniint2}.\footnote{Both these statements regarding typechecking 
+failure are somewhat simplified, even in these two cases the PVSM might 
+sometimes typecheck correctly, in case where the nested loops are followed by 
+assignments which completely overwrite the effect of these loops, e.g. if 
+the program in Figure~\ref{fig:uniint2} contained an assignment $x:=0$. 
+However, the statements intuitively 
+summarize the major reasons for typechecking failure. }
 \end{compactenum}
 
 
@@ -252,8 +318,29 @@ Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do }
 \textbf{[PETR: TBD]}
 \end{proof}
 
-Hence, NCSMs effectively trade the uniform integrability condition for non-negativity over the whole program. We believe that the latter condition is substantially easier to impose and check automatically, especially in the case of affine probabilistic programs and (propositionally) linear NCSMs: for \APP{}s, synthesizing NCSM entails synthesizing sufficient program invariants (for which there is a good automated tool support~\cite{xxx}) that overapproximate set of reachable configurations and encoding the rankingn, unaffection, and non-negativity conditions into a collection of linear constraints (as for general LinLexRSMs in Section~\ref{xxx}). Examples~\ref{xxx} show instances where attempts to prove of a.s. termination via PVSMs fail while proofs via LinNCSMs work. 
+Hence, NCSMs effectively trade the uniform integrability condition for 
+non-negativity over the whole program. We believe that the latter condition is 
+substantially easier to impose and check automatically, especially in the case 
+of affine probabilistic programs and (propositionally) linear NCSMs: for 
+\APP{}s, synthesizing NCSM entails synthesizing sufficient program invariants 
+(for which there is a good automated tool support~\cite{xxx}) that 
+overapproximate set of reachable configurations and encoding the rankingn, 
+unaffection, and non-negativity conditions into a collection of linear 
+constraints (as for general LinLexRSMs in Section~\ref{xxx}). 
+Figures~\ref{fig:uniint} and~\ref{fig:uniint2} show instances where attempts to 
+to prove of a.s. termination via PVSMs fail while proofs via LinNCSMs work. 
 
+\begin{example}
+For all programs in Figures~\ref{fig:uniint} and~\ref{fig:uniint2} there are 
+LinNCSMs for all the loops in the program, which shows that the programs 
+terminate 
+a.s. In Figure~\ref{fig:uniint}, for both programs the inner loops have 
+LinNCSMs of the form $c+d_{\loc}$, for $d_{\loc}$ a location-specific constant, 
+while the outer loops have LinNCSMs of the form $x+d_{\loc}'$. In 
+Figure~\ref{fig:uniint2} the program similarly has LinNCSMs defined, proceeding 
+from the innermost loop and neglecting the location-specific constants, by 
+variables $z$, $y$, $x$.
+\end{example}
 %While we defined NCSMs as one-dimensional measurable maps to make them analogous to 
 
 Using LinNCSMs we can devise the following simple algorithm for compositional proving of almost-sure termination of \APP{}s:
@@ -279,7 +366,12 @@ $\linsystem \leftarrow$ system of lin. constraints encoding the existence of Lin
 \label{algo:compositional}
 \end{algorithm}
 
-The soundness of the algorithm follows from Theorems~\ref{thm:nonneg-comp} and \ref{thm:holger-comp}. Note that we use the PVSM-based algorithm of~\cite{HolgerPOPL} as a back-up sub-procedure for the case when LinNCSM-based proof fails. Hence, Algorithm~\ref{algo:compositional} can compositionally prove a.s. termination of strictly larger class of programs than the PVSM-based algorithm alone.
+The soundness of the algorithm follows from Theorems~\ref{thm:nonneg-comp} and 
+\ref{thm:holger-comp}. Note that we use the PVSM-based algorithm 
+of~\cite{HolgerPOPL} as a back-up sub-procedure for the case when LinNCSM-based 
+proof fails. Hence, Algorithm~\ref{algo:compositional} can compositionally 
+prove a.s. termination of strictly larger class of programs than the PVSM-based 
+algorithm alone.
 
 To summarize, the novelty of NCSMs is the following:
 \begin{compactenum}
