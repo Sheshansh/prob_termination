@@ -1,5 +1,5 @@
 var i,j,N;
-[j>-5]
+[N>j]
 i := N;
 while i>0 do
 if prob(0.5) then

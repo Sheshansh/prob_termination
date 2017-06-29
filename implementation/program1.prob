@@ -1,0 +1,11 @@
+var x,c;
+while x>= 0 do
+    c:=1;
+    while x>= 1 and c>= 1 do
+        if prob(0.5) then x:=0
+            else x:=2*x-2 fi;
+        if prob(0.5) then c:=0
+            else skip fi
+    od;
+    x:=x-1
+od

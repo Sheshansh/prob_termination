@@ -3,13 +3,13 @@ while x>=0 do
 if prob(0.5) then
 	while y>=0 do 
 if prob(0.5) then
-		y:=y-1 
+		y:= [-2,2]+y-1 
 else skip fi 
 	od;
-	x:= x-1;
+	x:= [-2,2]+ x-1;
 	while y<=n do
 if prob(0.5) then
-		y:=y+1
+		y:= [-2,2]+y+1
 else skip fi 
 	od
 else skip fi 

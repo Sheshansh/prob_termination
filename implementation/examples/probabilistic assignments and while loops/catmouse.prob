@@ -4,9 +4,9 @@ if m>n and x<=n+1 then
 if prob(0.1) then
 
 		if x<=m then
-			x := x+1
+			x := [-2,2]+ x+1
 		else
-			x := x-1
+			x := [-2,2]+ x-1
 		fi
 else skip fi
 		
