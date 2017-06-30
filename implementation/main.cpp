@@ -462,8 +462,6 @@ int main(){
 	double start_time = time(0);
 	int start,end;
 	char* input = new char[MAXL];
-	// Setting precision to the printing of the double variables in program
-	// cout<<fixed<<setprecision(10);
 	int r,i;
 	for(i=0;(r=getchar())!=EOF;i++){
 		if(i>MAXL){
@@ -473,10 +471,15 @@ int main(){
 		input[i]=r;
 	}
 	input[i]=0;
+/*
+
+	program is the string used for generating the pCFG and stores the program as a whole
+
+*/
 	program=input;
 	delete[] input;
 	int begin = 0;
-	int endprog = program.length();
+	int endprog = program.length();	
 	skip_spaces(begin,endprog);
 	nVariables = find_variables(begin,endprog); //To find the number of different variables of the type x_i in the program
 	start = ++last_used_label;
