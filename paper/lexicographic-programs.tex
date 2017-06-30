@@ -6,7 +6,13 @@ programs. Hence, for the rest of this section we fix a \PP{} $\program$ and the
 associated pCFG 
 $\pCFG_\program=(\locs,\pvars,\locinit,\vecinitset,\transitions,\updates,\probdist,\guards)$.
 
-We aim to define a function assigning a non-negative vector to each configuration (so called measurable map) such that in each point of computation, the expected value of the function after performing one more computational step is smaller (in lexicographic ordering) than the current one. This property can be formalized using the standard  notion of \emph{pre-expectation}~\cite{xxx}.
+We aim to define a function assigning a non-negative vector to each 
+configuration (so called measurable map) such that in each point of 
+computation, the expected value of the function after performing one more 
+computational step is smaller (in lexicographic ordering) than the current one. 
+We formalize this property below.
+%This property can be formalized using the standard  notion of 
+%\emph{pre-expectation}~\cite{xxx}.
 
 \begin{definition}[Measurable Maps and Linear Expression Maps]
 A 1-dimensional \emph{measurable map} for a \PP{} $\program$ is a  
@@ -19,61 +25,177 @@ Each 1-dimensional measurable map $\lem$ and location $\loc$ determines a functi
 which takes as an argument an $|\pvars|$-dimensional vector. We use $\lem(\loc,\vec{x})$ as a shorthand 
 notation for $\lem(\loc)(\vec{x})$.
 
-\begin{definition}[Pre-Expectation]
-	Let $\lem$ 
-	be 1-dimensional measurable map for a \PP{} $\program$.
-	%Let $\locs$ 
-	%be the set of locations of $\pCFG_P$ and $\pvars$ its set of program 
-	%variables. 
-	The 
-	pre-expectation of $\lem$ is a function $\preexp{\lem}\colon \locs\times 
-	\Rset^{|\pvars|} \rightarrow \Rset\cup\{\infty\}$ defined as follows:
-	\begin{compactitem} %\itemsep1pt \parskip0pt \parsep0pt
+We now formalize the notion of a transition in a pCFG being ranked by a 
+measurable map. We first define this notion for transitions that do not go out 
+of a probabilistic branching location, as these require a special treatment.
+
+\begin{definition}
+\label{def:rank1}
+Let $\lem$ be a measurable map, $(\loc,\vec{x})$ be a configuration such that 
+$\loc\not\in \locsPB$ and let 
+$\tau=(\loc,\loc')$ be a 
+transition outgoing from $\loc$. For an $\eps\geq 0$ we say that $\tau$ is 
+\emph{$\eps$-ranked by $\lem$ from $(\loc,\vec{x})$} if the following 
+conditions are 
+satisfied, depending on the type of $\loc$:
+\begin{compactitem} %\itemsep1pt \parskip0pt \parsep0pt
+%		\item 
+%		if $\loc$ is a probabilistic branching location, then
+%		$$\preexp{\lem}(\loc,\vec{x}):=\sum_{(\loc,\loc')\in\transitions} 
+%		Pr_{\loc}\left(\loc,\loc'\right)\cdot
+%		\lem(\loc',\vec{x});$$
 		\item 
-		if $\loc$ is a probabilistic branching location, then
-		$$\preexp{\lem}(\loc,\vec{x}):=\sum_{(\loc,\loc')\in\transitions} 
-		Pr_{\loc}\left(\loc,\loc'\right)\cdot
-		\lem(\loc',\vec{x});$$
-		\item 
-		if $\loc$ is a non-deterministic branching location, then
-		$$\preexp{\lem}(\loc,\vec{x}):=
-		\max_{(\loc,\loc')\in\transitions}\lem(\loc',\vec{x});$$
+		if $\loc$ is a deterministic or non-deterministic branching location, 
+		then
+		$$\lem(\loc',\vec{x}) \leq 
+		\lem(\loc,\vec{x})-\eps;$$
 		
 		%\item 
-		%$\mathrm{pre}_\eta(\loc,\mathbf{x}):=\min_{(\loc,id,\ell')\in\transitions}\eta\left(\loc',\mathbf{x}\right)$
+		
+%%$\mathrm{pre}_\eta(\loc,\mathbf{x}):=\min_{(\loc,id,\ell')\in\transitions}\eta\left(\loc',\mathbf{x}\right)$
 		% if $\loc$ is an angelic location;
+%		\item 
+%		if $\loc$ is a deterministic location, then there is 
+%exactly one 
+%		transition
+%		$\tau=(\loc,\loc')$ such that $\vec{x}\models G(\tau)$. We put 
+%$$\preexp{\lem}(\loc,\vec{x}):= \lem(\loc',\vec{x})$$.
 		\item 
-		if $\loc$ is a deterministic location, then for each $\vec{x}$ the value 
-		$\preexp{\lem}(\loc,\vec{x})$ is determined as follows: there is exactly one 
-		transition
-		$\tau=(\loc,\loc')$ such that $\vec{x}\models G(\tau)$. We put $$\preexp{\lem}(\loc,\vec{x}):= \lem(\loc',\vec{x})$$.
-		\item 
-		If $\loc$ is an assignment location, then there is exactly one transition $\tau=(\loc,\loc')$ outgoing from $\loc$.
-		We distinguish 
-		three cases, depending on $\updates(\tau)=(j,\up)$ (recall that $\up$ is an update element):
+		If $\loc$ is an assignment location, then we distinguish 
+		three cases, depending on $\updates(\tau)=(j,\up)$ (recall that $\up$ 
+is an update element):
 		\begin{compactitem}
-			\item If $\up\colon \Rset^{|\pvars|}\rightarrow \Rset$ is a Borel-measurable function, then 
-			$$\preexp{\lem}(\loc,\vec{x}):= \lem(\loc',\vec{x}(j\leftarrow \up(\vec{x}))).$$
-			\item If $\up$ is a distribution $d$, then $$ \preexp{\lem}(\loc,\vec{x}):= 
-			\lem(\loc',\vec{x}(j\leftarrow \E[d])),$$ where $\E[d]$ is the expected value of the 
+			\item If $\up\colon \Rset^{|\pvars|}\rightarrow \Rset$ is a 
+Borel-measurable function, then we require
+			$$\lem(\loc',\vec{x}(j\leftarrow 
+\up(\vec{x}))) \leq \lem(\loc,\vec{x})-\eps$$
+			\item If $\up$ is a distribution $d$, then we require $$ 
+			\lem(\loc',\vec{x}(j\leftarrow \E[d])) \leq 
+			\lem(\loc,\vec{x})-\eps,$$ 
+			where $\E[d]$ is the 
+expected value of the 
 			distribution $d$.
 			\item 
-			If $\up$ is a set, then $$ \preexp{\lem}(\loc,\vec{x}):= \sup_{a\in\up}
-			\lem(\loc',\vec{x}(j \leftarrow a)).$$
+			If $\up$ is a set, then we require $$\sup_{a\in\up}
+			\lem(\loc',\vec{x}(j \leftarrow a)) \leq \lem(\loc,\vec{x})-\eps.$$
 		\end{compactitem}
-		%$\mathrm{pre}_\eta(\loc,\mathbf{x}):=\eta(\loc',\expv_{\rvars}\left(f(\vec{x},\mathbf{r})\right))$
-		% if $\loc$ is a deterministic location, $(\loc,f,\loc')\in\transitions$ and 
+		
+%%$\mathrm{pre}_\eta(\loc,\mathbf{x}):=\eta(\loc',\expv_{\rvars}\left(f(\vec{x},\mathbf{r})\right))$
+		% if $\loc$ is a deterministic location, 
+%$(\loc,f,\loc')\in\transitions$ and 
 		%$\mathbf{x}\in G(\loc,f,\loc')$, where 
-		%$\expv_{\rvars}\left(f(\vec{x},\mathbf{r})\right)$ is the expected value of 
-		%$f(\vec{x},\cdot)$. %on $\rvars$ if $\vec{x}$ is treated as a constant vector.
+		%$\expv_{\rvars}\left(f(\vec{x},\mathbf{r})\right)$ is the expected 
+%value of 
+		%$f(\vec{x},\cdot)$. %on $\rvars$ if $\vec{x}$ is treated as a constant 
+%%vector.
 	\end{compactitem}
-	%\end{definition}
 \end{definition}
 
-Intuitively, a pre-expectation of $\lem$ is a 
-function which for each configuration $(\loc,\vec{x})$ returns the maximal
-expected value of $\lem$ after one step is made from this configuration, where 
-the maximum is taken over all possible non-deterministic choices.
+Since ranking supermartingales are required to decrease on average, for 
+individual transitions outgoing from $\locsPB$ it does not make sense to say 
+that they are ranked or not. Instead, for each $\loc\in\locsPB$ we consider all 
+outgoing transitions together.
+
+\begin{definition}
+\label{def:rank2}
+Let $\lem$ be a measurable map, and let $(\loc,\vec{x})$ be a configuration with
+$\loc\in \locsPB$. For an $\eps\geq 0$ we say that $\loc$ is $\eps$-ranked by 
+$\lem$ from $(\loc,\vec{x})$ if 
+$$\sum_{(\loc,\loc')\in\transitions} 
+		Pr_{\loc}\left(\loc,\loc'\right)\cdot
+		\lem(\loc',\vec{x}\leq \lem(\loc,\vec{x})-\eps.$$
+\end{definition}
+
+To capture the specific of $\locsPB$, we introduce the 
+notion of \emph{generalized transition}.
+
+\begin{definition}
+A generalized transition of a pCFG $\pCFG$ is either a transition of $\pCFG$ 
+outgoing 
+from location not in $\locsPB$ or a location $\loc\in\locsPB$.
+\end{definition}
+
+Intuitively, we represent the set of transitions outgoing from $\loc\in\locsPB$ 
+by the source location $\loc$.  For generalized transitions 
+$\tilde{\tau}=\loc\in\locsPB$ we say that $\tilde{\tau}$ is outgoing from 
+$\loc$.
+
+Definitions~\ref{def:rank1} and~\ref{def:rank2} 
+define when is a generalized transition $\eps$-ranked by $\lem$ from 
+configuration $(\loc,\vec{x})$. We say that a 
+generalized transition is \emph{unaffected} by $\lem$ from $(\loc,\vec{x})$ if 
+it is $0$-ranked by $\lem$ from $(\loc,\vec{x})$.
+
+%\begin{definition}[Pre-Expectation]
+%	Let $\lem$ 
+%	be 1-dimensional measurable map for a \PP{} $\program$.
+%	%Let $\locs$ 
+%	%be the set of locations of $\pCFG_P$ and $\pvars$ its set of program 
+%	%variables. 
+%	The 
+%	pre-expectation of $\lem$ is a function $\preexp{\lem}\colon \locs\times 
+%	\Rset^{|\pvars|} \rightarrow \Rset\cup\{\infty\}$ defined as follows:
+%	\begin{compactitem} %\itemsep1pt \parskip0pt \parsep0pt
+%		\item 
+%		if $\loc$ is a probabilistic branching location, then
+%		$$\preexp{\lem}(\loc,\vec{x}):=\sum_{(\loc,\loc')\in\transitions} 
+%		Pr_{\loc}\left(\loc,\loc'\right)\cdot
+%		\lem(\loc',\vec{x});$$
+%		\item 
+%		if $\loc$ is a non-deterministic branching location, then
+%		$$\preexp{\lem}(\loc,\vec{x}):=
+%		\max_{(\loc,\loc')\in\transitions}\lem(\loc',\vec{x});$$
+%		
+%		%\item 
+%		
+%%%$\mathrm{pre}_\eta(\loc,\mathbf{x}):=\min_{(\loc,id,\ell')\in\transitions}\eta\left(\loc',\mathbf{x}\right)$
+%		% if $\loc$ is an angelic location;
+%		\item 
+%		if $\loc$ is a deterministic location, then for each $\vec{x}$ the 
+%value 
+%		$\preexp{\lem}(\loc,\vec{x})$ is determined as follows: there is 
+%exactly one 
+%		transition
+%		$\tau=(\loc,\loc')$ such that $\vec{x}\models G(\tau)$. We put 
+%$$\preexp{\lem}(\loc,\vec{x}):= \lem(\loc',\vec{x})$$.
+%		\item 
+%		If $\loc$ is an assignment location, then there is exactly one 
+%transition $\tau=(\loc,\loc')$ outgoing from $\loc$.
+%		We distinguish 
+%		three cases, depending on $\updates(\tau)=(j,\up)$ (recall that $\up$ 
+%is an update element):
+%		\begin{compactitem}
+%			\item If $\up\colon \Rset^{|\pvars|}\rightarrow \Rset$ is a 
+%Borel-measurable function, then 
+%			$$\preexp{\lem}(\loc,\vec{x}):= \lem(\loc',\vec{x}(j\leftarrow 
+%\up(\vec{x}))).$$
+%			\item If $\up$ is a distribution $d$, then $$ 
+%\preexp{\lem}(\loc,\vec{x}):= 
+%			\lem(\loc',\vec{x}(j\leftarrow \E[d])),$$ where $\E[d]$ is the 
+%expected value of the 
+%			distribution $d$.
+%			\item 
+%			If $\up$ is a set, then $$ \preexp{\lem}(\loc,\vec{x}):= 
+%\sup_{a\in\up}
+%			\lem(\loc',\vec{x}(j \leftarrow a)).$$
+%		\end{compactitem}
+%		
+%%%$\mathrm{pre}_\eta(\loc,\mathbf{x}):=\eta(\loc',\expv_{\rvars}\left(f(\vec{x},\mathbf{r})\right))$
+%		% if $\loc$ is a deterministic location, 
+%%$(\loc,f,\loc')\in\transitions$ and 
+%		%$\mathbf{x}\in G(\loc,f,\loc')$, where 
+%		%$\expv_{\rvars}\left(f(\vec{x},\mathbf{r})\right)$ is the expected 
+%%value of 
+%		%$f(\vec{x},\cdot)$. %on $\rvars$ if $\vec{x}$ is treated as a constant 
+%%%vector.
+%	\end{compactitem}
+%	%\end{definition}
+%\end{definition}
+
+%Intuitively, a pre-expectation of $\lem$ is a 
+%function which for each configuration $(\loc,\vec{x})$ returns the maximal
+%expected value of $\lem$ after one step is made from this configuration, where 
+%the maximum is taken over all possible non-deterministic choices.
 %Note that the only way in which pre-expectation can attain an infinite value 
 %is 
 %due to non-deterministic assignment. However, if the program in question has 
@@ -103,13 +225,15 @@ Let $\eps>0$. An $n$-dimensional \emph{lexicographic $\eps$-ranking supermarting
  	\item
  	for all $1\leq j \leq n$, $\lem_j(\loc,\vec{x})\geq 0$; and
  	\item 
- 	there exists $1\leq j \leq$ n such that
+ 	for each generalized transition $\tilde{\tau}$ outgoing from $\loc$ there 
+ 	exists $1\leq j 
+ 	\leq$ n such that
  	\begin{compactitem}
  	\item
- 	$\preexp{\lem_j}(\loc,\vec{x}) \leq \lem_j(\loc,\vec{x})-\eps$, and
+ 	$\tilde{\tau}$ is $\eps$-ranked by $\lem_j$ from $(\loc,\vec{x})$
  	\item
- 	for all $1\leq j'<j$ it holds 
- 	$\preexp{\lem_{j'}}(\loc,\vec{x}) \leq \lem_{j'}(\loc,\vec{x})$.
+ 	for all $1\leq j'<j$ we have that $\tilde{\tau}$ is unaffected by 
+ 	$\lem_{j'}$ from $(\loc,\vec{x})$.
  	\end{compactitem}
  \end{compactitem}
 If additionally $\lem$ is a linear expression map, then we call it a linear $\eps$-LexRSM map ($\eps$-LinLexRSM).
@@ -146,18 +270,18 @@ Definition~\ref{def:lexrsm} is satisfied. To this end, for each $i\geq 0$ we
 define an almost-sure partition of the set $\{\run\in \OmegaRun\mid 
 \ttime(\run) >i\}$ into sets $L^{i}_1,\dots,L^{i}_n$ by putting $L^i_j$ to be 
 the set of all runs $\run$ such that $\ttime(\run)>i$ and for $\run$ the index 
-$j$ is the smallest one such that $\preexp{\lem_j}(\cfg{\sigma}{i}(\run)) \leq 
-\lem_j(\cfg{\sigma}{i}(\run))-\eps$ (which entails 
-$\preexp{\lem_{j'}}(\cfg{\sigma}{i}(\run)) =
-\lem_{j'}(\cfg{\sigma}{i}(\run))-\eps$ for all $1\leq j'< j$). Due to 
+$j$ is the smallest one such that the $(i+1)$-th transition on $\run$ is ranked 
+by $\lem_j$ from $\cfg{\sigma}{i}(\run)$. Due to 
 definition of an $\eps$-LexRSM map such a $j$ exists for all 
 $\run\in\{\ttime>i\}$ and hence we indeed have a partition. It remains to prove 
 that irrespective of the initial choice of $\sigma$ and $\vecinit$ it holds, 
 for each $1\leq j 
-\leq n$, that $\E^\sigma_{\vecinit}[\vecseq{X}{i+1}{j}\mid 
-\natfilt_i]\leq\preexp{\lem_{j}}(\cfg{\sigma}{}) $. This can be achieved by a 
-standard~\cite{xxx}, through somewhat technical computation, which we defer to 
-\AppendixMaterial.
+\leq n$ and $j'<j$, that $\E^\sigma_{\vecinit}[\vecseq{X}{i+1}{j}\mid 
+\natfilt_i]\leq X_i[j]-\eps $ on $L_j^i$ and 
+$\E^\sigma_{\vecinit}[\vecseq{X}{i+1}{j}\mid 
+\natfilt_i]\leq X_i[j] $ on $L_{j'}^i$. This follows easily from 
+the definition of $L^{i}_1,\dots,L^{i}_n$ and from the definition of a 
+transition being $\eps$-ranked by $\lem_j$.
 
 Since  $\{\vec{X}_{i}\}_{i=0}^{\infty}$ 
 is an $\eps$-LexRSM for $\ttime$, from Theorem~\ref{thm:lexrsm-programs} it 

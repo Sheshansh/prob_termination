@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  30 JUN 2017 15:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  30 JUN 2017 17:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1883,14 +1883,7 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[11.11]) (./lexicographic-programs.tex
-
-Package natbib Warning: Citation `xxx' on page 12 undefined on input line 9.
-
-[12.12]
-
-Package natbib Warning: Citation `xxx' on page 13 undefined on input line 159.
-
+[11.11]) (./lexicographic-programs.tex [12.12]
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
@@ -1902,7 +1895,7 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 \infast=\box87
 \infastinv=\box88
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 230.
+(Font)              scaled to size 9.0pt on input line 354.
 ) (./synthesis.tex) (./compositional.tex
 
 Package natbib Warning: Citation `xxx' on page 14 undefined on input line 9.
@@ -1921,6 +1914,7 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 7.3pt on input line 85.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 5.5pt on input line 85.
+ [16.16]
 \uniinto=\box89
 \uniintt=\box90
 \unintthree=\box91
@@ -1930,7 +1924,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 224--255
 [][]
  []
 
-[16.16]
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
@@ -1948,15 +1941,16 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
 (Font)              scaled to size 7.0pt on input line 353.
 [18.18]
 
-LaTeX Warning: Reference `xxx' on page 19 undefined on input line 408.
-
-
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[19.19]) (./extensions.tex) (./main.bbl)
+[19.19]
+
+LaTeX Warning: Reference `xxx' on page 20 undefined on input line 408.
+
+) (./extensions.tex) (./main.bbl)
 
 Package natbib Warning: There were undefined citations.
 
@@ -1983,11 +1977,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 538.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 44813 strings out of 493644
- 963409 string characters out of 6150875
- 1223651 words of memory out of 5000000
- 46426 multiletter control sequences out of 15000+600000
- 338550 words of font info for 648 fonts, out of 8000000 for 9000
+ 44823 strings out of 493644
+ 963609 string characters out of 6150875
+ 1215712 words of memory out of 5000000
+ 46428 multiletter control sequences out of 15000+600000
+ 339200 words of font info for 652 fonts, out of 8000000 for 9000
  944 hyphenation exceptions out of 8191
  62i,18n,96p,1716b,7195s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/liberti
@@ -2027,10 +2021,10 @@ nts/txsyc.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/
 txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlr
 .pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlri.pfb
 >
-Output written on main.pdf (20 pages, 881692 bytes).
+Output written on main.pdf (20 pages, 883370 bytes).
 PDF statistics:
- 603 PDF objects out of 1000 (max. 8388607)
- 513 compressed objects within 6 object streams
- 193 named destinations out of 1000 (max. 500000)
+ 607 PDF objects out of 1000 (max. 8388607)
+ 517 compressed objects within 6 object streams
+ 195 named destinations out of 1000 (max. 500000)
  94329 words of extra memory for PDF output out of 106986 (max. 10000000)
 
