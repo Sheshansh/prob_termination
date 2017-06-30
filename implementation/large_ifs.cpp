@@ -74,5 +74,5 @@ int main(){
 	programfile<<"\n\nod"<<endl;
 	programfile.close();
 
-	system("./a.out < example.prob > large_output");
+	// system("./a.out < example.prob > large_output");
 }

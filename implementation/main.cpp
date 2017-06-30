@@ -19,9 +19,10 @@ Comments:
 #include <iomanip>
 #include <fstream>
 #include <queue>
+#include <ctime>
 #include "files/Parser.h"
 using namespace std;
-#define MAXL 100000 //Maximum length of the program
+#define MAXL 300000 //Maximum length of the program
 #define part(x,a,b) (x.substr((a),((b)-(a))))
 #define pb push_back
 #define A(i,j) (front->affexpr->children[i]->children[0]->expression[j+1])
@@ -459,14 +460,20 @@ void print_fast(ostream& fastfile){
 
 int main(){
 	int start,end;
-	char input[MAXL];
+	char* input = new char[MAXL];
 	// Setting precision to the printing of the double variables in program
 	// cout<<fixed<<setprecision(10);
 	int r,i;
-	for(i=0;(r=getchar())!=EOF;i++)
+	for(i=0;(r=getchar())!=EOF;i++){
+		if(i>MAXL){
+			cerr<<"Program longer than the maximum allowed limit of "<<MAXL<<endl;
+			exit(0);
+		}
 		input[i]=r;
+	}
 	input[i]=0;
 	program=input;
+	delete[] input;
 	int begin = 0;
 	int endprog = program.length();
 	skip_spaces(begin,endprog);
