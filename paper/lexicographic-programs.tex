@@ -165,5 +165,82 @@ follows that $\probm^{\sigma}_{\vecinit}\ttime <\infty) =1$, irrespective of
 $\sigma$ and $\vecinit$.
 \end{proof} 
 
+We conclude this section by showing that (Lin)LexRSMs can, unlike 1-dimensional 
+RSMs, prove a.s. 
+termination of programs whose expected termination time is infinite.
+\lstset{language=affprob}
+\lstset{tabsize=2,escapechar=\&}
+\newsavebox{\infas}
+\begin{lrbox}{\infas}
+	\begin{lstlisting}[mathescape]
+$x:=1$;$c:=1$ 
+while $c\geq 1$ do				
+	if prob(0.5) then			
+		$x:=2\cdot x$			
+	else						
+		$c:=0$					
+	fi							
+od								
+while $x\geq 0$ do $x:=x-1$ od	
+	\end{lstlisting}
+\end{lrbox}
+\newsavebox{\infast}
+\begin{lrbox}{\infast}
+	\begin{lstlisting}[mathescape]
+
+$(6c+2,x)$
+$(6c+1,x)$
+$(6c+3,x)$
+
+$(3,x)$
+
+
+$(0,x)$	
+	\end{lstlisting}
+\end{lrbox}
+\newsavebox{\infastinv}
+\begin{lrbox}{\infastinv}
+	\begin{lstlisting}[mathescape]
+
+$[c\geq 0 \wedge x\geq 1]$
+$[c\geq 1 \wedge x\geq 1]$
+$[c\geq 1 \wedge x\geq 1]$
+
+$[c\geq 1 \wedge x \geq 1]$
+
+
+$[x\geq 0]$	
+	\end{lstlisting}
+\end{lrbox}
+\begin{figure}[t]
+	\centering
+	\usebox{\infas}
+	\hspace{0.1cm}
+	\usebox{\infast}
+	\hspace{0.1cm}
+	\usebox{\infastinv}
+\caption{An a.s. terminating program with infinite expected termination time. A 
+2-dimensional $1$-LinLexRSM map for the program is given on the right, along 
+with the 
+supporting invariants in square brackets. The invariants and a LinLexRSM on 
+each 
+line belong to the program location in which the program is \emph{before} 
+executing the command on that line. The function is indeed a $1$-LinLexRSM, 
+since in the probabilistic branching location $\loc$ we have 
+$\preexp{\lem}(\loc,(x,c))=3c+3$ and $3c+3\leq 6c+1-1$ for all $c\geq 1$.} 
+\label{fig:inftime}
+\end{figure}
+
+\begin{example}
+Consider the program in Figure~\ref{fig:inftime}. It is easy to see that it 
+terminates a.s., but the expected termination time is infinite: to see this, 
+note that that the expected value of variable $x$ upon reaching the second loop 
+is $\frac{1}{2}\cdot 1 + \frac{1}{4}\cdot 2 + \frac{1}{8}\cdot 4 + \cdots = 
+\frac{1}{2}+\frac{1}{2}+\frac{1}{2}+\cdots=\infty$ and that the time needed to 
+get out of the second loop is equal to the value of $x$ upon entering the loop. 
+However, a.s. termination of the program is proved by a 2-dimensional LinLexRSM 
+$\lem$ pictured in the figure.
+\end{example}
+
 
 
