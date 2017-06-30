@@ -1,6 +1,3 @@
-//Compile with C++11
-//The variable names should be of the form x_i where i is a number and the indexing starts from 1 i.e. the variables in the program are of the form x_1, x_2 ... x_n.
-//Assuming * is for multiplication rather than .
 #include <iostream>
 #include <algorithm>
 #include <cstdio>
@@ -21,14 +18,22 @@ using namespace std;
 #define part(x,a,b) (x.substr((a),((b)-(a))))
 #define pb push_back
 
+//variable declarations
 string program;
 int nVariables;
 int last_used_label = 0;
 map<int,CFG_location*> label_map;
 map<string,int> variableId;
 map<int,string> variable;
-int dummy_states_needed = 0;
+int dummy_states_needed = 0; // The states needed for the if * transformation of non deterministic assignments
+node* root;
 
+/*
+
+	begin and end are the pointers to the concerned string in program
+	So, for parsing purposes, skip_spaces changes the pointers accordingly so that the extra spaces at the start and end are out of consideration
+
+*/
 void skip_spaces(int &begin, int &end){ //skips the spaces in the beginning and the end
 	while(begin<program.size() and isspace(program[begin])){
 		begin++;
@@ -38,6 +43,11 @@ void skip_spaces(int &begin, int &end){ //skips the spaces in the beginning and 
 	}
 }
 
+/*
+
+	line is the concerned string and may contain extra spaces at the begin and end, skip_spaces deletes the extra spaces from start and end of line
+
+*/
 void skip_spaces(string& line){
 	int begin = 0,end = line.length();
 	while(begin<line.size() and isspace(line[begin])){
@@ -49,6 +59,12 @@ void skip_spaces(string& line){
 	line = part(line,begin,end);
 }
 
+
+/*
+
+	Constructor when only the type of node is specified
+
+*/
 node::node(string t){
 	bracket = NULL;
 	begin = -1;
@@ -59,6 +75,16 @@ node::node(string t){
 	delta = 0.0;
 }
 
+/*
+
+	A general constructor when the
+		b: start pointer of the program
+		e: end pointer of the program
+		s: the id of start node in pCFG
+		l: rhe id of final node in pCFG
+		negate: a special bool passed for nodes of type "expr" when the expression was of the form -(string1) and now the concerned string becomes string1 and negate becomes 1
+
+*/
 node::node(string t, int b, int e, int s, int l, bool negate){
 	bracket = NULL;
 	type = t;
@@ -73,6 +99,17 @@ node::node(string t, int b, int e, int s, int l, bool negate){
 	process(s,l,negate);
 }
 
+/*
+
+	For processing the results of Invariant output a more time and memory expensive function made
+	Rather than dealing with pointers in string just passes the string concerned
+	t: type of node
+	l: string concerned
+	to_return: a special boolean introduced because sometimes the string to be parsed can be of the form <expr1>=<expr2>
+		In such cases, we interpret it as <expr1> <= <expr2> and control the return_bool so that code then adds <expr1> >= <expr2> after this function is called
+		The other literal has to be forcefully added depending upon the return value
+
+*/
 node::node(string t, string l, bool& to_return){
 	strict = false;
 	type = t;
@@ -124,6 +161,12 @@ node::node(string t, string l, bool& to_return){
 	
 }
 
+/*
+
+	copies the node* vector from tocopy to sink, was needed for operations with negate and and_node
+	Operations on bexpr needed this
+
+*/
 void vcopy(vector<node*> &sink,vector<node*> &tocopy){
 	sink.clear();
 	int size = tocopy.size();
@@ -139,6 +182,12 @@ void vcopy(vector<node*> &sink,vector<node*> &tocopy){
 	}
 }
 
+/*
+
+	returns a bexpr node which is negative of the tonegate bexpr node
+	Was necessary because both have to be in DNF, disjunctive normal form
+
+*/
 node* negation(node* tonegate){
 	if(tonegate->type=="bexpr" and tonegate->constant=="or"){
 		vector<node*> before_multiplication;
@@ -181,6 +230,12 @@ node* negation(node* tonegate){
 	return NULL;
 }
 
+/*
+
+	Returns a bexpr node which is the and of the bexpr nodes "one" and "two".
+	Necessary because both have to be in DNF, disjunctive normal form in terms of literals
+
+*/
 node* and_node(node* one,node* two){
 	if(one->type!="bexpr" or two->type!="bexpr"){
 		cerr<<"Taking and of wrong type of nodes"<<endl;
@@ -203,6 +258,13 @@ node* and_node(node* one,node* two){
 	return node_and;
 }
 
+/*
+
+	processes this node, given it is of type statement
+	s: initial node id in pCFG
+	l: destination node id in pCFG
+
+*/
 void node::proc_stmt(int s,int l){
 	
 	// Code to add invariants manually at each node
@@ -359,6 +421,13 @@ void node::proc_stmt(int s,int l){
 	children[0] = new node("assgn",begin,end,s,l);
 }
 
+/*
+
+	processes this node, given it is of type assignment
+	s: initial node id in pCFG
+	l: destination node id in pCFG
+	
+*/
 void node::proc_assgn(int s,int l){
 	skip_spaces(begin,end);
 	int pos = -1;
@@ -379,50 +448,19 @@ void node::proc_assgn(int s,int l){
 		while(isspace(program[samplepos])){
 			samplepos++;
 		}
-		// if(part(program,samplepos,samplepos+6)=="sample"){
-		// 	int semicolon = -1;
-		// 	constant = "assignment from distribution";
-		// 	for(int i = samplepos+6;i<end;i++){
-		// 		if(program[i]==';'){
-		// 			semicolon = i;
-		// 			break;
-		// 		}
-		// 	}
-		// 	if(semicolon == -1){
-		// 		cerr<<"Mean value not found in the from distribution assignment between ["<<begin<<","<<end<<")"<<endl;
-		// 	}
-		// 	else{
-		// 		int temp = samplepos+6;
-		// 		while(temp<semicolon){
-		// 			if(program[temp]=='('){
-		// 				break;
-		// 			}
-		// 			temp++;
-		// 		}
-		// 		if(program[temp]!='('){
-		// 			cerr<<"Wrong assignment from distribution between ["<<begin<<","<<end<<")"<<endl;
-		// 		}
-		// 		temp++;
-		// 		while(isspace(program[temp]) and temp<semicolon){
-		// 			temp++;
-		// 		}
-		// 		constant = part(program,temp,semicolon); //Gives the distribution
-		// 		children[1] = new node("expr",semicolon+1,end-1); //Though it is just a constant but still storing it in an expression because of consistency
-		// 		label_map[s]->type = "det"; //<flag> Considering that it is just the same as assigning the variable the constant value
-		// 		CFG_edge temporary_edge(label_map[l],variableId[part(program,children[0]->begin,children[0]->end)],children[1]);
-		// 		label_map[s]->edges.pb(temporary_edge);
-		// 	}
-		// }
-		// else{
-			constant = "simple assignment";
-			children[1] = new node("expr",pos+2,end); //rexpr is nothing but an expr, a expression
-			label_map[s]->type = "det";
-			CFG_edge temporary_edge(label_map[l],variableId[part(program,children[0]->begin,children[0]->end)],children[1]);
-			label_map[s]->edges.pb(temporary_edge);
-		// }
+		constant = "simple assignment";
+		children[1] = new node("expr",pos+2,end); //rexpr is nothing but an expr, a expression
+		label_map[s]->type = "det";
+		CFG_edge temporary_edge(label_map[l],variableId[part(program,children[0]->begin,children[0]->end)],children[1]);
+		label_map[s]->edges.pb(temporary_edge);
 	}
 }
 
+/*
+
+	processes this node, given it is of type affine expression
+		
+*/
 void node::proc_affexpr(){
 	constant = "and";
 	skip_spaces(begin,end);
@@ -447,6 +485,11 @@ void node::proc_affexpr(){
 	}
 }
 
+/*
+
+	processes this node, given it is of type single variable
+		
+*/
 void node::proc_pvar(){
 	skip_spaces(begin,end);
 	constant = part(program,begin,end);
@@ -622,6 +665,11 @@ void node::form_vector(string l,bool negate){
 	}
 }
 
+/*
+
+	processes this node, given it is of type expression
+		
+*/
 void node::proc_expr(){
 	skip_spaces(begin,end);
 	constant = "expression";
@@ -632,12 +680,24 @@ void node::proc_expr(){
 	}
 }
 
+/*
+
+	processes this node, given it is of type expression
+	For parsing the Invariant Output
+	l: The string which is to be parsed
+	
+*/
 void node::proc_expr(string l){
 	skip_spaces(l);
 	expression.resize(nVariables+1);
 	form_vector(l,false);
 }
 
+/*
+
+	processes this node, given it is of type constant
+		
+*/
 void node::proc_constant(){
 	skip_spaces(begin,end);
 	constant = part(program,begin,end);
@@ -646,6 +706,13 @@ void node::proc_constant(){
 	}
 }
 
+/*
+
+	processes this node, given it is of type literal
+	negate: A boolean whether this expression should be handled as a negative of what is in the concerned region
+	strategic: If it is false, the concerned string is from program. Otherwise it is the line which is one of the parameters
+	
+*/
 bool node::proc_literal(bool negate,bool strategic, string line){
 	bool to_return = false;
 	if(strategic){
@@ -760,6 +827,11 @@ bool node::proc_literal(bool negate,bool strategic, string line){
 	return to_return;
 }
 
+/*
+
+	processes this node, given it is of type boolean expression
+	
+*/
 void node::proc_bexpr(){
 	constant = "or";
 	skip_spaces(begin,end);
@@ -784,6 +856,11 @@ void node::proc_bexpr(){
 	}
 }
 
+/*
+
+	processes this node, given it is of type non deterministic (in general) boolean expression
+	
+*/
 void node::proc_ndbexpr(){
 	skip_spaces(begin,end);
 	if(part(program,begin,end)=="*"){
@@ -814,6 +891,13 @@ void node::proc_ndbexpr(){
 	children[0]=new node("bexpr",begin,end);
 }
 
+/*
+
+	This is called after the constructor.
+	calls the relevant proc_ function, depending on the type of the node.
+	It give parsing the relevant recursive strategy to proceed with
+	
+*/
 void node::process(int s, int l, bool negate){
 	if(type=="stmt"){
 		proc_stmt(s,l);
@@ -847,8 +931,12 @@ void node::process(int s, int l, bool negate){
 	}
 }
 
-node* root;
+/*
 
+	A preprocessing function, to read the variable declaration in the program.
+	The code needs the number of variables and their names before starting parsing, hence this function
+	
+*/
 int find_variables(int& begin, int &end){
 	int toReturn = 0;
 	if(part(program,begin,begin+3)!="var"){
@@ -878,6 +966,16 @@ int find_variables(int& begin, int &end){
 	return toReturn;
 }
 
+/*
+
+	Prints the contents of the node
+	outputfile: pointer to the stream in which the contents are printed
+	and_string: The string which is used to represent and, ex: "&&" or "and"
+	or_string: The string which is used to represent or, ex: "||" or "or"
+	multiply_string: The string which is used to represent the multiplication symbol, ex: "*" or ""
+	bruteforce: a misleading name, (because of code's history :p) but this means whether the strict inequalities should be printed as such or their non-strict appriximations should be printed
+	
+*/
 void node::print(ostream& outputfile, string and_string, string or_string, string multiply_string, bool bruteforce){
 	if(type=="expr"){
 		bool something_printed = false;
@@ -997,6 +1095,11 @@ void node::print(ostream& outputfile, string and_string, string or_string, strin
 	}
 }
 
+/*
+
+	The default constructor for an edge in the CFG
+
+*/
 CFG_edge::CFG_edge(){
 	guard = NULL;
 	next = NULL;
@@ -1005,6 +1108,17 @@ CFG_edge::CFG_edge(){
 	probability = 1.0;
 }
 
+/*
+
+	A constructor for CFG_edge when every parameter is specified, which is generally the case
+	next1: The destination of the CFG edge
+	toChange1: The id of variable changed in this transition, it is 0 otherwise. 0 means constant being changed which anyways doesn't make any sense
+	change1: the pointer to a expr node which represents the RHS of the assignment
+	guard1: the guard of this transition, a bexpr node
+	probability: probability of this transition occuring
+	For probabilistic nodes, guard is true, and probability defines the transition
+
+*/
 CFG_edge::CFG_edge(CFG_location* next1,int toChange1,node* change1,node* guard1,double probability1){
 	next = next1;
 	toChange = toChange1;
@@ -1013,6 +1127,12 @@ CFG_edge::CFG_edge(CFG_location* next1,int toChange1,node* change1,node* guard1,
 	probability = probability1;
 }
 
+/*
+
+	Prints the CFG_edge contents in some fashionable way
+	Used for debugging only in this program
+
+*/
 void CFG_edge::print(){
 	if(next!=NULL){
 		cout<<"Destination: "<<next->label<<endl;
@@ -1032,12 +1152,25 @@ void CFG_edge::print(){
 	cout<<"Probability to occur is"<<probability<<endl<<endl; 
 }
 
+/*
+
+	Constructor for a node in CFG, or a CFG location
+		label: the id of CFG_location
+		type: the type of CFG_node, "det" or "prob" or "ndet"
+
+*/
 CFG_location::CFG_location(string type,int label){
 	this->label = label;
 	this->type = type;
 	invariant = NULL;
 }
 
+/*
+
+	Prints the details about the CFG_location
+	It was used only for debussing in this program
+
+*/
 void CFG_location::print(){
 	cout<<"Type: "<<type<<endl;
 	if(invariant!=NULL){

@@ -1,0 +1,12 @@
+var x,y,z;
+while x>= 0 do
+    while y>=0 do
+        z:=x;
+        while z>= 0 do
+            z:=z-1;
+            x:=x-1
+        od;
+        y:=y-1
+    od;
+    x:=x-1
+od
