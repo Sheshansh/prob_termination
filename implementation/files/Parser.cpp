@@ -1,4 +1,3 @@
-//Compile with C++11
 #include <iostream>
 #include <algorithm>
 #include <cstdio>
@@ -26,7 +25,7 @@ int last_used_label = 0;
 map<int,CFG_location*> label_map;
 map<string,int> variableId;
 map<int,string> variable;
-int dummy_states_needed = 0;
+int dummy_states_needed = 0; // The states needed for the if * transformation of non deterministic assignments
 node* root;
 
 /*

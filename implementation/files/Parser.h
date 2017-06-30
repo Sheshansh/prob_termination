@@ -71,12 +71,12 @@ public:
 
 struct CFG_location{
 public:
-	int label;
-	string type; // det ndet and prob
-	vector<CFG_edge> edges;
 	CFG_location(string type,int label);
-	vector<int> ranking_function;
-	node* invariant; // A bexpr node
+	int label;	// The label of this node, or the reverse mapping of what is stored in the "label_map" map
+	string type; // det ndet or prob
+	vector<CFG_edge> edges; // The set of edges that emerge from this node
+	vector<int> ranking_function; // The coefficient matrix for the affine ranking function for this node
+	node* invariant; // A bexpr node, the invariant at this particular node
 	void print();
 };
 
