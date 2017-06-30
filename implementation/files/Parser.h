@@ -62,6 +62,7 @@ public:
 };
 
 void skip_spaces(int &begin, int &end);
+void skip_spaces(string& line);
 void vcopy(vector<node*> &sink,vector<node*> &tocopy);
 node* negation(node* tonegate);
 node* and_node(node* one,node* two);

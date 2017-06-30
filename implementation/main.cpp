@@ -22,7 +22,7 @@ Comments:
 #include <ctime>
 #include "files/Parser.h"
 using namespace std;
-#define MAXL 300000 //Maximum length of the program
+#define MAXL 700000 //Maximum length of the program
 #define part(x,a,b) (x.substr((a),((b)-(a))))
 #define pb push_back
 #define A(i,j) (front->affexpr->children[i]->children[0]->expression[j+1])
@@ -459,6 +459,7 @@ void print_fast(ostream& fastfile){
 }
 
 int main(){
+	double start_time = time(0);
 	int start,end;
 	char* input = new char[MAXL];
 	// Setting precision to the printing of the double variables in program
@@ -486,28 +487,52 @@ int main(){
 	// CFG_edge last_edge(label_map[end],-1,NULL);
 	// label_map[end]->edges.pb(last_edge);
 	root=new node("stmt",begin,endprog,start,end);
+	double parsing_over = time(0);
+	cout<<"Time:"<<(double(parsing_over-start_time))<<endl;
+	cout<<"Parsing over and CFG constructed"<<endl;
+	cout<<"The CFG constructed has "<<last_used_label<<" states"<<endl;
 	ofstream fastfile;
 	fastfile.open("files/aspic.fast");
 	ostream* outfast = &fastfile;
 	print_fast(*outfast);
 	fastfile.close();
+	double printed_fast = time(0);
+	cout<<endl<<"Time:"<<(double(printed_fast-start_time))<<endl;
+	cout<<"Fast file printed."<<endl;
 	if(system("./files/invariant_script.sh")!=0){
 		cout<<"Something wrong with the script to find invariants";
 	}
-	
+	double aspic_done = time(0);
+	cout<<endl<<"Time:"<<(double(aspic_done-start_time))<<endl;
+	cout<<"Invariants generated using aspic"<<endl;
 	// // Code for analysing files/InvariantOutput comes here
 	ifstream invariant_file("files/InvariantOutput");
 	for(int i=1;i<=last_used_label;){
 		string line;
 		getline(invariant_file,line);
+		skip_spaces(line);
 		size_t open = line.find('{');
 		if(open!=string::npos){
+			int first_space = -1;
+			for(int i=0;i<line.length();++i){
+				if(isspace(line[i])){
+					first_space = i;
+					break;
+				}
+			}
+			if(first_space==-1){
+				cerr<<"Error! No space in the Invariant output concerned line"<<endl;
+			}
+			if(part(line,0,6)!="state_"){
+				continue;
+				// cout<<stoi(part(line,6,first_space))<<endl;
+			}
 			size_t close = line.find('}');
 			string invariant_string = part(line,open+1,close);
 			if(invariant_string=="true"){
-				if(label_map[i]->invariant==NULL){
-					label_map[i]->invariant = new node("bexpr");
-					node* concerned_node = label_map[i]->invariant;
+				if(label_map[stoi(part(line,6,first_space))]->invariant==NULL){
+					label_map[stoi(part(line,6,first_space))]->invariant = new node("bexpr");
+					node* concerned_node = label_map[stoi(part(line,6,first_space))]->invariant;
 					concerned_node->children.resize(1);
 					concerned_node->children[0] = new node("affexpr");
 					concerned_node->children[0]->children.resize(1);
@@ -521,11 +546,12 @@ int main(){
 			else if(invariant_string!="false"){
 				bool temp;
 				node* generated_invariant = new node("bexpr",invariant_string,temp);
-				if(label_map[i]->invariant==NULL){
-					label_map[i]->invariant = generated_invariant;
+				if(label_map[stoi(part(line,6,first_space))]->invariant==NULL){
+					label_map[stoi(part(line,6,first_space))]->invariant = generated_invariant;
 				}
-				else if(i!=1){
-					label_map[i]->invariant = and_node(label_map[i]->invariant,generated_invariant);
+				else if(stoi(part(line,6,first_space))!=1){
+					// <flag> This still doesn't look very nice to me
+					label_map[stoi(part(line,6,first_space))]->invariant = and_node(label_map[i]->invariant,generated_invariant);
 				}
 			}
 			i++;
@@ -543,10 +569,12 @@ int main(){
 	// 	it->second->print();
 	// 	// cout<<it->second->label<<endl;
 	// }
-	
 	generate_equations();
 	ofstream equationsfile;
 	bool solved = false;
+	double equations_generated = time(0);
+	cout<<endl<<"Time:"<<(double(equations_generated-start_time))<<endl;
+	cout<<"Invariants read and equations generated."<<endl;
 	int loop_counter=0;
 	for(;loop_counter<100;++loop_counter){	
 		equationsfile.open("files/equations.lp");
@@ -582,7 +610,12 @@ int main(){
 		system(command.c_str());
 		// temporarily for just one iteration
 	}
-	cout<<"The number of states in pCFG generated is "<<last_used_label<<endl;
+
+	double final_result = time(0);
+	cout<<endl<<"Time:"<<(double(final_result-start_time))<<endl;
+	cout<<"Final result: "<<endl;
+	cout<<"--------------"<<endl;
+
 	if(solved){
 		cout<<"Found a solution of dimension "<<loop_counter+1<<"."<<endl;
 	}
