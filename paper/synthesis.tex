@@ -9,4 +9,44 @@ Hence, the main computational task of the algorithm is to check, for a given set
 \item for each $\tilde{\tau}\in U$ and  each configuration $(\loc,\vec{x})$ where $\loc$ is the source of $\tilde{\tau}$ and $\vec{x}\in \inv(\loc)$ we have that $\lem(\loc,\vec{x})\geq 0$ and that $\tilde{\tau}$ is unaffected by $\lem$; and
 \item there is $\tilde{\tau}\in U$ that is $1$-ranked by $\lem$, from each configuration $(\loc,\vec{x})$ where $\loc$ is the source of $\tilde{\tau}$ and $\vec{x}\in \inv(\loc)\cap\{\vec{x}'\mid \vec{x}'\models \guards(\tilde{\tau})\}$; we then say that $\lem$ ranks $\tilde{\tau}$ w.r.t. $\inv$.
 \end{compactenum}
-  Moreover, if such an LEM $\lem$ exists, the algorithm has to find one that maximizes the number of gen. transitions in $U$ ranked by it. Both these tasks can be accomplished by the standard  method of linear constraints based on the use of Farkas's lemma, which was widely use for synthesis of termination proofs in both probabilistic and non-probabilistic programs~\cite{xxx}. That is, the algorithm first constructs, for each location $\loc$ a \emph{template} for $\lem$, i.e. an expression of the form $a_1^{\loc}x_1 + \cdots + a_{|\pvars|}^{\loc}x_{|\pvars|} = b^{\loc} $, where $x_1,\dots,x_{|\pvars|}$ are program variables and $a_1^{\loc},\dots,a_{|\pvars|}^{\loc},b^{\loc} $ are yet unknown coefficients. That is, supplying concrete values for all the unknown coefficients yields an LEM. Using the construction provided e.g. in~\cite{xxx} we construct in polynomial time, for each generalized transition $\tilde{\tau}$, a system of linear constraints over set of variables $\{ a_1^{\loc},\dots,a_{|\pvars|}^{\loc},b^{\loc}\mid \loc\in\locs \}\cup \{\eps_{\tilde\tau}\}$
+  Moreover, if such an LEM $\lem$ exists, the algorithm has to find one that maximizes the number of gen. transitions in $U$ ranked by it. Both these tasks can be accomplished by the standard  method of linear constraints based on the use of Farkas's lemma, which was widely use for synthesis of termination proofs in both probabilistic and non-probabilistic programs~\cite{xxx}. That is, the algorithm first constructs, for each location $\loc$ a \emph{template} for $\lem$, i.e. an expression of the form $a_1^{\loc}x_1 + \cdots + a_{|\pvars|}^{\loc}x_{|\pvars|} = b^{\loc} $, where $x_1,\dots,x_{|\pvars|}$ are program variables and $a_1^{\loc},\dots,a_{|\pvars|}^{\loc},b^{\loc} $ are yet unknown coefficients. That is, supplying concrete values for all the unknown coefficients yields an LEM. Now the conditions (1) and (2) above can be expressed using linear constraints on the coefficients. More precisely, using the construction provided e.g. in~\cite{xxx} (which includes a use of the Farkas's lemma) we construct in polynomial time, for each generalized transition $\tilde{\tau}$, a system of linear constraints $\linsystem_{\tilde{\tau}}$ over set of variables $\{ a_1^{\loc},\dots,a_{|\pvars|}^{\loc},b^{\loc}\mid \loc\in\locs \}\cup \{\eps_{\tilde\tau}\}\cup F$, where $F$ is the set of fresh variables (not appearing in any template) and $\eps_{\tilde\tau} $ is constrained to be non-negative. Each solution of the system $\linsystem_{\tilde{\tau}}$ yields a LEM which satisfies the constraint (1) for $\tilde{\tau}$. Moreover, each solution of $\linsystem_{\tilde{\tau}}$ yields a LEM which $\eps_{\tilde{\tau}}$-ranks $\tilde{\tau}$. To find a LEM which satisfies both constraints (1) and (2) as well as maximizes the number of 1-ranked elements of $U$ it is sufficient to construct $\linsystem_{\tilde{\tau}}$ for each $\tilde{\tau}\in U$ and solve the following linear program $\lp_{U}$:
+  \begin{align*}
+\text{maximize }  &\sum_{\tilde{\tau} \in U} \eps_{\tilde\tau} \text{ subject to constraints}\\[0.3cm]
+&\linsystem_{\tilde{\tau}}\,;\quad\quad \quad\quad\tilde{\tau}\in U\\
+&0 \leq \eps_{\tilde{\tau}} \leq 1\,; \quad \tilde{\tau}\in U
+  \end{align*}
+  
+Each system $\linsystem_{\tilde{\tau}}$ is constructed in such a way that if it admits a solution with some $\eps_{\tilde{\tau}}$ positive, then decreasing the value of $\eps_{\tilde{\tau}}$ in that solution to any non-negative value still yield a valid solution (this corresponds to the fact that if some transition is $\eps$-ranked by $\lem$, than it is $\eps'$-ranked by $\lem$ for each $0\leq \eps'\leq \eps$). Morever, each solution where $\eps_{\tilde{\tau}}$ is positive can be rescaled into another solution in which $\eps_{\tilde{\tau}}$ is at least $1$. It follows that of $\lp_{U}$ has at least one feasible solution, then it has an optimal solution in which each $\eps_{\tilde{\tau}}$ is either $0$ or $1$. If the system does not have a solution or all the $\eps_{\tilde{\tau}}$ are equal to zero then there is no LEM satisfying (1) and (2). Otherwise, the optimal solution of $\lp_{U}$ yields a LEM $\lem$ which satisfies both (1) and (2) and maximizes the number of 1-ranked elements of $U$.
+
+This polynomial-time linear-programming step is used as a sub-procedure in Algorithm~\ref{algo:linlexrsm} for LinLexRSM synthesis. 
+
+\begin{algorithm}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\DontPrintSemicolon
+
+\Input{An \APP{} $\program$ together with an invariant map $\inv$.}
+\Output{A multi-dimensional LinLexRSM if it exists, otherwise ``No LinLexRSM''}
+$U \leftarrow \text{ all generalized transitions of } \pCFG_{\program}$\;
+$d\leftarrow 0$\;
+\While{$U$ is non-empty}{
+	$d \leftarrow d+1$\;
+	construct and solve $\lp_{U}$\;
+	\If{$\lp_U$ does not have feasible solution or optimal value is $0$}{\Return{No LinLexRSM}}
+	\Else{$\sol\leftarrow$ optimal solution of $\lp_U$\;
+		$\lem_d \leftarrow $ the LEM $\lem$ induced by $\sol$\;
+		$U\leftarrow U \setminus \{\tilde{\tau}\mid \eps_{\tilde{\tau}}=1 \text{ in }\sol \}$}
+}
+\Return{$(\lem_1,\dots,\lem_d)$}
+\caption{Synthesis of LinLexRSMs for \APP{} s}
+\label{algo:linlexrsm}
+\end{algorithm}
+
+Both soundness and relative completeness of Algorithm~\ref{algo:linlexrsm} follow by arguments identical to those presented in~\cite{xxx}. 
+\begin{theorem}
+	Suppose that Algorithm~\ref{algo:linlexrsm} is run on an \APP{} $\program$ together with linear invariant map $\inv$. If teh algorithm returns a $d$-dimensional LEM $\vec{\lem}=(\lem_1,\dots,\lem_d)$, then $\vec{\lem}$ is a $1$-LinLexRSM map for $\program$ supported by $\inv$. Conversely, if the algorithm returns ``No LinLexRSM'', then for any $d'\in \Nset$ and $\eps>0$ there is no $d'$-dimensional $\eps$-LinLexRSM for $\program$  supported by $\inv$.
+\end{theorem}
+\begin{proof}[Proof (sketch)]
+For soundness, let $U_i$ and $U_{i}$ denote the content of $U$ just before the $i$-th iteration of the while loop. Then each $\tilde{\tau}\in U_{i}\setminus U_{i+1}$ is $1$-ranked by $\lem_i$, for each $1\leq i \leq d$. Since $U_{d}=\emptyset$, each generalized transition of $\pCFG_{\program}$ is 1-ranked by some component of $\vec{\lem}$. Since 
+\end{proof}
+
+\
