@@ -7,7 +7,7 @@ if 0<=n and 0<=m and 0<=N then
 			j := j+ 1;
 			k := i;
 			while k<N do
-				k := k+1
+				k := k+k
 			od;
 			i := k
 		od;

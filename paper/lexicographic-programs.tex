@@ -215,7 +215,7 @@ An \emph{invariant map} for a \PP{} $\program$ is a function $\inv$ assigning to
 
 Slightly abusing the notation, we view each LIM equivalently as a function assigning linear predicates (whose satisfaction sets overapproximate the set of reachable valuations) to program locations.
 
-We now have all the ingredients needed to define the notion of LexRSM maps for probabilistic programs.
+We now have all the ingredients needed to define the notion of LexRSM maps for probabilistic programs. For notational convenience, we extend the function $\guards$ (which assigns guards to deterministic transitions) to the set of all generalized transition: for a generalized transition $\tau'$ which is not a standard transition outgoing from deterministic location, we put $\guards(\tau')=0\leq 0 \equiv \mathit{true}$.
 
 \begin{definition}[Lexicographic Ranking Supermartingale Map]
 Let $\eps>0$. An $n$-dimensional \emph{lexicographic $\eps$-ranking supermartingale map} ($\eps$-LexRSM map) for a program $\program$ supported by an invariant map $\inv$ is an $n$-dimensional measurable map $\vec{\lem}=(\lem_1,\dots,\lem_n)$ for $\program$ such that for each configuration $(\loc,\vec{x})$ where $\loc\neq \locterm$ and $\vec{x}\in \inv(\loc)$ the following conditions are satisfied:
@@ -225,7 +225,7 @@ Let $\eps>0$. An $n$-dimensional \emph{lexicographic $\eps$-ranking supermarting
  	\item
  	for all $1\leq j \leq n$, $\lem_j(\loc,\vec{x})\geq 0$; and
  	\item 
- 	for each generalized transition $\tilde{\tau}$ outgoing from $\loc$ there 
+ 	for each generalized transition $\tilde{\tau}$ outgoing from $\loc$ such that $\vec{x}\models\guards(\tilde\tau)$ there 
  	exists $1\leq j 
  	\leq$ n such that
  	\begin{compactitem}
