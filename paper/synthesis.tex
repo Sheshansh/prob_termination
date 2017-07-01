@@ -46,7 +46,7 @@ Both soundness and relative completeness of Algorithm~\ref{algo:linlexrsm} follo
 	Suppose that Algorithm~\ref{algo:linlexrsm} is run on an \APP{} $\program$ together with linear invariant map $\inv$. If teh algorithm returns a $d$-dimensional LEM $\vec{\lem}=(\lem_1,\dots,\lem_d)$, then $\vec{\lem}$ is a $1$-LinLexRSM map for $\program$ supported by $\inv$. Conversely, if the algorithm returns ``No LinLexRSM'', then for any $d'\in \Nset$ and $\eps>0$ there is no $d'$-dimensional $\eps$-LinLexRSM for $\program$  supported by $\inv$.
 \end{theorem}
 \begin{proof}[Proof (sketch)]
-For soundness, let $U_i$ and $U_{i}$ denote the content of $U$ just before the $i$-th iteration of the while loop. Then each $\tilde{\tau}\in U_{i}\setminus U_{i+1}$ is $1$-ranked by $\lem_i$, for each $1\leq i \leq d$. Since $U_{d}=\emptyset$, each generalized transition of $\pCFG_{\program}$ is 1-ranked by some component of $\vec{\lem}$. Since 
+For soundness, let $U_i$ and $U_{i}$ denote the content of $U$ just before the $i$-th iteration of the while loop. Then each $\tilde{\tau}\in U_{i}\setminus U_{i+1}$ is $1$-ranked by $\lem_i$, for each $1\leq i \leq d$. Since $U_{d}=\emptyset$, each generalized transition of $\pCFG_{\program}$ is 1-ranked by some component of $\vec{\lem}$. Since \textbf{[PETR: REWRITE (1) TO REQUIRE NON-NEG EVERYWHERE]}
 \end{proof}
 
 \
