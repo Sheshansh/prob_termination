@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  3 JUL 2017 18:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  3 JUL 2017 18:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2064,10 +2064,7 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[25.25]) (./main.bbl
-Underfull \vbox (badness 2221) has occurred while \output is active []
-
- [26.26])
+[25.25]) (./main.bbl [26.26])
 
 Package natbib Warning: There were undefined citations.
 
@@ -2100,11 +2097,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 566.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 45059 strings out of 493644
- 968093 string characters out of 6150875
- 1222561 words of memory out of 5000000
- 46506 multiletter control sequences out of 15000+600000
- 349208 words of font info for 715 fonts, out of 8000000 for 9000
+ 45067 strings out of 493644
+ 968212 string characters out of 6150875
+ 1222579 words of memory out of 5000000
+ 46510 multiletter control sequences out of 15000+600000
+ 349481 words of font info for 717 fonts, out of 8000000 for 9000
  944 hyphenation exceptions out of 8191
  62i,18n,96p,1979b,7207s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/liberti
@@ -2144,10 +2141,10 @@ nts/txsyc.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/
 txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlr
 .pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlri.pfb
 >
-Output written on main.pdf (27 pages, 918228 bytes).
+Output written on main.pdf (27 pages, 919070 bytes).
 PDF statistics:
- 755 PDF objects out of 1000 (max. 8388607)
- 657 compressed objects within 7 object streams
- 253 named destinations out of 1000 (max. 500000)
+ 756 PDF objects out of 1000 (max. 8388607)
+ 658 compressed objects within 7 object streams
+ 254 named destinations out of 1000 (max. 500000)
  94361 words of extra memory for PDF output out of 106986 (max. 10000000)
 
