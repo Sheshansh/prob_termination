@@ -12,7 +12,7 @@ NATURE PAPER, the probabilistic behavior must be considered to faithfully model
 the underlying dynamic system.
 The extension of classical imperative programs with \emph{random value generators}, 
 that produce random values according to some desired probability distribution, 
-naturally gives probabilistic programs.
+naturally gives rise probabilistic programs.
 Along with probability, nondeterminism also plays a crucial role.
 In particular in program analysis, for effective analysis of large programs,
 all variables cannot be considered, and abstraction ignores some variables,
@@ -27,7 +27,7 @@ In static analysis of programs the most basic, as well most important,
 liveness property is the {\em termination} problem.
 While for non-probabilistic programs the termination question asks whether
 an input program {\em always} terminates, for probabilistic programs 
-the termination questions accounts for the probabilistic behaviors. 
+the termination questions must account for the probabilistic behaviors. 
 The most basic and fundamental extensions of the termination problem 
 for probabilistic programs are:
 
@@ -51,9 +51,9 @@ While the positive termination implies almost-sure termination, the converse is 
 The key technique that applies for liveness analysis of non-probabilistic programs is 
 the notion of {\em ranking functions}, which provides a sound and complete 
 method for termination of non-probabilistic programs~\cite{rwfloyd1967programs}.
-There exist a wide variety of different approaches for construction 
+There exist a wide variety of approaches for construction 
 of ranking functions for non-probabilistic programs~\cite{DBLP:conf/cav/BradleyMS05,DBLP:conf/tacas/ColonS01,DBLP:conf/vmcai/PodelskiR04,DBLP:conf/pods/SohnG91}.
-The generalization of ranking function to probabilistic programs is achieved through the
+The generalization of ranking functions to probabilistic programs is achieved through the
 {\em ranking supermartingales (RSMs)}~\cite{}.
 The ranking supermartingales provide a powerful and automated approach for termination 
 analysis of probabilistic programs~\cite{SRIRAM,HOLGER,HONGFEI}, and algorithmic 
@@ -62,9 +62,9 @@ also been considered~\cite{POPL,CAV,POPL}.
 
 
 
-\smallskip\noindent{\em .} 
+\smallskip\noindent{\em Practical limitations of existing approaches.} 
 While a impressive set of theoretical results related to RSMs has been
-established, for probabilistic programs with nondeterminism the current approaches  
+established~\cite{}, for probabilistic programs with nondeterminism the current approaches  
 are only applicable to academic examples of variants of random walks. 
 The key reason can be understood as follows: even for non-probabilistic programs while 
 ranking functions are sound and complete, they do not necessarily provide a practical 
@@ -84,7 +84,7 @@ which we address in this work.
 
 
 \smallskip\noindent{\em Our contributions.} 
-In this work our main contributions ranges from theoretical foundations of lexicographic
+In this work our main contributions range from theoretical foundations of lexicographic
 RSMs, to algorithmic approaches for them, to experimental results
 showing their applicability for programs.
 We describe our main contributions below:
@@ -96,7 +96,7 @@ such supermartingales ensures almost-sure termination (Theorem~\ref{} in Section
 Our first result is a purely mathematical result that introduces a new concept, and 
 proves almost-sure termination, that is independent of any probabilistic program.
 Based on the mathematical result we show that probabilistic programs with nondeterminism
-the existence of a lexicographic ranking functions with respect to an invariant ensures
+the existence of a lexicographic RSM with respect to an invariant ensures
 almost-sure termination (Theorem~\ref{} in Section~\ref{}).
 
 \item {\em Compositionality.} 
@@ -116,9 +116,9 @@ for affine programs (see Theorem~\ref{}).
 \item {\em Asymptotic bounds.} 
 In general, the existence of lexicographic RSMs does not imply positive
 termination. 
-In other words, we present an example (Example~\ref{}) where lexicographic RSM exists ensuring
-almost-sure termination, but the expected termination time is infinite.
-We then present a natural restriction (i.e., a subclass of programs) such the lexicographic 
+In other words, we present an example (Example~\ref{}) where a lexicographic RSM exists ensuring
+almost-sure termination, yet the expected termination time is infinite.
+We then present a natural restriction (i.e., a subclass of programs) such that the lexicographic 
 RSMs not only imply positive termination, but even asymptotic bounds on the expected termination 
 time can be derived from them (see Theorem~\ref{}).
 

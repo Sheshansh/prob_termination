@@ -486,23 +486,23 @@ Probabilistic programs extend classical imperative programs with
 real-valued random variables.
 The most basic liveness property for such programs is the termination 
 property.
-The qualitative (aka almost-sure) termination problem asks given a probabilistic program
-whether the program terminates with probability~1.
+The qualitative (aka almost-sure) termination problem given a probabilistic program
+asks whether the program terminates with probability~1.
 While ranking function provide a sound and complete method for non-probabilistic
 programs, the extension of them to probabilistic programs is achieved
 via ranking supermartingales (RSMs). 
-While deep theoretical results have been establishes about RSMs, 
+While deep theoretical results have been established about RSMs, 
 their application to probabilistic programs with nondeterminism has been limited
-to academic examples. 
+only to academic examples. 
 For non-probabilistic programs lexicographic ranking functions provide a compositional
-and practical approach for termination analysis, which has been missing for
-probabilistic programs. 
+and practical approach for termination analysis of real-world programs, 
+which has been missing for probabilistic programs. 
 In this work we introduce lexicographic RSMs and show that they present a sound
-method for almost-sure termination .
+method for almost-sure termination of probabilistic programs with nondeterminism.
 We show that lexicographic RSMs enjoy the desired property of compositionality,
-and for programs with linear arithmetic they can be synthesized efficiently (in 
-polynomial time).
-We also show with additional restrictions even asymptotic bounds on expected
+and for probabilistic programs with linear arithmetic they can be synthesized 
+efficiently (in polynomial time).
+We also show that with additional restrictions even asymptotic bounds on expected
 termination time can be obtained through lexicographic RSMs.
 Finally, we present experimental results on abstraction of real-world programs
 to demonstrate the effectiveness of our approach.
