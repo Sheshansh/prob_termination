@@ -1,0 +1,168 @@
+\begin{abstract}
+Probabilistic programs extend classical imperative programs with 
+real-valued random variables.
+The most basic liveness property for such programs is the termination 
+property.
+The qualitative (aka almost-sure) termination problem asks given a probabilistic program
+whether the program terminates with probability~1.
+While ranking function provide a sound and complete method for non-probabilistic
+programs, the extension of them to probabilistic programs is achieved
+via ranking supermartingales (RSMs). 
+While deep theoretical results have been establishes about RSMs, 
+their application to probabilistic programs with nondeterminism has been limited
+to academic examples. 
+For non-probabilistic programs lexicographic ranking functions provide a compositional
+and practical approach for termination analysis, which has been missing for
+probabilistic programs. 
+In this work we introduce lexicographic RSMs and show that they present a sound
+method for almost-sure termination .
+We show that lexicographic RSMs enjoy the desired property of compositionality,
+and for programs with linear arithmetic they can be synthesized efficiently (in 
+polynomial time).
+We also show with additional restrictions even asymptotic bounds on expected
+termination time can be obtained through lexicographi RSMs.
+Finally, we present experimental results on abstraction of real-world programs
+to demonstrate the effectiveness of our approach.
+\end{abstract}
+
+
+\section{Introduction}\label{sec:introduction}
+
+
+\noindent{\em Probabilistic programs with nondeterminism.} 
+Randomness play a fundamental role in many areas across science, and in 
+computer science in particular.
+In applications such as stochastic network protocols~\cite{BaierBook,prism},
+randomized algorithms~\cite{RandBook,RandBook2}, machine learning~\cite{},
+NATURE PAPER, the probabilistic behavior must be considered to faithfully model
+the underlying dynamic system.
+The extension of classical imperative programs with \emph{random value generators}, 
+that produce random values according to some desired probability distribution, 
+naturally gives probabilistic programs.
+Along with probability, nondeterminism also plays a crucial role.
+In particular in program analysis, for effective analysis of large programs,
+all variables cannot be considered, and abstraction ignores some variables,
+and the worst-case analysis is represented by adversarial nondeterminism.
+Hence probabilistic programs with nondeterminism has become an active and 
+important research area in program analysis. 
+ 
+
+
+\smallskip\noindent{\em Termination problem.} 
+In static analysis of programs the most basic, as well most important, 
+liveness property is the {\em termination} problem.
+While for non-probabilistic programs the termination question asks whether
+an input program {\em always} terminates, for probabilistic programs 
+the termination questions accounts for the probabilistic behaviors. 
+The most basic and fundamental extensions of the termination problem 
+for probabilistic programs are:
+
+\begin{compactenum}
+\item \emph{Almost-sure termination.} 
+The \emph{almost-sure termination} problem asks whether the program terminates with probability~1.
+
+
+\item \emph{Positive termination.} 
+The \emph{positive termination} problem asks whether the expected termination time is finite.
+A related quantitative generalization of the positive termination question is to obtain 
+asymptotic bounds on the expected termination time.
+
+\end{compactenum}
+While the positive termination implies almost-sure termination, the converse is not true (see~\cite[]{}).
+
+
+
+
+\smallskip\noindent{\em Ranking functions and ranking supermartingales (RSMs).}
+The key technique that applies for liveness analysis of non-probabilistic programs is 
+the notion of {\em ranking functions}, which provides a sound and complete 
+method for termination of non-probabilistic programs~\cite{rwfloyd1967programs}.
+There exist a wide variety of different approaches for construction 
+of ranking functions for non-probabilistic programs~\cite{DBLP:conf/cav/BradleyMS05,DBLP:conf/tacas/ColonS01,DBLP:conf/vmcai/PodelskiR04,DBLP:conf/pods/SohnG91}.
+The generalization of ranking function to probabilistic programs is achieved through the
+{\em ranking supermartingales (RSMs)}~\cite{}.
+The ranking supermartingales provide a powerful and automated approach for termination 
+analysis of probabilistic programs~\cite{SRIRAM,HOLGER,HONGFEI}, and algorithmic 
+approaches for special cases such as linear and polynomial RSMs has
+also been considered~\cite{POPL,CAV,POPL}.
+
+
+
+\smallskip\noindent{\em .} 
+While a impressive set of theoretical results related to RSMs has been
+established, for probabilistic programs with nondeterminism the current approaches  
+are only applicable to academic examples of variants of random walks. 
+The key reason can be understood as follows: even for non-probabilistic programs while 
+ranking functions are sound and complete, they do not necessarily provide a practical 
+approach. 
+In contrast, as a practical and scalable approach for non-probabilistic programs the 
+notion of lexicographic ranking functions has been widely studied~\cite{}. 
+Algorithmic approaches for lexicographic ranking functions allow the termination analysis 
+to be applicable to real-world non-probabilistic programs (after abstraction).
+However both the theoretical foundations as well as practical approaches related to 
+such lexicographic ranking functions are completely missing for probabilistic programs,
+which we address in this work.
+
+
+
+
+
+
+
+\smallskip\noindent{\em Our contributions.} 
+In this work our main contributions ranges from theoretical foundations of lexicographic
+RSMs, to algorithmic approaches for them, to experimental results
+showing their applicability for programs.
+We describe our main contributions below:
+\begin{enumerate}
+
+\item {\em Theoretical foundations.} 
+First, we introduce the notion of lexicographic RSMs, and show that
+such supermartingales ensures almost-sure termination (Theorem~\ref{} in Section~\ref{}). 
+Our first result is a purely mathematical result that introduces a new concept, and 
+proves almost-sure termination, that is independent of any probabilistic program.
+Based on the mathematical result we show that probabilistic programs with nondeterminism
+the existence of a lexicographic ranking functions with respect to an invariant ensures
+almost-sure termination (Theorem~\ref{} in Section~\ref{}).
+
+\item {\em Compositionality.} 
+Second we study the compositional properties of lexicographic RSMs.
+A key limitation of the previous approaches related to RSMs is the lack 
+of compositionality, and we show (in Section~\ref{}) how lexicographic RSMs 
+present a compositional approach for almost-sure termination of probabilistic programs.
+
+\item {\em Algorithm.} We then consider algorithms for synthesis of lexicographic RSMs, 
+and for efficient algorithms we consider nondeterministic probabilistic 
+programs that are {\em affine} (i.e., the arithmetic operations are linear)
+[VARIABLE RANGE BOUNDED?]
+We present a polynomial-time algorithm for synthesis of lexicographic RSMs 
+for affine programs (see Theorem~\ref{}).
+
+
+\item {\em Asymptotic bounds.} 
+In general, the existence of lexicographic RSMs does not imply positive
+termination. 
+In other words, we present an example (Example~\ref{}) where lexicographic RSM exists ensuring
+almost-sure termination, but the expected termination time is infinite.
+We then present a natural restriction (i.e., a subclass of programs) such the lexicographic 
+RSMs not only imply positive termination, but even asymptotic bounds on the expected termination 
+time can be derived from them (see Theorem~\ref{}).
+
+
+\item {\em Experimental results.} 
+We present experimental results of our approach on realistic programs to show the applicability 
+of our approach. 
+To demonstrate the effectiveness of our approach we consider the benchmarks of non-probabilistic
+programs from~\cite{} which are obtained as abstraction of real-world programs,where 
+lexicographic ranking functions were applied for termination analysis. 
+We extend these benchmarks with probabilistic statements and apply lexicographic RSMs to these
+programs. 
+Our experimental results show that our approach can handle these programs very efficiently.
+
+
+\end{enumerate}
+
+
+
+
+

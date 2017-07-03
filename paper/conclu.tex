@@ -1,0 +1,65 @@
+
+\section{Related Work}
+In this section we discuss the related works.
+
+\smallskip\noindent{\em Probabilistic programs and termination.}
+In early works the termination for concurrent probabilistic programs was studied 
+as fairness~\cite{SPH84}, which ignored precise probabilities.
+For countable state space a sound and complete characterization of almost-sure termination 
+was presented in~\cite{HS85}, but nondeterminism was absent.
+A sound and complete method for proving termination of finite-state programs
+was given in~\cite{EGK12}.
+For probablistic programs with countable state space and without 
+nondeterminism, the {\em Lyapunov ranking functions} provide a sound and 
+complete method to prove positive termination~\cite{BG05,Foster53}.
+For probabilistic programs with nondeterminism, but restricted to discrete probabilistic
+choices, the termination problem was studied in~\cite{MM04,MM05}.
+The RSM-based (ranking supermatingale-based) approach extending ranking functions was first 
+presented in~\cite{SriramCAV} for probabilistic programs without non-determinism,
+but with real-valued variables, and its extension for probabilistic programs
+with non-determinism has been studied in~\cite{HolgerPOPL,CFNH16:prob-termination,CAV-POLY,POPL,ARXIV}.
+While all these results deeply clarify the role of RSMs for probabilistic programs, 
+the notion of lexicographic RSMs to obtain a practical approach for termination 
+analysis for probabilistic programs has not been studied before, which we consider in 
+this work.
+
+
+\smallskip\noindent{\em Other approaches.}
+Besides RSMs, other approaches has also been considered for probabilistic programs.
+A sound approach~\cite{DBLP:conf/sas/Monniaux01} for almost-sure termination 
+is to explore the exponential decrease of probabilities upon bounded-termination 
+through abstract interpretation~\cite{DBLP:conf/popl/CousotC77}.
+MENTION PROOF RULES AND NOT AN AUTOMATED APPROACH.
+
+
+
+\smallskip\noindent{\em Non-probabilistic programs.}
+Termination analysis of non-probabilistic programs has also been extensively 
+studied~\cite{DBLP:conf/cav/BradleyMS05,DBLP:conf/tacas/ColonS01,DBLP:conf/vmcai/PodelskiR04,DBLP:conf/pods/SohnG91,BMS05b,CSZ13,LJB01}.
+Ranking functions are at the heart of the termination analysis, and lexicographic 
+ranking function has emerged as one of the most efficient and practical approaches
+for termination analysis~\cite{}.
+In this work we extend such lexicographich ranking functions to probabilistic programs,
+and present lexicographic RSMs for almost-sure termination analysis of probabilistic programs
+with non-determinism.
+
+
+
+\section{Conclusion and Future Work}
+In this work we considered lexicographic RSMs for termination analysis of probabilistic
+programs with nondeterminism.
+We showed it presents a sound approach for almost-sure termination, that is compositional,
+algorithmically efficient, and leads to approach that can handle realistic programs.
+There are several interesting directions of future work.
+Lexicographic ranking functions has been considered in several works to 
+provide different practical methods for analysis of non-probabilistic programs.
+First, while our work presents the foundations of lexicographic RSMs for probabilistic 
+programs, extending other practical methods of lexicographic ranking functions to 
+lexicographic RSMs is an interesting direction of future work.
+Second, while our algorithmic approaches focus on the linear case, it would be interesting
+to consider other non-linear, and polynomial functions in the future.
+
+
+
+
+
