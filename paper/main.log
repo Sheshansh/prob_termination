@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.28)  2 JUL 2017 16:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  3 JUL 2017 18:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **main.tex
 (./main.tex
 LaTeX2e <2016/03/31> patch level 3
-Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+Babel <3.9r> and hyphenation patterns for 53 language(s) loaded.
 (./acmart.cls
 Document Class: acmart 2017/05/14 v1.39 Typesetting articles for Association of
  Computing Machinery
@@ -1684,11 +1684,11 @@ your preamble.
 
 \c@lstlisting=\count268
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 489.
+(Font)              scaled to size 14.4pt on input line 515.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 489.
+(Font)              scaled to size 14.4pt on input line 515.
 LaTeX Font Info:    Try loading font information for T1+LinuxBiolinumT-TLF on i
-nput line 489.
+nput line 515.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/libertine/T1LinuxBiolinumT-TL
 F.fd
@@ -1698,21 +1698,21 @@ uxBiolinumT-TLF.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/bx/n' in size <14.4> not 
 available
 (Font)              Font shape `T1/LinuxBiolinumT-TLF/b/n' tried instead on inp
-ut line 489.
+ut line 515.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 489.
+(Font)              scaled to size 14.4pt on input line 515.
 Package microtype Info: Loading generic settings for font family
 (microtype)             `LinuxBiolinumT-TLF' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 14.4pt on input line 489.
+(Font)              scaled to size 14.4pt on input line 515.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 489.
+(Font)              scaled to size 10.95pt on input line 515.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 489.
+(Font)              scaled to size 10.95pt on input line 515.
 LaTeX Font Info:    Try loading font information for TS1+LinuxLibertineT-TLF on
- input line 489.
+ input line 515.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/libertine/TS1LinuxLibertineT-
 TLF.fd
@@ -1720,25 +1720,25 @@ File: TS1LinuxLibertineT-TLF.fd 2012/11/26 (autoinst) Font definitions for TS1/
 LinuxLibertineT-TLF.
 )
 LaTeX Font Info:    Font shape `TS1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 8.0pt on input line 489.
+(Font)              scaled to size 8.0pt on input line 515.
 Package microtype Info: Loading generic settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 489.
+(Font)              scaled to size 9.0pt on input line 515.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 9.0pt on input line 489.
+(Font)              scaled to size 9.0pt on input line 515.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 489.
+(Font)              scaled to size 9.0pt on input line 515.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 489.
+(Font)              scaled to size 9.0pt on input line 515.
 Package microtype Info: Loading generic settings for font family
 (microtype)             `LinuxLibertineT-TLF' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 489.
+(Font)              scaled to size 7.3pt on input line 515.
  (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 ) (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -1746,13 +1746,13 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\\' on input line 489.
+(hyperref)                removing `\\' on input line 515.
 
 
 Class acmart Warning: The command \terms{} is obsolete. I am going to ignore it
- on input line 494.
+ on input line 520.
 
-(./prelims.tex
+(./introduction.tex
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
 (Font)              scaled to size 10.0pt on input line 3.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/bx/n' in size <10> not av
@@ -1761,26 +1761,88 @@ ailable
 ut line 3.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/b/n' will be
 (Font)              scaled to size 10.0pt on input line 3.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 10.0pt on input line 6.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
+(Font)              scaled to size 10.0pt on input line 10.
 
 
-Package natbib Warning: Citation `POPL17PAPER' on page 1 undefined on input lin
-e 6.
+Package natbib Warning: Citation `RandBook' on page 1 undefined on input line 1
+0.
+
+
+Package natbib Warning: Citation `RandBook2' on page 1 undefined on input line 
+10.
 
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 11.
+(Font)              scaled to size 10.0pt on input line 22.
+[1.1{/home/pnovotny/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package natbib Warning: Citation `SRIRAM' on page 2 undefined on input line 59.
+
+
+
+Package natbib Warning: Citation `HOLGER' on page 2 undefined on input line 59.
+
+
+
+Package natbib Warning: Citation `HONGFEI' on page 2 undefined on input line 59
+.
+
+
+Package natbib Warning: Citation `POPL' on page 2 undefined on input line 61.
+
+
+Package natbib Warning: Citation `CAV' on page 2 undefined on input line 61.
+
+
+Package natbib Warning: Citation `POPL' on page 2 undefined on input line 61.
+
+
+LaTeX Warning: Reference `' on page 2 undefined on input line 95.
+
+
+LaTeX Warning: Reference `' on page 2 undefined on input line 95.
+
+
+LaTeX Warning: Reference `' on page 2 undefined on input line 100.
+
+
+LaTeX Warning: Reference `' on page 2 undefined on input line 100.
+
+
+LaTeX Warning: Reference `' on page 2 undefined on input line 105.
+
+[2.2]
+
+LaTeX Warning: Reference `' on page 3 undefined on input line 113.
+
+
+LaTeX Warning: Reference `' on page 3 undefined on input line 119.
+
+
+LaTeX Warning: Reference `' on page 3 undefined on input line 123.
+
+) (./prelims.tex
+
+Package natbib Warning: Citation `POPL17PAPER' on page 3 undefined on input lin
+e 6.
+
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 10.0pt on input line 16.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 7.3pt on input line 16.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 5.5pt on input line 16.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 33.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
 (Font)              scaled to size 10.0pt on input line 115.
-[1.1{/home/pnovotny/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package Fancyhdr Warning: \headheight is too small (13.0pt): 
+ Make it at least 22.47003pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[3.3]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 7.3pt on input line 141.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
@@ -1797,14 +1859,14 @@ Overfull \hbox (8.74901pt too wide) in paragraph at lines 178--180
 
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 5.5pt on input line 197.
-[2.2]
+[4.4]
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[3.3]
+[5.5]
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 10.0pt on input line 304.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
@@ -1817,14 +1879,14 @@ LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 6.2pt on input line 368.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 8.0pt on input line 368.
- [4.4]
+ [6.6]
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[5.5]
+[7.7]
 Overfull \hbox (3.0958pt too wide) in paragraph at lines 846--856
 \T1/LinuxLibertineT-TLF/m/n/10 (-20) each sched-uler $\OML/nxlmi/m/it/10 ^^[$ \
 T1/LinuxLibertineT-TLF/m/n/10 (-20) and for each ini-tial val-u-a-tion $\OT1/Li
@@ -1834,7 +1896,7 @@ m/n/10 ¹f\OML/nxlmi/m/it/10 % \LMS/ntxsy/m/n/10 j \OML/nxlmi/m/it/10 %[]\LMS/nt
 xsy/m/n/10 gº \U/ntxmia/m/it/10 =
  []
 
-[6.6]
+[8.8]
 \invrun=\box85
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 7.0pt on input line 1245.
@@ -1853,61 +1915,61 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[7.7]
+[9.9]
 
-Package natbib Warning: Citation `xxx' on page 8 undefined on input line 112.
-
-
-Package natbib Warning: Citation `xxx' on page 8 undefined on input line 112.
+Package natbib Warning: Citation `xxx' on page 10 undefined on input line 120.
 
 
-Package natbib Warning: Citation `xxx' on page 8 undefined on input line 112.
+Package natbib Warning: Citation `xxx' on page 10 undefined on input line 120.
 
 
-LaTeX Warning: Reference `xxx' on page 8 undefined on input line 112.
+Package natbib Warning: Citation `xxx' on page 10 undefined on input line 120.
 
 
-LaTeX Warning: Reference `xxx' on page 8 undefined on input line 112.
+LaTeX Warning: Reference `xxx' on page 10 undefined on input line 120.
 
-[8.8]
 
-Package Fancyhdr Warning: \headheight is too small (13.0pt): 
- Make it at least 22.47003pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
+LaTeX Warning: Reference `xxx' on page 10 undefined on input line 120.
 
-[9.9] [10.10]
+[10.10]
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[11.11]) (./lexicographic-programs.tex [12.12]
+[11.11] [12.12]
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[13.13]
+[13.13]) (./lexicographic-programs.tex [14.14]
+
+Package Fancyhdr Warning: \headheight is too small (13.0pt): 
+ Make it at least 22.47003pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[15.15]
 \infas=\box86
 \infast=\box87
 \infastinv=\box88
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
 (Font)              scaled to size 9.0pt on input line 354.
- [14.14]) (./synthesis.tex
+ [16.16]) (./synthesis.tex
 
-Package natbib Warning: Citation `xxx' on page 15 undefined on input line 3.
-
-
-LaTeX Warning: Reference `xxx' on page 15 undefined on input line 5.
+Package natbib Warning: Citation `xxx' on page 17 undefined on input line 3.
 
 
-Package natbib Warning: Citation `xxx' on page 15 undefined on input line 13.
+LaTeX Warning: Reference `xxx' on page 17 undefined on input line 5.
 
 
-Package natbib Warning: Citation `xxx' on page 15 undefined on input line 13.
+Package natbib Warning: Citation `xxx' on page 17 undefined on input line 13.
+
+
+Package natbib Warning: Citation `xxx' on page 17 undefined on input line 13.
 
 
 Underfull \vbox (badness 4353) has occurred while \output is active []
@@ -1919,23 +1981,23 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[15.15]
+[17.17]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
 (Font)              scaled to size 7.0pt on input line 30.
 
 
-Package natbib Warning: Citation `xxx' on page 16 undefined on input line 45.
+Package natbib Warning: Citation `xxx' on page 18 undefined on input line 45.
 
-[16.16]
+[18.18]
 
-Package natbib Warning: Citation `xxx' on page 17 undefined on input line 52.
+Package natbib Warning: Citation `xxx' on page 19 undefined on input line 52.
 
 
-Package natbib Warning: Citation `xxx' on page 17 undefined on input line 52.
+Package natbib Warning: Citation `xxx' on page 19 undefined on input line 52.
 
 ) (./compositional.tex
 
-Package natbib Warning: Citation `xxx' on page 17 undefined on input line 9.
+Package natbib Warning: Citation `xxx' on page 19 undefined on input line 9.
 
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
@@ -1943,14 +2005,14 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[17.17]
+[19.19]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/it' will be
 (Font)              scaled to size 10.0pt on input line 85.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 7.3pt on input line 85.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 5.5pt on input line 85.
- [18.18]
+ [20.20]
 \uniinto=\box89
 \uniintt=\box90
 \unintthree=\box91
@@ -1966,25 +2028,46 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[19.19]
+[21.21]
 
-Package natbib Warning: Citation `xxx' on page 20 undefined on input line 326.
+Package natbib Warning: Citation `xxx' on page 22 undefined on input line 326.
 
 
-LaTeX Warning: Reference `xxx' on page 20 undefined on input line 329.
+LaTeX Warning: Reference `xxx' on page 22 undefined on input line 329.
 
-[20.20]
+[22.22]
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[21.21]
+[23.23]
 
-LaTeX Warning: Reference `xxx' on page 22 undefined on input line 408.
+LaTeX Warning: Reference `xxx' on page 24 undefined on input line 408.
 
-) (./extensions.tex) (./main.bbl [22.22])
+) (./extensions.tex [24.24]) (./conclu.tex
+
+Package natbib Warning: Citation `CAV-POLY' on page 25 undefined on input line 
+20.
+
+
+Package natbib Warning: Citation `POPL' on page 25 undefined on input line 20.
+
+
+Package natbib Warning: Citation `ARXIV' on page 25 undefined on input line 20.
+
+
+
+Package Fancyhdr Warning: \headheight is too small (13.0pt): 
+ Make it at least 22.47003pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[25.25]) (./main.bbl
+Underfull \vbox (badness 2221) has occurred while \output is active []
+
+ [26.26])
 
 Package natbib Warning: There were undefined citations.
 
@@ -1994,14 +2077,14 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[23.23]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 540.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 540.
+[27.27]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 566.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 566.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 540.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 540.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 566.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 566.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 8ECD0B2BEE830BE54D105AD7E519B36E;2764.
+(rerunfilecheck)             Checksum: 0C4BCAEC41B63C36F058E19986C9AF8A;3282.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -2010,33 +2093,33 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 540.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 566.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 44860 strings out of 493013
- 964151 string characters out of 6131492
- 1221429 words of memory out of 5000000
- 46476 multiletter control sequences out of 15000+600000
- 340104 words of font info for 658 fonts, out of 8000000 for 9000
- 1302 hyphenation exceptions out of 8191
- 62i,18n,96p,1979b,7205s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 45059 strings out of 493644
+ 968093 string characters out of 6150875
+ 1222561 words of memory out of 5000000
+ 46506 multiletter control sequences out of 15000+600000
+ 349208 words of font info for 715 fonts, out of 8000000 for 9000
+ 944 hyphenation exceptions out of 8191
+ 62i,18n,96p,1979b,7207s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/liberti
 ne/lbtn_ki75ao.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/libe
 rtine/lbtn_25tcsq.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/n
 ewtx/libertinealt.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/l
 ibertine/lbtn_xogrpz.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvip
-s/libertine/lbtn_naooyc.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/d
-vips/libertine/lbtn_ncsllp.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/en
-c/dvips/libertine/lbtn_7grukw.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts
-/enc/dvips/libertine/lbtn_ehpgim.enc}{/home/pnovotny/texlive/2016/texmf-dist/fo
-nts/enc/dvips/libertine/lbtn_c7kyj5.enc}{/home/pnovotny/texlive/2016/texmf-dist
-/fonts/enc/dvips/base/8r.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/
-dvips/libertine/lbtn_76gpa5.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/e
-nc/dvips/libertine/lbtn_nh77jq.enc}</home/pnovotny/texlive/2016/texmf-dist/font
+s/libertine/lbtn_ncsllp.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/d
+vips/libertine/lbtn_ehpgim.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/en
+c/dvips/libertine/lbtn_c7kyj5.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts
+/enc/dvips/base/8r.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/
+libertine/lbtn_naooyc.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvi
+ps/libertine/lbtn_7grukw.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/
+dvips/libertine/lbtn_nh77jq.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/e
+nc/dvips/libertine/lbtn_76gpa5.enc}</home/pnovotny/texlive/2016/texmf-dist/font
 s/type1/public/libertine/LinBiolinumT.pfb></home/pnovotny/texlive/2016/texmf-di
 st/fonts/type1/public/libertine/LinBiolinumTB.pfb></home/pnovotny/texlive/2016/
 texmf-dist/fonts/type1/public/libertine/LinBiolinumTI.pfb></home/pnovotny/texli
@@ -2061,10 +2144,10 @@ nts/txsyc.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/
 txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlr
 .pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlri.pfb
 >
-Output written on main.pdf (23 pages, 896281 bytes).
+Output written on main.pdf (27 pages, 918228 bytes).
 PDF statistics:
- 652 PDF objects out of 1000 (max. 8388607)
- 559 compressed objects within 6 object streams
- 218 named destinations out of 1000 (max. 500000)
- 94329 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 755 PDF objects out of 1000 (max. 8388607)
+ 657 compressed objects within 7 object streams
+ 253 named destinations out of 1000 (max. 500000)
+ 94361 words of extra memory for PDF output out of 106986 (max. 10000000)
 

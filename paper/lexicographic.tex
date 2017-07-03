@@ -46,7 +46,15 @@ Then there exists a conditional expectation of $X$ given $\mathcal{F}'$ and it i
 The proof for the case when $\E[|X|]$ is standard and appears in many textbooks on probability theory (e.g.~\cite{Billingsley:book,Ash:book,Rosenthal:book}). The proof for the second case is essentially the same: the condition that $X$ is non-negative and not admitting infinite value suffices for satisfying the assumptions of Radon-Nikodym Theorem, the main theoretical tool used in the proof. For the sake of completeness we present the proof in \AppendixMaterial.
 \end{proof}
 
-Since the constraint~\eqref{eq:cond-exp} defining conditional expectation is phrased in terms of expected values, the almost-sure uniqueness cannot be strengthened to uniqueness, as re-defining a random variable on a set of probability zero does not change its expectation. In the following, when we say that a conditional expectation of a random variable $X$ satisfies some inequality (e.g. $\E[X\mid\mathcal{F}]\geq 0$) on set $L\subseteq \Omega$, we mean that for each $\mathcal{F}$-measurable function $\E[X\mid\mathcal{F}]$ satisfying~\eqref{eq:cond-exp} the .
+Since the constraint~\eqref{eq:cond-exp} defining conditional expectation is 
+phrased in terms of expected values, the almost-sure uniqueness cannot be 
+strengthened to uniqueness, as re-defining a random variable on a set of 
+probability zero does not change its expectation. In the following, when we say 
+that a conditional expectation of a random variable $X$ satisfies some 
+inequality (e.g. $\E[X\mid\mathcal{F}]\geq 0$) on set $L\subseteq \Omega$, we 
+mean that for each $\mathcal{F}$-measurable function $\E[X\mid\mathcal{F}]$ 
+satisfying~\eqref{eq:cond-exp} the inequality holds on some subset $L'\subseteq 
+L$ such that $\probm(L')=\probm(L)$.
 
 In context of probabilistic programs we work with probability 
 spaces of the form $(\Omega,\natfilt,\probm^\sigma)$, where $\Omega$ is a 

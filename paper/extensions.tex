@@ -1,7 +1,43 @@
 \section{Bounds on Expected Termination Time}
 
-As shown in Example~\ref{ex:infinite-time}, already LinLexRSM maps are capable of proving almost-sure termination of programs whose expected termination time is infinite. However, it is often desirable to obtain bounds on expected runtime of a program. In this section, we present a LexRSM-based proof rule for obtaining bounds on expected runtime, and we show how to automatize the usage of this proof rule to obtain polynomial bounds on expected runtime in a subclass of \PP{}s.
+As shown in Example~\ref{ex:infinite-time}, already LinLexRSM maps are capable 
+of proving almost-sure termination of programs whose expected termination time 
+is infinite. However, it is often desirable to obtain bounds on expected 
+runtime of a program. In this section, we present a LexRSM-based proof rule for 
+obtaining bounds on expected runtime, and we show how to automatize the usage 
+of this proof rule to obtain polynomial bounds on expected runtime in a 
+subclass of \PP{}s.
+
+As in the case of a.s. termination we start with general mathematical statement 
+about LexRSMs. We define a restricted class of LexRSMs with \emph{bounded 
+expected conditional increase} property. Recall from 
+definition~\ref{def:lexrsm} that 
+LexRSM for a stopping time $\stime$ is characterized by the possibility to 
+a.s. partition, for each $i\in \Nset_0$, the set $\{\omega\in \Omega\mid 
+\stime(\omega)>i \}$ into $d$ sets $L^i_1,\dots,L^i_d$ such that, intuitively, 
+on $L^i_j$ the conditional expectation of $\vec{X}_{i+1}[j]$ given $\genfilt_i$ 
+is smaller than $\vec{X}_i[j]$, and for all $j'<j$, on $L^i_{j'}$ the 
+conditional expectation of $\vec{X}_{i+1}[j]$ given $\genfilt_i$ 
+is no larger than $\vec{X}_i[j]$. This leaves the opportunity of conditional 
+expectation of $\vec{X}_{i+1}[j]$ being larger than $\vec{X}_i[j]$ on 
+$L^i_{j''}$ with $j''$. The conditional expected increase property bounds the 
+possibility of this increase.
+
+\begin{definition}
+Let $\{\vec{X}_{i}\}_{i=0}^{\infty}$ be a 
+$d$-dimensional LexRSM for some stopping time $\stime$, defined w.r.t. some 
+filtration $\{\genfilt_i\}_{i=0}^{\infty}$. We say that 
+$\{\vec{X}_{i}\}_{i=0}^{\infty}$ has \emph{$c$-bounded expected conditional 
+increase (ECI),} for 
+some $c\geq 0$, if for each $i\in \Nset_0 $ and each $1\leq j \leq d $ it holds 
+$\E[\vecseq{X}{i+1}{j}\mid \genfilt_i]\leq \vecseq{X}{i}{j}+c$ on $L^i_{j''}$, 
+for all $j''>j$ 
+(here $L^i_1,\dots,L^i_d$ are as in Definition~\ref{def:lexrsm}).
+\end{definition}
+
+For LexRSMs with $c$-bounded ECI we have the following result.
 
 \begin{theorem}
 \label{thm:runtime-bound}
+
 \end{theorem}

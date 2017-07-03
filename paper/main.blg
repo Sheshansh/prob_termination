@@ -9,59 +9,102 @@ Warning--string name "springer" is undefined
 --line 6299 of file bibliography-master.bib
 Warning--string name "lncs" is undefined
 --line 6300 of file bibliography-master.bib
+Repeated entry---line 7617 of file bibliography-master.bib
+ : @inproceedings{
+ :                ,
+I'm skipping whatever remains of this entry
 Database file #2: new-popl18.bib
+Warning--I didn't find a database entry for "RandBook"
+Warning--I didn't find a database entry for "RandBook2"
+Warning--I didn't find a database entry for "SRIRAM"
+Warning--I didn't find a database entry for "HOLGER"
+Warning--I didn't find a database entry for "HONGFEI"
+Warning--I didn't find a database entry for "POPL"
+Warning--I didn't find a database entry for "CAV"
+Warning--I didn't find a database entry for "POPL17PAPER"
 Warning--I didn't find a database entry for "xxx"
+Warning--I didn't find a database entry for "CAV-POLY"
+Warning--I didn't find a database entry for "ARXIV"
+Warning--no key, author in 
+Warning--no author, editor, organization, or key in 
+Warning--to sort, need author or key in 
+Warning--no key, author in 
+Warning--no key, author in 
 Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--no key, author in 
+Warning--no author, editor, organization, or key in 
+Warning--empty year in 
 Warning--empty address in Ash:book
 Warning--empty address in Billingsley:book
+Warning--empty publisher in BG05
+Warning--empty address in BG05
+Warning--empty address in DBLP:conf/cav/BradleyMS05
+Warning--empty publisher in BMS05b
+Warning--empty address in BMS05b
 Warning--empty address in SriramCAV
 Warning--page numbers missing in both pages and numpages fields in CFG16:positivstellensatz-arxiv
 Warning--empty address in CFNH16:prob-termination
+Warning--empty address in DBLP:conf/tacas/ColonS01
+Warning--empty publisher in CSZ13
+Warning--empty address in CSZ13
+Warning--empty address in DBLP:conf/popl/CousotC77
+Warning--empty publisher in EGK12
+Warning--empty address in EGK12
 Warning--empty address in HolgerPOPL
+Warning--empty publisher in prism
+Warning--empty address in prism
+Warning--empty publisher in LJB01
+Warning--empty address in LJB01
+Warning--empty publisher in MM04
+Warning--empty address in MM04
+Warning--empty address in MM05
+Warning--empty address in DBLP:conf/sas/Monniaux01
 Warning--empty publisher in NSK:CTMDP-delayed
 Warning--empty address in NSK:CTMDP-delayed
 Warning--empty publisher in NK:CTMDP-bisimulation
 Warning--empty address in NK:CTMDP-bisimulation
+Warning--empty address in DBLP:conf/vmcai/PodelskiR04
 Warning--empty address in Rosenthal:book
-You've used 10 entries,
+Warning--empty address in DBLP:conf/pods/SohnG91
+You've used 30 entries,
             5706 wiz_defined-function locations,
-            1402 strings with 17906 characters,
-and the built_in function-call counts, 10656 in all, are:
-= -- 1215
-> -- 369
-< -- 0
-+ -- 107
-- -- 165
-* -- 747
-:= -- 1150
-add.period$ -- 53
-call.type$ -- 10
-change.case$ -- 63
-chr.to.int$ -- 9
-cite$ -- 21
-duplicate$ -- 876
-empty$ -- 637
-format.name$ -- 161
-if$ -- 2437
-int.to.chr$ -- 2
+            1587 strings with 22323 characters,
+and the built_in function-call counts, 33063 in all, are:
+= -- 3904
+> -- 1100
+< -- 1
++ -- 325
+- -- 428
+* -- 2252
+:= -- 3418
+add.period$ -- 154
+call.type$ -- 30
+change.case$ -- 185
+chr.to.int$ -- 28
+cite$ -- 74
+duplicate$ -- 2852
+empty$ -- 2060
+format.name$ -- 487
+if$ -- 7865
+int.to.chr$ -- 3
 int.to.str$ -- 0
-missing$ -- 39
-newline$ -- 131
-num.names$ -- 85
-pop$ -- 384
+missing$ -- 124
+newline$ -- 295
+num.names$ -- 248
+pop$ -- 1259
 preamble$ -- 1
-purify$ -- 110
+purify$ -- 331
 quote$ -- 0
-skip$ -- 334
+skip$ -- 1094
 stack$ -- 0
-substring$ -- 855
-swap$ -- 81
-text.length$ -- 63
+substring$ -- 2557
+swap$ -- 289
+text.length$ -- 64
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 221
-warning$ -- 11
-while$ -- 90
+type$ -- 729
+warning$ -- 40
+while$ -- 272
 width$ -- 0
-write$ -- 229
-(There were 14 warnings)
+write$ -- 594
+(There was 1 error message)
