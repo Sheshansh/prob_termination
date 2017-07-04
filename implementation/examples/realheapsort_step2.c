@@ -1,8 +1,3 @@
-//realheapsort - destruction only
-//aspic - delay 3 nécessaire, et pas de -nomu dans rank
-// on trouve 
-void realheapsort_step2()
-{
   float t[100], temp;
   int N;
   int k,j,m;

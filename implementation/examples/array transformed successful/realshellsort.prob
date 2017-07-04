@@ -8,12 +8,12 @@ while increment >= 1 do
     while j >= increment do
     
       skip;
-      j = j - increment
+      j := j - increment
     
     od;
     skip;
     i:=i+1
-  od
-  increment = increment*0.5;
+  od;
+  increment := 0.5*increment
 
 od
