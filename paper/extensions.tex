@@ -56,5 +56,21 @@ Then $\E[\stime]\leq
 Denote $\noofdecrank_j(\omega)$ the number of steps $i$ in which $\omega\in 
 L_j^i$. Since by Theorem~\ref{thm:lexrsm-main} the existence of LexRSM entails 
 $\probm(\stime<\infty)=1$, the value $\noofdecrank_j(\omega)$ is a.s. finite. 
-We prove, by induction on $1\$
+We prove that for each $1\leq j \leq d$ it holds $\E[\noofdecrank_j]\leq 
+\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\noofdecrank_{j'}]\right) + 
+\E[\vecseq{X}{0}{j}].$ Since $\stime(\omega)=\sum_{1\leq j \leq d} 
+\noofdecrank_j(\omega)$, for each $\omega\in \Omega$ (and hence, due to 
+linearity of expectation $\E[\stime]=\sum_{1\leq j \leq d} 
+E[\noofdecrank_j]$), the statement of the 
+Theorem follows by an easy induction. 
+
+To prove the required inequality, let $\nodecrank{k}{j}(\omega)$ be the number 
+of steps $i$ \emph{within the first $k$} steps such that $\omega\in L_j^i$. We 
+prove, by induction on $k$, that for each $k$ it holds 
+$\E[\nodecrank{k}{j}(\omega)]\leq 
+\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\noofdecrank_{j'}] \right)+ 
+\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k}{j}]$. Once this is proved, the 
+desired inequality follows by taking $k$ to $\infty$, since 
+$\lim_{k\rightarrow \infty}\E[\nodecrank{k}{j}] = \E[\noofdecrank_j]$ and 
+$\lim_{k\rightarrow \infty}\E[\vecseq{X}{k}{j}] \geq 0$.
 \end{proof}
