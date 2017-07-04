@@ -142,6 +142,8 @@ void generate_equations(){
 			// The invariant was "false", so just leave all the transitions of this state
 			continue;
 		}
+		it->second->invariant->print();
+		cout<<endl;
 		if(it->second->type=="det"){
 			//Invariant and guard imply the value decrease
 			if(it->second->edges.empty()){
