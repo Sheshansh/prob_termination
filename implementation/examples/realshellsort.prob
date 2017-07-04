@@ -1,6 +1,6 @@
 var i, j, increment, temp;
 increment := array_size / 2;
-while increment > 0 do
+while increment >= 1 do
   i:=0;
   while i < array_size do
     j := i;
@@ -14,6 +14,6 @@ while increment > 0 do
     skip;
     i:=i+1
   od
-  increment = increment/2;
+  increment = increment*0.5;
 
 od
