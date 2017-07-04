@@ -5,7 +5,7 @@ of proving almost-sure termination of programs whose expected termination time
 is infinite. However, it is often desirable to obtain bounds on expected 
 runtime of a program. In this section, we present a LexRSM-based proof rule for 
 obtaining bounds on expected runtime, and we show how to automatize the usage 
-of this proof rule to obtain polynomial bounds on expected runtime in a 
+of this proof rule to obtain bounds on expected runtime in a 
 subclass of \PP{}s.
 
 As in the case of a.s. termination we start with general mathematical statement 
@@ -27,20 +27,34 @@ possibility of this increase.
 Let $\{\vec{X}_{i}\}_{i=0}^{\infty}$ be a 
 $d$-dimensional LexRSM for some stopping time $\stime$, defined w.r.t. some 
 filtration $\{\genfilt_i\}_{i=0}^{\infty}$. We say that 
-$\{\vec{X}_{i}\}_{i=0}^{\infty}$ has \emph{$c$-bounded expected conditional 
+$\{\vec{X}_{i}\}_{i=0}^{\infty}$ has \emph{$\vec{c}$-bounded expected 
+conditional 
 increase (ECI),} for 
-some $c\geq 0$, if for each $i\in \Nset_0 $ and each $1\leq j \leq d $ it holds 
-$\E[\vecseq{X}{i+1}{j}\mid \genfilt_i]\leq \vecseq{X}{i}{j}+c$ on $L^i_{j''}$, 
+some non-negative vector $\vec{c}\in\Rset^d$, if for each $i\in \Nset_0 $ and 
+each $1\leq 
+j \leq d $ it holds 
+$\E[\vecseq{X}{i+1}{j}\mid \genfilt_i]\leq \vecseq{X}{i}{j}+\vec{c}[j]$ on 
+$L^i_{j''}$, 
 for all $j''>j$ 
 (here $L^i_1,\dots,L^i_d$ are as in Definition~\ref{def:lexrsm}).
 \end{definition}
 
-For LexRSMs with $c$-bounded ECI we have the following result. For simplicity, 
+For LexRSMs with $\vec{c}$-bounded ECI we have the following result. For 
+simplicity, 
 we formulate the result for 1-LexRSMs, though it is easy to prove analogous 
 result for general $\eps$-LexRSMs, $\eps>0$, at the cost of obtaining less 
 readable formula.
 
 \begin{theorem}
 \label{thm:runtime-bound}
-
+Let $\{\vec{X}_{i}\}_{i=0}^{\infty}$ be a 
+$d$-dimensional LexRSM with $c$-bounded ECI for some stopping time $\stime$. 
+Then $\E[\stime]\leq  
+\sum_{j=1}^{d}\E[\vecseq{X}{0}{j}]\cdot(\vec{c}[j]+1)^{d-j}$.
 \end{theorem}
+\begin{proof}
+Denote $\noofdecrank_j(\omega)$ the number of steps $i$ in which $\omega\in 
+L_j^i$. Since by Theorem~\ref{thm:lexrsm-main} the existence of LexRSM entails 
+$\probm(\stime<\infty)=1$, the value $\noofdecrank_j(\omega)$ is a.s. finite. 
+We prove, by induction on $1\$
+\end{proof}
