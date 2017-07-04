@@ -67,10 +67,90 @@ Theorem follows by an easy induction.
 To prove the required inequality, let $\nodecrank{k}{j}(\omega)$ be the number 
 of steps $i$ \emph{within the first $k$} steps such that $\omega\in L_j^i$. We 
 prove, by induction on $k$, that for each $k$ it holds 
-$\E[\nodecrank{k}{j}(\omega)]\leq 
-\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\noofdecrank_{j'}] \right)+ 
+$\E[\nodecrank{k}{j}]\leq 
+\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k}{j'}] \right)+ 
 \E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k}{j}]$. Once this is proved, the 
 desired inequality follows by taking $k$ to $\infty$, since 
 $\lim_{k\rightarrow \infty}\E[\nodecrank{k}{j}] = \E[\noofdecrank_j]$ and 
 $\lim_{k\rightarrow \infty}\E[\vecseq{X}{k}{j}] \geq 0$.
+
+The base case $k=0$ is simple as both sides of the inequality are zero. Assume 
+that the inequality holds for some $k\geq 0$. We have 
+$\E[\nodecrank{k+1}{j}]=\E[\nodecrank{k}{j}]+\probm{(L_j^{k})}$, so from 
+induction hypothesis we get 
+\begin{equation}
+\label{eq:time1}
+\E[\nodecrank{k+1}{j}]\leq 
+\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k}{j'}] \right)+ 
+\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k}{j}] + \probm{(L_j^{k})}.\end{equation} 
+Now denote 
+$L^k_{<j} = L^k_1 \cup \dots\cup L^k_{j-1}$ and $L^k_{>j}= 
+L^k_{j+1}\cup\dots\cup L^k_{d}$. We have  
+$\E[\vecseq{X}{k}{j}] = \E[\vecseq{X}{k}{j}\cdot 
+\indicator{ L_{<j}^k}] + \E[\vecseq{X}{k}{j}\cdot 
+\indicator{ L_j^k}] + \E[\vecseq{X}{k}{j}\cdot 
+	\indicator{L_{>j}^k}] \geq 
+\E[\vecseq{X}{k+1}{j}\cdot 
+	\indicator{ L_{<j}^k}] -\vec{c}[j]\cdot \probm(L_{<j}^k) + 
+	\E[\vecseq{X}{k+1}{j}\cdot 
+	\indicator{ L_{j}^k}] + \probm(L_{j}^k) + \E[\vecseq{X}{k+1}{j}\cdot 
+	\indicator{ L_{>j}^k}]= \E[\vecseq{X}{k+1}{j}] -\vec{c}[j]\cdot 
+	\probm(L_{<j}^k)+ \probm(L_{j}^k)$. Plugging this 
+	into~\ref{eq:time1} yields
+\begin{align*}
+\E[\nodecrank{k+1}{j}]&\leq 
+\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k}{j'}] \right)+ 
+\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k+1}{j}] + \vec{c}[j]\cdot 
+\probm(L_{<j}^k)\\
+&=\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k+1}{j'}] \right)+ 
+\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k+1}{j}].
+\end{align*}
+%
+%\end{align}
 \end{proof}
+
+To transfer this mathematical result to probabilistic programs, we want to 
+impose a restriction on LexRSM maps that ensures that all components of a 
+LexRSM map have, from each reachable configuration, an expected one-step 
+increase of at most $c$. Here $c$ can be a constant, but it can also be a value 
+that depends on the initial configurations: this is to handle cases where some 
+variables are periodically reset to a value related to the initial variable 
+values, such as variable $z$ in Figure~\ref{fig:uniint2}. To this end, let 
+$\program$ be a \PP{} with a pCFG $\pCFG_\program$ and let 
+$\vec{\lem}=(\lem_1,\dots,\lem_d)$ be a 
+$d$-dimensional $1$-LexRSM map for $\program$. Consider a $d$-dimensional 
+vector 
+$\vec{\bar{c}}=(\bar{c}_1,\dots,\bar{c}_d)$ whose each component is an 
+expression over variables of 
+$\program$. We say 
+that $\vec{\lem}$ has 
+$\vec{\bar{c}}$-bounded ECI w.r.t. invariant map $\inv$ if the following holds 
+for each initial configuration $(\locinit,\vecinit)$ with $\vecinit\in 
+\vecinitset$: for 
+each 
+configuration $(\loc,\vec{x})$ with $\vec{x}\in \inv(\loc)$ and generalized 
+transition $\tilde{\tau}$ 
+of 
+$\pCFG_\program$ outgoing from $(\loc,\vec{x})$ it holds that if $j$ is 
+the smallest index such that 
+$\tilde{\tau}$ is $1$-ranked by $\lem_j$ from $(\loc,\vec{x})$, then for all 
+$j'>j$ the gen. transition $\tilde{\tau}$ is $f$-ranked by $\lem_{j'}$ from 
+$(\loc,\vec{x})$, where $f=-c_{j'}(\vecinit)$. From 
+Theorem~\ref{thm:runtime-bound} we have the following:
+
+\begin{corollary}
+\label{col:runtime-progs}
+Let $\program$ be a probabilistic program. Assume that there exists a 
+$d$-dimensional $\eps$-LexRSM map $\vec{\lem}=(\lem_1,\dots,\lem_d)$ for 
+$\program$ supported 
+by some 
+invariant map $\inv$, scuh that $\vec{\lem}$ has $\vec{\bar{c}}$-bounded ECI 
+(w.r.t. $\inv$) 
+for some vector of expressions $\vec{\bar{c}}=(\bar{c}_1,\dots,\bar{c}_d)$. 
+Then under each scheduler $\sigma$ and for each initial valuation of program 
+variables $\vecinit\in\vecinitset$ it holds $\E^{\sigma}_{\vecinit}[\ttime]\leq 
+\sum_{j=1}^{d}\lem_j(\locinit,\vecinit)\cdot(\bar{c}_j(\vecinit))^{d-j}$.
+\end{corollary}
+
+\textbf{[PETR: FINISH THIS SECTION]}
+
