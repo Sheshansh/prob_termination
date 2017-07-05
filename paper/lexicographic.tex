@@ -31,6 +31,7 @@ Note that any $\mathcal{F}'$-measurable random variable satisfying~\eqref{eq:con
 
 \begin{proposition}
 \label{prop:conditional-exp-existence}
+\label{PROP:CONDITIONAL-EXP-EXISTENCE}
 Let $(\Omega,\mathcal{F},\probm)$ be a probability space, 
 $X\colon\Omega\rightarrow 
 \Rset$ an $\mathcal{F}$-measurable function, and $\mathcal{F}'\subseteq 
@@ -42,7 +43,7 @@ $X\colon\Omega\rightarrow
 Then there exists a conditional expectation of $X$ given $\mathcal{F}'$ and it is almost-surely unique, i.e. for each two $\mathcal{F}'$-measurable functions $f$, $g$ that satisfy~\eqref{eq:cond-exp} it holds $\probm(\{\omega\mid f(\omega)\neq g(\omega)\})=0$.
 \end{proposition}
 %\textbf{[PETR: POLISH, ADD INTUITION]}
-\begin{proof}
+\begin{proof}[Proof (Key ideas)]
 The proof for the case when $\E[|X|]$ is standard and appears in many textbooks on probability theory (e.g.~\cite{Billingsley:book,Ash:book,Rosenthal:book}). The proof for the second case is essentially the same: the condition that $X$ is non-negative and not admitting infinite value suffices for satisfying the assumptions of Radon-Nikodym Theorem, the main theoretical tool used in the proof. For the sake of completeness we present the proof in \AppendixMaterial.
 \end{proof}
 
@@ -81,10 +82,10 @@ prefix of length $i$ satisfies the property given by $A$.
 The sequence $\natfilt_0,\natfilt_1,\natfilt_2,\dots$ forms a 
 filtration of $\natfilt$, which we call a \emph{canonical filtration}.
 
-\begin{definition}
-Let $(\Omega,\genfilt,\probm)$ be a probability space and $O\subseteq \Omega$ some set.
- We say that sets $L_1,\dots,L_n$ form an almost-sure partition of $O$ if $L_1,\dots,L_n$ are pairwise disjoint and $\probm(\{\omega\in O\mid \omega \not \in L_1\cup\dots \cup L_n\})=0$
-\end{definition}
+%\begin{definition}
+%Let $(\Omega,\genfilt,\probm)$ be a probability space and $O\subseteq \Omega$ some set.
+% We say that sets $L_1,\dots,L_n$ form an almost-sure partition of $O$ if $L_1,\dots,L_n$ are pairwise disjoint and $\probm(\{\omega\in O\mid \omega \not \in L_1\cup\dots \cup L_n\})=0$
+%\end{definition}
 
 \begin{definition}[Lexicographic Ranking Supermartingale]
 \label{def:lexrsm}
@@ -106,7 +107,7 @@ $\{\genfilt_i\}_{i=0}^{\infty}$.
 %$\E[|\vecseq{X}{i}{j}|]<\infty$.
 \item For each $\omega \in \Omega$, $i\in \Nset_0$ and $1\leq j \leq n$ it holds 
 $\vec{X}_i (\omega)[j]\geq {0}$. % and $\vec{X}_i(\omega)[j]\neq \infty$.
-\item For each $i\in \Nset_0$ there exists an almost-sure partition of the set $\{\stime>i\}$ into $n$ subsets $L^i_1,\dots,L^i_n$, all of them $\genfilt_i$-measurable, such that for each $1\leq j \leq n$:
+\item For each $i\in \Nset_0$ there exists a partition of the set $\{\stime>i\}$ into $n$ subsets $L^i_1,\dots,L^i_n$, all of them $\genfilt_i$-measurable, such that for each $1\leq j \leq n$:
 \begin{compactitem}
 	\item $\E[\vecseq{X}{i+1}{j}\mid 
 	\genfilt_i]\leq\vecseq{X}{i}{j} - 
@@ -117,14 +118,20 @@ $\vec{X}_i (\omega)[j]\geq {0}$. % and $\vec{X}_i(\omega)[j]\neq \infty$.
 \end{compactenum}
 \end{definition}
 
-The 1-dimensional lexicographic $\eps$-ranking supermartingale is, to a large extent, equivalent to the notion of a ranking supermartingale as studied in~\cite{xxx}. There is one significant difference: in~\cite{xxx} there is an additional \emph{integrability} condition imposed on the one-dimensional process $\{X_i\}_{i=0}^{\infty}$, which requires that for each $i\geq 0$ it holds $\E[|X_i|]<\infty$ (or equivalently $\E[X_i]<\infty$, as the process is required to be non-negative). We do not impose this condition, and indeed, it is possible to define a 3-dimensional LexRSM $\{\vec{X}_{i}\}_{i=0}^{\infty}$ such that $\E[X[3]_i]=\infty$ for some $i$ \textbf{[PETR: EXAMPLE]}. However, closer inspection of proofs in~\cite{xxx} that link 1-dimensional ranking supermartingales to a.s. termination reveals that the integrability condition is never explicitly used there. Indeed, the only point in which integrability is needed is to ensure that the conditional expectations exist and are well-defined. However, the existence of conditional expectations is also guaranteed for random variables that are non-negative, even if their expected value if infinite, see Theorem~\ref{xxx}. This is exactly the case in both the original 1-dimensional ranking supermartingales and our generalization to LexRSMs. Below we show, that also in the LexRSM case we do not need integrability to prove a.s. termination, and hence we drop the condition altogether. This is particularly relevant when applying LexRSMs to programs with non-linear arithmetic, where proving integrability of LexRSM is more difficult than in the affine case, see Example~\ref{xxx}. 
+The 1-dimensional lexicographic $\eps$-ranking supermartingale is, to a large extent, equivalent to the notion of a ranking supermartingale as studied in~\cite{HolgerPOPL,CFNH16:prob-termination}. There is one significant difference: in these works there is an additional \emph{integrability} condition imposed on the one-dimensional process $\{X_i\}_{i=0}^{\infty}$, which requires that for each $i\geq 0$ it holds $\E[|X_i|]<\infty$ (or equivalently $\E[X_i]<\infty$, as the process is required to be non-negative). We do not impose this condition, which simplifies possible application of LexRSMs to programs with non-linear arithmetic, where, as already shown in~\cite{HolgerPOPL}, integrability of program variables is not guaranteed.
+%We do not impose this condition, and indeed, it is possible to define a 3-dimensional LexRSM $\{\vec{X}_{i}\}_{i=0}^{\infty}$ such that $\E[X[3]_i]=\infty$ for some $i$ (example in \AppendixMaterial). 
+The reason why integrability condiiton can be dropped is that it is only needed in the previous works to ensure that the conditional expectations exist and are well-defined. However, the existence of conditional expectations is also guaranteed for random variables that are real-valued non-negative, see Proposition~\ref{prop:conditional-exp-existence}. This is exactly the case in both the original 1-dimensional ranking supermartingales and our generalization to LexRSMs. 
+
+The following theorem states our main mathematical result on LexRSMs.
+%Below we show, that also in the LexRSM case we do not need integrability to prove a.s. termination, and hence we drop the condition altogether. This is particularly relevant when applying LexRSMs to programs with non-linear arithmetic, where integrability of program variables is not guaranteed.
 
 \begin{theorem}
 \label{thm:lexrsm-main}
+\label{THM:LEXRSM-MAIN}
 Let $(\Omega,\genfilt,\probm)$ be a probability space, 
 $\{\genfilt_i\}_{i=0}^{\infty}$ a filtration of $\genfilt$, and $\stime$ a 
 stopping 
-time w.r.t. that filtration. If there exists an $\eps$-LexRSM for $\stime$, 
+time w.r.t. that filtration. If there exists an $n$-dimensional $\eps$-LexRSM for $\stime$, 
 then $\probm(\stime<\infty)=1$.
 \end{theorem}
 \begin{proof}
@@ -133,12 +140,12 @@ $\stime$ exists and $\probm(\stime=\infty)>0$. For succinctness we denote the
 set $\{\omega\mid \stime(\omega)=\infty\}$ by $\genRunSet_{\infty}$.
 
 For $\omega\in \Omega$ we define the level of $\omega$ at step $i$ to be the 
-number $\levelrank{\omega}{i}$ equal to either $0$, if $\stime(\omega)\leq i$ or $\omega$ does not belong to $L^i_1 \cup \dots\cup L^i_n$, 
+number $\levelrank{\omega}{i}$ equal to either $0$, if $\stime(\omega)\leq i$, 
 or otherwise to the $1\leq j \leq n$ such that $\omega\in L^i_j$. By the definition of 
 $\eps$-LexRSM the value $\levelrank{\omega}{i}$ is well-defined for all 
 $\omega$ and moreover, the random variable $\levelrank{}{i}$ is $\genfilt_i$-measurable. We denote by $\minlev(\omega)$ the smallest $0 \leq j \leq n$ such 
 that $j$ is a level of $\omega$ at infinitely many steps. Note that $\omega \in 
-\genRunSet_{\infty}$ implies $\minlev(\omega)\neq 0$, and $\probm(\genRunSet_{\infty})=\probm(\{\minlev \neq 0 \})$, as for each $i$ almost all $\omega$'s for which $\stime(\omega)>i$ belong to $L^i_1 \cup \dots\cup L^i_n$. We denote by $M_i$ 
+\genRunSet_{\infty}$ if and only if $\minlev(\omega)\neq 0$, so $\probm(\genRunSet_{\infty})=\probm(\{\minlev \neq 0 \})$. We denote by $M_i$ 
 the set of all $\omega$'s with $\minlev(\omega)=i$.
 
 Throughout the proof we use several times the following fundamental fact: if 
@@ -147,25 +154,28 @@ sequence of sets $A_1,A_2,A_3,\dots$, then there exists $i$ such that
 $\probm(A_i)>0$.
 
 Now since $\genRunSet_{\infty}=M_1,\dots,M_n$, there must be $1\leq \fixn{j} \leq n$ 
-s.t. $\probm(M_{\fixn{j}})>0$. For each $\omega\in M_{\fixn{j}}$ there is the smallest number
-${i}_{\omega,\fixn{j}}\in\Nset_0$ such that for all $i\geq {i}_{\omega,{j}}$ it holds 
-$\levelrank{\omega}{i}\geq \fixn{j}$. Denote by $S_{\fixn{j},{i}}$ the set of all $\omega$'s in $M_{\fixn{j}}$ s.t. 
+s.t. $\probm(M_{\fixn{j}})>0$, i.e. with positive probability the smallest level appearing infinitely often is $\fixn{j}$. For each $\omega\in M_{\fixn{j}}$ there is the smallest number
+${i}_{\omega,\fixn{j}}\in\Nset_0$ such that for all $i\geq {i}_{\omega,\fixn{j}}$ it holds 
+$\levelrank{\omega}{i}\geq \fixn{j}$, i.e. after step ${i}_{\omega,\fixn{j}}$ the level of $\omega$ in all steps up to infinity is at least $\fixn{j}$. Denote by $S_{\fixn{j},{i}}$ the set of all $\omega$'s in $M_{\fixn{j}}$ s.t. 
 $i_{\omega,\fixn{j}}={i}$. 
 Since $M_{\fixn{j}} = M_{\fixn{j},1} \cup M_{\fixn{j},2} \cup M_{\fixn{j},3} \cup \cdots$, there is $\fixn{i}\in 
 \Nset_0$ 
 s.t. 
-$\probm(M_{\fixn{j},\fixn{i}})>0$. Continuing on the same note, for each $B\in \Nset$ we 
+$\probm(M_{\fixn{j},\fixn{i}})>0$. That is, there is a point in time such that with positive probability, after this point the level of $\omega$ is at least $\fixn{j}$, and it is equal to $\fixn{j}$ infinitely many times. Continuing on the same note, for each $B\in \Nset$ we 
 denote by $M_{\fixn{j},\fixn{i}}^{B}$ the set off all $\omega$'s in $M_{\fixn{j},\fixn{i}}$ s.t. 
 $\vecseq{X}{\fixn{i}}{\fixn{j}}(\omega)\leq B$. Since $M_{\fixn{j},\fixn{i}}= M_{\fixn{j},\fixn{i}}^{1} \cup M_{\fixn{j},\fixn{i}}^{2} 
 \cup M_{\fixn{j},\fixn{i}}^{3} \cup \cdots  $, there is $\fixn{B}\in \Nset$ s.t. 
-$\probm(M_{\fixn{j},\fixn{i}}^{\fixn{B}})>0$. Denote $\fixn{p}=\probm(M_{\fixn{j},\fixn{i}}^{\fixn{B}})$.
+$\probm(M_{\fixn{j},\fixn{i}}^{\fixn{B}})>0$. 
+%Denote $\fixn{p}=\probm(M_{\fixn{j},\fixn{i}}^{\fixn{B}})$.
+
+So there is a set of positive probability $M=M_{\fixn{j},\fixn{i}}^{\fixn{B}}$  such that for all $\omega$'s in the set: after step $\fixn{i}$ the level of $\omega$ is at least $\fixn{j}$ (which, intuitively, means that $\vec{X}[\fixn{j}]$ does not have a tendency to increase after this time step on $\omega$'s in $M$), the level of $\omega$ is infinitely often equal to $\fixn{j}$ (intuitively, $\vec{X}[\fixn{j}]$ has infinitely often the tendency to decrease by $\geq \eps$ for $\omega$'s in $M$), and at time $\fixn{i}$ the value of $\vec{X}[\fixn{j}]$ is bounded (by $B$) on $M$. This should, again intuitively, lead to a conclusion, that when ``restricted to $M$'', $\vec{X}[\fixn{j}]$ has tendency to decrease unboundedly over time, a contradiction with non-negativeness of $\vec{X}[\fixn{j}]$. However, proving this intuitive result is much more intricate: most importantly, it is not clear what ``restricted to $M$'' stands for. The stochastic process $\{\vec{X}\}_{i=0}^{\infty}$ as well as the LexRSM conditions are tied to the filtration $\{\genfilt_i\}_{i=0}^{\infty}$, but the set $M$ is not necessarily $\genfilt_i$ measurable for any concrete $i$, since whether $\omega$ belongs to $M$ depends on values of $\levelrank{\omega}{i}$ for \emph{infinitely many $i$}. Hence, we use a work-around.
 
 Let $D$ be the set of all $\omega\in \Omega$ such that 
-$\vecseq{X}{\fixn{i}}{\fixn{j}}(\omega)\leq \fixn{B}$. Note that $M_{\fixn{j},\fixn{i}}^{B} \subseteq D$ and $D\in 
-\genfilt_i$ (and thus also $D\in \genfilt_{i'}$ for all $i'\geq i$). 
-Define a stopping time $U$ w.r.t. filtration $\{\genfilt_i\}_{i=0}^{\infty}$ as follows: for all $\omega \in \Omega$ 
+$\vecseq{X}{\fixn{i}}{\fixn{j}}(\omega)\leq \fixn{B}$. Note that $M \subseteq D$ and $D\in 
+\genfilt_{\fixn{i}}$ (and thus also $D\in \genfilt_{i'}$ for all $i'\geq \fixn{i}$). 
+Define a stopping time $F$ w.r.t. filtration $\{\genfilt_i\}_{i=0}^{\infty}$ as follows: for all $\omega \in \Omega$ 
 we put 
-$U(\omega)=\inf\{k\in \Nset_0 \mid k\geq \fixn{i} \text{ and }
+$F(\omega)=\inf\{k\in \Nset_0 \mid k\geq \fixn{i} \text{ and }
 \levelrank{\omega}{k} < \fixn{j} \}$.
 
 Define a 
@@ -178,102 +188,57 @@ Y_k(\omega) = \begin{dcases}
 \vecseq{X}{k}{\fixn{j}}(\omega) & \text{if $\omega \in D$, $k\geq \fixn{i}$ and 
 $U(\omega)>k$ 
 }\\
-\vecseq{X}{U(\omega)}{\fixn{j}}(\omega) & \text{if $\omega\in D$, $k\geq 
+\vecseq{X}{F(\omega)}{\fixn{j}}(\omega) & \text{if $\omega\in D$, $k\geq 
 \fixn{i}$ and 
-$U(\omega)\leq k$ }.
+$F(\omega)\leq k$ }.
 \end{dcases}
 $$
 
-We prove several properties of the process $\{Y_k\}_{k=0}^{\infty}$. 
+Intuitively, the process $\{Y_k\}_{k=0}^{\infty}$ is an over-approximation of what we would like to call ``$\vec{X}[\fixn{j}]$ restricted to $M$.''
+We prove several properties of the process. 
 First, clearly for all $k\geq 0$, $Y_k(\omega)\geq 0$. Second, for each $k\geq \fixn{i}$, the variable $Y_k$ is $\genfilt_k$-measurable, as $D\in \genfilt_{\fixn{i}}$, $\{\vecseq{X}{i}{\fixn{j}}(\omega)\}_{i=0}^{\infty}$ is adapted to the filtration $\{\genfilt_i\}_{i=0}^{\infty}$ and $U$ is a stopping time w.r.t. this filtration. Finally, for any $k\in \Nset_0$ denote by 
 $\noofdec_k$ the random variable such that $\noofdec_k(\omega) = |\{i'\in 
-\Nset\mid \fixn{i} \leq i' < k \text{ and } \levelrank{\omega}{i'}=\fixn{j}\} |$.
-We claim 
+\Nset\mid \fixn{i} \leq i' < k \text{ and } \levelrank{\omega}{i'}=\fixn{j}\} |$, i.e. $\noofdec_k(\omega)$ counts the number of steps between $\fixn{i}$ and $k$ in which level is $\fixn{j}$.
+We prove
 that for each $k\geq \fixn{i}$ 
 it holds 
 \begin{equation}
 \label{eq:lexrsm-soundness-main}
 \E[Y_k]\leq \fixn{B}\cdot \probm(D) - \eps\cdot\sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D 
-\cap \{U\geq k\} \cap \{\noofdec_k 
+\cap \{F\geq k\} \cap \{\noofdec_k 
 = 
 \ell\}).
 \end{equation}
 
-The proof of~\eqref{eq:lexrsm-soundness-main} goes by induction on $k$. For 
-$k=\fixn{i}$ the sum on the right-hand side equals $0$, so the 
-inequality immediately follows from the definition of $Y_k$. Now assume 
-that~\eqref{eq:lexrsm-soundness-main} holds for some $k\geq \fixn{i}$. We have that 
-\begin{align}
-\label{eq:lexrsm-ind-1}
-\E[Y_{k+1}] &= \underbrace{\E[Y_{k+1}\cdot \indicator{\Omega\setminus D}]}_{=0=\E[Y_k\cdot\indicator{\Omega\setminus D}]} +  \underbrace{\E[Y_{k+1}\cdot \indicator{D \cap \{U \leq k\}}]}_{=\E[Y_k\cdot\indicator{D\cap \{U\leq k\}}]} + \underbrace{\E[Y_{k+1}\cdot \indicator{D \cap \{U > k\}}]}_{=\E[\vecseq{X}{k+1}{\fixn{j}}\cdot\indicator{D\cap \{U>k \} }]},
-\end{align}
-where the equality $\E[Y_{k+1}\cdot \indicator{D \cap \{U \leq k\}}] =\E[Y_k\cdot\indicator{D\cap \{U\leq k\}}] $ follows from the fact that $Y_{k+1}(\omega)=Y_k({\omega})=\vecseq{X}{U(\omega)}{\fixn{j}}(\omega)$ for $\omega\in \{U\leq k\}$, and similarly for the last term. We prove that 
-\begin{equation}
-\label{eq:lexrsm-ind-2}
-\E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{U > k \}}] \leq \E[Y_k\cdot \indicator{D\cap \{U > k \}} -\eps\cdot \indicator{D\cap \{U>k\} \cap \{\levelrank{}{k}= \fixn{j}\} }] .
-\end{equation}
-Indeed, it holds
-\begin{equation}
-\label{eq:lexrsm-ind-3}
-\E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{U > k \}}] = \E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}=\fixn{j} \} }]  + \E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}>\fixn{j}\} }], 
-\end{equation}
-since $\levelrank{\omega}{k}\geq \fixn{j}$ for all $\omega \in \{U>k\}$. Since the set $D\cap \{U > k \} \cap \{\levelrank{}{k}=\fixn{j} \}$ is $\genfilt_k$-measurable, we get
-\begin{align}
-\E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}=\fixn{j} \} }] &= \E[\E[\vecseq{X}{k+1}{\fixn{j}}\mid \genfilt_k]\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}=\fixn{j} \} }] \label{eq:lexrsm-ind-4}\\
-&\leq \E[(\vecseq{X}{k}{\fixn{j}} - \eps)\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}=\fixn{j} \}}] \label{eq:lexrsm-ind-5}\\
-&=\E[(Y_k - \eps)\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}=\fixn{j} \}}] \label{eq:lexrsm-ind-6},
-\end{align}
-where~\eqref{eq:lexrsm-ind-4} follows from the definition of conditional expectation~\eqref{eq:cond-exp},~\eqref{eq:lexrsm-ind-5} follows from the definition of $\{\levelrank{}{k}=\fixn{j}\}$, and~\eqref{eq:lexrsm-ind-6} holds since $Y_k(\omega)=\vecseq{X}{k}{\fixn{j}}(\omega)$ for $\omega$ with $U(\omega)> k$. Almost identical argument shows that
-\begin{equation}
-\label{eq:lexrsm-ind-7}
-\E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}>\fixn{j} \} }] \leq \E[Y_k\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}>\fixn{j} \}}].
-\end{equation}
-Plugging~\eqref{eq:lexrsm-ind-6} and~\eqref{eq:lexrsm-ind-7} into~\eqref{eq:lexrsm-ind-3} yields~\eqref{eq:lexrsm-ind-2}. Now we can plug~\eqref{eq:lexrsm-ind-2} into~\eqref{eq:lexrsm-ind-1} to get
-\begin{align}
-\E[Y_{k+1}]&\leq \E[Y_k] - \eps\cdot \E[\indicator{D \cap \{U>k\} \cap \{\levelrank{}{k} = \fixn{j} \} }] = \E[Y_k] - \eps\cdot \probm(D \cap \{U>k\} \cap \{\levelrank{}{k} = \fixn{j} \} ) \nonumber\\
-&\leq \fixn{B}\cdot \probm(D) - \eps\cdot\left(\sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D 
-\cap \{U\geq k\} \cap \{\noofdec_k = \ell\})\right) -\eps\cdot \probm(D \cap \{U>k\} \cap \{\levelrank{}{k} = \fixn{j} \}),
-\end{align}
-where the last inequality follows from induction hypothesis. Hence, using $D_{k,\ell}$ as a shorthand for $D 
-\cap \{U\geq k\} \cap \{\noofdec_k = \ell\}$, to prove~\eqref{eq:lexrsm-soundness-main} it remains to show that
-\begin{equation}
-\label{eq:lexrsm-ind-8}
-\sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D_{k,\ell}) + \probm(D \cap \{U>k\} \cap \{\levelrank{}{k} = \fixn{j} \}) = \sum_{\ell=0}^{k+1-\fixn{i}} \ell\cdot\probm(D_{k+1,\ell}).
-\end{equation}
-The left-hand side of~\eqref{eq:lexrsm-ind-8} is equal to
-\begin{align}
-&\phantom{+}\;\sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D_{k,\ell} \cap \{\levelrank{}{k}=\fixn{j}\}) + \sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D_{k,\ell}\cap \{\levelrank{}{k}>\fixn{j}\} )\nonumber \\ 
-&+\sum_{\ell=0}^{k-\fixn{i}}\probm(\underbrace{D \cap \{U>k\} \cap \{\levelrank{}{k} = \fixn{j}\} \cap \{\noofdec_k = \ell\}}_{=D_{k,\ell} \cap \{\levelrank{}{k} = \fixn{j}\}})
-\nonumber \\
-&= \sum_{\ell=0}^{k-\fixn{i}}(\ell+1) \cdot\probm(D_{k,\ell}\cap \{\levelrank{}{k} = \fixn{j}\}) +  \sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D_{k,\ell}\cap \{\levelrank{}{k}>\fixn{j}\} ) \nonumber\\
-&=\sum_{\ell=0}^{k-\fixn{i}} (\ell+1)\cdot \probm{(D_{k+1,\ell+1} \cap \{\levelrank{}{k} = \fixn{j}\})} +  \sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D_{k+1,\ell}\cap \{\levelrank{}{k}>\fixn{j}\} ) \label{eq:lexrsm-ind-9}\\
-&= \sum_{\ell=1}^{k+1-\fixn{i}} \ell\cdot \probm{(D_{k+1,\ell} \cap \{\levelrank{}{k} = \fixn{j}\})} +  \sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D_{k+1,\ell}\cap \{\levelrank{}{k}>\fixn{j}\} )
-   \nonumber \\
-&= (k+1-\fixn{i})\cdot \probm{(D_{k+1,k+1-\fixn{i}}\cap\{\levelrank{}{k} =\fixn{j} \} )} + \sum_{\ell=1}^{k-\fixn{i}} \ell \cdot \probm(D_{k+1,\ell})  \nonumber\\
-&= (k+1-\fixn{i})\cdot\probm(D_{k+1,k+1-\fixn{i}}) + \sum_{\ell=1}^{k-\fixn{i}}\ell\cdot\probm(D_{k+1,\ell}) = \text{ right-hand side of~\eqref{eq:lexrsm-ind-8}} \label{eq:lexrsm-ind-11}.
-\end{align}
-The individual steps in the above computation are justified as follows: in~\eqref{eq:lexrsm-ind-9} we use the facts that for all $\omega$'s whose level in step $k$ is $\fixn{j}$ it holds that $\noofdec_k(\omega)+1=\noofdec_{k+1}(\omega)$, and similarly, for $\omega$'s whose level in step $k$ is $>\fixn{j}$ it holds $\noofdec_k(\omega)=\noofdec_{k+1}(\omega)$. Moreover, for all $\omega\in D_{k,\ell}$ it holds that $\levelrank{k}{\omega}\geq \fixn{j} \Rightarrow U(\omega)\geq k+1$. Finally, in~\eqref{eq:lexrsm-ind-11} we use the fact that all $\omega\in D_{k+1,k+1-\fixn{i}}$ need to have level $\fixn{j}$ in step $k$, since otherwise such an $\omega$ would need to have level $\fixn{j}$ for at least $k+1-\fixn{i}$ times within steps $\{\fixn{i},\fixn{i}+1,\dots,k-1\}$, but there are $k-\fixn{i}$ such steps, a contradiction. This concludes the proof of~\eqref{eq:lexrsm-soundness-main}.
+The proof of~\eqref{eq:lexrsm-soundness-main} goes by induction on $k$. The computations being somewhat technical, we defer them to \AppendixMaterial. 
 
 Now according to~\eqref{eq:lexrsm-soundness-main} it holds  $\E[Y_k]\leq \fixn{B}\cdot \probm(D) - \eps\cdot\sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D 
 \cap \{U\geq k\} \cap \{\noofdec_k 
 = 
-\ell\})$ for all $k\geq \fixn{i}$. Let $m=3\fixn{B}\cdot \probm(D)/(\eps\cdot \fixn{p})$. For each $\omega\in M_{\fixn{j},\fixn{i}}^{\fixn{B}} $ there exists $k_m(\omega)\geq \fixn{i}$ such that $\noofdec_{k_{m}(\omega)}\geq m$. Hence, $M_{\fixn{j},\fixn{i}}^{\fixn{B}} = \bigcup_{k=\fixn{i}}^{\infty} M_{\fixn{j},\fixn{i}}^{\fixn{B}} \cap \{k_{m}(\omega) \leq k\}$ and $\fixn{p}=\probm(M_{\fixn{j},\fixn{i}}^{\fixn{B}})=\lim_{k\rightarrow \infty}\probm(M_{\fixn{j},\fixn{i}}^{\fixn{B}} \cap \{k_{m} \leq k\})$. Thus, there exists $k_0$ such that $\probm(M_{\fixn{j},\fixn{i}}^{\fixn{B}} \cap \{\noofdec_{k_0}\geq m\}) \geq \fixn{p}/2$. Denote $\fixn{M}= M_{\fixn{j},\fixn{i}}^{\fixn{B}} \cap \{\noofdec_{k_0}\geq m\}$. Clearly $\fixn{M} \subseteq D\cap \{U\geq k_0 \} \cap \{\noofdec_{k_0}\geq m \}$. From \eqref{eq:lexrsm-soundness-main} it follows that
+\ell\})$ for all $k\geq \fixn{i}$. Let $m=3\fixn{B}\cdot \probm(D)/(\eps\cdot \probm(M))$. For each $\omega\in M$ we see level $\fixn{j}$ infinitely often, so there exists step $k(\omega)\geq \fixn{i}$ such that $\noofdec_{k(\omega)}\geq m$, i.e. $\omega$ has level $\fixn{j} $ at least in $m$ steps between steps $\fixn{i}$ and $k(\omega)$. Clearly, $M = \bigcup_{\ell=\fixn{i}}^{\infty} (M \cap \{k(\omega) \leq \ell\})$ and hence $\probm(M)=\lim_{\ell\rightarrow \infty}\probm(M \cap \{k_{m} \leq \ell\})$. Thus, there exists $\ell_0 \geq m+\fixn{i}$ such that $\probm(M \cap \{\noofdec_{\ell_0}\geq m\}) \geq \probm(M)/2$. Clearly $M \cap \{\noofdec_{\ell_0}\geq m\} \subseteq D\cap \{F\geq \ell_0 \} \cap \{\noofdec_{\ell_0}\geq m \}$. From \eqref{eq:lexrsm-soundness-main} it follows that
 \begin{align*}
-\E[Y_{k_0}]&\leq \fixn{B}\cdot \probm(D) - \eps\cdot\sum_{\ell=0}^{k_0-\fixn{i}} \ell\cdot\probm(D 
-\cap \{U\geq k_0\} \cap \{\noofdec_{k_0} 
+\E[Y_{\ell_0}]&\leq \fixn{B}\cdot \probm(D) - \eps\cdot\sum_{\ell=0}^{\ell_0-\fixn{i}} \ell\cdot\probm(D 
+\cap \{U\geq \ell_0\} \cap \{\noofdec_{\ell_0} 
 =
 \ell\}) \\
-&= \fixn{B}\cdot \probm(D) - \eps\cdot \sum_{\ell=1}^{k_0-\fixn{i}} \probm(D 
-\cap \{U\geq k_0\} \cap \{\noofdec_{k_0} 
+&= \fixn{B}\cdot \probm(D) - \eps\cdot \sum_{\ell=1}^{\ell_0-\fixn{i}} \probm(D 
+\cap \{U\geq \ell_0\} \cap \{\noofdec_{\ell_0} 
 \geq 
 \ell\})\\
 & \leq \fixn{B}\cdot \probm(D) - \eps\cdot \sum_{\ell=1}^{m} \probm(D 
-\cap \{U\geq k_0\} \cap \{\noofdec_{k_0} 
+\cap \{U\geq \ell_0\} \cap \{\noofdec_{\ell_0} 
 \geq 
-\ell\})\\
-&\leq \fixn{B}\cdot \probm(D) - \eps\cdot m \cdot \fixn{p}/2 < 0, 
-\end{align*}
-the last inequality following by substituting for $m$. But for each $k$ the random variable $Y_k$, so it must also have a non-negative expectation, a contradiction.
+\ell\}) \\&\leq \fixn{B}\cdot \probm(D) - \eps\cdot \sum_{\ell=1}^{m} \probm(D 
+\cap \{U\geq \ell_0\} \cap \{\noofdec_{\ell_0} 
+\geq 
+m\})\\
+&\leq \fixn{B}\cdot \probm(D) - \eps\cdot m \cdot \probm(M)/2 < 0, 
+\end{align*}where the second line follows by standard re-arranging of terms, the third line follows from the fact that $m\leq \ell_0 + \fixn{i}$, the fourth line follows from $\{\noofdec_{\ell_0} 
+\geq 
+m \} \subseteq \noofdec_{\ell_0} 
+\geq 
+\ell$ for each $\ell \leq m$, the first inequality on the last line follows by  using $\probm(M)/2\leq \probm(M \cap \{\noofdec_{\ell_0}\geq m\}) \leq \probm(D\cap \{F\geq \ell_0 \} \cap \{\noofdec_{\ell_0}\geq m \})$, and
+the last inequality follows by expanding the definition of $m$. But for each $k$ the random variable $Y_k$ is non-negative, so it must also have a non-negative expectation, a contradiction.
 %\begin{enumerate}
 %\
 %\end{itemize}

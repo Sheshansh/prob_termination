@@ -2,6 +2,11 @@ This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: ACM-Reference-Format.bst
+I couldn't open database file new.bib
+---line 158 of file main.aux
+ : \bibdata{bibliography-master,new-popl18,new
+ :                                            }
+I'm skipping whatever remains of this command
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: bibliography-master.bib
@@ -14,25 +19,7 @@ Repeated entry---line 84 of file new-popl18.bib
  : @article{LearningSurvey
  :                        ,
 I'm skipping whatever remains of this entry
-Database file #3: new.bib
-Repeated entry---line 3 of file new.bib
- : @inproceedings{CFNH16:prob-termination
- :                                       ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 17 of file new.bib
- : @inproceedings{DBLP:conf/sas/Monniaux01
- :                                        ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 68 of file new.bib
- : @proceedings{DBLP:conf/popl/2016
- :                                 ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 216 of file new.bib
- : @proceedings{DBLP:conf/sas/2001
- :                                ,
-I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "POPL17PAPER"
-Warning--I didn't find a database entry for "HONGFEI-CAV16"
 Warning--I didn't find a database entry for "xxx"
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Warning--numpages field, but no articleno or eid field, in ADFG10:lexicographic
@@ -57,6 +44,8 @@ Warning--empty publisher in CNZ17
 Warning--empty address in CNZ17
 Warning--page numbers missing in both pages and numpages fields in CNZ17
 Warning--empty address in DBLP:conf/tacas/ColonS01
+Warning--empty publisher in CSS03:linear-invariant-farkas
+Warning--empty address in CSS03:linear-invariant-farkas
 Warning--numpages field, but no articleno or eid field, in CPR06:terminator
 Warning--empty publisher in CSZ13
 Warning--empty address in CSZ13
@@ -89,45 +78,45 @@ Warning--empty address in DBLP:conf/vmcai/PodelskiR04
 Warning--numpages field, but no articleno or eid field, in PR04:transition-invariants
 Warning--empty address in Rosenthal:book
 Warning--empty address in DBLP:conf/pods/SohnG91
-You've used 52 entries,
+You've used 53 entries,
             5706 wiz_defined-function locations,
-            1779 strings with 28773 characters,
-and the built_in function-call counts, 58764 in all, are:
-= -- 7047
-> -- 2043
+            1784 strings with 29003 characters,
+and the built_in function-call counts, 59941 in all, are:
+= -- 7173
+> -- 2084
 < -- 1
-+ -- 610
-- -- 811
-* -- 4140
-:= -- 6138
-add.period$ -- 268
-call.type$ -- 52
-change.case$ -- 338
-chr.to.int$ -- 48
-cite$ -- 106
-duplicate$ -- 4930
-empty$ -- 3549
-format.name$ -- 887
-if$ -- 13912
++ -- 622
+- -- 823
+* -- 4221
+:= -- 6255
+add.period$ -- 273
+call.type$ -- 53
+change.case$ -- 345
+chr.to.int$ -- 49
+cite$ -- 109
+duplicate$ -- 5040
+empty$ -- 3627
+format.name$ -- 903
+if$ -- 14196
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 216
-newline$ -- 505
-num.names$ -- 430
-pop$ -- 2091
+missing$ -- 221
+newline$ -- 512
+num.names$ -- 438
+pop$ -- 2143
 preamble$ -- 1
-purify$ -- 591
+purify$ -- 603
 quote$ -- 0
-skip$ -- 1873
+skip$ -- 1915
 stack$ -- 0
-substring$ -- 4686
-swap$ -- 532
+substring$ -- 4776
+swap$ -- 543
 text.length$ -- 187
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1217
-warning$ -- 54
-while$ -- 464
+type$ -- 1247
+warning$ -- 56
+while$ -- 471
 width$ -- 0
-write$ -- 1032
-(There were 5 error messages)
+write$ -- 1049
+(There were 2 error messages)
