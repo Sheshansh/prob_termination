@@ -4,7 +4,7 @@ In this section we discuss the related works.
 
 \smallskip\noindent{\em Probabilistic programs and termination.}
 In early works the termination for concurrent probabilistic programs was studied 
-as fairness~1\cite{SPH84}, which ignored precise probabilities.
+as fairness~\cite{SPH84}, which ignored precise probabilities.
 For countable state space a sound and complete characterization of almost-sure termination 
 was presented in~\cite{HS85}, but nondeterminism was absent.
 A sound and complete method for proving termination of finite-state programs
@@ -26,11 +26,15 @@ this work.
 
 \smallskip\noindent{\em Other approaches.}
 Besides RSMs, other approaches has also been considered for probabilistic programs.
+Logical calculi for reasoning about properties of 
+probabilistic programs (including termination) were studied 
+in~\cite{Kozen:prob-semantics,FH:prdl,Kozen:probabilistic-PDL,Feldman:propositional-probdl}
+ and extended to programs with demonic non-determinism 
+ in~\cite{MM04,MM05,KKMO16:wp-expected-runtime,OKKM16:recursive-prob-wp-calculus}.
 A sound approach~\cite{DBLP:conf/sas/Monniaux01} for almost-sure termination 
-is to explore the exponential decrease of probabilities upon bounded-termination 
+is to explore the exponential decrease of probabilities upon 
+bounded-termination 
 through abstract interpretation~\cite{DBLP:conf/popl/CousotC77}.
-MENTION PROOF RULES AND NOT AN AUTOMATED APPROACH.
-
 
 
 \smallskip\noindent{\em Non-probabilistic programs.}

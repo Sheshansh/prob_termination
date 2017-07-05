@@ -14,10 +14,29 @@ Repeated entry---line 7617 of file bibliography-master.bib
  :                ,
 I'm skipping whatever remains of this entry
 Database file #2: new-popl18.bib
+Database file #3: new.bib
+Repeated entry---line 3 of file new.bib
+ : @inproceedings{CFNH16:prob-termination
+ :                                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 17 of file new.bib
+ : @inproceedings{DBLP:conf/sas/Monniaux01
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 68 of file new.bib
+ : @proceedings{DBLP:conf/popl/2016
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 80 of file new.bib
+ : @article{CFG16:positivstellensatz-arxiv
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 216 of file new.bib
+ : @proceedings{DBLP:conf/sas/2001
+ :                                ,
+I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "RandBook"
 Warning--I didn't find a database entry for "RandBook2"
-Warning--I didn't find a database entry for "SRIRAM"
-Warning--I didn't find a database entry for "HOLGER"
 Warning--I didn't find a database entry for "HONGFEI"
 Warning--I didn't find a database entry for "POPL"
 Warning--I didn't find a database entry for "CAV"
@@ -34,6 +53,7 @@ Reallocated singl_function (elt_size=4) to 100 items from 50.
 Warning--no key, author in 
 Warning--no author, editor, organization, or key in 
 Warning--empty year in 
+Warning--numpages field, but no articleno or eid field, in ADFG10:lexicographic
 Warning--empty address in Ash:book
 Warning--empty address in Billingsley:book
 Warning--empty publisher in BG05
@@ -50,7 +70,10 @@ Warning--empty address in CSZ13
 Warning--empty address in DBLP:conf/popl/CousotC77
 Warning--empty publisher in EGK12
 Warning--empty address in EGK12
+Warning--empty publisher in FH:prdl
+Warning--empty address in FH:prdl
 Warning--empty address in HolgerPOPL
+Warning--numpages field, but no articleno or eid field, in Kozen:probabilistic-PDL
 Warning--empty publisher in prism
 Warning--empty address in prism
 Warning--empty publisher in LJB01
@@ -66,45 +89,45 @@ Warning--empty address in NK:CTMDP-bisimulation
 Warning--empty address in DBLP:conf/vmcai/PodelskiR04
 Warning--empty address in Rosenthal:book
 Warning--empty address in DBLP:conf/pods/SohnG91
-You've used 30 entries,
+You've used 34 entries,
             5706 wiz_defined-function locations,
-            1587 strings with 22323 characters,
-and the built_in function-call counts, 33063 in all, are:
-= -- 3904
-> -- 1100
+            1626 strings with 23409 characters,
+and the built_in function-call counts, 38290 in all, are:
+= -- 4578
+> -- 1230
 < -- 1
-+ -- 325
-- -- 428
-* -- 2252
-:= -- 3418
-add.period$ -- 154
-call.type$ -- 30
-change.case$ -- 185
-chr.to.int$ -- 28
-cite$ -- 74
-duplicate$ -- 2852
-empty$ -- 2060
-format.name$ -- 487
-if$ -- 7865
++ -- 361
+- -- 525
+* -- 2599
+:= -- 3918
+add.period$ -- 174
+call.type$ -- 34
+change.case$ -- 209
+chr.to.int$ -- 32
+cite$ -- 82
+duplicate$ -- 3265
+empty$ -- 2356
+format.name$ -- 543
+if$ -- 9085
 int.to.chr$ -- 3
 int.to.str$ -- 0
-missing$ -- 124
-newline$ -- 295
-num.names$ -- 248
-pop$ -- 1259
+missing$ -- 143
+newline$ -- 333
+num.names$ -- 280
+pop$ -- 1425
 preamble$ -- 1
-purify$ -- 331
+purify$ -- 375
 quote$ -- 0
-skip$ -- 1094
+skip$ -- 1251
 stack$ -- 0
-substring$ -- 2557
-swap$ -- 289
-text.length$ -- 64
+substring$ -- 3122
+swap$ -- 335
+text.length$ -- 163
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 729
-warning$ -- 40
-while$ -- 272
+type$ -- 835
+warning$ -- 44
+while$ -- 313
 width$ -- 0
-write$ -- 594
-(There was 1 error message)
+write$ -- 675
+(There were 6 error messages)
