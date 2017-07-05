@@ -113,7 +113,8 @@ $\vars=\{x_1,x_2,x_3,\dots\}$.
 
 In this subsection we define the form of probabilistic programs that we 
 consider in our analysis. We consider two classes of probabilistic programs: 
-general probabilistic programs with arbitrary (measurable) expressions and 
+general probabilistic programs (\PP{}s ) with arbitrary (measurable) 
+expressions and 
 their subclass, affine probabilistic programs (\APP s) where all expressions 
 are restricted to be affine (see below for a precise definition). The reason 
 for this dual view is that our work also has two main points of focus: a 
@@ -162,7 +163,11 @@ is called affine. As noted above, each affine function is Borel-measurable.
 %following nomenclature
 
 \smallskip\noindent{\em Predicates.}
-A \emph{predicate} is a logical formula obtained by a finite number of applications of conjunction, disjunction and negation operations on \emph{atomic predicates} of the form $E\leq E'$, where $E$, $E'$ are expressions.
+A \emph{predicate} is a logical formula obtained by a finite number of 
+applications of conjunction, disjunction and negation operations on 
+\emph{atomic predicates} of the form $E\leq E'$, where $E$, $E'$ are 
+expressions. We denote by $\vec{x}\models E$ the fact that $E$ is satisfied by 
+substituting values from of $\vec{x}$ for the corresponding variables in $E$.
 
 \smallskip\noindent{\em Linear constraints, assertions, predicates.}
 In the case of predicates involving only linear expression we use the following 
@@ -178,8 +183,8 @@ standard nomenclature:
 	linear assertions.
 \end{compactitem}
 
-\textbf{[PETR: SAY SOMETHING ABOUT PREDICATE SATISFACTION.]}
-\textbf{[PETR: EXPLAIN BOREL-MEASURABILITY IN MORE DETAIL?]}
+%\textbf{[PETR: SAY SOMETHING ABOUT PREDICATE SATISFACTION.]}
+%\textbf{[PETR: EXPLAIN BOREL-MEASURABILITY IN MORE DETAIL?]}
 
 %\noindent{\em Arity and satisfaction of PLP.}
 %%The \emph{arity} of a PLP is the number of distinct variables appearing in it. 
@@ -210,8 +215,9 @@ of a single predicate characterizing possible initial valuations.
 
 \smallskip\noindent{\em Affine Probabilistic Programs (\APP s).}
 A probabilistic program is \emph{affine} if all the expressions that occur in 
-the program (i.e. in loop guards, conditionals and on right-hand sides of 
-assignments) are affine. We refer to the class of affine probabilistic programs 
+the program (i.e. in loop guards, conditionals, right-hand sides of 
+assignments) are affine and if the set of possible initial valuations is a 
+polyhedron. We refer to the class of affine probabilistic programs 
 as \APP s.
 %We also assume that assume that each \APP{} $\program$ is preceded by an 
 %initialization preamble 
@@ -237,7 +243,7 @@ theory.
 
 \smallskip\noindent{\em Basics of Probability Theory.}
 %%We now recall basic definitions of probability theory.
-The crucial notion is the one of a probability space. A probability space is a triple
+ A probability space is a triple
 $(\Omega,\mathcal{F},\probm)$, where $\Omega$ is a non-empty set (so called
 \emph{sample space}), $\mathcal{F}$ is a \emph{sigma-algebra} of measurable 
 sets over $\Omega$,
@@ -293,12 +299,13 @@ real numbers, both discrete and continuous.
 %There are several ways in which one can express the semantics of \APP's with
 %(angelic and demonic) 
 %non-determinism
-The semantics can be defined as the semantics of an uncountable state-space
+We consider standard operational semantics of \PP{}s defined via an 
+uncountable state-space
 Markov decision process (MDP) (uncountable due to real-valued variables).
-We take an operational approach to define the semantics, and associate to each program 
-a certain stochastic process~\cite{SriramCAV,HolgerPOPL,Kozen:prob-semantics}.
+That is, we associate to each program 
+a certain stochastic process.
 To define this process, we first define so called 
-\emph{probabilistic control flow graphs}~\cite{CFG16:positivstellensatz-arxiv}.
+\emph{probabilistic control flow graphs}~\cite{HONGFEI-CAV16}.
 
 \smallskip
 \begin{definition}
@@ -344,7 +351,7 @@ be one of the following mathematical objects: %\begin{itemize}
 %\item 
 (b)~a distribution $d\in \mathcal{D}$; or
 %\item 
-(c)~a set $R\subseteq \Rset$.
+(c)~a set $R\subseteq \Rset$ (representing a non-deterministic update).
 %\end{itemize}
 \item $\probdist=\{\prob_{\ell}\}_{\ell \in \locsPB}$ is a collection of
 probability distributions, where each $\prob_{\ell}$ is a discrete probability
@@ -358,19 +365,21 @@ We assume that each location has at least one outgoing transition.
 Also, for every deterministic location $\ell$ we assume the following: if
 $\tau_1,\dots,\tau_k$ are all transitions outgoing from $\ell$, then $G(\tau_1)
 \vee \dots \vee G(\tau_k) \equiv \mathit{true}$ and $G(\tau_i) \wedge G(\tau_j)
-\equiv \mathit{false}$ for each $1\leq i < j \leq k$. Moreover, for each 
+\equiv \mathit{false}$ for each $1\leq i < j \leq k$. For each 
 distribution $d$ appearing in the 
 pCFG we assume the following features are known: expected value $\expv[d]$ of 
-$d$ and a 
-single-variable PLP $\varphi_d$ such that the \emph{support} of $d$ (i.e. the 
+$d$ and a set $SP_d$ containing the \emph{support} of $d$. Tthe support is the  
 smallest 
 closed set of real numbers whose complement has probability zero 
-under $d$)\footnote{In particular, a support of a \emph{discrete} probability 
+under $d$\footnote{In particular, a support of a \emph{discrete} probability 
 	distribution $d$ is simply the at most countable set of all points on a 
 	real 
-	line that have positive probability under $d$.} satisfies 
-$\support(d)\subseteq\exsat{\varphi_d}$. Finally, we assume that each 
-assignment location has at most (and thus exactly) one outgoing transition.
+	line that have positive probability under $d$.}) Finally, we assume that 
+	each 
+assignment location has at most (and thus exactly) one outgoing transition. The 
+translation from probabilistic programs to the corresponding pCFG is 
+standard~\cite{CFNH16:prob-termination}, and the details are presented 
+in~\AppendixMaterial.
 %Finally, we assume that for each 
 %transition $(\loc,j,u,\loc')$ such that $u$ is a set the location $\loc$ is 
 %deterministic. This is just a technical assumption yielding no loss of 
@@ -380,68 +389,7 @@ assignment location has at most (and thus exactly) one outgoing transition.
 %variable exists).
 \end{definition}
 
-%We can naturally transfer the linear ordering of variables in $\vars$ to 
-%variables in $X$. Hence, the set of variables $X$ can be uniquely written as a 
-%vector $\vec{x}=(x_1,\dots,x_{|X|})$.
-%Since $\pvars$ is a linearly ordered set of variables, there is a natural 
-%correspondence between valuations in $\vals(\pvars)$ and 
-%$|\pvars|$-dimensional 
-%vectors. To formalize this correspondence, to any valuation 
-%$\val\in\vals(X)$ we assign a vector 
-%$\vec{x}_{\val}=(\val(x_1),\dots,\val(x_{|X|}))$, while to an 
-%$|X|$-dimensional vector $\vec{x}$ we assign a valuation $\val_{\vec{x}}\in 
-%\vals(\pvars)$ such that $\val_{\vec{x}}(x_i) = \vec{x}[i]$ for all $1\leq i 
-%\leq |X|$. 
 
-%Given a pCFG $\pCFG$ 
-%
-%For notational convenience we assume that the sets $\pvars$ and $\rvars$ are
-%endowed with some fixed linear ordering, which allows us to write $\pvars =
-%\{x_1,x_2,\dots,x_{|\pvars|}\}$ and $\rvars = \{r_1,r_2,\dots,r_{|\rvars|}\}$.
-%Every update function $f$ in a stochastic game can then be viewed as a tuple
-%$(f_1,\dots,f_{|\pvars|})$, where each $f_i$ is of type
-%$\Rset^{|\pvars\cup\rvars|}\rightarrow\Rset$. We denote by
-%$\mathbf{x}=(\vec{x}[i])_{i=1}^{|\pvars|}$ and
-%$\mathbf{r}=(\vec{r}[i])_{i=1}^{|\rvars|}$ the vectors of concrete valuations 
-%of
-%program and random variables, respectively.
-%In particular, we assume that each component of $\vec{r}$ lies within the range
-%of the corresponding random variable. %A valuation $\vec{r}$ is admissible if
-%%each its component lies within the range of the corresponding random variable.
-%We use the following succinct notation for special update functions: by $\id$ 
-%we
-%denote a function which does not change the program variables at all, i.e. for
-%every $1\leq i \leq |\pvars|$ we have $f_i(\vec{x},\vec{r})= \vec{x}[i]$. For a
-%function $g$ over the program and random variables we denote by 
-%$\assgn{x_j}{g}$
-%the update function $f$ such that $f_j(\vec{x},\vec{r})=g(\vec{x},\vec{r})$ and
-%$f_i(\vec{x},\vec{r})=\vec{x}[i]$ for all $i\neq j$.
-
-%We say that an SGS $\mathcal{G}$ is \emph{normalized} if all guards of all
-%transitions in $\mathcal{G}$ are in a disjunctive normal form.
-
-
-%\begin{example}\label{ex:sgs}
-%Figure~\ref{fig:Q4:SGS} shows an example of stochastic game structure.
-%Deterministic locations are represented by boxes, angelic locations by
-%triangles, demonic locations by diamonds,
-%and stochastic locations by circles. Transitions are labelled with update
-%functions, while guards and probabilities
-%of transitions outgoing from deterministic and stochastic locations,
-%respectively, are given in rounded rectangles
-%on these transitions. For the sake of succinctness we do not picture
-%tautological guards and identity update functions. Note that the SGS is
-%normalized.
-%We will describe in Example~\ref{ex:illustrate} how the stochastic game
-%structure shown corresponds to the program described in
-%Example~\ref{ex:prog}.
-%\end{example}
-
-%\paragraph*{Dynamics of Stochastic Games}
-
-The translation from probabilistic programs to the corresponding pCFG is 
-standard~\cite{CFNH16:prob-termination}, and the details are presented 
-in~\AppendixMaterial.
 
 \smallskip\noindent{\em Configurations.}
 A \emph{configuration} of a pCFG $\pCFG$ is a tuple $(\ell,\vec{x})$,
@@ -508,20 +456,19 @@ dropping the index $\pCFG$ when known from the context.
 
 
 \smallskip\noindent{\em Non-determinism and Schedulers.}
-Due to the presence of non-determinism and probabilistic choices, a pCFG
-$\pCFG$ may represent a multitude of possible behaviours. The probabilistic
+%Due to the presence of non-determinism and probabilistic choices, a pCFG
+%$\pCFG$ may represent a multitude of possible behaviours. 
+The probabilistic
 behaviour of $\pCFG$ can be captured by constructing a suitable
 probability measure over the set of all its runs. Before this can be
 done, non-determinism in $\pCFG$ needs to be resolved. This is achieved using 
 the 
-standard notion of a \emph{scheduler}. 
-
-There are two sources of non-determinism in our programs: one in branching and 
+standard notion of a \emph{scheduler}. Note that there are two sources of 
+non-determinism in our programs: one in branching and 
 one in assignments. We call a location $\loc$ non-deterministic if $\loc$ is a 
 non-deterministic branching location or if $\loc$ is an assignment location 
-with a 
-non-deterministic assignment (i.e., the only transition $\tau$ outgoing from 
-$\loc$ has $\updates(\tau)=(j,\up)$ where $\up$ is a set). A configuration 
+with the only transition $\tau$ outgoing from 
+$\loc$ having a non-deterministic assignment. A configuration 
 $(\loc,\vec{x})$ is non-deterministic if $\loc$ is non-deterministic.
 
 \smallskip
@@ -723,7 +670,7 @@ $i$-th configuration on $\run$ (i.e., $\cfg{\sigma}{i}$ is a random vector
 $(\lr{\sigma}{i},\vr{\sigma}{i})$ with  $\lr{\sigma}{i}$ taking 
 values in $\locs$ and $\vr{\sigma}{i}$ being a random vector of dimension 
 $|\pvars|$ consisting of real-valued random variables). The sigma-algebra 
-$\natfilt$ is the smallest (w.r.t. inclusion) sigma algebra under which all 
+$\natfilt$ is the smallest (w.r.t. inclusion) sigma-algebra under which all 
 the functions $\cfg{\sigma}{i}$, for all $i\geq 0$, 
 are $\natfilt$-measurable (i.e., for each $\cfg{\sigma}{i}$ and each measurable 
 set of configurations $\confset\in\mathcal{F}_{\Conf}$ it holds 
@@ -796,17 +743,18 @@ $(\OmegaRun,\natfilt,\probm^{\sigma}_{\vecinit})$.
 \vspace{-1em}
 \subsection{Almost-Sure and Positive Termination}
 \vspace{-0.5em}
-We consider computational problems related to the basic liveness properties of 
-\APP{s}, namely \emph{termination} and its generalization, \emph{reachability}. 
+Termination is the basic liveness property of \PP{}s. 
 
 \smallskip\noindent{\em Termination and termination time.}
-In the following, consider a \PP{} $P$ and its associated pCFG $\pCFG_P$. 
+In the following, consider a \PP{} $P$ and its associated pCFG $\pCFG_P$. This 
+pCFG has a special location  $\loc_{P}^{\lout}$ corresponding to the value of 
+the program counter after 
+executing $P$.
 We say that a run 
 \emph{terminates} if it reaches a 
-configuration whose first component (i.e. a location of $\pCFG_P$) is the 
-location
-$\loc_{P}^{\lout}$ corresponding to the value of the program counter after 
-executing $P$. 
+configuration whose first component is
+$\loc_{P}^{\lout}$.
+%
 We define a random variable $\ttime$
 such that for each run $\run$ the value $\ttime(\run)$ represents 
 the first 
