@@ -23,6 +23,12 @@ the notion of lexicographic RSMs to obtain a practical approach for termination
 analysis for probabilistic programs has not been studied before, which we consider in 
 this work.
 
+\smallskip\noindent{\em Compositional a.s. termination proving.} A 
+compositional rule for proving almost-sure termination was studied 
+in~\cite{HolgerPOPL} under the uniform integrability assumption. 
+In~\cite{MM05}, a soundness of the probabilistic variant rule is proved for 
+programs with finitely many configurations.
+
 
 \smallskip\noindent{\em Other approaches.}
 Besides RSMs, other approaches has also been considered for probabilistic programs.
@@ -30,35 +36,50 @@ Logical calculi for reasoning about properties of
 probabilistic programs (including termination) were studied 
 in~\cite{Kozen:prob-semantics,FH:prdl,Kozen:probabilistic-PDL,Feldman:propositional-probdl}
  and extended to programs with demonic non-determinism 
- in~\cite{MM04,MM05,KKMO16:wp-expected-runtime,OKKM16:recursive-prob-wp-calculus}.
+ in~\cite{MM04,MM05,KKMO16:wp-expected-runtime,OKKM16:recursive-prob-wp-calculus,GKI14:prob-semantics,
+  DBLP:conf/sas/KatoenMMM10}. However, none of these approaches is readily 
+  automatizable.
 A sound approach~\cite{DBLP:conf/sas/Monniaux01} for almost-sure termination 
 is to explore the exponential decrease of probabilities upon 
 bounded-termination 
-through abstract interpretation~\cite{DBLP:conf/popl/CousotC77}.
-
+through abstract interpretation~\cite{DBLP:conf/popl/CousotC77}. A method for 
+a.s. termination of weakly finite programs (where number of reachable 
+configurations is finite from each initial configuration) based on 
+\emph{patterns} was presented in~\cite{EGK12}.
+ 
 
 \smallskip\noindent{\em Non-probabilistic programs.}
 Termination analysis of non-probabilistic programs has also been extensively 
-studied~\cite{DBLP:conf/cav/BradleyMS05,DBLP:conf/tacas/ColonS01,DBLP:conf/vmcai/PodelskiR04,DBLP:conf/pods/SohnG91,BMS05b,CSZ13,LJB01}.
+studied~\cite{PR04:transition-invariants, 
+CPR06:terminator,DBLP:conf/cav/BradleyMS05,DBLP:conf/tacas/ColonS01, 
+DBLP:conf/vmcai/PodelskiR04,DBLP:conf/pods/SohnG91,BMS05b,LJB01,KSTW10:compositional-transition-invariants,
+ CPR11:termination-cacm}.
 Ranking functions are at the heart of the termination analysis, and lexicographic 
 ranking function has emerged as one of the most efficient and practical approaches
-for termination analysis~\cite{}.
-In this work we extend such lexicographich ranking functions to probabilistic programs,
+for termination analysis~\cite{CSZ13,ADFG10:lexicographic,GMR15:rank-extremal}, 
+being used e.g. in 
+the prominent \texttt{T2} temporal prover~\cite{BCIKP16:T2}.
+In this work we extend lexicographic ranking functions to probabilistic 
+programs,
 and present lexicographic RSMs for almost-sure termination analysis of probabilistic programs
-with non-determinism.
+with non-determinism. Theoretical complexity of synthesizing lexicographic 
+ranking functions in non-probabilistic programs was studied 
+in~\cite{BG13:integer-ranking,BG15:lexicographic-complexity}.
 
 
 
 \section{Conclusion and Future Work}
 In this work we considered lexicographic RSMs for termination analysis of probabilistic
-programs with nondeterminism.
-We showed it presents a sound approach for almost-sure termination, that is compositional,
-algorithmically efficient, and leads to approach that can handle realistic programs.
+programs with non-determinism.
+We showed it presents a sound approach for almost-sure termination, that is
+algorithmically efficient, enables compositional reasoning about termination, 
+and leads to approach that can handle realistic programs.
 There are several interesting directions of future work.
 Lexicographic ranking functions has been considered in several works to 
 provide different practical methods for analysis of non-probabilistic programs.
 First, while our work presents the foundations of lexicographic RSMs for probabilistic 
-programs, extending other practical methods of lexicographic ranking functions to 
+programs, extending other practical methods based on lexicographic ranking 
+functions to 
 lexicographic RSMs is an interesting direction of future work.
 Second, while our algorithmic approaches focus on the linear case, it would be interesting
 to consider other non-linear, and polynomial functions in the future.

@@ -14,11 +14,14 @@ integers, integers, and real numbers, respectively. We assume basic knowledge
 of matrix calculus.
 We use boldface notation for
 vectors, e.g. $\vec{x}$, $\vec{y}$, etc., and we denote an $i$-th component of a
-vector $\vec{x}$ by $\vec{x}[i]$. For the purpose of matrix calculations we 
-assume that (non-transposed) vectors are row vectors. If $\vec{v},\vec{v}'$ are 
-$n$ and $m$ dimensional vectors, respectively, then $(\vec{v},\vec{v}')$ is an 
-$(n+m)$-dimensional vector obtained by ``concatenation'' of $\vec{v}$ and 
-$\vec{v}'$. We identify 1-dimensional vectors with numbers. For an 
+vector $\vec{x}$ by $\vec{x}[i]$. 
+%For the purpose of matrix calculations we 
+%assume that (non-transposed) vectors are row vectors. If $\vec{v},\vec{v}'$ 
+%are 
+%$n$ and $m$ dimensional vectors, respectively, then $(\vec{v},\vec{v}')$ is an 
+%$(n+m)$-dimensional vector obtained by ``concatenation'' of $\vec{v}$ and 
+%$\vec{v}'$. 
+We identify 1-dimensional vectors with numbers. For an 
 $n$-dimensional vector 
 $\vec{x}$, index $1 \leq i\leq n$, and number $a$ we denote by $\vec{x}(i\leftarrow a)$ 
 a 
@@ -32,10 +35,9 @@ if $f(x)\leq g(x)$ for all $x$ in the domain.
 
 \smallskip\noindent{\em Variables.}
 Throughout the paper we fix a countable set of variables $\vars$. 
-We consider some arbitrary but fixed linear order on the set of all variables. 
-Hence, given some set of variables $V$ we can enumerate its members in 
-ascending order (w.r.t. the fixed ordering) and write 
-$V=\{x_1,x_2,x_3,\dots\}$. 
+We consider some arbitrary but fixed linear order on the set of all variables, 
+hence we write 
+$\vars=\{x_1,x_2,x_3,\dots\}$. 
 %A \emph{valuation} is a partial function 
 %$\val\colon 
 %\vars \dashrightarrow \Rset$ assigning a unique number to some of the 
@@ -112,7 +114,7 @@ $V=\{x_1,x_2,x_3,\dots\}$.
 In this subsection we define the form of probabilistic programs that we 
 consider in our analysis. We consider two classes of probabilistic programs: 
 general probabilistic programs with arbitrary (measurable) expressions and 
-their subclass, affine probabilistic programs (\APP s) where are expressions 
+their subclass, affine probabilistic programs (\APP s) where all expressions 
 are restricted to be affine (see below for a precise definition). The reason 
 for this dual view is that our work also has two main points of focus: a 
 theoretical one, where we introduce new proof rules that can be used to prove 
@@ -136,12 +138,12 @@ $m\geq n$,
 returns a number resulting from substituting each $x_i$ in $E$ by $\vec{x}[i]$. 
 Slightly abusing our notation, we denote this function also by $E$ and the 
 value of this function on argument $\vec{x}$ by $E(\vec{x})$. We do not a priori fix a concrete set of operators that can be used to form expressions. However, in order to ensure that semantics of probabilistic programs with real-valued variables is defined correctly, we impose the following two conditions on the set of expressions used in each program:
-\begin{enumerate}
-\item
+%\begin{enumerate}
+(1)
 For each expression $E$ over variables $\{x_1,\dots,x_n\}$ and each $n$-dimensional vector $\vec{x}$ the value $E(\vec{x})$ is well defined.\footnote{Our results can be easily extended to programs where encountering an expression of undefined value, such as division by zero, triggers an exception which terminates the program, but we abstract away from such details for the sake of clarity.}
-\item
+(2)
 The function defined by each expression $E$ is Borel-measurable (for definition of Borel-measura\-bility, see, e.g.~\cite{Billingsley:book}).
-\end{enumerate}
+%\end{enumerate}
 
 From measure theory it is known that these conditions hold in particular for programs where expressions are build using the standard arithmetic operators of addition, subtraction, multiplication, and division (provided that expressions evaluating to zero are not allowed as divisors).
 
@@ -163,7 +165,8 @@ is called affine. As noted above, each affine function is Borel-measurable.
 A \emph{predicate} is a logical formula obtained by a finite number of applications of conjunction, disjunction and negation operations on \emph{atomic predicates} of the form $E\leq E'$, where $E$, $E'$ are expressions.
 
 \smallskip\noindent{\em Linear constraints, assertions, predicates.}
-In the case of predicates involving only linear expression we use the following nomenclature:
+In the case of predicates involving only linear expression we use the following 
+standard nomenclature:
 \begin{compactitem}
 	\item {\em Linear Constraint.} A \emph{linear constraint} is a formula of the
 	form $\psi$ or $\neg\psi$, where  $\psi$ is a non-strict inequality

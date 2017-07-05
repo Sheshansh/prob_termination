@@ -55,16 +55,20 @@ Warning--no author, editor, organization, or key in
 Warning--empty year in 
 Warning--numpages field, but no articleno or eid field, in ADFG10:lexicographic
 Warning--empty address in Ash:book
+Warning--numpages field, but no articleno or eid field, in BG13:integer-ranking
+Warning--can't use both author and editor fields in BG15:lexicographic-complexity
 Warning--empty address in Billingsley:book
 Warning--empty publisher in BG05
 Warning--empty address in BG05
 Warning--empty address in DBLP:conf/cav/BradleyMS05
 Warning--empty publisher in BMS05b
 Warning--empty address in BMS05b
+Warning--can't use both author and editor fields in BCIKP16:T2
 Warning--empty address in SriramCAV
 Warning--page numbers missing in both pages and numpages fields in CFG16:positivstellensatz-arxiv
 Warning--empty address in CFNH16:prob-termination
 Warning--empty address in DBLP:conf/tacas/ColonS01
+Warning--numpages field, but no articleno or eid field, in CPR06:terminator
 Warning--empty publisher in CSZ13
 Warning--empty address in CSZ13
 Warning--empty address in DBLP:conf/popl/CousotC77
@@ -73,7 +77,12 @@ Warning--empty address in EGK12
 Warning--empty publisher in FH:prdl
 Warning--empty address in FH:prdl
 Warning--empty address in HolgerPOPL
+Warning--numpages field, but no articleno or eid field, in GMR15:rank-extremal
+Warning--can't use both author and editor fields in KKMO16:wp-expected-runtime
+Warning--empty publisher in DBLP:conf/sas/KatoenMMM10
+Warning--empty address in DBLP:conf/sas/KatoenMMM10
 Warning--numpages field, but no articleno or eid field, in Kozen:probabilistic-PDL
+Warning--can't use both author and editor fields in KSTW10:compositional-transition-invariants
 Warning--empty publisher in prism
 Warning--empty address in prism
 Warning--empty publisher in LJB01
@@ -86,48 +95,50 @@ Warning--empty publisher in NSK:CTMDP-delayed
 Warning--empty address in NSK:CTMDP-delayed
 Warning--empty publisher in NK:CTMDP-bisimulation
 Warning--empty address in NK:CTMDP-bisimulation
+Warning--numpages field, but no articleno or eid field, in OKKM16:recursive-prob-wp-calculus
 Warning--empty address in DBLP:conf/vmcai/PodelskiR04
+Warning--numpages field, but no articleno or eid field, in PR04:transition-invariants
 Warning--empty address in Rosenthal:book
 Warning--empty address in DBLP:conf/pods/SohnG91
-You've used 34 entries,
+You've used 46 entries,
             5706 wiz_defined-function locations,
-            1626 strings with 23409 characters,
-and the built_in function-call counts, 38290 in all, are:
-= -- 4578
-> -- 1230
+            1751 strings with 28095 characters,
+and the built_in function-call counts, 52303 in all, are:
+= -- 6245
+> -- 1776
 < -- 1
-+ -- 361
-- -- 525
-* -- 2599
-:= -- 3918
-add.period$ -- 174
-call.type$ -- 34
-change.case$ -- 209
-chr.to.int$ -- 32
-cite$ -- 82
-duplicate$ -- 3265
-empty$ -- 2356
-format.name$ -- 543
-if$ -- 9085
-int.to.chr$ -- 3
++ -- 529
+- -- 715
+* -- 3685
+:= -- 5410
+add.period$ -- 235
+call.type$ -- 46
+change.case$ -- 296
+chr.to.int$ -- 43
+cite$ -- 105
+duplicate$ -- 4409
+empty$ -- 3173
+format.name$ -- 768
+if$ -- 12365
+int.to.chr$ -- 4
 int.to.str$ -- 0
-missing$ -- 143
-newline$ -- 333
-num.names$ -- 280
-pop$ -- 1425
+missing$ -- 189
+newline$ -- 457
+num.names$ -- 375
+pop$ -- 1870
 preamble$ -- 1
-purify$ -- 375
+purify$ -- 521
 quote$ -- 0
-skip$ -- 1251
+skip$ -- 1676
 stack$ -- 0
-substring$ -- 3122
-swap$ -- 335
-text.length$ -- 163
+substring$ -- 4248
+swap$ -- 483
+text.length$ -- 187
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 835
-warning$ -- 44
-while$ -- 313
+type$ -- 1101
+warning$ -- 55
+while$ -- 408
 width$ -- 0
-write$ -- 675
+write$ -- 927
 (There were 6 error messages)

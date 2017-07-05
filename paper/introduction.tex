@@ -69,10 +69,16 @@ established~\cite{}, for probabilistic programs with nondeterminism the current 
 are only applicable to academic examples of variants of random walks. 
 The key reason can be understood as follows: even for non-probabilistic programs while 
 ranking functions are sound and complete, they do not necessarily provide a practical 
-approach. 
+approach. This is because to prove termination, a witness in the form of a 
+ranking function has to be computed: to this automatically, ranking functions 
+of a restricted shape (such as linear ranking functions) have to be considered, 
+and 1-dimensional ranking functions of a restricted type can only prove 
+termination of a limited class of programs. 
 In contrast, as a practical and scalable approach for non-probabilistic programs the 
-notion of lexicographic ranking functions has been widely studied~\cite{}. 
-Algorithmic approaches for lexicographic ranking functions allow the termination analysis 
+notion of lexicographic ranking functions has been widely 
+studied~\cite{}. 
+Algorithmic approaches for linear lexicographic ranking functions allow the 
+termination analysis 
 to be applicable to real-world non-probabilistic programs (after abstraction).
 However both the theoretical foundations as well as practical approaches related to 
 such lexicographic ranking functions are completely missing for probabilistic programs,
@@ -126,7 +132,7 @@ termination.
 In other words, we present an example (Example~\ref{ex:infinite-time}) where a 
 lexicographic RSM exists ensuring
 almost-sure termination, yet the expected termination time is infinite.
-We then present a natural restriction (i.e., a subclass of programs) such that the lexicographic 
+We then present a natural restriction under which the lexicographic 
 RSMs not only imply positive termination, but even asymptotic bounds on the expected termination 
 time can be derived from them (Theorem~\ref{thm:runtime-bound} and 
 Corollary~\ref{col:runtime-progs}).

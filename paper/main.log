@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  5 JUL 2017 14:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  5 JUL 2017 15:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1802,7 +1802,7 @@ LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 5.5pt on input line 16.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 10.0pt on input line 115.
+(Font)              scaled to size 10.0pt on input line 117.
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
@@ -1811,23 +1811,22 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 
 [3.3]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.3pt on input line 141.
+(Font)              scaled to size 7.3pt on input line 143.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 8.0pt on input line 141.
+(Font)              scaled to size 8.0pt on input line 143.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 6.2pt on input line 141.
+(Font)              scaled to size 6.2pt on input line 143.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 6.2pt on input line 141.
+(Font)              scaled to size 6.2pt on input line 143.
 
-Overfull \hbox (8.74901pt too wide) in paragraph at lines 178--180
+Overfull \hbox (8.74901pt too wide) in paragraph at lines 181--183
 []\T1/LinuxLibertineT-TLF/b/n/10 [PETR: SAY SOME-THING ABOUT PRED-I-CATE SAT-IS
 -FAC-TION.] [PETR: EX-PLAIN BOREL-
  []
 
-[4.4]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 5.5pt on input line 197.
-
+(Font)              scaled to size 5.5pt on input line 200.
+[4.4]
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
@@ -1836,17 +1835,17 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 
 [5.5]
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 10.0pt on input line 304.
+(Font)              scaled to size 10.0pt on input line 307.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 7.3pt on input line 304.
+(Font)              scaled to size 7.3pt on input line 307.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 5.5pt on input line 304.
+(Font)              scaled to size 5.5pt on input line 307.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 8.0pt on input line 368.
+(Font)              scaled to size 8.0pt on input line 371.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 6.2pt on input line 368.
+(Font)              scaled to size 6.2pt on input line 371.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 8.0pt on input line 368.
+(Font)              scaled to size 8.0pt on input line 371.
  [6.6]
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
@@ -1855,7 +1854,7 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [7.7] [8.8]
-Overfull \hbox (3.0958pt too wide) in paragraph at lines 846--856
+Overfull \hbox (3.0958pt too wide) in paragraph at lines 849--859
 \T1/LinuxLibertineT-TLF/m/n/10 (-20) each sched-uler $\OML/nxlmi/m/it/10 ^^[$ \
 T1/LinuxLibertineT-TLF/m/n/10 (-20) and for each ini-tial val-u-a-tion $\OT1/Li
 nuxLibertineT-TLF/sb/n/10 x[] \LMS/ntxsy/m/n/10 2 \U/ntxmia/m/it/10 ^^D[]$ \T1/
@@ -1866,15 +1865,15 @@ xsy/m/n/10 gº \U/ntxmia/m/it/10 =
 
 \invrun=\box85
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 1245.
+(Font)              scaled to size 7.0pt on input line 1248.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 1285.
+(Font)              scaled to size 9.0pt on input line 1288.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 9.0pt on input line 1285.
+(Font)              scaled to size 9.0pt on input line 1288.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 9.0pt on input line 1285.
+(Font)              scaled to size 9.0pt on input line 1288.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 1285.
+(Font)              scaled to size 9.0pt on input line 1288.
 ) (./lexicographic.tex
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
@@ -1882,21 +1881,25 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[9.9] [10.10]
+[9.9]
 
-Package natbib Warning: Citation `xxx' on page 11 undefined on input line 120.
-
-
-Package natbib Warning: Citation `xxx' on page 11 undefined on input line 120.
+Package natbib Warning: Citation `xxx' on page 10 undefined on input line 120.
 
 
-Package natbib Warning: Citation `xxx' on page 11 undefined on input line 120.
+Package natbib Warning: Citation `xxx' on page 10 undefined on input line 120.
 
 
-LaTeX Warning: Reference `xxx' on page 11 undefined on input line 120.
+Package natbib Warning: Citation `xxx' on page 10 undefined on input line 120.
 
 
-LaTeX Warning: Reference `xxx' on page 11 undefined on input line 120.
+LaTeX Warning: Reference `xxx' on page 10 undefined on input line 120.
+
+
+LaTeX Warning: Reference `xxx' on page 10 undefined on input line 120.
+
+[10.10]
+Underfull \vbox (badness 2050) has occurred while \output is active []
+
 
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
@@ -2030,7 +2033,22 @@ Package natbib Warning: Citation `POPL' on page 26 undefined on input line 20.
 Package natbib Warning: Citation `ARXIV' on page 26 undefined on input line 20.
 
 
-[26.26]) (./main.bbl
+[26.26]
+LaTeX Font Info:    Try loading font information for T1+zi4 on input line 61.
+ (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/inconsolata/t1zi4.fd
+File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
+)
+Package microtype Info: Loading generic settings for font family
+(microtype)             `zi4' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+Package microtype Info: Character `textendash ' is missing
+(microtype)             in font `T1/zi4/m/n/10'.
+(microtype)             Ignoring protrusion settings for this character.
+Package microtype Info: Character `textemdash ' is missing
+(microtype)             in font `T1/zi4/m/n/10'.
+(microtype)             Ignoring protrusion settings for this character.
+) (./main.bbl
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
@@ -2073,54 +2091,56 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 569.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 45106 strings out of 493644
- 969147 string characters out of 6150875
- 1224084 words of memory out of 5000000
- 46526 multiletter control sequences out of 15000+600000
- 350923 words of font info for 727 fonts, out of 8000000 for 9000
+ 45193 strings out of 493644
+ 971477 string characters out of 6150875
+ 1224946 words of memory out of 5000000
+ 46579 multiletter control sequences out of 15000+600000
+ 353048 words of font info for 740 fonts, out of 8000000 for 9000
  944 hyphenation exceptions out of 8191
  62i,18n,96p,1979b,7209s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/liberti
-ne/lbtn_ki75ao.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/libe
-rtine/lbtn_25tcsq.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/n
-ewtx/libertinealt.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/l
-ibertine/lbtn_xogrpz.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvip
-s/libertine/lbtn_ncsllp.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/d
-vips/libertine/lbtn_ehpgim.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/en
-c/dvips/libertine/lbtn_c7kyj5.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts
-/enc/dvips/base/8r.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/
-libertine/lbtn_naooyc.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvi
-ps/libertine/lbtn_7grukw.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/
-dvips/libertine/lbtn_nh77jq.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/e
-nc/dvips/libertine/lbtn_76gpa5.enc}</home/pnovotny/texlive/2016/texmf-dist/font
-s/type1/public/libertine/LinBiolinumT.pfb></home/pnovotny/texlive/2016/texmf-di
-st/fonts/type1/public/libertine/LinBiolinumTB.pfb></home/pnovotny/texlive/2016/
-texmf-dist/fonts/type1/public/libertine/LinBiolinumTI.pfb></home/pnovotny/texli
-ve/2016/texmf-dist/fonts/type1/public/libertine/LinLibertineT.pfb></home/pnovot
-ny/texlive/2016/texmf-dist/fonts/type1/public/libertine/LinLibertineTB.pfb></ho
-me/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/libertine/LinLibertineTB
-I.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/libertine/LinL
-ibertineTI.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/liber
-tine/LinLibertineTZ.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/pub
-lic/newtx/fxlri-5letters.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type
-1/public/newtx/fxlri-7letters.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts
-/type1/public/txfonts/rtxmi.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/t
-ype1/public/newtx/rtxmi5.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type
-1/public/newtx/rtxmi7.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/p
-ublic/txfonts/rtxr.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/publ
-ic/stmaryrd/stmary10.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/pu
-blic/newtx/txex-bar.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/pub
-lic/newtx/txexs.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/
-txfonts/txsya.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/tx
-fonts/txsyb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/txfo
-nts/txsyc.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/
-txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlr
-.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/newtx/zxlri.pfb
->
-Output written on main.pdf (29 pages, 936529 bytes).
+{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/inconso
+lata/i4-t1-4.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/libert
+ine/lbtn_ki75ao.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/lib
+ertine/lbtn_25tcsq.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/
+newtx/libertinealt.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/
+libertine/lbtn_xogrpz.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvi
+ps/libertine/lbtn_ncsllp.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/
+dvips/libertine/lbtn_ehpgim.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/e
+nc/dvips/libertine/lbtn_c7kyj5.enc}{/home/pnovotny/texlive/2016/texmf-dist/font
+s/enc/dvips/base/8r.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips
+/libertine/lbtn_naooyc.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dv
+ips/libertine/lbtn_7grukw.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc
+/dvips/libertine/lbtn_nh77jq.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/
+enc/dvips/libertine/lbtn_76gpa5.enc}</home/pnovotny/texlive/2016/texmf-dist/fon
+ts/type1/public/inconsolata/Inconsolata-zi4r.pfb></home/pnovotny/texlive/2016/t
+exmf-dist/fonts/type1/public/libertine/LinBiolinumT.pfb></home/pnovotny/texlive
+/2016/texmf-dist/fonts/type1/public/libertine/LinBiolinumTB.pfb></home/pnovotny
+/texlive/2016/texmf-dist/fonts/type1/public/libertine/LinBiolinumTI.pfb></home/
+pnovotny/texlive/2016/texmf-dist/fonts/type1/public/libertine/LinLibertineT.pfb
+></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/libertine/LinLibert
+ineTB.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/libertine/
+LinLibertineTBI.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/
+libertine/LinLibertineTI.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type
+1/public/libertine/LinLibertineTZ.pfb></home/pnovotny/texlive/2016/texmf-dist/f
+onts/type1/public/newtx/fxlri-5letters.pfb></home/pnovotny/texlive/2016/texmf-d
+ist/fonts/type1/public/newtx/fxlri-7letters.pfb></home/pnovotny/texlive/2016/te
+xmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></home/pnovotny/texlive/2016/texm
+f-dist/fonts/type1/public/newtx/rtxmi5.pfb></home/pnovotny/texlive/2016/texmf-d
+ist/fonts/type1/public/newtx/rtxmi7.pfb></home/pnovotny/texlive/2016/texmf-dist
+/fonts/type1/public/txfonts/rtxr.pfb></home/pnovotny/texlive/2016/texmf-dist/fo
+nts/type1/public/stmaryrd/stmary10.pfb></home/pnovotny/texlive/2016/texmf-dist/
+fonts/type1/public/newtx/txex-bar.pfb></home/pnovotny/texlive/2016/texmf-dist/f
+onts/type1/public/newtx/txexs.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts
+/type1/public/txfonts/txsya.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/t
+ype1/public/txfonts/txsyb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/typ
+e1/public/txfonts/txsyc.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1
+/public/newtx/txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/pub
+lic/newtx/zxlr.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/n
+ewtx/zxlri.pfb>
+Output written on main.pdf (29 pages, 953767 bytes).
 PDF statistics:
- 800 PDF objects out of 1000 (max. 8388607)
- 700 compressed objects within 7 object streams
- 262 named destinations out of 1000 (max. 500000)
- 94361 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 848 PDF objects out of 1000 (max. 8388607)
+ 745 compressed objects within 8 object streams
+ 272 named destinations out of 1000 (max. 500000)
+ 94873 words of extra memory for PDF output out of 106986 (max. 10000000)
 
