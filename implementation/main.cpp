@@ -142,8 +142,8 @@ void generate_equations(){
 			// The invariant was "false", so just leave all the transitions of this state
 			continue;
 		}
-		it->second->invariant->print();
-		cout<<endl;
+		// it->second->invariant->print();
+		// cout<<endl;
 		if(it->second->type=="det"){
 			//Invariant and guard imply the value decrease
 			if(it->second->edges.empty()){
@@ -303,7 +303,12 @@ void print_equations(ostream& equationsfile){
 	Also return the state relevant to determine the further step in the algorithm
 
 */
+int dimension_used = 0;
 bool process_equations_output(){
+	vector<double> temp(nVariables+1,0);
+	for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+		it->second->lexrsm.push_back(temp);
+	}
 	bool to_return = false;
 	ifstream to_process("files/EquationsOutput");
 	string line;
@@ -317,9 +322,20 @@ bool process_equations_output(){
 					to_return = true;
 					//Removing those equations whose epsilon is 1
 				}
+				else if(temp1.substr(0,2)=="f_"){
+					int underscore = -1;
+					for(int i = 2;i<temp1.length();++i){
+						if(temp1[i]=='_'){
+							underscore = i;
+							break;
+						}
+					}
+					label_map[stoi(part(temp1,2,underscore))]->lexrsm[dimension_used][stoi(part(temp1,underscore+1,temp1.length()))] = stod(temp2);
+				}
 			}
 		}
 	}
+	dimension_used++;
 	return to_return;
 }
 
@@ -624,7 +640,8 @@ int main(){
 		if(state==false){
 			// If all the epsilons were 0, this means that no solution can ever be found by our algorithm
 			string command;
-			command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+			// command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+			command = "rm files/EquationsOutput files/InvariantOutput files/aspic.fast files/equations.lp";
 			system(command.c_str());
 			break;
 		}
@@ -634,7 +651,8 @@ int main(){
 				// If the equations due to the epsilons are all removed, this means that we found a solution and hence break from the loop	
 				solved = true;
 				string command;
-				command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+				// command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+				command = "rm files/EquationsOutput files/InvariantOutput files/aspic.fast files/equations.lp";
 				system(command.c_str());
 				break;
 			}
@@ -644,17 +662,25 @@ int main(){
 		}
 		string command;
 		//Renaming the files/EquationsOutput because it contains the solution
-		command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
+		command = "rm files/EquationsOutput files/InvariantOutput files/aspic.fast files/equations.lp";
+		// command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
 		system(command.c_str());
 	}
 
 	double final_result = time(0);
 	cout<<endl<<"Time:"<<(double(final_result-start_time))<<endl;
 	cout<<"Final result: "<<endl;
-	cout<<"--------------"<<endl;
+	cout<<"=============="<<endl;
 
 	if(solved){
 		cout<<"Found a solution of dimension "<<loop_counter+1<<"."<<endl;
+		cout<<"CFG details are:"<<endl;
+		for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+			cout<<"------------------------"<<endl;
+			cout<<"|||Node "<<it->first<<"|||"<<endl<<endl;
+			it->second->print();
+			// cout<<it->second->label<<endl;
+		}
 	}
 	else{
 		cout<<"No solution found, stopped after "<<loop_counter+1<<" iterations"<<endl;
