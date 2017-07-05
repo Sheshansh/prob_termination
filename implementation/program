@@ -1,12 +1,11 @@
-var a,b,c;
-[-1-b>0]
-while a > 1 do
-    if prob(0.5) then
-        b:= 1+[-1,1]
-    else
-        a:=a-1
-    fi
+var x,c;
+x := 1;
+c := 1;
+while c >= 1 do
+	if prob(0.5) then
+		x := 2*x
+	else
+		c := 0
+	fi
 od;
-while b >= 1 do
-    b:=b-1
-od
+while x >= 0 do x := x - 1 od

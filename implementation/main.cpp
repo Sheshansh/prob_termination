@@ -20,6 +20,9 @@ Comments:
 #include <fstream>
 #include <queue>
 #include <ctime>
+#include <sys/time.h>
+
+
 #include "files/Parser.h"
 using namespace std;
 #define MAXL 700000 //Maximum length of the program
@@ -498,7 +501,8 @@ void print_fast(ostream& fastfile){
 }
 
 int main(){
-	double start_time = time(0);
+	struct timeval  tv1, tv2;
+	gettimeofday(&tv1, NULL);
 	int start,end;
 	char* input = new char[MAXL];
 	int r,i;
@@ -525,8 +529,8 @@ int main(){
 	label_map[end]	 = new CFG_location("det",end);
 	// Parsing program from begin to endprog(pointers) and the start and end nodesid's have also been passed
 	root=new node("stmt",begin,endprog,start,end);
-	double parsing_over = time(0);
-	cout<<"Time:"<<(double(parsing_over-start_time))<<endl;
+	gettimeofday(&tv2, NULL);
+	cout<<"Time:"<<(double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +(double) (tv2.tv_sec - tv1.tv_sec)<<endl;
 	cout<<"Parsing over and CFG constructed"<<endl;
 	cout<<"The CFG constructed has "<<last_used_label<<" states"<<endl;
 	ofstream fastfile;
@@ -535,15 +539,17 @@ int main(){
 	// Printing the CFG in fast format into files/aspic.fast file
 	print_fast(*outfast);
 	fastfile.close();
-	double printed_fast = time(0);
-	cout<<endl<<"Time:"<<(double(printed_fast-start_time))<<endl;
+	gettimeofday(&tv2, NULL);
+	cout<<"Time:"<<(double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +(double) (tv2.tv_sec - tv1.tv_sec)<<endl;
 	cout<<"Fast file printed."<<endl;
+	double aspic_start_time = (double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +(double) (tv2.tv_sec - tv1.tv_sec);
 	// Calling the invariant_script.sh which inturn calls aspic to generate invariants into files/InvariantOutput	
 	if(system("./files/invariant_script.sh")!=0){
 		cerr<<"Something wrong with the script to find invariants";
 	}
-	double aspic_done = time(0);
-	cout<<endl<<"Time:"<<(double(aspic_done-start_time))<<endl;
+	gettimeofday(&tv2, NULL);
+	cout<<"Time:"<<(double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +(double) (tv2.tv_sec - tv1.tv_sec)<<endl;
+	double aspic_end_time = (double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +(double) (tv2.tv_sec - tv1.tv_sec);
 	cout<<"Invariants generated using aspic"<<endl;
 	// Code for analysing files/InvariantOutput comes here
 	ifstream invariant_file("files/InvariantOutput");
@@ -619,8 +625,8 @@ int main(){
 	generate_equations();
 	ofstream equationsfile;
 	bool solved = false;
-	double equations_generated = time(0);
-	cout<<endl<<"Time:"<<(double(equations_generated-start_time))<<endl;
+	gettimeofday(&tv2, NULL);
+	cout<<"Time:"<<(double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +(double) (tv2.tv_sec - tv1.tv_sec)<<endl;
 	cout<<"Invariants read and equations generated."<<endl;
 	int loop_counter=0;
 	// The main algorithm implementation
@@ -642,7 +648,7 @@ int main(){
 			string command;
 			// command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
 			command = "rm files/EquationsOutput files/InvariantOutput files/aspic.fast files/equations.lp";
-			system(command.c_str());
+			// system(command.c_str());
 			break;
 		}
 		else{
@@ -653,7 +659,7 @@ int main(){
 				string command;
 				// command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
 				command = "rm files/EquationsOutput files/InvariantOutput files/aspic.fast files/equations.lp";
-				system(command.c_str());
+				// system(command.c_str());
 				break;
 			}
 			else{
@@ -664,26 +670,28 @@ int main(){
 		//Renaming the files/EquationsOutput because it contains the solution
 		command = "rm files/EquationsOutput files/InvariantOutput files/aspic.fast files/equations.lp";
 		// command = "mv files/EquationsOutput files/EquationsOutput" + to_string(loop_counter);
-		system(command.c_str());
+		// system(command.c_str());
 	}
 
-	double final_result = time(0);
-	cout<<endl<<"Time:"<<(double(final_result-start_time))<<endl;
-	cout<<"Final result: "<<endl;
-	cout<<"=============="<<endl;
+	gettimeofday(&tv2, NULL);
+	cout<<"Time:"<<(double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +(double) (tv2.tv_sec - tv1.tv_sec)<<endl;
+	// cout<<"Final result: "<<endl;
+	// cout<<"=============="<<endl;
 
 	if(solved){
 		cout<<"Found a solution of dimension "<<loop_counter+1<<"."<<endl;
-		cout<<"CFG details are:"<<endl;
-		for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
-			cout<<"------------------------"<<endl;
-			cout<<"|||Node "<<it->first<<"|||"<<endl<<endl;
-			it->second->print();
-			// cout<<it->second->label<<endl;
-		}
+		// cout<<"CFG details are:"<<endl;
+		// for(map<int,CFG_location*>::iterator it = label_map.begin();it!=label_map.end();++it){
+		// 	cout<<"------------------------"<<endl;
+		// 	cout<<"|||Node "<<it->first<<"|||"<<endl<<endl;
+		// 	it->second->print();
+		// 	// cout<<it->second->label<<endl;
+		// }
 	}
 	else{
 		cout<<"No solution found, stopped after "<<loop_counter+1<<" iterations"<<endl;
 	}
+	cout<<"Total time taken: "<<(double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +(double) (tv2.tv_sec - tv1.tv_sec)<<endl;
+	cout<<"Time taken by aspic: "<<aspic_end_time-aspic_start_time<<endl;
 	return 0;
 }
