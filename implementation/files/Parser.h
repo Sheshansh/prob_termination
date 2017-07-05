@@ -66,7 +66,7 @@ public:
 	double probability;
 	CFG_edge();
 	CFG_edge(CFG_location* next,int toChange,node* change,node* guard=NULL,double probability=1.0);
-	void print();
+	void print(bool print_probability = false);
 };
 
 struct CFG_location{
@@ -78,6 +78,7 @@ public:
 	vector<int> ranking_function; // The coefficient matrix for the affine ranking function for this node
 	node* invariant; // A bexpr node, the invariant at this particular node
 	void print();
+	vector<vector<double> > lexrsm;
 };
 
 void skip_spaces(int &begin, int &end);

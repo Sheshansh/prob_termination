@@ -1133,7 +1133,7 @@ CFG_edge::CFG_edge(CFG_location* next1,int toChange1,node* change1,node* guard1,
 	Used for debugging only in this program
 
 */
-void CFG_edge::print(){
+void CFG_edge::print(bool print_probability){
 	if(next!=NULL){
 		cout<<"Destination: "<<next->label<<endl;
 	}
@@ -1146,10 +1146,13 @@ void CFG_edge::print(){
 		cout<<endl;
 	}
 	if(guard!=NULL){
-		cout<<"Guard is: "<<endl;
+		cout<<"Guard is: ";
 		guard-> print();
+		cout<<endl;
 	}
-	cout<<"Probability to occur is"<<probability<<endl<<endl; 
+	if(print_probability){
+		cout<<"Probability to occur is "<<probability<<endl; 
+	}
 }
 
 /*
@@ -1168,22 +1171,50 @@ CFG_location::CFG_location(string type,int label){
 /*
 
 	Prints the details about the CFG_location
-	It was used only for debussing in this program
 
 */
 void CFG_location::print(){
 	cout<<"Type: "<<type<<endl;
+	cout<<"Invariant: ";
 	if(invariant!=NULL){
-		cout<<"Invariant: ";
-		cout<<invariant<<" : ";
 		invariant->print();
-		cout<<endl;
 	}
-
+	else{
+		cout<<"false";
+	}
+	cout<<endl;
+	cout<<"LexRSM: ";
+	for(int i=0;i<lexrsm.size();++i){
+		bool printed = false;
+		if(lexrsm[i][0]!=0.0){
+			cout<<lexrsm[i][0];
+			printed = true;
+		}
+		for(int j=1;j<=nVariables;++j){
+			if(lexrsm[i][j]>0){
+				if(printed==true){
+					cout<<"+";
+				}
+				cout<<lexrsm[i][j]<<"*"<<variable[j];
+				printed = true;
+			}
+			else if(lexrsm[i][j]<0){
+				cout<<lexrsm[i][j]<<"*"<<variable[j];
+				printed = true;
+			}
+		}
+		if(printed == false){
+			cout<<"0";
+		}
+		if(i!=lexrsm.size()-1){
+			cout<<" ; ";
+		}
+	}
+	cout<<endl;
 	int i=1;
 	for(vector<CFG_edge>::iterator it = edges.begin();it!=edges.end();++it){
-		cout<<"Edge #"<<i<<endl;
-		it->print();
+		cout<<">>Edge #"<<i<<endl;
+		it->print(type=="prob");
 		i++;
 	}
 }
