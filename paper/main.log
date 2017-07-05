@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  5 JUL 2017 16:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  5 JUL 2017 17:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1768,34 +1768,13 @@ LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/b/n' will be
 (Font)              scaled to size 10.0pt on input line 3.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 10.0pt on input line 6.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 10.
-
-
-Package natbib Warning: Citation `RandBook' on page 1 undefined on input line 1
-0.
-
-
-Package natbib Warning: Citation `RandBook2' on page 1 undefined on input line 
-10.
-
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 22.
-[1.1{/home/pnovotny/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+(Font)              scaled to size 10.0pt on input line 21.
+ [1.1{/home/pnovotny/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+] [2.2]) (./prelims.tex
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
+(Font)              scaled to size 10.0pt on input line 6.
 
-Package natbib Warning: Citation `HONGFEI' on page 2 undefined on input line 59
-.
-
-
-Package natbib Warning: Citation `POPL' on page 2 undefined on input line 62.
-
-
-Package natbib Warning: Citation `CAV' on page 2 undefined on input line 62.
-
-
-Package natbib Warning: Citation `POPL' on page 2 undefined on input line 62.
-
-[2.2]) (./prelims.tex
 
 Package natbib Warning: Citation `POPL17PAPER' on page 3 undefined on input lin
 e 6.
@@ -1826,10 +1805,6 @@ LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 5.5pt on input line 205.
  [4.4]
-
-Package natbib Warning: Citation `HONGFEI-CAV16' on page 5 undefined on input l
-ine 308.
-
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
@@ -2023,21 +1998,10 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[25.25]) (./conclu.tex
-
-Package natbib Warning: Citation `CAV-POLY' on page 26 undefined on input line 
-20.
-
-
-Package natbib Warning: Citation `POPL' on page 26 undefined on input line 20.
-
-
-Package natbib Warning: Citation `ARXIV' on page 26 undefined on input line 20.
-
-
-[26.26]
+[25.25]) (./conclu.tex [26.26]
 LaTeX Font Info:    Try loading font information for T1+zi4 on input line 61.
- (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/inconsolata/t1zi4.fd
+
+(/home/pnovotny/texlive/2016/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
 )
 Package microtype Info: Loading generic settings for font family
@@ -2050,7 +2014,8 @@ Package microtype Info: Character `textendash ' is missing
 Package microtype Info: Character `textemdash ' is missing
 (microtype)             in font `T1/zi4/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
-) (./main.bbl
+)
+(./main.bbl
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
@@ -2090,7 +2055,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 569.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 569.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 569.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 65230FC0D027AAA82A7E06A7FB9DAD38;3675.
+(rerunfilecheck)             Checksum: AF88581C3EB45D1AEE940BC98EE6BA0C;3681.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -2106,11 +2071,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 569.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 45243 strings out of 493644
- 972277 string characters out of 6150875
- 1225610 words of memory out of 5000000
- 46593 multiletter control sequences out of 15000+600000
- 359934 words of font info for 753 fonts, out of 8000000 for 9000
+ 45264 strings out of 493644
+ 972604 string characters out of 6150875
+ 1226234 words of memory out of 5000000
+ 46602 multiletter control sequences out of 15000+600000
+ 360576 words of font info for 757 fonts, out of 8000000 for 9000
  944 hyphenation exceptions out of 8191
  62i,18n,96p,1979b,7219s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/inconso
@@ -2151,10 +2116,10 @@ e1/public/txfonts/txsyb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1
 ublic/newtx/txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/publi
 c/newtx/zxlr.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/new
 tx/zxlri.pfb>
-Output written on main.pdf (32 pages, 963236 bytes).
+Output written on main.pdf (32 pages, 964845 bytes).
 PDF statistics:
- 879 PDF objects out of 1000 (max. 8388607)
- 775 compressed objects within 8 object streams
- 287 named destinations out of 1000 (max. 500000)
+ 908 PDF objects out of 1000 (max. 8388607)
+ 803 compressed objects within 9 object streams
+ 293 named destinations out of 1000 (max. 500000)
  95401 words of extra memory for PDF output out of 106986 (max. 10000000)
 
