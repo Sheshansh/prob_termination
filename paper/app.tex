@@ -1,0 +1,360 @@
+\section{Details of Program Syntax}
+In this subsection we present the details of the syntax of (affine) 
+probabilistic 
+programs.
+
+Recall that $\vars$ %and $\mathcal{R}$ 
+is a collection of 
+\emph{variables}.
+%and \emph{random} variables, respectively. 
+Moreover, let $\mathcal{D}$ be a set of \emph{probability distributions} on 
+real numbers.
+The abstract syntax of affine
+probabilistic programs (\APP s)
+is given by the grammar in Figure~\ref{fig:syntax}, where
+the expressions $\langle \mathit{pvar}\rangle$ and $\langle
+\mathit{dist}\rangle$  range over $\vars$ and $\mathcal{D}$, respectively.
+We allow for non-deterministic assignments, expressed by a statement $x:=
+\text{\textbf{ndet($\mathit{dom}$)}}$, where $\mathit{dom}$ is a \emph{domain
+specifier} determining the set from which the value can be chosen: for general 
+programs it can be any Borel-measureable set, for \APP{}s it has to be an 
+interval (possibly of infinite length).  
+The grammar is such that $\langle \mathit{expr} \rangle$ %and $\langle
+%\mathit{rexpr} \rangle$ 
+may evaluate to an arbitrary affine expression over the
+program variables.
+%, and the program and random variables, respectively (note that
+%random variables can only be used in the RHS of an assignment). 
+Next, $\langle
+\mathit{bexpr}\rangle$ may evaluate to an arbitrary propositionally linear
+predicate. 
+
+For general (not necessary affine) \PP{}s we set $\langle\mathit{expr}\rangle$ 
+to be the set of all expressions permitted by the set of mathematical 
+operations of the underlying language. Similarly, $\langle\mathit{bexpr} 
+\rangle$ is the set of all predicates, as defined in Section~\ref{sec:prelim}.
+
+The guard of each if-then-else statement is either $\star$, 
+representing a (demonic) non-deterministic choice between the branches,
+a keyword \textbf{prob}($p$), where $p\in [0,1]$ is a number given in decimal
+representation (represents a probabilistic choice, where  the if-branch is
+executed with probability $p$ and the then-branch with probability $1-p$), or
+the guard is a propositionally linear predicate, in which case the statement
+represents a standard deterministic conditional branching.
+
+%We assume that each \APP{} $\program$ is preceded by an initialization 
+%preamble 
+%in 
+%which 
+%each variable appearing in $\program$ is assigned some concrete number. 
+Regarding distributions, for each $d\in \mathcal{D}$ we assume the
+existence of a program primitive denoted by '\textbf{sample($d$)}' implementing 
+sampling from $d$. In practice, the distributions appearing in a program would 
+be those for which sampling is 
+provided by suitable libraries (such as 
+uniform distribution over some interval, Bernoulli, geometric, etc.), 
+but we 
+abstract away from these implementation details. For the purpose of our 
+analysis, it is sufficient that for each distribution $d$ appearing in the 
+program the following characteristics: expected value $\expv[d]$ of $d$ and a 
+set $SP_d$ containing \emph{support} of $d$  (the support of $d$ is the 
+smallest 
+closed set of real numbers whose complement has probability zero 
+under $d$). \footnote{In 
+particular, 
+a support of a \emph{discrete} probability 
+distribution $d$ is simply the at most countable set of all points on a real 
+line that have positive probability under $d$. For continuous distributions, 
+e.g. a normal distribution, uniform, etc., the support is typically either 
+$\Rset$ or some closed real interval. } For \APP{}s, $SP_d$ is required to be 
+an 
+interval. 
+\begin{figure}
+\begin{align*}
+\langle \mathit{stmt}\rangle &::= 
+%\,\langle\mathit{pvar}\rangle
+%\,\text{'$:=$'}\, \langle\mathit{rexpr} \rangle \mid 
+%\langle\mathit{pvar}\rangle \,\text{'$:=$}\,
+%\text{\textbf{ndet($\langle\mathit{dom}\rangle$)}'}  \\
+\langle \mathit{assgn} \rangle \mid \text{'\textbf{skip}'} \mid 
+\langle\mathit{stmt}\rangle \, \text{';'} \, \langle \mathit{stmt}\rangle \\
+%
+&\mid   \text{'\textbf{if}'} \,
+\langle\mathit{ndbexpr}\rangle\,\text{'\textbf{then}'} \, \langle
+\mathit{stmt}\rangle \, \text{'\textbf{else}'} \, \langle \mathit{stmt}\rangle
+\,\text{'\textbf{fi}'}
+\\
+%
+&\mid  \text{'\textbf{while}'}\, \langle\mathit{bexpr}\rangle \,
+\text{'\textbf{do}'} \, \langle \mathit{stmt}\rangle \, \text{'\textbf{od}'}
+\\
+\langle \mathit{assgn} \rangle &::= 
+\,\langle\mathit{pvar}\rangle
+\,\text{'$:=$'}\, \langle\mathit{expr} \rangle \mid 
+\langle\mathit{pvar}\rangle \,\text{'$:=$}\,
+\text{\textbf{ndet($\langle\mathit{dom}\rangle$)}'}
+\\
+&\mid \langle\mathit{pvar}\rangle \,\text{'$:=$}\,
+\text{\textbf{sample($\langle\mathit{dist}\rangle$)}'}
+%
+%
+%
+%
+%&
+%
+%\\
+%
+%\\
+\\
+\vspace{0.5\baselineskip}
+%\\
+%\langle\mathit{var} \rangle &::= \langle\mathit{pvar} \rangle \mid 
+%\langle\mathit{rvar}\rangle
+%\\
+%%\vspace{\baselineskip}
+%\vspace{0.5\baselineskip}
+%\\
+\langle\mathit{expr} \rangle &::= \langle \mathit{constant} \rangle \mid
+\langle\mathit{pvar}\rangle
+%\\
+\mid \langle \mathit{constant} \rangle \,\text{'$\cdot$'} \,
+\langle\mathit{pvar}\rangle
+\\
+%
+&\mid \langle\mathit{expr} \rangle\, \text{'$+$'} \,\langle\mathit{expr} \rangle
+\mid \langle\mathit{expr} \rangle\, \text{'$-$'} \,\langle\mathit{expr} \rangle
+%\\
+%%
+%\vspace{0.5\baselineskip}
+%%\\
+%\langle\mathit{rexpr} \rangle &::= \langle\mathit{expr} \rangle \mid 
+%\langle\mathit{rvar}\rangle 
+%%\mid
+%% \langle\mathit{pvar}\rangle 
+%\mid\langle\mathit{constant} \rangle \,\text{'$*$'} \,
+%\langle\mathit{rvar}\rangle \\
+%%
+%&\mid
+%%\langle\mathit{constant} \rangle \,\text{'$*$'} \, \langle\mathit{pvar}\rangle
+%%\mid 
+%\langle\mathit{rexpr} \rangle\, \text{'$+$'} \,\langle\mathit{rexpr} \rangle
+%\mid \langle\mathit{rexpr} \rangle\, \text{'$-$'} \,\langle\mathit{rexpr}
+%\rangle
+%%\\
+%%\vspace{0.5\baselineskip}
+%%\\ \langle\mathit{bexpr} \rangle &::= \langle \mathit{predicate}\rangle \mid 
+%%\neg \langle\mathit{predicate}\rangle
+\\
+%
+%\vspace{0.5\baselineskip}
+%\langle \mathit{dom} \rangle &::= \text{'\textbf{Int}'} \mid
+%\text{'\textbf{Real}'} \mid
+%\text{'\textbf{Int}$[\langle\mathit{constant}\rangle,\langle\mathit{constant}\rangle]$'}
+% \\ 
+%% 
+% &\mid
+%\text{'\textbf{Real}$[\langle\mathit{constant}\rangle,\langle\mathit{constant}\rangle]$'}
+%\mid \langle \mathit{dom} \rangle \text{'\textbf{or}'}\langle \mathit{dom}
+%\rangle
+%\\
+%
+%\vspace{0.5\baselineskip}
+%\\
+\langle \mathit{bexpr}\rangle &::=  \langle \mathit{affexpr} \rangle \mid
+\langle \mathit{affexpr} \rangle \, \text{'\textbf{or}'} \,
+\langle\mathit{bexpr}\rangle
+\vspace{0.5\baselineskip}
+\\
+%
+%\vspace{\baselineskip}
+%\\
+\langle\mathit{affexpr} \rangle &::=  \langle\mathit{literal} \rangle\mid
+\langle\mathit{literal} \rangle\, \text{'\textbf{and}'}
+\,\langle\mathit{affexpr} \rangle
+\\
+%
+\langle\mathit{literal} \rangle &::= \langle\mathit{expr} \rangle\,
+\text{'$\leq$'} \,\langle\mathit{expr} \rangle \mid \langle\mathit{expr}
+\rangle\, \text{'$\geq$'} \,\langle\mathit{expr} \rangle
+\\
+%
+&\mid \neg \langle \mathit{literal} \rangle
+\\
+%
+%\vspace{0.5\baselineskip}
+%\\
+\langle\mathit{ndbexpr} \rangle &::= {\star}\mid
+\text{'\textbf{prob($p$)}'} \mid \langle\mathit{bexpr} \rangle
+\end{align*}
+\caption{Syntax of affine probabilistic programs (\APP 's).}
+\label{fig:syntax}
+\end{figure}
+
+%The syntax is such that $\langle \mathit{expr} \rangle$ and $\langle
+%\mathit{rexpr} \rangle$ may evaluate to an arbitrary affine expression over the
+%program variables, and the program and random variables, respectively (note
+%that random variables can only be used in the RHS of an assignment). Next,
+%$\langle \mathit{bexpr}\rangle$ may evaluate to an arbitrary disjunction of
+%polyhedral constraints (i.e. conjunctions of linear inequalities and equalities
+%over the program variables).
+
+
+
+%Additionally to the program body generated by the grammar, we assume that each
+%program has a preamble in which both program and random variables are declared.
+%We assume that every program variable is initialized to some fixed constant
+%upon declaration, and that for each of the random variables its
+%For random variables we need to suitably specify their distribution in the
+%preamble. This amounts to either directly specifying the joint distribution of
+%these variables, or stipulating the variables to be stochastically independent
+%and specifying a probability distribution for each one of them. We point out
+%that the only parameters of the program's random variables that we use in the
+%process of deriving ranking supermartingales are their expected values (which
+%we assume to be well-defined and finite) and, for deriving concentration
+%inequalities, also bounds on their range. \PN{Is this true? Do we not need
+%bounds on their range for as termination as well?} The exact distributions are
+%only needed for the actual execution of the program.
+
+
+%\begin{example}\label{ex:prog}
+%We present an example of an affine probabilistic program shown in
+%Figure~\ref{ex:prob}.
+%The program variable is $x$, and there is a while loop, where given a
+%probabilistic
+%choice one of two statement blocks $Q_1$ or $Q_2$ is executed.
+%The block $Q_1$ (resp. $Q_2$) is executed if the probabilistic choice is at
+%least
+%$0.6$ (resp. less than $0.4$).
+%The statement block $Q_1$ (resp., $Q_2$) is an angelic (resp. demonic)
+%conditional
+%statement to either increment or decrement $x$.
+%\lstset{language=affprob}
+%\lstset{tabsize=3}
+%\newsavebox{\affproblist}
+%\begin{lrbox}{\affproblist}
+%\begin{lstlisting}[mathescape]
+%$x:=0$;
+%while $x \geq 0$ do
+%	if prob(0.6) then
+%		if angel then
+%			$x:=x+1$
+%		else
+%			$x:=x-1$
+%		fi
+%	else
+%		if demon then
+%			$x:=x+1$
+%		else
+%			$x:=x-1$
+%		fi
+%	fi
+%od
+%\end{lstlisting}
+%\end{lrbox}
+%\begin{figure}[t]
+%%%\centering
+%\usebox{\affproblist}
+%\caption{An example of a probabilistic program}\label{ex:prob}
+%\end{figure}
+%\end{example}
+
+
+\section{Details of Program Semantics}
+
+
+\begin{remark}[Use of random variables]
+%\label{rem:randuse}
+In the paper we sometimes work with random variables 
+that are functions of the type $R\colon\Omega \rightarrow S$ for some finite 
+set $S$. These can be captured by the definition given in 
+Section~\ref{sec:prelim} by identifying the 
+elements of $S$ with distinct real numbers.\footnote{This is equivalent to 
+saying that a function $R\colon \Omega\rightarrow S$, with $S$ finite, is a 
+random variable if for each $s\in S$ the set $\{\omega\in \Omega\mid 
+R(\omega)=s\}$ belongs to $\mathcal{F}$.} The exact choice of numbers is 
+irrelevant in such a case, as we are not interested in, e.g. computing expected 
+values of such random variables, or similar operations. 
+\end{remark}
+
+
+\paragraph*{From Programs to pCFGs}
+To every probabilistic program $P$ we can assign a pCFG $\pCFG_P$ whose 
+locations correspond to the values of the
+program counter of $P$ and whose transition relation captures the behaviour of
+$P$. We illustrate the construction for \APP{}s, for general programs it is 
+similar. To obtain $\pCFG_{P}$, we first rename 
+the variables in $P$ to 
+$x_1,\dots,x_n$, where $n$ is the number of distinct variables in the program. 
+The
+construction of $\pCFG_P$ can be described inductively.
+For each program $P$ the pCFG $\pCFG_P$ contains two distinguished
+locations, $\ell^{\lin}_{P}$ and $\ell^{\lout}_{P}$, the latter one being always
+deterministic, that intuitively represent the state of the program counter
+before and after executing $P$, respectively. In the following, we denote by 
+$\id_1$ a function such that for each $\vec{x}$ we have 
+$\id_{1}(\vec{x})=\vec{x}[1]$.
+\begin{compactenum}
+\item {\em Deterministic Assignments and Skips.}
+For $P= {x_j}{:=}{E}$ where $x_j$ is a program variable and $E$ is an 
+expression, or $P = \textbf{skip}$, the pCFG $\pCFG_P$ consists only of
+%these two (deterministic) locations
+locations $\ell^{\lin}_P$ and $\ell^{\lout}_P$ (first assignment location, 
+second one deterministic) and a
+transition $(\ell^{\lin}_{P},\ell^{\lout}_P)$. In the first case, 
+$U(\ell^{\lin}_{P},\ell^{\lout}_P)=(j,E)$.
+\item {\em Probabilistic and Non-Deterministic Assignemnts}
+For $P= {x_j}{:=}{\textbf{sample($d$)}}$ where $x_j$ is a program variable and 
+$d$ is a distribution, the pCFG $\pCFG_P$ consists locations $\ell^{\lin}_P$ 
+and $\ell^{\lout}_P$ and a
+transition $\tau=(\ell^{\lin}_{P},\ell^{\lout}_P)$ with $U(\tau)=(j,d)$. For 
+$P= 
+{x_j}{:=}{\textbf{ndet($\mathit{dom}$)}}$, the construction is similar, with 
+the only transition being $\tau=(\ell^{\lin}_{P}\ell^{\lout}_P)$ and 
+$U(\tau)=(j,D)$, where 
+$D$ is 
+the set specified by the domain specifier $\mathit{dom}$.
+
+\item {\em Sequential Statements.}
+For $P = Q_1;Q_2$ we take the pCFGs $\pCFG_{Q_1}$, $\pCFG_{Q_2}$ and
+join them by identifying the location $\ell^{\lout}_{Q_1}$ with
+$\ell^{\lin}_{Q_2}$, putting $\ell^{\lin}_{P}=\ell^{\lin}_{Q_1}$ and
+$\ell^{\lout}_{P}=\ell^{\lout}_{Q_2}$.
+
+\item {\em While Statements.}
+For $P = \textbf{while $\phi$ do }Q \textbf{ od}$ we add a new deterministic
+location $\ell^{\lin}_{P}$ which we identify with $\ell^{\lout}_{Q}$, a new
+deterministic location $\ell^{\lout}_{P}$, and transitions
+$\tau=(\ell^{\lin}_{P},\ell^{\lin}_{Q})$,
+$\tau'=(\ell^{\lin}_{P},\ell^{\lout}_{P})$ such that $G(\tau)=\phi$ and
+$G(\tau')=\neg\phi$.
+
+\item {\em If Statements.}
+Finally, for $P = \textbf{if $\mathit{ndb}$ then }Q_1 \textbf{ else } Q_2
+\textbf{ fi}$ we add a new location $\ell^{\lin}_{P}$ (which is not an 
+assignment location) together with two
+transitions $\tau_1 = (\ell^{\lin}_{P},\ell^{\lin}_{Q_1})$, $\tau_2 =
+(\ell^{\lin}_{P},\ell^{\lin}_{Q_2})$, and we identify the locations 
+$\ell^{\lout}_{Q_1}$ and $\ell^{\lout}_{Q_1}$ with $\ell^{\lout}_{P}$. (If both
+$Q_j$'s consist of a single statement, we also identify $\ell^\lin_{P}$ with 
+$\ell^{\lin}_{Q_j}$'s.) In this
+case the newly added location $\ell^\lin_{P}$ is non-deterministic branching if 
+and only 
+if
+$ndb$ is the keyword '$\star$'. If
+$\mathit{ndb}$ is of the form $\textbf{prob($p$)}$, the location $\ell^\lin_{P}$
+is probabilistic branching with $\probdist_{\ell^\lin_{P}}(\tau_1)=p$ and
+$\probdist_{\ell^\lin_{P}}(\tau_2)=1-p$. Otherwise (i.e. if $\mathit{ndb}$ is a
+predicate), $\ell^\lin_{P}$ is a deterministic location
+with $G(\tau_1)=\mathit{ndb}$ and $G(\tau_2)=\neg \mathit{ndb}$.
+\end{compactenum}
+Once the pCFG $\pCFG_P$ is constructed using the above rules, we put
+$G(\tau)=\textit{true}$ for all transitions $\tau$ outgoing from deterministic
+locations whose guard was not set in the process, and finally we add a self-loop
+on the location $\ell^{\lout}_P$. This ensures that the assumptions in
+Definition~\ref{def:stochgame} are satisfied.
+Furthermore note that for pCFG obtained for a program $P$, since the only
+branching is if-then-else branching, every location $\loc$ has at most two
+successors $\loc_1,\loc_2$.
+
+
+
