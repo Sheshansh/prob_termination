@@ -7,9 +7,8 @@
 Randomness plays a fundamental role in many areas across science, and in 
 computer science in particular.
 In applications such as stochastic network protocols~\cite{BaierBook,prism},
-randomized algorithms~\cite{RandBook,RandBook2}, machine learning~\cite{},
-NATURE PAPER, the probabilistic behavior must be considered to faithfully model
-the underlying dynamic system.
+randomized algorithms~\cite{RandBook,RandBook2}, machine learning~\cite{LearningSurvey,G15},
+the probabilistic behavior must be considered to faithfully model the underlying dynamic system.
 The extension of classical imperative programs with \emph{random value generators}, 
 that produce random values according to some desired probability distribution, 
 naturally gives rise to probabilistic programs.
@@ -42,7 +41,9 @@ A related quantitative generalization of the positive termination question is to
 asymptotic bounds on the expected termination time.
 
 \end{compactenum}
-While the positive termination implies almost-sure termination, the converse is not true (see~\cite[]{}).
+While the positive termination implies almost-sure termination, the converse is not true 
+(e.g., see Example~\ref{ex:infinite-time}).
+
 
 
 
@@ -54,18 +55,17 @@ method for termination of non-probabilistic programs~\cite{rwfloyd1967programs}.
 There exist a wide variety of approaches for construction 
 of ranking functions for non-probabilistic programs~\cite{DBLP:conf/cav/BradleyMS05,DBLP:conf/tacas/ColonS01,DBLP:conf/vmcai/PodelskiR04,DBLP:conf/pods/SohnG91}.
 The generalization of ranking functions to probabilistic programs is achieved through the
-{\em ranking supermartingales (RSMs)}~\cite{}.
+{\em ranking supermartingales (RSMs)}~\cite{SriramCAV,HolgerPOPL,CF17}.
 The ranking supermartingales provide a powerful and automated approach for termination 
-analysis of probabilistic programs~\cite{SriramCAV,HolgerPOPL,HONGFEI}, and 
-algorithmic 
-approaches for special cases such as linear and polynomial RSMs have
-also been considered~\cite{POPL,CAV,POPL}.
+analysis of probabilistic programs, and algorithmic approaches for special cases such as 
+linear and polynomial RSMs have also been considered~\cite{SriramCAV,CFNH16,CFG16,CNZ17}.
 
 
 
 \smallskip\noindent{\em Practical limitations of existing approaches.} 
 While an impressive set of theoretical results related to RSMs has been
-established~\cite{}, for probabilistic programs with nondeterminism the current approaches  
+established~\cite{SriramCAV,HolgerPOPL,CF17,CFNH16,CFG16,CNZ17}, 
+for probabilistic programs with nondeterminism the current approaches  
 are only applicable to academic examples of variants of random walks. 
 The key reason can be understood as follows: even for non-probabilistic programs while 
 ranking functions are sound and complete, they do not necessarily provide a practical 
@@ -76,7 +76,7 @@ and 1-dimensional ranking functions of a restricted type can only prove
 termination of a limited class of programs. 
 In contrast, as a practical and scalable approach for non-probabilistic programs the 
 notion of lexicographic ranking functions has been widely 
-studied~\cite{}. 
+studied~\cite{CSZ13,ADFG10:lexicographic,GMR15:rank-extremal,BCIKP16:T2}. 
 Algorithmic approaches for linear lexicographic ranking functions allow the 
 termination analysis 
 to be applicable to real-world non-probabilistic programs (after abstraction).
@@ -99,7 +99,7 @@ We describe our main contributions below:
 
 \item {\em Theoretical foundations.} 
 First, we introduce the notion of lexicographic RSMs, and show that
-such supermartingales ensure almost-sure termination (\ref{thm:lexrsm-main} in 
+such supermartingales ensure almost-sure termination (Theorem~\ref{thm:lexrsm-main} in 
 Section~\ref{sec:lexicographic}). 
 Our first result is a purely mathematical result that introduces a new concept, and 
 proves almost-sure termination, that is independent of any probabilistic program.
