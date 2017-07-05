@@ -152,5 +152,23 @@ variables $\vecinit\in\vecinitset$ it holds $\E^{\sigma}_{\vecinit}[\ttime]\leq
 \sum_{j=1}^{d}\lem_j(\locinit,\vecinit)\cdot(\bar{c}_j(\vecinit))^{d-j}$.
 \end{corollary}
 
-\textbf{[PETR: FINISH THIS SECTION]}
+Now assume that we have synthesized a $1$-LexRSM map $\vec{\lem}$ and we want 
+to check if there exists $\bar{\vec{c}}$ such that $\vec{\lem}$ has 
+$\bar{\vec{c}}$-bounded ECI. In the linear setting (i.e. the program is an 
+\APP{}, masp $\lem$ and $\inv$ are linear, and we seek $\vec{\bar{c}}$ which is 
+a vector of affine expressions) we can encode the existence of $\vec{\bar{c}}$ 
+into a system of linear inequalities in the similar way as the existence of a 
+linear LexRSM maps was encoded in Section~\ref{sec:lex-programs}. That is, we 
+set up a linear template with unknown coefficients for each component of 
+$\vec{\bar{c}}$ and using Farkas's lemma we set up a system of linear 
+constraints, which includes the unknown coefficients as variables, encoding the 
+fact that $\vec{\lem}$ has $\bar{\vec{c}}$-bounded ECI. Details are provided 
+in~\AppendixMaterial. In this way, we can check in polynomial time if 
+Corollary~\ref{col:runtime-progs} can be applied to $\vec{\lem}$, and if yes, 
+we can synthesize the witness vector $\bar{\vec{c}}$. Since $\bar{\vec{c}}$ 
+consists of affine expressions, Corollary~\ref{col:runtime-progs} provides a 
+polynomial upper bound on expected runtime (polynomial in the ``size'' of 
+initial variable valuation).
+
+%\textbf{[PETR: FINISH THIS SECTION]}
 
