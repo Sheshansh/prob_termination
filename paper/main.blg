@@ -2,6 +2,11 @@ This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: ACM-Reference-Format.bst
+I couldn't open database file new.bib
+---line 163 of file main.aux
+ : \bibdata{bibliography-master,new-popl18,new
+ :                                            }
+I'm skipping whatever remains of this command
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: bibliography-master.bib
@@ -10,30 +15,9 @@ Warning--string name "springer" is undefined
 Warning--string name "lncs" is undefined
 --line 6300 of file bibliography-master.bib
 Database file #2: new-popl18.bib
-Repeated entry---line 84 of file new-popl18.bib
+Repeated entry---line 95 of file new-popl18.bib
  : @article{LearningSurvey
  :                        ,
-I'm skipping whatever remains of this entry
-Database file #3: new.bib
-Repeated entry---line 3 of file new.bib
- : @inproceedings{CFNH16:prob-termination
- :                                       ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 17 of file new.bib
- : @inproceedings{DBLP:conf/sas/Monniaux01
- :                                        ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 68 of file new.bib
- : @proceedings{DBLP:conf/popl/2016
- :                                 ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 184 of file new.bib
- : @inbook{CVS16:martingale-recurrence-persistence
- :                                                ,
-I'm skipping whatever remains of this entry
-Repeated entry---line 216 of file new.bib
- : @proceedings{DBLP:conf/sas/2001
- :                                ,
 I'm skipping whatever remains of this entry
 Warning--no key, author in cplex
 Warning--no author, editor, organization, or key in cplex
@@ -45,33 +29,26 @@ Warning--no key, author in cplex
 Warning--no author, editor, organization, or key in cplex
 Warning--numpages field, but no articleno or eid field, in ADFG10:lexicographic
 Warning--empty address in Ash:book
-Warning--can't use both author and editor fields in BEFH16:doob
+Warning--empty address in BEFH16:doob
 Warning--numpages field, but no articleno or eid field, in BGGHS16:diff-privacy-coupling
 Warning--numpages field, but no articleno or eid field, in BGHP16:diff-privacy-siglog
 Warning--numpages field, but no articleno or eid field, in BG13:integer-ranking
-Warning--can't use both author and editor fields in BG15:lexicographic-complexity
+Warning--empty address in BG15:lexicographic-complexity
 Warning--empty address in Billingsley:book
 Warning--empty publisher in BG05
 Warning--empty address in BG05
 Warning--empty address in DBLP:conf/cav/BradleyMS05
 Warning--empty publisher in BMS05b
 Warning--empty address in BMS05b
-Warning--can't use both author and editor fields in BCIKP16:T2
 Warning--empty address in SriramCAV
-Warning--can't use both author and editor fields in CVS16:martingale-recurrence-persistence
 Warning--page numbers missing in both pages and numpages fields in CF17
 Warning--empty publisher in CFG16
 Warning--empty address in CFG16
-Warning--empty publisher in CFNH16
-Warning--empty address in CFNH16
 Warning--empty address in CFNH16:prob-termination
-Warning--empty publisher in CNZ17
-Warning--empty address in CNZ17
-Warning--page numbers missing in both pages and numpages fields in CNZ17
+Warning--numpages field, but no articleno or eid field, in CNZ17
 Warning--empty address in DBLP:conf/tacas/ColonS01
 Warning--numpages field, but no articleno or eid field, in CPR06:terminator
-Warning--empty publisher in CSZ13
-Warning--empty address in CSZ13
+Warning--numpages field, but no articleno or eid field, in CSZ13
 Warning--empty address in DBLP:conf/popl/CousotC77
 Warning--empty publisher in EGK12
 Warning--empty address in EGK12
@@ -79,11 +56,9 @@ Warning--empty publisher in FH:prdl
 Warning--empty address in FH:prdl
 Warning--empty address in HolgerPOPL
 Warning--numpages field, but no articleno or eid field, in GMR15:rank-extremal
-Warning--can't use both author and editor fields in KKMO16:wp-expected-runtime
 Warning--empty publisher in DBLP:conf/sas/KatoenMMM10
 Warning--empty address in DBLP:conf/sas/KatoenMMM10
 Warning--numpages field, but no articleno or eid field, in Kozen:probabilistic-PDL
-Warning--can't use both author and editor fields in KSTW10:compositional-transition-invariants
 Warning--empty publisher in prism
 Warning--empty address in prism
 Warning--empty publisher in LJB01
@@ -102,45 +77,45 @@ Warning--empty address in DBLP:conf/vmcai/PodelskiR04
 Warning--numpages field, but no articleno or eid field, in PR04:transition-invariants
 Warning--empty address in Rosenthal:book
 Warning--empty address in DBLP:conf/pods/SohnG91
-You've used 59 entries,
+You've used 58 entries,
             5706 wiz_defined-function locations,
-            1828 strings with 30677 characters,
-and the built_in function-call counts, 66636 in all, are:
-= -- 8087
-> -- 2325
+            1836 strings with 31068 characters,
+and the built_in function-call counts, 67079 in all, are:
+= -- 8165
+> -- 2321
 < -- 1
-+ -- 702
-- -- 950
-* -- 4745
-:= -- 6942
-add.period$ -- 303
-call.type$ -- 59
-change.case$ -- 386
++ -- 697
+- -- 946
+* -- 4760
+:= -- 6910
+add.period$ -- 299
+call.type$ -- 58
+change.case$ -- 378
 chr.to.int$ -- 53
-cite$ -- 129
-duplicate$ -- 5500
-empty$ -- 3972
-format.name$ -- 1005
-if$ -- 15779
-int.to.chr$ -- 7
+cite$ -- 119
+duplicate$ -- 5575
+empty$ -- 4022
+format.name$ -- 998
+if$ -- 15950
+int.to.chr$ -- 6
 int.to.str$ -- 0
-missing$ -- 237
-newline$ -- 579
-num.names$ -- 476
-pop$ -- 2334
+missing$ -- 250
+newline$ -- 572
+num.names$ -- 481
+pop$ -- 2343
 preamble$ -- 1
-purify$ -- 672
+purify$ -- 660
 quote$ -- 0
-skip$ -- 2069
+skip$ -- 2125
 stack$ -- 0
-substring$ -- 5357
-swap$ -- 595
+substring$ -- 5370
+swap$ -- 588
 text.length$ -- 274
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1346
-warning$ -- 66
-while$ -- 512
+type$ -- 1412
+warning$ -- 57
+while$ -- 514
 width$ -- 0
-write$ -- 1173
-(There were 6 error messages)
+write$ -- 1174
+(There were 2 error messages)

@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  6 JUL 2017 19:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.28)  6 JUL 2017 23:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **main.tex
 (./main.tex
 LaTeX2e <2016/03/31> patch level 3
-Babel <3.9r> and hyphenation patterns for 53 language(s) loaded.
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
 (./acmart.cls
 Document Class: acmart 2017/05/14 v1.39 Typesetting articles for Association of
  Computing Machinery
@@ -2050,7 +2050,7 @@ LaTeX Warning: No positions in optional float specifier.
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 105.
+               Default added (so using `tbp') on input line 107.
 
 ) (./conclu.tex
 Underfull \hbox (badness 10000) has occurred while \output is active
@@ -2064,11 +2064,6 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [25.25]
-Underfull \hbox (badness 10000) has occurred while \output is active
-
- []
-
-[26.26]
 LaTeX Font Info:    Try loading font information for T1+zi4 on input line 67.
  (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
@@ -2083,7 +2078,12 @@ Package microtype Info: Character `textendash ' is missing
 Package microtype Info: Character `textemdash ' is missing
 (microtype)             in font `T1/zi4/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
-) (./main.bbl
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+
+ []
+
+[26.26]) (./main.bbl
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -2163,11 +2163,6 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 10.
 
-
-Overfull \hbox (2.84685pt too wide) in paragraph at lines 12--44
- [][] 
- []
-
 )
 Underfull \hbox (badness 10000) has occurred while \output is active
 
@@ -2207,12 +2202,12 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 570.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 45291 strings out of 493644
- 973717 string characters out of 6150875
- 1229205 words of memory out of 5000000
- 46562 multiletter control sequences out of 15000+600000
- 365281 words of font info for 786 fonts, out of 8000000 for 9000
- 944 hyphenation exceptions out of 8191
+ 45287 strings out of 493013
+ 973670 string characters out of 6131492
+ 1230723 words of memory out of 5000000
+ 46602 multiletter control sequences out of 15000+600000
+ 365181 words of font info for 786 fonts, out of 8000000 for 9000
+ 1302 hyphenation exceptions out of 8191
  62i,18n,96p,1381b,7214s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/inconso
 lata/i4-t1-4.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/libert
@@ -2252,10 +2247,10 @@ e1/public/txfonts/txsyb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1
 ublic/newtx/txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/publi
 c/newtx/zxlr.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/new
 tx/zxlri.pfb>
-Output written on main.pdf (36 pages, 987652 bytes).
+Output written on main.pdf (36 pages, 989723 bytes).
 PDF statistics:
- 1018 PDF objects out of 1200 (max. 8388607)
- 906 compressed objects within 10 object streams
- 314 named destinations out of 1000 (max. 500000)
+ 1014 PDF objects out of 1200 (max. 8388607)
+ 902 compressed objects within 10 object streams
+ 313 named destinations out of 1000 (max. 500000)
  95457 words of extra memory for PDF output out of 106986 (max. 10000000)
 
