@@ -2,17 +2,13 @@ var N,k,j,m;
 if N > 2 then
   k:=1;
   while k<=N-1 do
-if prob(0.5) then
     j:=k;
     while j>=2
     do
-if prob(0.5) then
       skip;
       j := 0.5*j-0.5
-    else skip fi
-od;
+    od;
     k:=k+1
-  else skip fi
-od
+  od
 else skip fi
 
