@@ -58,33 +58,35 @@ The results are presented in Table~\ref{tab:exp2}.
   \centering
    \begin{tabular}{c|c|c|c|c|c}
     
-   {Benchmark} & {Time (s)} & {Solution} & {Dimension} & {Prob. loops} & {Prob. Assignments} \\\hline
-{alain} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
-{catmouse} & {0.06} & {yes} & {2} & {yes} & {yes} \\\hline
-{counterex1a} & {0.08} & {no} & {} & {no} & {no} \\\hline
-{counterex1c} & {0.09} & {yes} & {3} & {yes} & {yes} \\\hline
-{easy1} & {0.07} & {yes} & {1} & {yes} & {yes} \\\hline
-{exmini} & {0.07} & {yes} & {2} & {yes} & {yes} \\\hline
-{insertsort} & {0.08} & {yes} & {3} & {yes} & {yes} \\\hline
-{ndecr} & {0.07} & {yes} & {2} & {yes} & {yes} \\\hline
-{perfect} & {0.09} & {yes} & {3} & {yes} & {yes} \\\hline
-{perffect2} & {0.1} & {yes} & {3} & {yes} & {no} \\\hline
-{real2} & {0.07} & {no} & {} & {no} & {no} \\\hline
-{realheapsort\_step2} & {0.07} & {yes} & {1} & {no} & {no} \\\hline
-{realshellsort} & {0.07} & {yes} & {1} & {no} & {no} \\\hline
-{serpent} & {0.08} & {yes} & {1} & {yes} & {yes} \\\hline
-{sipmabubble} & {0.08} & {yes} & {3} & {yes} & {yes} \\\hline
-{speedDis2} & {0.07} & {no} & {} & {no} & {no
-} \\\hline
-{speedFails2} & {0.06} & {yes} & {2} & {yes} & {no} \\\hline
-{speedNestedMultiple} & {0.08} & {yes} & {3} & {yes} & {yes} \\\hline
-{speedpldi2} & {0.07} & {yes} & {2} & {yes} & {yes} \\\hline
-{speedpldi4} & {0.07} & {yes} & {3} & {yes} & {yes} \\\hline
-{speedSimpleMultipleDep} & {0.07} & {no} & {} & {no} & {no} \\\hline
-{speedSingleSingle2} & {0.08} & {yes} & {2} & {yes} & {no} \\\hline
-{unperfect} & {0.08} & {yes} & {2} & {yes} & {no} \\\hline
-{wcet1} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
-{while2} & {0.08} & {yes} & {3} & {yes} & {yes} \\\hline
+{Benchmark} & {Time (s)} & {Solution} & {Dimension} & {Prob. loops} & {Prob. Assignments} \\\hline \hline
+{alain} & {0.11} & {yes} & {2} & {yes} & {yes} \\\hline
+{catmouse} & {0.08} & {yes} & {2} & {yes} & {yes} \\\hline
+{counterex1a} & {0.1} & {no} & {} & {no} & {no} \\\hline
+{counterex1c} & {0.11} & {yes} & {3} & {yes} & {yes} \\\hline
+{easy1} & {0.09} & {yes} & {1} & {yes} & {yes} \\\hline
+{exmini} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
+{insertsort} & {0.1} & {yes} & {3} & {yes} & {yes} \\\hline
+{ndecr} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
+{perfect} & {0.11} & {yes} & {3} & {yes} & {yes} \\\hline
+{\multirow{2}{*}{perfect2}} & {0.1} & {yes} & {3} & {yes} & {no} \\\cline{2-6}
+{} & {0.11} & {no} & {} & {yes} & {yes} \\\hline
+{real2} & {0.09} & {no} & {} & {no} & {no} \\\hline
+{realselect} & {0.11} & {yes} & {3} & {yes} & {yes} \\\hline
+{realshellsort} & {0.09} & {no} & {} & {yes} & {no} \\\hline
+{serpent} & {0.1} & {yes} & {1} & {yes} & {yes} \\\hline
+{sipmabubble} & {0.1} & {yes} & {3} & {yes} & {yes} \\\hline
+{speedDis2} & {0.09} & {no} & {} & {no} & {no} \\\hline
+{speedFails1} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
+{speedNestedMultiple} & {0.1} & {yes} & {3} & {yes} & {yes} \\\hline
+{speedpldi2} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
+{speedpldi4} & {0.09} & {yes} & {3} & {yes} & {yes} \\\hline
+{speedSimpleMultipleDep} & {0.09} & {no} & {} & {no} & {no} \\\hline
+{\multirow{2}{*}{speedSingleSingle2}} & {0.12} & {yes} & {2} & {yes} & {no} \\\cline{2-6}
+{} & {0.1} & {no} & {} & {yes} & {yes} \\\hline
+{\multirow{2}{*}{unperfect}} & {0.1} & {yes} & {2} & {yes} & {no} \\\cline{2-6}
+{} & {0.16} & {no} & {} & {yes} & {yes} \\\hline
+{wcet1} & {0.11} & {yes} & {2} & {yes} & {yes} \\\hline
+{while2} & {0.1} & {yes} & {3} & {yes} & {yes} \\\hline
     
 \end{tabular}
 \caption{Experimental results for benchmarks from~\cite{ADFG10:lexicographic} extended with probabilistic loops and/or probabilistic assignments.} \label{tab:exp1}
@@ -96,10 +98,7 @@ The results are presented in Table~\ref{tab:exp2}.
   \centering
    \begin{tabular}{c|c|c|c|c}
 
-{Variables} & {LOC} & {Inv Time (s)} & {Our Time (s)} & {Total Time (s)
-} \\\hline
-{0} & {8} & {0.09} & {0.02} & {0.11} \\\hline
-{1} & {14} & {0.05} & {0.02} & {0.07} \\\hline
+{Variables} & {LOC} & {Inv Time (s)} & {Our Time (s)} & {Total Time (s)} \\\hline \hline
 {2} & {20} & {0.06} & {0.03} & {0.08} \\\hline
 {3} & {32} & {0.07} & {0.03} & {0.09} \\\hline
 {4} & {56} & {0.08} & {0.04} & {0.11} \\\hline
