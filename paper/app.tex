@@ -427,8 +427,47 @@ The left-hand side of~\eqref{eq:lexrsm-ind-8} is equal to
 &= (k+1-\fixn{i})\cdot \probm{(D_{k+1,k+1-\fixn{i}}\cap\{\levelrank{}{k} =\fixn{j} \} )} + \sum_{\ell=1}^{k-\fixn{i}} \ell \cdot \probm(D_{k+1,\ell})  \nonumber\\
 &= (k+1-\fixn{i})\cdot\probm(D_{k+1,k+1-\fixn{i}}) + \sum_{\ell=1}^{k-\fixn{i}}\ell\cdot\probm(D_{k+1,\ell}) = \text{ right-hand side of~\eqref{eq:lexrsm-ind-8}} \label{eq:lexrsm-ind-11}.
 \end{align}
-The individual steps in the above computation are justified as follows: in~\eqref{eq:lexrsm-ind-9} we use the facts that for all $\omega$'s whose level in step $k$ is $\fixn{j}$ it holds that $\noofdec_k(\omega)+1=\noofdec_{k+1}(\omega)$, and similarly, for $\omega$'s whose level in step $k$ is $>\fixn{j}$ it holds $\noofdec_k(\omega)=\noofdec_{k+1}(\omega)$. Moreover, for all $\omega\in D_{k,\ell}$ it holds that $\levelrank{k}{\omega}\geq \fixn{j} \Rightarrow U(\omega)\geq k+1$. Finally, in~\eqref{eq:lexrsm-ind-11} we use the fact that all $\omega\in D_{k+1,k+1-\fixn{i}}$ need to have level $\fixn{j}$ in step $k$, since otherwise such an $\omega$ would need to have level $\fixn{j}$ for at least $k+1-\fixn{i}$ times within steps $\{\fixn{i},\fixn{i}+1,\dots,k-1\}$, but there are $k-\fixn{i}$ such steps, a contradiction. This concludes the proof of~\eqref{eq:lexrsm-soundness-main}.
+The individual steps in the above computation are justified as follows: 
+in~\eqref{eq:lexrsm-ind-9} we use the facts that for all $\omega$'s whose level 
+in step $k$ is $\fixn{j}$ it holds that 
+$\noofdec_k(\omega)+1=\noofdec_{k+1}(\omega)$, and similarly, for $\omega$'s 
+whose level in step $k$ is $>\fixn{j}$ it holds 
+$\noofdec_k(\omega)=\noofdec_{k+1}(\omega)$. Moreover, for all $\omega\in 
+D_{k,\ell}$ it holds that $\levelrank{k}{\omega}\geq \fixn{j} \Rightarrow 
+U(\omega)\geq k+1$. Finally, in~\eqref{eq:lexrsm-ind-11} we use the fact that 
+all $\omega\in D_{k+1,k+1-\fixn{i}}$ need to have level $\fixn{j}$ in step $k$, 
+since otherwise such an $\omega$ would need to have level $\fixn{j}$ for at 
+least $k+1-\fixn{i}$ times within steps $\{\fixn{i},\fixn{i}+1,\dots,k-1\}$, 
+but there are $k-\fixn{i}$ such steps, a contradiction. This concludes the 
+proof of~\eqref{eq:lexrsm-soundness-main}.
 
+\section{Complexity Clarification for Theorem~\ref{THM:ALGO}}
+
+Since instances of linear programming is in~\textsc{PTIME}, it remains to show 
+that each system $\linsystem_{\tilde{\tau}}$ is constructible in polynomial 
+time. In~\cite{CFNH16:prob-termination} it shown that this can be done provided 
+that guard of each transition in pCFG is a propositionally linear predicate. 
+Now all transition guards in $\pCFG_\program$ are of the form $\phi$ or 
+$\neg\phi$, where $\phi$ is a guard of a conditional or of while-loop in 
+$\program$. If $\phi$ is a linear assertion, then $\neg\phi$ can be converted 
+into a propositionally linear predicate in polynomial time, after which the 
+construction of~\cite{CFNH16:prob-termination} can be used. 
+
+\section{Additional Computation for Example~\ref{EX:UNIFORM}}
+
+ To see that $x$ is uniformly integrable in the left program and not in the 
+ right one (within the inner loop), 
+ imagine the inner loop as a stand-alone program and let $X_n$ be the value of 
+ variable $x$ after $n$ steps of this stand-alone program (i.e., when the loop 
+ terminates $x$ no longer changes). Solving a simple linear recurrence shows 
+ that in the right program $\E[X_n] \rightarrow 0$ as $n\rightarrow \infty$, 
+ which in particular shows uniform integrability of $X_0,X_1,X_2,\dots$. On the 
+ other hand, in the left program for each $K>0$ we have $\probm(X_K \geq 
+ 2^K\cdot{x_0})\geq \frac{1}{2^K}$, where $x_0$ is the value of $x$ upon 
+ entering the loop. Hence $\E[|X_K|cdot\indicator{X_K 
+ 	\geq K}]\geq 1$ for each $K$ sufficiently large, which is incompatible with 
+ uniform integrability. 
+ 
 
 
 

@@ -13,17 +13,23 @@ For probablistic programs with countable state space and without
 nondeterminism, the {\em Lyapunov ranking functions} provide a sound and 
 complete method to prove positive termination~\cite{BG05,Foster53}.
 For probabilistic programs with nondeterminism, but restricted to discrete probabilistic
-choices, the termination problem was studied in~\cite{MM04,MM05}.
+choices, the termination problem was studied 
+in~\cite{MM04,MM05}.
 The RSM-based (ranking supermatingale-based) approach extending ranking functions was first 
 presented in~\cite{SriramCAV} for probabilistic programs without non-determinism,
 but with real-valued variables, and its extension for probabilistic programs
-with non-determinism has been studied in~\cite{HolgerPOPL,CF17,CFNH16,CFG16,CNZ17}.
+with non-determinism has been studied 
+in~\cite{HolgerPOPL,CF17,CFNH16,CFG16,CNZ17,MM16:proofrule-arxiv}. 
+Supermartingales were also 
+considered for other liveness and safety 
+properties~\cite{CVS16:martingale-recurrence-persistence,BEFH16:doob}.
 While all these results deeply clarify the role of RSMs for probabilistic programs, 
 the notion of lexicographic RSMs to obtain a practical approach for termination 
 analysis for probabilistic programs has not been studied before, which we consider in 
 this work.
 
-\smallskip\noindent{\em Compositional a.s. termination proving.} A 
+\smallskip\noindent{\em Compositional a.s. termination proving.} 
+A 
 compositional rule for proving almost-sure termination was studied 
 in~\cite{HolgerPOPL} under the uniform integrability assumption. 
 In~\cite{MM05}, a soundness of the probabilistic variant rule is proved for 
