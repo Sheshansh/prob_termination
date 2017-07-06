@@ -9,37 +9,38 @@ of this proof rule to obtain bounds on expected runtime in a
 subclass of \PP{}s.
 
 As in the case of a.s. termination we start with general mathematical statement 
-about LexRSMs. We define a restricted class of LexRSMs with \emph{bounded 
+about LexRSMs. We define a restricted class of strict LexRSMs with \emph{bounded 
 expected conditional increase} property. Recall from 
-definition~\ref{def:lexrsm} that 
+definition~\ref{def:lexrsm} that strict
 LexRSM for a stopping time $\stime$ is characterized by the possibility to 
 a.s. partition, for each $i\in \Nset_0$, the set $\{\omega\in \Omega\mid 
-\stime(\omega)>i \}$ into $d$ sets $L^i_1,\dots,L^i_d$ such that, intuitively, 
+\stime(\omega)>i \}$ into $n$ sets $L^i_1,\dots,L^i_d$ such that, intuitively, 
 on $L^i_j$ the conditional expectation of $\vec{X}_{i+1}[j]$ given $\genfilt_i$ 
 is smaller than $\vec{X}_i[j]$, and for all $j'<j$, on $L^i_{j'}$ the 
 conditional expectation of $\vec{X}_{i+1}[j]$ given $\genfilt_i$ 
 is no larger than $\vec{X}_i[j]$. This leaves the opportunity of conditional 
 expectation of $\vec{X}_{i+1}[j]$ being larger than $\vec{X}_i[j]$ on 
-$L^i_{j''}$ with $j''$. The conditional expected increase property bounds the 
+$L^i_{j''}$ with $j''>j$. The conditional expected increase property bounds the 
 possibility of this increase.
 
 \begin{definition}
-Let $\{\vec{X}_{i}\}_{i=0}^{\infty}$ be a 
-$d$-dimensional LexRSM for some stopping time $\stime$, defined w.r.t. some 
+	\label{def:lexrsm-eci}
+Let $\{\vec{X}_{i}\}_{i=0}^{\infty}$ be an 
+$n$-dimensional strict LexRSM for some stopping time $\stime$, defined w.r.t. some 
 filtration $\{\genfilt_i\}_{i=0}^{\infty}$. We say that 
 $\{\vec{X}_{i}\}_{i=0}^{\infty}$ has \emph{$\vec{c}$-bounded expected 
 conditional 
 increase (ECI),} for 
-some non-negative vector $\vec{c}\in\Rset^d$, if for each $i\in \Nset_0 $ and 
+some non-negative vector $\vec{c}\in\Rset^d$, if there exists an instance $(\{\vec{X}_{i=0}^{\infty},\{L_1^i,\dots,L_{n+1}^i\}_{i=0}^{\infty})$ of the strict LexRSM (i.e. $L^i_{n+1}=\emptyset$ for all $i$) such that for each $i\in \Nset_0 $ and 
 each $1\leq 
-j \leq d $ it holds 
+j \leq n $ it holds 
 $\E[\vecseq{X}{i+1}{j}\mid \genfilt_i]\leq \vecseq{X}{i}{j}+\vec{c}[j]$ on 
 $L^i_{j''}$, 
 for all $j''>j$ 
-(here $L^i_1,\dots,L^i_d$ are as in Definition~\ref{def:lexrsm}).
+(here $L^i_1,\dots,L^i_n$ are as in Definition~\ref{def:lexrsm}).
 \end{definition}
 
-For LexRSMs with $\vec{c}$-bounded ECI we have the following result. For 
+For strict LexRSMs with $\vec{c}$-bounded ECI we have the following result. For 
 simplicity, 
 we formulate the result for 1-LexRSMs, though it is easy to prove analogous 
 result for general $\eps$-LexRSMs, $\eps>0$, at the cost of obtaining less 
@@ -47,20 +48,20 @@ readable formula.
 
 \begin{theorem}
 \label{thm:runtime-bound}
-Let $\{\vec{X}_{i}\}_{i=0}^{\infty}$ be a 
-$d$-dimensional LexRSM with $c$-bounded ECI for some stopping time $\stime$. 
+Let $\{\vec{X}_{i}\}_{i=0}^{\infty}$ be an 
+$n$-dimensional strict LexRSM with $c$-bounded ECI for some stopping time $\stime$. 
 Then $\E[\stime]\leq  
-\sum_{j=1}^{d}\E[\vecseq{X}{0}{j}]\cdot(\vec{c}[j]+1)^{d-j}$.
+\sum_{j=1}^{n}\E[\vecseq{X}{0}{j}]\cdot(\vec{c}[j]+1)^{n-j}$.
 \end{theorem}
 \begin{proof}
-Denote $\noofdecrank_j(\omega)$ the number of steps $i$ in which $\omega\in 
-L_j^i$. Since by Theorem~\ref{thm:lexrsm-main} the existence of LexRSM entails 
-$\probm(\stime<\infty)=1$, the value $\noofdecrank_j(\omega)$ is a.s. finite. 
-We prove that for each $1\leq j \leq d$ it holds $\E[\noofdecrank_j]\leq 
+Fix an instance $(\{\vec{X}_{i=0}^{\infty},\{L_1^i,\dots,L_{n+1}^i\}_{i=0}^{\infty})$ satisfying Definition~\ref{def:lexrsm-eci}. Denote $\noofdecrank_j(\omega)$ the number of steps $i$ in which $\omega\in 
+L_j^i$. Since by Theorem~\ref{thm:lexrsm-main} the existence of strict LexRSM entails 
+$\probm(\stime<\infty)=1$, the value $\noofdecrank_j(\omega)$ is a.s. finite for all $1\leq j \leq n$. 
+We prove that for each $1\leq j \leq n$ it holds $\E[\noofdecrank_j]\leq 
 \vec{c}[j]\cdot\left(\sum_{j'<j}\E[\noofdecrank_{j'}]\right) + 
-\E[\vecseq{X}{0}{j}].$ Since $\stime(\omega)=\sum_{1\leq j \leq d} 
+\E[\vecseq{X}{0}{j}].$ Since $\stime(\omega)=\sum_{1\leq j \leq n} 
 \noofdecrank_j(\omega)$, for each $\omega\in \Omega$ (and hence, due to 
-linearity of expectation $\E[\stime]=\sum_{1\leq j \leq d} 
+linearity of expectation $\E[\stime]=\sum_{1\leq j \leq n} 
 E[\noofdecrank_j]$), the statement of the 
 Theorem follows by an easy induction. 
 
@@ -117,10 +118,10 @@ that depends on the initial configurations: this is to handle cases where some
 variables are periodically reset to a value related to the initial variable 
 values, such as variable $z$ in Figure~\ref{fig:uniint2}. To this end, let 
 $\program$ be a \PP{} with a pCFG $\pCFG_\program$ and let 
-$\vec{\lem}=(\lem_1,\dots,\lem_d)$ be a 
-$d$-dimensional $1$-LexRSM map for $\program$. Consider a $d$-dimensional 
+$\vec{\lem}=(\lem_1,\dots,\lem_n)$ be an 
+$n$-dimensional $1$-LexRSM map for $\program$. Consider an $n$-dimensional 
 vector 
-$\vec{\bar{c}}=(\bar{c}_1,\dots,\bar{c}_d)$ whose each component is an 
+$\vec{\bar{c}}=(\bar{c}_1,\dots,\bar{c}_n)$ whose each component is an 
 expression over variables of 
 $\program$. We say 
 that $\vec{\lem}$ has 
@@ -140,16 +141,16 @@ Theorem~\ref{thm:runtime-bound} we have the following:
 
 \begin{corollary}
 \label{col:runtime-progs}
-Let $\program$ be a probabilistic program. Assume that there exists a 
-$d$-dimensional $\eps$-LexRSM map $\vec{\lem}=(\lem_1,\dots,\lem_d)$ for 
+Let $\program$ be a probabilistic program. Assume that there exists an 
+$n$-dimensional $\eps$-LexRSM map $\vec{\lem}=(\lem_1,\dots,\lem_d)$ for 
 $\program$ supported 
 by some 
 invariant map $\inv$, scuh that $\vec{\lem}$ has $\vec{\bar{c}}$-bounded ECI 
 (w.r.t. $\inv$) 
-for some vector of expressions $\vec{\bar{c}}=(\bar{c}_1,\dots,\bar{c}_d)$. 
+for some vector of expressions $\vec{\bar{c}}=(\bar{c}_1,\dots,\bar{c}_n)$. 
 Then under each scheduler $\sigma$ and for each initial valuation of program 
 variables $\vecinit\in\vecinitset$ it holds $\E^{\sigma}_{\vecinit}[\ttime]\leq 
-\sum_{j=1}^{d}\lem_j(\locinit,\vecinit)\cdot(\bar{c}_j(\vecinit))^{d-j}$.
+\sum_{j=1}^{n}\lem_j(\locinit,\vecinit)\cdot(\bar{c}_j(\vecinit))^{n-j}$.
 \end{corollary}
 
 Now assume that we have synthesized a $1$-LexRSM map $\vec{\lem}$ and we want 

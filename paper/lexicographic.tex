@@ -107,20 +107,28 @@ $\{\genfilt_i\}_{i=0}^{\infty}$.
 %$\E[|\vecseq{X}{i}{j}|]<\infty$.
 \item For each $\omega \in \Omega$, $i\in \Nset_0$ and $1\leq j \leq n$ it holds 
 $\vec{X}_i (\omega)[j]\geq {0}$. % and $\vec{X}_i(\omega)[j]\neq \infty$.
-\item For each $i\in \Nset_0$ there exists a partition of the set $\{\stime>i\}$ into $n$ subsets $L^i_1,\dots,L^i_n$, all of them $\genfilt_i$-measurable, such that for each $1\leq j \leq n$:
+\item For each $i\in \Nset_0$ there exists a partition of the set $\{\stime>i\}$ into $n+1$ subsets $L^i_1,\dots,L^i_n,L^i_{n+1}$, all of them $\genfilt_i$-measurable, such that for each $1\leq j \leq n$:
 \begin{compactitem}
 	\item $\E[\vecseq{X}{i+1}{j}\mid 
 	\genfilt_i]\leq\vecseq{X}{i}{j} - 
-	\eps$ on $L_j^i$; and
-	\item for all $1 \leq j' < j$ we have $\E[\vecseq{X}{i+1}{j'}\mid 
-	\genfilt_i]=\vecseq{X}{i}{j'}$ on $L_{j}^i$.
+	\eps$ on $L_j^i$; 
+	\item 
+	 for all $1 \leq j' < j$ we have $\E[\vecseq{X}{i+1}{j'}\mid 
+	 \genfilt_i]=\vecseq{X}{i}{j'}$ on $L_{j}^i$; and
+	\item $\E[\vecseq{X}{i+1}{j}\mid 
+	\genfilt_i]\leq\vecseq{X}{i}{j}$ on $L_{n+1}^i$. 
 \end{compactitem}
 \end{compactenum}
+The $n$-dimensional LexRSM is \emph{strict} if $L^i_{n+1}=\emptyset$ for each $i$.
 \end{definition}
 
-The 1-dimensional lexicographic $\eps$-ranking supermartingale is, to a large extent, equivalent to the notion of a ranking supermartingale as studied in~\cite{HolgerPOPL,CFNH16:prob-termination}. There is one significant difference: in these works there is an additional \emph{integrability} condition imposed on the one-dimensional process $\{X_i\}_{i=0}^{\infty}$, which requires that for each $i\geq 0$ it holds $\E[|X_i|]<\infty$ (or equivalently $\E[X_i]<\infty$, as the process is required to be non-negative). We do not impose this condition, which simplifies possible application of LexRSMs to programs with non-linear arithmetic, where, as already shown in~\cite{HolgerPOPL}, integrability of program variables is not guaranteed.
+An \emph{instance} of an $n$-dimensional LexRSM $\{\vec{X} \}_{i=0}^{\infty}$ is a tuple $(\{\vec{X}_{i=0}^{\infty},\{L_1^i,\dots,L_{n+1}^i\}_{i=0}^{\infty})$ where the second component is a sequence of partitions of $\Omega$ satisfying the condition in Definition~\ref{def:lexrsm}.
+Intuitively, the sets $ L_j^{i}$ for $1\leq j \leq n$ represent the lexicographic ranking condition, i.e. for strict LexRSMs, we are in each step able to partition $\Omega$ into subsets such that on $j$-th subset the $j$-th component of $\vec{X}$ is expected to decrease while the previous components are not expected to increase. On additional sets $L_{n+1}^i$, none of the components is expected to increase, but decrease is not required: this will become handy later when we deal with compositional LexRSM-based proofs (Section~\ref{sec:compositional}) -- we will not require decrease in every step as long as decrease happens at least once on each cycle in the pCFG. We say that $\omega\in \Omega$ has level $j$ in step $i$ of instance $(\{\vec{X}_{i=0}^{\infty},\{L_1^i,\dots,L_{n+1}^i\}_{i=0}^{\infty})$ if $\omega\in L^i_j$. We also say that $\omega$ has level $0$ in step $i$ if $\stime(\omega)\leq i$.
+
+The strict 1-dimensional lexicographic $\eps$-ranking supermartingale is, to a large extent, equivalent to the notion of a ranking supermartingale as studied in~\cite{HolgerPOPL,CFNH16:prob-termination}. There is one significant difference: in these works there is an additional \emph{integrability} condition imposed on the one-dimensional process $\{X_i\}_{i=0}^{\infty}$, which requires that for each $i\geq 0$ it holds $\E[|X_i|]<\infty$ (or equivalently $\E[X_i]<\infty$, as the process is required to be non-negative). We do not impose this condition, which simplifies possible application of LexRSMs to programs with non-linear arithmetic, where, as already shown in~\cite{HolgerPOPL}, integrability of program variables is not guaranteed.
 %We do not impose this condition, and indeed, it is possible to define a 3-dimensional LexRSM $\{\vec{X}_{i}\}_{i=0}^{\infty}$ such that $\E[X[3]_i]=\infty$ for some $i$ (example in \AppendixMaterial). 
-The reason why integrability condiiton can be dropped is that it is only needed in the previous works to ensure that the conditional expectations exist and are well-defined. However, the existence of conditional expectations is also guaranteed for random variables that are real-valued non-negative, see Proposition~\ref{prop:conditional-exp-existence}. This is exactly the case in both the original 1-dimensional ranking supermartingales and our generalization to LexRSMs. 
+The reason why integrability condition can be dropped is that it is only needed in the previous works to ensure that the conditional expectations exist and are well-defined. However, the existence of conditional expectations is also guaranteed for random variables that are real-valued non-negative, see Proposition~\ref{prop:conditional-exp-existence}. 
+%This is exactly the case in both the original 1-dimensional ranking supermartingales and our generalization to LexRSMs. 
 
 The following theorem states our main mathematical result on LexRSMs.
 %Below we show, that also in the LexRSM case we do not need integrability to prove a.s. termination, and hence we drop the condition altogether. This is particularly relevant when applying LexRSMs to programs with non-linear arithmetic, where integrability of program variables is not guaranteed.
@@ -129,20 +137,19 @@ The following theorem states our main mathematical result on LexRSMs.
 \label{thm:lexrsm-main}
 \label{THM:LEXRSM-MAIN}
 Let $(\Omega,\genfilt,\probm)$ be a probability space, 
-$\{\genfilt_i\}_{i=0}^{\infty}$ a filtration of $\genfilt$, and $\stime$ a 
+$\{\genfilt_i\}_{i=0}^{\infty}$ a filtration of $\genfilt$, $\stime$ a 
 stopping 
-time w.r.t. that filtration. If there exists an $n$-dimensional $\eps$-LexRSM for $\stime$, 
-then $\probm(\stime<\infty)=1$.
+time w.r.t. that filtration, and $\eps>0$. Assume there exists an $n$-dimensional $\eps$-LexRSM for $\stime$ and its instance $(\{\vec{X}_{i=0}^{\infty},\{L_1^i,\dots,L_{n+1}^i\}_{i=0}^{\infty})$ such that $\probm(\{\omega\in \Omega \mid \text{level of $\omega$ is $<n+1$ in infinitely many steps}\})=1$. Then $\probm(\stime<\infty)=1$. In particular, if there exists a strict $\eps$-LexRSM for $\stime$, then $\probm(\stime<\infty)=1$.
 \end{theorem}
 \begin{proof}
 The proof proceeds by contradiction, i.e. we assume that an $\eps$-LexRSM for 
-$\stime$ exists and $\probm(\stime=\infty)>0$. For succinctness we denote the 
+$\stime$ satisfying the above conditions exists and $\probm(\stime=\infty)>0$. For succinctness we denote the 
 set $\{\omega\mid \stime(\omega)=\infty\}$ by $\genRunSet_{\infty}$.
 
-For $\omega\in \Omega$ we define the level of $\omega$ at step $i$ to be the 
-number $\levelrank{\omega}{i}$ equal to either $0$, if $\stime(\omega)\leq i$, 
-or otherwise to the $1\leq j \leq n$ such that $\omega\in L^i_j$. By the definition of 
-$\eps$-LexRSM the value $\levelrank{\omega}{i}$ is well-defined for all 
+For $\omega\in \Omega$ we denote the level of $\omega$ at step $i$ by $\levelrank{\omega}{i}$.
+%equal to either $0$, if $\stime(\omega)\leq i$, 
+%or otherwise to the $1\leq j \leq n$ such that $\omega\in L^i_j$. 
+The value $\levelrank{\omega}{i}$ is well-defined for all 
 $\omega$ and moreover, the random variable $\levelrank{}{i}$ is $\genfilt_i$-measurable. We denote by $\minlev(\omega)$ the smallest $0 \leq j \leq n$ such 
 that $j$ is a level of $\omega$ at infinitely many steps. Note that $\omega \in 
 \genRunSet_{\infty}$ if and only if $\minlev(\omega)\neq 0$, so $\probm(\genRunSet_{\infty})=\probm(\{\minlev \neq 0 \})$. We denote by $M_i$ 
@@ -153,7 +160,7 @@ $\probm(A)>0$ for some set $A$ and $A=A_1\cup A_2 \cup A_3\cdots$ for some
 sequence of sets $A_1,A_2,A_3,\dots$, then there exists $i$ such that 
 $\probm(A_i)>0$.
 
-Now since $\genRunSet_{\infty}=M_1,\dots,M_n$, there must be $1\leq \fixn{j} \leq n$ 
+Now $\genRunSet_{\infty}=M_1\cup\dots\cup M_n\cup M_{n+1}$ and $\probm(M_{n+1})=0$ (as the measure of $\omega$'s that have level $<n+1$ in only finitely many steps is zero, per Theorem's assumption), there must be $1\leq \fixn{j} \leq n$ 
 s.t. $\probm(M_{\fixn{j}})>0$, i.e. with positive probability the smallest level appearing infinitely often is $\fixn{j}$. For each $\omega\in M_{\fixn{j}}$ there is the smallest number
 ${i}_{\omega,\fixn{j}}\in\Nset_0$ such that for all $i\geq {i}_{\omega,\fixn{j}}$ it holds 
 $\levelrank{\omega}{i}\geq \fixn{j}$, i.e. after step ${i}_{\omega,\fixn{j}}$ the level of $\omega$ in all steps up to infinity is at least $\fixn{j}$. Denote by $S_{\fixn{j},{i}}$ the set of all $\omega$'s in $M_{\fixn{j}}$ s.t. 
@@ -186,7 +193,7 @@ Y_k(\omega) = \begin{dcases}
 0 & \text{if $\omega \not\in D$}\\
 \fixn{B} & \text{if $\omega \in D$ and $k<\fixn{i}$ }\\
 \vecseq{X}{k}{\fixn{j}}(\omega) & \text{if $\omega \in D$, $k\geq \fixn{i}$ and 
-$U(\omega)>k$ 
+$F(\omega)>k$ 
 }\\
 \vecseq{X}{F(\omega)}{\fixn{j}}(\omega) & \text{if $\omega\in D$, $k\geq 
 \fixn{i}$ and 
@@ -196,7 +203,7 @@ $$
 
 Intuitively, the process $\{Y_k\}_{k=0}^{\infty}$ is an over-approximation of what we would like to call ``$\vec{X}[\fixn{j}]$ restricted to $M$.''
 We prove several properties of the process. 
-First, clearly for all $k\geq 0$, $Y_k(\omega)\geq 0$. Second, for each $k\geq \fixn{i}$, the variable $Y_k$ is $\genfilt_k$-measurable, as $D\in \genfilt_{\fixn{i}}$, $\{\vecseq{X}{i}{\fixn{j}}(\omega)\}_{i=0}^{\infty}$ is adapted to the filtration $\{\genfilt_i\}_{i=0}^{\infty}$ and $U$ is a stopping time w.r.t. this filtration. Finally, for any $k\in \Nset_0$ denote by 
+First, clearly for all $k\geq 0$, $Y_k(\omega)\geq 0$. Second, for each $k\geq \fixn{i}$, the variable $Y_k$ is $\genfilt_k$-measurable, as $D\in \genfilt_{\fixn{i}}$, $\{\vecseq{X}{i}{\fixn{j}}(\omega)\}_{i=0}^{\infty}$ is adapted to the filtration $\{\genfilt_i\}_{i=0}^{\infty}$ and $F$ is a stopping time w.r.t. this filtration. Finally, for any $k\in \Nset_0$ denote by 
 $\noofdec_k$ the random variable such that $\noofdec_k(\omega) = |\{i'\in 
 \Nset\mid \fixn{i} \leq i' < k \text{ and } \levelrank{\omega}{i'}=\fixn{j}\} |$, i.e. $\noofdec_k(\omega)$ counts the number of steps between $\fixn{i}$ and $k$ in which level is $\fixn{j}$.
 We prove
@@ -213,23 +220,23 @@ it holds
 The proof of~\eqref{eq:lexrsm-soundness-main} goes by induction on $k$. The computations being somewhat technical, we defer them to \AppendixMaterial. 
 
 Now according to~\eqref{eq:lexrsm-soundness-main} it holds  $\E[Y_k]\leq \fixn{B}\cdot \probm(D) - \eps\cdot\sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D 
-\cap \{U\geq k\} \cap \{\noofdec_k 
+\cap \{F\geq k\} \cap \{\noofdec_k 
 = 
 \ell\})$ for all $k\geq \fixn{i}$. Let $m=3\fixn{B}\cdot \probm(D)/(\eps\cdot \probm(M))$. For each $\omega\in M$ we see level $\fixn{j}$ infinitely often, so there exists step $k(\omega)\geq \fixn{i}$ such that $\noofdec_{k(\omega)}\geq m$, i.e. $\omega$ has level $\fixn{j} $ at least in $m$ steps between steps $\fixn{i}$ and $k(\omega)$. Clearly, $M = \bigcup_{\ell=\fixn{i}}^{\infty} (M \cap \{k(\omega) \leq \ell\})$ and hence $\probm(M)=\lim_{\ell\rightarrow \infty}\probm(M \cap \{k_{m} \leq \ell\})$. Thus, there exists $\ell_0 \geq m+\fixn{i}$ such that $\probm(M \cap \{\noofdec_{\ell_0}\geq m\}) \geq \probm(M)/2$. Clearly $M \cap \{\noofdec_{\ell_0}\geq m\} \subseteq D\cap \{F\geq \ell_0 \} \cap \{\noofdec_{\ell_0}\geq m \}$. From \eqref{eq:lexrsm-soundness-main} it follows that
 \begin{align*}
 \E[Y_{\ell_0}]&\leq \fixn{B}\cdot \probm(D) - \eps\cdot\sum_{\ell=0}^{\ell_0-\fixn{i}} \ell\cdot\probm(D 
-\cap \{U\geq \ell_0\} \cap \{\noofdec_{\ell_0} 
+\cap \{F\geq \ell_0\} \cap \{\noofdec_{\ell_0} 
 =
 \ell\}) \\
 &= \fixn{B}\cdot \probm(D) - \eps\cdot \sum_{\ell=1}^{\ell_0-\fixn{i}} \probm(D 
-\cap \{U\geq \ell_0\} \cap \{\noofdec_{\ell_0} 
+\cap \{F\geq \ell_0\} \cap \{\noofdec_{\ell_0} 
 \geq 
 \ell\})\\
 & \leq \fixn{B}\cdot \probm(D) - \eps\cdot \sum_{\ell=1}^{m} \probm(D 
-\cap \{U\geq \ell_0\} \cap \{\noofdec_{\ell_0} 
+\cap \{F\geq \ell_0\} \cap \{\noofdec_{\ell_0} 
 \geq 
 \ell\}) \\&\leq \fixn{B}\cdot \probm(D) - \eps\cdot \sum_{\ell=1}^{m} \probm(D 
-\cap \{U\geq \ell_0\} \cap \{\noofdec_{\ell_0} 
+\cap \{F\geq \ell_0\} \cap \{\noofdec_{\ell_0} 
 \geq 
 m\})\\
 &\leq \fixn{B}\cdot \probm(D) - \eps\cdot m \cdot \probm(M)/2 < 0, 
@@ -240,23 +247,6 @@ m \} \subseteq\{ \noofdec_{\ell_0}
 \ell\}$ for each $\ell \leq m$, the first inequality on the last line follows 
 by  using $\probm(M)/2\leq \probm(M \cap \{\noofdec_{\ell_0}\geq m\}) \leq 
 \probm(D\cap \{F\geq \ell_0 \} \cap \{\noofdec_{\ell_0}\geq m \})$, and
-the last inequality follows by expanding the definition of $m$. But for each $k$ the random variable $Y_k$ is non-negative, so it must also have a non-negative expectation, a contradiction.
-%\begin{enumerate}
-%\
-%\end{itemize}
-%\end{enumerate}
-
-
-%\begin{fact}
-	
-%\end{fact}
-
-
-%\[
-%\levelrank{\omega}{i} = \begin{dcases}
-%0 & \text{if $\stime(\omega)\leq i$} \\
-% 
-%\end{dcases}
-%\]
+the last inequality follows by expanding the definition of $m$. But for each $k$ the random variable $Y_k$ is non-negative, so it must also have a non-negative expectation, a contradiction. Finally, note that for strict $n$-dimensional LexRSMs the condition of level $<n+1$ appearing infinitely many times is trivially satisfied.
 \end{proof}
 

@@ -264,7 +264,7 @@ that for each
 $i\geq 0$ and $1\leq j 
 \leq n$ and each run $\run$ we put $\vecseq{X}{i}{j}(\run) = 
 \lem_j(\cfg{\sigma}{i}(\run))$. We claim that $\{\vec{X}_{i}\}_{i=0}^{\infty}$ 
-is an $\eps$-LexRSM for the termination time $\ttime$ of $\program$. Clearly 
+is a strict $n$-dimensional $\eps$-LexRSM for the termination time $\ttime$ of $\program$. Clearly 
 the process is real-valued, componentwise non-negative, and adapted to the 
 canonical filtration of $\natfilt$. It remains to prove that condition (3) in 
 Definition~\ref{def:lexrsm} is satisfied. To this end, for each $i\geq 0$ we 
@@ -274,7 +274,7 @@ the set of all runs $\run$ such that $\ttime(\run)>i$ and for $\run$ the index
 $j$ is the smallest one such that the $(i+1)$-th transition on $\run$ is ranked 
 by $\lem_j$ from $\cfg{\sigma}{i}(\run)$. Due to 
 definition of an $\eps$-LexRSM map such a $j$ exists for all 
-$\run\in\{\ttime>i\}$ and hence we indeed have a partition. It remains to prove 
+$\run\in\{\ttime>i\}$ and hence we indeed have a partition (so $L^i_{n+1}=\emptyset$ for all $i$). It remains to prove 
 that irrespective of the initial choice of $\sigma$ and $\vecinit$ it holds, 
 for each $1\leq j 
 \leq n$ and $j'<j$, that $\E^\sigma_{\vecinit}[\vecseq{X}{i+1}{j}\mid 
@@ -286,7 +286,7 @@ transition being $\eps$-ranked by $\lem_j$.
 
 Since  $\{\vec{X}_{i}\}_{i=0}^{\infty}$ 
 is an $\eps$-LexRSM for $\ttime$, from Theorem~\ref{thm:lexrsm-programs} it 
-follows that $\probm^{\sigma}_{\vecinit}\ttime <\infty) =1$, irrespective of 
+follows that $\probm^{\sigma}_{\vecinit}(\ttime <\infty) =1$, irrespective of 
 $\sigma$ and $\vecinit$.
 \end{proof} 
 

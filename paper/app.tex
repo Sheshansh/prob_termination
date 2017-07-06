@@ -303,16 +303,16 @@ expression, or $P = \textbf{skip}$, the pCFG $\pCFG_P$ consists only of
 locations $\ell^{\lin}_P$ and $\ell^{\lout}_P$ (first assignment location, 
 second one deterministic) and a
 transition $(\ell^{\lin}_{P},\ell^{\lout}_P)$. In the first case, 
-$U(\ell^{\lin}_{P},\ell^{\lout}_P)=(j,E)$.
+$\updates(\ell^{\lin}_{P},\ell^{\lout}_P)=(j,E)$.
 \item {\em Probabilistic and Non-Deterministic Assignemnts}
 For $P= {x_j}{:=}{\textbf{sample($d$)}}$ where $x_j$ is a program variable and 
 $d$ is a distribution, the pCFG $\pCFG_P$ consists locations $\ell^{\lin}_P$ 
 and $\ell^{\lout}_P$ and a
-transition $\tau=(\ell^{\lin}_{P},\ell^{\lout}_P)$ with $U(\tau)=(j,d)$. For 
+transition $\tau=(\ell^{\lin}_{P},\ell^{\lout}_P)$ with $\updates(\tau)=(j,d)$. For 
 $P= 
 {x_j}{:=}{\textbf{ndet($\mathit{dom}$)}}$, the construction is similar, with 
 the only transition being $\tau=(\ell^{\lin}_{P}\ell^{\lout}_P)$ and 
-$U(\tau)=(j,D)$, where 
+$\updates(\tau)=(j,D)$, where 
 $D$ is 
 the set specified by the domain specifier $\mathit{dom}$.
 
@@ -380,45 +380,45 @@ inequality immediately follows from the definition of $Y_k$. Now assume
 that~\eqref{eq:lexrsm-soundness-main} holds for some $k\geq \fixn{i}$. We have that 
 \begin{align}
 \label{eq:lexrsm-ind-1}
-\E[Y_{k+1}] &= \underbrace{\E[Y_{k+1}\cdot \indicator{\Omega\setminus D}]}_{=0=\E[Y_k\cdot\indicator{\Omega\setminus D}]} +  \underbrace{\E[Y_{k+1}\cdot \indicator{D \cap \{U \leq k\}}]}_{=\E[Y_k\cdot\indicator{D\cap \{U\leq k\}}]} + \underbrace{\E[Y_{k+1}\cdot \indicator{D \cap \{U > k\}}]}_{=\E[\vecseq{X}{k+1}{\fixn{j}}\cdot\indicator{D\cap \{U>k \} }]},
+\E[Y_{k+1}] &= \underbrace{\E[Y_{k+1}\cdot \indicator{\Omega\setminus D}]}_{=0=\E[Y_k\cdot\indicator{\Omega\setminus D}]} +  \underbrace{\E[Y_{k+1}\cdot \indicator{D \cap \{F \leq k\}}]}_{=\E[Y_k\cdot\indicator{D\cap \{F\leq k\}}]} + \underbrace{\E[Y_{k+1}\cdot \indicator{D \cap \{F > k\}}]}_{=\E[\vecseq{X}{k+1}{\fixn{j}}\cdot\indicator{D\cap \{F>k \} }]},
 \end{align}
-where the equality $\E[Y_{k+1}\cdot \indicator{D \cap \{U \leq k\}}] =\E[Y_k\cdot\indicator{D\cap \{U\leq k\}}] $ follows from the fact that $Y_{k+1}(\omega)=Y_k({\omega})=\vecseq{X}{U(\omega)}{\fixn{j}}(\omega)$ for $\omega\in \{U\leq k\}$, and similarly for the last term. We prove that 
+where the equality $\E[Y_{k+1}\cdot \indicator{D \cap \{F \leq k\}}] =\E[Y_k\cdot\indicator{D\cap \{F\leq k\}}] $ follows from the fact that $Y_{k+1}(\omega)=Y_k({\omega})=\vecseq{X}{F(\omega)}{\fixn{j}}(\omega)$ for $\omega\in \{F\leq k\}$, and similarly for the last term. We prove that 
 \begin{equation}
 \label{eq:lexrsm-ind-2}
-\E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{U > k \}}] \leq \E[Y_k\cdot \indicator{D\cap \{U > k \}} -\eps\cdot \indicator{D\cap \{U>k\} \cap \{\levelrank{}{k}= \fixn{j}\} }] .
+\E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{F > k \}}] \leq \E[Y_k\cdot \indicator{D\cap \{F > k \}} -\eps\cdot \indicator{D\cap \{F>k\} \cap \{\levelrank{}{k}= \fixn{j}\} }] .
 \end{equation}
 Indeed, it holds
 \begin{equation}
 \label{eq:lexrsm-ind-3}
-\E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{U > k \}}] = \E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}=\fixn{j} \} }]  + \E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}>\fixn{j}\} }], 
+\E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{F > k \}}] = \E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{F > k \} \cap \{\levelrank{}{k}=\fixn{j} \} }]  + \E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{F > k \} \cap \{\levelrank{}{k}>\fixn{j}\} }], 
 \end{equation}
-since $\levelrank{\omega}{k}\geq \fixn{j}$ for all $\omega \in \{U>k\}$. Since the set $D\cap \{U > k \} \cap \{\levelrank{}{k}=\fixn{j} \}$ is $\genfilt_k$-measurable, we get
+since $\levelrank{\omega}{k}\geq \fixn{j}$ for all $\omega \in \{F>k\}$. Since the set $D\cap \{F > k \} \cap \{\levelrank{}{k}=\fixn{j} \}$ is $\genfilt_k$-measurable, we get
 \begin{align}
-\E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}=\fixn{j} \} }] &= \E[\E[\vecseq{X}{k+1}{\fixn{j}}\mid \genfilt_k]\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}=\fixn{j} \} }] \label{eq:lexrsm-ind-4}\\
-&\leq \E[(\vecseq{X}{k}{\fixn{j}} - \eps)\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}=\fixn{j} \}}] \label{eq:lexrsm-ind-5}\\
-&=\E[(Y_k - \eps)\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}=\fixn{j} \}}] \label{eq:lexrsm-ind-6},
+\E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{F > k \} \cap \{\levelrank{}{k}=\fixn{j} \} }] &= \E[\E[\vecseq{X}{k+1}{\fixn{j}}\mid \genfilt_k]\cdot \indicator{D\cap \{F > k \} \cap \{\levelrank{}{k}=\fixn{j} \} }] \label{eq:lexrsm-ind-4}\\
+&\leq \E[(\vecseq{X}{k}{\fixn{j}} - \eps)\cdot \indicator{D\cap \{F > k \} \cap \{\levelrank{}{k}=\fixn{j} \}}] \label{eq:lexrsm-ind-5}\\
+&=\E[(Y_k - \eps)\cdot \indicator{D\cap \{F > k \} \cap \{\levelrank{}{k}=\fixn{j} \}}] \label{eq:lexrsm-ind-6},
 \end{align}
-where~\eqref{eq:lexrsm-ind-4} follows from the definition of conditional expectation~\eqref{eq:cond-exp},~\eqref{eq:lexrsm-ind-5} follows from the definition of $\{\levelrank{}{k}=\fixn{j}\}$, and~\eqref{eq:lexrsm-ind-6} holds since $Y_k(\omega)=\vecseq{X}{k}{\fixn{j}}(\omega)$ for $\omega$ with $U(\omega)> k$. Almost identical argument shows that
+where~\eqref{eq:lexrsm-ind-4} follows from the definition of conditional expectation~\eqref{eq:cond-exp},~\eqref{eq:lexrsm-ind-5} follows from the definition of $\{\levelrank{}{k}=\fixn{j}\}$, and~\eqref{eq:lexrsm-ind-6} holds since $Y_k(\omega)=\vecseq{X}{k}{\fixn{j}}(\omega)$ for $\omega$ with $F(\omega)> k$. Almost identical argument shows that
 \begin{equation}
 \label{eq:lexrsm-ind-7}
-\E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}>\fixn{j} \} }] \leq \E[Y_k\cdot \indicator{D\cap \{U > k \} \cap \{\levelrank{}{k}>\fixn{j} \}}].
+\E[\vecseq{X}{k+1}{\fixn{j}}\cdot \indicator{D\cap \{F > k \} \cap \{\levelrank{}{k}>\fixn{j} \} }] \leq \E[Y_k\cdot \indicator{D\cap \{F > k \} \cap \{\levelrank{}{k}>\fixn{j} \}}].
 \end{equation}
 Plugging~\eqref{eq:lexrsm-ind-6} and~\eqref{eq:lexrsm-ind-7} into~\eqref{eq:lexrsm-ind-3} yields~\eqref{eq:lexrsm-ind-2}. Now we can plug~\eqref{eq:lexrsm-ind-2} into~\eqref{eq:lexrsm-ind-1} to get
 \begin{align}
-\E[Y_{k+1}]&\leq \E[Y_k] - \eps\cdot \E[\indicator{D \cap \{U>k\} \cap \{\levelrank{}{k} = \fixn{j} \} }] = \E[Y_k] - \eps\cdot \probm(D \cap \{U>k\} \cap \{\levelrank{}{k} = \fixn{j} \} ) \nonumber\\
+\E[Y_{k+1}]&\leq \E[Y_k] - \eps\cdot \E[\indicator{D \cap \{F>k\} \cap \{\levelrank{}{k} = \fixn{j} \} }] = \E[Y_k] - \eps\cdot \probm(D \cap \{F>k\} \cap \{\levelrank{}{k} = \fixn{j} \} ) \nonumber\\
 &\leq \fixn{B}\cdot \probm(D) - \eps\cdot\left(\sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D 
-\cap \{U\geq k\} \cap \{\noofdec_k = \ell\})\right) -\eps\cdot \probm(D \cap \{U>k\} \cap \{\levelrank{}{k} = \fixn{j} \}),
+\cap \{F\geq k\} \cap \{\noofdec_k = \ell\})\right) -\eps\cdot \probm(D \cap \{F>k\} \cap \{\levelrank{}{k} = \fixn{j} \}),
 \end{align}
 where the last inequality follows from induction hypothesis. Hence, using $D_{k,\ell}$ as a shorthand for $D 
-\cap \{U\geq k\} \cap \{\noofdec_k = \ell\}$, to prove~\eqref{eq:lexrsm-soundness-main} it remains to show that
+\cap \{F\geq k\} \cap \{\noofdec_k = \ell\}$, to prove~\eqref{eq:lexrsm-soundness-main} it remains to show that
 \begin{equation}
 \label{eq:lexrsm-ind-8}
-\sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D_{k,\ell}) + \probm(D \cap \{U>k\} \cap \{\levelrank{}{k} = \fixn{j} \}) = \sum_{\ell=0}^{k+1-\fixn{i}} \ell\cdot\probm(D_{k+1,\ell}).
+\sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D_{k,\ell}) + \probm(D \cap \{F>k\} \cap \{\levelrank{}{k} = \fixn{j} \}) = \sum_{\ell=0}^{k+1-\fixn{i}} \ell\cdot\probm(D_{k+1,\ell}).
 \end{equation}
 The left-hand side of~\eqref{eq:lexrsm-ind-8} is equal to
 \begin{align}
 &\phantom{+}\;\sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D_{k,\ell} \cap \{\levelrank{}{k}=\fixn{j}\}) + \sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D_{k,\ell}\cap \{\levelrank{}{k}>\fixn{j}\} )\nonumber \\ 
-&+\sum_{\ell=0}^{k-\fixn{i}}\probm(\underbrace{D \cap \{U>k\} \cap \{\levelrank{}{k} = \fixn{j}\} \cap \{\noofdec_k = \ell\}}_{=D_{k,\ell} \cap \{\levelrank{}{k} = \fixn{j}\}})
+&+\sum_{\ell=0}^{k-\fixn{i}}\probm(\underbrace{D \cap \{F>k\} \cap \{\levelrank{}{k} = \fixn{j}\} \cap \{\noofdec_k = \ell\}}_{=D_{k,\ell} \cap \{\levelrank{}{k} = \fixn{j}\}})
 \nonumber \\
 &= \sum_{\ell=0}^{k-\fixn{i}}(\ell+1) \cdot\probm(D_{k,\ell}\cap \{\levelrank{}{k} = \fixn{j}\}) +  \sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D_{k,\ell}\cap \{\levelrank{}{k}>\fixn{j}\} ) \nonumber\\
 &=\sum_{\ell=0}^{k-\fixn{i}} (\ell+1)\cdot \probm{(D_{k+1,\ell+1} \cap \{\levelrank{}{k} = \fixn{j}\})} +  \sum_{\ell=0}^{k-\fixn{i}} \ell\cdot\probm(D_{k+1,\ell}\cap \{\levelrank{}{k}>\fixn{j}\} ) \label{eq:lexrsm-ind-9}\\
@@ -434,7 +434,7 @@ $\noofdec_k(\omega)+1=\noofdec_{k+1}(\omega)$, and similarly, for $\omega$'s
 whose level in step $k$ is $>\fixn{j}$ it holds 
 $\noofdec_k(\omega)=\noofdec_{k+1}(\omega)$. Moreover, for all $\omega\in 
 D_{k,\ell}$ it holds that $\levelrank{k}{\omega}\geq \fixn{j} \Rightarrow 
-U(\omega)\geq k+1$. Finally, in~\eqref{eq:lexrsm-ind-11} we use the fact that 
+F(\omega)\geq k+1$. Finally, in~\eqref{eq:lexrsm-ind-11} we use the fact that 
 all $\omega\in D_{k+1,k+1-\fixn{i}}$ need to have level $\fixn{j}$ in step $k$, 
 since otherwise such an $\omega$ would need to have level $\fixn{j}$ for at 
 least $k+1-\fixn{i}$ times within steps $\{\fixn{i},\fixn{i}+1,\dots,k-1\}$, 

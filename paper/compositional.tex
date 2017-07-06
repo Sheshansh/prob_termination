@@ -93,9 +93,9 @@ $\slice(\program)=\{\loc_0,\loc_1,\loc_4,\loc^{\lout}\}$.
 \end{example}
 
 Given an invariant map $\inv$, we say that a 1-dimensional measurable map 
-$\lem$ for $\pCFG_{\program}$ is $\eps$-$\inv$-ranking in location $\loc$, if 
+$\lem$ for $\pCFG_{\program}$ is $\eps$-$\inv$-ranking/unaffecting in location $\loc$, if 
 for each $\vec{x}\in\inv(\loc)$  each generalized transition~$\tilde{\tau}$ 
-outgoing from $\loc$ is $\eps$-ranked by $\lem$. 
+outgoing from $\loc$ is $\eps$-ranked/unaffected by $\lem$. 
 
 We recall the notion of compositional ranking supermartingale as introduced 
 in~\cite{HolgerPOPL}. We call it a PV supermartingale, as it is based on so 
@@ -352,11 +352,11 @@ To overcome the rather strict typechecking, we use the results on LexRSMs to def
 \label{def:nonneg-comp}
 A 1-dimensional measurable map $\lem$ is an NC supermartingale (NCSM) for a program $\program$ supported by an invariant map $\inv$ if there exists $\eps>0$ such that $\lem$ is:
 \begin{compactenum}
-\item  $\inv$-non-negative in each location of $\pCFG_{\program}$;
+\item  non-negative in each $(\loc,\vec{x})$ where $\loc$ is a location of $\pCFG_{\program}$ and $\vec{x}\in \inv(\loc)$;
 \item 
  $\eps$-$\inv$-ranking in each location $\loc\in\slice{(\program)}$; and
 \item 
-  $\inv$-unaffected in each $\loc\in\loops(\program)$.
+  $\inv$-unaffecting in each $\loc\in\loops(\program)$.
 \end{compactenum}
 A (propositionally) linear NCSM (LinNCSM) is a NCSM which is also a (propositionally) linear expression map.
 \end{definition}
@@ -374,16 +374,18 @@ exists a NCSM for $\program$ supported by some invariant map. Then $\program$
 terminates almost surely from each initial configuration.
 \end{theorem}
 \begin{proof}[Proof (Key Idea)]
-Assume that there is set of non-terminating runs $A$ of positive probability.
+%Assume that there is set of non-terminating runs $A$ of positive probability.
+%Let $\{X_i\}_{i=0}^{\infty}$ be a stochastic process returning the value of 
+%NCSM $\lem$ in step $i$. We show that for each $i$ it holds $\E[X_i] 
+%\leq \lem(\locinit,\vecinit) - \eps\cdot \E[\sharp_i]$, where $\sharp_i$ is the 
+%random variable returning the number of times a location from 
+%$\slice(\program)$ is visited. Since all sub-loops of $\program$ terminate 
+%a.s., $\lim_{i\rightarrow \infty}\sharp_i(\run)=\infty$ for $\run\in A$. Since 
+%$A$ has positive probability $\lim_{i\rightarrow 
+%\infty}\E[\sharp_i(\run)=\infty]$, it holds $\lim_{i\rightarrow 
+%\infty}\E[X_i] = -\infty$, a contradiction with non-negativity of $\lem$.
 Let $\{X_i\}_{i=0}^{\infty}$ be a stochastic process returning the value of 
-NCSM $\lem$ in step $i$. We show that for each $i$ it holds $\E[X_i] 
-\leq \lem(\locinit,\vecinit) - \eps\cdot \E[\sharp_i]$, where $\sharp_i$ is the 
-random variable returning the number of times a location from 
-$\slice(\program)$ is visited. Since all sub-loops of $\program$ terminate 
-a.s., $\lim_{i\rightarrow \infty}\sharp_i(\run)=\infty$ for $\run\in A$. Since 
-$A$ has positive probability $\lim_{i\rightarrow 
-\infty}\E[\sharp_i(\run)=\infty]$, it holds $\lim_{i\rightarrow 
-\infty}\E[X_i] = -\infty$, a contradiction with non-negativity of $\lem$.
+NCSM $\lem$ in step $i$. Then $\{X_i\}_{i=0}^{\infty}$ is a (non-strict) $1$-dimensional $\eps$-LexRSM for the termination time of the program, for some $\eps>0$. Since all sub-loops of $\program$ terminate, with probability one each run has level $<2$ in infinitely many steps. From theorem $\ref{thm:lexrsm-main}$ it follows that $\probm^\sigma_{\vecinit}(\ttime<\infty)=1$, for all $\sigma$ and $\vecinit$.
 \end{proof}
 
 Hence, NCSMs effectively trade the uniform integrability condition for 
@@ -451,31 +453,31 @@ NCSMs allow compositional, fully automated proofs of a.s. termination without th
 
 \subsection{Multidimensional Compositional Ranking}
 
-As noted previously, a fundamental advantage of LexRSMs over PVSMs is that LexRSMs can handle loops that go through several computational phases and as a result of this do not admit one-dimensional ranking supermartingales. Above, we defined NCSMs as one-dimensional objects, to make them analogous to PVSMs for better comparison. However, we can also define a multi-dimensional version of NCSMs. We say that, given an invariant map $\inv$, an $n$-dimensional measurable map is $\inv$-ranking in a location $\loc$ if for each $\vec{x}\in \inv(\loc)$ there exists $1\leq j \leq n$ such that $\preexp{\lem_j}(\loc,\vec{x}) \leq \lem_j(\loc,\vec{x})-\eps$ and for each $j'<j$ the map $\lem_{j'}$ is $\inv$-unaffected in $\loc$.
+ Above, we defined NCSMs as one-dimensional objects, to make them analogous to PVSMs for better comparison. However, we can also define a multi-dimensional version of NCSMs, to take advantage of the fact that LexRSMs can handle loops for which no 1-dimensional linear RSM exists. We say that, given an invariant map $\inv$, an $n$-dimensional measurable map is $\eps$-$\inv$-ranking in a location $\loc$ if for each $\vec{x}\in \inv(\loc)$ and each gen. transition $\tilde{\tau}$ outgoing from $\loc$ there exists $1\leq j \leq n$ such that $\tilde\tau$ is $\eps$-ranked by $\lem_j$ and for each $j'<j$ we have that  $\tilde{\tau}$ is unaffected by $\lem_{j'}$.
 
 \begin{definition}
 An $n$-dimensional measurable map $\vec{\lem}=(\lem_1,\dots,\lem_n)$ is an NC supermartingale (NCSM) for a program $\program$ supported by an invariant map $\inv$ if there exists $\eps>0$ such that:
 \begin{compactenum}
 	\item  for each $1\leq i \leq n$, $\lem_i$ is non-negative in each location of $\pCFG_{\program}$;
 	\item 
-	$\vec{\lem}$ is $\eps$-ranking in each location $\loc\in\slice{(\program)}$; and
+	$\vec{\lem}$ is $\eps$-$\inv$-ranking in each location $\loc\in\slice{(\program)}$; and
 	\item 
 	for each $1\leq i \leq n$, $\lem_i$ is
 	unaffected in each $\loc\in\loops(\program)$.
 \end{compactenum}
-An $n$-dimensional (propositionally) linear NCSM (LinNCSM) is an $n$-dimensional NCSM which is also a (propositionally) linear expression map.
+An $n$-dimensional linear NCSM (LinNCSM) is an $n$-dimensional NCSM which is also a linear expression map.
 \end{definition}
 
-The following theorem can be proved in the same way as Theorem~\ref{thm:nonneg-comp}.
+The following theorem can be proved in essentially the same way as Theorem~\ref{thm:nonneg-comp}.
 
 \begin{theorem}
 Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do } 
 \programbody \textbf{ od}$. Assume that each nested loop of $\program$ terminates almost surely from each reachable configuration, and that there exists a NCSM for $\program$ supported by some invariant map. Then $\program$ terminates almost surely.
 \end{theorem}
 
-For \APP{}s, we can generalize Algorithm~\ref{algo:compositional} by changing line~\ref{algoline:one} to ``check existence of a multi-dimensional LinNCSM for $\program'$'' and line~\ref{algoline:two} to ``\textbf{if} a multi-dimensional LinNCSM does not exist.'' The check of existence of a multi-dimensional LinNCSM for $\program'$ can be done by algorithm presented in Section~\ref{xxx}, modified so as to only pursue ranking for transitions outgoing from locations belonging to $\slice(\program')$. (I.e., only these transitions have $\eps_{\tau}$ included in the objective function, and algorithm terminates once all such transitions are ranked.) This further expands the usage of the algorithm.
+For \APP{}s, we can generalize Algorithm~\ref{algo:compositional} by changing line~\ref{algoline:one} to ``check existence of a multi-dimensional LinNCSM for $\program'$'' and line~\ref{algoline:two} to ``\textbf{if} a multi-dimensional LinNCSM does not exist.'' The check of existence of a multi-dimensional LinNCSM for $\program'$ can be done by algorithm presented in Section~\ref{sec:algo}, modified so as to only pursue ranking for generalized transitions outgoing from locations belonging to $\slice(\program')$. (I.e., only these gen. transitions have $\eps_{\tau}$ included in the objective function, and algorithm terminates once all such transitions are ranked.) %This further expands the usage of the algorithm.
 
-There are several advantages of using LexRSMs in a compositonal way. First, using Algorithm~\ref{algo:compositional} (modified for multi-dimensional LinNCSMs) we opt for solving a larger number of smaller linear systems rather than a smaller number of larger ones, which may be sometimes advantageous for performance reasons. Second, using compositional reasoning, we can leverage LexRSMs in a situation where some of the sub-loops were already proved to be a.s. terminating by some other argument, such as using an interactive proof assistant that leverages human intuition. This makes the LexRSM method applicable to programs whose parts are difficult to treat via automated static analysis.
+%There are several advantages of using LexRSMs in a compositonal way. First, using Algorithm~\ref{algo:compositional} (modified for multi-dimensional LinNCSMs) we opt for solving a larger number of smaller linear systems rather than a smaller number of larger ones, which may be sometimes advantageous for performance reasons. Second, using compositional reasoning, we can leverage LexRSMs in a situation where some of the sub-loops were already proved to be a.s. terminating by some other argument, such as using an interactive proof assistant that leverages human intuition. This makes the LexRSM method applicable to programs whose parts are difficult to treat via automated static analysis.
 
 
 %% I SHOULD MAYBE EXPLAIN THAT THE NEED TO PERFORM A STATIC ANALYSIS OF THE WHOLE PROGRAM IS 
