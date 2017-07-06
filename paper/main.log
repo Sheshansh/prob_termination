@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.28)  6 JUL 2017 00:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  6 JUL 2017 12:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **main.tex
 (./main.tex
 LaTeX2e <2016/03/31> patch level 3
-Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+Babel <3.9r> and hyphenation patterns for 53 language(s) loaded.
 (./acmart.cls
 Document Class: acmart 2017/05/14 v1.39 Typesetting articles for Association of
  Computing Machinery
@@ -1955,16 +1955,10 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [15.15]
-
-Package natbib Warning: Citation `xxx' on page 16 undefined on input line 13.
-
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 7.0pt on input line 30.
-
-Package natbib Warning: Citation `xxx' on page 16 undefined on input line 45.
-
+(Font)              scaled to size 7.0pt on input line 57.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/it' will be
-(Font)              scaled to size 10.0pt on input line 55.
+(Font)              scaled to size 10.0pt on input line 84.
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 
@@ -2064,7 +2058,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  []
 
 [24.24]
-LaTeX Font Info:    Try loading font information for T1+zi4 on input line 61.
+LaTeX Font Info:    Try loading font information for T1+zi4 on input line 62.
  (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
 )
@@ -2090,9 +2084,6 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [25.25]) (./main.bbl
-Underfull \vbox (badness 2221) has occurred while \output is active []
-
-
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -2191,13 +2182,13 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 569.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 45210 strings out of 493013
- 972070 string characters out of 6131492
- 1232877 words of memory out of 5000000
- 46571 multiletter control sequences out of 15000+600000
- 362603 words of font info for 770 fonts, out of 8000000 for 9000
- 1302 hyphenation exceptions out of 8191
- 62i,18n,96p,2062b,7217s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 45200 strings out of 493644
+ 971775 string characters out of 6150875
+ 1231201 words of memory out of 5000000
+ 46525 multiletter control sequences out of 15000+600000
+ 362059 words of font info for 766 fonts, out of 8000000 for 9000
+ 944 hyphenation exceptions out of 8191
+ 62i,18n,96p,1381b,7217s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/inconso
 lata/i4-t1-4.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/libert
 ine/lbtn_ki75ao.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/lib
@@ -2236,10 +2227,10 @@ e1/public/txfonts/txsyb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1
 ublic/newtx/txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/publi
 c/newtx/zxlr.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/new
 tx/zxlri.pfb>
-Output written on main.pdf (33 pages, 978911 bytes).
+Output written on main.pdf (33 pages, 978809 bytes).
 PDF statistics:
- 939 PDF objects out of 1000 (max. 8388607)
- 833 compressed objects within 9 object streams
- 297 named destinations out of 1000 (max. 500000)
+ 940 PDF objects out of 1000 (max. 8388607)
+ 834 compressed objects within 9 object streams
+ 296 named destinations out of 1000 (max. 500000)
  95417 words of extra memory for PDF output out of 106986 (max. 10000000)
 
