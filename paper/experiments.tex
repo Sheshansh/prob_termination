@@ -58,56 +58,32 @@ The results are presented in Table~\ref{tab:exp2}.
   \centering
    \begin{tabular}{c|c|c|c|c|c}
     
-   {Benchmark} & {Time (s)} & {Solution} & {Dimension} & {Prob. loops} & {Prob. Assignments
-} \\\hline
-{alain} & {0.09} & {yes} & {2} & {yes} & {yes
-} \\\hline
-{catmouse} & {0.06} & {yes} & {2} & {yes} & {yes
-} \\\hline
-{counterex1a} & {0.08} & {no} & {} & {no} & {no
-} \\\hline
-{counterex1c} & {0.09} & {yes} & {3} & {yes} & {yes
-} \\\hline
-{easy1} & {0.07} & {yes} & {1} & {yes} & {yes
-} \\\hline
-{exmini} & {0.07} & {yes} & {2} & {yes} & {yes
-} \\\hline
-{insertsort} & {0.08} & {yes} & {3} & {yes} & {yes
-} \\\hline
-{ndecr} & {0.07} & {yes} & {2} & {yes} & {yes
-} \\\hline
-{perfect} & {0.09} & {yes} & {3} & {yes} & {yes
-} \\\hline
-{perffect2} & {0.1} & {yes} & {3} & {yes} & {no
-} \\\hline
-{real2} & {0.07} & {no} & {} & {no} & {no
-} \\\hline
-{realheapsort\_step2} & {0.07} & {yes} & {1} & {no} & {no
-} \\\hline
-{realshellsort} & {0.07} & {yes} & {1} & {no} & {no
-} \\\hline
-{serpent} & {0.08} & {yes} & {1} & {yes} & {yes
-} \\\hline
-{sipmabubble} & {0.08} & {yes} & {3} & {yes} & {yes
-} \\\hline
+   {Benchmark} & {Time (s)} & {Solution} & {Dimension} & {Prob. loops} & {Prob. Assignments} \\\hline
+{alain} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
+{catmouse} & {0.06} & {yes} & {2} & {yes} & {yes} \\\hline
+{counterex1a} & {0.08} & {no} & {} & {no} & {no} \\\hline
+{counterex1c} & {0.09} & {yes} & {3} & {yes} & {yes} \\\hline
+{easy1} & {0.07} & {yes} & {1} & {yes} & {yes} \\\hline
+{exmini} & {0.07} & {yes} & {2} & {yes} & {yes} \\\hline
+{insertsort} & {0.08} & {yes} & {3} & {yes} & {yes} \\\hline
+{ndecr} & {0.07} & {yes} & {2} & {yes} & {yes} \\\hline
+{perfect} & {0.09} & {yes} & {3} & {yes} & {yes} \\\hline
+{perffect2} & {0.1} & {yes} & {3} & {yes} & {no} \\\hline
+{real2} & {0.07} & {no} & {} & {no} & {no} \\\hline
+{realheapsort\_step2} & {0.07} & {yes} & {1} & {no} & {no} \\\hline
+{realshellsort} & {0.07} & {yes} & {1} & {no} & {no} \\\hline
+{serpent} & {0.08} & {yes} & {1} & {yes} & {yes} \\\hline
+{sipmabubble} & {0.08} & {yes} & {3} & {yes} & {yes} \\\hline
 {speedDis2} & {0.07} & {no} & {} & {no} & {no
 } \\\hline
-{speedFails2} & {0.06} & {yes} & {2} & {yes} & {no
-} \\\hline
-{speedNestedMultiple} & {0.08} & {yes} & {3} & {yes} & {yes
-} \\\hline
-{speedpldi2} & {0.07} & {yes} & {2} & {yes} & {yes
-} \\\hline
-{speedpldi4} & {0.07} & {yes} & {3} & {yes} & {yes
-} \\\hline
-{speedSimpleMultipleDep} & {0.07} & {no} & {} & {no} & {no
-} \\\hline
-{speedSingleSingle2} & {0.08} & {yes} & {2} & {yes} & {no
-} \\\hline
-{unperfect} & {0.08} & {yes} & {2} & {yes} & {no
-} \\\hline
-{wcet1} & {0.09} & {yes} & {2} & {yes} & {yes
-} \\\hline
+{speedFails2} & {0.06} & {yes} & {2} & {yes} & {no} \\\hline
+{speedNestedMultiple} & {0.08} & {yes} & {3} & {yes} & {yes} \\\hline
+{speedpldi2} & {0.07} & {yes} & {2} & {yes} & {yes} \\\hline
+{speedpldi4} & {0.07} & {yes} & {3} & {yes} & {yes} \\\hline
+{speedSimpleMultipleDep} & {0.07} & {no} & {} & {no} & {no} \\\hline
+{speedSingleSingle2} & {0.08} & {yes} & {2} & {yes} & {no} \\\hline
+{unperfect} & {0.08} & {yes} & {2} & {yes} & {no} \\\hline
+{wcet1} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
 {while2} & {0.08} & {yes} & {3} & {yes} & {yes} \\\hline
     
 \end{tabular}
@@ -120,17 +96,20 @@ The results are presented in Table~\ref{tab:exp2}.
   \centering
    \begin{tabular}{c|c|c|c|c}
 
-{Variables} & {LOC} & {Inv Time (s)} & {Our Time (s)} & {Total Time (s)} \\\hline
-{2} & {20} & {0.050189} & {0.028366} & {0.078555} \\\hline
-{3} & {32} & {0.060078} & {0.02359} & {0.083668} \\\hline
-{4} & {56} & {0.074388} & {0.030035} & {0.104423} \\\hline
-{5} & {104} & {0.131122} & {0.051545} & {0.182667} \\\hline
-{6} & {200} & {0.354702} & {0.097943} & {0.452645} \\\hline
-{7} & {392} & {1.30833} & {0.29947} & {1.6078} \\\hline
-{8} & {776} & {7.55238} & {0.69566} & {8.24804} \\\hline
-{9} & {1544} & {33.0638} & {2.4977} & {35.5615} \\\hline
-{10} & {3080} & {164.088} & {8.763} & {172.851} \\\hline
-{11} & {6152} & {817.914} & {35.37} & {853.284} \\\hline
+{Variables} & {LOC} & {Inv Time (s)} & {Our Time (s)} & {Total Time (s)
+} \\\hline
+{0} & {8} & {0.09} & {0.02} & {0.11} \\\hline
+{1} & {14} & {0.05} & {0.02} & {0.07} \\\hline
+{2} & {20} & {0.06} & {0.03} & {0.08} \\\hline
+{3} & {32} & {0.07} & {0.03} & {0.09} \\\hline
+{4} & {56} & {0.08} & {0.04} & {0.11} \\\hline
+{5} & {104} & {0.14} & {0.06} & {0.19} \\\hline
+{6} & {200} & {0.36} & {0.1} & {0.46} \\\hline
+{7} & {392} & {1.31} & {0.3} & {1.61} \\\hline
+{8} & {776} & {7.56} & {0.7} & {8.25} \\\hline
+{9} & {1544} & {33.07} & {2.5} & {35.57} \\\hline
+{10} & {3080} & {164.09} & {8.77} & {172.86} \\\hline
+{11} & {6152} & {817.92} & {35.37} & {853.29} \\\hline
 {12} & {12296} & {4260.96} & {145.18} & {4406.14} \\\hline
 \end{tabular}
 \caption{Experimental results for synthetic examples.}\label{tab:exp2}
