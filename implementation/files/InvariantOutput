@@ -1,0 +1,37 @@
+   *  Invariants =  
+state_1 -----> {true} 
+
+state_2 -----> {true} 
+
+state_3 -----> {N>2} 
+
+state_4 -----> {N<=2} 
+
+state_5 -----> {N>2, k=1} 
+
+state_6 -----> {k>=1, N>=k+1, N>2} 
+
+state_7 -----> {N>2, N>=k, k>=1} 
+
+state_8 -----> {N>2, k>=1, N>=k+1} 
+
+state_9 -----> {N>2, k>=1, N>=k+1} 
+
+state_10 -----> {N>2, N>=k+1, k>=1, k=j} 
+
+state_11 -----> {2j>=1, k+2j>=3, N>2, k>=j, j<2, N>=k+1} 
+
+state_12 -----> {j>=2, k>=j, N>=k+1} 
+
+state_13 -----> {N>=k+1, k>=2, k>=j, 2j>=1} 
+
+state_14 -----> {j>=2, k>=j, N>=k+1} 
+
+state_15 -----> {j>=2, k>=j, N>=k+1} 
+
+state_16 -----> {j>=2, k>=j, N>=k+1} 
+   * Remember that we have no bad region 
+   * No accel has been applied
+   * Stats =  { time=0.004000; iterations=6; descendings=0; } 
+
+ Finished ! 

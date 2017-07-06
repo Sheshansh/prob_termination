@@ -1,0 +1,55 @@
+
+Log for 'files/equations.lp' Clone_1 (V12.7.1.0) Thu Jul  6 04:38:07 2017
+
+Tried aggregator 0 times.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.78 ticks)
+Parallel mode: using up to 3 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 10710
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.63 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 3
+  Rows in Factor            = 1131
+  Integer space required    = 3864
+  Total non-zeros in factor = 26879
+  Total FP ops to factor    = 723875
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   6.1600000e+02   5.9316000e+04  3.77e+03  2.63e+02  2.70e+06  1.00e+00
+   1   1.6468508e+02   1.9168253e+04  1.03e+03  7.14e+01  8.74e+05  1.75e-02
+   2   9.1850387e+01   9.0599211e+03  4.15e+02  2.89e+01  4.13e+05  2.49e-02
+   3   6.0206846e+01   3.3812064e+03  1.59e+02  1.11e+01  1.53e+05  4.89e-02
+   4   5.4958175e+01   1.7557213e+03  1.12e+02  7.79e+00  7.87e+04  8.89e-02
+   5   4.7243856e+01   6.7042113e+02  3.55e+01  2.48e+00  2.88e+04  2.42e-01
+   6   4.6016519e+01   2.2711638e+02  1.25e+01  8.69e-01  8.42e+03  8.49e-01
+   7   4.9971659e+01   8.2376651e+01  2.88e+00  2.00e-01  1.52e+03  3.87e+00
+   8   6.3548283e+01   8.2967188e+01  1.71e+00  1.19e-01  6.42e+02  6.60e+00
+   9   7.3834095e+01   8.8350696e+01  1.38e+00  9.63e-02  5.40e+02  6.33e+00
+Barrier time = 0.03 sec. (13.88 ticks)
+
+Dual simplex solved model.
+
+
+Log for 'files/equations.lp' Clone_1 (V12.7.1.0) Thu Jul  6 04:38:07 2017
+
+Tried aggregator 0 times.
+No LP presolve or aggregator reductions.
+Presolve time = 0.00 sec. (0.32 ticks)
+Parallel mode: using up to 3 threads for barrier.
+Number of nonzeros in lower triangle of A*A' = 5032
+Using Approximate Minimum Degree ordering
+Total time for automatic ordering = 0.00 sec. (0.29 ticks)
+Summary statistics for Cholesky factor:
+  Threads                   = 3
+  Rows in Factor            = 518
+  Integer space required    = 1964
+  Total non-zeros in factor = 13000
+  Total FP ops to factor    = 363326
+ Itn      Primal Obj        Dual Obj  Prim Inf Upper Inf  Dual Inf Inf Ratio
+   0   2.8300000e+02   2.6200000e+04  1.62e+03  1.24e+02  1.11e+06  1.00e+00
+   1   4.7540889e+01   4.7163331e+03  3.61e+02  2.75e+01  2.02e+05  1.87e-02
+   2   2.0341741e+01   2.1383898e+03  1.47e+02  1.12e+01  9.19e+04  3.34e-02
+Barrier time = 0.01 sec. (2.65 ticks)
+
+Dual simplex solved model.
+
