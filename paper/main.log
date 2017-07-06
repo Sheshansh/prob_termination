@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.28)  6 JUL 2017 23:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.9.28)  6 JUL 2017 23:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2046,7 +2046,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 [24.24]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 67.
+               Default added (so using `tbp') on input line 66.
 
 
 LaTeX Warning: No positions in optional float specifier.
@@ -2247,10 +2247,10 @@ e1/public/txfonts/txsyb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1
 ublic/newtx/txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/publi
 c/newtx/zxlr.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/new
 tx/zxlri.pfb>
-Output written on main.pdf (36 pages, 989723 bytes).
+Output written on main.pdf (36 pages, 989477 bytes).
 PDF statistics:
- 1014 PDF objects out of 1200 (max. 8388607)
- 902 compressed objects within 10 object streams
+ 1013 PDF objects out of 1200 (max. 8388607)
+ 901 compressed objects within 10 object streams
  313 named destinations out of 1000 (max. 500000)
  95457 words of extra memory for PDF output out of 106986 (max. 10000000)
 
