@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  6 JUL 2017 12:45
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  6 JUL 2017 19:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1352,9 +1352,6 @@ Package: flushend 2016/06/21 v3.2 Balancing columns in twocolumn mode
 Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count187
 ))
-
-Package amsthm Warning: Unknown theoremstyle `example' on input line 49.
-
 \c@remark=\count188
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libr
@@ -1767,14 +1764,14 @@ LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/b/n' will be
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 10.0pt on input line 6.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 7.0pt on input line 21.
+(Font)              scaled to size 7.0pt on input line 24.
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 21.
+(Font)              scaled to size 10.0pt on input line 24.
 [1.1{/home/pnovotny/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 
 Underfull \hbox (badness 10000) has occurred while \output is active
@@ -1782,13 +1779,6 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  []
 
 [2.2]) (./prelims.tex
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 10.0pt on input line 6.
-
-
-Package natbib Warning: Citation `POPL17PAPER' on page 3 undefined on input lin
-e 6.
-
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 10.0pt on input line 16.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
@@ -1817,6 +1807,8 @@ LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
 (Font)              scaled to size 6.2pt on input line 144.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 6.2pt on input line 144.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
+(Font)              scaled to size 10.0pt on input line 205.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 5.5pt on input line 205.
 
@@ -1956,19 +1948,17 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 
 [15.15]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 7.0pt on input line 57.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/it' will be
-(Font)              scaled to size 10.0pt on input line 84.
+(Font)              scaled to size 7.0pt on input line 64.
+
+
+LaTeX Font Warning: Command \sc invalid in math mode on input line 91.
+
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
 [16.16]) (./compositional.tex
-
-Package natbib Warning: Citation `xxx' on page 17 undefined on input line 9.
-
-
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -1980,21 +1970,24 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [17.17]
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/it' will be
+(Font)              scaled to size 10.0pt on input line 145.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
+(Font)              scaled to size 7.3pt on input line 145.
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
+(Font)              scaled to size 5.5pt on input line 145.
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
 [18.18]
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 7.3pt on input line 85.
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 5.5pt on input line 85.
 \uniinto=\box90
 \uniintt=\box91
 \unintthree=\box92
 \unintfour=\box93
 
-Underfull \hbox (badness 10000) in paragraph at lines 224--255
+Underfull \hbox (badness 10000) in paragraph at lines 280--311
 [][]
  []
 
@@ -2015,13 +2008,6 @@ Underfull \hbox (badness 10000) has occurred while \output is active
  []
 
 [20.20]
-
-Package natbib Warning: Citation `xxx' on page 21 undefined on input line 326.
-
-
-LaTeX Warning: Reference `xxx' on page 21 undefined on input line 329.
-
-
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -2034,14 +2020,14 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 
 [21.21]
 
-LaTeX Warning: Reference `xxx' on page 22 undefined on input line 408.
+LaTeX Warning: Reference `xxx' on page 22 undefined on input line 476.
 
-
+) (./extensions.tex
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-[22.22]) (./extensions.tex
+[22.22]
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -2052,13 +2038,38 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[23.23]) (./conclu.tex
+[23.23]) (./experiments.tex
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
 [24.24]
-LaTeX Font Info:    Try loading font information for T1+zi4 on input line 62.
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 67.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 105.
+
+) (./conclu.tex
+Underfull \hbox (badness 10000) has occurred while \output is active
+
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (13.0pt): 
+ Make it at least 22.47003pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[25.25]
+Underfull \hbox (badness 10000) has occurred while \output is active
+
+ []
+
+[26.26]
+LaTeX Font Info:    Try loading font information for T1+zi4 on input line 67.
  (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
 )
@@ -2072,7 +2083,7 @@ Package microtype Info: Character `textendash ' is missing
 Package microtype Info: Character `textemdash ' is missing
 (microtype)             in font `T1/zi4/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
-
+) (./main.bbl
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -2083,12 +2094,15 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[25.25]) (./main.bbl
+[27.27]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-[26.26]
+[28.28]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
@@ -2102,12 +2116,12 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[27.27])
+[29.29])
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-[28.28]
+[30.30]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
 (Font)              scaled to size 12.0pt on input line 556.
  (./app.tex
@@ -2121,34 +2135,14 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[29.29
+[31.31
 
 ]
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-[30.30]
-Underfull \hbox (badness 10000) has occurred while \output is active
-
- []
-
-
-Package Fancyhdr Warning: \headheight is too small (13.0pt): 
- Make it at least 22.47003pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[31.31]
-Underfull \hbox (badness 10000) has occurred while \output is active
-
- []
-
-[32.32])
-
-Package natbib Warning: There were undefined citations.
-
-
+[32.32]
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -2160,13 +2154,44 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [33.33]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 569.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 569.
+Underfull \hbox (badness 10000) has occurred while \output is active
+
+ []
+
+[34.34]) (./exp_appendix.tex
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 10.
+
+
+Overfull \hbox (2.84685pt too wide) in paragraph at lines 12--44
+ [][] 
+ []
+
+)
+Underfull \hbox (badness 10000) has occurred while \output is active
+
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (13.0pt): 
+ Make it at least 22.47003pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[35.35]
+Underfull \hbox (badness 10000) has occurred while \output is active
+
+ []
+
+[36.36]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 570.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 570.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 569.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 569.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 570.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 570.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: AE5282B325BDDD59B6D18513088CBC27;4149.
+(rerunfilecheck)             Checksum: 44FB8153415561EF37035662C14D0465;5418.
 
 
 LaTeX Font Warning: Size substitutions with differences
@@ -2175,20 +2200,20 @@ LaTeX Font Warning: Size substitutions with differences
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 569.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 570.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 45200 strings out of 493644
- 971775 string characters out of 6150875
- 1231201 words of memory out of 5000000
- 46525 multiletter control sequences out of 15000+600000
- 362059 words of font info for 766 fonts, out of 8000000 for 9000
+ 45291 strings out of 493644
+ 973717 string characters out of 6150875
+ 1229205 words of memory out of 5000000
+ 46562 multiletter control sequences out of 15000+600000
+ 365281 words of font info for 786 fonts, out of 8000000 for 9000
  944 hyphenation exceptions out of 8191
- 62i,18n,96p,1381b,7217s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,18n,96p,1381b,7214s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/inconso
 lata/i4-t1-4.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/libert
 ine/lbtn_ki75ao.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/lib
@@ -2227,10 +2252,10 @@ e1/public/txfonts/txsyb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1
 ublic/newtx/txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/publi
 c/newtx/zxlr.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/new
 tx/zxlri.pfb>
-Output written on main.pdf (33 pages, 978809 bytes).
+Output written on main.pdf (36 pages, 987652 bytes).
 PDF statistics:
- 940 PDF objects out of 1000 (max. 8388607)
- 834 compressed objects within 9 object streams
- 296 named destinations out of 1000 (max. 500000)
- 95417 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 1018 PDF objects out of 1200 (max. 8388607)
+ 906 compressed objects within 10 object streams
+ 314 named destinations out of 1000 (max. 500000)
+ 95457 words of extra memory for PDF output out of 106986 (max. 10000000)
 

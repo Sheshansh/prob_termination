@@ -1,41 +1,65 @@
 \section{Compositionality of Ranking Supermartingales Revisited}
 \label{sec:compositional}
 
+\subsection{One-Dimensional Compositional Proofs of Almost-Sure Termination}
+
 Compositionality in the context of termination proving means providing the 
 proof of termination step-by-step, handling one loop at a time, rather than 
-attempting to construct the proof (in our case, a LexRSM) at once. In non-probabilistic setting, the 
-relationship between lexicographic ranking functions and compositional 
-termination proving is well established, as well as the importance of 
-compositional proofs for efficient implementation~\cite{xxx}. In the context of 
+attempting to construct the proof (in our case, a LexRSM) at 
+once~\cite{KSTW10:compositional-transition-invariants}. 
+%In non-probabilistic setting, the 
+%relationship between lexicographic ranking functions and compositional 
+%termination proving is well established, as well as the importance of 
+%compositional proofs for efficient implementation. 
+In the context of 
 probabilistic programs, the work~\cite{HolgerPOPL} attempted to provide a 
 compositional notion of almost-sure termination proof based on the 
 \emph{probabilistic variant rule (V-rule),} which we explain in a more detail 
-below. The reason for this attempt was to provide a method of proving a.s. termination for programs where 1-dimensional ranking supermartingales are not sufficient. Since our LexRSMs were conceived with a similar motivation, we devote this section to a thorough comparison of our approach with the one of~\cite{HolgerPOPL}. 
-
-There are two main features of LexRSMs compared with the previous approach, which we call a PVSM (probabilistci V-rule supermartingale) approach. First, the PVSM approach is only applicable to programs in which termination of each loop can be witnessed by a suitable 1-dimensional ranking supermartingale. But there are already single-loop programs for which no 1-dimensional ranking supermartingale exists but a LexRSM does, see the following example.
-
-\textbf{[PETR: ADD EXAMPLE]}
-
-The need for multi-dimensional ranking arises within loops that might go through several ``computation phases'' before terminating, and loops containing non-deterministic choices.
-
-Second, as already noted in~\cite{HolgerPOPL}, the probabilistic V-rule is not 
-sound in general. In order to rectify this issue, in~\cite{HolgerPOPL} they 
-impose an additional constraint of \emph{uniform integrability} on ranking 
-supermartingales that prove termination of individual loops, 
-under which the probabilistic V-rule is shown to be sound. Apart from uniform 
-integrability being somewhat restrictive in itself, in~\cite{HolgerPOPL} it is 
-argued that proving uniform integrability is beyond the capability of 
-state-of-the-art automated theorem provers. As a substitute for 
-these,~\cite{HolgerPOPL} introduces a type system that can be used to 
-automatically prove 
-uniform integrability of ranking supermartingales for a restricted class of 
-programs. In particular, the method cannot handle programs in which termination 
-is controlled by a variable that can be modified by a non-constant value in some sub-program, e.g. 
-variable $x$ which appears in an assignment of the form $x:=x-y$. In this 
+below. However, for the method to work,~\cite{HolgerPOPL} imposes a 
+technical~\emph{uniform integrability} condition, whose checking is hard to 
+automatize. In this 
 section we show that using our insights into LexRSMs we 
-can obtain a subtly different notion of a probabilistic V-rule which is sound 
-without any additional assumptions, and which can be used to compositionally prove termination 
+can obtain a different notion of a probabilistic V-rule which is sound 
+without any additional assumptions, and which can be used to compositionally 
+prove termination 
 of programs that the previous method cannot handle. 
+
+%The reason for this attempt was to provide a method of 
+%proving a.s. termination for programs where 1-dimensional ranking 
+%supermartingales are not sufficient. Since our LexRSMs were conceived with a 
+%similar motivation, we devote this section to a thorough comparison of our 
+%approach with the one of~\cite{HolgerPOPL}. 
+
+%There are two main features of LexRSMs compared with the previous approach, 
+%which we call a PVSM (probabilistic V-rule supermartingale) approach. First, 
+%the PVSM approach is only applicable to programs in which termination of each 
+%loop can be witnessed by a suitable 1-dimensional ranking supermartingale. But 
+%there are already single-loop programs for which no 1-dimensional ranking 
+%supermartingale exists but a LexRSM does, see the following example.
+%
+%\textbf{[PETR: ADD EXAMPLE]}
+%
+%%The need for multi-dimensional ranking arises within loops that might go 
+%%through several ``computation phases'' before terminating, and loops 
+%%containing 
+%%non-deterministic choices.
+%
+%Second, as already noted in~\cite{HolgerPOPL}, the probabilistic V-rule is not 
+%sound in general. In order to rectify this issue, in~\cite{HolgerPOPL} they 
+%impose an additional constraint of \emph{uniform integrability} on ranking 
+%supermartingales that prove termination of individual loops, 
+%under which the probabilistic V-rule is shown to be sound. Apart from uniform 
+%integrability being somewhat restrictive in itself, in~\cite{HolgerPOPL} it is 
+%argued that proving uniform integrability is beyond the capability of 
+%state-of-the-art automated theorem provers. As a substitute for 
+%these,~\cite{HolgerPOPL} introduces a type system that can be used to 
+%automatically prove 
+%uniform integrability of ranking supermartingales for a restricted class of 
+%programs. In particular, the method cannot handle programs in which 
+%termination 
+%is controlled by a variable that can be modified by a non-constant value in 
+%some sub-program, e.g. 
+%variable $x$ which appears in an assignment of the form $x:=x-y$. 
 
 Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do } 
 \programbody \textbf{ od}$, and let $\pCFG_{\program}$ be the associated pCFG, whose set of locations we denote by $\locs$. We denote by $\loops(\program)$ the set of all locations of $\pCFG_{\program}$ that belong to a sub-pCFG of $\pCFG_{\program}$ corresponding to some nested loop of $\program$. We also define $\slice(\program)$ to be the set $\locs\setminus\loops(\program)$ of locations that do not belong to any nested sub-loop.  A formal definition of 
@@ -68,9 +92,19 @@ pCFG. Then $\loops(\program)=\{\loc_2,\loc_3\}$ and
 $\slice(\program)=\{\loc_0,\loc_1,\loc_4,\loc^{\lout}\}$.
 \end{example}
 
-Given an invariant map $\inv$, we say that a 1-dimensional measurable map $\lem$ for $\pCFG_{\program}$ is $\eps$-$\inv$-ranking in location $\loc$, if for each $\vec{x}\in\inv(\loc)$  it holds $\preexp{\lem}(\loc,\vec{x})\leq \lem(\loc,\vec{x})-\eps.$ The map $\lem$ is $\inv$-\emph{unaffected} in location $\loc$ if it is $0$-ranking in $\loc$, and $\inv$-non-negative in $\loc$ if $\lem(\loc,\vec{x})\geq 0$ for all $\vec{x} \in \inv(\loc)$. A measurable map $\lem$ is propositionally linear, if each function $\lem(\loc)$ is of the form $\indicator{G_1}\cdot E_1 + \cdots \indicator{G_k}\cdot E_k$, where each $\indicator{G_i}$ is an indicator function of some polyhedron and each $E_i$ is a linear expression.
+Given an invariant map $\inv$, we say that a 1-dimensional measurable map 
+$\lem$ for $\pCFG_{\program}$ is $\eps$-$\inv$-ranking in location $\loc$, if 
+for each $\vec{x}\in\inv(\loc)$  each generalized transition~$\tilde{\tau}$ 
+outgoing from $\loc$ is $\eps$-ranked by $\lem$. 
 
-We recall the notion of compositional ranking supermartingale as introduced in~\cite{HolgerPOPL}. We call it a PV supermartingale, as it is based on so called probabilistic variant rule. Due to differences in syntax and semantics, the definition is syntactically slightly different from~\cite{HolgerPOPL}, but the essence is the same. 
+We recall the notion of compositional ranking supermartingale as introduced 
+in~\cite{HolgerPOPL}. We call it a PV supermartingale, as it is based on so 
+called probabilistic variant rule. Due to differences in syntax and semantics, 
+the definition is syntactically slightly different from~\cite{HolgerPOPL}, but 
+the essence is the same. A measurable map $\lem$ is propositionally linear, if 
+each function $\lem(\loc)$ is of the form $\indicator{G_1}\cdot E_1 + \cdots 
+\indicator{G_k}\cdot E_k$, where each $\indicator{G_i}$ is an indicator 
+function of some polyhedron and each $E_i$ is a linear expression.
 
 \begin{definition}[PV-supermartingale {\cite[Definition 7.1.]{HolgerPOPL}}]
 A 1-dimensional propositionally linear map $\lem$ is a PV supermartingale (PVSM) for a program $\program$ supported by an invariant map $\inv$ if there exists $\eps>0$ such that $\lem$ is $\eps$-$\inv$-ranking an $\inv$-non-negative in each location $\loc\in\slice{(\program)}$ and $\inv$-unaffected in each $\loc\in\loops(\program)$.
@@ -78,28 +112,59 @@ A 1-dimensional propositionally linear map $\lem$ is a PV supermartingale (PVSM)
 
 As a matter of fact, the condition that $\lem$ should be non-negative in locations of $\slice{(\program)}$ is not explicitly mentioned in \cite{HolgerPOPL}. However, it is implicitly used in some of the proofs and one can easily construct an example where, if the non-negativity in $\slice{(\program)}$ is not required, the Theorem~\ref{thm:holger-comp} below, which also comes from~\cite{HolgerPOPL}, does not hold. Hence, we state the condition explicitly.
 
-In~\cite{HolgerPOPL} they show that even if all nested loops were already proved to terminate a.s. and there is a PVSM for the program, then the program itself might not terminate a.s. Then they investigate conditions under which existence of a PVSM together with a proof of a.s. termination of each nested sub-loop of $\program$ entails termination of the whole program $\program$. The condition were formulated in terms of a certain type system for \PP{}s, so we say that a PVSM satisfying the condition \emph{typechecks} correctly. In~\cite{HolgerPOPL} the following was proved:
+In~\cite{HolgerPOPL} they show that even if all nested loops were already 
+proved to terminate a.s. and there is a PVSM for the program, then the program 
+itself might not terminate a.s. Then they impose a \emph{uniform integrability} 
+constraint on the PVSM under which a 
+PVSM together with a proof of a.s. termination of each nested sub-loop of 
+$\program$ entails termination of the whole program $\program$. 
+%they 
+%impose an additional constraint of \emph{uniform integrability} on ranking 
+%supermartingales that prove termination of individual loops, 
+%under which the probabilistic V-rule is shown to be sound. 
+Uniform integrability is a deep 
+concept from probability and measure theory: a sequence $X_0,X_1,X_2,\dots$ of 
+random variables is uniformly integrable if for each $\delta>0$ there exists an 
+$K\in \Nset$ such that for all $n\geq 0$ it holds $\E[|X_n|\cdot\indicator{X_n 
+	\geq K}]\leq \delta$.
+Apart from uniform 
+integrability being somewhat restrictive in itself, in~\cite{HolgerPOPL} it is 
+argued that proving uniform integrability is beyond the capability of 
+state-of-the-art automated theorem provers. As a substitute for 
+these,~\cite{HolgerPOPL} introduces a type system that can be used to 
+automatically prove 
+uniform integrability of ranking supermartingales for a restricted class of 
+programs.
+We do not repeat the precise definition of the typesystem here, we just say 
+that a PVSM satisfying the condition imposed by the type system 
+\emph{typechecks} correctly. 
+In~\cite{HolgerPOPL} the following was proved:
 
 \begin{theorem}[\cite{HolgerPOPL}]
 \label{thm:holger-comp}
 Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do } 
-\programbody \textbf{ od}$. Assume that each nested loop of $\program$ terminates almost surely from each reachable configuration, and that there exists a PVSM for $\program$ that typechecks correctly. Then $\program$ terminates almost surely.
+\programbody \textbf{ od}$. Assume that each nested loop of $\program$ 
+terminates almost surely from each reachable configuration, and that there 
+exists a PVSM for $\program$ that typechecks correctly. Then $\program$ 
+terminates almost surely.
 \end{theorem}
 
-We do not repeat the precise definition of the typesystem here, we just explain its motivation and give examples where it fails, i.e. examples where $\program$ terminates a.s. (and hence the same holds also for its nested loops) and a PV martingale exists, but no PVSM typechecks.  
+%, we just explain its motivation and give examples where it fails, i.e. 
+%examples where $\program$ terminates a.s. (and hence the same holds also for 
+%its nested loops) and a PV martingale exists, but no PVSM typechecks.  
 
-The purpose of the typesystem is, in principle, to ensure that the stochastic 
-process which, in each time step, returns the current value of the PVSM, is 
-uniformly integrable inside the nested loops. Uniform integrability is a deep 
-concept from probability and measure theory: a sequence $X_0,X_1,X_2,\dots$ of 
-random variables is uniformly integrable if for each $\delta>0$ there exists an 
-$K\in \Nset$ such that for all $n\geq 0$ it holds $\E[|X_n|\cdot\indicator{X_n 
-\geq K}]\leq \delta$. As noted in~\cite{HolgerPOPL}, proofs of uniform 
-integrability are hard to (semi)-automatize, and hence they devise the 
-typechecking as a sound (but not complete) method of proving uniform 
-integrability. This is illustrated in the following example.
+%The purpose of the typesystem is, in principle, to ensure that the stochastic 
+%process which, in each time step, returns the current value of the PVSM, is 
+%uniformly integrable inside the nested loops.  As noted in~\cite{HolgerPOPL}, 
+%proofs of uniform 
+%integrability are hard to (semi)-automatize, and hence they devise the 
+%typechecking as a sound (but not complete) method of proving uniform 
+%integrability. This is illustrated in the following example.
+The intricacies of uniform integrability are shown in the following example.
 
 \begin{example}
+\label{ex:uniform}
+\label{EX:UNIFORM}
 Consider the two \APP{}s in Figure~\ref{fig:uniint}, that differ only in one 
 coefficient in the 
 assignment on line 5. For the inner loop there exists (in both cases) a 
@@ -114,17 +179,8 @@ change of $x$ zero in the left program and $-\frac{x}{4} - \frac{3}{4}$ in the
 right 
 program). 
 However, the variable $x$ is uniformly integrable within the inner loop of the 
-right program while for the left program this does not hold. To see this, 
-imagine the inner loop as a stand-alone program and let $X_n$ be the value of 
-variable $x$ after $n$ steps of this stand-alone program (i.e., when the loop 
-terminates $x$ no longer changes). Solving a simple linear recurrence shows 
-that in the right program $\E[X_n] \rightarrow 0$ as $n\rightarrow \infty$, 
-which in particular shows uniform integrability of $X_0,X_1,X_2,\dots$. On the 
-other hand, in the left program for each $K>0$ we have $\probm(X_K \geq 
-2^K\cdot{x_0})\geq \frac{1}{2^K}$, where $x_0$ is the value of $x$ upon 
-entering the loop. Hence $\E[|X_K|cdot\indicator{X_K 
-\geq K}]\geq 1$ for each $K$ sufficiently large, which is incompatible with 
-uniform integrability. The example shows that proving uniform integrability 
+right program while for the left program this does not hold: we show this 
+in~\AppendixMaterial. The example shows that proving uniform integrability 
 requires intricate reasoning about quantitative behaviour of the program. 
 Moreover, as shown below, none of the two programs have a PVSM that typechecks.
 
@@ -312,10 +368,22 @@ We can prove that NCSMs are a sound method for proving a.s. termination in a com
 \begin{theorem}
 \label{thm:nonneg-comp}
 Let $\program$ be a \PP{} of the form $\textbf{while } \Psi \textbf{ do } 
-\programbody \textbf{ od}$. Assume that each nested loop of $\program$ terminates almost surely from each reachable configuration, and that there exists a NCSM for $\program$ supported by some invariant map. Then $\program$ terminates almost surely.
+\programbody \textbf{ od}$. Assume that each nested loop of $\program$ 
+terminates almost surely from each reachable configuration, and that there 
+exists a NCSM for $\program$ supported by some invariant map. Then $\program$ 
+terminates almost surely from each initial configuration.
 \end{theorem}
-\begin{proof}
-\textbf{[PETR: TBD]}
+\begin{proof}[Proof (Key Idea)]
+Assume that there is set of non-terminating runs $A$ of positive probability.
+Let $\{X_i\}_{i=0}^{\infty}$ be a stochastic process returning the value of 
+NCSM $\lem$ in step $i$. We show that for each $i$ it holds $\E[X_i] 
+\leq \lem(\locinit,\vecinit) - \eps\cdot \E[\sharp_i]$, where $\sharp_i$ is the 
+random variable returning the number of times a location from 
+$\slice(\program)$ is visited. Since all sub-loops of $\program$ terminate 
+a.s., $\lim_{i\rightarrow \infty}\sharp_i(\run)=\infty$ for $\run\in A$. Since 
+$A$ has positive probability $\lim_{i\rightarrow 
+\infty}\E[\sharp_i(\run)=\infty]$, it holds $\lim_{i\rightarrow 
+\infty}\E[X_i] = -\infty$, a contradiction with non-negativity of $\lem$.
 \end{proof}
 
 Hence, NCSMs effectively trade the uniform integrability condition for 
@@ -323,10 +391,10 @@ non-negativity over the whole program. We believe that the latter condition is
 substantially easier to impose and check automatically, especially in the case 
 of affine probabilistic programs and (propositionally) linear NCSMs: for 
 \APP{}s, synthesizing NCSM entails synthesizing sufficient program invariants 
-(for which there is a good automated tool support~\cite{xxx}) that 
-overapproximate set of reachable configurations and encoding the rankingn, 
+(for which there is a good automated tool support~\cite{FG10:aspic})  encoding 
+the ranking, 
 unaffection, and non-negativity conditions into a collection of linear 
-constraints (as for general LinLexRSMs in Section~\ref{xxx}). 
+constraints (as for general LinLexRSMs in Section~\ref{sec:algo}). 
 Figures~\ref{fig:uniint} and~\ref{fig:uniint2} show instances where attempts to 
 to prove of a.s. termination via PVSMs fail while proofs via LinNCSMs work. 
 

@@ -1,6 +1,13 @@
 \section{Algorithmic Aspects}
+\label{sec:algo}
 
-In this section we describe a polynomial-time algorithm for synthesizing linear $\eps$-LexRSM maps in affine probabilistic programs supported by a given linear invariant map $\inv$. The algorithm, based on iterative solving of linear constraints, is an adaptation of a similar algorithm for finding lexicographic ranking functions in non-probabilistic programs~\cite{ADFG10:lexicographic}. Hence, we provide only a high-level description, focusing on new aspects of our adaptation. 
+In this section we describe a polynomial-time algorithm for synthesizing linear 
+$\eps$-LexRSM maps in affine probabilistic programs supported by a given linear 
+invariant map $\inv$. The algorithm, based on iterative solving of linear 
+constraints, is a generalization of an algorithm for finding 
+lexicographic ranking functions in non-probabilistic 
+programs~\cite{ADFG10:lexicographic}. Hence, we provide only a high-level 
+description, focusing on the new aspects.
 
 The main idea is to iteratively synthesize 1-dimensional linear expression map that $1$-rank a subset of generalized transitions. These maps form the individual components of the sought-after $1$-LinLexRSM map. In each iteration, we start with a set $U$ of the yet-unranked generalized transitions. We seek a 1-dimensional LEM which ranks the maximal number of elements if $U$, and is unaffected by the remaining elements of $U$ (here by ranking a generalized transition $\tilde\tau$ we mean ranking it from each configuration $(\loc,\vec{x})$, where $\loc$ is the source location of $\tilde\tau$ and $\vec{x}\in\inv(\loc)$). If no 1-dimensional LEM that would rank at least one element in $U$ exists, then there is no LinLexRSM map for the program. Otherwise, we remove the newly ranked elements from $U$ and continue into the next iteration, until $U$ becomes empty. The process is summarized in Algorithm~\ref{algo:linlexrsm}.
 
@@ -74,19 +81,31 @@ follow by arguments identical to those presented
 in~\cite{ADFG10:lexicographic}. 
 \begin{theorem}
 \label{thm:algo}
+\label{THM:ALGO}
 	Suppose that Algorithm~\ref{algo:linlexrsm} is run on an \APP{} $\program$ 
 	together with linear invariant map $\inv$. If the algorithm returns a 
 	$d$-dimensional LEM $\vec{\lem}=(\lem_1,\dots,\lem_d)$, then $\vec{\lem}$ 
 	is a $1$-LinLexRSM map for $\program$ supported by $\inv$. Conversely, if 
 	the algorithm returns ``No LinLexRSM'', then for any $d'\in \Nset$ and 
 	$\eps>0$ there is no $d'$-dimensional $\eps$-LinLexRSM for $\program$  
-	supported by $\inv$. The algorithm runs in time polynomial in size of 
-	$\program$ and $\inv$. \textbf{[PETR: POLYHEDRAL GUARDS]}
+	supported by $\inv$. If guards of all conditionals and loops in $\APP{}$ 
+	are linear assertion, then the
+	algorithm runs in time polynomial in size of 
+	$\program$ and $\inv$.
 \end{theorem}
 \begin{proof}[Proof (Key Ideas)]
 For soundness, let $U_i$ and $U_{i}$ denote the content of $U$ just before the $i$-th iteration of the while loop. Then each $\tilde{\tau}\in U_{i}\setminus U_{i+1}$ is $1$-ranked by $\lem_i$, for each $1\leq i \leq d$. Since $U_{d}=\emptyset$, each generalized transition of $\pCFG_{\program}$ is 1-ranked by some component of $\vec{\lem}$. Non-negativity of each $\lem_i$ is ensured directly by $\lp_{U_i}$. Hence, it remains to show that each $\tilde{\tau}\in U_i$ is unaffected by $\lem_1,\dots,\lem_{i-1}$. But this follows from $U_i \subseteq U_{i-1}\subseteq \cdots\subseteq U_1$ and from the fact that each gen. transition in $U_j$ is unaffected by $\lem_j$.
 
-Proving completeness is more intricate; as pointed out in~\cite{ADFG10:lexicographic}, one needs to show that the greedy strategy of selecting LEM that ranks maximal number of remaining transitions does not cut off some possible LinLexRSMs. In~\cite{ADFG10:lexicographic} the completeness of the greedy strategy is proved by using several geometric arguments that exploit the fact that the underlying programs are affine. The same geometric properties hold for our generalization to \APP{}s (all ranking conditions in Definitions~\ref{def:rank1} and~\ref{def:rank2} are linear in program variables), so the result is easily transferable.
+Proving completeness is more intricate; as pointed out 
+in~\cite{ADFG10:lexicographic}, one needs to show that the greedy strategy of 
+selecting LEM that ranks maximal number of remaining transitions does not cut 
+off some possible LinLexRSMs. In~\cite{ADFG10:lexicographic} the completeness 
+of the greedy strategy is proved by using several geometric arguments that 
+exploit the fact that the underlying programs are affine. The same geometric 
+properties hold for our generalization to \APP{}s (all ranking conditions in 
+Definitions~\ref{def:rank1} and~\ref{def:rank2} are linear in program 
+variables), so the result is easily transferable. The complexity argument is 
+rather standard and we present it in~\AppendixMaterial.
 \end{proof}
 
 %\

@@ -27,15 +27,27 @@ Repeated entry---line 68 of file new.bib
  : @proceedings{DBLP:conf/popl/2016
  :                                 ,
 I'm skipping whatever remains of this entry
+Repeated entry---line 184 of file new.bib
+ : @inbook{CVS16:martingale-recurrence-persistence
+ :                                                ,
+I'm skipping whatever remains of this entry
 Repeated entry---line 216 of file new.bib
  : @proceedings{DBLP:conf/sas/2001
  :                                ,
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "POPL17PAPER"
-Warning--I didn't find a database entry for "xxx"
+Warning--no key, author in cplex
+Warning--no author, editor, organization, or key in cplex
+Warning--to sort, need author or key in cplex
+Warning--no key, author in cplex
+Warning--no key, author in cplex
 Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--no key, author in cplex
+Warning--no author, editor, organization, or key in cplex
 Warning--numpages field, but no articleno or eid field, in ADFG10:lexicographic
 Warning--empty address in Ash:book
+Warning--can't use both author and editor fields in BEFH16:doob
+Warning--numpages field, but no articleno or eid field, in BGGHS16:diff-privacy-coupling
+Warning--numpages field, but no articleno or eid field, in BGHP16:diff-privacy-siglog
 Warning--numpages field, but no articleno or eid field, in BG13:integer-ranking
 Warning--can't use both author and editor fields in BG15:lexicographic-complexity
 Warning--empty address in Billingsley:book
@@ -46,6 +58,7 @@ Warning--empty publisher in BMS05b
 Warning--empty address in BMS05b
 Warning--can't use both author and editor fields in BCIKP16:T2
 Warning--empty address in SriramCAV
+Warning--can't use both author and editor fields in CVS16:martingale-recurrence-persistence
 Warning--page numbers missing in both pages and numpages fields in CF17
 Warning--empty publisher in CFG16
 Warning--empty address in CFG16
@@ -78,6 +91,7 @@ Warning--empty address in LJB01
 Warning--empty publisher in MM04
 Warning--empty address in MM04
 Warning--empty address in MM05
+Warning--page numbers missing in both pages and numpages fields in MM16:proofrule-arxiv
 Warning--empty address in DBLP:conf/sas/Monniaux01
 Warning--empty publisher in NSK:CTMDP-delayed
 Warning--empty address in NSK:CTMDP-delayed
@@ -88,45 +102,45 @@ Warning--empty address in DBLP:conf/vmcai/PodelskiR04
 Warning--numpages field, but no articleno or eid field, in PR04:transition-invariants
 Warning--empty address in Rosenthal:book
 Warning--empty address in DBLP:conf/pods/SohnG91
-You've used 52 entries,
+You've used 59 entries,
             5706 wiz_defined-function locations,
-            1777 strings with 28747 characters,
-and the built_in function-call counts, 58764 in all, are:
-= -- 7047
-> -- 2043
+            1828 strings with 30677 characters,
+and the built_in function-call counts, 66636 in all, are:
+= -- 8087
+> -- 2325
 < -- 1
-+ -- 610
-- -- 811
-* -- 4140
-:= -- 6138
-add.period$ -- 268
-call.type$ -- 52
-change.case$ -- 338
-chr.to.int$ -- 48
-cite$ -- 106
-duplicate$ -- 4930
-empty$ -- 3549
-format.name$ -- 887
-if$ -- 13912
-int.to.chr$ -- 5
++ -- 702
+- -- 950
+* -- 4745
+:= -- 6942
+add.period$ -- 303
+call.type$ -- 59
+change.case$ -- 386
+chr.to.int$ -- 53
+cite$ -- 129
+duplicate$ -- 5500
+empty$ -- 3972
+format.name$ -- 1005
+if$ -- 15779
+int.to.chr$ -- 7
 int.to.str$ -- 0
-missing$ -- 216
-newline$ -- 505
-num.names$ -- 430
-pop$ -- 2091
+missing$ -- 237
+newline$ -- 579
+num.names$ -- 476
+pop$ -- 2334
 preamble$ -- 1
-purify$ -- 591
+purify$ -- 672
 quote$ -- 0
-skip$ -- 1873
+skip$ -- 2069
 stack$ -- 0
-substring$ -- 4686
-swap$ -- 532
-text.length$ -- 187
+substring$ -- 5357
+swap$ -- 595
+text.length$ -- 274
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1217
-warning$ -- 54
-while$ -- 464
+type$ -- 1346
+warning$ -- 66
+while$ -- 512
 width$ -- 0
-write$ -- 1032
-(There were 5 error messages)
+write$ -- 1173
+(There were 6 error messages)
