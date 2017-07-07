@@ -67,14 +67,15 @@ linear and polynomial RSMs have also been considered~\cite{SriramCAV,CFNH16:prob
 
 \smallskip\noindent{\em Practical limitations of existing approaches.} 
 While an impressive set of theoretical results related to RSMs has been
-established~\cite{SriramCAV,HolgerPOPL,CF17,CFNH16:prob-termination,CFG16,CNZ17}, 
-for probabilistic programs with nondeterminism the current approaches  
+established~\cite{SriramCAV,HolgerPOPL,CF17,CFNH16:prob-termination,CFG16,CNZ17},
+ for probabilistic programs with nondeterminism the current approaches  
 are only applicable to academic examples of variants of random walks. 
 The key reason can be understood as follows: even for non-probabilistic programs while 
 ranking functions are sound and complete, they do not necessarily provide a practical 
 approach. This is because to prove termination, a witness in the form of a 
-ranking function has to be computed: to this automatically, ranking functions 
-of a restricted shape (such as linear ranking functions) have to be considered, 
+ranking function has to be computed: to do this automatically, ranking 
+functions 
+of a restricted form (such as linear ranking functions) have to be considered, 
 and 1-dimensional ranking functions of a restricted type can only prove 
 termination of a limited class of programs. 
 In contrast, as a practical and scalable approach for non-probabilistic programs the 
