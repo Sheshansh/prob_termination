@@ -1141,18 +1141,28 @@ a.s. terminating, but the converse does not hold.
 \newsavebox{\invrun}
 \begin{lrbox}{\invrun}
 \begin{lstlisting}[mathescape]
-$x:=10$
-while $x\geq 1$ do
-	if prob(0.75) then $x:=x-1$	else $x:=x+1$ 
+while $x\geq 0$ and $y\geq 0$ do
+	if * then
+		if prob(0.5) then 
+			$x:=x-2$ 
+		else skip 
+		fi
+	else 
+		$x:=2x$;
+		$y:=y-1$
 	fi
 od
 \end{lstlisting}
 \end{lrbox}
 \begin{figure}[t]
+	\begin{subfigure}{0.45\textwidth}
 \centering
 \usebox{\invrun}
-
-\begin{tikzpicture}[x = 1.8cm]
+%\caption{}
+\end{subfigure}
+\begin{subfigure}{0.45\textwidth}
+	\centering
+\begin{tikzpicture}
 %\node[det] (det1) at (0,0) {$\loc_0$};
 %\node[det] (while) at (1.5,-1.5)  {$\loc_1$};
 %\node[det] (fin) at (0,-3) {$\loc_5$};
@@ -1175,9 +1185,10 @@ od
 %\draw[tran] (demon) to node[auto] {x:=x-1} (while);
 %\draw[tran] (angel) to node[auto, swap] {x:=x-1} (while);
 
-\node[det] (while) at (1.5,0)  {$\loc_0$};
+\node[det] (while) at (0,0)  {$\loc_0$};
+%\node[det] (while) at (0,0)  {$\loc_0$};
 %%\node[det] (fin) at (0,-3) {};
-\node[ran] (prob) at (3,0) {$\loc_1$};
+\node[dem] (demon) at (2,0) {$\loc_1$};
 %\node[ang] (angel) at (3,0) {$\loc_3$};
 %\node[dem] at (3,-3) (demon) {$\loc_4$};
 %\node[det] (aif) at (2,-0.075) {$\loc_5$};
@@ -1186,21 +1197,42 @@ od
 %\node[det] (delse) at (3,-2.2) {$\loc_8$};
 %\node[det] (det1) at (0,0) {$\loc_0$};
 %\node[det] (while) at (1.5,-1.5)  {};
-\node[det] (fin) at (0,0) {$\loc_2$};
+\node[det] (br1) at (3.5,0)  {$\loc_2$};
+\node[det] (br11) at (2,1)	{$\loc_6$};
+\node[ran] (br2) at (2,-1.5)  {$\loc_3$};
+\node[det] (pr1) at (3.5,-1.5)  {$\loc_4$};
+\node[det] (pr2) at (3.5,-3)  {$\loc_5$};
+\node[det] (fin) at (0,-1.5) {$\loc_7$};
 %\node[ran] (prob) at (3,-1.5) {};
 %\node[ang] (angel) at (3,0) {};
 %\node[dem] at (3,-3) (demon) {};
 %
 %%\draw[tran] (det1) to node[auto, swap] {x:=0} (while);
 \draw[tran] (while) to node[font=\scriptsize,draw, fill=white, 
-rectangle,pos=0.5] {$x<1$} (fin);
+rectangle,pos=0.5] {$x<0 \vee y<0$} (fin);
 \draw[tran, loop, looseness = 5, in =-65, out = -115] (fin) to (fin);
 \draw[tran] (while) to node[font=\scriptsize,draw, fill=white, 
-rectangle,pos=0.5] {$x\geq 1$} (prob);
-%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white, 
-%rectangle,pos=0.3, inner sep = 1pt] {$\frac{6}{10}$} (angel);
-%\draw[tran] (prob) to node[font=\scriptsize,draw, fill=white, 
-%rectangle,pos=0.3, inner sep = 1pt] {$\frac{4}{10}$} (demon);
+rectangle,pos=0.5, text width=0.8cm, text centered] {$x\geq0$ \\$\wedge$ 
+\\$y\geq0$} (demon);
+\draw[tran] (demon) to (br1);
+\draw[tran] (demon) to (br2);
+\draw[tran] (br2) to node[font=\scriptsize,draw, fill=white, 
+rectangle,pos=0.5, inner sep = 1pt] {$\frac{1}{2}$} (pr1);
+\draw[tran] (br2) to node[font=\scriptsize,draw, fill=white, 
+rectangle,pos=0.5, inner sep = 1pt] {$\frac{1}{2}$} (pr2);
+\draw[tran, rounded corners] (br1) -- (3.5,1) -- node[font=\scriptsize, 
+label={[font=\scriptsize, yshift=-0.5cm] {$x:=2x$}},swap] {}  
+(br11);
+\draw[tran, rounded corners] (br11) -- node[font=\scriptsize, 
+label={[font=\scriptsize, yshift=-0.55cm] {$y:=y-1$}}] {} (while.70|-br11) -- 
+(while.70);
+\draw[tran, rounded corners] (pr1) -- (3.9,-1.5) -- (3.9,1.5) -- 
+(while|-3.9,1.5) -- 
+(while);
+\draw[tran, rounded corners] (pr2) -- (4.1,-3) -- node[font=\scriptsize, 
+label={[font=\scriptsize,xshift=0.6cm] {$x:=x-2$}}] {} (4.1,1.7) -- 
+(while.110|-4.1,1.7) -- 
+(while.110);
 %\draw[tran] (demon) -- node[auto] {x:=x+1} (demon-|while) -- (while);
 %\draw[tran] (angel) -- node[auto, swap] {x:=x+1} (angel-|while) -- (while);
 %\draw[tran] (demon) to node[auto] {x:=x-1} (while);
@@ -1212,16 +1244,16 @@ rectangle,pos=0.5] {$x\geq 1$} (prob);
 %\draw[tran] (demon) -- (dif);
 %\draw[tran] (demon) -- (delse);
 
-\node (dum1) at (0,0.8) {};
-\node (dum2) at (0,-0.8) {};
+%\node (dum1) at (0,0.8) {};
+%\node (dum2) at (0,-0.8) {};
 
-\draw[tran] (prob) -- node[font=\scriptsize,draw, fill=white, 
-rectangle,pos=0.5, inner sep = 1pt] {$\frac{3}{4}$} (prob|-dum1) -- node[auto] 
-{x:=x-1}
-(while|-dum1)--(while);
-\draw[tran] (prob) -- node[font=\scriptsize,draw, fill=white, 
-rectangle,pos=0.5, inner sep = 1pt] {$\frac{1}{4}$} (prob|-dum2) 
--- node[auto,swap] {x:=x+1} (while|-dum2)--(while);
+%\draw[tran] (prob) -- node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.5, inner sep = 1pt] {$\frac{3}{4}$} (prob|-dum1) -- node[auto] 
+%{x:=x-1}
+%(while|-dum1)--(while);
+%\draw[tran] (prob) -- node[font=\scriptsize,draw, fill=white, 
+%rectangle,pos=0.5, inner sep = 1pt] {$\frac{1}{4}$} (prob|-dum2) 
+%-- node[auto,swap] {x:=x+1} (while|-dum2)--(while);
 %\draw[tran] (dif) --  (demon-|while) -- node[auto, pos=0.2] {x:=x+1} (while);
 %\draw[tran] (aif) --  (angel-|while) -- node[auto, swap, pos=0.2] {x:=x+1} 
 %(while);
@@ -1229,11 +1261,14 @@ rectangle,pos=0.5, inner sep = 1pt] {$\frac{1}{4}$} (prob|-dum2)
 %\draw[tran] (aelse) -- node[auto, swap] {x:=x-1} (aelse-|while.55) --  
 %(while.55);
 \end{tikzpicture}
-\caption{An \APP{} modelling an asymmetric 1-D random walk and the associated 
+%\caption{}
+\end{subfigure}
+\caption{An example \APP{} and its associated 
 pCFG. Probabilistic locations are depicted by circles, with probabilities given 
 on outgoing 
-transitions. Transitions are labelled by their effects. Location $\loc_0$ is 
-initial and $\loc_2$ is terminal.}
+transitions, demonic locations are denoted by diamonds. Transitions are 
+labelled by their effects. Location $\loc_0$ is 
+initial and $\loc_7$ is terminal.}
 \label{fig:invariant-running}
 \end{figure}
 

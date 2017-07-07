@@ -290,7 +290,8 @@ od
 		\draw[tran] (init) to node[font=\scriptsize,draw, fill=white, 
 		rectangle,pos=0.6] {$x<0 \vee z<0$} (fin);
 		\draw[tran] (init) to node[font=\scriptsize,draw, fill=white, 
-		rectangle,pos=0.5,text width=0.8cm] {$x\geq 0$\\$\wedge$\\$z\geq 0$} 
+		rectangle,pos=0.5,text width=0.8cm, text centered] {$x\geq 
+		0$\\$\wedge$\\$z\geq 0$} 
 		(as1);
 		\draw[tran] (as1) -- node[auto,font=\scriptsize] {$y:=z$} (inner);
 		\draw[tran] (inner) to node[font=\scriptsize,draw, fill=white, 
@@ -454,7 +455,15 @@ NCSMs allow compositional, fully automated proofs of a.s. termination without th
 
 \subsection{Multidimensional Compositional Ranking}
 
- Above, we defined NCSMs as one-dimensional objects, to make them analogous to PVSMs for better comparison. However, we can also define a multi-dimensional version of NCSMs, to take advantage of the fact that LexRSMs can handle loops for which no 1-dimensional linear RSM exists. We say that, given an invariant map $\inv$, an $n$-dimensional measurable map is $\eps$-$\inv$-ranking in a location $\loc$ if for each $\vec{x}\in \inv(\loc)$ and each gen. transition $\tilde{\tau}$ outgoing from $\loc$ there exists $1\leq j \leq n$ such that $\tilde\tau$ is $\eps$-ranked by $\lem_j$ and for each $j'<j$ we have that  $\tilde{\tau}$ is unaffected by $\lem_{j'}$.
+ Above, we defined NCSMs as one-dimensional objects, to make them analogous to 
+ PVSMs for better comparison. However, we can also define a multi-dimensional 
+ version of NCSMs, to take advantage of the fact that LexRSMs can handle loops 
+ for which no 1-dimensional linear RSM exists (see Example~\ref{ex:oneloop}). 
+ We say that, given an invariant map $\inv$, an $n$-dimensional measurable map 
+ is $\eps$-$\inv$-ranking in a location $\loc$ if for each $\vec{x}\in 
+ \inv(\loc)$ and each gen. transition $\tilde{\tau}$ outgoing from $\loc$ there 
+ exists $1\leq j \leq n$ such that $\tilde\tau$ is $\eps$-ranked by $\lem_j$ 
+ and for each $j'<j$ we have that  $\tilde{\tau}$ is unaffected by $\lem_{j'}$.
 
 \begin{definition}
 An $n$-dimensional measurable map $\overrightarrow{\lem}=(\lem_1,\dots,\lem_n)$ 

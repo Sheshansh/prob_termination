@@ -77,7 +77,7 @@ desired inequality follows by taking $k$ to $\infty$, since
 $\lim_{k\rightarrow \infty}\E[\nodecrank{k}{j}] = \E[\noofdecrank_j]$ and 
 $\lim_{k\rightarrow \infty}\E[\vecseq{X}{k}{j}] \geq 0$. The inductive proof is 
 somewhat technical and deferred to \AppendixMaterial.
-
+%
 %The base case $k=0$ is simple as both sides of the inequality are zero. Assume 
 %that the inequality holds for some $k\geq 0$. We have 
 %$\E[\nodecrank{k+1}{j}]=\E[\nodecrank{k}{j}]+\probm{(L_j^{k})}$, so from 
@@ -161,7 +161,8 @@ variables $\vecinit\in\vecinitset$ it holds $\E^{\sigma}_{\vecinit}[\ttime]\leq
 \end{corollary}
 
 \begin{example}
-Consider the program in Figure~\ref{fig:uniint4}. For the program we have an 
+Consider the program in Figure~\ref{fig:uniint4}, with initial condition 
+$x_{\mathit{init}}\geq 0$. For the program we have an 
 invariant map $\inv$ with $\inv(\loc_0)=x\geq -1$, $\inv(\loc_1)=\inv(\loc_4) = 
 x\geq 0 
 \wedge z\geq 0$, $\inv(\loc_2)=\inv(\loc_3)= x\geq 0 \wedge y \geq 0
@@ -177,7 +178,8 @@ $\overrightarrow{\lem}(\loc_4)=(2x+2,0,0)$, and
 $\overrightarrow{\lem}(\loc^{\lout})=(0,0,0)$. It is 
 easy to check that $\overrightarrow{\lem}$ is has $(0,z,2)$-bounded ECI. 
 Applying 
-Corollary~\ref{col:runtime-progs} yields $\E[\ttime]\leq (2x_{\mathit{init}} + 
+Corollary~\ref{col:runtime-progs} yields $\E^{\sigma}_{\vecinit}[\ttime]\leq 
+(2x_{\mathit{init}} + 
 3)\cdot(1+3z_{\mathit{init}})+0+2= 6x_{\mathit{init}}z_{\mathit{init}} + 
 2x_{\mathit{init}} + 9z_{\mathit{init}}+5$. Note that this quadratic bound is 
 asymptotically optimal for the given program.

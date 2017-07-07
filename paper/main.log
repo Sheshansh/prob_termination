@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  7 JUL 2017 13:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  7 JUL 2017 14:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1873,14 +1873,16 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
 [8.8]
 \invrun=\box86
+LaTeX Font Info:    Font shape `TS1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 10.0pt on input line 1145.
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 1236.
+(Font)              scaled to size 9.0pt on input line 1271.
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/sc' will be
-(Font)              scaled to size 9.0pt on input line 1236.
+(Font)              scaled to size 9.0pt on input line 1271.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
-(Font)              scaled to size 9.0pt on input line 1236.
+(Font)              scaled to size 9.0pt on input line 1271.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 1236.
+(Font)              scaled to size 9.0pt on input line 1271.
 ) (./lexicographic.tex
 Underfull \hbox (badness 10000) has occurred while \output is active
 
@@ -1914,6 +1916,9 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [11.11]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -1940,7 +1945,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 \infastinv=\box89
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
 (Font)              scaled to size 9.0pt on input line 368.
-) (./synthesis.tex
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -1951,7 +1956,7 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[15.15]
+[15.15]) (./synthesis.tex
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -1960,10 +1965,6 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
 (Font)              scaled to size 7.0pt on input line 64.
 
-
-LaTeX Font Warning: Command \sc invalid in math mode on input line 92.
-
-
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -1974,7 +1975,16 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[17.17]) (./compositional.tex
+[17.17]
+
+LaTeX Font Warning: Command \sc invalid in math mode on input line 92.
+
+) (./compositional.tex
+Underfull \hbox (badness 10000) has occurred while \output is active
+
+ []
+
+[18.18]
 Overfull \hbox (19.83559pt too wide) in paragraph at lines 95--99
 []\T1/LinuxLibertineT-TLF/m/n/10 (-20) Given an in-vari-ant map $\OML/nxlmi/m/i
 t/10 I$\T1/LinuxLibertineT-TLF/m/n/10 (-20) , we say that a 1-dimensional mea-s
@@ -1989,28 +1999,6 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-[18.18]
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/it' will be
-(Font)              scaled to size 10.0pt on input line 145.
-\uniinto=\box90
-\uniintt=\box91
-\unintthree=\box92
-\unintfour=\box93
-
-Underfull \hbox (badness 10000) in paragraph at lines 280--312
-[][]
- []
-
-
-Overfull \hbox (7.7012pt too wide) in paragraph at lines 280--312
-[] 
- []
-
-
-Underfull \hbox (badness 10000) has occurred while \output is active
-
- []
-
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
@@ -2018,6 +2006,23 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [19.19]
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/it' will be
+(Font)              scaled to size 10.0pt on input line 145.
+\uniinto=\box90
+\uniintt=\box91
+\unintthree=\box92
+\unintfour=\box93
+
+Underfull \hbox (badness 10000) in paragraph at lines 280--313
+[][]
+ []
+
+
+Overfull \hbox (7.7012pt too wide) in paragraph at lines 280--313
+[] 
+ []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -2033,12 +2038,12 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[21.21]) (./extensions.tex
+[21.21]
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-[22.22]
+[22.22]) (./extensions.tex
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -2049,12 +2054,23 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[23.23]) (./experiments.tex
+[23.23]
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-[24.24]
+[24.24]) (./experiments.tex
+Underfull \hbox (badness 10000) has occurred while \output is active
+
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (13.0pt): 
+ Make it at least 22.47003pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[25.25]
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 66.
@@ -2068,13 +2084,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-
-Package Fancyhdr Warning: \headheight is too small (13.0pt): 
- Make it at least 22.47003pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
-
-[25.25]
+[26.26]
 LaTeX Font Info:    Try loading font information for T1+zi4 on input line 67.
  (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
@@ -2094,21 +2104,13 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-[26.26]) (./main.bbl
-Underfull \hbox (badness 10000) has occurred while \output is active
-
- []
-
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[27.27]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
+[27.27]) (./main.bbl
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -2127,15 +2129,15 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[29.29])
+[29.29]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-[30.30]
-LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 12.0pt on input line 556.
- (./app.tex
+[30.30])
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -2146,14 +2148,17 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[31.31
-
-]
+[31.31]
+LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
+(Font)              scaled to size 12.0pt on input line 556.
+ (./app.tex
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-[32.32]
+[32.32
+
+]
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -2169,7 +2174,7 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-[34.34]) (./exp_appendix.tex
+[34.34]
 Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
@@ -2180,7 +2185,12 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[35.35]
+[35.35]) (./exp_appendix.tex
+Underfull \hbox (badness 10000) has occurred while \output is active
+
+ []
+
+[36.36]
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 10.
@@ -2190,7 +2200,13 @@ Underfull \hbox (badness 10000) has occurred while \output is active
 
  []
 
-[36.36]
+
+Package Fancyhdr Warning: \headheight is too small (13.0pt): 
+ Make it at least 22.47003pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[37.37]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 570.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 570.
  (./main.aux)
@@ -2210,11 +2226,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 570.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 45294 strings out of 493644
- 973823 string characters out of 6150875
- 1229052 words of memory out of 5000000
- 46561 multiletter control sequences out of 15000+600000
- 365293 words of font info for 788 fonts, out of 8000000 for 9000
+ 45369 strings out of 493644
+ 975235 string characters out of 6150875
+ 1232022 words of memory out of 5000000
+ 46623 multiletter control sequences out of 15000+600000
+ 366490 words of font info for 793 fonts, out of 8000000 for 9000
  944 hyphenation exceptions out of 8191
  62i,18n,96p,1381b,7216s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/inconso
@@ -2255,10 +2271,10 @@ e1/public/txfonts/txsyb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1
 ublic/newtx/txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/publi
 c/newtx/zxlr.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/new
 tx/zxlri.pfb>
-Output written on main.pdf (36 pages, 994980 bytes).
+Output written on main.pdf (37 pages, 999082 bytes).
 PDF statistics:
- 1026 PDF objects out of 1200 (max. 8388607)
- 914 compressed objects within 10 object streams
- 315 named destinations out of 1000 (max. 500000)
- 95465 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 1043 PDF objects out of 1200 (max. 8388607)
+ 930 compressed objects within 10 object streams
+ 323 named destinations out of 1000 (max. 500000)
+ 95977 words of extra memory for PDF output out of 106986 (max. 10000000)
 

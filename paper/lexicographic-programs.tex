@@ -378,7 +378,36 @@ is $\frac{1}{2}\cdot 1 + \frac{1}{4}\cdot 2 + \frac{1}{8}\cdot 4 + \cdots =
 \frac{1}{2}+\frac{1}{2}+\frac{1}{2}+\cdots=\infty$ and that the time needed to 
 get out of the second loop is equal to the value of $x$ upon entering the loop. 
 However, a.s. termination of the program is proved by a 2-dimensional LinLexRSM 
+map
 $\lem$ pictured in the figure.
+\end{example}
+
+Also, similarly to non-probabilistic programs, LexRSMs are more powerful than 
+1-dimensional LexRSMs already on 
+single-loop programs.
+
+\newcommand{\olem}{\overrightarrow{\lem}}
+
+\begin{example}
+\label{ex:oneloop}
+Consider the program in Figure~\ref{fig:invariant-running}, and for simplicity, 
+assume that initial values of variables are non-negative. One can rather 
+straightforwardly check that there is no 1-dimensional Lin(Lex)RSM map for the 
+program, given any invariant. Intuitively, this is because any such RSM map has 
+to 
+decrease as $x$ decreases, since $x$ is the only variable modified in the 
+``if'' branch of non-deterministic choice, but $x$ can increase unboundedly in 
+the ``else'' branch, and this cannot be compensated by a bounded decrease of 
+$y$. However, there is the following $3$-dimensional $\frac{1}{2}$-LinLexRSM 
+map 
+$\overrightarrow{\lem}$: $\olem(\loc_0)=(y+1,x+2,3)$, $\olem(\loc_1) = 
+(y+1,x+2,2)$, $\olem(\loc_2)=\olem(\loc_3)=(y+1,x+2,1)$, 
+$\olem(\loc_4)=(y+1,x+3,0)$, $\olem(\loc_5)=(y+1,x+1,0)$, 
+$\olem(\loc_6)=(y+\frac{1}{2},x+2,1)$, $\olem(\loc_7)=(0,0,0)$. (Here $\olem$ 
+is supported by invariant $\inv$ s.t. $\inv(\loc_0)=x\geq -2 \wedge y\geq -1 $, 
+$\inv(\loc_i)=x\geq 0 \wedge y\geq 0$ for $i=1,\dots,6$, and 
+$\inv(\loc_7)=\mathit{true}$.) A bit more intricate LinLexRSM map exists also 
+without the assumption that initial valuation is non-negative.
 \end{example}
 
 
