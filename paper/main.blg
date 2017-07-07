@@ -93,45 +93,45 @@ Warning--empty address in DBLP:conf/vmcai/PodelskiR04
 Warning--numpages field, but no articleno or eid field, in PR04:transition-invariants
 Warning--empty address in Rosenthal:book
 Warning--empty address in DBLP:conf/pods/SohnG91
-You've used 58 entries,
+You've used 59 entries,
             5706 wiz_defined-function locations,
-            1836 strings with 31068 characters,
-and the built_in function-call counts, 67079 in all, are:
-= -- 8165
-> -- 2321
+            1846 strings with 31585 characters,
+and the built_in function-call counts, 68424 in all, are:
+= -- 8306
+> -- 2388
 < -- 1
-+ -- 697
-- -- 946
-* -- 4760
-:= -- 6910
-add.period$ -- 299
-call.type$ -- 58
-change.case$ -- 378
-chr.to.int$ -- 53
-cite$ -- 119
-duplicate$ -- 5575
-empty$ -- 4022
-format.name$ -- 998
-if$ -- 15950
++ -- 718
+- -- 967
+* -- 4874
+:= -- 7060
+add.period$ -- 304
+call.type$ -- 59
+change.case$ -- 387
+chr.to.int$ -- 54
+cite$ -- 120
+duplicate$ -- 5684
+empty$ -- 4099
+format.name$ -- 1023
+if$ -- 16257
 int.to.chr$ -- 6
 int.to.str$ -- 0
-missing$ -- 250
-newline$ -- 572
-num.names$ -- 481
-pop$ -- 2343
+missing$ -- 255
+newline$ -- 582
+num.names$ -- 491
+pop$ -- 2388
 preamble$ -- 1
-purify$ -- 660
+purify$ -- 674
 quote$ -- 0
-skip$ -- 2125
+skip$ -- 2167
 stack$ -- 0
-substring$ -- 5370
-swap$ -- 588
+substring$ -- 5467
+swap$ -- 601
 text.length$ -- 274
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 1412
+type$ -- 1442
 warning$ -- 57
-while$ -- 514
+while$ -- 522
 width$ -- 0
-write$ -- 1174
+write$ -- 1196
 (There were 6 error messages)

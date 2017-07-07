@@ -392,12 +392,15 @@ Let $\{X_i\}_{i=0}^{\infty}$ be a stochastic process returning the value of
 NCSM $\lem$ in step $i$. Then $\{X_i\}_{i=0}^{\infty}$ is a (non-strict) $1$-dimensional $\eps$-LexRSM for the termination time of the program, for some $\eps>0$. Since all sub-loops of $\program$ terminate, with probability one each run has level $<2$ in infinitely many steps. From theorem $\ref{thm:lexrsm-main}$ it follows that $\probm^\sigma_{\vecinit}(\ttime<\infty)=1$, for all $\sigma$ and $\vecinit$.
 \end{proof}
 
-Hence, NCSMs effectively trade the uniform integrability condition for 
-non-negativity over the whole program. We believe that the latter condition is 
-substantially easier to impose and check automatically, especially in the case 
-of affine probabilistic programs and (propositionally) linear NCSMs: for 
-\APP{}s, synthesizing NCSM entails synthesizing sufficient program invariants 
-(for which there is a good automated tool support~\cite{FG10:aspic})  encoding 
+%Hence, NCSMs effectively trade the uniform integrability condition for 
+%non-negativity over the whole program. We believe that the latter condition is 
+%substantially easier to impose and check automatically, especially in the case 
+%of affine probabilistic programs and (propositionally) linear NCSMs: 
+For 
+\APP{}s, synthesizing linear NCSM entails synthesizing sufficient program 
+invariants 
+(for which there is a good automated tool support~\cite{FG10:aspic}) and  
+encoding 
 the ranking, 
 unaffection, and non-negativity conditions into a collection of linear 
 constraints (as for general LinLexRSMs in Section~\ref{sec:algo}). 
@@ -405,8 +408,8 @@ Figures~\ref{fig:uniint} and~\ref{fig:uniint2} show instances where attempts to
 to prove of a.s. termination via PVSMs fail while proofs via LinNCSMs work. 
 
 \begin{example}
-For all programs in Figures~\ref{fig:uniint} and~\ref{fig:uniint2} there are 
-LinNCSMs for all the loops in the program, which shows that the programs 
+All programs in Figures~\ref{fig:uniint} and~\ref{fig:uniint2} have 
+LinNCSMs for all their loops, which shows that the programs 
 terminate 
 a.s. In Figure~\ref{fig:uniint}, for both programs the inner loops have 
 LinNCSMs of the form $c+d_{\loc}$, for $d_{\loc}$ a location-specific constant, 
@@ -424,8 +427,8 @@ Using LinNCSMs we can devise the following simple algorithm for compositional pr
 \DontPrintSemicolon
 
 \Input{An \APP{} $\program$ together with an invariant map $\inv$.}
-$d\leftarrow \text{ depth of loop nesting in $\program$}$\;
-\For{$i \leftarrow d$ \KwTo $0$}{
+%$d\leftarrow \text{ depth of loop nesting in $\program$}$\;
+\For{$i \leftarrow \text{ depth of loop nesting in $\program$}$ \KwTo $0$}{
 \ForEach{sub-loop $\program'$ of $\program$ nested $i$ levels below the main loop}{
 \label{algoline:one}
 $\linsystem \leftarrow$ system of lin. constraints encoding the existence of LinNCSM for $\program'$ supported by $\inv$\;
