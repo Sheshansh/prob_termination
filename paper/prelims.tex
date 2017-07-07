@@ -249,15 +249,15 @@ sets over $\Omega$,
 i.e. a collection of subsets of $\Omega$ that contains the empty set
 $\emptyset$, and that is closed under complementation and countable unions, and
 $\probm$ is a \emph{probability measure} on $\mathcal{F}$, i.e., a function
-$\probm\colon \mathcal{F}\rightarrow[0,1]$ such that
-\begin{compactitem}
-\item $\probm(\emptyset)=0$,
-\item for all $A\in \mathcal{F}$ it holds $\probm(\Omega\smallsetminus
+$\probm\colon \mathcal{F}\rightarrow[0,1]$ such that:
+%\begin{compactitem}
+(1) $\probm(\emptyset)=0$,
+(2) for all $A\in \mathcal{F}$ it holds $\probm(\Omega\smallsetminus
 A)=1-\probm(A)$, and
-\item for all pairwise disjoint countable set sequences $A_1,A_2,\dots \in
+(3) for all pairwise disjoint countable set sequences $A_1,A_2,\dots \in
 \mathcal{F}$ (i.e., $A_i \cap A_j = \emptyset$ for all $i\neq j$)
 we have $\sum_{i=1}^{\infty}\probm(A_i)=\probm(\bigcup_{i=1}^{\infty} A_i)$.
-\end{compactitem}
+%\end{compactitem}
 
 Following the usual probabilistic terminology, we say that \emph{almost all} $\omega$ belonging to some set $O\subseteq \Omega$ satisfy some property $\Psi$ if it holds that $\probm{(\{\omega\in O\mid \omega \text{ does not satisfy }\Psi\})}=0$.
 
@@ -742,7 +742,7 @@ $(\OmegaRun,\natfilt,\probm^{\sigma}_{\vecinit})$.
 \vspace{-1em}
 \subsection{Almost-Sure and Positive Termination}
 \vspace{-0.5em}
-Termination is the basic liveness property of \PP{}s. 
+%Termination is the basic liveness property of \PP{}s. 
 
 \smallskip\noindent{\em Termination and termination time.}
 In the following, consider a \PP{} $P$ and its associated pCFG $\pCFG_P$. This 
@@ -787,9 +787,9 @@ $\ttime(\run)=\infty$. We call $\ttime$ the
 % $\{(\loc',(x,y))\mid \loc' \in\{\loc_{P}^{\lin},\loc_{P}^{\lout},\loc\} \text{ 
 % and } x\geq 2\}$, then $\treach{C}(\run)=1$.
 %\end{example}
-Since a probabilistic program may exhibit more than one run, we are interested 
-in probabilities of runs that terminate or reach some set of configurations. 
-This gives rise to the following fundamental computational problems regarding 
+%Since a probabilistic program may exhibit more than one run, we are interested 
+%in probabilities of runs that terminate or reach some set of configurations. 
+We consider the following fundamental computational problems regarding 
 termination:
 
 \begin{compactenum}
