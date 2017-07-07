@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  7 JUL 2017 20:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  8 JUL 2017 00:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -7,7 +7,7 @@ entering extended mode
 LaTeX2e <2016/03/31> patch level 3
 Babel <3.9r> and hyphenation patterns for 53 language(s) loaded.
 (./acmart.cls
-Document Class: acmart 2017/05/14 v1.39 Typesetting articles for Association of
+Document Class: acmart 2017/06/25 v1.41 Typesetting articles for Association of
  Computing Machinery
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
@@ -172,6 +172,9 @@ Package: environ 2014/05/04 v0.3 A new way to define environments
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
+(/home/pnovotny/texlive/2016/texmf-dist/tex/latex/textcase/textcase.sty
+Package: textcase 2004/10/07 v0.07 Text only upper/lower case changing (DPC)
+)
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip52
@@ -299,7 +302,22 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
 \Hy@SectionHShift=\skip54
-) (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+) (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/cleveref/cleveref.sty
+Package: cleveref 2013/12/28 v0.19 Intelligent cross-referencing
+Package cleveref Info: `hyperref' support loaded on input line 2230.
+LaTeX Info: Redefining \cref on input line 2230.
+LaTeX Info: Redefining \Cref on input line 2230.
+LaTeX Info: Redefining \crefrange on input line 2230.
+LaTeX Info: Redefining \Crefrange on input line 2230.
+LaTeX Info: Redefining \cpageref on input line 2230.
+LaTeX Info: Redefining \Cpageref on input line 2230.
+LaTeX Info: Redefining \cpagerefrange on input line 2230.
+LaTeX Info: Redefining \Cpagerefrange on input line 2230.
+LaTeX Info: Redefining \labelcref on input line 2230.
+LaTeX Info: Redefining \labelcpageref on input line 2230.
+Package cleveref Info: `amsthm' support loaded on input line 2858.
+)
+(/home/pnovotny/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
@@ -651,10 +669,10 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@ACM@badge@width=\skip56
 \@ACM@title@width=\skip57
 \@ACM@badge@skip=\skip58
-Class acmart Info: Printing CCS on input line 1197.
-Class acmart Info: Printing bibformat on input line 1197.
-Class acmart Info: Printing folios on input line 1202.
-Class acmart Info: Setting authorsperrow to 0 on input line 1207.
+Class acmart Info: Printing CCS on input line 1207.
+Class acmart Info: Printing bibformat on input line 1207.
+Class acmart Info: Printing folios on input line 1212.
+Class acmart Info: Setting authorsperrow to 0 on input line 1217.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/comment/comment.sty
 \CommentStream=\write4
@@ -687,7 +705,7 @@ Special comment 'acks' Excluding comment 'screenonly'
 Include comment 'printonly' Excluding comment 'anonsuppress'
 Excluding comment 'acks'
 LaTeX Font Info:    Try loading font information for T1+LinuxLibertineT-TLF on 
-input line 2418.
+input line 2460.
 
 (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/libertine/T1LinuxLibertineT-T
 LF.fd
@@ -695,7 +713,7 @@ File: T1LinuxLibertineT-TLF.fd 2012/11/26 (autoinst) Font definitions for T1/Li
 nuxLibertineT-TLF.
 )
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 2418.
+(Font)              scaled to size 10.0pt on input line 2460.
 ) (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2016/06/19 v1.99m Standard LaTeX package
 
@@ -1638,13 +1656,13 @@ e
 * paper: custom
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: includehead includefoot twoside 
+* modes: includehead includefoot twoside heightrounded 
 * h-part:(L,W,R)=(46.0pt, 395.8225pt, 46.0pt)
 * v-part:(T,H,B)=(58.0pt, 620.7pt, 44.0pt)
 * \paperwidth=487.8225pt
 * \paperheight=722.7pt
 * \textwidth=395.8225pt
-* \textheight=569.7pt
+* \textheight=574.0pt
 * \oddsidemargin=-26.26999pt
 * \evensidemargin=-26.26999pt
 * \topmargin=-14.26999pt
@@ -1761,7 +1779,7 @@ LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/b/n' will be
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/m/it' will be
 (Font)              scaled to size 10.0pt on input line 6.
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/m/n' will be
-(Font)              scaled to size 10.0pt on input line 24.
+(Font)              scaled to size 10.0pt on input line 27.
  [1.1{/home/pnovotny/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 ] [2.2]) (./prelims.tex
 LaTeX Font Info:    Font shape `OT1/LinuxLibertineT-TLF/sb/n' will be
@@ -1932,14 +1950,14 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[21.21]) (./extensions.tex [22.22]
+[21.21]) (./extensions.tex [22.22]) (./experiments.tex
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[23.23]) (./experiments.tex
+[23.23]
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 68.
@@ -1956,7 +1974,7 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [25.25]
-LaTeX Font Info:    Try loading font information for T1+zi4 on input line 70.
+LaTeX Font Info:    Try loading font information for T1+zi4 on input line 72.
  (/home/pnovotny/texlive/2016/texmf-dist/tex/latex/inconsolata/t1zi4.fd
 File: t1zi4.fd 2014/06/22 T1/zi4 (Inconsolata)
 )
@@ -1971,19 +1989,13 @@ Package microtype Info: Character `textemdash ' is missing
 (microtype)             in font `T1/zi4/m/n/10'.
 (microtype)             Ignoring protrusion settings for this character.
 ) (./main.bbl [26.26]
-Underfull \vbox (badness 1817) has occurred while \output is active []
-
-
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[27.27]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [28.28])
+[27.27] [28.28])
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.47003pt.
@@ -2003,7 +2015,7 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
  This may cause the page layout to be inconsistent, however.
 
 [31.31] [32.32]
-Underfull \vbox (badness 2941) has occurred while \output is active []
+Underfull \vbox (badness 3168) has occurred while \output is active []
 
 
 
@@ -2044,13 +2056,13 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 570.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 45375 strings out of 493644
- 975460 string characters out of 6150875
- 1229453 words of memory out of 5000000
- 46626 multiletter control sequences out of 15000+600000
+ 46875 strings out of 493644
+ 1009616 string characters out of 6150875
+ 1262709 words of memory out of 5000000
+ 48118 multiletter control sequences out of 15000+600000
  366724 words of font info for 794 fonts, out of 8000000 for 9000
  944 hyphenation exceptions out of 8191
- 62i,18n,96p,1381b,7216s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,18n,96p,1381b,7809s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/inconso
 lata/i4-t1-4.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/libert
 ine/lbtn_ki75ao.enc}{/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/lib
@@ -2089,10 +2101,10 @@ e1/public/txfonts/txsyb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1
 ublic/newtx/txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/publi
 c/newtx/zxlr.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/new
 tx/zxlri.pfb>
-Output written on main.pdf (36 pages, 992318 bytes).
+Output written on main.pdf (36 pages, 992206 bytes).
 PDF statistics:
- 1049 PDF objects out of 1200 (max. 8388607)
- 937 compressed objects within 10 object streams
+ 1051 PDF objects out of 1200 (max. 8388607)
+ 939 compressed objects within 10 object streams
  324 named destinations out of 1000 (max. 500000)
  95977 words of extra memory for PDF output out of 106986 (max. 10000000)
 
