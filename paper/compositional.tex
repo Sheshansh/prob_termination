@@ -1,5 +1,7 @@
 \section{Compositionality of Ranking Supermartingales Revisited}
 \label{sec:compositional}
+In this section we discuss compositional aspects. We start with the 
+one-dimensional case, and then present the multidimensional case.
 
 \subsection{One-Dimensional Compositional Proofs of Almost-Sure Termination}
 
@@ -348,7 +350,7 @@ summarize the major reasons for typechecking failure. }
 
 
 Thus, the typechecking algorithm may rule out programs where the termination-controlling variable represents e.g. a length of an array, which can be doubled/halved in some sub-program do to (de)allocation, merging, or splitting.
-To overcome the rather strict typechecking, we use the results on LexRSMs to define a new notion of compositional ranking supermartingales, which we call \emph{nob-negative compositional (NC)} supermartingales. For the sake of generality, we allow NC martingales to be general measurable maps, not necessarily propositionally linear.
+To overcome the rather strict typechecking, we use the results on LexRSMs to define a new notion of compositional ranking supermartingales, which we call \emph{non-negative compositional (NC)} supermartingales. For the sake of generality, we allow NC martingales to be general measurable maps, not necessarily propositionally linear.
 
 \begin{definition}
 \label{def:nonneg-comp}

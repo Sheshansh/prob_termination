@@ -26,9 +26,9 @@ probability executing skip statements; and
 probabilistic assignment uniformly in the range $[-1,1]$, and we add such variable 
 to the RHS of an existing assignment).
 We report our results on twenty five benchmarks in Table~\ref{tab:exp1} (we 
-consider around fifty benchmark examples and the results on the remaining ones 
-are presented in \AppendixMaterial.
-The experimental results show that the time taken by our approach is always less 
+consider around fifty benchmark examples and the results on the remaining ones,
+along with detailed description of the table, are presented in \AppendixMaterial).
+The experimental results show that the time taken by our approach is almost always less 
 than $1/10$-th of second.
 In the table, along with the benchmark name, and time in seconds, we show 
 whether a solution exists or not (i.e., whether linear lexicographic RSMs exist
@@ -43,7 +43,7 @@ The programs obtained as abstractions of real-world programs in the benchmarks
 as mentioned above have between 10-100 lines of code. 
 To test the how does our approach scale with larger codes we consider synthetic examples 
 of large probabilistic programs generated as follows.
-Given $n$ additional Boolean-like variables, we consider probabilistic while loops,
+Given $n$ Boolean variables, we consider probabilistic while loops,
 with some nondeterministic conditional branches, and generate all possible $2^n$ if conditions
 based on the Boolean variables. 
 Hence given $n$ variables we have probabilistic programs of size $O(2^n)$.
@@ -70,7 +70,7 @@ by Aspic, then the time taken by our algorithm, and finally the total time.
 {Benchmark} & {Time (s)} & {Solution} & {Dimension} & {Prob. loops} & {Prob. Assignments} \\\hline \hline
 {alain} & {0.11} & {yes} & {2} & {yes} & {yes} \\\hline
 {catmouse} & {0.08} & {yes} & {2} & {yes} & {yes} \\\hline
-{counterex1a} & {0.1} & {no} & {} & {no} & {no} \\\hline
+{counterex1a} & {0.1} & {no} & {-} & {no} & {no} \\\hline
 {counterex1c} & {0.11} & {yes} & {3} & {yes} & {yes} \\\hline
 {easy1} & {0.09} & {yes} & {1} & {yes} & {yes} \\\hline
 {exmini} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
@@ -78,28 +78,29 @@ by Aspic, then the time taken by our algorithm, and finally the total time.
 {ndecr} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
 {perfect} & {0.11} & {yes} & {3} & {yes} & {yes} \\\hline
 {\multirow{2}{*}{perfect2}} & {0.1} & {yes} & {3} & {yes} & {no} \\\cline{2-6}
-{} & {0.11} & {no} & {} & {yes} & {yes} \\\hline
-{real2} & {0.09} & {no} & {} & {no} & {no} \\\hline
+{} & {0.11} & {no} & {-} & {yes} & {yes} \\\hline
+{real2} & {0.09} & {no} & {-} & {no} & {no} \\\hline
 {realbubble} & {0.22} & {yes} & {3} & {yes} & {yes} \\\hline
 {realselect} & {0.11} & {yes} & {3} & {yes} & {yes} \\\hline
-{realshellsort} & {0.09} & {no} & {} & {yes} & {no} \\\hline
+{realshellsort} & {0.09} & {no} & {-} & {yes} & {no} \\\hline
 {serpent} & {0.1} & {yes} & {1} & {yes} & {yes} \\\hline
 {sipmabubble} & {0.1} & {yes} & {3} & {yes} & {yes} \\\hline
-{speedDis2} & {0.09} & {no} & {} & {no} & {no} \\\hline
+{speedDis2} & {0.09} & {no} & {-} & {no} & {no} \\\hline
 %{speedFails1} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
 {speedNestedMultiple} & {0.1} & {yes} & {3} & {yes} & {yes} \\\hline
 {speedpldi2} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
 {speedpldi4} & {0.09} & {yes} & {3} & {yes} & {yes} \\\hline
 {speedSimpleMultipleDep} & {0.09} & {no} & {} & {no} & {no} \\\hline
 {\multirow{2}{*}{speedSingleSingle2}} & {0.12} & {yes} & {2} & {yes} & {no} \\\cline{2-6}
-{} & {0.1} & {no} & {} & {yes} & {yes} \\\hline
+{} & {0.1} & {no} & {-} & {yes} & {yes} \\\hline
 {\multirow{2}{*}{unperfect}} & {0.1} & {yes} & {2} & {yes} & {no} \\\cline{2-6}
-{} & {0.16} & {no} & {} & {yes} & {yes} \\\hline
+{} & {0.16} & {no} & {-} & {yes} & {yes} \\\hline
 {wcet1} & {0.11} & {yes} & {2} & {yes} & {yes} \\\hline
 {while2} & {0.1} & {yes} & {3} & {yes} & {yes} \\\hline
     
 \end{tabular}
-\caption{Experimental results for benchmarks from~\cite{ADFG10:lexicographic} extended with probabilistic loops and/or probabilistic assignments.} \label{tab:exp1}
+\caption{Experimental results for benchmarks from~\cite{ADFG10:lexicographic} extended with probabilistic loops/assignments.} \label{tab:exp1}
+\vspace{-1em}
 \end{table}
 \end{center}
 
@@ -122,5 +123,6 @@ by Aspic, then the time taken by our algorithm, and finally the total time.
 {12} & {12296} & {4260.96} & {145.18} & {4406.14} \\\hline
 \end{tabular}
 \caption{Experimental results for synthetic examples.}\label{tab:exp2}
+\vspace{-1em}
 \end{table}
 \end{center}

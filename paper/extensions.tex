@@ -3,9 +3,9 @@
 As shown in Example~\ref{ex:infinite-time}, already LinLexRSM maps are capable 
 of proving almost-sure termination of programs whose expected termination time 
 is infinite. However, it is often desirable to obtain bounds on expected 
-runtime of a program. In this section, we present a LexRSM-based proof rule for 
+runtime of a program. In this section, we present a LexRSM-based method for 
 obtaining bounds on expected runtime, and we show how to automatize the usage 
-of this proof rule to obtain bounds on expected runtime in a 
+of this method to obtain bounds on expected runtime in a 
 subclass of \PP{}s.
 
 As in the case of a.s. termination we start with general mathematical statement 
@@ -185,7 +185,8 @@ Corollary~\ref{col:runtime-progs} yields $\E^{\sigma}_{\vecinit}[\ttime]\leq
 asymptotically optimal for the given program.
 \end{example}
 
-Now assume that we have synthesized a $1$-LexRSM map $\overrightarrow{\lem}$ 
+\begin{remark}[Polynomial bounds]\label{rem:poly}
+Now consider that we have synthesized a $1$-LexRSM map $\overrightarrow{\lem}$ 
 and we want 
 to check if there exists $\bar{\vec{c}}$ such that $\overrightarrow{\lem}$ has 
 $\bar{\vec{c}}$-bounded ECI. In the linear setting (i.e. the program is an 
@@ -205,6 +206,7 @@ we can synthesize the witness vector $\bar{\vec{c}}$. Since $\bar{\vec{c}}$
 consists of affine expressions, Corollary~\ref{col:runtime-progs} provides a 
 polynomial (in the size of 
 initial variable valuation) upper bound on expected runtime.
+\end{remark}
 
 %\textbf{[PETR: FINISH THIS SECTION]}
 

@@ -1,4 +1,4 @@
-\section{Applying Lexicographic Supermartingales to Probabilistic Programs}
+\section{Lexicographic Supermartingales for Probabilistic Programs}
 \label{sec:lex-programs}
 
 We now discuss how to leverage the mathematical results of the previous section 
@@ -19,7 +19,7 @@ We formalize this property below.
 A 1-dimensional \emph{measurable map} for a \PP{} $\program$ is a  
 real-valued function $\lem$ 
 assigning to each program location $\loc$ of $\pCFG_P$ a Borel-measurable function $\lem(\loc)$  of program variables, i.e. each $\lem(\loc)$  is a function of type $\Rset^{|\pvars|}\rightarrow \Rset$. As a special case, if all the functions $\lem(\loc)$ are affine, then we call $\lem$ a 1-dimensional \emph{linear expression map (LEM)}. 
-Am $n$-dimensional measurable/linear expression map is a vector 
+An $n$-dimensional measurable/linear expression map is a vector 
 $\overrightarrow{\lem}=(\lem_1,\dots,\lem_n)$ of 1-dimensional 
 measurable/linear expression maps. 
 \end{definition}
@@ -303,9 +303,10 @@ follows that $\probm^{\sigma}_{\vecinit}(\ttime <\infty) =1$, irrespective of
 $\sigma$ and $\vecinit$.
 \end{proof} 
 
-We conclude this section by showing that (Lin)LexRSMs can, unlike 1-dimensional 
-RSMs, prove a.s. 
-termination of programs whose expected termination time is infinite.
+For 1-dimensional RSMs, their existence imply both a.s. termination as 
+well as positive termination.
+In contrast, we show that (Lin)LexRSMs can prove a.s. termination of programs 
+whose expected termination time is infinite.
 \lstset{language=affprob}
 \lstset{tabsize=2,escapechar=\&}
 \newsavebox{\infas}

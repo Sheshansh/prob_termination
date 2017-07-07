@@ -4,6 +4,28 @@
 In Table~\ref{tab:exp1} in Section~\ref{sec:experiments} we presented results for twenty five benchmarks.
 We now present additional result for other twenty seven benchmarks in Table~\ref{tab:exp3}.
 
+\smallskip\noindent{\em Additional description of table.}
+For the benchmark results reported in Table~\ref{tab:exp1} and Table~\ref{tab:exp3}, 
+we explain the possibilities of Yes/No in the last two column entries.
+\begin{compactitem}
+\item If for the non-probabilistic program no lexicographic RSM exists, then the last two 
+column entries are no and no.
+
+\item If extending the probabilistic program with both probabilistic loop and assignment,
+a lexicographic RSM exists, then the last two column entries are yes and yes. 
+
+\item If there exist lexicographic RSM for the non-probabilistic program, but there is no
+lexicographic RSM for the program extended with probabilistic loops, then the second-last 
+entry is yes and the last entry is no, and no RSM exists (i.e., the third entry is no).
+
+\item If there exists lexicographic RSM for extending the non-probabilistic program 
+with probabilistic loop, but no lexicographic RSM for extending the non-probabilistic programs
+with both probabilistic loops and assignments, then for such benchmarks there are two rows 
+explaining the results. 
+Hence while in all previous cases there is a single row for the benchmarks, for this case,
+there are two rows presenting the results.
+\end{compactitem}
+
 
 
 \begin{center}
@@ -43,7 +65,7 @@ We now present additional result for other twenty seven benchmarks in Table~\ref
 {wcet2} & {0.09} & {yes} & {2} & {yes} & {yes} \\\hline
 {wise} & {0.09} & {no} & {} & {no} & {no} \\\hline
     \end{tabular}
-    \caption{Additonal experimental results for benchmarks from~\cite{ADFG10:lexicographic} extended with probabilistic loops and/or probabilistic assignments.}
+    \caption{Additonal experimental results for benchmarks from~\cite{ADFG10:lexicographic} extended with probabilistic loops/probabilistic assignments.}
     \label{tab:exp3}
 \end{table}
 \end{center}
