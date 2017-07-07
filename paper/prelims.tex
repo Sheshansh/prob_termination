@@ -113,15 +113,15 @@ $\vars=\{x_1,x_2,x_3,\dots\}$.
 
 In this subsection we define the form of probabilistic programs that we 
 consider in our analysis. We consider two classes of probabilistic programs: 
-general probabilistic programs (\PP{}s ) with arbitrary (measurable) 
+general probabilistic programs (\PP{}s) with arbitrary (measurable) 
 expressions and 
 their subclass, affine probabilistic programs (\APP s) where all expressions 
 are restricted to be affine (see below for a precise definition). The reason 
 for this dual view is that our work also has two main points of focus: a 
-theoretical one, where we introduce new proof rules that can be used to prove 
+theoretical one, where we introduce new concepts that can be used to prove 
 properties of general probabilistic programs; and an algorithmic one, where we 
 aim to prove properties of probabilistic programs automatically, using the 
-aforementioned proof rules. As already testified in the non-probabilistic 
+aforementioned concepts. As already testified in the non-probabilistic 
 world, programs that contain only affine expressions allow for more efficient 
 automation of the analysis and at the same time, due to the presence of 
 non-determinism they can be used to form sound abstractions of programs with 
@@ -209,7 +209,7 @@ uniformly sampled from interval $[-2,1]$). We also allow constructs for
 non-deterministic branching indicated by `\textbf{if }$\star$ \textbf{then...}' construct and non-deterministic assignment.  
 Variables (or identifiers) of a probabilistic program are of \emph{real} type, i.e., 
 values of the variables are real numbers. 
-We also assume that assume that each \PP{} $\program$ is preceded by a preamble 
+We also assume that each \PP{} $\program$ is preceded by a preamble 
 specifying possible initial values of program variables: the preamble consists 
 of a single predicate characterizing possible initial valuations.
 
@@ -291,7 +291,7 @@ such that $\mathcal{F}_0 \subseteq \mathcal{F}_1 \subseteq \cdots \subseteq
 
 \emph{Distributions.} We assume the standard definition of a probability 
 distribution specified by a cumulative distribution 
-function~\cite{Billingsley:book}. We denote by $\mathcal{D}$ be a set of 
+function~\cite{Billingsley:book}. We denote by $\mathcal{D}$ the set of 
 probability distributions on 
 real numbers, both discrete and continuous.
 
@@ -368,13 +368,13 @@ $\tau_1,\dots,\tau_k$ are all transitions outgoing from $\ell$, then $G(\tau_1)
 \equiv \mathit{false}$ for each $1\leq i < j \leq k$. For each 
 distribution $d$ appearing in the 
 pCFG we assume the following features are known: expected value $\expv[d]$ of 
-$d$ and a set $SP_d$ containing the \emph{support} of $d$. Tthe support is the  
+$d$ and a set $SP_d$ containing the \emph{support} of $d$. The support is the  
 smallest 
 closed set of real numbers whose complement has probability zero 
-under $d$\footnote{In particular, a support of a \emph{discrete} probability 
+under $d$.\footnote{In particular, a support of a \emph{discrete} probability 
 	distribution $d$ is simply the at most countable set of all points on a 
 	real 
-	line that have positive probability under $d$.}) Finally, we assume that 
+	line that have positive probability under $d$.} Finally, we assume that 
 	each 
 assignment location has at most (and thus exactly) one outgoing transition. The 
 translation from probabilistic programs to the corresponding pCFG is 

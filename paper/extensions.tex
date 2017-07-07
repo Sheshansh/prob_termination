@@ -121,13 +121,13 @@ that depends on the initial configurations: this is to handle cases where some
 variables are periodically reset to a value related to the initial variable 
 values, such as variable $y$ in Figure~\ref{fig:uniint4}. To this end, let 
 $\program$ be a \PP{} with a pCFG $\pCFG_\program$ and let 
-$\vec{\lem}=(\lem_1,\dots,\lem_n)$ be an 
+$\overrightarrow{\lem}=(\lem_1,\dots,\lem_n)$ be an 
 $n$-dimensional $1$-LexRSM map for $\program$. Consider an $n$-dimensional 
 vector 
 $\vec{\bar{c}}=(\bar{c}_1,\dots,\bar{c}_n)$ whose each component is an 
 expression over variables of 
 $\program$. We say 
-that $\vec{\lem}$ has 
+that $\overrightarrow{\lem}$ has 
 $\vec{\bar{c}}$-bounded ECI w.r.t. invariant map $\inv$ if the following holds 
 for each initial configuration $(\locinit,\vecinit)$ with $\vecinit\in 
 \vecinitset$: for 
@@ -145,10 +145,12 @@ Theorem~\ref{thm:runtime-bound} we have the following:
 \begin{corollary}
 \label{col:runtime-progs}
 Let $\program$ be a probabilistic program. Assume that there exists an 
-$n$-dimensional $\eps$-LexRSM map $\vec{\lem}=(\lem_1,\dots,\lem_d)$ for 
+$n$-dimensional $\eps$-LexRSM map $\overrightarrow{\lem}=(\lem_1,\dots,\lem_d)$ 
+for 
 $\program$ supported 
 by some 
-invariant map $\inv$, scuh that $\vec{\lem}$ has $\vec{\bar{c}}$-bounded ECI 
+invariant map $\inv$, such that $\overrightarrow{\lem}$ has 
+$\vec{\bar{c}}$-bounded ECI 
 (w.r.t. $\inv$) 
 for some vector of expressions $\vec{\bar{c}}=(\bar{c}_1,\dots,\bar{c}_n)$. 
 Then under each scheduler $\sigma$ and for each initial valuation of program 
@@ -166,19 +168,24 @@ x\geq 0
 \wedge z\geq 0$, and $\inv(\loc^{\lout})=\mathit{true}$. Further, there exists 
 the following 
 $3$-dimensional 
-$1$-LinLexRSM map $\vec{\lem}$ supported by $\inv$: 
-$\vec{\lem}(\loc_0)=(2x+3,0,2)$, $\vec{\lem}(\loc_1)=(2x+3,0,1)$, 
-$\vec{\lem}(\loc_2)=(2x+2,y,1)$, $\vec{\lem}(\loc_3)=(2x+2,y,0)$, 
-$\vec{\lem}(\loc_4)=(2x+2,0,0)$, and $\vec{\lem}(\loc^{\lout})=(0,0,0)$. It is 
-easy to check that $\vec{\lem}$ is has $(0,z,2)$-bounded ECI. Applying 
+$1$-LinLexRSM map $\overrightarrow{\lem}$ supported by $\inv$: 
+$\overrightarrow{\lem}(\loc_0)=(2x+3,0,2)$, 
+$\overrightarrow{\lem}(\loc_1)=(2x+3,0,1)$, 
+$\overrightarrow{\lem}(\loc_2)=(2x+2,y,1)$, 
+$\overrightarrow{\lem}(\loc_3)=(2x+2,y,0)$, 
+$\overrightarrow{\lem}(\loc_4)=(2x+2,0,0)$, and 
+$\overrightarrow{\lem}(\loc^{\lout})=(0,0,0)$. It is 
+easy to check that $\overrightarrow{\lem}$ is has $(0,z,2)$-bounded ECI. 
+Applying 
 Corollary~\ref{col:runtime-progs} yields $\E[\ttime]\leq (2x_{\mathit{init}} + 
 3)\cdot(1+3z_{\mathit{init}})+0+2= 6x_{\mathit{init}}z_{\mathit{init}} + 
 2x_{\mathit{init}} + 9z_{\mathit{init}}+5$. Note that this quadratic bound is 
 asymptotically optimal for the given program.
 \end{example}
 
-Now assume that we have synthesized a $1$-LexRSM map $\vec{\lem}$ and we want 
-to check if there exists $\bar{\vec{c}}$ such that $\vec{\lem}$ has 
+Now assume that we have synthesized a $1$-LexRSM map $\overrightarrow{\lem}$ 
+and we want 
+to check if there exists $\bar{\vec{c}}$ such that $\overrightarrow{\lem}$ has 
 $\bar{\vec{c}}$-bounded ECI. In the linear setting (i.e. the program is an 
 \APP{}, masp $\lem$ and $\inv$ are linear, and we seek $\vec{\bar{c}}$ which is 
 a vector of affine expressions) we can encode the existence of $\vec{\bar{c}}$ 
@@ -187,9 +194,11 @@ linear LexRSM maps was encoded in Section~\ref{sec:lex-programs}. That is, we
 set up a linear template with unknown coefficients for each component of 
 $\vec{\bar{c}}$ and using Farkas's lemma we set up a system of linear 
 constraints, which includes the unknown coefficients as variables, encoding the 
-fact that $\vec{\lem}$ has $\bar{\vec{c}}$-bounded ECI. Details are provided 
+fact that $\overrightarrow{\lem}$ has $\bar{\vec{c}}$-bounded ECI. Details are 
+provided 
 in~\AppendixMaterial. In this way, we can check in polynomial time if 
-Corollary~\ref{col:runtime-progs} can be applied to $\vec{\lem}$, and if yes, 
+Corollary~\ref{col:runtime-progs} can be applied to $\overrightarrow{\lem}$, 
+and if yes, 
 we can synthesize the witness vector $\bar{\vec{c}}$. Since $\bar{\vec{c}}$ 
 consists of affine expressions, Corollary~\ref{col:runtime-progs} provides a 
 polynomial (in the size of 
