@@ -1,0 +1,8 @@
+var x,y;
+while x>=0 and y>=0 do
+     if * then 
+          if prob(0.5) then x:=x-2 else skip fi
+     else
+          x:=2*x; y:=y-1
+     fi
+od
