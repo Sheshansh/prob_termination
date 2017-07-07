@@ -35,11 +35,12 @@ Note that any $\mathcal{F}'$-measurable random variable satisfying~\eqref{eq:con
 Let $(\Omega,\mathcal{F},\probm)$ be a probability space, 
 $X\colon\Omega\rightarrow 
 \Rset$ an $\mathcal{F}$-measurable function, and $\mathcal{F}'\subseteq 
-\mathcal{F}$ sub-sigma-algebra of $\mathcal{F}$. Assume that one of the following conditions hold:
-\begin{itemize}
-\item $\E[|X|]<\infty$; or
-\item $X$ is real-valued and non-negative.
-\end{itemize}
+\mathcal{F}$ sub-sigma-algebra of $\mathcal{F}$. Assume that one of the 
+following conditions hold: (a)
+%\begin{itemize}
+$\E[|X|]<\infty$, or (b)
+$X$ is real-valued and non-negative. 
+%\end{itemize}
 Then there exists a conditional expectation of $X$ given $\mathcal{F}'$ and it is almost-surely unique, i.e. for each two $\mathcal{F}'$-measurable functions $f$, $g$ that satisfy~\eqref{eq:cond-exp} it holds $\probm(\{\omega\mid f(\omega)\neq g(\omega)\})=0$.
 \end{proposition}
 %\textbf{[PETR: POLISH, ADD INTUITION]}
@@ -206,6 +207,7 @@ $F(\omega)>k$
 $F(\omega)\leq k$ }.
 \end{dcases}
 $$
+\vspace{-3mm}
 
 Intuitively, the process $\{Y_k\}_{k=0}^{\infty}$ is an over-approximation of what we would like to call ``$\vec{X}[\fixn{j}]$ restricted to $M$.''
 We prove several properties of the process. 
@@ -222,6 +224,7 @@ it holds
 = 
 \ell\}).
 \end{equation}
+
 
 The proof of~\eqref{eq:lexrsm-soundness-main} goes by induction on $k$. The computations being somewhat technical, we defer them to \AppendixMaterial. 
 
