@@ -57,6 +57,8 @@ mean that for each $\mathcal{F}$-measurable function $\E[X\mid\mathcal{F}]$
 satisfying~\eqref{eq:cond-exp} the inequality holds on some subset $L'\subseteq 
 L$ such that $\probm(L')=\probm(L)$.
 
+\begin{remark}
+\label{rem:canfilt}
 In context of probabilistic programs we work with probability 
 spaces of the form $(\Omega,\natfilt,\probm^\sigma)$, where $\Omega$ is a 
 set of runs in some $\pCFG$ and $\natfilt$ is (the smallest) sigma-algebra 
@@ -65,12 +67,13 @@ $\sigma$ is a scheduler, are $\natfilt$-measurable. In such a setting we can
 also consider sub-sigma-algebras $\natfilt_i$, $i\in \Nset_0$, of 
 $\natfilt$, where $\natfilt_i$ is the smallest sub-sigma-algebra of 
 $\natfilt$ such that all the functions $\cfg{\sigma}{j}$, $0\leq j \leq 
-i$, are $\natfilt_i$-measurable. Intuitively, each set $A$ belonging to such 
-an $\natfilt_i$ consists of runs whose first $i$ steps satisfy some 
-property, and the probability space $(\Omega,\natfilt_i,\probm^\sigma)$ 
-allows us to reason about probabilities of certain events happening in the 
-first 
-$i$ steps of program execution. 
+i$, are $\natfilt_i$-measurable. 
+Intuitively, each set $A\in\natfilt_i$ consists of runs whose first $i$ steps 
+satisfy some property.
+%property, and the probability space $(\Omega,\natfilt_i,\probm^\sigma)$ 
+%allows us to reason about probabilities of certain events happening in the 
+%first 
+%$i$ steps of program execution. 
 %(note that since $\natfilt_i \subseteq 
 %\natfilt$, we can view $\probm^\sigma$ also as a function of type 
 %$\natfilt_i\rightarrow [0,1]$). 
@@ -81,6 +84,7 @@ runs whose
 prefix of length $i$ satisfies the property given by $A$. 
 The sequence $\natfilt_0,\natfilt_1,\natfilt_2,\dots$ forms a 
 filtration of $\natfilt$, which we call a \emph{canonical filtration}.
+\end{remark}
 
 %\begin{definition}
 %Let $(\Omega,\genfilt,\probm)$ be a probability space and $O\subseteq \Omega$ some set.
