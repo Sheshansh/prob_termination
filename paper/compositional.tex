@@ -457,11 +457,14 @@ NCSMs allow compositional, fully automated proofs of a.s. termination without th
  Above, we defined NCSMs as one-dimensional objects, to make them analogous to PVSMs for better comparison. However, we can also define a multi-dimensional version of NCSMs, to take advantage of the fact that LexRSMs can handle loops for which no 1-dimensional linear RSM exists. We say that, given an invariant map $\inv$, an $n$-dimensional measurable map is $\eps$-$\inv$-ranking in a location $\loc$ if for each $\vec{x}\in \inv(\loc)$ and each gen. transition $\tilde{\tau}$ outgoing from $\loc$ there exists $1\leq j \leq n$ such that $\tilde\tau$ is $\eps$-ranked by $\lem_j$ and for each $j'<j$ we have that  $\tilde{\tau}$ is unaffected by $\lem_{j'}$.
 
 \begin{definition}
-An $n$-dimensional measurable map $\vec{\lem}=(\lem_1,\dots,\lem_n)$ is an NC supermartingale (NCSM) for a program $\program$ supported by an invariant map $\inv$ if there exists $\eps>0$ such that:
+An $n$-dimensional measurable map $\overrightarrow{\lem}=(\lem_1,\dots,\lem_n)$ 
+is an NC supermartingale (NCSM) for a program $\program$ supported by an 
+invariant map $\inv$ if there exists $\eps>0$ such that:
 \begin{compactenum}
 	\item  for each $1\leq i \leq n$, $\lem_i$ is non-negative in each location of $\pCFG_{\program}$;
 	\item 
-	$\vec{\lem}$ is $\eps$-$\inv$-ranking in each location $\loc\in\slice{(\program)}$; and
+	$\overrightarrow{\lem}$ is $\eps$-$\inv$-ranking in each location 
+	$\loc\in\slice{(\program)}$; and
 	\item 
 	for each $1\leq i \leq n$, $\lem_i$ is
 	unaffected in each $\loc\in\loops(\program)$.

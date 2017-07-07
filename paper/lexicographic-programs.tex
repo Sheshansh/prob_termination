@@ -19,7 +19,9 @@ We formalize this property below.
 A 1-dimensional \emph{measurable map} for a \PP{} $\program$ is a  
 real-valued function $\lem$ 
 assigning to each program location $\loc$ of $\pCFG_P$ a Borel-measurable function $\lem(\loc)$  of program variables, i.e. each $\lem(\loc)$  is a function of type $\Rset^{|\pvars|}\rightarrow \Rset$. As a special case, if all the functions $\lem(\loc)$ are affine, then we call $\lem$ a 1-dimensional \emph{linear expression map (LEM)}. 
-Am $n$-dimensional measurable/linear expression map is a vector $\vec{\lem}=(\lem_1,\dots,\lem_n)$ of 1-dimensional measurable/linear expression maps. 
+Am $n$-dimensional measurable/linear expression map is a vector 
+$\overrightarrow{\lem}=(\lem_1,\dots,\lem_n)$ of 1-dimensional 
+measurable/linear expression maps. 
 \end{definition}
 
 Each 1-dimensional measurable map $\lem$ and location $\loc$ determines a function $\lem(\loc)$ 
@@ -216,10 +218,20 @@ An \emph{invariant map} for a \PP{} $\program$ is a function $\inv$ assigning to
 
 Slightly abusing the notation, we view each LIM equivalently as a function assigning linear predicates (whose satisfaction sets overapproximate the set of reachable valuations) to program locations.
 
-We now have all the ingredients needed to define the notion of LexRSM maps for probabilistic programs. For notational convenience, we extend the function $\guards$ (which assigns guards to deterministic transitions) to the set of all generalized transition: for a generalized transition $\tau'$ which is not a standard transition outgoing from deterministic location, we put $\guards(\tau')=0\leq 0 \equiv \mathit{true}$.
+We now have all the ingredients needed to define the notion of LexRSM maps for 
+probabilistic programs. For notational convenience, we extend the function 
+$\guards$ (which assigns guards to deterministic transitions) to the set of all 
+generalized transition: for a generalized transition $\tau'$ which is not a 
+standard transition outgoing from deterministic location, we put 
+$\guards(\tau')=0\leq 0 \equiv \mathit{true}$. 
 
 \begin{definition}[Lexicographic Ranking Supermartingale Map]
-Let $\eps>0$. An $n$-dimensional \emph{lexicographic $\eps$-ranking supermartingale map} ($\eps$-LexRSM map) for a program $\program$ supported by an invariant map $\inv$ is an $n$-dimensional measurable map $\vec{\lem}=(\lem_1,\dots,\lem_n)$ for $\program$ such that for each configuration $(\loc,\vec{x})$ where $\loc\neq \locterm$ and $\vec{x}\in \inv(\loc)$ the following conditions are satisfied:
+Let $\eps>0$. An $n$-dimensional \emph{lexicographic $\eps$-ranking 
+supermartingale map} ($\eps$-LexRSM map) for a program $\program$ supported by 
+an invariant map $\inv$ is an $n$-dimensional measurable map 
+$\overrightarrow{\lem}=(\lem_1,\dots,\lem_n)$ for $\program$ such that for each 
+configuration $(\loc,\vec{x})$ where $\loc\neq \locterm$ and $\vec{x}\in 
+\inv(\loc)$ the following conditions are satisfied:
  \begin{compactitem}
  	%\item For all $(\loc,\vec{x})\in \locs\times\Rset^{|\pvars|}$ it holds
  	%\item For all  it holds 
@@ -248,7 +260,8 @@ termination.
 \begin{theorem}
 \label{thm:lexrsm-programs}
 Let $\program$ be a probabilistic program. Assume that there exists an $\eps>0$ 
-and an $n$-dimensional $\eps$-LexRSM map $\vec{\lem}=(\lem_1,\dots,\lem_n)$ for 
+and an $n$-dimensional $\eps$-LexRSM map 
+$\overrightarrow{\lem}=(\lem_1,\dots,\lem_n)$ for 
 $\program$ supported 
 by some 
 invariant map $\inv$. 
