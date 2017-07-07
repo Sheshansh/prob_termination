@@ -468,6 +468,46 @@ construction of~\cite{CFNH16:prob-termination} can be used.
  	\geq K}]\geq 1$ for each $K$ sufficiently large, which is incompatible with 
  uniform integrability. 
  
+\section{Computations for the proof of Theorem~\ref{THM:RUNTIME-BOUND}}
+
+We 
+prove, by induction on $k$, that for each $k$ it holds 
+$\E[\nodecrank{k}{j}]\leq 
+\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k}{j'}] \right)+ 
+\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k}{j}]$.
+
+The base case $k=0$ is simple as both sides of the inequality are zero. Assume 
+that the inequality holds for some $k\geq 0$. We have 
+$\E[\nodecrank{k+1}{j}]=\E[\nodecrank{k}{j}]+\probm{(L_j^{k})}$, so from 
+induction hypothesis we get 
+\begin{equation}
+\label{eq:time1}
+\E[\nodecrank{k+1}{j}]\leq 
+\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k}{j'}] \right)+ 
+\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k}{j}] + \probm{(L_j^{k})}.\end{equation} 
+Now denote 
+$L^k_{<j} = L^k_1 \cup \dots\cup L^k_{j-1}$ and $L^k_{>j}= 
+L^k_{j+1}\cup\dots\cup L^k_{d}$. We have  
+$\E[\vecseq{X}{k}{j}] = \E[\vecseq{X}{k}{j}\cdot 
+\indicator{ L_{<j}^k}] + \E[\vecseq{X}{k}{j}\cdot 
+\indicator{ L_j^k}] + \E[\vecseq{X}{k}{j}\cdot 
+	\indicator{L_{>j}^k}] \geq 
+\E[\vecseq{X}{k+1}{j}\cdot 
+	\indicator{ L_{<j}^k}] -\vec{c}[j]\cdot \probm(L_{<j}^k) + 
+	\E[\vecseq{X}{k+1}{j}\cdot 
+	\indicator{ L_{j}^k}] + \probm(L_{j}^k) + \E[\vecseq{X}{k+1}{j}\cdot 
+	\indicator{ L_{>j}^k}]= \E[\vecseq{X}{k+1}{j}] -\vec{c}[j]\cdot 
+	\probm(L_{<j}^k)+ \probm(L_{j}^k)$. Plugging this 
+	into~\ref{eq:time1} yields
+\begin{align*}
+\E[\nodecrank{k+1}{j}]&\leq 
+\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k}{j'}] \right)+ 
+\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k+1}{j}] + \vec{c}[j]\cdot 
+\probm(L_{<j}^k)\\
+&=\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k+1}{j'}] \right)+ 
+\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k+1}{j}].
+\end{align*}
+ 
 
 
 

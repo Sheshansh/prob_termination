@@ -48,10 +48,12 @@ readable formula.
 
 \begin{theorem}
 \label{thm:runtime-bound}
+\label{THM:RUNTIME-BOUND}
 Let $\{\vec{X}_{i}\}_{i=0}^{\infty}$ be an 
 $n$-dimensional strict LexRSM with $c$-bounded ECI for some stopping time $\stime$. 
 Then $\E[\stime]\leq  
-\sum_{j=1}^{n}\E[\vecseq{X}{0}{j}]\cdot(\vec{c}[j]+1)^{n-j}$.
+\sum_{j=1}^{n}\E[\vecseq{X}{0}{j}]\cdot(1+\sum_{j'= j+1}^{n}\prod_{j'}^{n} 
+\vec{c}[j'])$.
 \end{theorem}
 \begin{proof}
 Fix an instance $(\{\vec{X}_{i=0}^{\infty},\{L_1^i,\dots,L_{n+1}^i\}_{i=0}^{\infty})$ satisfying Definition~\ref{def:lexrsm-eci}. Denote $\noofdecrank_j(\omega)$ the number of steps $i$ in which $\omega\in 
@@ -73,39 +75,40 @@ $\E[\nodecrank{k}{j}]\leq
 \E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k}{j}]$. Once this is proved, the 
 desired inequality follows by taking $k$ to $\infty$, since 
 $\lim_{k\rightarrow \infty}\E[\nodecrank{k}{j}] = \E[\noofdecrank_j]$ and 
-$\lim_{k\rightarrow \infty}\E[\vecseq{X}{k}{j}] \geq 0$.
+$\lim_{k\rightarrow \infty}\E[\vecseq{X}{k}{j}] \geq 0$. The inductive proof is 
+somewhat technical and deferred to \AppendixMaterial.
 
-The base case $k=0$ is simple as both sides of the inequality are zero. Assume 
-that the inequality holds for some $k\geq 0$. We have 
-$\E[\nodecrank{k+1}{j}]=\E[\nodecrank{k}{j}]+\probm{(L_j^{k})}$, so from 
-induction hypothesis we get 
-\begin{equation}
-\label{eq:time1}
-\E[\nodecrank{k+1}{j}]\leq 
-\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k}{j'}] \right)+ 
-\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k}{j}] + \probm{(L_j^{k})}.\end{equation} 
-Now denote 
-$L^k_{<j} = L^k_1 \cup \dots\cup L^k_{j-1}$ and $L^k_{>j}= 
-L^k_{j+1}\cup\dots\cup L^k_{d}$. We have  
-$\E[\vecseq{X}{k}{j}] = \E[\vecseq{X}{k}{j}\cdot 
-\indicator{ L_{<j}^k}] + \E[\vecseq{X}{k}{j}\cdot 
-\indicator{ L_j^k}] + \E[\vecseq{X}{k}{j}\cdot 
-	\indicator{L_{>j}^k}] \geq 
-\E[\vecseq{X}{k+1}{j}\cdot 
-	\indicator{ L_{<j}^k}] -\vec{c}[j]\cdot \probm(L_{<j}^k) + 
-	\E[\vecseq{X}{k+1}{j}\cdot 
-	\indicator{ L_{j}^k}] + \probm(L_{j}^k) + \E[\vecseq{X}{k+1}{j}\cdot 
-	\indicator{ L_{>j}^k}]= \E[\vecseq{X}{k+1}{j}] -\vec{c}[j]\cdot 
-	\probm(L_{<j}^k)+ \probm(L_{j}^k)$. Plugging this 
-	into~\ref{eq:time1} yields
-\begin{align*}
-\E[\nodecrank{k+1}{j}]&\leq 
-\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k}{j'}] \right)+ 
-\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k+1}{j}] + \vec{c}[j]\cdot 
-\probm(L_{<j}^k)\\
-&=\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k+1}{j'}] \right)+ 
-\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k+1}{j}].
-\end{align*}
+%The base case $k=0$ is simple as both sides of the inequality are zero. Assume 
+%that the inequality holds for some $k\geq 0$. We have 
+%$\E[\nodecrank{k+1}{j}]=\E[\nodecrank{k}{j}]+\probm{(L_j^{k})}$, so from 
+%induction hypothesis we get 
+%\begin{equation}
+%\label{eq:time1}
+%\E[\nodecrank{k+1}{j}]\leq 
+%\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k}{j'}] \right)+ 
+%\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k}{j}] + \probm{(L_j^{k})}.\end{equation} 
+%Now denote 
+%$L^k_{<j} = L^k_1 \cup \dots\cup L^k_{j-1}$ and $L^k_{>j}= 
+%L^k_{j+1}\cup\dots\cup L^k_{d}$. We have  
+%$\E[\vecseq{X}{k}{j}] = \E[\vecseq{X}{k}{j}\cdot 
+%\indicator{ L_{<j}^k}] + \E[\vecseq{X}{k}{j}\cdot 
+%\indicator{ L_j^k}] + \E[\vecseq{X}{k}{j}\cdot 
+%	\indicator{L_{>j}^k}] \geq 
+%\E[\vecseq{X}{k+1}{j}\cdot 
+%	\indicator{ L_{<j}^k}] -\vec{c}[j]\cdot \probm(L_{<j}^k) + 
+%	\E[\vecseq{X}{k+1}{j}\cdot 
+%	\indicator{ L_{j}^k}] + \probm(L_{j}^k) + \E[\vecseq{X}{k+1}{j}\cdot 
+%	\indicator{ L_{>j}^k}]= \E[\vecseq{X}{k+1}{j}] -\vec{c}[j]\cdot 
+%	\probm(L_{<j}^k)+ \probm(L_{j}^k)$. Plugging this 
+%	into~\ref{eq:time1} yields
+%\begin{align*}
+%\E[\nodecrank{k+1}{j}]&\leq 
+%\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k}{j'}] \right)+ 
+%\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k+1}{j}] + \vec{c}[j]\cdot 
+%\probm(L_{<j}^k)\\
+%&=\vec{c}[j]\cdot\left(\sum_{j'<j}\E[\nodecrank{k+1}{j'}] \right)+ 
+%\E[\vecseq{X}{0}{j}] - \E[\vecseq{X}{k+1}{j}].
+%\end{align*}
 %
 %\end{align}
 \end{proof}
@@ -116,7 +119,7 @@ LexRSM map have, from each reachable configuration, an expected one-step
 increase of at most $c$. Here $c$ can be a constant, but it can also be a value 
 that depends on the initial configurations: this is to handle cases where some 
 variables are periodically reset to a value related to the initial variable 
-values, such as variable $z$ in Figure~\ref{fig:uniint2}. To this end, let 
+values, such as variable $y$ in Figure~\ref{fig:uniint4}. To this end, let 
 $\program$ be a \PP{} with a pCFG $\pCFG_\program$ and let 
 $\vec{\lem}=(\lem_1,\dots,\lem_n)$ be an 
 $n$-dimensional $1$-LexRSM map for $\program$. Consider an $n$-dimensional 
@@ -149,9 +152,30 @@ invariant map $\inv$, scuh that $\vec{\lem}$ has $\vec{\bar{c}}$-bounded ECI
 (w.r.t. $\inv$) 
 for some vector of expressions $\vec{\bar{c}}=(\bar{c}_1,\dots,\bar{c}_n)$. 
 Then under each scheduler $\sigma$ and for each initial valuation of program 
-variables $\vecinit\in\vecinitset$ it holds $\E^{\sigma}_{\vecinit}[\ttime]\leq 
-\sum_{j=1}^{n}\lem_j(\locinit,\vecinit)\cdot(\bar{c}_j(\vecinit))^{n-j}$.
+variables $\vecinit\in\vecinitset$ it holds $\E^{\sigma}_{\vecinit}[\ttime]\leq
+\sum_{j=1}^{n}\lem_j(\locinit,\vecinit)\cdot(1+\sum_{j'= j+1}^{n}\prod_{j'}^{n} 
+\bar{c}_{j'}(\vecinit)).$
+%\sum_{j=1}^{n}\lem_j(\locinit,\vecinit)\cdot(\bar{c}_j(\vecinit))^{n-j}$.
 \end{corollary}
+
+\begin{example}
+Consider the program in Figure~\ref{fig:uniint4}. For the program we have an 
+invariant map $\inv$ with $\inv(\loc_0)=x\geq -1$, $\inv(\loc_1)=\inv(\loc_4) = 
+x\geq 0 
+\wedge z\geq 0$, $\inv(\loc_2)=\inv(\loc_3)= x\geq 0 \wedge y \geq 0
+\wedge z\geq 0$, and $\inv(\loc^{\lout})=\mathit{true}$. Further, there exists 
+the following 
+$3$-dimensional 
+$1$-LinLexRSM map $\vec{\lem}$ supported by $\inv$: 
+$\vec{\lem}(\loc_0)=(2x+3,0,2)$, $\vec{\lem}(\loc_1)=(2x+3,0,1)$, 
+$\vec{\lem}(\loc_2)=(2x+2,y,1)$, $\vec{\lem}(\loc_3)=(2x+2,y,0)$, 
+$\vec{\lem}(\loc_4)=(2x+2,0,0)$, and $\vec{\lem}(\loc^{\lout})=(0,0,0)$. It is 
+easy to check that $\vec{\lem}$ is has $(0,z,2)$-bounded ECI. Applying 
+Corollary~\ref{col:runtime-progs} yields $\E[\ttime]\leq (2x_{\mathit{init}} + 
+3)\cdot(1+3z_{\mathit{init}})+0+2= 6x_{\mathit{init}}z_{\mathit{init}} + 
+2x_{\mathit{init}} + 9z_{\mathit{init}}+5$. Note that this quadratic bound is 
+asymptotically optimal for the given program.
+\end{example}
 
 Now assume that we have synthesized a $1$-LexRSM map $\vec{\lem}$ and we want 
 to check if there exists $\bar{\vec{c}}$ such that $\vec{\lem}$ has 

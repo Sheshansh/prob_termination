@@ -2,11 +2,6 @@ This is BibTeX, Version 0.99d (TeX Live 2016)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: main.aux
 The style file: ACM-Reference-Format.bst
-I couldn't open database file new.bib
----line 163 of file main.aux
- : \bibdata{bibliography-master,new-popl18,new
- :                                            }
-I'm skipping whatever remains of this command
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: bibliography-master.bib
@@ -18,6 +13,27 @@ Database file #2: new-popl18.bib
 Repeated entry---line 95 of file new-popl18.bib
  : @article{LearningSurvey
  :                        ,
+I'm skipping whatever remains of this entry
+Database file #3: new.bib
+Repeated entry---line 3 of file new.bib
+ : @inproceedings{CFNH16:prob-termination
+ :                                       ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 17 of file new.bib
+ : @inproceedings{DBLP:conf/sas/Monniaux01
+ :                                        ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 68 of file new.bib
+ : @proceedings{DBLP:conf/popl/2016
+ :                                 ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 184 of file new.bib
+ : @inbook{CVS16:martingale-recurrence-persistence
+ :                                                ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 216 of file new.bib
+ : @proceedings{DBLP:conf/sas/2001
+ :                                ,
 I'm skipping whatever remains of this entry
 Warning--no key, author in cplex
 Warning--no author, editor, organization, or key in cplex
@@ -118,4 +134,4 @@ warning$ -- 57
 while$ -- 514
 width$ -- 0
 write$ -- 1174
-(There were 2 error messages)
+(There were 6 error messages)

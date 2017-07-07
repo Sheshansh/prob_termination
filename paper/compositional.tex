@@ -265,9 +265,9 @@ od
 \newsavebox{\unintfour}
 \begin{lrbox}{\unintfour}
 	\begin{lstlisting}[mathescape]
-while $x\geq 0 $ do
-	$y:=x$;
-	while $y\geq 1$ do
+while $x\geq 0$ and $z \geq 0 $ do
+	$y:=z$;
+	while $y\geq 3$ do
 		$y:=y+$sample$(\mathit{Uniform[-3,1]})$
 	od;
 	$x:=x-1$
@@ -282,20 +282,21 @@ od
 		\begin{tikzpicture}[x=1.8cm,y=1.4cm]
 		\node[det] (init) at (0,0) {$\loc_0$};
 		\node[det] (fin) at (0,-1) {$\loc^{\lout}$};
-		\node[det] (as1) at (1,0) {$\loc_1$};
+		\node[det] (as1) at (1.2,0) {$\loc_1$};
 		\node[det] (inner) at (2,0) {$\loc_2$};
 		\node[det] (as2) at (2,-1) {$\loc_3$};
 		\node[det] (as3) at (3,0) {$\loc_4$};
 %		
 		\draw[tran] (init) to node[font=\scriptsize,draw, fill=white, 
-		rectangle,pos=0.5] {$x<0$} (fin);
+		rectangle,pos=0.6] {$x<0 \vee z<0$} (fin);
 		\draw[tran] (init) to node[font=\scriptsize,draw, fill=white, 
-		rectangle,pos=0.5] {$x\geq 0$} (as1);
-		\draw[tran] (as1) -- node[auto,font=\scriptsize] {$y:=x$} (inner);
+		rectangle,pos=0.5,text width=0.8cm] {$x\geq 0$\\$\wedge$\\$z\geq 0$} 
+		(as1);
+		\draw[tran] (as1) -- node[auto,font=\scriptsize] {$y:=z$} (inner);
 		\draw[tran] (inner) to node[font=\scriptsize,draw, fill=white, 
-		rectangle,pos=0.5] {$y<1$} (as3);
+		rectangle,pos=0.5] {$y<3$} (as3);
 		\draw[tran] (inner) to node[font=\scriptsize,draw, fill=white, 
-		rectangle,pos=0.5] {$y\geq 1$} (as2);
+		rectangle,pos=0.5] {$y\geq 3$} (as2);
 		\draw[tran,rounded corners] (as2) -- (1.25,-1) -- 
 		node[font=\scriptsize, 
 		label={[xshift=-0.4cm,yshift=-0.2cm,font=\scriptsize] 
@@ -437,7 +438,7 @@ $\linsystem \leftarrow$ system of lin. constraints encoding the existence of Lin
 \end{algorithm}
 
 The soundness of the algorithm follows from Theorems~\ref{thm:nonneg-comp} and 
-\ref{thm:holger-comp}. Note that we use the PVSM-based algorithm 
+\ref{thm:holger-comp}. Note that we can use the PVSM-based algorithm 
 of~\cite{HolgerPOPL} as a back-up sub-procedure for the case when LinNCSM-based 
 proof fails. Hence, Algorithm~\ref{algo:compositional} can compositionally 
 prove a.s. termination of strictly larger class of programs than the PVSM-based 
