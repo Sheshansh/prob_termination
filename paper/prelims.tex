@@ -30,10 +30,8 @@ $1\leq j \leq n$, $j\neq i$.
 For comparison of vectors (e.g. as in $\vec{x}\leq \vec{y}$), we consider componentwise 
 comparison. 
 For comparing functions $f,g$ with the same domains, we write $f\leq g$ 
-if $f(x)\leq g(x)$ for all $x$ in the domain.
-
-
-\smallskip\noindent{\em Variables.}
+if $f(x)\leq g(x)$ for all $x$ in the domain. 
+%\smallskip\noindent{\em Variables.}
 Throughout the paper we fix a countable set of variables $\vars$. 
 We consider some arbitrary but fixed linear order on the set of all variables, 
 hence we write 
@@ -112,7 +110,8 @@ $\vars=\{x_1,x_2,x_3,\dots\}$.
 \vspace{-0.5em}
 
 In this subsection we define the form of probabilistic programs that we 
-consider in our analysis. We consider two classes of probabilistic programs: 
+consider in our analysis. 
+We consider two classes of probabilistic programs: 
 general probabilistic programs (\PP{}s) with arbitrary (measurable) 
 expressions and 
 their subclass, affine probabilistic programs (\APP s) where all expressions 
@@ -145,7 +144,7 @@ For each expression $E$ over variables $\{x_1,\dots,x_n\}$ and each $n$-dimensio
 (2)
 The function defined by each expression $E$ is Borel-measurable (for definition of Borel-measura\-bility, see, e.g.~\cite{Billingsley:book}).
 %\end{enumerate}
-
+%
 From measure theory it is known that these conditions hold in particular for programs where expressions are build using the standard arithmetic operators of addition, subtraction, multiplication, and division (provided that expressions evaluating to zero are not allowed as divisors).
 
 %An expression $E$ 
@@ -250,15 +249,15 @@ sets over $\Omega$,
 i.e. a collection of subsets of $\Omega$ that contains the empty set
 $\emptyset$, and that is closed under complementation and countable unions, and
 $\probm$ is a \emph{probability measure} on $\mathcal{F}$, i.e., a function
-$\probm\colon \mathcal{F}\rightarrow[0,1]$ such that
-\begin{compactitem}
-\item $\probm(\emptyset)=0$,
-\item for all $A\in \mathcal{F}$ it holds $\probm(\Omega\smallsetminus
+$\probm\colon \mathcal{F}\rightarrow[0,1]$ such that:
+%\begin{compactitem}
+(1) $\probm(\emptyset)=0$,
+(2) for all $A\in \mathcal{F}$ it holds $\probm(\Omega\smallsetminus
 A)=1-\probm(A)$, and
-\item for all pairwise disjoint countable set sequences $A_1,A_2,\dots \in
+(3) for all pairwise disjoint countable set sequences $A_1,A_2,\dots \in
 \mathcal{F}$ (i.e., $A_i \cap A_j = \emptyset$ for all $i\neq j$)
 we have $\sum_{i=1}^{\infty}\probm(A_i)=\probm(\bigcup_{i=1}^{\infty} A_i)$.
-\end{compactitem}
+%\end{compactitem}
 
 Following the usual probabilistic terminology, we say that \emph{almost all} $\omega$ belonging to some set $O\subseteq \Omega$ satisfy some property $\Psi$ if it holds that $\probm{(\{\omega\in O\mid \omega \text{ does not satisfy }\Psi\})}=0$.
 
@@ -295,7 +294,7 @@ function~\cite{Billingsley:book}. We denote by $\mathcal{D}$ the set of
 probability distributions on 
 real numbers, both discrete and continuous.
 
-\smallskip\noindent{\em Probabilistic Control Flow Graphs.}
+\noindent{\em Probabilistic Control Flow Graphs.}
 %There are several ways in which one can express the semantics of \APP's with
 %(angelic and demonic) 
 %non-determinism
@@ -307,7 +306,7 @@ a certain stochastic process.
 To define this process, we first define so called 
 \emph{probabilistic control flow graphs}~\cite{CFG16}.
 
-\smallskip
+
 \begin{definition}
 \label{def:stochgame}
 A \emph{probabilistic control flow graph (pCFG)} is a tuple
@@ -388,10 +387,7 @@ in~\AppendixMaterial.
 %random variable (i.e., the expected value of the absolute value of the random
 %variable exists).
 \end{definition}
-
-
-
-\smallskip\noindent{\em Configurations.}
+\noindent{\em Configurations.}
 A \emph{configuration} of a pCFG $\pCFG$ is a tuple $(\ell,\vec{x})$,
 where $\ell$ is a location of $\pCFG$ and $\vec{x}$ is an 
 $|\pvars|$-dimensional vector.
@@ -405,7 +401,7 @@ ${\vec{x}}\models G(\tau)$ provided that $\ell$ is deterministic.
 %$\loc$ is 
 %non-deterministic/probabilistic/deterministic/assignment one, respectively.
 
-\smallskip\noindent{\em Executions and reachable configurations.}
+\noindent{\em Executions and reachable configurations.}
 We say that a configuration $(\loc',\vec{x}')$ is a \emph{successor} of a 
 configuration $(\loc,\vec{x})$ if 
 %A \emph{finite path} (or
@@ -746,7 +742,7 @@ $(\OmegaRun,\natfilt,\probm^{\sigma}_{\vecinit})$.
 \vspace{-1em}
 \subsection{Almost-Sure and Positive Termination}
 \vspace{-0.5em}
-Termination is the basic liveness property of \PP{}s. 
+%Termination is the basic liveness property of \PP{}s. 
 
 \smallskip\noindent{\em Termination and termination time.}
 In the following, consider a \PP{} $P$ and its associated pCFG $\pCFG_P$. This 
@@ -791,9 +787,9 @@ $\ttime(\run)=\infty$. We call $\ttime$ the
 % $\{(\loc',(x,y))\mid \loc' \in\{\loc_{P}^{\lin},\loc_{P}^{\lout},\loc\} \text{ 
 % and } x\geq 2\}$, then $\treach{C}(\run)=1$.
 %\end{example}
-Since a probabilistic program may exhibit more than one run, we are interested 
-in probabilities of runs that terminate or reach some set of configurations. 
-This gives rise to the following fundamental computational problems regarding 
+%Since a probabilistic program may exhibit more than one run, we are interested 
+%in probabilities of runs that terminate or reach some set of configurations. 
+We consider the following fundamental computational problems regarding 
 termination:
 
 \begin{compactenum}
@@ -1266,6 +1262,7 @@ label={[font=\scriptsize,xshift=0.6cm] {$x:=x-2$}}] {} (4.1,1.7) --
 \end{tikzpicture}
 %\caption{}
 \end{subfigure}
+%\vspace{-3em}
 \caption{An example \APP{} and its associated 
 pCFG. Probabilistic locations are depicted by circles, with probabilities given 
 on outgoing 

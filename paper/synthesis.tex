@@ -51,7 +51,19 @@ Hence, the main computational task of the algorithm is to check, for a given set
 &0 \leq \eps_{\tilde{\tau}} \leq 1\,; \quad \tilde{\tau}\in U
   \end{align*}
   
-Each system $\linsystem_{\tilde{\tau}}$ is constructed in such a way that if it admits a solution with some $\eps_{\tilde{\tau}}$ positive, then decreasing the value of $\eps_{\tilde{\tau}}$ in that solution to any non-negative value still yield a valid solution (this corresponds to the fact that if some transition is $\eps$-ranked by $\lem$, than it is $\eps'$-ranked by $\lem$ for each $0\leq \eps'\leq \eps$). Morever, each solution where $\eps_{\tilde{\tau}}$ is positive can be rescaled into another solution in which $\eps_{\tilde{\tau}}$ is at least $1$. It follows that of $\lp_{U}$ has at least one feasible solution, then it has an optimal solution in which each $\eps_{\tilde{\tau}}$ is either $0$ or $1$. If the system does not have a solution or all the $\eps_{\tilde{\tau}}$ are equal to zero then there is no LEM satisfying (1)--(3). Otherwise, the optimal solution of $\lp_{U}$ yields a LEM $\lem$ which satisfies (1)--(3) and maximizes the number of 1-ranked elements of $U$.
+Each system $\linsystem_{\tilde{\tau}}$ is constructed in such a way that if it 
+admits a solution with some $\eps_{\tilde{\tau}}$ positive, then decreasing the 
+value of $\eps_{\tilde{\tau}}$ in that solution to any non-negative value still 
+yield a valid solution (this corresponds to the fact that if some transition is 
+$\eps$-ranked by $\lem$, than it is $\eps'$-ranked by $\lem$ for each $0\leq 
+\eps'\leq \eps$). Moreover, each solution where $\eps_{\tilde{\tau}}$ is 
+positive can be rescaled into another solution in which $\eps_{\tilde{\tau}}$ 
+is at least $1$. It follows that of $\lp_{U}$ has at least one feasible 
+solution, then it has an optimal solution in which each $\eps_{\tilde{\tau}}$ 
+is either $0$ or $1$. If the system does not have a solution or all the 
+$\eps_{\tilde{\tau}}$ are equal to zero then there is no LEM satisfying 
+(1)--(3). Otherwise, the optimal solution of $\lp_{U}$ yields a LEM $\lem$ 
+which satisfies (1)--(3) and maximizes the number of 1-ranked elements of $U$.
 
 This polynomial-time linear-programming step is used as a sub-procedure in Algorithm~\ref{algo:linlexrsm} for LinLexRSM synthesis. 
 
