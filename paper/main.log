@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  8 JUL 2017 01:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  8 JUL 2017 01:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1892,7 +1892,7 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 \infast=\box87
 \infastinv=\box88
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 372.
+(Font)              scaled to size 9.0pt on input line 373.
  [14.14]) (./synthesis.tex
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
@@ -2101,7 +2101,7 @@ e1/public/txfonts/txsyb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1
 ublic/newtx/txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/publi
 c/newtx/zxlr.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/new
 tx/zxlri.pfb>
-Output written on main.pdf (36 pages, 992120 bytes).
+Output written on main.pdf (36 pages, 992115 bytes).
 PDF statistics:
  1051 PDF objects out of 1200 (max. 8388607)
  939 compressed objects within 10 object streams
