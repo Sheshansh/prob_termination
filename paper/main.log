@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  7 JUL 2017 17:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.8.5)  7 JUL 2017 18:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1937,7 +1937,7 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 \infast=\box88
 \infastinv=\box89
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/it' will be
-(Font)              scaled to size 9.0pt on input line 371.
+(Font)              scaled to size 9.0pt on input line 372.
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 
@@ -1956,7 +1956,7 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 
 [15.15]
 LaTeX Font Info:    Font shape `T1/LinuxLibertineT-TLF/b/n' will be
-(Font)              scaled to size 7.0pt on input line 64.
+(Font)              scaled to size 7.0pt on input line 76.
 
 Underfull \hbox (badness 10000) has occurred while \output is active
 
@@ -2207,11 +2207,11 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 570.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 45375 strings out of 493644
- 975368 string characters out of 6150875
- 1234420 words of memory out of 5000000
+ 45378 strings out of 493644
+ 975440 string characters out of 6150875
+ 1234421 words of memory out of 5000000
  46629 multiletter control sequences out of 15000+600000
- 366780 words of font info for 793 fonts, out of 8000000 for 9000
+ 367055 words of font info for 795 fonts, out of 8000000 for 9000
  944 hyphenation exceptions out of 8191
  62i,18n,96p,1381b,7217s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/pnovotny/texlive/2016/texmf-dist/fonts/enc/dvips/inconso
@@ -2252,7 +2252,7 @@ e1/public/txfonts/txsyb.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1
 ublic/newtx/txsys.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/publi
 c/newtx/zxlr.pfb></home/pnovotny/texlive/2016/texmf-dist/fonts/type1/public/new
 tx/zxlri.pfb>
-Output written on main.pdf (35 pages, 998727 bytes).
+Output written on main.pdf (35 pages, 998714 bytes).
 PDF statistics:
  1038 PDF objects out of 1200 (max. 8388607)
  927 compressed objects within 10 object streams
