@@ -9,7 +9,7 @@ obtaining bounds on expected runtime using a restricted class of LexRSMs.
 As in the case of a.s. termination we start with general mathematical statement 
 about LexRSMs. We define a restricted class of strict LexRSMs with \emph{bounded 
 expected conditional increase} property. Recall from 
-definition~\ref{def:lexrsm} that strict
+Definition~\ref{def:lexrsm} that strict
 LexRSM for a stopping time $\stime$ is characterized by the possibility to 
 a.s. partition, for each $i\in \Nset_0$, the set $\{\omega\in \Omega\mid 
 \stime(\omega)>i \}$ into $n$ sets $L^i_1,\dots,L^i_d$ such that, intuitively, 
@@ -159,12 +159,19 @@ variables $\vecinit\in\vecinitset$ it holds $\E^{\sigma}_{\vecinit}[\ttime]\leq
 %\sum_{j=1}^{n}\lem_j(\locinit,\vecinit)\cdot(\bar{c}_j(\vecinit))^{n-j}$.
 \end{corollary}
 
-Previous work testifies that analogous ``bounded 
-expected change'' constraints naturally emerge when one aims to obtain 
-additional information about runtime of programs 
-~\cite{HolgerPOPL,CFNH16:prob-termination,CNZ17,CF17}. The major novelty of our 
-bounded ECI condition is that it can be used to obtain polynomial bounds on 
-expected runtime using \emph{linear} supermartingales.
+\begin{remark}
+Previous works testify that analogous ``bounded expected change'' constraints 
+naturally emerge when one aims to obtain additional information about termination 
+time of probabilistic programs~\cite{HolgerPOPL,CFNH16:prob-termination,CNZ17}.
+However all previous works consider bounded expected change to use well-known 
+tail-bound inequalities for martingales such as Azuma's inequality to obtain 
+probability bounds on termination time, but not asymptotic bounds on expected
+termination time.
+In contrast, the major novelty of our bounded ECI condition is that it we show it can be used to 
+obtain asymptotic bounds on expected termination time, and in particular, they 
+can be used to obtain polynomial bounds on expected runtime using \emph{linear} 
+supermartingales.
+\end{remark}
 
 \begin{example}
 Consider the program in Figure~\ref{fig:uniint4}, with initial condition 
@@ -203,8 +210,9 @@ linear LexRSM maps was encoded in Section~\ref{sec:lex-programs}. That is, we
 set up a linear template with unknown coefficients for each component of 
 $\vec{\bar{c}}$ and using Farkas's lemma we set up a system of linear 
 constraints, which includes the unknown coefficients as variables, encoding the 
-fact that $\overrightarrow{\lem}$ has $\bar{\vec{c}}$-bounded ECI. In this way, 
-we can check in polynomial time if 
+fact that $\overrightarrow{\lem}$ has $\bar{\vec{c}}$-bounded ECI. Details are 
+provided 
+in~\AppendixMaterial. In this way, we can check in polynomial time if 
 Corollary~\ref{col:runtime-progs} can be applied to $\overrightarrow{\lem}$, 
 and if yes, 
 we can synthesize the witness vector $\bar{\vec{c}}$. Since $\bar{\vec{c}}$ 

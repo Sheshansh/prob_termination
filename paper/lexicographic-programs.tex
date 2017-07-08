@@ -37,7 +37,7 @@ of a probabilistic branching location, as these require a special treatment.
 Let $\lem$ be a measurable map, $(\loc,\vec{x})$ be a configuration such that 
 $\loc\not\in \locsPB$ and let 
 $\tau=(\loc,\loc')$ be a 
-transition outgoing from $\loc$. For an $\eps\in \Rset$ we say that $\tau$ is 
+transition outgoing from $\loc$. For an $\eps\geq 0$ we say that $\tau$ is 
 \emph{$\eps$-ranked by $\lem$ from $(\loc,\vec{x})$} if the following 
 conditions are 
 satisfied, depending on the type of $\loc$:
@@ -102,8 +102,7 @@ outgoing transitions together.
 \begin{definition}
 \label{def:rank2}
 Let $\lem$ be a measurable map, and let $(\loc,\vec{x})$ be a configuration with
-$\loc\in \locsPB$. For an $\eps\in \Rset$ we say that $\loc$ is $\eps$-ranked 
-by 
+$\loc\in \locsPB$. For an $\eps\geq 0$ we say that $\loc$ is $\eps$-ranked by 
 $\lem$ from $(\loc,\vec{x})$ if 
 $$\sum_{(\loc,\loc')\in\transitions} 
 		Pr_{\loc}\left(\loc,\loc'\right)\cdot
@@ -254,6 +253,15 @@ If additionally $\lem$ is a linear expression map, then we call it a linear
 $\eps$-LexRSM map ($\eps$-LinLexRSM).
 \end{definition}
 
+\begin{example}\label{ex:lexrsmbasic} 
+Consider the program shown in Figure~\ref{fig:inftime}.
+A 2-dimensional $1$-LinLexRSM map for the program is given on the right, along 
+with the supporting invariants in square brackets. The invariants and a LinLexRSM 
+on each line belong to the program location in which the program is \emph{before} 
+executing the command on that line. The function is indeed a $1$-LinLexRSM, 
+since in the probabilistic branching location $\loc$ we have 
+$\preexp{\lem}(\loc,(x,c))=3c+3$ and $3c+3\leq 6c+1-1$ for all $c\geq 1$.
+\end{example}
 %\textbf{[PETR: DEFINE LOCATION TERMINATION]}
 
 The main result is the soundness of $\eps$-LexRSM maps for proving a.s. 
@@ -362,29 +370,23 @@ $[x\geq 0]$
 	\usebox{\infast}
 	\hspace{0.1cm}
 	\usebox{\infastinv}
-\caption{An a.s. terminating program with infinite expected termination time. A 
-2-dimensional $1$-LinLexRSM map for the program is given on the right, along 
-with the 
-supporting invariants in square brackets. The invariants and a LinLexRSM on 
-each 
-line belong to the program location in which the program is \emph{before} 
-executing the command on that line. The function is indeed a $1$-LinLexRSM, 
-since in the probabilistic branching location $\loc$ we have 
-$\preexp{\lem}(\loc,(x,c))=3c+3$ and $3c+3\leq 6c+1-1$ for all $c\geq 1$.} 
+\caption{An example program that is a.s. terminating but with infinite expected termination time.} 
 \label{fig:inftime}
 \end{figure}
 
+
+
 \begin{example}
 \label{ex:infinite-time}
-Consider the program in Figure~\ref{fig:inftime}. It is easy to see that it 
-terminates a.s., but the expected termination time is infinite: to see this, 
+Consider the program in Figure~\ref{fig:inftime}. 
+By Example~\ref{ex:lexrsmbasic} and Theorem~\ref{thm:lexrsm-programs} it follows that 
+the program terminates a.s., but the expected termination time is infinite: to see this, 
 note that that the expected value of variable $x$ upon reaching the second loop 
 is $\frac{1}{2}\cdot 1 + \frac{1}{4}\cdot 2 + \frac{1}{8}\cdot 4 + \cdots = 
 \frac{1}{2}+\frac{1}{2}+\frac{1}{2}+\cdots=\infty$ and that the time needed to 
 get out of the second loop is equal to the value of $x$ upon entering the loop. 
-However, a.s. termination of the program is proved by a 2-dimensional LinLexRSM 
-map
-$\lem$ pictured in the figure.
+%However, a.s. termination of the program is proved by a 2-dimensional LinLexRSM map
+%$\lem$ pictured in the figure.
 \end{example}
 
 Also, similarly to non-probabilistic programs, LexRSMs are more powerful than 
