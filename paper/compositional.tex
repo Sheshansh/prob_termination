@@ -175,12 +175,14 @@ assignment on line 5. For the inner loop there exists (in both cases) a
 equal to $c+d_{\loc}$, where $d_{\loc}$ is a location-specific constant. Since 
 the expected change of $c$ in each loop step is $-0.5$, this is indeed a LRSM. 
 Also, in both cases, a LEM of the form $x+d_{\loc}'$, again for some suitable 
-location-specific constants $d_{\loc}'$, is a PVSM for the outer loop, as $x$ 
-decreases and is non-negative within the outer loop and its expected change is 
-non-negative within the inner loop (more precisely, the inner-loop expected 
-change of $x$ zero in the left program and $-\frac{x}{4} - \frac{3}{4}$ in the 
-right 
-program). 
+location-specific constants $d_{\loc}'$, is a PVSM for the outer loop.
+%, as $x$ 
+%decreases and is non-negative within the outer loop and its expected change is 
+%non-negative within the inner loop (more precisely, the inner-loop expected 
+%change of $x$ is zero in the left program and $-\frac{x}{4} - \frac{3}{4}$ in 
+%the 
+%right 
+%program). 
 However, the variable $x$ is uniformly integrable within the inner loop of the 
 right program while for the left program this does not hold: we show this 
 in~\AppendixMaterial. The example shows that proving uniform integrability 
@@ -484,9 +486,12 @@ invariant map $\inv$ if there exists $\eps>0$ such that:
 	for each $1\leq i \leq n$, $\lem_i$ is
 	unaffected in each $\loc\in\loops(\program)$.
 \end{compactenum}
-An $n$-dimensional linear NCSM (LinNCSM) is an $n$-dimensional NCSM which is also a linear expression map.
+%An $n$-dimensional linear NCSM (LinNCSM) is an $n$-dimensional NCSM which is 
+%also a linear expression map.
 \end{definition}
 
+An $n$-dimensional linear NCSM (LinNCSM) is an $n$-dimensional NCSM which is 
+also a linear expression map.
 The following theorem can be proved in essentially the same way as Theorem~\ref{thm:nonneg-comp}.
 
 \begin{theorem}
