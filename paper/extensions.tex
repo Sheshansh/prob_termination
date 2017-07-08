@@ -195,7 +195,7 @@ Corollary~\ref{col:runtime-progs} yields $\E^{\sigma}_{\vecinit}[\ttime]\leq
 (2x_{\mathit{init}} + 
 3)\cdot(1+3z_{\mathit{init}})+0+2= 6x_{\mathit{init}}z_{\mathit{init}} + 
 2x_{\mathit{init}} + 9z_{\mathit{init}}+5$. Note that this quadratic bound is 
-asymptotically optimal for the given program.
+asymptotically optimal for the program.
 \end{example}
 
 \begin{remark}[Polynomial bounds]\label{rem:poly}
@@ -205,14 +205,13 @@ to check if there exists $\bar{\vec{c}}$ such that $\overrightarrow{\lem}$ has
 $\bar{\vec{c}}$-bounded ECI. In the linear setting (i.e. the program is an 
 \APP{}, masp $\lem$ and $\inv$ are linear, and we seek $\vec{\bar{c}}$ which is 
 a vector of affine expressions) we can encode the existence of $\vec{\bar{c}}$ 
-into a system of linear inequalities in the similar way as the existence of a 
-linear LexRSM maps was encoded in Section~\ref{sec:lex-programs}. That is, we 
+into a system of linear inequalities in a similar way as the existence of a 
+linear LexRSM maps was encoded in Section~\ref{sec:lex-programs}. I.e., we 
 set up a linear template with unknown coefficients for each component of 
 $\vec{\bar{c}}$ and using Farkas's lemma we set up a system of linear 
 constraints, which includes the unknown coefficients as variables, encoding the 
-fact that $\overrightarrow{\lem}$ has $\bar{\vec{c}}$-bounded ECI. Details are 
-provided 
-in~\AppendixMaterial. In this way, we can check in polynomial time if 
+fact that $\overrightarrow{\lem}$ has $\bar{\vec{c}}$-bounded ECI. In this way, 
+we can check in polynomial time if 
 Corollary~\ref{col:runtime-progs} can be applied to $\overrightarrow{\lem}$, 
 and if yes, 
 we can synthesize the witness vector $\bar{\vec{c}}$. Since $\bar{\vec{c}}$ 
