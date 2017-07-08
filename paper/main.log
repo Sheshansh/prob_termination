@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.4.19)  8 JUL 2017 06:58
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.4.19)  8 JUL 2017 07:04
 entering extended mode
 **main.tex
 
@@ -2091,13 +2091,13 @@ Package Fancyhdr Warning: \headheight is too small (13.0pt):
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.221 \end{remark}
+l.222 \end{remark}
                   pdfTeX warning (ext4): destination with the same identifier (
 name{theorem.7.4}) has been already used, duplicate ignored
 
 \@EveryShipout@Output ...@Org@Shipout \box \@cclv 
                                                   
-l.221 \end{remark}
+l.222 \end{remark}
                   ])
 (C:\DropBoxFILES\Dropbox\OwnSync\FILES_Changed\Papers\GIT_NEW\PetrWorks\multidi
 mensional-probabilistic-ranking\paper\experiments.tex
@@ -2109,23 +2109,23 @@ fined on input line 17.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 68.
 
+[24.24]
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 110.
 
-[24.24]
+)
+(C:\DropBoxFILES\Dropbox\OwnSync\FILES_Changed\Papers\GIT_NEW\PetrWorks\multidi
+mensional-probabilistic-ranking\paper\conclu.tex
 
 Package Fancyhdr Warning: \headheight is too small (13.0pt): 
  Make it at least 22.45503pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[25.25])
-(C:\DropBoxFILES\Dropbox\OwnSync\FILES_Changed\Papers\GIT_NEW\PetrWorks\multidi
-mensional-probabilistic-ranking\paper\conclu.tex
+[25.25]
 LaTeX Font Info:    Try loading font information for T1+zi4 on input line 72.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\inconsolata\t1zi4.fd"
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\inconsolata\t1zi4.fd"
 File: t1zi4.fd 2016/12/29 T1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
@@ -2549,7 +2549,7 @@ Program Files/MiKTeX 2.9/fonts/type1/public/txfonts/txsyb.pfb><C:/Program Files
 onts/type1/public/newtx/txsys.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
 ic/newtx/zxlr.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/newtx/zxlri.p
 fb>
-Output written on main.pdf (36 pages, 1090209 bytes).
+Output written on main.pdf (36 pages, 1090283 bytes).
 PDF statistics:
  1038 PDF objects out of 1200 (max. 8388607)
  326 named destinations out of 1000 (max. 500000)
