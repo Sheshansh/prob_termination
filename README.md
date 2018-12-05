@@ -5,11 +5,11 @@ Most of the neccessary tools are included (the main tool, and the invariant gene
 The code calls the script implementation/files/script.sh to execute CPLEX. So, change the address of cplex executable in script.sh from "/opt/ibm/ILOG/CPLEX_Studio1271/cplex/bin/x86-64_linux/cplex" to whatever it is on the machine you want to run this tool on.
 
 ## How to Run
-Just compile the files by using 
-$ make
-The executable is a.out. To run use
-./a.out < "path_of_program_file"
-The folder "examples" contains many examples used during development.
+Just compile the files and run. The folder "examples" contains many examples used during development.
+```bash
+make
+./a.out < <path_of_input_program_file>
+```
 
 Program format/Things to note:
 1. Declare all the variables in the beginning of the program as
