@@ -1,10 +1,10 @@
-Setup =>
+## Setup
 
 Download all the files.
 Most of the neccessary tools are included (the main tool, and the invariant generator binary, downloaded from aspic website) except for CPLEX because of memory occupied by CPLEX. Make sure that you use the full version. Otherwise it poses unnecessary constraints.
 The code calls the script implementation/files/script.sh to execute CPLEX. So, change the address of cplex executable in script.sh from "/opt/ibm/ILOG/CPLEX_Studio1271/cplex/bin/x86-64_linux/cplex" to whatever it is on the machine you want to run this tool on.
 
-How to Run =>
+## How to Run
 Just compile the files by using 
 $ make
 The executable is a.out. To run use
