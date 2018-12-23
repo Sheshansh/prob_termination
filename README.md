@@ -13,7 +13,7 @@ make
 
 Program format/Things to note:
 1. Declare all the variables in the beginning of the program as
- var <variable-1>, <variable-2>, ...;
-2. After variable declaration, write the program in the format described in the paper. But, for assignment from distribtion, the syntax is "[lower_bound,upper_bound]". Ex: "x:=x+[-1,1]".
+ `var <variable-1>`, `<variable-2>`, ...;
+2. After variable declaration, write the program in the format described in the paper. But, for assignment from distribtion, the syntax is `[lower_bound,upper_bound]`. Ex: `x:=x+[-1,1]`.
 3. The invariants if provided, maually should be put in before the statements in square brackets. The invariant provided at start is particularly useful because it is provided into the invariant generation tool and hence can propagate to other nodes in the pCFG as well.
 4. The code calls the implementation/files/invariant_script.sh to call the invariant generator executable i.e. aspic. Sometimes changing the delay and descend paramters help in finding out the LexRSM in this tool. Use aspic help to know usage. Or read its documentation.
