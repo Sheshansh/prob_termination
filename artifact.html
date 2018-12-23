@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>
+	Artifact README
+</title>
+</head>
+<body>
+<h3>
+	Instructions to Download the VM (.ova) file
+</h3>
+<ul>
+<li>
+Either download via Google Drive <a href="https://drive.google.com/open?id=0B8ukoFgQ3nEEZHd3ZG50TjhUeW8">link here</a>
+</li>
+After downloading both in the same directory, run the command (to combine them to form a single file) <br>
+$cat lexRSM-part* > lexrsm.ova
+<br>
+Ensure that only the two newly downloaded files match the string lexRSM-part*. 
+<br>
+</li>
+</ul>
+
+
+<h3>
+Instructions after Download
+</h3>
+<ul>
+<li>Import the ova file into virtualbox (File > Import Appliance).
+</li>
+<li>Boot the VM. You will be logged into an Ubuntu 16.04 system. Use the login credentials:<br>
+&nbsp;&nbsp;&nbsp;Username: rasam<br>
+&nbsp;&nbsp;&nbsp;Password: rasam
+</li>
+<li>Open a terminal and navigate to the Desktop/artifact directory:<br>
+$cd Desktop/artifact.
+</li>
+<li>The compiled version of tool has the name lexrsm_term. To execute the tool on a probabilistic program, say sample.prob, execute
+<br>$./lexrsm_term &lt; sample.prob
+</li>
+<li>Output format: It prints the progress while finding out the solution along with timestamp. Additionaly,
+<ul>
+<li>If solution is not found, it just prints the number of iterations of the algorithm after which it stopped.
+</li>
+<li>If solution is found, it prints for each node in pCFG, the type, invariant, LexRSM found at that node, the edges going out and their destination and the update that occurs on that edge.
+</ul>
+</li>
+<li>There are several sub-directories of interest
+	<ol>
+	<li><b>examples/All Vanilla Examples (without proababilistic while loops or probabilistic assignments)/</b><br>
+	This contains all the probabilistic programs we tested the tool on without any probabilistic while loops/ probabilistic assignments.
+	</li>
+	<li><b>examples/Examples with probabilistic while loops/</b><br>
+	This contains the programs with loops converted to probabilistic loops for only those programs which gave a LexRSM solution above.
+	</li>
+	<li><b>examples/Examples with both probabilistic assignments and probabilistic while loops/</b><br>
+	This contains the programs with assignments converted to probabilistic assignments (additionally) for only those programs which gave a LexRSM solution above.
+	</li>
+	</ol>
+</li>
+<li>For generating the large examples on which tool was tested, use the binary large_ifs. <br>
+$./large_ifs<br>
+After giving an integer, it generates a probabilstic program, example.prob in the artifacts directory.
+</li>
+
+
+</ul>
+<h3>Additional Notes:</h3>
+<ul>
+<li>The results in paper correspond to a 8GB RAM machine but it isn't recommended to use a VM which uses more than half of the RAM of the base machine so we are submitting a VM with 4 GB RAM. But, the RAM given to the VM can be changed from Settings > System > Base Memory in Virtualbox after importing the appliance.
+</li>
+<li>Running the tool requires installing CPLEX (as the only dependency) which can be downloaded from the IBM website. (Download the full version otherwise it poses size constraints on the problem being solved and hence the input program in our case).
+</li>
+<li> The source files which are used to generate large_ifs and lexrsm_term are large_ifs.cpp and main.cpp (both are sufficiently commented) respectively and can be compiled respectively by using commands
+$make<br>
+$make large
+</li>
+<li>
+The code calls the files/invariant_script.sh which in turn calls the aspic invariant generator binary (aspicV3.4 available for Linux i386/64-bit architecture). Sometimes changing the delay and descend paramters help in finding out the LexRSM in this tool. Use aspic help to know usage or read its documentation.
+</li>
+<li>There is a version of the paper on the Desktop in VM. But The README.md there is a legacy version.
+</li>
+
+</ul>
+
+</body>
+</html>
